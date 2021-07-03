@@ -1,0 +1,56 @@
+/* 动画 */
+
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.5s ease;
+}
+
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
+}
+
+.sub-title {
+  margin-bottom: 10px;
+  font-size: 13px;
+  color: #111111;
+}
+
+.row-mb {
+  margin-bottom: 10px;
+}
+
+.row-mt {
+  margin-top: 10px;
+}
+
+.row-mt-40 {
+  margin-top: 40px;
+}
+
+.row {
+  margin-bottom: 10px;
+  margin-top: 10px;
+}
+
+/* 面板组件中的居中内容 */
+.panel-context {
+  max-width: 900px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.select-tag {
+  background-color: #f0f0f0;
+  border: 1px solid #e0e0e0;
+  padding: 16px;
+  display: inline-block;
+  border-radius: 4px;
+  margin: 8px;
+  padding: 12px;
+  cursor: pointer;
+}
+
+.select-tag:hover {
+  border: 1px solid rgb(11, 78, 165);
+}
