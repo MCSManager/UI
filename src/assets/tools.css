@@ -1,0 +1,55 @@
+/* 动画 */
+
+/* 工具类 */
+.row-mb {
+  margin-bottom: 10px;
+}
+
+.row-mt {
+  margin-top: 10px;
+}
+
+.row-mt-40 {
+  margin-top: 40px;
+}
+
+.row {
+  margin-bottom: 10px;
+  margin-top: 10px;
+}
+
+.text-align-right{
+  text-align: right;
+}
+
+/* 公共文字颜色 */
+
+.color-red{
+  color: red;
+}
+
+.color-green{
+  color: green;
+}
+
+.color-yellow{
+  color: yellow;
+}
+
+.color-gray{
+  color: gray;
+}
+
+
+/* Flex 左右布局 */
+.flex{
+  display: flex;
+}
+
+.flex-space-between{
+  justify-content: space-between;
+}
+
+.flex-align-items-center{
+  align-items: center;
+}

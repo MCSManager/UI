@@ -1,7 +1,7 @@
 <!--
  * @Author: Copyright(c) 2020 Suwings
  * @Date: 2021-05-08 11:53:54
- * @LastEditTime: 2021-07-01 18:40:05
+ * @LastEditTime: 2021-07-04 15:54:31
  * @Description: 
 -->
 
@@ -29,12 +29,15 @@
         <el-col :md="16">
           <el-row :gutter="20">
             <el-col :md="12" class="row-mt">
-              <div class="sub-title">实例名称</div>
+              <div class="sub-title">
+                <div class="sub-title-title">实例名称</div>
+              </div>
               <el-input v-model="instanceInfo.config.nickname" type="text"> </el-input>
             </el-col>
             <el-col :md="12" class="row-mt">
-              <div class="sub-title">类型</div>
-              <!-- <el-input v-model="instanceInfo.config.type" type="text"> </el-input> -->
+              <div class="sub-title">
+                <div class="sub-title-title">类型</div>
+              </div>
               <el-select
                 v-model="instanceInfo.config.type"
                 placeholder="请选择"
@@ -45,31 +48,48 @@
               </el-select>
             </el-col>
             <el-col :md="24" class="row-mt">
-              <div class="sub-title">启动命令</div>
+              <div class="sub-title">
+                <div class="sub-title-title">启动命令</div>
+                <div class="sub-title-info">
+                  适用于任何程序启动命令，列如 cmd.exe /c ping localhost
+                </div>
+              </div>
               <el-input v-model="instanceInfo.config.startCommand" type="text"> </el-input>
             </el-col>
             <el-col :md="24" class="row-mt">
-              <div class="sub-title">工作目录</div>
+              <div class="sub-title">
+                <div class="sub-title-title">工作目录</div>
+              </div>
               <el-input v-model="instanceInfo.config.cwd" type="text"> </el-input>
             </el-col>
             <el-col :md="8" class="row-mt">
-              <div class="sub-title">输入编码</div>
+              <div class="sub-title">
+                <div class="sub-title-title">输入编码</div>
+              </div>
               <el-input v-model="instanceInfo.config.ie" type="text"> </el-input>
             </el-col>
             <el-col :md="8" class="row-mt">
-              <div class="sub-title">输出编码</div>
+              <div class="sub-title">
+                <div class="sub-title-title">输出编码</div>
+              </div>
               <el-input v-model="instanceInfo.config.oe" type="text"> </el-input>
             </el-col>
             <el-col :md="8" class="row-mt">
-              <div class="sub-title">关闭命令</div>
+              <div class="sub-title">
+                <div class="sub-title-title">关闭命令</div>
+              </div>
               <el-input v-model="instanceInfo.config.stopCommand" type="text"> </el-input>
             </el-col>
             <el-col :md="8" class="row-mt" :offset="0">
-              <div class="sub-title">最大储存（单位 GB）</div>
+              <div class="sub-title">
+                <div class="sub-title-title">最大储存（单位GB）</div>
+              </div>
               <el-input v-model="instanceInfo.config.maxSpace" type="text"> </el-input>
             </el-col>
             <el-col :md="8" class="row-mt" :offset="0">
-              <div class="sub-title">到期时间</div>
+              <div class="sub-title">
+                <div class="sub-title-title">到期时间</div>
+              </div>
               <el-date-picker
                 v-model="instanceInfo.config.endTime"
                 type="date"

@@ -1,7 +1,7 @@
 <!--
  * @Author: Copyright(c) 2020 Suwings
  * @Date: 2021-05-08 11:53:54
- * @LastEditTime: 2021-05-13 13:54:29
+ * @LastEditTime: 2021-07-04 13:10:56
  * @Description: 
 -->
 
@@ -12,9 +12,6 @@
         <template #title>操作系统数据</template>
         <template #default>
           <el-row :gutter="20">
-            <!-- <el-col :span="24" :offset="0">
-              <div class="overview-info-hr">操作系统数据</div>
-            </el-col> -->
             <el-col :xs="12" :md="6" v-for="(item, index) in computerInfoA" :key="index">
               <div class="overview-info-warpper">
                 <p class="overview-info-title" v-text="item.name"></p>
@@ -33,6 +30,44 @@
               </div>
             </el-col>
           </el-row>
+        </template>
+      </Panel>
+      <Panel>
+        <template #title>分布式服务状态</template>
+        <template #default>
+          <el-row :gutter="20">
+            <el-col :span="6">
+              <LineLabel size="small">
+                <template #title>已连接远程服务: </template>
+                <template #default> 0 个 </template>
+              </LineLabel>
+            </el-col>
+            <el-col :span="6">
+              <LineLabel size="small">
+                <template #title>不可用远程服务: </template>
+                <template #default> 0 个 </template>
+              </LineLabel>
+            </el-col>
+            <el-col :span="6">
+              <LineLabel size="small">
+                <template #title>实例总数: </template>
+                <template #default> 0 个 </template>
+              </LineLabel>
+            </el-col>
+            <el-col :span="6">
+              <LineLabel size="small">
+                <template #title>运行中: </template>
+                <template #default> 0</template>
+              </LineLabel>
+            </el-col>
+          </el-row>
+          <div v-show="true">
+            <span style="color: red">
+              <b>警告：</b> 检测到您有一个或以上远程服务无法建立连接，请前往
+              <a class="alink" href="./services">分布式服务</a>
+              功能确认各个远程服务器状态，若不修复此问题，则有部分远程实例您可能无法访问和显示。
+            </span>
+          </div>
         </template>
       </Panel>
     </el-col>
@@ -100,7 +135,7 @@
 
 <script>
 import Panel from "../../components/Panel";
-
+import LineLabel from "../../components/LineLabel";
 export default {
   data: function () {
     return {
@@ -202,7 +237,7 @@ export default {
     };
   },
   methods: {},
-  components: { Panel }
+  components: { Panel, LineLabel }
 };
 </script>
 

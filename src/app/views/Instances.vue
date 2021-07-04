@@ -1,7 +1,7 @@
 <!--
  * @Author: Copyright(c) 2020 Suwings
  * @Date: 2021-05-08 11:53:54
- * @LastEditTime: 2021-07-03 22:56:22
+ * @LastEditTime: 2021-07-04 13:10:42
  * @Description: 
 -->
 
@@ -10,26 +10,26 @@
     <template #title>分布式服务状态</template>
     <template #default>
       <el-row :gutter="20">
-        <el-col :span="6" style="margin: -12px 0px">
-          <LineLabel>
+        <el-col :span="6">
+          <LineLabel size="small">
             <template #title>已连接远程服务: </template>
             <template #default> {{ availableService.length }} 个 </template>
           </LineLabel>
         </el-col>
-        <el-col :span="6" style="margin: -12px 0px">
-          <LineLabel>
+        <el-col :span="6">
+          <LineLabel size="small">
             <template #title>不可用远程服务: </template>
             <template #default> {{ unavailableService.length }} 个 </template>
           </LineLabel>
         </el-col>
-        <el-col :span="6" style="margin: -12px 0px">
-          <LineLabel>
+        <el-col :span="6">
+          <LineLabel size="small">
             <template #title>实例总数: </template>
             <template #default> {{ instances.length }} 个 </template>
           </LineLabel>
         </el-col>
-        <el-col :span="6" style="margin: -12px 0px">
-          <LineLabel>
+        <el-col :span="6">
+          <LineLabel size="small">
             <template #title>运行中: </template>
             <template #default> {{ startedInstance }} 个 </template>
           </LineLabel>

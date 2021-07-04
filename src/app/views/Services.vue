@@ -1,7 +1,7 @@
 <!--
  * @Author: Copyright(c) 2020 Suwings
  * @Date: 2021-05-08 11:53:54
- * @LastEditTime: 2021-07-03 22:28:04
+ * @LastEditTime: 2021-07-04 13:13:42
  * @Description: 
 -->
 
@@ -20,12 +20,14 @@
       <Panel>
         <template #title>远程服务节点</template>
         <template #default>
-          <el-tree
-            :data="remoteNodes"
-            :props="defaultProps"
-            :default-expand-all="true"
-            @node-click="handleNodeClick"
-          ></el-tree>
+          <div style="min-height: 280px">
+            <el-tree
+              :data="remoteNodes"
+              :props="defaultProps"
+              :default-expand-all="true"
+              @node-click="handleNodeClick"
+            ></el-tree>
+          </div>
         </template>
       </Panel>
     </el-col>
@@ -35,17 +37,36 @@
           <div>
             <span v-text="displayService.ip + ':' + displayService.port"></span>
             &nbsp;
-            <el-tag size="small">{{ displayService.available ? "已连接" : "不可使用" }}</el-tag>
+            <el-tag type="success" v-show="displayService.available" size="small">正常</el-tag>
+            <el-tag type="danger" v-show="!displayService.available" size="small">无法连接</el-tag>
           </div>
-          <el-button class="button" type="text">删除</el-button>
+          <el-button class="button" type="text" @click="deleteService">删除</el-button>
         </template>
         <template #default>
+          <p v-if="!displayService.available" style="color: red">
+            无法连接到远程服务，此远程服务所在主机的全部信息都将无法正常获取，请确认地址是否正确且服务正常启用。
+          </p>
           <el-descriptions size="mini">
             <el-descriptions-item label="UUID">{{ displayService.uuid }}</el-descriptions-item>
             <el-descriptions-item label="远程实例数">{{
               displayService.instances.length
             }}</el-descriptions-item>
           </el-descriptions>
+          <div class="service-address-wrapper">
+            <div class="row-mt">
+              <el-input v-model="displayService.ip" size="small">
+                <template #prepend>地址</template>
+              </el-input>
+            </div>
+            <div class="row-mt">
+              <el-input v-model="displayService.port" size="small">
+                <template #prepend>端口</template>
+              </el-input>
+            </div>
+            <div class="row-mt" style="text-align: right">
+              <el-button size="small">更新地址</el-button>
+            </div>
+          </div>
           <el-table :data="displayService.instances" stripe style="width: 100%" size="small">
             <el-table-column prop="instanceUuid" label="UUID"></el-table-column>
             <el-table-column prop="config.nickname" label="实例昵称"></el-table-column>
@@ -124,6 +145,20 @@ export default {
         const tAddr = `${service.ip}:${service.port}`;
         if (sAddr == tAddr) return (this.displayService = service);
       });
+    },
+    deleteService() {
+      this.$confirm("此操作将永久删除该远程服务，是否继续？", "警告", {
+        confirmButtonText: "删除",
+        cancelButtonText: "取消",
+        type: "warning"
+      })
+        .then(() => {
+          this.$message({
+            type: "success",
+            message: "删除成功!"
+          });
+        })
+        .catch(() => {});
     }
   },
   components: { Panel, Dialog },

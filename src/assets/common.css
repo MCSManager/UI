@@ -12,25 +12,18 @@
 
 .sub-title {
   margin-bottom: 10px;
+  font-size: 14px;
+}
+
+.sub-title-title{
+  font-size: 14px;
+  color: #000000;
+  margin: 0px;
+}
+.sub-title-info{
   font-size: 13px;
-  color: #111111;
-}
-
-.row-mb {
-  margin-bottom: 10px;
-}
-
-.row-mt {
-  margin-top: 10px;
-}
-
-.row-mt-40 {
-  margin-top: 40px;
-}
-
-.row {
-  margin-bottom: 10px;
-  margin-top: 10px;
+  color: gray;
+  margin: 0px;
 }
 
 /* 面板组件中的居中内容 */
@@ -57,4 +50,10 @@
 
 .alink{
   text-decoration:underline;
+}
+
+.input-label{
+  font-size: 14px;
+  margin: 8px 0px;
+  display: inline-block;
 }

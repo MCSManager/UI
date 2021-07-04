@@ -1,7 +1,7 @@
 /*
  * @Author: Copyright(c) 2020 Suwings
  * @Date: 2021-05-08 10:07:55
- * @LastEditTime: 2021-05-18 18:36:58
+ * @LastEditTime: 2021-07-04 13:46:10
  * @Description:
  */
 
@@ -9,6 +9,7 @@ import { createApp } from "vue";
 import App from "./App.vue";
 import installElementPlus from "../plugins/element";
 import "../assets/common.css";
+import "../assets/tools.css";
 
 // eslint-disable-next-line no-unused-vars
 import socket from "./service/socket";
