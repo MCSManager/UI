@@ -54,3 +54,7 @@
 .select-tag:hover {
   border: 1px solid rgb(11, 78, 165);
 }
+
+.alink{
+  text-decoration:underline;
+}

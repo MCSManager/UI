@@ -1,7 +1,7 @@
 <!--
  * @Author: Copyright(c) 2020 Suwings
  * @Date: 2021-05-08 11:08:44
- * @LastEditTime: 2021-06-20 14:28:02
+ * @LastEditTime: 2021-07-03 20:22:50
  * @Description: 
 -->
 <template>
@@ -31,9 +31,9 @@
           <i class="el-icon-coin"></i>
           <template #title>应用实例</template>
         </el-menu-item>
-        <el-menu-item index="/users">
+        <el-menu-item index="/private">
           <i class="el-icon-user"></i>
-          <template #title>个人中心</template>
+          <template #title>个人信息</template>
         </el-menu-item>
       </el-menu-item-group>
       <el-menu-item-group>

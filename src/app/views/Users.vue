@@ -1,7 +1,7 @@
 <!--
  * @Author: Copyright(c) 2020 Suwings
  * @Date: 2021-05-08 11:53:54
- * @LastEditTime: 2021-07-03 09:32:19
+ * @LastEditTime: 2021-05-13 12:04:14
  * @Description: 
 -->
 
@@ -10,7 +10,47 @@
     <el-col :span="24">
       <Panel>
         <template #title>用户列表</template>
-        <template #default> test </template>
+        <template #default>
+          <div class="instance-table-warpper">
+            <div>
+              <el-button size="mini" type="success">
+                <i class="el-icon-plus"></i> 新建用户
+              </el-button>
+              <el-button size="mini" type="primary">
+                <i class="el-icon-refresh"></i> 刷新
+              </el-button>
+            </div>
+
+            <div>
+              <el-button size="mini" type="danger" @click="batDelete">
+                <i class="el-icon-delete"></i> 删除用户
+              </el-button>
+            </div>
+          </div>
+
+          <el-table
+            :data="objects"
+            stripe
+            style="width: 100%"
+            size="small"
+            ref="multipleTable"
+            @selection-change="selectionChange"
+          >
+            <el-table-column type="selection" width="55"> </el-table-column>
+            <el-table-column prop="uuid" label="UUID" width="240"></el-table-column>
+            <el-table-column prop="userName" label="用户名"></el-table-column>
+            <el-table-column prop="permission" label="权限等级"></el-table-column>
+            <el-table-column prop="registerTime" label="注册时间"></el-table-column>
+            <el-table-column prop="loginTime" label="最后登录时间"></el-table-column>
+            <el-table-column label="操作" style="text-align: center">
+              <template #default="scope">
+                <el-button size="mini" @click="editObject(scope.row)" type="primary"
+                  >详细</el-button
+                >
+              </template>
+            </el-table-column>
+          </el-table>
+        </template>
       </Panel>
     </el-col>
   </el-row>

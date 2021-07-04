@@ -1,7 +1,7 @@
 /*
  * @Author: Copyright(c) 2020 Suwings
  * @Date: 2021-05-08 22:54:31
- * @LastEditTime: 2021-06-30 18:50:53
+ * @LastEditTime: 2021-07-03 20:22:12
  * @Description:
  */
 import { createRouter, createWebHistory } from "vue-router";
@@ -10,7 +10,8 @@ import Overview from "./views/Overview";
 import Instances from "./views/Instances";
 // import About from "./views/About";
 import Services from "./views/Services";
-import Users from "./views/Users";
+// import Users from "./views/Users";
+import UserDetail from "./views/UserDetail";
 
 import Analysis from "./views/Analysis";
 import News from "./views/News";
@@ -43,9 +44,9 @@ const routes = [
     component: Services
   },
   {
-    path: "/users",
-    name: "用户",
-    component: Users
+    path: "/private",
+    name: "个人信息",
+    component: UserDetail
   },
   {
     path: "/analysis",
