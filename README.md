@@ -20,6 +20,13 @@ _  /  / / / /___  ____/ /_  /  / / / /_/ /_  / / / /_/ /_  /_/ //  __/  /
 
 <br />
 
+相关项目
+-----------
+[MCSManager 守护进程项目](https://github.com/Suwings/MCSManager-Daemon)
+[MCSManager 前端项目](https://github.com/Suwings/MCSManager-UI)
+[MCSManager 8.X 版本主项目](https://github.com/Suwings/MCSManager)
+
+
 
 
 MCSManager 简介
@@ -54,12 +61,18 @@ MCSManager 简介
 
 <br />
 
-使用
+预览新界面
 -----------
 ```bash
+git clone https://github.com/Suwings/MCSManager-UI.git
 npm install
 npm run serve
 ```
+
+部分界面可能无法查看，因为前端数据模型渲染需要 Web 端配合，Web 端的源代码还未放出，计划放在 MCSManager 主项目仓库中。
+
+<br />
+
 
 开源协议
 -----------
