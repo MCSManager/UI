@@ -1,6 +1,3 @@
-<<<<<<< HEAD
-# project2104-ui
-=======
 ```
 ______  _______________________  ___
 ___   |/  /_  ____/_  ___/__   |/  /_____ _____________ _______ _____________
@@ -18,7 +15,6 @@ _  /  / / / /___  ____/ /_  /  / / / /_/ /_  / / / /_/ /_  /_/ //  __/  /
 适用于 MCSManager 未来版本的 Web 界面项目。
 
 
-
 [官方网站](http://mcsm.suwings.top/) | 当前正在开发中
 
 <br />
@@ -29,45 +25,15 @@ _  /  / / / /___  ____/ /_  /  / / / /_/ /_  / / / /_/ /_  /_/ //  __/  /
 [MCSManager 前端项目](https://github.com/Suwings/MCSManager-UI)
 [MCSManager 8.X 版本主项目](https://github.com/Suwings/MCSManager)
 
-
-
+<br />
 
 MCSManager 简介
 -----------
 这是一款可以管理多个 Minecraft 服务端（支持群组端）的 Web 管理面板，并且可以分配多个子账号来分别管理不同的 Minecraft 服务端，支持绝大部分主流的服务端，甚至是其他非 Minecraft 的程序。
 
 控制面板可运行在 Windows 与 Linux 平台，无需数据库与任何系统配置，只需安装 node 环境即可快速运行，属于轻量级的 Minecraft 服务端控制面板。
->>>>>>> 80976c6798f1093144d0c778898f15dad58d891c
 
-## Project setup
 
-```
-npm install
-```
-
-### Compiles and hot-reloads for development
-
-```
-npm run serve
-```
-
-### Compiles and minifies for production
-
-```
-npm run build
-```
-
-### Lints and fixes files
-
-<<<<<<< HEAD
-```
-npm run lint
-```
-
-### Customize configuration
-
-See [Configuration Reference](https://cli.vuejs.org/config/).
-=======
 预览新界面
 -----------
 ```bash
@@ -86,4 +52,3 @@ npm run serve
 使用 GNU General Public License v3.0
 
 若您想基于本项目进行任何修改，你需要提供许可作品和修改的完整源代码，其中包括使用许可作品的较大作品。 必须保留版权和许可声明以及贡献者明确授予专利权。
->>>>>>> 80976c6798f1093144d0c778898f15dad58d891c
