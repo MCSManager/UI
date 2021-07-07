@@ -1,7 +1,7 @@
 <!--
  * @Author: Copyright(c) 2020 Suwings
  * @Date: 2021-05-08 11:08:44
- * @LastEditTime: 2021-07-03 20:22:50
+ * @LastEditTime: 2021-07-07 13:12:19
  * @Description: 
 -->
 <template>
@@ -9,7 +9,6 @@
     mode="vertical"
     :uniqueOpened="false"
     :router="true"
-    class="el-menu-vertical-demo"
     @open="handleOpen"
     @close="handleClose"
     background-color="#303133"
@@ -44,23 +43,23 @@
         </el-menu-item>
         <el-menu-item index="/container">
           <i class="el-icon-copy-document"></i>
-          <template #title>容器化</template>
+          <template #title>镜像管理</template>
         </el-menu-item>
-        <el-menu-item index="/analysis">
+        <!-- <el-menu-item index="/analysis">
           <i class="el-icon-document"></i>
           <template #title>数据分析</template>
-        </el-menu-item>
+        </el-menu-item> -->
       </el-menu-item-group>
       <el-menu-item-group>
         <template #title>扩展功能</template>
         <el-menu-item index="/news">
           <i class="el-icon-news"></i>
-          <template #title>新闻</template>
+          <template #title>更新动态</template>
         </el-menu-item>
-        <el-menu-item index="/extension">
+        <!-- <el-menu-item index="/extension">
           <i class="el-icon-cpu"></i>
           <template #title>面板扩展</template>
-        </el-menu-item>
+        </el-menu-item> -->
       </el-menu-item-group>
       <el-menu-item-group>
         <template #title>其他</template>
@@ -78,9 +77,7 @@ import router from "../app/router";
 
 export default {
   data: function () {
-    return {
-      url: "'require(../../assets/logo.png)'"
-    };
+    return {};
   },
   methods: {
     handleOpen(key, keyPath) {

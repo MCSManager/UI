@@ -1,7 +1,7 @@
 <!--
  * @Author: Copyright 2021 Suwings
  * @Date: 2021-07-03 20:12:26
- * @LastEditTime: 2021-07-03 21:05:31
+ * @LastEditTime: 2021-07-07 13:17:56
  * @Description: 
 -->
 <!--
@@ -66,18 +66,18 @@
       </Panel>
 
       <el-row :gutter="20">
-        <el-col :span="16" :offset="0">
+        <el-col :md="16" :offset="0">
           <Panel>
             <template #title>拥有的实例</template>
             <template #default>
-              <el-table :data="user.instances" style="width: 100%">
+              <el-table :data="user.instances" style="width: 100%" size="mini">
                 <el-table-column prop="uuid" label="标识符（UUID）"> </el-table-column>
                 <el-table-column prop="region" label="所属主机（Region）"> </el-table-column>
               </el-table>
             </template>
           </Panel>
         </el-col>
-        <el-col :span="8" :offset="0">
+        <el-col :md="8" :offset="0">
           <Panel>
             <template #title>访问密码</template>
             <template #default>
@@ -173,5 +173,4 @@ export default {
 };
 </script>
 
-<style>
-</style>
+<style></style>

@@ -1,7 +1,7 @@
 /*
  * @Author: Copyright(c) 2020 Suwings
  * @Date: 2021-05-08 21:46:34
- * @LastEditTime: 2021-05-08 22:26:04
+ * @LastEditTime: 2021-07-06 22:21:25
  * @Description:
  */
 // vue.config.js
@@ -18,5 +18,8 @@ module.exports = {
       filename: "index.html",
       title: "控制面板 | MCSMANAGER"
     }
+  },
+  devServer: {
+    port: 8088
   }
 };

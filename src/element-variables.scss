@@ -12,7 +12,8 @@ $--font-path: "~element-plus/lib/theme-chalk/fonts";
 
 body,
 html {
-  font-family: "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", Arial, sans-serif;
+  font-family: "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei",
+    Arial, sans-serif;
   margin: 0;
   height: 100%;
   background-color: #e9eef3;
@@ -32,6 +33,10 @@ a {
 .el-container {
   height: 100%;
   overflow-y: auto;
+}
+
+.el-menu {
+  border-right: 0px;
 }
 
 .el-menu-item {

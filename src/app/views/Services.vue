@@ -1,112 +1,102 @@
 <!--
  * @Author: Copyright(c) 2020 Suwings
  * @Date: 2021-05-08 11:53:54
- * @LastEditTime: 2021-07-04 13:13:42
+ * @LastEditTime: 2021-07-07 12:44:20
  * @Description: 
 -->
 
 <template>
-  <el-row :gutter="20">
-    <el-col :md="8">
-      <Panel>
-        <template #title>远程服务管理</template>
-        <template #default>
-          <el-button type="success" size="mini" @click="openNewServiceDialog"
-            >新增远程守护进程</el-button
-          >
-          <el-button size="mini">刷新</el-button>
-        </template>
-      </Panel>
-      <Panel>
-        <template #title>远程服务节点</template>
-        <template #default>
-          <div style="min-height: 280px">
-            <el-tree
-              :data="remoteNodes"
-              :props="defaultProps"
-              :default-expand-all="true"
-              @node-click="handleNodeClick"
-            ></el-tree>
-          </div>
-        </template>
-      </Panel>
-    </el-col>
-    <el-col :md="16">
-      <Panel v-if="displayService">
-        <template #title>
-          <div>
-            <span v-text="displayService.ip + ':' + displayService.port"></span>
-            &nbsp;
-            <el-tag type="success" v-show="displayService.available" size="small">正常</el-tag>
-            <el-tag type="danger" v-show="!displayService.available" size="small">无法连接</el-tag>
-          </div>
-          <el-button class="button" type="text" @click="deleteService">删除</el-button>
-        </template>
-        <template #default>
-          <p v-if="!displayService.available" style="color: red">
-            无法连接到远程服务，此远程服务所在主机的全部信息都将无法正常获取，请确认地址是否正确且服务正常启用。
-          </p>
-          <el-descriptions size="mini">
-            <el-descriptions-item label="UUID">{{ displayService.uuid }}</el-descriptions-item>
-            <el-descriptions-item label="远程实例数">{{
-              displayService.instances.length
-            }}</el-descriptions-item>
-          </el-descriptions>
-          <div class="service-address-wrapper">
-            <div class="row-mt">
-              <el-input v-model="displayService.ip" size="small">
-                <template #prepend>地址</template>
-              </el-input>
-            </div>
-            <div class="row-mt">
-              <el-input v-model="displayService.port" size="small">
-                <template #prepend>端口</template>
-              </el-input>
-            </div>
-            <div class="row-mt" style="text-align: right">
-              <el-button size="small">更新地址</el-button>
-            </div>
-          </div>
-          <el-table :data="displayService.instances" stripe style="width: 100%" size="small">
-            <el-table-column prop="instanceUuid" label="UUID"></el-table-column>
-            <el-table-column prop="config.nickname" label="实例昵称"></el-table-column>
-          </el-table>
-        </template>
-      </Panel>
-      <Panel v-if="!displayService">
-        <template #title> 具体信息 </template>
-        <template #default>选择右侧菜单中任意一个节点即可查看远程服务的详细信息</template>
-      </Panel>
-    </el-col>
-  </el-row>
+  <Panel>
+    <template #title>远程服务管理</template>
+    <template #default>
+      <el-button type="success" size="mini" @click="openNewServiceDialog"
+        >新增远程守护进程</el-button
+      >
+      <el-button size="mini">刷新</el-button>
+    </template>
+  </Panel>
+  <Panel>
+    <template #title>所有分布式服务总览</template>
+    <template #default>
+      <p style="color: red">
+        无法连接到远程服务，此远程服务所在主机的全部信息都将无法正常获取，请确认地址是否正确且服务正常启用。
+      </p>
+      <el-table :data="services" style="width: 100%">
+        <el-table-column prop="ip" label="地址" width="220">
+          <template #default="scope">
+            <el-input size="small" v-model="scope.row.ip" placeholder="必填"></el-input>
+          </template>
+        </el-table-column>
+        <el-table-column prop="port" label="端口" width="100">
+          <template #default="scope">
+            <el-input size="small" v-model="scope.row.port" placeholder="必填"></el-input>
+          </template>
+        </el-table-column>
+        <el-table-column label="正在运行">
+          <template #default="scope"> {{ scope.row.started }} 个 </template>
+        </el-table-column>
+        <el-table-column label="实例总数">
+          <template #default="scope"> {{ scope.row.ilen }} 个 </template>
+        </el-table-column>
+        <el-table-column label="连接状态">
+          <template #default="scope">
+            <span class="color-green" v-if="scope.row.available">连接正常</span>
+            <span class="color-red" v-if="!scope.row.available">无法连接</span>
+          </template>
+        </el-table-column>
+        <el-table-column label="操作" style="text-align: center" width="240">
+          <template #default="scope">
+            <el-button size="mini" @click="toLink(scope.row)">应用更改</el-button>
+            <el-button size="mini" @click="toInfo(scope.row)">详情</el-button>
+            <el-button size="mini" @click="toInfo(scope.row)">删除</el-button>
+          </template>
+        </el-table-column>
+      </el-table>
+    </template>
+  </Panel>
 
-  <!-- 对话框代码 -->
-  <Dialog v-show="isNewService">
+  <!-- 示例抽屉 -->
+  <Drawer ref="drawer" title="远程服务详情">
+    <LineLabel>
+      <template #title>地址</template>
+      <template #default> {{ selectRow.ip }}:{{ selectRow.port }}</template>
+    </LineLabel>
+    <el-table :data="selectRow.instances" style="width: 100%">
+      <el-table-column prop="instanceUuid" label="标识符"></el-table-column>
+      <el-table-column prop="config.nickname" label="名字"></el-table-column>
+      <el-table-column prop="status" label="状态"></el-table-column>
+    </el-table>
+  </Drawer>
+
+  <!-- 详情弹框 -->
+  <Dialog v-model="drawer">
+    <template #title>远程服务详情</template>
+    <template #default>
+      <LineLabel>
+        <template #title>地址</template>
+        <template #default> {{ selectRow.ip }}:{{ selectRow.port }}</template>
+      </LineLabel>
+      <p>
+        本远程守护进程拥有的实例列表，具体的实例列表详细信息可在“实例管理”功能中进行管理和编辑，这里仅供浏览基本信息。
+      </p>
+      <el-table :data="selectRow.instances" style="width: 100%; min-width: 300px" size="mini">
+        <el-table-column prop="instanceUuid" label="标识符" width="260"></el-table-column>
+        <el-table-column prop="config.nickname" label="名字"></el-table-column>
+        <el-table-column prop="status" label="状态"></el-table-column>
+      </el-table>
+    </template>
+  </Dialog>
+
+  <Dialog v-model="isNewService">
     <template #title>新增远程服务</template>
     <template #default>
-      <p>
-        远程服务一般情况指远程主机，在将来也有可能会有不同类型的服务对接。
-        <br />确保目标主机已经部署运行守护进程（Daemon），接下来您便可以轻松连接远程服务
-      </p>
-      <div>
-        <el-input
-          placeholder="列如 127.0.0.1 或 www.demo.com"
-          v-model="newServiceInfo.ip"
-          size="small"
-        >
-          <template #prepend>地址</template>
-        </el-input>
-      </div>
+      <div class="sub-title">远程服务所在主机的IP地址</div>
+      <el-input v-model="newServiceInfo.ip" placeholder="地址，必填" size="small"></el-input>
+      <div class="sub-title row-mt">远程服务端口</div>
+      <el-input v-model="newServiceInfo.port" placeholder="端口，必填" size="small"></el-input>
       <div class="row-mt">
-        <el-input placeholder="一般为 24444 端口" v-model="newServiceInfo.port" size="small">
-          <template #prepend>端口</template>
-        </el-input>
-      </div>
-      <div class="row-mt">
-        <el-button type="success" size="small" @click="closeNewServiceDialog">
-          新增远程服务
-        </el-button>
-        <el-button type="danger" size="small" @click="closeNewServiceDialog">取消</el-button>
+        <el-button type="success" size="small">新增</el-button>
+        <el-button @click="isNewService = !isNewService" size="small">取消</el-button>
       </div>
     </template>
   </Dialog>
@@ -114,37 +104,37 @@
 
 <script>
 import Panel from "../../components/Panel";
+import LineLabel from "../../components/LineLabel";
 import Dialog from "../../components/Dialog";
+import Drawer from "../../components/Drawer";
 import axios from "axios";
 import { API_SERVICE } from "../service/common";
 
 export default {
+  components: { Panel, LineLabel, Dialog, Drawer },
   data() {
     return {
       newServiceInfo: {
         ip: "",
         port: ""
       },
-      isNewService: false,
       services: [],
-      remoteNodes: [],
-      displayService: null
+      drawer: false,
+      selectRow: null,
+      isNewService: false
     };
   },
   methods: {
     openNewServiceDialog() {
       this.isNewService = true;
     },
-    closeNewServiceDialog() {
-      this.isNewService = false;
+    toLink(row) {
+      this.selectRow = row;
+      this.$refs.drawer.open();
     },
-    handleNodeClick(v) {
-      console.log("Node Click:", v);
-      const sAddr = v.id;
-      this.services.forEach((service) => {
-        const tAddr = `${service.ip}:${service.port}`;
-        if (sAddr == tAddr) return (this.displayService = service);
-      });
+    toInfo(row) {
+      this.selectRow = row;
+      this.drawer = true;
     },
     deleteService() {
       this.$confirm("此操作将永久删除该远程服务，是否继续？", "警告", {
@@ -161,36 +151,25 @@ export default {
         .catch(() => {});
     }
   },
-  components: { Panel, Dialog },
   async mounted() {
     const result = await axios.get(API_SERVICE);
     const responseObjects = result.data.data;
-    this.remoteNodes = [
-      {
-        label: "面板节点",
-        children: []
-      }
-    ];
+
     this.services = [];
     responseObjects.forEach((v) => {
-      // 服务类所有数据列表
-      this.services.push(v);
-
-      // 节点菜单，根据状态进行不同的参数压入
-      if (v.available) {
-        this.remoteNodes[0].children.push({
-          id: `${v.ip}:${v.port}`,
-          label: `${v.ip}:${v.port}`,
-          available: v.available
-        });
-      } else {
-        this.remoteNodes[0].children.push({
-          id: `${v.ip}:${v.port}`,
-          label: `${v.ip}:${v.port} (不可用)`,
-          available: v.available
-        });
+      let started = 0;
+      let len = 0;
+      if (v.instances) {
+        for (const iterator of v.instances) {
+          len++;
+          if (iterator.status != 0) started++;
+        }
       }
+      v.started = started;
+      v.ilen = len;
+      this.services.push(v);
     });
+    window.services = this.services;
   }
 };
 </script>

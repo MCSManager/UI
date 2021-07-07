@@ -1,7 +1,7 @@
 <!--
  * @Author: Copyright(c) 2020 Suwings
  * @Date: 2021-05-08 11:53:54
- * @LastEditTime: 2021-07-04 13:10:56
+ * @LastEditTime: 2021-07-06 22:37:35
  * @Description: 
 -->
 
@@ -9,7 +9,7 @@
   <el-row :gutter="20">
     <el-col :span="24">
       <Panel>
-        <template #title>操作系统数据</template>
+        <template #title>面板部署系统数据</template>
         <template #default>
           <el-row :gutter="20">
             <el-col :xs="12" :md="6" v-for="(item, index) in computerInfoA" :key="index">
@@ -68,6 +68,21 @@
               功能确认各个远程服务器状态，若不修复此问题，则有部分远程实例您可能无法访问和显示。
             </span>
           </div>
+        </template>
+      </Panel>
+
+      <Panel>
+        <template #title>所有分布式服务总览</template>
+        <template #default>
+          <el-table :data="servicesStatus" style="width: 100%">
+            <el-table-column prop="ip" label="地址" width="180"> </el-table-column>
+            <el-table-column prop="port" label="端口" width="180"> </el-table-column>
+            <el-table-column prop="cpu" label="CPU 使用"> </el-table-column>
+            <el-table-column prop="mem" label="内存使用"> </el-table-column>
+            <el-table-column prop="instance" label="已有实例"> </el-table-column>
+            <el-table-column prop="started" label="运行实例"> </el-table-column>
+            <el-table-column prop="status" label="连接状态"> </el-table-column>
+          </el-table>
         </template>
       </Panel>
     </el-col>
@@ -232,6 +247,44 @@ export default {
         {
           title: "即时通信 IM 消息存储时长是多久？",
           link: ""
+        }
+      ],
+      servicesStatus: [
+        {
+          ip: "127.0.0.1",
+          port: 24444,
+          cpu: "18%",
+          mem: "15.4GB/126GB", // 记得合并数据
+          instance: 23,
+          started: 14,
+          status: "正常"
+        },
+        {
+          ip: "127.0.0.1",
+          port: 24444,
+          cpu: "18%",
+          mem: "15.4GB/126GB", // 记得合并数据
+          instance: 23,
+          started: 14,
+          status: "正常"
+        },
+        {
+          ip: "127.0.0.1",
+          port: 24444,
+          cpu: "18%",
+          mem: "15.4GB/126GB", // 记得合并数据
+          instance: 23,
+          started: 14,
+          status: "正常"
+        },
+        {
+          ip: "127.0.0.1",
+          port: 24444,
+          cpu: "18%",
+          mem: "15.4GB/126GB", // 记得合并数据
+          instance: 23,
+          started: 14,
+          status: "正常"
         }
       ]
     };

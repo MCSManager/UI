@@ -1,0 +1,13 @@
+@media (max-width: 860px) {
+  .only-pc-display {
+    display: none;
+  }
+  .only-phone-display {
+    display: block;
+  }
+}
+@media (min-width: 860px) {
+  .only-phone-display {
+    display: none;
+  }
+}

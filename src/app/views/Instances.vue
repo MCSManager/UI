@@ -1,7 +1,7 @@
 <!--
  * @Author: Copyright(c) 2020 Suwings
  * @Date: 2021-05-08 11:53:54
- * @LastEditTime: 2021-07-04 13:10:42
+ * @LastEditTime: 2021-07-07 13:23:10
  * @Description: 
 -->
 
@@ -86,11 +86,11 @@
       >
         <el-table-column type="selection" width="55"> </el-table-column>
         <!-- <el-table-column prop="instanceUuid" label="UUID" width="240"></el-table-column> -->
-        <el-table-column prop="nickname" label="实例昵称" width="260"></el-table-column>
+        <el-table-column prop="nickname" label="实例昵称" min-width="240"></el-table-column>
         <el-table-column prop="status" label="运行状态" width="120"></el-table-column>
-        <el-table-column prop="type" label="实例类型"></el-table-column>
-        <el-table-column prop="ip" label="来自于"></el-table-column>
-        <el-table-column label="操作" style="text-align: center">
+        <el-table-column prop="type" label="实例类型" width="140"></el-table-column>
+        <el-table-column prop="ip" label="来自于" width="140"></el-table-column>
+        <el-table-column label="操作" style="text-align: center" width="180">
           <template #default="scope">
             <el-button
               size="mini"

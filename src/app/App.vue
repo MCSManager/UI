@@ -1,25 +1,31 @@
 <!--
- * @Author: Copyright(c) 2020 Suwings
+ * @Author: Copyright(c) 2021 Suwings
  * @Date: 2021-05-08 10:07:55
- * @LastEditTime: 2021-05-16 22:47:30
+ * @LastEditTime: 2021-07-06 22:14:17
  * @Description: 
 -->
 <template>
   <el-container>
-    <el-aside width="240px">
-      <Aside />
-    </el-aside>
-
+    <!-- 手机屏幕菜单栏 -->
+    <el-drawer size="240" v-model="drawer" :with-header="false" direction="ltr">
+      <el-aside width="240px" style="height: 100%">
+        <Aside />
+      </el-aside>
+    </el-drawer>
+    <!-- 电脑屏幕菜单栏 -->
+    <div id="app-menu" class="only-pc-display">
+      <el-aside width="240px" style="height: 100%">
+        <Aside />
+      </el-aside>
+    </div>
     <el-container>
       <el-main>
         <el-row>
           <el-col>
-            <Header v-bind:breadcrumbs="breadCrumbs" />
+            <Header v-bind:breadcrumbs="breadCrumbs" :aside="toAside" />
           </el-col>
         </el-row>
-        <!-- <transition name="fade"> -->
         <router-view></router-view>
-        <!-- </transition> -->
       </el-main>
     </el-container>
   </el-container>
@@ -36,8 +42,15 @@ export default {
   components: { Aside, Header },
   data: function () {
     return {
-      breadCrumbs: "aaa"
+      breadCrumbs: "",
+      mode: 1,
+      drawer: false
     };
+  },
+  methods: {
+    toAside() {
+      this.drawer = !this.drawer;
+    }
   },
   mounted() {
     router.beforeEach((to, from, next) => {

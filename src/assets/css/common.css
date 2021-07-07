@@ -1,3 +1,9 @@
+/* 菜单 */
+#app-menu {
+  height: 100%;
+  transition: all 1s;
+}
+
 /* 动画 */
 
 .fade-enter-active,
@@ -10,17 +16,18 @@
   opacity: 0;
 }
 
+/* 标题和子标题组件 */
 .sub-title {
   margin-bottom: 10px;
   font-size: 14px;
 }
 
-.sub-title-title{
+.sub-title-title {
   font-size: 14px;
   color: #000000;
   margin: 0px;
 }
-.sub-title-info{
+.sub-title-info {
   font-size: 13px;
   color: gray;
   margin: 0px;
@@ -48,12 +55,30 @@
   border: 1px solid rgb(11, 78, 165);
 }
 
-.alink{
-  text-decoration:underline;
+.alink {
+  text-decoration: underline;
 }
 
-.input-label{
+.input-label {
   font-size: 14px;
   margin: 8px 0px;
   display: inline-block;
+}
+
+/* 列表项目栏 */
+.list-item {
+  margin: 2px 0px;
+  padding: 8px;
+  transition: all 0.2s;
+  cursor: pointer;
+}
+
+.list-item:hover {
+  background-color: #dfdfdf;
+  border-radius: 4px;
+}
+
+.drawer-body {
+  margin: 0px 20px;
+  overflow-y: auto;
 }

@@ -18,38 +18,45 @@
   margin-top: 10px;
 }
 
-.text-align-right{
+.text-align-right {
   text-align: right;
 }
 
 /* 公共文字颜色 */
 
-.color-red{
+.color-red {
   color: red;
 }
 
-.color-green{
+.color-green {
   color: green;
 }
 
-.color-yellow{
+.color-yellow {
   color: yellow;
 }
 
-.color-gray{
+.color-gray {
   color: gray;
 }
 
-
 /* Flex 左右布局 */
-.flex{
+.flex {
   display: flex;
 }
 
-.flex-space-between{
+.flex-space-between {
   justify-content: space-between;
 }
 
-.flex-align-items-center{
+.flex-align-items-center {
   align-items: center;
+}
+
+.font-size-12 {
+  font-size: 12px;
+}
+
+.font-size-14 {
+  font-size: 14px;
 }

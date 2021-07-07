@@ -5,7 +5,7 @@
  * @Description:
  */
 import { io } from "socket.io-client";
-import { ElNotification } from 'element-plus';
+import { ElNotification } from "element-plus";
 
 import { API_URL } from "./common";
 
@@ -36,7 +36,7 @@ socket.on("instance/stopped", (data) => {
     dangerouslyUseHTMLString: true,
     type: "success",
     duration: 3000
-  })
+  });
 });
 
 socket.on("instance/opened", (data) => {
@@ -47,9 +47,8 @@ socket.on("instance/opened", (data) => {
     dangerouslyUseHTMLString: true,
     type: "success",
     duration: 3000
-  })
+  });
 });
-
 
 socket.on("instance/failure", (data) => {
   console.log("Event: 实例失败:", data);
@@ -59,7 +58,7 @@ socket.on("instance/failure", (data) => {
     dangerouslyUseHTMLString: true,
     type: "error",
     duration: 5000
-  })
+  });
 });
 
 socket.on("forward/instance", (data) => {
