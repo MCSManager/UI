@@ -1,7 +1,7 @@
 <!--
  * @Author: Copyright(c) 2020 Suwings
  * @Date: 2021-05-08 11:53:54
- * @LastEditTime: 2021-07-07 13:23:10
+ * @LastEditTime: 2021-07-13 20:45:20
  * @Description: 
 -->
 
@@ -50,10 +50,10 @@
     <template #default>
       <div class="instance-table-warpper">
         <div>
-          <el-button size="mini" type="success" @click="toNewInstance">
+          <el-button size="small" type="success" @click="toNewInstance">
             <i class="el-icon-plus"></i> 新建实例
           </el-button>
-          <el-button size="mini" type="primary" @click="refresh">
+          <el-button size="small" type="primary" @click="refresh">
             <i class="el-icon-refresh"></i> 刷新
           </el-button>
         </div>
@@ -61,16 +61,16 @@
           <el-tag style="margin: 0px 12px" v-show="!canInterval" type="danger">
             实时刷新已暂停
           </el-tag>
-          <el-button size="mini" type="primary" @click="batOpen">
+          <el-button size="small" type="primary" @click="batOpen">
             <i class="el-icon-video-play"></i> 开启
           </el-button>
-          <el-button size="mini" type="primary" @click="batStop">
+          <el-button size="small" type="primary" @click="batStop">
             <i class="el-icon-video-pause"></i> 关闭
           </el-button>
-          <el-button size="mini" type="primary" @click="batKill">
+          <el-button size="small" type="primary" @click="batKill">
             <i class="el-icon-video-pause"></i> 终止
           </el-button>
-          <el-button size="mini" type="danger" @click="batDelete">
+          <el-button size="small" type="danger" @click="batDelete">
             <i class="el-icon-delete"></i> 删除
           </el-button>
         </div>
@@ -80,7 +80,7 @@
         :data="instances"
         stripe
         style="width: 100%"
-        size="small"
+        size="mini"
         ref="multipleTable"
         @selection-change="selectionChange"
       >
@@ -93,16 +93,18 @@
         <el-table-column label="操作" style="text-align: center" width="180">
           <template #default="scope">
             <el-button
-              size="mini"
+              size="small"
               @click="editInstance(scope.row.serviceUuid, scope.row.instanceUuid)"
-              >编辑</el-button
             >
+              编辑
+            </el-button>
             <el-button
-              size="mini"
+              size="small"
               @click="toInstance(scope.row.serviceUuid, scope.row.instanceUuid)"
-              >管理</el-button
             >
-            <!-- <el-button size="mini" type="danger" @click="delInstance(scope.row)">
+              管理
+            </el-button>
+            <!-- <el-button size="small" type="danger" @click="delInstance(scope.row)">
                   删除
                 </el-button> -->
           </template>

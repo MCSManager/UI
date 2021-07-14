@@ -72,7 +72,7 @@
             </el-col>
             <el-col :span="6" :offset="0">
               <LineButton>
-                <div><i class="el-icon-folder-opened"></i> 文件管理</div>
+                <div @click="toFileManager"><i class="el-icon-folder-opened"></i> 文件管理</div>
               </LineButton>
             </el-col>
             <el-col :span="6" :offset="0">
@@ -122,6 +122,7 @@ import LineButton from "../../components/LineButton";
 import axios from "axios";
 import socket from "../service/socket";
 import { API_URL } from "../service/common";
+import router from "../router";
 
 export default {
   data: function () {
@@ -213,6 +214,11 @@ export default {
         command: command
       });
       this.command = "";
+    },
+
+    // 前往文件管理界面
+    toFileManager() {
+      router.push({ path: `/file/${this.serviceUuid}/${this.instanceUuid}/` });
     }
   },
   async mounted() {

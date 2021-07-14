@@ -1,7 +1,7 @@
 <!--
  * @Author: Copyright(c) 2020 Suwings
  * @Date: 2021-05-08 11:53:54
- * @LastEditTime: 2021-07-05 17:15:29
+ * @LastEditTime: 2021-07-07 17:20:20
  * @Description: 
 -->
 
@@ -11,7 +11,7 @@
     <template #default>
       <div class="flex flex-space-between flex-align-items-center">
         <div>
-          <el-button type="success" size="mini">新建镜像</el-button>
+          <el-button type="success" size="mini" @click="newImage">新建镜像</el-button>
           <el-button type="" size="mini">刷新</el-button>
         </div>
         <span class="color-gray">新建镜像可能需要一定时间。&nbsp;&nbsp;</span>
@@ -39,6 +39,7 @@
 </template>
 
 <script>
+import router from "../router";
 import Panel from "../../components/Panel";
 // import LineLabel from "../../components/LineLabel";
 
@@ -85,7 +86,11 @@ export default {
       ]
     };
   },
-  methods: {}
+  methods: {
+    newImage() {
+      router.push({ path: `/new_image` });
+    }
+  }
 };
 </script>
 

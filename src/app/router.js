@@ -1,7 +1,7 @@
 /*
  * @Author: Copyright(c) 2020 Suwings
  * @Date: 2021-05-08 22:54:31
- * @LastEditTime: 2021-07-06 20:58:22
+ * @LastEditTime: 2021-07-14 14:22:46
  * @Description:
  */
 import { createRouter, createWebHistory } from "vue-router";
@@ -21,6 +21,8 @@ import Setting from "./views/Setting";
 import Terminal from "./views/Terminal";
 import InstanceDetail from "./views/InstanceDetail";
 import NewInstance from "./views/NewInstance";
+import NewImage from "./views/NewImage";
+import FileManager from "./views/FileManager";
 
 const routes = [
   {
@@ -74,9 +76,19 @@ const routes = [
     component: Setting
   },
   {
+    path: "/new_image",
+    name: "创建镜像",
+    component: NewImage
+  },
+  {
     path: "/terminal/:serviceUuid/:instanceUuid",
     name: "终端",
     component: Terminal
+  },
+  {
+    path: "/file/:serviceUuid/:instanceUuid",
+    name: "文件管理",
+    component: FileManager
   },
   {
     path: "/instance_detail/:serviceUuid/:instanceUuid",
