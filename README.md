@@ -34,16 +34,6 @@ MCSManager 简介
 控制面板可运行在 Windows 与 Linux 平台，无需数据库与任何系统配置，只需安装 node 环境即可快速运行，属于轻量级的 Minecraft 服务端控制面板。
 
 
-预览新界面
------------
-```bash
-git clone https://github.com/Suwings/MCSManager-UI.git
-npm install
-npm run serve
-```
-
-部分界面可能无法查看，因为前端数据模型渲染需要 Web 端配合，Web 端的源代码还未放出，计划放在 MCSManager 主项目仓库中。
-
 <br />
 
 
