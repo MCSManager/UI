@@ -1,7 +1,7 @@
 <!--
  * @Author: Copyright(c) 2020 Suwings
  * @Date: 2021-05-08 11:53:54
- * @LastEditTime: 2021-07-01 13:36:25
+ * @LastEditTime: 2021-07-28 13:45:55
  * @Description: 
 -->
 
@@ -264,7 +264,8 @@ import Panel from "../../components/Panel";
 
 import SelectBlock from "../../components/SelectBlock";
 import axios from "axios";
-import { API_SERVICE, API_URL } from "../service/common";
+import { API_INSTANCE, API_SERVICE } from "../service/common";
+import { request } from "../service/protocol";
 
 export default {
   components: { Panel, SelectBlock },
@@ -304,10 +305,10 @@ export default {
         console.log("正在保存:", this.form);
         const postData = JSON.parse(JSON.stringify(this.form));
         postData.docker.ports = this.form.docker.ports.split(" ");
-        await axios.request({
+        await request({
           method: "POST",
-          url: `${API_URL}/api/instance/${this.service}/`,
-          params: { uuid: this.instanceUuid },
+          url: API_INSTANCE,
+          params: { remote_uuid: this.service },
           data: postData
         });
         this.$message({ message: "创建成功", type: "success" });

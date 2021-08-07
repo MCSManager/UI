@@ -1,7 +1,7 @@
 <!--
  * @Author: Copyright(c) 2020 Suwings
  * @Date: 2021-05-08 11:53:54
- * @LastEditTime: 2021-07-07 17:20:20
+ * @LastEditTime: 2021-07-22 12:15:42
  * @Description: 
 -->
 
@@ -11,8 +11,8 @@
     <template #default>
       <div class="flex flex-space-between flex-align-items-center">
         <div>
-          <el-button type="success" size="mini" @click="newImage">新建镜像</el-button>
-          <el-button type="" size="mini">刷新</el-button>
+          <el-button type="success" size="small" @click="newImage">新建镜像</el-button>
+          <el-button type="" size="small">刷新</el-button>
         </div>
         <span class="color-gray">新建镜像可能需要一定时间。&nbsp;&nbsp;</span>
       </div>

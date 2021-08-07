@@ -1,39 +1,41 @@
 <!--
  * @Author: Copyright 2021 Suwings
  * @Date: 2021-07-03 21:29:11
- * @LastEditTime: 2021-07-07 12:42:45
+ * @LastEditTime: 2021-07-31 20:29:07
  * @Description: 基于 Element UI 的对话框
 -->
 
 <template>
-  <div v-if="modelValue" class="component-dialog-wrapper">
-    <div class="component-dialog-overflow">
-      <Panel style="margin-bottom: 0px">
-        <template #title>
-          <div class="flex flex-space-between flex-align-items-center" style="width: 100%">
-            <slot name="title"></slot>
-            <div class="component-dialog-close-button" @click="close">
-              <i class="el-icon-close"></i>
+  <transition name="fade2">
+    <div v-show="modelValue" class="component-dialog-wrapper">
+      <div class="component-dialog-overflow">
+        <Panel style="margin-bottom: 0px">
+          <template #title>
+            <div class="flex flex-space-between flex-align-items-center" style="width: 100%">
+              <slot name="title"></slot>
+              <div class="component-dialog-close-button" @click="close">
+                <i class="el-icon-close"></i>
+              </div>
             </div>
-          </div>
-        </template>
-        <template #default>
-          <div class="component-dialog-body">
-            <slot></slot>
-          </div>
-        </template>
-      </Panel>
+          </template>
+          <template #default>
+            <div class="component-dialog-body">
+              <slot></slot>
+            </div>
+          </template>
+        </Panel>
+      </div>
     </div>
-  </div>
+  </transition>
 </template>
 
 <script>
 import Panel from "./Panel";
-
 // 使用 v-model 指令实现双向数据传递
 export default {
   props: {
-    modelValue: Boolean
+    modelValue: Boolean,
+    cancel: Function
   },
   emits: ["update:modelValue"],
   data: function () {
@@ -43,6 +45,7 @@ export default {
   },
   methods: {
     close() {
+      if (this.cancel) this.cancel();
       this.$emit("update:modelValue", false);
     }
   },

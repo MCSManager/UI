@@ -1,7 +1,7 @@
 <!--
  * @Author: Copyright(c) 2020 Suwings
  * @Date: 2021-05-08 11:53:54
- * @LastEditTime: 2021-07-04 17:04:34
+ * @LastEditTime: 2021-07-22 12:16:04
  * @Description: 
 -->
 
@@ -11,8 +11,8 @@
     <template #default>
       <div class="flex flex-space-between flex-align-items-center">
         <div>
-          <el-button type="success" size="mini">更新配置</el-button>
-          <el-button type="" size="mini">刷新</el-button>
+          <el-button type="success" size="small">更新配置</el-button>
+          <el-button type="" size="small">刷新</el-button>
         </div>
         <span class="color-gray">部分配置可能需要重启面板才能生效&nbsp;&nbsp;</span>
       </div>

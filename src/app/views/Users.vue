@@ -1,55 +1,45 @@
 <!--
  * @Author: Copyright(c) 2020 Suwings
  * @Date: 2021-05-08 11:53:54
- * @LastEditTime: 2021-05-13 12:04:14
+ * @LastEditTime: 2021-08-07 13:15:08
  * @Description: 
 -->
 
 <template>
   <el-row :gutter="20">
-    <el-col :span="24">
+    <el-col :md="16" :offset="0">
       <Panel>
-        <template #title>用户列表</template>
+        <template #title>最新动态</template>
         <template #default>
-          <div class="instance-table-warpper">
-            <div>
-              <el-button size="mini" type="success">
-                <i class="el-icon-plus"></i> 新建用户
-              </el-button>
-              <el-button size="mini" type="primary">
-                <i class="el-icon-refresh"></i> 刷新
-              </el-button>
-            </div>
-
-            <div>
-              <el-button size="mini" type="danger" @click="batDelete">
-                <i class="el-icon-delete"></i> 删除用户
-              </el-button>
-            </div>
+          <el-timeline style="margin-left: -36px">
+            <el-timeline-item v-for="(activity, index) in activities" :key="index" :icon="activity.icon" :type="activity.type" :color="activity.color" :size="activity.size" :timestamp="activity.time">
+              <div class="sub-title">
+                <p class="sub-title-title">{{ activity.title }}</p>
+                <p class="sub-title-info">{{ activity.msg }}</p>
+              </div>
+            </el-timeline-item>
+          </el-timeline>
+        </template>
+      </Panel>
+    </el-col>
+    <el-col :md="8" :offset="0">
+      <Panel>
+        <template #title>官方公告</template>
+        <template #default>
+          <div class="sub-title component-message-item" v-for="(item, index) in notice" :key="index">
+            <p class="sub-title-title row-mb">{{ item.title }}</p>
+            <p class="sub-title-info">{{ item.msg }}</p>
           </div>
+        </template>
+      </Panel>
 
-          <el-table
-            :data="objects"
-            stripe
-            style="width: 100%"
-            size="small"
-            ref="multipleTable"
-            @selection-change="selectionChange"
-          >
-            <el-table-column type="selection" width="55"> </el-table-column>
-            <el-table-column prop="uuid" label="UUID" width="240"></el-table-column>
-            <el-table-column prop="userName" label="用户名"></el-table-column>
-            <el-table-column prop="permission" label="权限等级"></el-table-column>
-            <el-table-column prop="registerTime" label="注册时间"></el-table-column>
-            <el-table-column prop="loginTime" label="最后登录时间"></el-table-column>
-            <el-table-column label="操作" style="text-align: center">
-              <template #default="scope">
-                <el-button size="mini" @click="editObject(scope.row)" type="primary"
-                  >详细</el-button
-                >
-              </template>
-            </el-table-column>
-          </el-table>
+      <Panel>
+        <template #title>重要通知</template>
+        <template #default>
+          <div class="sub-title component-message-item" v-for="(item, index) in notice" :key="index">
+            <p class="sub-title-title row-mb">{{ item.title }}</p>
+            <p class="sub-title-info">{{ item.msg }}</p>
+          </div>
         </template>
       </Panel>
     </el-col>
@@ -58,43 +48,42 @@
 
 <script>
 import Panel from "../../components/Panel";
-// import { ElMessage } from "element-plus";
 export default {
-  data() {
+  components: { Panel },
+  data: function () {
     return {
-      objects: [
+      activities: [
         {
-          uuid: "14c154fc93bb4186a129d235310f2431",
-          userName: "Suwings",
-          permission: "管理账户",
-          registerTime: "2021/1/1 12:24:11",
-          loginTime: "2021/1/1 12:24:11",
-          instances: []
+          title: "TDSQL-A PostgreSQL 版-新品上线",
+          msg: "提供高性能、高扩展、高安全、高性价比的在线关系型实时数仓服务，自研列式存储引擎，支持完整事务能力，全面兼容 PostgreSQL，高度兼",
+          time: "2021年7月"
+        },
+        {
+          title: "边缘可用区-开放专用可用区申请",
+          msg: "专用可用区（CDZ）是一种特殊的边缘可用区，旨在帮助中大型企业、政府/机构、IDC 服务商在本地机房快速搭建专属的云计算服务，用户可根据",
+          time: "2021年8月"
         }
       ],
-      multipleSelection: [] // 表格多选属性
+      notice: [
+        {
+          title: "TDSQL-A PostgreSQL 版-新品上线",
+          msg: "提供高性能、高扩展、高安全、高性价比的在线关系型实时数仓服务，自研列式存储引擎，支持完整事务能力，全面兼容 PostgreSQL，高度兼",
+          time: "2021年9月"
+        },
+        {
+          title: "边缘可用区-开放专用可用区申请",
+          msg: "专用可用区（CDZ）是一种特殊的边缘可用区，旨在帮助中大型企业、政府/机构、IDC 服务商在本地机房快速搭建专属的云计算服务，用户可根据"
+        }
+      ]
     };
   },
-  mounted() {},
-  methods: {
-    // 表格多选函数
-    selectionChange(v) {
-      this.multipleSelection = v;
-    },
-    editObject() {},
-    batDelete() {
-      console.log("Delete:", this.multipleSelection);
-    }
-  },
-  components: { Panel }
+  methods: {},
+  mounted() {}
 };
 </script>
 
 <style>
-.instance-table-warpper {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: 12px;
+.component-message-item {
+  margin: 18px 0px;
 }
 </style>

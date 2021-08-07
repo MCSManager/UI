@@ -1,7 +1,7 @@
 <!--
  * @Author: Copyright(c) 2020 Suwings
  * @Date: 2021-05-08 11:53:54
- * @LastEditTime: 2021-07-06 22:13:58
+ * @LastEditTime: 2021-07-28 15:00:20
  * @Description: 
 -->
 
@@ -24,31 +24,32 @@
       <el-col :span="12" style="text-align: right; line-height: 28px">
         <el-dropdown style="margin: 0px 10px">
           <span class="el-dropdown-link">
-            Suwings<i class="el-icon-arrow-down el-icon--right"></i>
+            {{ userInfo.userName }}
+            <i class="el-icon-arrow-down el-icon--right"></i>
           </span>
           <template #dropdown>
             <el-dropdown-menu>
-              <el-dropdown-item>个人资料</el-dropdown-item>
-              <el-dropdown-item>修改密码</el-dropdown-item>
-              <el-dropdown-item>退出</el-dropdown-item>
+              <el-dropdown-item @click="toPrivate">个人资料</el-dropdown-item>
+              <!-- <el-dropdown-item>修改密码</el-dropdown-item> -->
+              <el-dropdown-item @click="logout">退出</el-dropdown-item>
             </el-dropdown-menu>
           </template>
         </el-dropdown>
-        <el-tooltip content="消息" class="only-pc-display">
+        <!-- <el-tooltip content="消息" class="only-pc-display">
           <el-button size="mini" icon="el-icon-bell" circle></el-button>
-        </el-tooltip>
-        <el-tooltip content="在线支持" class="only-pc-display">
-          <el-button size="mini" icon="el-icon-cloudy" circle></el-button>
         </el-tooltip>
         <el-tooltip content="使用文档" class="only-pc-display">
           <el-button size="mini" icon="el-icon-help" circle></el-button>
-        </el-tooltip>
+        </el-tooltip> -->
       </el-col>
     </el-row>
   </el-card>
 </template>
 
 <script>
+import router from "../app/router";
+import { API_USER_LOGOUT } from "../app/service/common";
+import { request } from "../app/service/protocol";
 export default {
   props: {
     breadcrumbs: String,
@@ -57,9 +58,38 @@ export default {
   data: function () {
     return {};
   },
+  computed: {
+    userInfo() {
+      return this.$store.state.userInfo;
+    }
+  },
   methods: {
     toAside() {
       this.$props.aside();
+    },
+    toPrivate() {
+      router.push({ path: "private" });
+    },
+    async logout() {
+      try {
+        request({
+          method: "GET",
+          url: API_USER_LOGOUT
+        });
+        window.location.href = "/login";
+        this.$notify({
+          title: "退出成功",
+          message: "欢迎下次使用",
+          type: "success"
+        });
+      } catch (error) {
+        this.$notify({
+          title: "退出失败",
+          message: error.message,
+          type: "error",
+          duration: 0
+        });
+      }
     }
   },
   components: {}

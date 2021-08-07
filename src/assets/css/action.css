@@ -1,0 +1,32 @@
+/* Vue 组件默认的动画名 */
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.4s ease;
+}
+
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
+}
+
+/* 更快的淡入淡出动画 */
+.fade2-enter-active,
+.fade2-leave-active {
+  transition: opacity 0.3s ease;
+}
+
+.fade2-enter-from,
+.fade2-leave-to {
+  opacity: 0;
+}
+
+/* 更快的淡入淡出动画 */
+.fade3-enter-active,
+.fade3-leave-active {
+  transition: opacity 0.3s ease;
+}
+
+.fade3-enter-from,
+.fade3-leave-to {
+  opacity: 0;
+}

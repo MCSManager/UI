@@ -1,7 +1,7 @@
 <!--
  * @Author: Copyright(c) 2020 Suwings
  * @Date: 2021-05-08 11:53:54
- * @LastEditTime: 2021-07-13 20:45:20
+ * @LastEditTime: 2021-08-02 16:01:29
  * @Description: 
 -->
 
@@ -12,13 +12,13 @@
       <el-row :gutter="20">
         <el-col :span="6">
           <LineLabel size="small">
-            <template #title>已连接远程服务: </template>
+            <template #title>在线远程服务: </template>
             <template #default> {{ availableService.length }} 个 </template>
           </LineLabel>
         </el-col>
         <el-col :span="6">
           <LineLabel size="small">
-            <template #title>不可用远程服务: </template>
+            <template #title>离线远程服务: </template>
             <template #default> {{ unavailableService.length }} 个 </template>
           </LineLabel>
         </el-col>
@@ -45,22 +45,24 @@
     </template>
   </Panel>
 
-  <Panel>
+  <Panel v-loading="loading">
     <template #title>分布式应用实例列表</template>
     <template #default>
       <div class="instance-table-warpper">
         <div>
-          <el-button size="small" type="success" @click="toNewInstance">
-            <i class="el-icon-plus"></i> 新建实例
-          </el-button>
-          <el-button size="small" type="primary" @click="refresh">
+          <el-select v-model="currentRemoteUuid" filterable placeholder="请选择远程服务地址" size="small" style="margin-right: 10px" @change="remoteSelectHandle">
+            <el-option v-for="item in remoteList" :key="item.value" :label="item.label" :value="item.value">
+            </el-option>
+          </el-select>
+          <el-input v-model="query.instanceName" placeholder="实例名称" size="small" style="width: 180px; margin-right: 10px"></el-input>
+          <el-button size="small" type="success" @click="refresh">
             <i class="el-icon-refresh"></i> 刷新
           </el-button>
         </div>
         <div>
-          <el-tag style="margin: 0px 12px" v-show="!canInterval" type="danger">
-            实时刷新已暂停
-          </el-tag>
+          <el-button size="small" type="success" @click="toNewInstance">
+            <i class="el-icon-plus"></i> 新建实例
+          </el-button>
           <el-button size="small" type="primary" @click="batOpen">
             <i class="el-icon-video-play"></i> 开启
           </el-button>
@@ -76,37 +78,26 @@
         </div>
       </div>
 
-      <el-table
-        :data="instances"
-        stripe
-        style="width: 100%"
-        size="mini"
-        ref="multipleTable"
-        @selection-change="selectionChange"
-      >
+      <div class="instance-table-warpper">
+        <div></div>
+        <div>
+          <el-pagination background layout="prev, pager, next" :total="maxPage" v-model:currentPage="page" :page-size="1" @current-change="handleCurrentChange" small></el-pagination>
+        </div>
+      </div>
+
+      <el-table :data="instances" stripe style="width: 100%" size="mini" ref="multipleTable" @selection-change="selectionChange">
         <el-table-column type="selection" width="55"> </el-table-column>
-        <!-- <el-table-column prop="instanceUuid" label="UUID" width="240"></el-table-column> -->
         <el-table-column prop="nickname" label="实例昵称" min-width="240"></el-table-column>
         <el-table-column prop="status" label="运行状态" width="120"></el-table-column>
         <el-table-column prop="type" label="实例类型" width="140"></el-table-column>
-        <el-table-column prop="ip" label="来自于" width="140"></el-table-column>
         <el-table-column label="操作" style="text-align: center" width="180">
           <template #default="scope">
-            <el-button
-              size="small"
-              @click="editInstance(scope.row.serviceUuid, scope.row.instanceUuid)"
-            >
+            <el-button size="mini" @click="editInstance(scope.row.serviceUuid, scope.row.instanceUuid)">
               编辑
             </el-button>
-            <el-button
-              size="small"
-              @click="toInstance(scope.row.serviceUuid, scope.row.instanceUuid)"
-            >
+            <el-button size="mini" @click="toInstance(scope.row.serviceUuid, scope.row.instanceUuid)">
               管理
             </el-button>
-            <!-- <el-button size="small" type="danger" @click="delInstance(scope.row)">
-                  删除
-                </el-button> -->
           </template>
         </el-table-column>
       </el-table>
@@ -119,95 +110,125 @@ import Panel from "../../components/Panel";
 import LineLabel from "../../components/LineLabel";
 import { ElMessage } from "element-plus";
 import axios from "axios";
-import { API_SERVICE, API_URL } from "../service/common";
+import { API_INSTANCE, API_SERVICE_INSTANCES, API_SERVICE_LIST, API_URL } from "../service/common";
 import router from "../router";
+import { request } from "../service/protocol";
+import { statusCodeToText, typeTextToReadableText } from "../service/instance_tools";
 export default {
+  components: { Panel, LineLabel },
   data() {
     return {
-      canInterval: true,
-      interval: null,
+      remoteList: [],
+      currentRemoteUuid: null,
       instances: [],
-      remoteIps: [],
-      remoteObjects: [],
       multipleSelection: [], // 表格多选属性
-      availableService: [],
+      startedInstance: 0,
+      loading: false,
+      availableService: [], // 可用和不可用远程服务列表
       unavailableService: [],
-      startedInstance: 0
+
+      page: 1,
+      maxPage: 1,
+
+      query: {
+        instanceName: ""
+      }
     };
   },
   async mounted() {
     await this.render();
-    this.startAjaxTask();
   },
-  unmounted() {
-    this.stopAjaxTask();
-  },
+  beforeUnmount() {},
   methods: {
-    startAjaxTask() {
-      if (this.interval === null) {
-        this.interval = setInterval(() => {
-          if (this.canInterval) this.render();
-        }, 5000);
+    // 获取分布式服务列表（不包括具体实例列表）
+    async displayRemoteServiceList() {
+      const data = await request({
+        method: "GET",
+        url: API_SERVICE_LIST
+      });
+      for (const service of data) {
+        if (service.available) {
+          const ip = `${service.ip}:${service.port}`;
+          this.remoteList.push({
+            value: service.uuid,
+            label: ip
+          });
+          this.availableService.push(service);
+        } else {
+          const ip = `${service.ip}:${service.port}`;
+          this.remoteList.push({
+            value: service.uuid,
+            label: `${ip} (离线)`
+          });
+          this.unavailableService.push(service);
+        }
+      }
+
+      // 如果存在上次的选择记录，那么直接跳转到上次记录
+      const lastSelected = localStorage.getItem("pageSelectedRemoteUuid");
+      if (lastSelected) {
+        this.remoteList.forEach((v) => {
+          if (v.value === lastSelected) {
+            this.currentRemoteUuid = v.value;
+            return this.remoteSelectHandle();
+          }
+        });
       }
     },
-    stopAjaxTask() {
-      clearInterval(this.interval);
-      this.interval = null;
-    },
-    refresh() {
-      this.render();
-      this.$message({ message: "已刷新", type: "success" });
-    },
-    async render() {
-      const result = await axios.get(API_SERVICE);
-      console.log("响应:", result.data.data);
-      this.remoteObjects = result.data.data;
-      // 初始化数据模型
-      this.instances = [];
-      this.remoteIps = [];
-      this.multipleSelection = []; // 表格多选属性
-      this.availableService = [];
-      this.unavailableService = [];
-      this.startedInstance = 0;
-      // 开始遍历解析数据
-      this.remoteObjects.forEach((v) => {
-        const fromIP = v.ip;
-        const fromPort = v.port;
-        const addr = `${v.ip}:${v.port}`;
-        const instances = v.instances;
-        const serviceUuid = v.uuid;
-        const available = v.available;
-        // 根据可用性识别出所有可用/不可用服务
-        if (available) {
-          this.availableService.push(addr);
-        } else {
-          this.unavailableService.push(addr);
-        }
-        let statusText = null;
+    // 获取分布式服务具体实例列表
+    async remoteSelectHandle() {
+      try {
+        if (!this.currentRemoteUuid) throw new Error("还未选择远程服务器");
+        this.startedInstance = 0;
+        this.instances = [];
+        const result = await request({
+          method: "GET",
+          url: API_SERVICE_INSTANCES,
+          params: {
+            remote_uuid: this.currentRemoteUuid,
+            page: this.page,
+            page_size: 40,
+            instance_name: this.query.instanceName
+          }
+        });
+        // 页码调整
+        this.page = result.page;
+        this.maxPage = result.maxPage;
+        const instances = result.data;
         instances.forEach((instance) => {
-          //Busy=-1;Stop=0;Stopping=1;Starting=2;Running=3;
-          if (instance.status == -1) statusText = "忙碌";
-          if (instance.status == 0) statusText = "未运行";
-          if (instance.status == 1) statusText = "停止中";
-          if (instance.status == 2) statusText = "启动中";
-          if (instance.status == 3) statusText = "正在运行";
-
+          const status = statusCodeToText(instance.status);
+          const type = typeTextToReadableText(instance.config.type);
           // 计算正在运行的实例
           if (instance.status != 0) this.startedInstance++;
-
           // 压入所有实例
           this.instances.push({
             instanceUuid: instance.instanceUuid,
-            serviceUuid: serviceUuid,
+            serviceUuid: this.currentRemoteUuid,
             nickname: instance.config.nickname,
-            type: instance.config.type,
-            status: statusText,
-            ip: `${fromIP}:${fromPort}`
+            type,
+            status
           });
         });
-      });
+        // 记录当前选择的远程服务，方便下次直接加载
+        localStorage.setItem("pageSelectedRemoteUuid", this.currentRemoteUuid);
+      } catch (error) {
+        this.$notify({
+          title: "访问远程服务异常",
+          message: error.toString(),
+          type: "error"
+        });
+      }
     },
-
+    // 分页改变
+    handleCurrentChange() {
+      this.refresh();
+    },
+    refresh() {
+      this.remoteSelectHandle();
+    },
+    async render() {
+      await this.displayRemoteServiceList();
+    },
     // 表格多选函数
     selectionChange(v) {
       if (v.length == 0) this.canInterval = true;
@@ -225,8 +246,38 @@ export default {
       console.log("访问实例:", serviceUuid, instanceUuid);
       router.push({ path: `/terminal/${serviceUuid}/${instanceUuid}/` });
     },
-    batDelete() {
+    // 批量删除
+    async batDelete() {
+      const uuids = [];
+      for (const iterator of this.multipleSelection) {
+        uuids.push(iterator.instanceUuid);
+      }
+      await axios.request({
+        method: "DELETE",
+        url: API_INSTANCE,
+        params: {
+          remote_uuid: this.currentRemoteUuid
+        },
+        data: { uuids }
+      });
+      this.$notify({
+        title: "批量删除成功",
+        message: "可能会存在一定延迟，文件删除需要一定的时间"
+      });
       console.log("Delete:", this.multipleSelection);
+    },
+    async batKill() {
+      if (this.multipleSelection.length == 0)
+        return ElMessage.error("无法执行，请至少选择一个实例");
+      await axios.request({
+        method: "POST",
+        url: `${API_URL}/api/instance/multi_kill/`,
+        data: this.multipleSelection
+      });
+      this.$notify({
+        title: "终止命令已发出",
+        message: "已成功向各个远程主机发布命令，具体操作可能略有延时，请稍等一段时间后查看结果"
+      });
     },
     async batOpen() {
       if (this.multipleSelection.length == 0)
@@ -238,7 +289,7 @@ export default {
         data: this.multipleSelection
       });
       this.$notify({
-        title: "命令已发出",
+        title: "开启命令已发出",
         message: "已成功向各个远程主机发布命令，具体操作可能略有延时，请稍等一段时间后查看结果"
       });
     },
@@ -251,23 +302,10 @@ export default {
         data: this.multipleSelection
       });
       this.$notify({
-        title: "命令已发出",
+        title: "关闭命令已发出",
         message: "已成功向各个远程主机发布命令，具体操作可能略有延时，请稍等一段时间后查看结果"
       });
-    },
-    batKill() {
-      console.log("Kill:", this.multipleSelection);
     }
-  },
-  components: { Panel, LineLabel }
+  }
 };
 </script>
-
-<style>
-.instance-table-warpper {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: 12px;
-}
-</style>

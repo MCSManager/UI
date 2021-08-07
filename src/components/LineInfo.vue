@@ -1,12 +1,12 @@
 <!--
  * @Author: Copyright(c) 2020 Suwings
  * @Date: 2021-05-08 11:08:44
- * @LastEditTime: 2021-05-25 13:45:38
+ * @LastEditTime: 2021-07-30 14:57:08
  * @Description: 
 -->
 <template>
   <div class="line-info-warpper">
-    <div class="line-info">
+    <div class="line-info" :class="{ 'line-info-button': isButton }">
       <slot></slot>
     </div>
   </div>
@@ -14,6 +14,9 @@
 
 <script>
 export default {
+  props: {
+    isButton: Boolean
+  },
   data: function () {
     return {};
   },
@@ -29,17 +32,19 @@ export default {
 
 .line-info {
   /* background-color: #eeeeee; */
-  font-size: 12px;
+  font-size: 13px;
   padding: 2px 0px;
   overflow: hidden;
   display: block;
-  cursor: pointer;
+
   color: #333;
   /* user-select: none; */
   transition: all 0.4s;
 }
-
-.line-button:hover {
-  color: rgb(73, 73, 73);
+.line-info-button {
+  cursor: pointer;
+}
+.line-info-button:hover {
+  color: rgb(126, 123, 123);
 }
 </style>

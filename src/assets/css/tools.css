@@ -5,8 +5,16 @@
   margin-bottom: 10px;
 }
 
+.row-mb-12 {
+  margin-bottom: 20px;
+}
+
 .row-mt {
   margin-top: 10px;
+}
+
+.row-mt-20 {
+  margin-top: 20px;
 }
 
 .row-mt-40 {
@@ -25,19 +33,19 @@
 /* 公共文字颜色 */
 
 .color-red {
-  color: red;
+  color: #f56c6c;
 }
 
 .color-green {
-  color: green;
+  color: #67c23a;
 }
 
 .color-yellow {
-  color: yellow;
+  color: #e6a23c;
 }
 
 .color-gray {
-  color: gray;
+  color: #909399;
 }
 
 /* Flex 左右布局 */
@@ -53,10 +61,43 @@
   align-items: center;
 }
 
+.flex-wrap {
+  flex-wrap: wrap;
+}
+
 .font-size-12 {
   font-size: 12px;
 }
 
 .font-size-14 {
   font-size: 14px;
+}
+
+.inline-block {
+  display: inline-block;
+}
+
+.margin-4 {
+  margin: 4px;
+}
+
+.margin-8 {
+  margin: 8px;
+}
+
+.margin-2-4 {
+  margin: 2px 4px;
+}
+
+.instance-table-warpper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 12px;
+}
+
+.text-overflow-ellipsis {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }

@@ -1,7 +1,7 @@
 <!--
  * @Author: Copyright(c) 2020 Suwings
  * @Date: 2021-05-08 11:53:54
- * @LastEditTime: 2021-07-13 21:15:08
+ * @LastEditTime: 2021-07-30 15:08:17
  * @Description: 
 -->
 
@@ -18,10 +18,10 @@
   <Panel>
     <template #title>所有分布式服务总览</template>
     <template #default>
-      <p style="color: red">
-        无法连接到远程服务，此远程服务所在主机的全部信息都将无法正常获取，请确认地址是否正确且服务正常启用。
+      <p>
+        远程服务（远程主机）必须确保全部在线且互相网络畅通，面板连接需公开放行远程服务端口与配置密钥。
       </p>
-      <el-table :data="services" style="width: 100%">
+      <el-table :data="services" style="width: 100%" size="small">
         <el-table-column prop="ip" label="地址" width="220">
           <template #default="scope">
             <el-input size="small" v-model="scope.row.ip" placeholder="必填"></el-input>
@@ -32,19 +32,32 @@
             <el-input size="small" v-model="scope.row.port" placeholder="必填"></el-input>
           </template>
         </el-table-column>
-        <el-table-column label="密钥">
-          <template #default> 已保存 </template>
+        <el-table-column label="CPU">
+          <template #default="scope">
+            <div v-if="scope.row.system">
+              {{ Number(scope.row.system.cpuUsage * 100).toFixed(1) }}%
+            </div>
+          </template>
+        </el-table-column>
+        <el-table-column label="内存">
+          <template #default="scope">
+            <div v-if="scope.row.system">{{ scope.row.system.memText }}</div>
+          </template>
         </el-table-column>
         <el-table-column label="正在运行">
-          <template #default="scope"> {{ scope.row.started }} 个 </template>
+          <template #default="scope">
+            <div v-if="scope.row.instance">{{ scope.row.instance.running }} 个</div>
+          </template>
         </el-table-column>
         <el-table-column label="实例总数">
-          <template #default="scope"> {{ scope.row.ilen }} 个 </template>
+          <template #default="scope">
+            <div v-if="scope.row.instance">{{ scope.row.instance.total }} 个</div>
+          </template>
         </el-table-column>
         <el-table-column label="连接状态">
           <template #default="scope">
             <span class="color-green" v-if="scope.row.available">
-              <i class="el-icon-circle-check"></i> 正常
+              <i class="el-icon-circle-check"></i> 在线
             </span>
             <span class="color-red" v-if="!scope.row.available">
               <el-tooltip effect="dark" content="无法连接到指定ip或者密钥错误" placement="top">
@@ -55,46 +68,13 @@
         </el-table-column>
         <el-table-column label="操作" style="text-align: center" width="240">
           <template #default="scope">
-            <el-button size="small" @click="linkService(scope.row, true)">连接</el-button>
-            <el-button size="small" @click="toInfo(scope.row)">详情</el-button>
-            <el-button size="small" @click="deleteService(scope.row.uuid)">删除</el-button>
+            <el-button size="mini" @click="linkService(scope.row, true)">连接</el-button>
+            <el-button size="mini" @click="deleteService(scope.row.uuid)">删除</el-button>
           </template>
         </el-table-column>
       </el-table>
     </template>
   </Panel>
-
-  <!-- 示例抽屉 -->
-  <Drawer ref="drawer" title="远程服务详情">
-    <LineLabel>
-      <template #title>地址</template>
-      <template #default> {{ selectRow.ip }}:{{ selectRow.port }}</template>
-    </LineLabel>
-    <el-table :data="selectRow.instances" style="width: 100%">
-      <el-table-column prop="instanceUuid" label="标识符"></el-table-column>
-      <el-table-column prop="config.nickname" label="名字"></el-table-column>
-      <el-table-column prop="status" label="状态"></el-table-column>
-    </el-table>
-  </Drawer>
-
-  <!-- 详情弹框 -->
-  <Dialog v-model="drawer">
-    <template #title>远程服务详情</template>
-    <template #default>
-      <LineLabel>
-        <template #title>地址</template>
-        <template #default> {{ selectRow.ip }}:{{ selectRow.port }}</template>
-      </LineLabel>
-      <p>
-        本远程守护进程拥有的实例列表，具体的实例列表详细信息可在“实例管理”功能中进行管理和编辑，这里仅供浏览基本信息。
-      </p>
-      <el-table :data="selectRow.instances" style="width: 100%; min-width: 300px" size="mini">
-        <el-table-column prop="instanceUuid" label="标识符" width="260"></el-table-column>
-        <el-table-column prop="config.nickname" label="名字"></el-table-column>
-        <el-table-column prop="status" label="状态"></el-table-column>
-      </el-table>
-    </template>
-  </Dialog>
 
   <Dialog v-model="isNewService">
     <template #title>新增远程服务</template>
@@ -131,15 +111,14 @@
 
 <script>
 import Panel from "../../components/Panel";
-import LineLabel from "../../components/LineLabel";
 import Dialog from "../../components/Dialog";
-import Drawer from "../../components/Drawer";
 import axios from "axios";
-import { API_SERVICE, API_SERVICE_CURD, API_SERVICE_URL } from "../service/common";
+import { API_OVERVIEW, API_SERVICE_CURD, API_SERVICE_URL } from "../service/common";
 import { ERROR_TEXT, OK_TEXT } from "../service/text";
+import { request } from "../service/protocol";
 
 export default {
-  components: { Panel, LineLabel, Dialog, Drawer },
+  components: { Panel, Dialog },
   data() {
     return {
       newServiceInfo: {
@@ -157,27 +136,24 @@ export default {
     // 刷新按钮
     async refresh() {
       await this.render();
-      this.$message({ type: "info", message: "已刷新" });
     },
     // 渲染数据方法
     async render() {
-      const result = await axios.get(API_SERVICE);
-      const responseObjects = result.data.data;
-
-      this.services = [];
-      responseObjects.forEach((v) => {
-        let started = 0;
-        let len = 0;
-        if (v.instances) {
-          for (const iterator of v.instances) {
-            len++;
-            if (iterator.status != 0) started++;
-          }
-        }
-        v.started = started;
-        v.ilen = len;
-        this.services.push(v);
+      const result = await request({
+        method: "GET",
+        url: API_OVERVIEW
       });
+      console.log("分布式列表:", result.remote);
+      result.remote.forEach((element) => {
+        if (element.system) {
+          // 计算内存
+          const free = Number(element.system.freemem / 1024 / 1024 / 1024).toFixed(1);
+          const total = Number(element.system.totalmem / 1024 / 1024 / 1024).toFixed(1);
+          const used = Number(total - free).toFixed(1);
+          element.system.memText = `${used}GB/${total}GB`;
+        }
+      });
+      this.services = result.remote;
     },
     // 新增服务
     async toNewService(ip, port, apiKey) {
@@ -204,11 +180,6 @@ export default {
       } catch (error) {
         this.$message({ type: "error", message: ERROR_TEXT });
       }
-    },
-    // 前往详细信息面板
-    toInfo(row) {
-      this.selectRow = row;
-      this.drawer = true;
     },
     // 保存服务
     async saveService(row) {

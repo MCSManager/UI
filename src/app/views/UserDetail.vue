@@ -1,7 +1,7 @@
 <!--
  * @Author: Copyright 2021 Suwings
  * @Date: 2021-07-03 20:12:26
- * @LastEditTime: 2021-07-07 13:17:56
+ * @LastEditTime: 2021-08-07 13:15:21
  * @Description: 
 -->
 <!--
@@ -21,11 +21,11 @@
             <el-col :span="12" :offset="0">
               <LineLabel>
                 <template #title>唯一标识符</template>
-                <template #default>{{ user.uuid }}</template>
+                <template #default>{{ userInfo.uuid }}</template>
               </LineLabel>
               <LineLabel>
                 <template #title>用户名</template>
-                <template #default>{{ user.userName }}</template>
+                <template #default>{{ userInfo.userName }}</template>
               </LineLabel>
               <LineLabel>
                 <template #title>账号状态</template>
@@ -37,11 +37,11 @@
             <el-col :span="12" :offset="0">
               <LineLabel>
                 <template #title>注册时间</template>
-                <template #default>{{ user.registerTime }}</template>
+                <template #default>{{ userInfo.registerTime }}</template>
               </LineLabel>
               <LineLabel>
                 <template #title>登录时间</template>
-                <template #default>{{ user.loginTime }}</template>
+                <template #default>{{ userInfo.loginTime }}</template>
               </LineLabel>
               <LineLabel>
                 <template #title>接口</template>
@@ -53,27 +53,16 @@
           </el-row>
         </template>
       </Panel>
-
-      <Panel>
-        <template #title>常见问题</template>
-        <template #default>
-          <el-row :gutter="20">
-            <el-col :span="8" :offset="0" v-for="(item, index) in manualLink" :key="index">
-              <a class="manualLink" :href="item.link" v-text="item.title"></a>
-            </el-col>
-          </el-row>
-        </template>
-      </Panel>
-
       <el-row :gutter="20">
         <el-col :md="16" :offset="0">
           <Panel>
-            <template #title>拥有的实例</template>
+            <template #title>常见问题</template>
             <template #default>
-              <el-table :data="user.instances" style="width: 100%" size="mini">
-                <el-table-column prop="uuid" label="标识符（UUID）"> </el-table-column>
-                <el-table-column prop="region" label="所属主机（Region）"> </el-table-column>
-              </el-table>
+              <el-row :gutter="20">
+                <el-col :span="8" :offset="0" v-for="(item, index) in manualLink" :key="index">
+                  <a class="manualLink" :href="item.link" v-text="item.title"></a>
+                </el-col>
+              </el-row>
             </template>
           </Panel>
         </el-col>
@@ -103,38 +92,11 @@
 import Panel from "../../components/Panel";
 import LineLabel from "../../components/LineLabel";
 import { API_URL } from "../service/common";
+// import { request } from "../service/protocol";
 // import { ElMessage } from "element-plus";
 export default {
   data() {
     return {
-      user: {
-        uuid: "e5de5a80c26a4c4ea4a32716bc0a11db",
-        userName: "RUser_Champlin",
-        loginTime: "2021/7/3 下午8:14:48",
-        registerTime: "2021/7/3 下午8:14:40",
-        instances: [
-          {
-            uuid: "测试服务器",
-            region: "e5de5a80c26a4c4ea4a32716bc0a11db"
-          },
-          {
-            uuid: "群组服务器1号",
-            region: "4c4ea4a32716bc0a11db4c4ea4a32716"
-          },
-          {
-            uuid: "云端小游戏服",
-            region: "4c4ea4a32716bc0a11db4c4ea4a32716"
-          },
-          {
-            uuid: "test2",
-            region: "a"
-          },
-          {
-            uuid: "test2",
-            region: "a"
-          }
-        ]
-      },
       moreUserInfo: {
         api: API_URL,
         safe: "账号正常"
@@ -167,7 +129,18 @@ export default {
       ]
     };
   },
-  mounted() {},
+  computed: {
+    userInfo() {
+      return this.$store.state.userInfo;
+    }
+  },
+
+  async mounted() {
+    // this.user = await request({
+    //   method: "GET",
+    //   url: API_USER
+    // });
+  },
   methods: {},
   components: { Panel, LineLabel }
 };
