@@ -1,317 +1,406 @@
 <!--
  * @Author: Copyright(c) 2020 Suwings
  * @Date: 2021-05-08 11:53:54
- * @LastEditTime: 2021-07-28 13:45:55
+ * @LastEditTime: 2021-09-09 16:01:11
  * @Description: 
 -->
 
 <template>
-  <el-row>
-    <el-col :span="24">
-      <Panel>
-        <template #title>新增实例</template>
-        <template #default>
-          <div class="">
-            <el-steps :active="page" finish-status="success" align-center>
-              <el-step title="实例类型"></el-step>
-              <el-step title="分配主机"></el-step>
-              <el-step title="基本参数"></el-step>
-              <el-step title="容器设置"></el-step>
-              <el-step title="最终确认"></el-step>
-            </el-steps>
-          </div>
+  <Panel style="max-width: 900px">
+    <template #title>{{ title }}</template>
+    <template #default>
+      <div v-show="page == 0" class="panel-context row-mt">
+        <div class="sub-title">
+          <p class="sub-title-title">选择相应的实例类型</p>
+          <p class="sub-title-info">建议修改成非默认端口以确保基本的安全性。</p>
+        </div>
+        <el-row :gutter="10" justify="center" class="col-md-responsive">
+          <el-col :md="8" :offset="0">
+            <SelectBlock @click="selectTypeA(1)" style="min-height: 120px">
+              <template #title>Java 版 Minecraft 服务端</template>
+              <template #info> 适用于类似于 Spigot，Bungeecord 等 Jar 格式文件的服务端 </template>
+            </SelectBlock>
+          </el-col>
+          <el-col :md="8" :offset="0">
+            <SelectBlock @click="selectTypeA(2)" style="min-height: 120px">
+              <template #title>基岩版 Minecraft 服务端</template>
+              <template #info>
+                适用于 Bedrock Dedicated Server 等二进制执行文件或其他格式的服务端软件
+              </template>
+            </SelectBlock>
+          </el-col>
+          <el-col :md="8" :offset="0">
+            <SelectBlock @click="selectTypeA(3)" style="min-height: 120px">
+              <template #title>自定义命令程序</template>
+              <template #info> 适用于类似于 bash，cmd.exe 和其他任何可用命令启动的程序 </template>
+            </SelectBlock>
+          </el-col>
+        </el-row>
+      </div>
 
-          <!-- 不同步骤的动态内容，这里采用简单的方式实现 -->
-          <div v-show="page == 0" class="panel-context row-mt-40">
-            <h2>根据需求选择合适的实例类型。</h2>
-            <div class="select-box-wrapper">
-              <SelectBlock @click="selectType(1)">
-                <h3>Java 版 Minecraft 服务端</h3>
-                <p>适用于类似于 Spigot，Bungeecord 等 Jar 格式文件的服务端</p>
-              </SelectBlock>
-              <SelectBlock @click="selectType(2)">
-                <h3>基岩版 Minecraft 服务端</h3>
-                <p>适用于基岩版等 exe 格式或其他格式的服务端软件</p>
-              </SelectBlock>
-              <SelectBlock @click="selectType(3)">
-                <h3>自定义命令程序</h3>
-                <p>适用于类似于 bash，cmd.exe 和其他任何可用命令启动的程序</p>
-              </SelectBlock>
-            </div>
-          </div>
+      <div v-show="page == 1" class="panel-context row-mt">
+        <div class="sub-title">
+          <p class="sub-title-title">关于创建方式</p>
+          <p class="sub-title-info">
+            如果您只想通过服务端软件开启服务器则选择第一项，其他选项均适用于不同的场景需求
+          </p>
+        </div>
 
-          <div v-show="page == 1" class="panel-context row-mt-40">
-            <h2>请选择此实例要分配到哪个主机？</h2>
-            <div
-              v-for="(item, index) in services"
-              :key="index"
-              class="select-tag"
-              @click="selectRemoteService(item.uuid)"
-            >
-              {{ item.ip }}:{{ item.port }}
-            </div>
-            <p class="sub-title">
-              如果您不知道应该如何选择，请选择 Localhost 或者 127.0.0.1 的主机。
+        <el-row :gutter="10" justify="center" class="col-md-responsive">
+          <el-col :md="8" :offset="0">
+            <SelectBlock @click="selectTypeB(1)" style="min-height: 120px">
+              <template #title>上传单个服务端软件 (推荐)</template>
+              <template #info>
+                适用于第一次创建服务器，只需上传一个程序文件即可直接创建服务器并生成地图存档等
+              </template>
+            </SelectBlock>
+          </el-col>
+          <el-col :md="8" :offset="0">
+            <SelectBlock @click="selectTypeB(2)" style="min-height: 120px">
+              <template #title>上传服务端压缩包</template>
+              <template #info>
+                适用于服务端整合包，以及现有的服务器存档，打包上传后自动解压并运行，只支持 zip 格式
+              </template>
+            </SelectBlock>
+          </el-col>
+          <el-col :md="8" :offset="0">
+            <SelectBlock @click="selectTypeB(3)" style="min-height: 120px">
+              <template #title>无需文件/导入已存在文件</template>
+              <template #info>
+                不需要任何文件或者服务端文件已存在远程主机上，只需要手动设置启动命令以及文件目录即可完成
+              </template>
+            </SelectBlock>
+          </el-col>
+        </el-row>
+        <div class="row-mt" style="text-align: center">
+          <el-button @click="up" size="small">回退</el-button>
+        </div>
+      </div>
+
+      <!-- 上传单个服务端软件创建新实例 -->
+      <div v-show="page == 2 && typeB == 1" class="panel-context row-mt">
+        <div class="">
+          <div class="sub-title">
+            <p class="sub-title-title">实例名称</p>
+            <p class="sub-title-info">支持中文，尽可能保证唯一性</p>
+          </div>
+          <el-input
+            placeholder="实例名，尽可能确保唯一性"
+            v-model="form.nickname"
+            :disabled="assist.creating"
+          >
+          </el-input>
+        </div>
+        <div class="row-mt">
+          <div class="sub-title">
+            <p class="sub-title-title">启动命令模板</p>
+            <p
+              class="sub-title-info"
+              v-text="'其中 {{ProgramName}} 代表您接下来上传的文件名，一般情况下无需进行修改'"
+            ></p>
+          </div>
+          <div class="flex">
+            <el-input
+              v-model="assist.commandtemplate"
+              placeholder="如 java -jar server.jar"
+              :disabled="assist.creating"
+            ></el-input>
+            <el-button @click="openCommandAssistCall(1)">命令助手</el-button>
+          </div>
+        </div>
+        <div class="row-mt">
+          <div class="sub-title">
+            <p class="sub-title-title">服务端文件目录</p>
+            <p class="sub-title-info">
+              选填，默认自动创建与管理，如需填写请写完整绝对路径，如: C:/Servers/MyServer
             </p>
-            <div class="panel-context row-mt-40" style="text-align: right">
-              <el-button type="success" @click="up" size="small">上一步</el-button>
-            </div>
           </div>
-
-          <div v-show="page == 2 && type == 1" class="panel-context row-mt-40">
-            <h2>完善此实例的基本信息</h2>
-            <div class="row-mt">
-              <el-input placeholder="请输入内容" v-model="input1">
-                <template #prepend>实例昵称</template>
-              </el-input>
-            </div>
-            <div class="row-mt">
-              <el-input placeholder="请输入内容" v-model="input1">
-                <template #prepend>Jar 文件名</template>
-              </el-input>
-            </div>
-            <div class="row-mt">
-              <el-input placeholder="请输入内容" v-model="input1">
-                <template #prepend>工作目录</template>
-              </el-input>
-            </div>
-            <div class="panel-context row-mt-40" style="text-align: right">
-              <el-button type="success" @click="up" size="small">上一步</el-button>
-              <el-button type="success" @click="down" size="small">下一步</el-button>
-            </div>
-          </div>
-
-          <div v-show="page == 2 && type == 3" class="panel-context row-mt-40">
-            <h2>完善此实例的基本信息</h2>
-            <el-row :gutter="20" class="row-mt">
-              <el-col :span="16" :offset="0">
-                <el-input placeholder="请输入内容" v-model="form.nickname">
-                  <template #prepend>实例昵称</template>
-                </el-input>
-              </el-col>
-              <el-col :md="8" :offset="0">
-                <el-date-picker
-                  v-model="form.endTime"
-                  type="date"
-                  placeholder="选择使用到期时间"
-                  style="width: 100%"
-                >
-                </el-date-picker>
-              </el-col>
-            </el-row>
-            <div class="row-mt">
-              <el-input placeholder="请输入内容" v-model="form.startCommand">
-                <template #prepend>启动命令</template>
-              </el-input>
-            </div>
-            <div class="row-mt">
-              <el-input placeholder="请输入内容" v-model="form.cwd">
-                <template #prepend>工作目录</template>
-              </el-input>
-            </div>
-            <el-row :gutter="20">
-              <el-col :span="12" :offset="0">
-                <div class="row-mt">
-                  <el-input placeholder="默认是 Ctrl+C 用 ^C 表示" v-model="form.stopCommand">
-                    <template #prepend>关闭命令</template>
-                  </el-input>
-                </div>
-              </el-col>
-              <el-col :span="12" :offset="0">
-                <div class="row-mt">
-                  <el-input placeholder="单位GB" v-model="form.maxSpace">
-                    <template #prepend>最大可用储存</template>
-                  </el-input>
-                </div>
-              </el-col>
-            </el-row>
-            <el-row :gutter="20">
-              <el-col :md="12" :offset="0">
-                <div class="row-mt">
-                  <el-input placeholder="默认是 Ctrl+C 用 ^C 表示" v-model="form.ie">
-                    <template #prepend>标准输入流编码</template>
-                  </el-input>
-                </div>
-              </el-col>
-              <el-col :md="12" :offset="0">
-                <div class="row-mt">
-                  <el-input placeholder="单位GB" v-model="form.oe">
-                    <template #prepend>标准输出流编码</template>
-                  </el-input>
-                </div>
-              </el-col>
-            </el-row>
-            <p class="sub-title">更多设置信息在创建完毕后可在实例的"编辑"页面进行设置。</p>
-            <div class="panel-context row-mt-40" style="text-align: right">
-              <el-button type="success" @click="up" size="small">上一步</el-button>
-              <el-button type="success" @click="down" size="small">下一步</el-button>
-            </div>
-          </div>
-
-          <div v-show="page == 3" class="panel-context row-mt-40">
-            <h2>是否需要使用容器？</h2>
-            <p class="sub-title">
-              如果您运行的程序是个人或内部使用（非商业），那么可以忽略此功能直接点击“下一步”按钮。
+          <el-input placeholder="默认自动创建与管理" v-model="form.cwd" :disabled="assist.creating">
+          </el-input>
+        </div>
+        <div class="row-mt">
+          <div class="sub-title">
+            <p class="sub-title-title">上传服务端软件</p>
+            <p class="sub-title-info">
+              服务端软件指 JAR/EXE 格式或其他可执行程序（如 Spigot.jar，Paper.jar 等）
             </p>
-            <el-row :gutter="20">
-              <el-col :span="6">
-                <div class="sub-title">启用容器</div>
-                <el-select v-model="isDocker" style="width: 100%">
-                  <el-option label="禁用" :value="false"></el-option>
-                  <el-option label="启用" :value="true"></el-option>
-                </el-select>
-              </el-col>
-              <el-col :span="6">
-                <div class="sub-title">选择容器镜像</div>
-                <el-select
-                  v-model="form.docker.image"
-                  placeholder="请选择"
-                  style="width: 100%"
-                  :disabled="!isDocker"
-                >
-                  <el-option label="默认镜像" value="mcsd"></el-option>
-                  <el-option label="java16" value="java16"></el-option>
-                  <el-option label="linux" value="linux"></el-option>
-                </el-select>
-              </el-col>
-              <el-col :span="6" :offset="0">
-                <div class="sub-title">最大内存</div>
-                <el-input
-                  v-model="form.docker.xmx"
-                  placeholder="单位为MB，如 1024 即可"
-                  :disabled="!isDocker"
-                ></el-input>
-              </el-col>
-              <el-col :span="6" :offset="0">
-                <div class="sub-title">CPU核心数</div>
-                <el-input
-                  v-model="form.docker.cpu"
-                  placeholder="单位为MB，如 1024 即可"
-                  :disabled="!isDocker"
-                ></el-input>
-              </el-col>
-              <el-col :span="24" class="row-mt">
-                <div class="sub-title">开放端口，开放多个需用空格分割格式如下</div>
-                <el-input
-                  v-model="form.docker.ports"
-                  placeholder="列如：25565:25565/tcp 8080:8080/tcp 81:81/udp"
-                  :disabled="!isDocker"
-                ></el-input>
-              </el-col>
-            </el-row>
-
-            <div class="panel-context row-mt-40" style="text-align: right">
-              <el-button type="success" @click="up" size="small">上一步</el-button>
-              <el-button type="success" @click="down" size="small">下一步</el-button>
-            </div>
           </div>
-
-          <div v-show="page == 4" class="panel-context row-mt-40">
-            <h2>基本参数填写完毕，准备创建</h2>
-            <el-row :gutter="20">
-              <el-col :span="12" :offset="0">
-                <p>名称: {{ form.nickname }}</p>
-                <p>启动命令: {{ form.startCommand }}</p>
-                <p>工作目录: {{ form.cwd }}</p>
-                <p>输入编码: {{ form.ie }}</p>
-                <p>创建日期: {{ form.createDatetime }}</p>
-                <p>容器: {{ form.isDocker ? "启用" : "禁用" }}</p>
-                <p>最大空间: {{ form.maxSpace }}GB</p>
-              </el-col>
-              <el-col :span="12" :offset="0">
-                <p>到期时间: {{ form.endTime }}</p>
-                <p>停止命令: {{ form.stopCommand }}</p>
-                <p>输出编码: {{ form.oe }}</p>
-                <p>类型: {{ form.type }}</p>
-                <p>容器镜像名: {{ form.docker.image }}</p>
-                <p>容器最大内存: {{ form.docker.xmx }}</p>
-                <p>容器暴露端口: {{ form.docker.ports }}</p>
-                <p>容器核心数: {{ form.docker.cpu }}</p>
-              </el-col>
-            </el-row>
-
-            <div class="panel-context row-mt-40" style="text-align: right">
-              <el-button type="success" @click="up" size="small">上一步</el-button>
-              <el-button type="primary" @click="createInstance" size="small">创建实例</el-button>
-            </div>
+          <el-button @click="uploadFile(1)" :disabled="assist.creating">上传服务端软件</el-button>
+          <div v-if="percentComplete > 0">
+            <el-progress :percentage="percentComplete"></el-progress>
           </div>
+          <p>上传文件后实例将自动创建</p>
+        </div>
+        <div class="row-mt" style="text-align: center">
+          <el-button @click="up" size="small" :disabled="assist.creating">回退</el-button>
+          <!-- <el-button @click="down" size="small">下一步</el-button> -->
+        </div>
+      </div>
 
-          <div v-show="page == 5" class="panel-context row-mt-40">
-            <h2>创建成功！您已完成基本步骤，接下来您可以：</h2>
-            <div class="select-box-wrapper">
-              <SelectBlock>
-                <h3>前往此实例编辑页面</h3>
-                <p>修改更多详细设置和具体参数</p>
-              </SelectBlock>
-              <SelectBlock>
-                <h3>前往实例控制台</h3>
-                <p>开启/关闭/上传文件等具体操作</p>
-              </SelectBlock>
-              <SelectBlock>
-                <h3>回到实例列表</h3>
-                <p>查看分布式的所有实例列表</p>
-              </SelectBlock>
-            </div>
+      <!-- 上传服务端压缩包创建新实例 -->
+      <div v-show="page == 2 && typeB == 2" class="panel-context row-mt">
+        <div class="row-mt">
+          <div class="sub-title">
+            <p class="sub-title-title">实例名称</p>
+            <p class="sub-title-info">支持中文，尽可能保证唯一性</p>
           </div>
-        </template>
-      </Panel>
-    </el-col>
-  </el-row>
+          <el-input
+            placeholder="实例名，尽可能确保唯一性"
+            v-model="form.nickname"
+            :disabled="assist.creating"
+          >
+          </el-input>
+        </div>
+        <div class="row-mt">
+          <div class="sub-title">
+            <p class="sub-title-title">启动命令</p>
+            <p class="sub-title-info">因为无法识别压缩包中的服务端文件名，请您自行填写启动命令</p>
+          </div>
+          <div class="flex">
+            <el-input
+              v-model="form.startCommand"
+              placeholder="如 java -jar server.jar"
+              :disabled="assist.creating"
+            ></el-input>
+            <el-button @click="openCommandAssistCall(2)">命令助手</el-button>
+          </div>
+        </div>
+        <div class="row-mt">
+          <div class="sub-title">
+            <p class="sub-title-title">服务端文件目录</p>
+            <p class="sub-title-info">
+              选填，默认自动创建与管理，如需填写请写完整绝对路径，如: C:/Servers/MyServer
+            </p>
+          </div>
+          <el-input placeholder="选填，默认自动管理" v-model="form.cwd" :disabled="assist.creating">
+          </el-input>
+        </div>
+        <div class="row-mt">
+          <div class="sub-title">
+            <p class="sub-title-title">上传服务端压缩包</p>
+            <p class="sub-title-info">仅支持 ZIP 格式，上传后压缩包会自动解压到 “文件目录”</p>
+          </div>
+          <el-button @click="uploadFile(2)" :disabled="assist.creating">上传压缩包</el-button>
+          <div v-if="percentComplete > 0">
+            <el-progress :percentage="percentComplete"></el-progress>
+          </div>
+          <p>上传文件后实例将自动创建并解压文件，可能需要一段时间才能完成解压任务</p>
+        </div>
+        <div class="row-mt" style="text-align: center">
+          <el-button @click="up" size="small" :disabled="assist.creating">回退</el-button>
+          <!-- <el-button @click="createInstance" size="small">创建实例</el-button> -->
+        </div>
+      </div>
+
+      <!-- 从已存在的文件选择服务端 -->
+      <div v-show="page == 2 && typeB == 3" class="panel-context row-mt">
+        <div>
+          <div class="sub-title">
+            <p class="sub-title-title">从已存在的文件选择服务端</p>
+            <p class="sub-title-info">文件必须已经存在远程主机（非面板机器）</p>
+          </div>
+          <el-input placeholder="实例名，尽可能确保唯一性" v-model="form.nickname"> </el-input>
+        </div>
+        <div class="row-mt">
+          <div class="sub-title">
+            <p class="sub-title-title">启动命令</p>
+            <p class="sub-title-info">请您自行填写启动命令</p>
+          </div>
+          <div class="flex">
+            <el-input
+              v-model="form.startCommand"
+              placeholder="如 java -jar server.jar，cmd.exe 等等"
+            ></el-input>
+            <el-button @click="openCommandAssistCall(2)">命令助手</el-button>
+          </div>
+        </div>
+        <div class="row-mt">
+          <div class="sub-title">
+            <p class="sub-title-title">服务端文件目录</p>
+            <p class="sub-title-info">
+              选填，默认自动创建与管理，如需填写请写完整绝对路径，如: C:/Servers/MyServer
+            </p>
+          </div>
+          <el-input
+            placeholder="选填，默认自动创建与管理，如需填写请写完整绝对路径，如: C:/Servers/MyServer"
+            v-model="form.cwd"
+          >
+          </el-input>
+        </div>
+        <p>填写好服务端软件文件名后，再前往文件管理上传服务端软件即可开启实例。</p>
+        <div class="row-mt" style="text-align: center">
+          <ItemGroup>
+            <el-button @click="up" size="small">回退</el-button>
+            <el-button @click="createInstance" size="small">创建实例</el-button></ItemGroup
+          >
+        </div>
+      </div>
+
+      <div v-show="page == 3" class="panel-context row-mt">
+        <div class="sub-title">
+          <p class="sub-title-title">创建完毕</p>
+          <p class="sub-title-info">您现在可以对实例进行具体的设置和编辑</p>
+        </div>
+        <el-row :gutter="10" justify="center" class="col-md-responsive">
+          <el-col :md="8" :offset="0">
+            <SelectBlock @click="toEdit" style="min-height: 120px">
+              <template #title>前往编辑实例具体参数</template>
+              <template #info>
+                推荐立即前往编辑界面设置相关参数，比如 Docker 启动方式，编码设置，工作环境等
+              </template>
+            </SelectBlock>
+          </el-col>
+        </el-row>
+      </div>
+    </template>
+  </Panel>
+
+  <!-- 命令助手 -->
+  <CommandAssist
+    v-model="commandAssistPanel"
+    :result="commandAssistCallback"
+    :default-program-name="assist.defaultProgramName"
+  >
+  </CommandAssist>
+
+  <!-- 隐藏的文件上传按钮 -->
+  <input type="file" ref="fileButtonHidden" @change="selectedFile" hidden="hidden" />
 </template>
 
 <script>
+import path from "path";
+import axios from "axios";
 import Panel from "../../components/Panel";
+import CommandAssist from "../../components/CommandAssist";
 
 import SelectBlock from "../../components/SelectBlock";
-import axios from "axios";
-import { API_INSTANCE, API_SERVICE } from "../service/common";
-import { request } from "../service/protocol";
+import { API_INSTANCE, API_INSTANCE_UPLOAD } from "../service/common";
+import {
+  TYPE_MINECRAFT_JAVA,
+  TYPE_MINECRAFT_BEDROCK,
+  TYPE_UNIVERSAL
+} from "../service/instance_type";
+import { parseforwardAddress, request } from "../service/protocol";
 
 export default {
-  components: { Panel, SelectBlock },
+  components: { Panel, SelectBlock, CommandAssist },
   data: function () {
     return {
-      stepActive: 0,
+      title: "新建实例引导程序",
       page: 0,
-      type: -1,
-      service: "",
-      services: [],
-      isDocker: false,
+      typeA: -1,
+      typeB: -1,
+      commandAssistPanel: false,
+      serviceUuid: this.$route.params.serviceUuid,
       form: {
-        nickname: "未定义的名字",
+        nickname: "",
         startCommand: "",
         stopCommand: "^c",
-        cwd: ".",
+        cwd: "",
         ie: "GBK",
         oe: "GBK",
         createDatetime: new Date().toDateString(),
         lastDatetime: "",
-        type: "TYPE_UNIVERSAL",
+        type: TYPE_UNIVERSAL,
         tag: [],
         maxSpace: null,
-        endTime: "",
-        docker: {
-          image: "",
-          xmx: "",
-          ports: "",
-          cpu: ""
-        }
-      }
+        endTime: ""
+      },
+      assist: {
+        defaultProgramName: "",
+        commandtemplate: "",
+        uploadFileType: 0,
+        creating: false
+      },
+      newInstanceUuid: "",
+      uploadConfig: {
+        addr: "",
+        password: ""
+      },
+      percentComplete: 0
     };
   },
   methods: {
-    async createInstance() {
+    // 创建实例并上传文件
+    async uploadFile(type) {
+      if (!this.form.nickname || (!this.assist.commandtemplate && !this.form.startCommand)) {
+        return this.$message({ message: "请先完善基本参数再进行上传文件操作", type: "error" });
+      }
+      await this.$confirm("上传文件时将同时创建实例，此操作不可逆，是否继续？", "最终确认", {
+        confirmButtonText: "确定",
+        cancelButtonText: "取消",
+        type: "warning"
+      });
+      this.assist.uploadFileType = type;
+      this.$refs.fileButtonHidden.click();
+    },
+    // 文件已选择，开始上传
+    async selectedFile() {
       try {
-        console.log("正在保存:", this.form);
-        const postData = JSON.parse(JSON.stringify(this.form));
-        postData.docker.ports = this.form.docker.ports.split(" ");
-        await request({
+        this.assist.creating = true;
+        const file = this.$refs.fileButtonHidden.files[0];
+        // 命令模板替换
+        if (this.assist.uploadFileType === 1) {
+          this.form.startCommand = this.assist.commandtemplate.replace(
+            "{{ProgramName}}",
+            file.name
+          );
+        }
+        if (!this.form.cwd) this.form.cwd = ".";
+        // 上传文件式创建实例 & 请求守护进程直连上传
+        const cfg = await request({
+          method: "POST",
+          url: API_INSTANCE_UPLOAD,
+          params: {
+            upload_dir: ".",
+            remote_uuid: this.serviceUuid
+          },
+          data: this.form
+        });
+        this.uploadConfig.addr = parseforwardAddress(cfg.addr);
+        this.uploadConfig.password = cfg.password;
+        this.newInstanceUuid = cfg.instanceUuid;
+        // 上传文件参数准备
+        const formData = new FormData();
+        formData.append("file", file);
+        const fullAddress = `//${this.uploadConfig.addr}/upload/${this.uploadConfig.password}`;
+        console.log("新建实例 - 文件上传:", fullAddress, "\n", file);
+        // 上传文件
+        const fileName = file.name;
+        const extName = path.extname(fileName);
+        await axios.post(fullAddress, formData, {
+          params: {
+            unzip: extName === ".zip" ? 1 : null
+          },
+          headers: { "Content-Type": "multipart/form-data" },
+          onUploadProgress: (progressEvent) => {
+            this.percentComplete = Math.round((progressEvent.loaded * 100) / progressEvent.total);
+          }
+        });
+        this.$message({ message: `上传完毕`, type: "success" });
+        this.down();
+        this.title = "创建完毕";
+      } catch (error) {
+        this.$message({ message: `错误:${error.message}`, type: "error" });
+      }
+    },
+    // 非上传文件式的创建实例
+    async createInstance() {
+      await this.$confirm("实例将创建，是否继续？", "最终确认", {
+        confirmButtonText: "确定",
+        cancelButtonText: "取消",
+        type: "warning"
+      });
+      try {
+        if (!this.form.cwd) this.form.cwd = ".";
+        const data = await request({
           method: "POST",
           url: API_INSTANCE,
-          params: { remote_uuid: this.service },
-          data: postData
+          params: { remote_uuid: this.serviceUuid },
+          data: this.form
         });
         this.$message({ message: "创建成功", type: "success" });
+        this.newInstanceUuid = data.instanceUuid;
         this.down();
       } catch (err) {
         this.$message({
@@ -321,36 +410,51 @@ export default {
         console.error("创建失败，原因:", err);
       }
     },
-    selectType(v) {
-      this.type = v;
+    selectTypeA(v) {
+      if (v === 1) {
+        this.form.type = TYPE_MINECRAFT_JAVA;
+        this.assist.commandtemplate = "java -jar {{ProgramName}}";
+      }
+      if (v === 2) {
+        this.form.type = TYPE_MINECRAFT_BEDROCK;
+        this.assist.commandtemplate = "{{ProgramName}}";
+      }
+      if (v === 3) {
+        this.form.type = TYPE_UNIVERSAL;
+        this.assist.commandtemplate = "{{ProgramName}}";
+      }
+      this.title = "选择创建方式";
+      this.typeA = v;
       this.down();
     },
-    selectRemoteService(service) {
-      console.log("选择分配到:", service);
-      this.service = service;
+    selectTypeB(v) {
+      this.title = "上传文件/设置参数";
+      this.typeB = v;
       this.down();
+    },
+    toEdit() {
+      this.$router.push({ path: `/instance_detail/${this.serviceUuid}/${this.newInstanceUuid}/` });
     },
     up() {
+      this.title = "新建实例引导程序";
       if (this.page > 0) this.page -= 1;
     },
     down() {
       this.page += 1;
+    },
+    openCommandAssistCall(type) {
+      if (type === 1) {
+        this.assist.defaultProgramName = "{{ProgramName}}";
+      } else {
+        this.assist.defaultProgramName = "";
+      }
+      this.commandAssistPanel = true;
+    },
+    commandAssistCallback(cmd) {
+      this.assist.commandtemplate = cmd;
+      this.form.startCommand = cmd;
     }
   },
-  async mounted() {
-    const result = await axios.get(API_SERVICE);
-    const responseObjects = result.data.data;
-    responseObjects.forEach((v) => {
-      this.services.push(v);
-    });
-  }
+  async mounted() {}
 };
 </script>
-
-<style>
-.select-box-wrapper {
-  display: flex;
-  justify-content: center;
-  align-content: center;
-}
-</style>

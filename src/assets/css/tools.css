@@ -48,6 +48,9 @@
   color: #909399;
 }
 
+.color-blue {
+  color: #409eff;
+}
 /* Flex 左右布局 */
 .flex {
   display: flex;
@@ -55,6 +58,10 @@
 
 .flex-space-between {
   justify-content: space-between;
+}
+
+.flex-space-center {
+  justify-content: center;
 }
 
 .flex-align-items-center {
@@ -100,4 +107,8 @@
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+}
+
+.text-center {
+  text-align: center;
 }

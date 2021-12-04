@@ -33,13 +33,6 @@
   margin: 0px;
 }
 
-/* 面板组件中的居中内容 */
-.panel-context {
-  max-width: 900px;
-  margin-left: auto;
-  margin-right: auto;
-}
-
 .select-tag {
   background-color: #f0f0f0;
   border: 1px solid #e0e0e0;
@@ -134,4 +127,14 @@
 .CodeMirror {
   font-family: "Courier New", Courier, monospace;
   height: 100%;
+}
+
+/* 卡片 CSS 标题元素 */
+.box-card-title-more {
+  font-weight: 800;
+  margin-bottom: 12px;
+  font-size: 14px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }

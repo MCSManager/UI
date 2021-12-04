@@ -1,14 +1,14 @@
 <!--
  * @Author: Copyright 2021 Suwings
  * @Date: 2021-07-18 14:32:17
- * @LastEditTime: 2021-07-28 15:21:30
+ * @LastEditTime: 2021-12-04 18:03:32
  * @Description: 
 -->
 <template>
   <el-row :gutter="20">
     <!-- 左侧用户数据栏 -->
     <el-col :md="16" :offset="0">
-      <Panel style="height: 120px">
+      <Panel style="min-height: 120px">
         <template #title>数据总览</template>
         <template #default>
           <el-row :gutter="20">
@@ -32,7 +32,7 @@
             </el-col>
             <el-col :xs="12" :md="6" :offset="0">
               <div class="overview-info-warpper">
-                <p class="overview-info-title">忙碌（离线/不可用）</p>
+                <p class="overview-info-title">离线/不可用</p>
                 <p class="overview-info-value color-red">{{ this.info.unknown }}</p>
               </div>
             </el-col>
@@ -47,22 +47,30 @@
           <el-row type="flex" class="row-bg" justify="space-between">
             <el-col :span="6">
               <div class="manual-link-block-wrapper">
-                <a class="manual-link-block" href="/"><i class="el-icon-link"></i>用户手册</a>
+                <a class="manual-link-block" href="https://guide.mcsmanager.com/"
+                  ><i class="el-icon-link"></i> 用户手册</a
+                >
               </div>
             </el-col>
             <el-col :span="6">
               <div class="manual-link-block-wrapper">
-                <a class="manual-link-block" href="/"><i class="el-icon-link"></i>接口文档</a>
+                <a class="manual-link-block" href="https://docs.mcsmanager.com/"
+                  ><i class="el-icon-link"></i> 接口文档</a
+                >
               </div>
             </el-col>
             <el-col :span="6">
               <div class="manual-link-block-wrapper">
-                <a class="manual-link-block" href="/"><i class="el-icon-link"></i>常见问题</a>
+                <a class="manual-link-block" href="https://guide.mcsmanager.com/"
+                  ><i class="el-icon-link"></i> 常见问题</a
+                >
               </div>
             </el-col>
             <el-col :span="6">
               <div class="manual-link-block-wrapper">
-                <a class="manual-link-block" href="/"><i class="el-icon-link"></i>错误报告</a>
+                <a class="manual-link-block" href="https://github.com/Suwings/MCSManager/wiki"
+                  ><i class="el-icon-link"></i> 维基百科</a
+                >
               </div>
             </el-col>
           </el-row>
@@ -111,27 +119,47 @@
         v-loading="info.loading"
       >
         <el-table-column prop="nickname" label="实例昵称" min-width="240"></el-table-column>
-        <el-table-column label="运行状态" width="80">
+        <el-table-column label="运行状态">
           <template #default="scope">
-            {{ statusToText(scope.row.status) }}
+            <div class="color-gray" v-if="scope.row.status == 0">
+              <i class="el-icon-video-pause"></i>
+              <span> 未运行</span>
+            </div>
+            <div class="color-green" v-else-if="scope.row.status == 3">
+              <i class="el-icon-video-play"></i>
+              <span> 运行中</span>
+            </div>
+            <span class="color-yellow" v-else-if="scope.row.status == 1">停止中</span>
+            <span class="color-yellow" v-else-if="scope.row.status == 2">启动中</span>
+
+            <span class="color-red" v-else-if="scope.row.status == -1">离线</span>
+            <span class="color-red" v-else>离线</span>
+            <!-- {{ statusToText(scope.row.status) }} -->
           </template>
         </el-table-column>
+
+        <el-table-column label="字节流编码">
+          <template #default="scope"> {{ scope.row.ie }}/{{ scope.row.oe }} </template>
+        </el-table-column>
+        <el-table-column prop="lastDatetime" label="最后启动"></el-table-column>
         <el-table-column label="到期时间">
           <template #default="scope">
             {{ String(scope.row.endTime || "").split("T")[0] }}
           </template>
         </el-table-column>
-        <el-table-column label="流编码">
-          <template #default="scope"> {{ scope.row.ie }}/{{ scope.row.oe }} </template>
-        </el-table-column>
-        <el-table-column prop="lastDatetime" label="最后启动" width="120"></el-table-column>
-
         <el-table-column label="操作" style="text-align: center" width="180">
           <template #default="scope">
-            <el-button size="small" @click="toEditInstance(scope.row)"> 编辑 </el-button>
+            <el-button
+              size="small"
+              @click="toEditInstance(scope.row)"
+              :disabled="scope.row.status == -1"
+            >
+              编辑
+            </el-button>
             <el-button
               size="small"
               @click="toInstance(scope.row.serviceUuid, scope.row.instanceUuid)"
+              :disabled="scope.row.status == -1"
             >
               管理
             </el-button>
@@ -140,6 +168,18 @@
       </el-table>
     </template>
   </Panel>
+
+  <!-- 版权信息 -->
+  <div
+    class="flex flex-space-center flex-align-items-center"
+    style="font-size: 12px; color: #cdcdcd; text-align: center; margin-top: 40px"
+  >
+    <div>
+      <span>MCSManager is released under the GPL-3.0 License</span>
+      <br />
+      <span>Copyright © 2021 Suwings</span>
+    </div>
+  </div>
 
   <!-- 实例详情编辑框 -->
   <Dialog v-model="editInstance.is">
@@ -158,8 +198,10 @@
           <p class="sub-title-info">当控制台出现乱码时可以尝试调整，列如: GBK，UTF-8 等</p>
         </div>
         <div class="flex">
-          <el-input v-model="editInstance.instance.ie" size="small" style="width: 40%"></el-input>
-          <el-input v-model="editInstance.instance.oe" size="small" style="width: 40%"></el-input>
+          <ItemGroup :lr="true">
+            <el-input v-model="editInstance.instance.ie" size="small" style="width: 40%"></el-input>
+            <el-input v-model="editInstance.instance.oe" size="small" style="width: 40%"></el-input>
+          </ItemGroup>
         </div>
         <div class="row-mt">
           <el-button type="success" size="small" @click="saveInstance">更新</el-button>
@@ -200,7 +242,6 @@ export default {
       try {
         this.info.loading = true;
         const data = await requestUserInfo(true);
-        console.log("普通用户界面 详细实例信息:", data);
         this.userInfo = data;
         await this.loadInfoPanel();
       } catch (error) {
@@ -216,7 +257,6 @@ export default {
     async loadInfoPanel() {
       this.info = { total: 0, running: 0, stopped: 0, unknown: 0 };
       const instance = this.userInfo.instances;
-      console.log(instance);
       for (const iterator of instance) {
         this.info.total++;
         if (iterator.status === -1) this.info.unknown++;
@@ -260,5 +300,3 @@ export default {
   }
 };
 </script>
-
-<style></style>

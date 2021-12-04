@@ -28,7 +28,6 @@ export function getDefaultOption() {
   };
 }
 
-
 export function getStatusChartOption1() {
   return {
     grid: {
@@ -49,9 +48,8 @@ export function getStatusChartOption1() {
         symbol: "none"
       }
     ]
-  }
+  };
 }
-
 
 export function getStatusChartOption2() {
   return {
@@ -85,5 +83,5 @@ export function getStatusChartOption2() {
         symbol: "none"
       }
     ]
-  }
+  };
 }

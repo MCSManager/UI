@@ -1,14 +1,34 @@
 <!--
- * @Author: Copyright(c) 2020 Suwings
- * @Date: 2021-05-08 11:08:44
- * @LastEditTime: 2021-08-07 12:50:43
+ * @Author: Copyright 2021 Suwings
+ * @Date: 2021-08-02 20:40:35
+ * @LastEditTime: 2021-08-22 12:23:05
  * @Description: 
 -->
+
 <template>
-  <div v-for="(item,index) in modelValue" :key="index">
+  <!-- 当前文件的说明，请根据需要自定义修改文字，勿修改排版 -->
+  <LineOption :custom="true">
+    <template #default>
+      <div class="sub-title">
+        <div class="sub-title">关于配置兼容与翻译</div>
+        <div class="sub-title-info">
+          此界面由开源社区开发者开发与翻译，若翻译发现错误可前往开源社区进行反馈。配置文件部分设置因版本和服务端类型不同会有些许变化，某些配置文件子元素过于复杂，可能会导致配置项值无法正常显示，如遇到不正常的配置项值切勿进行修改。若对配置文件要进行更为详细的配置，建议前往文件在线管理功能进行文件编辑。
+        </div>
+      </div>
+      <div class="sub-title">
+        <div class="sub-title">关于配置文件</div>
+        <div class="sub-title-info">
+          此配置文件为 Bukkit
+          类或其他衍生类服务端常见的配置文件，包含了绝大部分的服务端设置，列如服务器端口，最大人数，玩家视距和正版验证等。
+        </div>
+      </div>
+    </template>
+  </LineOption>
+
+  <div v-for="(item, index) in modelValue" :key="index">
     <LineOption :option-value="modelValue" :option-key="index">
-      <template #title>{{index}}</template>
-      <template #info>{{description[index]}}</template>
+      <template #title>{{ index }}</template>
+      <template #info>{{ description[index] }}</template>
     </LineOption>
   </div>
 </template>
@@ -26,12 +46,15 @@ export default {
   data() {
     return {
       description: {
+        "require-resource-pack": "是否需要资源包",
+        "enable-jmx-monitoring": "是否启用 JMX 监视",
+        "sync-chunk-writes": "是否启用同步区块写入",
         "generator-settings": "用于自定义超平坦世界的生成，不生成超平坦世界请留空",
         "allow-nether": "是否允许下界（包括地狱）",
         "level-name": "世界（地图）名称 不要使用中文",
         "enable-query": "是否允许使用GameSpy4协议的服务器监听器",
         "allow-flight": "是否允许玩家飞行（在任何游戏模式下）",
-        "server-port": "服务器端口",
+        "server-port": "服务器端口（若服务器有更高级的设置，此选项可能会失效）",
         "level-type": "地图的生成类型",
         "enable-rcon": "是否允许远程访问服务器控制台（RCON）",
         "force-gamemode": "强制玩家加入时为默认游戏模式",

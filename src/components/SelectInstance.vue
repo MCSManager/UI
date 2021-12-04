@@ -1,7 +1,7 @@
 <!--
  * @Author: Copyright 2021 Suwings
  * @Date: 2021-07-03 21:29:11
- * @LastEditTime: 2021-07-28 21:16:53
+ * @LastEditTime: 2021-12-04 19:36:02
  * @Description: 实例选择器
 -->
 
@@ -89,17 +89,18 @@ export default {
           url: API_SERVICE_LIST
         });
         for (const service of data) {
+          const remarks = `${service.remarks}`;
           if (service.available) {
             const ip = `${service.ip}:${service.port}`;
             this.serviceList.push({
               value: `${service.uuid} ${ip}`,
-              label: ip
+              label: `${ip} ${remarks}`
             });
           } else {
             const ip = `${service.ip}:${service.port}`;
             this.serviceList.push({
               value: `${service.uuid} ${ip}`,
-              label: `${ip} (离线)`
+              label: `${ip} ${remarks} (离线)`
             });
           }
         }
@@ -109,8 +110,7 @@ export default {
         this.loading = false;
       }
     },
-    async remoteSelectHandle(row) {
-      console.log(row);
+    async remoteSelectHandle() {
       try {
         if (!this.selectedServiceUuid) throw new Error("还未选择远程服务器");
         const hostIp = this.selectedServiceUuid.split(" ")[1];

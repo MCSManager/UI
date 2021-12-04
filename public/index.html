@@ -1,29 +1,40 @@
 <!--
- * @Author: Copyright(c) 2020 Suwings
+ * @Author: Copyright 2021 Suwings
  * @Date: 2021-05-08 10:07:55
- * @LastEditTime: 2021-08-01 09:36:43
+ * @LastEditTime: 2021-09-02 19:38:33
  * @Description: 
 -->
 <!DOCTYPE html>
-<html lang="">
-  <head>
-    <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
-    <link rel="icon" href="<%= BASE_URL %>favicon.ico" />
-    <title><%= htmlWebpackPlugin.options.title %></title>
-  </head>
+<html>
 
-  <body>
-    <noscript>
-      <strong
-        >We're sorry but <%= htmlWebpackPlugin.options.title %> doesn't work properly without
-        JavaScript enabled. Please enable it to continue.</strong
-      >
-    </noscript>
-    <div id="app" class="app"></div>
-    <!-- built files will be auto injected -->
-  </body>
-  <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.15.2/codemirror.js"></script>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.15.2/codemirror.css" /> -->
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="description" content="MCSManager Panel" />
+  <link rel="icon" href="favicon.ico" />
+
+  <title>控制面板 | MCSManager</title>
+</head>
+
+<body>
+  <noscript>
+    <div style="text-align: center;margin-top: 10%;">
+      <h2>很抱歉，网页需要 Javascript 运行时环境，请准许运行脚本或使用新版现代浏览器。</h2>
+      <p>Sorry, the web page requires a Javascript runtime environment, please allow you to run scripts or use a new
+        version of the modern browser.</p>
+      <p>推荐使用 <a href="https://www.google.cn/chrome/">Chrome</a> 现代浏览器</p>
+      <p>It is recommended to use <a href="https://www.google.cn/chrome/">Chrome</a> modern browser.</p>
+    </div>
+  </noscript>
+  <div id="app" class="app"></div>
+</body>
+
+
+<script src="/static/editor/ace.js" type="text/javascript" charset="utf-8"></script>
+<script async="true" src="http://api.mcsmanager.com/mcsmanager_online_data.js" type="text/javascript" charset="utf-8">
+</script>
+<script async="true" src="http://api.mcsmanager.com/mcsm_sponsor.js" type="text/javascript" charset="utf-8">
+</script>
+
 </html>

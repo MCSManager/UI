@@ -1,7 +1,7 @@
 <!--
  * @Author: Copyright(c) 2020 Suwings
  * @Date: 2021-05-08 11:08:44
- * @LastEditTime: 2021-07-27 15:21:33
+ * @LastEditTime: 2021-09-02 17:40:24
  * @Description: 
 -->
 <template>
@@ -42,7 +42,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 .logo-wrapper2 {
   display: inline-block;
   margin: 14px 0px;

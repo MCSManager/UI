@@ -2,14 +2,14 @@
  eslint-disable vue/no-mutating-props
  * @Author: Copyright(c) 2020 Suwings
  * @Date: 2021-05-08 11:08:44
- * @LastEditTime: 2021-08-07 13:03:43
+ * @LastEditTime: 2021-09-07 11:15:04
  * @Description: 
 -->
 <template>
   <div class="line-option-warpper">
-    <el-card class="" shadow="hover" style="margin-bottom: 0px;border-radius: 4px;" :body-style="{ padding: '14px' }">
-      <div class="line-option">
-        <el-row :gutter="20" justify="space-around" class="flex-align-items-center">
+    <el-card class="" shadow="hover" style="margin-bottom: 0px; border-radius: 4px" :body-style="{ padding: '14px' }">
+      <div class="line-option" v-if="!custom">
+        <el-row :gutter="20" justify="space-around" class="flex-align-items-center col-md-responsive">
           <el-col :sm="7" :offset="0">
             <slot name="title"></slot>
           </el-col>
@@ -23,24 +23,26 @@
               <slot name="optionInput"></slot>
             </div>
             <div v-else class="flex">
-              <el-input v-if="type==2" v-model="optionValue[optionKey]" size="small"></el-input>
-              <el-select v-if=" type==1" v-model="optionValue[optionKey]" size="small" style="width:100%" placeholder="未选择">
+              <el-input v-if="type == 2" v-model="optionValue[optionKey]" size="small"></el-input>
+              <el-select v-if="type == 1" v-model="optionValue[optionKey]" size="small" style="width: 100%" placeholder="未选择">
                 <el-option label="是" :value="true"></el-option>
                 <el-option label="否" :value="false"></el-option>
               </el-select>
-              <el-button v-if=" type==1" size="small" icon="el-icon-edit" @click="forceType"></el-button>
+              <el-button v-if="type == 1" size="small" icon="el-icon-edit" @click="forceType"></el-button>
             </div>
           </el-col>
         </el-row>
       </div>
+      <div v-else>
+        <slot></slot>
+      </div>
     </el-card>
   </div>
-
 </template>
 
 <script>
 export default {
-  props: ["optionValue", "optionKey"],
+  props: ["optionValue", "optionKey", "custom"],
   data: function () {
     return {
       type: 0
@@ -59,6 +61,7 @@ export default {
     }
   },
   mounted() {
+    if (this.custom) return;
     if (this.valueType(this.optionValue[this.optionKey]) == 1) {
       this.type = 1;
     }
@@ -69,7 +72,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 .line-option-warpper {
   width: 100%;
   margin-bottom: 4px;

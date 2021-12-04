@@ -1,17 +1,27 @@
 <!--
  * @Author: Copyright(c) 2020 Suwings
  * @Date: 2021-05-08 11:08:44
- * @LastEditTime: 2021-06-30 19:37:01
+ * @LastEditTime: 2021-09-02 17:40:10
  * @Description: 
 -->
 <template>
-  <div class="select-block">
-    <slot></slot>
+  <div class="select-block" :style="style">
+    <div>
+      <p class="color-black" style="font-size: 14px; font-weight: 600; letter-spacing: -0.4px">
+        <slot name="title"></slot>
+      </p>
+      <p>
+        <slot name="info"></slot>
+      </p>
+    </div>
   </div>
 </template>
 
 <script>
 export default {
+  props: {
+    style: String
+  },
   data: function () {
     return {};
   },
@@ -19,28 +29,17 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 .select-block {
-  background-color: #f0f0f0;
-  border: 1px solid #f0f0f0;
-  margin: 8px;
-  padding: 4px;
+  border: 1px solid #dcdfe6;
   cursor: pointer;
-  height: 200px;
-  width: 200px;
-  border-radius: 8px;
-
+  border-radius: 4px;
   overflow: hidden;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  flex-direction: column;
   transition: all 0.4s;
+  padding: 4px 14px;
 }
 
 .select-block:hover {
-  /* background-color: #d4d3d3; */
-  border: 1px solid rgb(11, 78, 165);
+  border: 1px solid #409eff;
 }
 </style>

@@ -5,20 +5,22 @@
  * @Description: 
 -->
 <template>
-
   <div class="line-option-list-wrapper" v-if="options[optionKey]">
-    <div v-for="(item,index) in options[optionKey]" :key="index">
-      <LineOption v-if="valueType(options[optionKey][index])!=-1" :option-value="options[optionKey]" :option-key="index">
+    <div v-for="(item, index) in options[optionKey]" :key="index">
+      <LineOption
+        v-if="valueType(options[optionKey][index]) != -1"
+        :option-value="options[optionKey]"
+        :option-key="index"
+      >
         <template #title>
-          <span v-if="topTitle">{{topTitle}}/</span><span>{{optionKey}}/{{index}}</span>
+          <span v-if="topTitle">{{ topTitle }}/</span><span>{{ optionKey }}/{{ index }}</span>
         </template>
         <template #info>
-          <span v-if="description">{{description[index]}}</span>
+          <span v-if="description">{{ description[index] }}</span>
         </template>
       </LineOption>
     </div>
   </div>
-
 </template>
 
 <script>

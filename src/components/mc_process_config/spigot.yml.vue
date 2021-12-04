@@ -1,11 +1,3 @@
-
-<!--
-eslint-disable vue/no-mutating-props
- * @Author: Copyright(c) 2020 Suwings
- * @Date: 2021-05-08 11:08:44
- * @LastEditTime: 2021-08-07 12:49:47
- * @Description: 
--->
 <template>
   <div v-if="modelValue">
     <!-- {{config}} -->
@@ -18,17 +10,36 @@ eslint-disable vue/no-mutating-props
       </template>
     </LineOption> -->
 
+    <!-- 当前文件的说明，请根据需要自定义修改文字，勿修改排版 -->
+    <LineOption :custom="true">
+      <template #default>
+        <div class="sub-title">
+          <div class="sub-title">关于配置兼容与翻译</div>
+          <div class="sub-title-info">
+            此界面由开源社区开发者开发与翻译，若翻译发现错误可前往开源社区进行反馈。Spigot
+            服务端每个版本几乎都有修改过配置文件，导致适配难度极大，此文件部分配置可能不会如期显示翻译，但是依然可以工作。
+          </div>
+        </div>
+        <div class="sub-title">
+          <div class="sub-title">关于配置文件</div>
+          <div class="sub-title-info">
+            此文件为 Spigot
+            服务端专用的配置文件，可以进一步的设置服务端的一些高级参数，比如实体AI范围，玩家限制，视距限制和区块限制等
+          </div>
+        </div>
+      </template>
+    </LineOption>
+
     <!-- 根据一层 Map 对象遍历所有选项 -->
-    <div v-for="(item,index) in config" :key="index">
+    <div v-for="(item, index) in config" :key="index">
       <!-- 选项标题与选项传值,组件会自动判断其值类型采用不同组件 -->
       <LineOption :option-value="config" :option-key="index">
         <!-- 选项标题 -->
-        <template #title>{{index}}</template>
+        <template #title>{{ index }}</template>
         <!-- 选项中文解释 -->
-        <template #info>{{descriptionByTitle(description,index)}}</template>
+        <template #info>{{ descriptionByTitle(description, index) }}</template>
       </LineOption>
     </div>
-
   </div>
 </template>
 

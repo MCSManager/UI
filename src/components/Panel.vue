@@ -1,11 +1,11 @@
 <!--
  * @Author: Copyright(c) 2020 Suwings
  * @Date: 2021-05-08 11:08:44
- * @LastEditTime: 2021-07-18 15:51:32
+ * @LastEditTime: 2021-09-01 15:57:14
  * @Description: 
 -->
 <template>
-  <el-card :body-style="bodyStyle || 'padding:12px;'" :style="style">
+  <el-card class="box-card-shadow" :body-style="bodyStyle || 'padding:12px;'" :style="style">
     <div class="box-card-title" v-if="$slots.title">
       <slot name="title"></slot>
     </div>
@@ -28,7 +28,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 .box-card-title {
   font-weight: 800;
   margin-bottom: 12px;
@@ -41,5 +41,9 @@ export default {
 .box-card-content {
   font-size: 12px;
   font-weight: 400;
+}
+
+.box-card-shadow {
+  border-radius: 4px;
 }
 </style>

@@ -1,7 +1,7 @@
 <!--
  * @Author: Copyright(c) 2020 Suwings
  * @Date: 2021-05-08 11:08:44
- * @LastEditTime: 2021-07-30 14:57:08
+ * @LastEditTime: 2021-09-02 17:39:39
  * @Description: 
 -->
 <template>
@@ -24,7 +24,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 .line-info-warpper {
   text-align: left;
   margin-bottom: 10px;

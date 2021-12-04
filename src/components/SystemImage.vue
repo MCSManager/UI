@@ -1,7 +1,7 @@
 <!--
  * @Author: Copyright 2021 Suwings
  * @Date: 2021-07-03 21:29:11
- * @LastEditTime: 2021-07-04 15:31:25
+ * @LastEditTime: 2021-09-02 17:40:20
  * @Description: Index 系统预览框
 -->
 
@@ -27,7 +27,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 .component-system-wrapper {
   display: flex;
   justify-content: flex-start;

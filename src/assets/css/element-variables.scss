@@ -1,0 +1,90 @@
+/*
+Write your variables here. All available variables can be
+found in element-plus/packages/theme-chalk/src/common/var.scss.
+For example, to overwrite the theme color:
+*/
+$--color-primary: #409eff;
+
+body,
+html {
+  font-family: "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", Arial, sans-serif;
+  margin: 0;
+  height: 100%;
+  background-color: #eef1f5;
+  color: #333;
+  overflow: hidden;
+}
+
+a {
+  text-decoration: none;
+  color: #333;
+}
+
+.app {
+  height: 100%;
+}
+
+.el-container {
+  height: 100%;
+  overflow-y: auto;
+}
+
+.el-menu {
+  border-right: 0px;
+}
+
+.el-menu-item {
+  height: 45px;
+  line-height: 45px;
+  transition: all .6s;
+  border-radius: 8px;
+  margin:4px 0px;
+}
+
+.el-menu-item:hover{
+  background-color: rgb(66, 66, 66);
+}
+
+// .el-card.is-always-shadow {
+// box-shadow: 0 2px 4px 0 rgb(54 58 80 / 28%);
+// box-shadow: 0px 2px 1px -1px rgb(0 0 0 / 20%), 0px 1px 1px 0px rgb(0 0 0 / 14%), 0px 1px 3px 0px rgb(0 0 0 / 12%);
+// }
+
+.el-card {
+  background-color: #fff;
+  margin-left: auto;
+  margin-right: auto;
+  box-sizing: border-box;
+  border-radius: 0;
+  color: rgba(0, 0, 0, 0.9);
+
+  margin-bottom: 20px;
+  border: 1px solid #dcdfe6;
+}
+
+
+$item-group-margin: 5px;
+
+.el-button+.el-button {
+  margin-left:$item-group-margin;
+}
+
+.item-group-warpper {
+  margin:0px -5px;
+}
+
+.item-responsive-group > * {
+  margin-left: $item-group-margin;
+  margin-right: $item-group-margin;
+  margin-bottom: $item-group-margin;
+  margin-top: $item-group-margin;
+}
+
+.item-responsive-group-only-lr > *{
+  margin-left: $item-group-margin;
+  margin-right: $item-group-margin;
+}
+
+.el-drawer__body{
+  padding: 0px;
+}

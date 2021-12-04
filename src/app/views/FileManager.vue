@@ -1,7 +1,7 @@
 <!--
  * @Author: Copyright(c) 2020 Suwings
  * @Date: 2021-05-08 11:53:54
- * @LastEditTime: 2021-08-01 19:47:34
+ * @LastEditTime: 2021-09-09 16:00:32
  * @Description: 
 -->
 
@@ -9,39 +9,54 @@
   <Panel>
     <template #title>文件管理</template>
     <template #default>
-      <div class="instance-table-warpper">
-        <div>
-          <el-button size="small" type="primary" @click="refresh">
-            <i class="el-icon-refresh"></i> 刷新
-          </el-button>
-          <el-button size="small" @click="back">
-            <i class="el-icon-pie-chart"></i> 回到控制台
-          </el-button>
-        </div>
-        <div>
-          <el-button size="small" @click="mkdir">
-            <i class="el-icon-folder-add"></i> 新建目录
-          </el-button>
-          <el-button size="small"> <i class="el-icon-box"></i> 压缩 </el-button>
-          <el-button size="small"> <i class="el-icon-files"></i> 解压 </el-button>
-          <el-button size="small" @click="rename">
-            <i class="el-icon-document"></i> 重命名
-          </el-button>
-          <el-button size="small" @click="move"> <i class="el-icon-scissors"></i> 剪切 </el-button>
-          <el-button size="small" @click="copy">
-            <i class="el-icon-document-copy"></i> 复制
-          </el-button>
-          <el-button size="small" @click="paste"> <i class="el-icon-tickets"></i> 粘贴 </el-button>
-          <el-button size="small" type="success" @click="upload">
-            <i class="el-icon-plus"></i> 上传文件
-          </el-button>
-          <el-button size="small" type="danger">
-            <i class="el-icon-document-delete"></i> 删除
-          </el-button>
-        </div>
-      </div>
+      <el-row :gutter="20">
+        <el-col :xs="24" :md="6" :offset="0">
+          <ItemGroup>
+            <el-button size="small" @click="back">
+              <i class="el-icon-pie-chart"></i> 回到控制台
+            </el-button>
+            <el-button size="small" @click="refresh">
+              <i class="el-icon-refresh"></i> 刷新
+            </el-button>
+          </ItemGroup>
+        </el-col>
+        <el-col :xs="24" :md="18" :offset="0" class="text-align-right">
+          <ItemGroup>
+            <el-button size="small" @click="toUpDir">
+              <i class="el-icon-pie-chart"></i> 返回上层
+            </el-button>
+            <el-button size="small" @click="mkdir">
+              <i class="el-icon-folder-add"></i> 新建目录
+            </el-button>
+            <el-button size="small" @click="compress(1)">
+              <i class="el-icon-box"></i> 压缩
+            </el-button>
+            <el-button size="small" @click="compress(2)">
+              <i class="el-icon-files"></i> 解压
+            </el-button>
+            <el-button size="small" @click="rename">
+              <i class="el-icon-document"></i> 重命名
+            </el-button>
+            <el-button size="small" @click="move">
+              <i class="el-icon-scissors"></i> 剪切
+            </el-button>
+            <el-button size="small" @click="copy">
+              <i class="el-icon-document-copy"></i> 复制
+            </el-button>
+            <el-button size="small" @click="paste">
+              <i class="el-icon-tickets"></i> 粘贴
+            </el-button>
+            <el-button size="small" type="success" @click="upload">
+              <i class="el-icon-plus"></i> 上传文件
+            </el-button>
+            <el-button size="small" type="danger" @click="deleteFiles">
+              <i class="el-icon-document-delete"></i> 删除
+            </el-button>
+          </ItemGroup>
+        </el-col>
+      </el-row>
 
-      <div v-show="percentComplete > 0">
+      <div class="row-mt" v-show="percentComplete > 0">
         <el-progress
           :text-inside="true"
           :stroke-width="14"
@@ -49,7 +64,7 @@
         ></el-progress>
       </div>
 
-      <p>当前目录: {{ this.currentDir }}</p>
+      <p>当前目录: {{ currentDir }}</p>
 
       <el-table
         :data="files"
@@ -76,12 +91,33 @@
             </div>
           </template>
         </el-table-column>
-        <el-table-column prop="typeText" label="文件类型" width="120"></el-table-column>
-        <el-table-column prop="size" label="文件大小" width="140"></el-table-column>
+        <el-table-column
+          prop="typeText"
+          label="文件类型"
+          width="120"
+          class="only-pc-display"
+        ></el-table-column>
+        <el-table-column label="文件大小" width="140">
+          <template #default="scope">
+            <span v-if="scope.row.size > 1024 * 1024"
+              >{{ Number(Number(scope.row.size) / 1024 / 1024).toFixed(0) }} MB</span
+            >
+            <span v-else-if="scope.row.size > 1024"
+              >{{ Number(Number(scope.row.size) / 1024).toFixed(0) }} KB</span
+            >
+            <span v-else-if="scope.row.size > 0"
+              >{{ Number(Number(scope.row.size)).toFixed(0) }} B</span
+            >
+          </template>
+        </el-table-column>
         <el-table-column prop="timeText" label="最后修改" width="160"></el-table-column>
         <el-table-column label="操作" style="text-align: center" width="180">
           <template #default="scope">
-            <el-button size="mini" :disabled="scope.row.type != 1" @click="editFile(scope.row)">
+            <el-button
+              size="mini"
+              :disabled="scope.row.type != 1"
+              @click="toEditFilePage(scope.row)"
+            >
               编辑
             </el-button>
             <el-button size="mini" :disabled="scope.row.type != 1" @click="download(scope.row)">
@@ -93,56 +129,17 @@
     </template>
   </Panel>
 
-  <!-- 编辑框 -->
-  <Dialog v-model="edit.isOpenEdit" :cancel="cancelSaveFile">
-    <template #title>文件 {{ edit.fileName }}</template>
-    <template #default>
-      <div class="file-code-editor-wrapper" style="height: 560px; width: 100%">
-        <div id="file-code-editor" style="height: 540px; width: 1024px"></div>
-      </div>
-      <el-button type="success" size="small" @click="saveFile"> 保存 </el-button>
-      <el-button type="danger" size="small" @click="cancelSaveFile"> 取消 </el-button>
-    </template>
-  </Dialog>
-
   <!-- 隐藏的文件上传按钮 -->
-  <input type="file" ref="fileButtonHidden" @change="selectedFile" hidden="hidden" />
+  <form ref="fileForm" action="" method="post">
+    <input type="file" ref="fileButtonHidden" @change="selectedFile" hidden="hidden" />
+  </form>
 </template>
 
 <script>
-// import * as monaco from "monaco-editor";
-// import * as CodeMirror from "codemirror";
-// import "codemirror/lib/codemirror.css";
-// import "codemirror/theme/idea.css";
-// import "codemirror/mode/javascript/javascript.js";
-// import "codemirror/mode/css/css.js";
-// import "codemirror/mode/xml/xml.js";
-// import "codemirror/mode/shell/shell.js";
-// import "codemirror/mode/sql/sql.js";
-// import "codemirror/addon/hint/anyword-hint.js";
-// import "codemirror/addon/hint/css-hint.js";
-// import "codemirror/addon/hint/html-hint.js";
-// import "codemirror/addon/hint/javascript-hint.js";
-// import "codemirror/addon/hint/show-hint.css";
-// import "codemirror/addon/hint/show-hint.js";
-// import "codemirror/addon/hint/sql-hint.js";
-// import "codemirror/addon/hint/xml-hint.js";
-// import "codemirror/addon/merge/merge.js";
-// import "codemirror/addon/merge/merge.css";
-
-// eslint-disable-next-line no-unused-vars
-import { highlight, languages } from "prismjs/components/prism-core";
-import "prismjs/components/prism-clike";
-import "prismjs/components/prism-javascript";
-import "prismjs/themes/prism-tomorrow.css";
-
-import { CodeJar } from "codejar";
-import { withLineNumbers } from "codejar/linenumbers";
-
-import Dialog from "../../components/Dialog";
 import Panel from "../../components/Panel";
 import axios from "axios";
 import {
+  API_FILE_COMPRESS,
   API_FILE_COPY,
   API_FILE_DOWNLOAD,
   API_FILE_LIST,
@@ -152,10 +149,10 @@ import {
   API_FILE_URL
 } from "../service/common";
 import path from "path";
-import { request } from "../service/protocol";
+import { parseforwardAddress, request } from "../service/protocol";
 
 export default {
-  components: { Panel, Dialog },
+  components: { Panel },
   data() {
     return {
       serviceUuid: this.$route.params.serviceUuid,
@@ -169,42 +166,20 @@ export default {
         password: ""
       },
 
+      paramPath: this.$route.query.path,
+
       // 移动，复制，粘贴文件所需数据
       tmpFile: {
         tmpFileNames: null,
         tmpOperationMode: -1,
         tmpDir: null
-      },
-
-      // 文件编辑功能
-      edit: {
-        isOpenEdit: false,
-        text: "",
-        fileName: ""
-      },
-
-      editor: null,
-      value: "function a(){}",
-      highlighterThrottle: null,
-      highlighterThrottleb: false
+      }
     };
   },
   async mounted() {
-    // 创建在线代码编辑器
-    const editor = document.querySelector("#file-code-editor");
-    const highlightFunc = (editor) => {
-      const code = editor.textContent;
-      editor.innerHTML = code;
-      // editor.innerHTML = highlight(code, languages.js);
-    };
-    this.editor = CodeJar(editor, withLineNumbers(highlightFunc), {
-      history: false,
-      spellcheck: false,
-      catchTab: false,
-      preserveIdent: false,
-      addClosing: false
-    });
-
+    if (this.paramPath) {
+      this.currentDir = this.paramPath;
+    }
     await this.render();
   },
   unmounted() {},
@@ -222,17 +197,20 @@ export default {
     // 进入某目录
     async toDir(name) {
       try {
-        let p = ".";
-        if (name == "返回上层") p = path.normalize(path.join(this.currentDir, "../"));
-        else p = path.normalize(path.join(this.currentDir, name));
+        const p = path.normalize(path.join(this.currentDir, name));
         await this.list(p);
       } catch (error) {
         this.$message({ message: "错误，无法查看此目录或文件", type: "error" });
       }
     },
-
+    // 返回上层目录
+    async toUpDir() {
+      const p = path.normalize(path.join(this.currentDir, "../"));
+      await this.list(p);
+    },
     // 目录 List 功能
     async list(cwd = ".") {
+      this.$route.query.path = cwd;
       const data = await request({
         method: "GET",
         url: API_FILE_LIST,
@@ -249,14 +227,6 @@ export default {
     // 表格数据处理
     tableFilter(filesData) {
       this.files = [];
-      // 存放返回上层目录
-      this.files.push({
-        name: "返回上层",
-        type: 0,
-        size: 0,
-        typeText: "目录",
-        timeText: "--"
-      });
 
       for (const iterator of filesData) {
         const typeText = iterator.type == 1 ? "文件" : "目录";
@@ -284,6 +254,14 @@ export default {
       const res = [];
       arr.forEach((v) => res.push(v.name));
       return res;
+    },
+
+    fileNamesToPaths(fileNames = []) {
+      const targets = [];
+      fileNames.forEach((v) => {
+        targets.push(path.normalize(path.join(this.currentDir, v)));
+      });
+      return targets;
     },
 
     multipleFileJoinPath(arr = [], dir = null) {
@@ -376,7 +354,6 @@ export default {
           });
         }
         this.$message({ message: "操作成功", type: "success" });
-        console.log("操作目标:", targets);
         this.render();
       } catch (error) {
         this.$message({ message: `错误:${error.message}`, type: "error" });
@@ -411,66 +388,110 @@ export default {
     },
 
     // 编辑文件
-    async editFile(row) {
+    async toEditFilePage(row) {
       const target = path.normalize(path.join(this.currentDir, row.name));
-      const text = await request({
-        method: "PUT",
-        url: API_FILE_URL,
-        params: {
-          remote_uuid: this.serviceUuid,
-          uuid: this.instanceUuid
-        },
-        data: {
+      this.$router.push({
+        path: `/file_editor/${this.serviceUuid}/${this.instanceUuid}/`,
+        query: {
           target
         }
       });
-      this.edit.text = text;
-      this.edit.isOpenEdit = true;
-      this.edit.fileName = row.name;
-      this.value = text;
-      // this.editor.setValue(this.edit.text);
-      this.editor.updateCode(this.edit.text);
-
-      // 新建代码编辑器
-      // eslint-disable-next-line no-undef
-
-      // this.editor.setValue(this.edit.text.toString());
-      // setTimeout(() => {
-      //   this.editor.refresh();
-      // }, 1000);
-      // setTimeout(() => {
-      //   this.editor.refresh();
-      // }, 1000);
     },
 
-    // 取消保存文件
-    async cancelSaveFile() {
-      this.edit.text = "";
-      this.edit.fileName = "";
-      this.edit.isOpenEdit = false;
-    },
-
-    // 保存文件
-    async saveFile() {
-      this.edit.text = this.editor.toString();
-      const target = path.normalize(path.join(this.currentDir, this.edit.fileName));
-      await request({
-        method: "PUT",
-        url: API_FILE_URL,
-        params: {
-          remote_uuid: this.serviceUuid,
-          uuid: this.instanceUuid
-        },
-        data: {
-          text: this.edit.text,
-          target
-        }
+    // 删除文件
+    async deleteFiles() {
+      await this.$confirm("确定要删除选中的文件吗？", "警告", {
+        confirmButtonText: "确定",
+        cancelButtonText: "取消",
+        type: "warning"
       });
-      this.edit.text = "";
-      this.edit.fileName = "";
-      this.edit.isOpenEdit = false;
-      // this.editor.toTextArea();
-      this.$message({ message: "更新文本成功", type: "success" });
+      try {
+        const fileNames = this.multipleFileToNames(this.multipleSelection);
+        const targets = this.fileNamesToPaths(fileNames);
+        if (fileNames.length === 0)
+          return this.$message({ message: "请至少选择一个文件", type: "error" });
+        await request({
+          method: "DELETE",
+          url: API_FILE_URL,
+          params: {
+            remote_uuid: this.serviceUuid,
+            uuid: this.instanceUuid
+          },
+          data: {
+            targets
+          }
+        });
+        this.$message({ message: "文件已删除", type: "success" });
+      } catch (error) {
+        this.$message({ message: `错误:${error}`, type: "error" });
+      }
+    },
+
+    // 压缩/解压文件
+    async compress(type) {
+      const cwd = this.currentDir;
+      try {
+        const fileNames = this.multipleFileToNames(this.multipleSelection);
+        if (fileNames.length === 0)
+          return this.$message({ message: "请至少选择一个文件", type: "error" });
+        const targets = this.fileNamesToPaths(fileNames);
+        if (type === 1) {
+          //压缩
+          const text = await this.$prompt("新的压缩包文件名", "文件名", {
+            confirmButtonText: "确定",
+            cancelButtonText: "取消"
+          });
+          const zipName = text.value;
+          for (const k in fileNames) {
+            fileNames[k] = path.join(cwd, fileNames[k]);
+          }
+          await request({
+            method: "POST",
+            url: API_FILE_COMPRESS,
+            params: {
+              remote_uuid: this.serviceUuid,
+              uuid: this.instanceUuid
+            },
+            data: {
+              type: 1,
+              source: path.join(cwd, `${zipName}.zip`),
+              targets
+            }
+          });
+          this.$notify({
+            title: "压缩任务已经开始",
+            message: "异步压缩需要一段时间，可以利用刷新文件列表查看 zip 大小来判断是否压缩完毕"
+          });
+        } else {
+          if (fileNames.length !== 1)
+            return this.$message({ message: "解压只能同时进行一个压缩文件", type: "error" });
+          //解压
+          const text = await this.$prompt("请输入新的解压文件夹名称", "文件名", {
+            confirmButtonText: "确定",
+            cancelButtonText: "取消"
+          });
+          const dirName = text.value;
+          await request({
+            method: "POST",
+            url: API_FILE_COMPRESS,
+            params: {
+              remote_uuid: this.serviceUuid,
+              uuid: this.instanceUuid
+            },
+            data: {
+              type: 2,
+              source: path.join(cwd, fileNames[0]),
+              targets: path.join(cwd, dirName)
+            }
+          });
+          this.$notify({
+            title: "解压任务已经开始",
+            message: "异步解压需要一段时间，可以利用刷新文件列表查看目录内容来判断是否压缩完毕"
+          });
+        }
+      } catch (error) {
+        this.$message({ message: `${error}`, type: "error" });
+      }
     },
 
     // 文件已选择，开始上传
@@ -482,7 +503,7 @@ export default {
         formData.append("source", "MCSManager/FileManager");
         formData.append("time", new Date().toUTCString());
         const fullAddress = `http://${this.uploadConfig.addr}/upload/${this.uploadConfig.password}`;
-        console.log("Req Upload:", fullAddress);
+        console.log("上传文件:", fullAddress);
         // 上传文件
         await axios.post(fullAddress, formData, {
           headers: {
@@ -490,11 +511,12 @@ export default {
           },
           onUploadProgress: (progressEvent) => {
             this.percentComplete = Math.round((progressEvent.loaded * 100) / progressEvent.total);
-            console.log("UploadPercentComplete:", this.percentComplete);
           }
         });
         this.$message({ message: `上传完毕`, type: "success" });
-        setTimeout(() => location.reload(), 1400);
+        await this.refresh();
+        this.$refs.fileForm.reset();
+        this.percentComplete = -1;
       } catch (error) {
         this.$message({ message: `错误:${error}`, type: "error" });
       }
@@ -510,7 +532,7 @@ export default {
         }
       });
       const cfg = result.data.data;
-      this.uploadConfig.addr = cfg.addr;
+      this.uploadConfig.addr = parseforwardAddress(cfg.addr);
       this.uploadConfig.password = cfg.password;
       this.$refs.fileButtonHidden.click();
     },
@@ -527,7 +549,7 @@ export default {
         }
       });
       const cfg = result.data.data;
-      const addr = cfg.addr;
+      const addr = parseforwardAddress(cfg.addr);
       const password = cfg.password;
       window.open(`http://${addr}/download/${password}/${fileName}`);
     }
@@ -535,7 +557,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 .filemanager-item-dir {
   font-size: 14px;
   text-decoration: underline;

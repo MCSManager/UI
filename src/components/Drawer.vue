@@ -1,18 +1,12 @@
 <!--
  * @Author: Copyright 2021 Suwings
  * @Date: 2021-07-07 10:33:37
- * @LastEditTime: 2021-07-07 11:39:58
+ * @LastEditTime: 2021-09-07 11:21:55
  * @Description: 
 -->
 
 <template>
-  <el-drawer
-    :title="title"
-    v-model="openDrawer"
-    :direction="direction"
-    destroy-on-close
-    :size="width"
-  >
+  <el-drawer :title="title" v-model="openDrawer" :direction="direction" destroy-on-close :size="width">
     <div class="component-drawer-body">
       <slot></slot>
       <br />
@@ -48,7 +42,6 @@ export default {
   methods: {
     open() {
       const w = document.documentElement.clientWidth;
-      console.log("宽带:", w);
       if (w > 900) {
         this.width = "40%";
       } else if (w > 720) {
@@ -66,7 +59,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 .component-drawer-body {
   overflow-y: auto;
   overflow-x: hidden;

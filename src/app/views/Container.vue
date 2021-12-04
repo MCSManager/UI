@@ -1,39 +1,61 @@
 <!--
  * @Author: Copyright(c) 2020 Suwings
  * @Date: 2021-05-08 11:53:54
- * @LastEditTime: 2021-07-22 12:15:42
+ * @LastEditTime: 2021-09-01 15:45:37
  * @Description: 
 -->
 
 <template>
   <Panel>
-    <template #title>容器操作</template>
+    <template #title>分布式服务列表</template>
     <template #default>
-      <div class="flex flex-space-between flex-align-items-center">
-        <div>
-          <el-button type="success" size="small" @click="newImage">新建镜像</el-button>
-          <el-button type="" size="small">刷新</el-button>
-        </div>
-        <span class="color-gray">新建镜像可能需要一定时间。&nbsp;&nbsp;</span>
-      </div>
+      <el-table :data="services" stripe style="width: 100%" size="small">
+        <el-table-column prop="ip" label="地址"></el-table-column>
+        <el-table-column prop="port" label="端口"></el-table-column>
+        <el-table-column label="状态">
+          <template #default="scope">
+            <span>{{ scope.row.available ? "在线" : "离线" }}</span>
+          </template>
+        </el-table-column>
+        <el-table-column prop="remarks" label="备注"></el-table-column>
+        <el-table-column label="操作" style="text-align: center" width="140px">
+          <template #default="scope">
+            <el-button
+              size="mini"
+              @click="toImagesPanel(scope.row)"
+              :disabled="!scope.row.available"
+              >环境镜像管理</el-button
+            >
+            <!-- <el-button size="mini" @click="deleteImage(scope.row)" :disabled="!scope.row.available">主机本地环境</el-button> -->
+          </template>
+        </el-table-column>
+      </el-table>
     </template>
   </Panel>
 
   <Panel>
-    <template #title>镜像列表</template>
+    <template #title>相关资料</template>
     <template #default>
-      <el-table :data="images" stripe style="width: 100%" size="small">
-        <el-table-column prop="id" label="序号" width="260"></el-table-column>
-        <el-table-column prop="tag" label="标签名" width="120"></el-table-column>
-        <el-table-column prop="size" label="大小"></el-table-column>
-        <el-table-column prop="time" label="上次启动"></el-table-column>
-        <el-table-column prop="text" label="备注"></el-table-column>
-        <el-table-column label="操作" style="text-align: center">
-          <template #default="scope">
-            <el-button size="mini" @click="deleteImage(scope.row)">删除</el-button>
-          </template>
-        </el-table-column>
-      </el-table>
+      <el-row :gutter="10">
+        <el-col :md="6" :offset="0">
+          <ItemGroup>
+            <SelectBlock style="min-height: 100px" @click="selectLink(1)">
+              <template #title>检查本地环境</template>
+              <template #info>学习如何在系统上知晓您当前的一些常用运行时环境</template>
+            </SelectBlock>
+          </ItemGroup>
+        </el-col>
+        <el-col :md="6" :offset="0">
+          <ItemGroup>
+            <SelectBlock style="min-height: 100px" @click="selectLink(2)">
+              <template #title>安装 Docker 软件</template>
+              <template #info>学习如何在常见 Linux 发行版系统上安装 Docker 软件</template>
+            </SelectBlock>
+          </ItemGroup>
+        </el-col>
+        <el-col :md="6" :offset="0"> </el-col>
+        <el-col :md="6" :offset="0"> </el-col>
+      </el-row>
     </template>
   </Panel>
 </template>
@@ -41,54 +63,39 @@
 <script>
 import router from "../router";
 import Panel from "../../components/Panel";
-// import LineLabel from "../../components/LineLabel";
+import { API_SERVICE_LIST } from "../service/common";
+import { request } from "../service/protocol";
+import SelectBlock from "../../components/SelectBlock";
 
 export default {
-  components: { Panel },
+  components: { Panel, SelectBlock },
   data: function () {
     return {
-      images: [
-        {
-          id: "IVCIOHSOFJIOVCPOSJDOPWA",
-          tag: "openjdk:16",
-          size: "200MB",
-          time: "2021/12/24",
-          text: "用来开 MC1.17 版本"
-        },
-        {
-          id: "IVCIOHSOFJIOVCPOSJDOPWA",
-          tag: "mcsd",
-          size: "400MB",
-          time: "2021/12/24",
-          text: "原版MC开服环境"
-        },
-        {
-          id: "IVCIOHSOFJIOVCPOSJDOPWA",
-          tag: "ubuntu14",
-          size: "421MB",
-          time: "2021/12/24",
-          text: "基岩版环境"
-        },
-        {
-          id: "IVCIOHSOFJIOVCPOSJDOPWA",
-          tag: "openjdk:16",
-          size: "200MB",
-          time: "2021/12/24",
-          text: "用来开 MC1.17 版本"
-        },
-        {
-          id: "IVCIOHSOFJIOVCPOSJDOPWA",
-          tag: "openjdk:16",
-          size: "200MB",
-          time: "2021/12/24",
-          text: "用来开 MC1.17 版本"
-        }
-      ]
+      services: []
     };
   },
+  async mounted() {
+    await this.render();
+  },
   methods: {
-    newImage() {
-      router.push({ path: `/new_image` });
+    selectLink(type) {
+      if (type === 1) {
+        window.open(
+          "https://github.com/Suwings/MCSManager/wiki/%E6%A3%80%E6%9F%A5%E4%B8%BB%E6%9C%BA%E6%9C%AC%E5%9C%B0%E7%8E%AF%E5%A2%83"
+        );
+      }
+      if (type === 2) {
+        window.open("https://www.runoob.com/docker/ubuntu-docker-install.html");
+      }
+    },
+    async render() {
+      this.services = await request({
+        method: "GET",
+        url: API_SERVICE_LIST
+      });
+    },
+    toImagesPanel(row) {
+      router.push({ path: `/image/${row.uuid}` });
     }
   }
 };

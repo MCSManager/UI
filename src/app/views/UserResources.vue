@@ -1,105 +1,185 @@
 <!--
  * @Author: Copyright(c) 2020 Suwings
  * @Date: 2021-05-08 11:53:54
- * @LastEditTime: 2021-07-19 11:11:40
+ * @LastEditTime: 2021-12-04 19:23:07
  * @Description: 
 -->
 
 <template>
-  <el-row :gutter="20">
-    <el-col :md="16" :offset="0">
-      <Panel>
-        <template #title>最新动态</template>
-        <template #default>
-          <el-timeline style="margin-left: -36px">
-            <el-timeline-item
-              v-for="(activity, index) in activities"
-              :key="index"
-              :icon="activity.icon"
-              :type="activity.type"
-              :color="activity.color"
-              :size="activity.size"
-              :timestamp="activity.time"
-            >
-              <div class="sub-title">
-                <p class="sub-title-title">{{ activity.title }}</p>
-                <p class="sub-title-info">{{ activity.msg }}</p>
-              </div>
-            </el-timeline-item>
-          </el-timeline>
-        </template>
-      </Panel>
-    </el-col>
-    <el-col :md="8" :offset="0">
-      <Panel>
-        <template #title>官方公告</template>
-        <template #default>
-          <div
-            class="sub-title component-message-item"
-            v-for="(item, index) in notice"
-            :key="index"
-          >
-            <p class="sub-title-title row-mb">{{ item.title }}</p>
-            <p class="sub-title-info">{{ item.msg }}</p>
+  <Panel>
+    <template #title>用户信息</template>
+    <template #default>
+      <el-row :gutter="20">
+        <el-col :span="6" :offset="0">
+          <div class="overview-info-warpper">
+            <p class="overview-info-title">UUID</p>
+            <p class="overview-info-value" v-text="userInfo.uuid"></p>
           </div>
-        </template>
-      </Panel>
+        </el-col>
+        <el-col :span="6" :offset="0">
+          <div class="overview-info-warpper">
+            <p class="overview-info-title">名称</p>
+            <p class="overview-info-value" v-text="userInfo.userName"></p>
+          </div>
+        </el-col>
+        <el-col :span="6" :offset="0">
+          <div class="overview-info-warpper">
+            <p class="overview-info-title">注册时间</p>
+            <p class="overview-info-value" v-text="userInfo.registerTime"></p>
+          </div>
+        </el-col>
+        <el-col :span="6" :offset="0">
+          <div class="overview-info-warpper">
+            <p class="overview-info-title">拥有实例</p>
+            <p class="overview-info-value" v-text="userInfo.instances.length"></p>
+          </div>
+        </el-col>
+      </el-row>
+    </template>
+  </Panel>
+  <Panel v-loading="loading">
+    <template #title>用户资源管理</template>
+    <template #default>
+      <div class="sub-title row-mt">
+        <p class="sub-title-title">用户资源表</p>
+        <p class="sub-title-info">
+          当前子用户可管理的所有实例，若实例状态显示“忙碌”代表此实例不存在或远程主机已经离线。
+        </p>
+      </div>
+      <div class="row-mt">
+        <ItemGroup>
+          <el-button size="small" type="success" @click="openAddInstancePanel">
+            <i class="el-icon-plus"></i> 分配实例
+          </el-button>
+          <el-button size="small" type="primary" @click="save">
+            <i class="el-icon-document-checked"></i> 保存数据
+          </el-button>
+          <el-button size="small" @click="refresh">
+            <i class="el-icon-refresh"></i> 刷新
+          </el-button>
+        </ItemGroup>
+      </div>
+      <div class="row-mt">
+        <el-table :data="userInfo.instances" stripe style="width: 100%" size="small">
+          <el-table-column label="远程服务节点">
+            <template #default="{ row }"> {{ row.hostIp }}（{{ row.remarks }}） </template>
+          </el-table-column>
+          <el-table-column prop="nickname" label="实例名称" width="240"></el-table-column>
+          <el-table-column label="到期时间">
+            <template #default="scope">
+              {{ String(scope.row.endTime || "").split("T")[0] }}
+            </template>
+          </el-table-column>
+          <el-table-column prop="status" label="状态">
+            <template #default="scope">
+              {{ statusToText(scope.row.status) }}
+            </template>
+          </el-table-column>
+          <el-table-column label="操作" style="text-align: center">
+            <template #default="scope">
+              <el-button size="mini" @click="deleteInstance(scope.row)">删除</el-button>
+            </template>
+          </el-table-column>
+        </el-table>
+      </div>
+    </template>
+  </Panel>
 
-      <Panel>
-        <template #title>重要通知</template>
-        <template #default>
-          <div
-            class="sub-title component-message-item"
-            v-for="(item, index) in notice"
-            :key="index"
-          >
-            <p class="sub-title-title row-mb">{{ item.title }}</p>
-            <p class="sub-title-info">{{ item.msg }}</p>
-          </div>
-        </template>
-      </Panel>
-    </el-col>
-  </el-row>
+  <!-- 新增实例框 -->
+  <Dialog v-model="isAddInstanceForUser">
+    <template #title>为用户新增实例资源</template>
+    <template #default>
+      <div class="sub-title">
+        <p class="sub-title-title">分配资源</p>
+        <p class="sub-title-info">利用远程主机地址与模糊查询来为此用户增加应用实例</p>
+      </div>
+      <SelectInstance :callback="selectedInstance"></SelectInstance>
+    </template>
+  </Dialog>
 </template>
 
 <script>
 import Panel from "../../components/Panel";
+import Dialog from "../../components/Dialog";
+import SelectInstance from "../../components/SelectInstance";
+import { API_USER } from "../service/common";
+import { request } from "../service/protocol";
+import { statusCodeToText } from "../service/instance_tools";
+
 export default {
-  components: { Panel },
-  data: function () {
+  components: { Panel, SelectInstance, Dialog },
+  data() {
     return {
-      activities: [
-        {
-          title: "TDSQL-A PostgreSQL 版-新品上线",
-          msg: "提供高性能、高扩展、高安全、高性价比的在线关系型实时数仓服务，自研列式存储引擎，支持完整事务能力，全面兼容 PostgreSQL，高度兼",
-          time: "2021年7月"
-        },
-        {
-          title: "边缘可用区-开放专用可用区申请",
-          msg: "专用可用区（CDZ）是一种特殊的边缘可用区，旨在帮助中大型企业、政府/机构、IDC 服务商在本地机房快速搭建专属的云计算服务，用户可根据",
-          time: "2021年8月"
-        }
-      ],
-      notice: [
-        {
-          title: "TDSQL-A PostgreSQL 版-新品上线",
-          msg: "提供高性能、高扩展、高安全、高性价比的在线关系型实时数仓服务，自研列式存储引擎，支持完整事务能力，全面兼容 PostgreSQL，高度兼",
-          time: "2021年9月"
-        },
-        {
-          title: "边缘可用区-开放专用可用区申请",
-          msg: "专用可用区（CDZ）是一种特殊的边缘可用区，旨在帮助中大型企业、政府/机构、IDC 服务商在本地机房快速搭建专属的云计算服务，用户可根据"
-        }
-      ]
+      userUuid: this.$route.params.userUuid,
+      userInfo: {
+        instances: []
+      },
+      isAddInstanceForUser: false,
+      loading: true
     };
   },
-  methods: {},
-  mounted() {}
+  methods: {
+    openAddInstancePanel() {
+      this.isAddInstanceForUser = true;
+    },
+    selectedInstance(row) {
+      this.userInfo.instances.push({
+        instanceUuid: row.instanceUuid,
+        serviceUuid: row.serviceUuid,
+        nickname: row.nickname,
+        status: row.status,
+        hostIp: row.hostIp
+      });
+      this.isAddInstanceForUser = false;
+    },
+    deleteInstance(row) {
+      this.userInfo.instances.forEach((v, index) => {
+        if (v.instanceUuid === row.instanceUuid) {
+          this.userInfo.instances.splice(index, 1);
+        }
+      });
+    },
+    statusToText(code) {
+      return statusCodeToText(code);
+    },
+    async save() {
+      try {
+        await request({
+          method: "PUT",
+          url: API_USER,
+          data: {
+            uuid: this.userUuid,
+            config: this.userInfo
+          }
+        });
+        this.$message({ type: "success", message: "更新成功" });
+      } catch (error) {
+        this.$message({
+          type: "error",
+          message: `错误: ${error.message}`
+        });
+      }
+    },
+    // 用户数据渲染
+    async render() {
+      const result = await request({
+        method: "GET",
+        url: API_USER,
+        params: {
+          uuid: this.userUuid,
+          advanced: true
+        }
+      });
+      this.userInfo = result;
+      this.loading = false;
+    },
+    async refresh() {
+      await this.render();
+      this.$message({ type: "info", message: "已刷新" });
+    }
+  },
+  async mounted() {
+    await this.render();
+  }
 };
 </script>
-
-<style>
-.component-message-item {
-  margin: 18px 0px;
-}
-</style>

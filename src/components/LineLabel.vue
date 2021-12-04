@@ -1,7 +1,7 @@
 <!--
  * @Author: Copyright 2021 Suwings
  * @Date: 2021-07-03 20:25:22
- * @LastEditTime: 2021-07-05 17:04:47
+ * @LastEditTime: 2021-12-04 18:10:56
  * @Description: 标题定宽标签组件
 -->
 
@@ -39,11 +39,10 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 .line-label-wrapper {
   line-height: 14px;
   font-size: 14px;
-  overflow: hidden;
 }
 
 .line-label-margin-24 {
@@ -78,7 +77,6 @@ export default {
 
 .line-label-text {
   display: inline-block;
-  overflow: hidden;
   vertical-align: top;
 }
 

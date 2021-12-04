@@ -1,89 +1,391 @@
 <!--
  * @Author: Copyright(c) 2020 Suwings
  * @Date: 2021-05-08 11:53:54
- * @LastEditTime: 2021-08-07 13:15:08
+ * @LastEditTime: 2021-10-20 13:58:15
  * @Description: 
 -->
 
 <template>
   <el-row :gutter="20">
-    <el-col :md="16" :offset="0">
+    <el-col :span="24">
       <Panel>
-        <template #title>最新动态</template>
+        <template #title>用户列表</template>
         <template #default>
-          <el-timeline style="margin-left: -36px">
-            <el-timeline-item v-for="(activity, index) in activities" :key="index" :icon="activity.icon" :type="activity.type" :color="activity.color" :size="activity.size" :timestamp="activity.time">
-              <div class="sub-title">
-                <p class="sub-title-title">{{ activity.title }}</p>
-                <p class="sub-title-info">{{ activity.msg }}</p>
-              </div>
-            </el-timeline-item>
-          </el-timeline>
-        </template>
-      </Panel>
-    </el-col>
-    <el-col :md="8" :offset="0">
-      <Panel>
-        <template #title>官方公告</template>
-        <template #default>
-          <div class="sub-title component-message-item" v-for="(item, index) in notice" :key="index">
-            <p class="sub-title-title row-mb">{{ item.title }}</p>
-            <p class="sub-title-info">{{ item.msg }}</p>
-          </div>
-        </template>
-      </Panel>
+          <el-row :gutter="20" class="row-mb">
+            <el-col :md="12" :offset="0" class="col-md-responsive">
+              <el-input
+                v-model="query.userName"
+                type="text"
+                placeholder="根据名字搜索"
+                size="small"
+                style="width: 180px; margin-right: 10px"
+                autocomplete="false"
+              ></el-input>
+              <el-button size="small" type="primary" @click="refresh">
+                <i class="el-icon-refresh"></i> 刷新/搜索
+              </el-button>
+            </el-col>
+            <el-col :md="12" :offset="0" class="text-align-right col-md-responsive">
+              <el-button size="small" type="success" @click="toNewUserPanel">
+                <i class="el-icon-plus"></i> 新建用户
+              </el-button>
+              <el-button size="small" type="danger" @click="deleteUser">
+                <i class="el-icon-delete"></i> 删除用户
+              </el-button>
+            </el-col>
+          </el-row>
 
-      <Panel>
-        <template #title>重要通知</template>
-        <template #default>
-          <div class="sub-title component-message-item" v-for="(item, index) in notice" :key="index">
-            <p class="sub-title-title row-mb">{{ item.title }}</p>
-            <p class="sub-title-info">{{ item.msg }}</p>
+          <div class="instance-table-warpper">
+            <div></div>
+            <div>
+              <el-pagination
+                background
+                layout="prev, pager, next"
+                :total="maxPage"
+                v-model:currentPage="page"
+                :page-size="1"
+                @current-change="handleCurrentChange"
+                small
+              ></el-pagination>
+            </div>
           </div>
+
+          <el-table
+            :data="objects"
+            stripe
+            style="width: 100%"
+            size="small"
+            ref="multipleTable"
+            @selection-change="selectionChange"
+          >
+            <el-table-column type="selection" width="55"> </el-table-column>
+            <el-table-column prop="uuid" label="UUID" width="240"></el-table-column>
+            <el-table-column prop="userName" label="用户名"></el-table-column>
+            <el-table-column prop="permission" label="权限等级"></el-table-column>
+            <el-table-column prop="registerTime" label="注册时间"></el-table-column>
+            <el-table-column prop="loginTime" label="最后登录"></el-table-column>
+            <el-table-column label="操作" style="text-align: center" width="180">
+              <template #default="scope">
+                <el-button size="mini" @click="toEditUserPanel(scope.row)">编辑</el-button>
+                <el-button size="mini" @click="toAssignPanel(scope.row)">分配资源</el-button>
+              </template>
+            </el-table-column>
+          </el-table>
         </template>
       </Panel>
     </el-col>
   </el-row>
+
+  <!-- 新增用户弹框 -->
+  <Dialog v-model="isNewUser">
+    <template #title>新增用户</template>
+    <template #default>
+      <div>
+        <div class="sub-title">
+          <p class="sub-title-title">用户昵称</p>
+          <p class="sub-title-info">必填，6到12个字符，支持中文，英文和字符</p>
+        </div>
+        <el-input
+          v-model="newUserInfo.userName"
+          placeholder="请输入内容..."
+          size="small"
+        ></el-input>
+        <div class="sub-title row-mt">
+          <p class="sub-title-title">用户密码</p>
+          <p class="sub-title-info">必填，6到18个字符，不支持中文，只限于字母，数字和符号</p>
+        </div>
+        <el-input
+          v-model="newUserInfo.password"
+          placeholder="请输入内容..."
+          size="small"
+          type="password"
+        ></el-input>
+        <div class="sub-title row-mt">
+          <p class="sub-title-title">权限</p>
+          <p class="sub-title-info">普通权限适用于商业用户，最高权限适用于管理人员</p>
+        </div>
+        <el-select v-model="newUserInfo.permission" placeholder="请选择" size="small">
+          <el-option label="普通权限" :value="1"></el-option>
+          <el-option label="最高权限" :value="10"></el-option>
+          <el-option label="禁封" :value="-1"></el-option>
+        </el-select>
+        <div class="row-mt">
+          <el-button type="success" size="small" @click="createUser">新增</el-button>
+          <el-button @click="isNewUser = !isNewUser" size="small">取消</el-button>
+        </div>
+      </div>
+    </template>
+  </Dialog>
+
+  <!-- 编辑用户弹框 -->
+  <Dialog v-model="isEditUser">
+    <template #title>编辑用户</template>
+    <template #default>
+      <div>
+        <div class="sub-title">
+          <p class="sub-title-title">用户昵称</p>
+          <p class="sub-title-info">必填，6到12个字符，支持中文，英文和字符</p>
+        </div>
+        <el-input
+          v-model="editUserInfo.userName"
+          placeholder="请输入内容..."
+          size="small"
+        ></el-input>
+        <div class="sub-title row-mt">
+          <p class="sub-title-title">重置密码</p>
+          <p class="sub-title-info">不填写则不更变原有值</p>
+        </div>
+        <el-input
+          v-model="editUserInfo.password"
+          placeholder="原值"
+          size="small"
+          type="password"
+        ></el-input>
+        <div class="sub-title row-mt">
+          <p class="sub-title-title">权限</p>
+          <p class="sub-title-info">普通权限适用于商业用户，最高权限适用于管理人员</p>
+        </div>
+        <el-select v-model="editUserInfo.permission" placeholder="请选择" size="small">
+          <el-option label="普通权限" :value="1"></el-option>
+          <el-option label="最高权限" :value="10"></el-option>
+          <el-option label="禁封" :value="-1"></el-option>
+        </el-select>
+        <div class="row-mt">
+          <el-button type="success" size="small" @click="updateUser">更新数据</el-button>
+          <el-button @click="isEditUser = !isEditUser" size="small">取消</el-button>
+        </div>
+      </div>
+    </template>
+  </Dialog>
+
+  <!-- 分配用户实例对话框 -->
+  <!-- <Dialog v-model="isAssign">
+    <template #title>分配实例</template>
+    <template #default>
+      <div v-loading="isAssignLoading" element-loading-text="正在获取数据">
+        <div class="sub-title">
+          <p class="sub-title-title">用户昵称</p>
+          <p class="sub-title-info">{{ editUserInfo.userName }}</p>
+        </div>
+
+        <div class="sub-title row-mt">
+          <p class="sub-title-title">已有实例</p>
+          <p class="sub-title-info"></p>
+          <div class="inline-block margin-4" v-for="(item, index) in editUserInfo.instances" :key="index">
+            <el-tag type="info" closable @close="cancelInstace(item.uuid)">
+              <span v-if="item.instanceInfo">{{ item.instanceInfo.config.nickname }}</span>
+              <span v-else>{{ item.region }} | {{ item.uuid }}</span>
+            </el-tag>
+          </div>
+        </div>
+        <div style="">
+          <el-table :data="instances" stripe style="width: 100%" size="small" ref="multipleTable">
+            <el-table-column prop="nickname" label="NAME" width="240"></el-table-column>
+            <el-table-column prop="serviceUuid" label="GUID" width="240"></el-table-column>
+            <el-table-column prop="instanceUuid" label="UUID" width="240"></el-table-column>
+            <el-table-column label="操作" style="text-align: center">
+              <template #default="scope">
+                <el-button size="mini" @click="assignInstance(scope.row)">分配</el-button>
+              </template>
+            </el-table-column>
+          </el-table>
+        </div>
+        <div class="row-mt">
+          <el-button type="success" size="small" @click="updateUser">确定</el-button>
+          <el-button @click="isAssign = !isAssign" size="small">取消</el-button>
+        </div>
+      </div>
+    </template>
+  </Dialog> -->
 </template>
 
 <script>
 import Panel from "../../components/Panel";
+import Dialog from "../../components/Dialog";
+import { request } from "../service/protocol";
+import { API_SERVICE, API_USER, API_SEARCH } from "../service/common";
+// import qs from "qs";
+
 export default {
-  components: { Panel },
-  data: function () {
+  components: { Panel, Dialog },
+  data() {
     return {
-      activities: [
-        {
-          title: "TDSQL-A PostgreSQL 版-新品上线",
-          msg: "提供高性能、高扩展、高安全、高性价比的在线关系型实时数仓服务，自研列式存储引擎，支持完整事务能力，全面兼容 PostgreSQL，高度兼",
-          time: "2021年7月"
-        },
-        {
-          title: "边缘可用区-开放专用可用区申请",
-          msg: "专用可用区（CDZ）是一种特殊的边缘可用区，旨在帮助中大型企业、政府/机构、IDC 服务商在本地机房快速搭建专属的云计算服务，用户可根据",
-          time: "2021年8月"
-        }
-      ],
-      notice: [
-        {
-          title: "TDSQL-A PostgreSQL 版-新品上线",
-          msg: "提供高性能、高扩展、高安全、高性价比的在线关系型实时数仓服务，自研列式存储引擎，支持完整事务能力，全面兼容 PostgreSQL，高度兼",
-          time: "2021年9月"
-        },
-        {
-          title: "边缘可用区-开放专用可用区申请",
-          msg: "专用可用区（CDZ）是一种特殊的边缘可用区，旨在帮助中大型企业、政府/机构、IDC 服务商在本地机房快速搭建专属的云计算服务，用户可根据"
-        }
-      ]
+      page: 1,
+      maxPage: 1,
+      query: {
+        userName: ""
+      },
+      newUserInfo: {
+        userName: "",
+        password: "",
+        permission: 1
+      },
+      isEditUser: false,
+      isNewUser: false,
+      // isAssign: false,
+      // isAssignLoading: true,
+      editUserInfo: {},
+      objects: [],
+      remoteObjects: [], // 以远程服务器为主键的列表
+      instances: [], // 以实例为主键的列表
+      multipleSelection: [] // 表格多选属性
     };
   },
-  methods: {},
-  mounted() {}
+  methods: {
+    // 用户数据渲染
+    async render() {
+      const result = await request({
+        method: "GET",
+        url: API_SEARCH,
+        params: {
+          userName: this.query.userName,
+          page: this.page,
+          page_size: 50
+        }
+      });
+      this.maxPage = result.maxPage;
+      this.page = result.page;
+      this.objects = result.data;
+      this.query.userName = "";
+    },
+    async renderServices() {
+      this.remoteObjects = await request({
+        method: "GET",
+        url: API_SERVICE
+      });
+      this.remoteObjects.forEach((v) => {
+        v.instances.forEach((instance) => {
+          this.instances.push({
+            instanceUuid: instance.instanceUuid,
+            serviceUuid: v.uuid,
+            nickname: instance.config.nickname
+          });
+        });
+      });
+    },
+    async requestUserInfo(uuid) {
+      return await request({
+        method: "GET",
+        url: API_USER,
+        params: {
+          uuid: uuid,
+          advanced: true
+        }
+      });
+    },
+    // 页码点击事件
+    handleCurrentChange() {
+      this.refresh();
+    },
+    // 表格多选函数
+    selectionChange(v) {
+      this.multipleSelection = v;
+    },
+    toEditUserPanel(row) {
+      this.editUserInfo = row;
+      this.isEditUser = true;
+    },
+    toNewUserPanel() {
+      this.isNewUser = true;
+    },
+    async toAssignPanel(row) {
+      const uuid = row.uuid;
+      this.$router.push({ path: `/user_resources/${uuid}` });
+      // this.isAssign = true;
+      // this.isAssignLoading = true;
+      // this.editUserInfo = {};
+      // // 请求选择的用户详细信息
+      // this.editUserInfo = await this.requestUserInfo(row.uuid);
+      // this.isAssignLoading = false;
+    },
+    assignInstance(row) {
+      this.editUserInfo.instances.push({
+        uuid: row.instanceUuid,
+        region: row.serviceUuid,
+        instanceInfo: {
+          config: {
+            nickname: row.nickname
+          }
+        }
+      });
+    },
+    cancelInstace(uuid) {
+      const targetUuid = uuid;
+      this.editUserInfo.instances.forEach((v, index) => {
+        if (v.uuid == targetUuid) this.editUserInfo.instances.splice(index, 1);
+      });
+    },
+    async updateUser() {
+      try {
+        await request({
+          method: "PUT",
+          url: API_USER,
+          data: {
+            uuid: this.editUserInfo.uuid,
+            config: this.editUserInfo
+          }
+        });
+        this.$message({ type: "success", message: "修改成功" });
+        this.isEditUser = false;
+        this.isAssign = false;
+      } catch (error) {
+        this.$message({
+          type: "error",
+          message: `错误: ${error.message}`
+        });
+      }
+      this.refresh();
+    },
+    async createUser() {
+      try {
+        await request({
+          method: "POST",
+          url: API_USER,
+          data: {
+            username: this.newUserInfo.userName,
+            password: this.newUserInfo.password,
+            permission: this.newUserInfo.permission
+          }
+        });
+        this.$message({ type: "success", message: "创建成功" });
+        this.isNewUser = !this.isNewUser;
+      } catch (error) {
+        this.$message({
+          type: "error",
+          message: `错误: ${error.message}`
+        });
+      }
+      this.refresh();
+    },
+    async deleteUser() {
+      try {
+        const uuids = [];
+        for (const v of this.multipleSelection) {
+          uuids.push(v.uuid);
+        }
+        await request({
+          method: "DELETE",
+          url: API_USER,
+          data: uuids
+        });
+        this.$message({ type: "success", message: "删除成功" });
+      } catch (error) {
+        this.$message({
+          type: "error",
+          message: `错误: ${error.message}`
+        });
+      }
+      this.refresh();
+    },
+    refresh() {
+      this.render();
+    }
+  },
+  async mounted() {
+    // 请求并渲染所有用户
+    await this.render();
+    // 异步请求所有实例缓存结果
+    this.renderServices();
+  }
 };
 </script>
-
-<style>
-.component-message-item {
-  margin: 18px 0px;
-}
-</style>

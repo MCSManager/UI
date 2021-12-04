@@ -1,28 +1,28 @@
 /*
  * @Author: Copyright(c) 2020 Suwings
  * @Date: 2021-05-08 22:54:31
- * @LastEditTime: 2021-08-02 20:37:38
+ * @LastEditTime: 2021-09-09 16:13:13
  * @Description:
  */
-import { createRouter, createWebHistory } from "vue-router";
+import { createRouter, createWebHashHistory } from "vue-router";
 
 import Overview from "./views/Overview";
 import Instances from "./views/Instances";
-// import About from "./views/About";
 import Services from "./views/Services";
 import Users from "./views/Users";
 import UserDetail from "./views/UserDetail";
-
 import Analysis from "./views/Analysis";
 import News from "./views/News";
 import Container from "./views/Container";
+import ImageManager from "./views/ImageManager";
 import Extension from "./views/Extension";
-import Setting from "./views/Setting";
+import Settings from "./views/Settings";
 import Terminal from "./views/Terminal";
 import InstanceDetail from "./views/InstanceDetail";
 import NewInstance from "./views/NewInstance";
 import NewImage from "./views/NewImage";
 import FileManager from "./views/FileManager";
+import FileManagerEditor from "./views/FileManagerEditor";
 import Home from "./views/Home";
 import Login from "./views/Login";
 import Trigger from "./views/Trigger";
@@ -30,7 +30,8 @@ import Root from "./views/Root";
 import UserResources from "./views/UserResources";
 import ProcessConfig from "./views/ProcessConfig";
 import ProcessConfigFile from "./views/ProcessConfigFile";
-
+import Schedule from "./views/Schedule";
+import Update from "./views/Update"
 
 const routes = [
   {
@@ -75,13 +76,18 @@ const routes = [
   },
   {
     path: "/news",
-    name: "新闻",
+    name: "更新与通知",
     component: News
   },
   {
     path: "/container",
-    name: "容器",
+    name: "服务环境",
     component: Container
+  },
+  {
+    path: "/image/:serviceUuid",
+    name: "镜像管理",
+    component: ImageManager
   },
   {
     path: "/trigger",
@@ -94,12 +100,12 @@ const routes = [
     component: Extension
   },
   {
-    path: "/Setting",
+    path: "/settings",
     name: "设置",
-    component: Setting
+    component: Settings
   },
   {
-    path: "/new_image",
+    path: "/new_image/:serviceUuid",
     name: "创建镜像",
     component: NewImage
   },
@@ -109,12 +115,12 @@ const routes = [
     component: Terminal
   },
   {
-    path: "/process_config_file/:serviceUuid/:instanceUuid/:configName",
+    path: "/process_config_file/:serviceUuid/:instanceUuid/",
     name: "实例配置文件",
     component: ProcessConfigFile
   },
   {
-    path: "/process_config/:serviceUuid/:instanceUuid",
+    path: "/process_config/:serviceUuid/:instanceUuid/",
     name: "常用配置",
     component: ProcessConfig
   },
@@ -122,6 +128,11 @@ const routes = [
     path: "/file/:serviceUuid/:instanceUuid",
     name: "文件管理",
     component: FileManager
+  },
+  {
+    path: "/file_editor/:serviceUuid/:instanceUuid/",
+    name: "文件编辑",
+    component: FileManagerEditor
   },
   {
     path: "/instance_detail/:serviceUuid/:instanceUuid",
@@ -134,7 +145,12 @@ const routes = [
     component: UserResources
   },
   {
-    path: "/new_instace/",
+    path: "/schedule/:serviceUuid/:instanceUuid",
+    name: "计划任务",
+    component: Schedule
+  },
+  {
+    path: "/new_instace/:serviceUuid",
     name: "新增实例",
     component: NewInstance
   },
@@ -142,11 +158,16 @@ const routes = [
     path: "/login",
     name: "登录",
     component: Login
+  },
+  {
+    path: "/update",
+    name: "版本控制",
+    component: Update
   }
 ];
 
 const router = createRouter({
-  history: createWebHistory(process.env.BASE_URL),
+  history: createWebHashHistory(),
   routes
 });
 

@@ -1,7 +1,7 @@
 <!--
  * @Author: Copyright(c) 2020 Suwings
  * @Date: 2021-05-08 11:53:54
- * @LastEditTime: 2021-08-03 18:58:28
+ * @LastEditTime: 2021-12-04 16:01:30
  * @Description: 
 -->
 
@@ -15,18 +15,26 @@
             <el-col :xs="12" :md="6" v-for="(item, index) in computerInfoA" :key="index">
               <div class="overview-info-warpper">
                 <p class="overview-info-title" v-html="item.name"></p>
-                <p class="overview-info-value" v-text="item.value" :class="{ 'color-red': item.warn }"></p>
+                <p
+                  class="overview-info-value"
+                  v-text="item.value"
+                  :class="{ 'color-red': item.warn }"
+                ></p>
               </div>
             </el-col>
 
             <el-col :span="24" :offset="0">
-              <div class="box-card-title">面板总览数据</div>
+              <div class="box-card-title-more">面板总览数据</div>
             </el-col>
 
             <el-col :xs="12" :md="6" v-for="(item, index) in computerInfoB" :key="index">
               <div class="overview-info-warpper">
                 <p class="overview-info-title" v-html="item.name"></p>
-                <p class="overview-info-value" v-text="item.value" :class="{ 'color-red': item.warn }"></p>
+                <p
+                  class="overview-info-value"
+                  v-text="item.value"
+                  :class="{ 'color-red': item.warn }"
+                ></p>
               </div>
             </el-col>
           </el-row>
@@ -37,11 +45,9 @@
           <Panel v-loading="loading">
             <template #title>面板端接口请求量</template>
             <template #default>
-              <p>
-                每1分钟统计间隔，总计1小时的请求历史
-              </p>
+              <p>每1分钟统计间隔，总计1小时的请求历史</p>
               <div class="echart-wrapper">
-                <div id="echart-wrapper-main3" style="width:100%;height:200px"></div>
+                <div id="echart-wrapper-main3" style="width: 100%; height: 200px"></div>
               </div>
             </template>
           </Panel>
@@ -50,11 +56,9 @@
           <Panel v-loading="loading">
             <template #title>面板端 CPU 使用率</template>
             <template #default>
-              <p>
-                每10秒统计间隔，总十分钟的 CPU 历史使用率
-              </p>
+              <p>每10秒统计间隔，总十分钟的 CPU 历史使用率</p>
               <div class="echart-wrapper">
-                <div id="echart-wrapper-main" style="width:100%;height:200px"></div>
+                <div id="echart-wrapper-main" style="width: 100%; height: 200px"></div>
               </div>
             </template>
           </Panel>
@@ -65,11 +69,9 @@
           <Panel v-loading="loading">
             <template #title>分布式应用实例状态</template>
             <template #default>
-              <p>
-                每1分钟统计间隔，总计1小时的实例状态历史
-              </p>
+              <p>每1分钟统计间隔，总计1小时的实例状态历史</p>
               <div class="echart-wrapper">
-                <div id="echart-wrapper-main4" style="width:100%;height:200px"></div>
+                <div id="echart-wrapper-main4" style="width: 100%; height: 200px"></div>
               </div>
             </template>
           </Panel>
@@ -78,11 +80,9 @@
           <Panel v-loading="loading">
             <template #title>面板端内存使用率</template>
             <template #default>
-              <p>
-                每10秒统计间隔，总十分钟的内存历史使用率
-              </p>
+              <p>每10秒统计间隔，总十分钟的内存历史使用率</p>
               <div class="echart-wrapper">
-                <div id="echart-wrapper-main2" style="width:100%;height:200px"></div>
+                <div id="echart-wrapper-main2" style="width: 100%; height: 200px"></div>
               </div>
             </template>
           </Panel>
@@ -95,7 +95,7 @@
           <p>
             确保所有远程服务均在线，离线状态将导致此远程服务以及相关功能不可用，可能会影响使用体验与数据。
           </p>
-          <el-table :data="servicesStatus" style="width: 100%">
+          <el-table :data="servicesStatus" style="width: 100%" size="small">
             <el-table-column prop="ip" label="地址" width="180"> </el-table-column>
             <el-table-column prop="port" label="端口" width="180"> </el-table-column>
             <el-table-column prop="cpu" label="CPU"> </el-table-column>
@@ -109,24 +109,23 @@
     </el-col>
   </el-row>
 
-  <Panel>
+  <Panel v-if="manualLink">
     <template #title>帮助文档</template>
     <template #default>
       <el-row :gutter="20">
-        <el-col :span="12" :offset="0" v-for="(item, index) in manualLink" :key="index">
-          <a class="manualLink" :href="item.link" v-text="item.title"></a>
+        <el-col :md="6" :offset="0" v-for="(item, index) in manualLink['helpLink']" :key="index">
+          <a class="manualLink" :href="item.link" v-text="item.title" target="_black"></a>
         </el-col>
 
         <el-col :span="24">
-          <div class="box-card-title">常见问题</div>
+          <div class="box-card-title-more">常见问题</div>
         </el-col>
-        <el-col :span="12" :offset="0" v-for="(item, index) in manualLink" :key="index">
-          <a class="manualLink" :href="item.link" v-text="item.title"></a>
+        <el-col :md="6" :offset="0" v-for="(item, index) in manualLink['faq']" :key="index">
+          <a class="manualLink" :href="item.link" v-text="item.title" target="_black"></a>
         </el-col>
       </el-row>
     </template>
   </Panel>
-
 </template>
 
 <script>
@@ -154,32 +153,7 @@ export default {
       computerInfoA: [],
       computerInfoB: [],
       servicesStatus: [],
-      manualLink: [
-        {
-          title: "如何获取云服务器的初始密码？",
-          link: ""
-        },
-        {
-          title: "为何控制台展示的流量数据与日志计算的流量对不上？",
-          link: ""
-        },
-        {
-          title: "使用 SSH 密钥登录还可以同时使用密码登录吗？",
-          link: ""
-        },
-        {
-          title: "在群聊中如何对群成员设置或取消禁言？",
-          link: ""
-        },
-        {
-          title: "备案初审被腾讯云驳回如何解决？",
-          link: ""
-        },
-        {
-          title: "即时通信 IM 消息存储时长是多久？",
-          link: ""
-        }
-      ]
+      manualLink: null
     };
   },
   methods: {
@@ -200,7 +174,6 @@ export default {
       });
     },
     render(data) {
-      console.log(data);
       const system = data.system;
       // 表格数据渲染
       if (data.chart) this.systemChartData = data.chart;
@@ -220,45 +193,51 @@ export default {
       const total = Number(system.totalmem / 1024 / 1024 / 1024).toFixed(1);
       const used = Number(total - free).toFixed(1);
       // 计算已正常运行时间
-      const uptime = Number(system.uptime / 60 / 60 / 60).toFixed(0);
+      // const uptime = Number(system.uptime / 60 / 60).toFixed(0);
       this.computerInfoA = [
         {
           name: "系统类型",
-          value: `${system.type} ${system.release}`
+          value: `${system.type} ${system.platform}`
         },
         {
-          name: "操作系统",
-          value: system.version
+          name: "系统版本",
+          value: `${system.version} ${system.release}`
+        },
+        {
+          name: "面板端时间",
+          value: system.time
+        },
+        {
+          name: "本地时间",
+          value: new Date().toLocaleDateString() + " " + new Date().toLocaleTimeString()
         },
         {
           name: "计算机名称",
           value: system.hostname
         },
         {
-          name: "正常运行时间",
-          value: `${uptime} 小时`
+          name: "进程权限用户",
+          value: system.user.username
         },
+        {
+          name: "内存使用",
+          value: `${used}GB/${total}GB`,
+          warn: used / total > 0.9
+        },
+        {
+          name: "系统 CPU 使用率",
+          value: `${Number(system.cpu * 100).toFixed(1)}%`,
+          warn: system.cpu * 100 > 90
+        }
+      ];
+      this.computerInfoB = [
         {
           name: "Node 版本",
           value: system.node
         },
         {
-          name: "系统平台",
-          value: system.platform
-        },
-        {
-          name: "内存使用",
-          value: `${used}GB/${total}GB`
-        },
-        {
-          name: "系统 CPU 率",
-          value: `${Number(system.cpu).toFixed(2) * 100}%`
-        }
-      ];
-      this.computerInfoB = [
-        {
           name: "面板版本",
-          value: system.node
+          value: data.version
         },
         {
           name: "分布式在线",
@@ -266,29 +245,26 @@ export default {
           warn: remoteCount.available !== remoteCount.total
         },
         {
-          name: "用户总数",
-          value: "20"
-        },
-        {
           name: "实例运行数",
           value: `${runningInstance}/${totalInstance}`
         },
 
         {
-          name: "封禁 IP 数",
-          value: "4"
-        },
-        {
-          name: "面板使用内存",
+          name: "面板已用内存",
           value: `${Number(data.process.memory / 1024 / 1024).toFixed(0)}MB`
         },
         {
-          name: "越权访问接口",
-          value: "0"
+          name: "越权请求次数",
+          value: data.record.illegalAccess
         },
         {
-          name: "面板 CPU 事件",
-          value: `${Number(data.process.cpu / 1000 / 60).toFixed(1)}秒`
+          name: "登录失败与总次数",
+          value: `${data.record.loginFailed}/${data.record.logined}`
+        },
+        {
+          name: "封禁 IP 数",
+          value: data.record.banips,
+          warn: data.record.banips > 0
         }
       ];
       // 装载远程服务信息
@@ -322,9 +298,11 @@ export default {
       }
     },
     initChart() {
+      console.log("正在初始化表格....");
       // 基于准备好的dom，初始化echarts实例
       this.systemChart = echarts.init(document.getElementById("echart-wrapper-main"));
       this.systemChart.setOption(getDefaultOption());
+      // this.systemChart.resize({});
       this.systemChart2 = echarts.init(document.getElementById("echart-wrapper-main2"));
       this.systemChart2.setOption(getDefaultOption());
       this.systemChart3 = echarts.init(document.getElementById("echart-wrapper-main3"));
@@ -383,10 +361,15 @@ export default {
     this.render(data);
     this.initChart();
     this.loading = false;
+    this.manualLink = window.onlineMCSManagerNotice ? window.onlineMCSManagerNotice() : null;
     this.startInterval();
   },
   beforeUnmount() {
     this.stopInterval();
+    this.systemChart.dispose();
+    this.systemChart2.dispose();
+    this.systemChart3.dispose();
+    this.systemChart4.dispose();
   }
 };
 </script>

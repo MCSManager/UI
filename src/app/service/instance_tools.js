@@ -1,23 +1,11 @@
 /*
  * @Author: Copyright 2021 Suwings
  * @Date: 2021-07-27 17:17:41
- * @LastEditTime: 2021-08-02 16:13:58
+ * @LastEditTime: 2021-08-08 17:35:15
  * @Description:
  */
 
-const PROCESS_TYPE_LIST = {
-  TYPE_UNIVERSAL: "通用程序",
-  TYPE_WEB_SHELL: "Web Shell",
-  TYPE_LOW_PERMISSION: "低权限程序",
-
-  TYPE_MINECRAFT: "MC 通用端",
-  TYPE_MINECRAFT_SPIGOT: "MC Spigot",
-  TYPE_MINECRAFT_BDS: "MC DBS",
-  TYPE_MINECRAFT_PAPER: "MC Paper",
-  TYPE_MINECRAFT_FORGE: "MC Forge",
-  TYPE_MINECRAFT_PE: "Minecraft PE",
-  TYPE_MINECRAFT_BUNGEECORD: "BungeeCord"
-};
+import { INSTANCE_TYPE_TRANSLATION } from "./instance_type";
 
 /**
  * @param {number} statusCode
@@ -34,11 +22,11 @@ export function statusCodeToText(statusCode) {
 }
 
 export function typeTextToReadableText(type) {
-  const text = PROCESS_TYPE_LIST[type];
+  const text = INSTANCE_TYPE_TRANSLATION[type];
   if (text) return text;
   else return type;
 }
 
 export function processTypeList() {
-  return JSON.parse(JSON.stringify(PROCESS_TYPE_LIST));
+  return JSON.parse(JSON.stringify(INSTANCE_TYPE_TRANSLATION));
 }

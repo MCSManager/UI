@@ -1,13 +1,24 @@
-@media (max-width: 860px) {
+@media (max-width: 900px) {
   .only-pc-display {
     display: none;
   }
   .only-phone-display {
     display: block;
   }
+
+  .col-md-responsive > *,
+  .col-responsive > * {
+    margin-bottom: 10px;
+  }
 }
-@media (min-width: 860px) {
+@media (min-width: 900px) {
   .only-phone-display {
     display: none;
+  }
+}
+
+@media (min-width: 900px) {
+  .phone-row-mt {
+    margin-top: 10px;
   }
 }

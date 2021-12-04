@@ -1,7 +1,7 @@
 <!--
  * @Author: Copyright(c) 2020 Suwings
  * @Date: 2021-05-08 11:08:44
- * @LastEditTime: 2021-05-25 14:02:42
+ * @LastEditTime: 2021-09-02 17:39:35
  * @Description: 
 -->
 <template>
@@ -21,7 +21,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 /* .line-button-warpper { */
 /* margin-bottom: 10px; */
 /* } */

@@ -1,12 +1,11 @@
 <!--
  * @Author: Copyright(c) 2020 Suwings
  * @Date: 2021-05-08 11:53:54
- * @LastEditTime: 2021-07-26 09:23:13
+ * @LastEditTime: 2021-10-20 16:38:20
  * @Description: 
 -->
 
 <template>
-  <!-- 登录界面 -->
   <div
     id="login-layer-top"
     :class="{ 'login-layer-fadeout-top': close, 'login-layer-fadein-top': !close }"
@@ -29,61 +28,79 @@
       <template #default>
         <form action="/login" method="post">
           <div style="font-size: 24px; font-weight: 600">身份验证</div>
-          <p>使用此设备的 MCSManager 账号登录到面板</p>
-          <div style="margin-top: 22px">
-            <div>
-              <el-input
-                v-model="form.username"
-                type="text"
-                name="username"
-                placeholder="账号"
-                autocomplete="on"
-                :disabled="close"
-              >
-                <template #suffix>
-                  <i class="el-icon-user"></i>
-                </template>
-              </el-input>
+          <p>使用服务器的 MCSManager 账号登录到面板</p>
+          <form action="/" method="post">
+            <div style="margin-top: 22px">
+              <div>
+                <el-input
+                  type="text"
+                  name="username"
+                  v-model="form.username"
+                  placeholder="账号"
+                  autocomplete="on"
+                  :disabled="close"
+                  @keyup.enter="submit"
+                >
+                  <template #suffix>
+                    <i class="el-icon-user"></i>
+                  </template>
+                </el-input>
+              </div>
+              <div class="row-mt">
+                <el-input
+                  type="password"
+                  name="password"
+                  v-model="form.password"
+                  placeholder="密码"
+                  autocomplete="on"
+                  :disabled="close"
+                  @keyup.enter="submit"
+                >
+                  <template #suffix>
+                    <i class="el-icon-lock"></i>
+                  </template>
+                </el-input>
+              </div>
+              <div class="login-btn-wrapper row-mt">
+                <transition name="fade">
+                  <div v-if="cause" id="login-cause">{{ cause }}</div>
+                </transition>
+                <el-button
+                  type="primary"
+                  size="small"
+                  style="width: 110px"
+                  @click="login"
+                  :disabled="close"
+                  :loading="loading"
+                >
+                  {{ loginText }}
+                </el-button>
+              </div>
+              <div class="login-info-wrapper row-mt">
+                <div>
+                  <span class="color-gray"
+                    >根据
+                    <a
+                      target="black"
+                      href="https://github.com/Suwings/MCSManager-Daemon/blob/master/LICENSE"
+                      >GPL-3.0</a
+                    >
+                    开源软件协议发行</span
+                  >
+                  <br />
+                  <span class="color-gray"
+                    >版权所有 2021
+                    <a target="black" href="https://github.com/Suwings">Suwings</a></span
+                  >
+                </div>
+              </div>
             </div>
-            <div class="row-mt">
-              <el-input
-                v-model="form.password"
-                type="password"
-                name="password"
-                placeholder="密码"
-                autocomplete="on"
-                :disabled="close"
-              >
-                <template #suffix>
-                  <i class="el-icon-lock"></i>
-                </template>
-              </el-input>
-            </div>
-            <div class="login-btn-wrapper row-mt">
-              <transition name="fade">
-                <div v-if="cause" id="login-cause">{{ cause }}</div>
-              </transition>
-              <el-button
-                type="primary"
-                size="small"
-                style="width: 110px"
-                @click="login"
-                :disabled="close"
-                :loading="loading"
-              >
-                {{ loginText }}
-              </el-button>
-            </div>
-            <div class="login-btn-wrapper row-mt">
-              <span class="color-gray">Copyright © 2021 Suwings.</span>
-            </div>
-          </div>
+          </form>
         </form>
       </template>
     </Panel>
   </div>
 
-  <!-- 背景样板 -->
   <div>
     <el-row :gutter="20">
       <el-col :md="24" :offset="0">
@@ -118,8 +135,8 @@ export default {
   data: function () {
     return {
       form: {
-        username: "root",
-        password: "123456"
+        username: "",
+        password: ""
       },
       close: false,
       closeWindow: false,
@@ -129,13 +146,20 @@ export default {
     };
   },
   methods: {
+    // 回车登录
+    submit() {
+      this.login();
+    },
     // 登录过程入口
     async login() {
       try {
+        if (!this.form.username || !this.form.username) {
+          throw new Error("账号或密码不能为空值");
+        }
         this.loading = true;
         this.cause = "";
         this.loginText = "登录中";
-        await sleep(800);
+        await sleep(600);
         const res = await request({
           method: "POST",
           url: API_USER_LOGIN,
@@ -145,7 +169,6 @@ export default {
           }
         });
         if (res) {
-          console.log("登录成功");
           return this.success(res);
         }
       } catch (error) {
@@ -192,7 +215,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 /* 动画与基本元素CSS */
 
 .login-panel-wrapper-out {
@@ -251,7 +274,7 @@ export default {
 #login-layer-top,
 #login-layer-bottom {
   transition-property: all;
-  transition-duration: 1.5s;
+  transition-duration: 1.6s;
   transition-timing-function: cubic-bezier(0.17, 0.99, 0.63, 0.6);
   transition-delay: 0s;
 }
@@ -259,7 +282,7 @@ export default {
 #login-layer-right,
 #login-layer-left {
   transition-property: all;
-  transition-duration: 1.5s;
+  transition-duration: 0.5s;
   transition-timing-function: cubic-bezier(0.17, 0.99, 0.63, 0.6);
   transition-delay: 0s;
 }
@@ -312,14 +335,31 @@ export default {
 }
 
 #login-panel {
-  min-height: 340px;
-  width: 440px;
+  min-height: 330px;
+  width: 430px;
+  transition: all 1s;
+}
+
+#login-panel:hover {
+  border: 1px solid #77797c;
 }
 
 .login-btn-wrapper {
   display: flex;
   justify-content: flex-end;
   align-items: center;
+}
+
+.login-info-wrapper {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  text-align: right;
+}
+
+.login-info-wrapper a {
+  color: gray;
+  text-decoration: underline;
 }
 
 #login-cause {

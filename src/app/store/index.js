@@ -1,7 +1,7 @@
 /*
  * @Author: Copyright 2021 Suwings
  * @Date: 2021-07-19 10:59:17
- * @LastEditTime: 2021-08-05 19:54:19
+ * @LastEditTime: 2021-09-07 21:06:36
  * @Description: Vuex 状态管理
  */
 
@@ -15,9 +15,11 @@ const stateModel = {
     loginTime: "",
     registerTime: "",
     permission: 0,
-    instances: []
+    instances: [],
+    apiKey: ""
   },
-  gameProfile: null
+  gameProfile: null,
+  onlineNotice: null
 };
 
 const store = createStore({
@@ -33,6 +35,12 @@ const store = createStore({
     },
     setGameProfile(state, v) {
       state.gameProfile = v;
+    },
+    setOnlineNotice(state, v) {
+      state.onlineNotice = v;
+    },
+    setApiKey(state, v) {
+      state.userInfo.apiKey = v;
     }
   }
 });

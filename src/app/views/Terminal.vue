@@ -4,118 +4,262 @@
       <Panel>
         <template #title>基本信息</template>
         <template #default>
-          <LineInfo>
-            <i class="el-icon-edit"></i> 昵称: {{ instanceInfo.config.nickname }}
-          </LineInfo>
-          <LineInfo>
-            <i class="el-icon-tickets"></i> 类型: {{ instanceInfo.config.type }}
-          </LineInfo>
-          <LineInfo><i class="el-icon-finished"></i> 状态: {{ codeToText(instanceInfo.status) }}</LineInfo>
+          <div v-if="!available">
+            <el-skeleton :rows="3" animated />
+          </div>
+          <div v-else>
+            <LineInfo>
+              <i class="el-icon-edit"></i> 昵称: {{ instanceInfo.config.nickname }}
+            </LineInfo>
+            <LineInfo>
+              <i class="el-icon-tickets"></i> 类型: {{ typeToText(instanceInfo.config.type) }}
+            </LineInfo>
+            <LineInfo
+              ><i class="el-icon-finished"></i> 状态:
+              {{ codeToText(instanceInfo.status) }}</LineInfo
+            >
+            <LineInfo v-if="instanceInfo.info && instanceInfo.info.currentPlayers != -1">
+              <i class="el-icon-user"></i> 玩家数: {{ instanceInfo.info.currentPlayers }} /
+              {{ instanceInfo.info.maxPlayers }}
+            </LineInfo>
+            <LineInfo v-if="instanceInfo.info && instanceInfo.info.version">
+              <i class="el-icon-user"></i> 版本: {{ instanceInfo.info.version }}
+            </LineInfo>
+          </div>
         </template>
       </Panel>
       <Panel>
         <template #title>实例控制组</template>
         <template #default>
           <div v-loading="busy">
-            <el-row type="flex" class="row-bg" justify="space-between" :gutter="10">
-              <el-col :span="6">
-                <el-button @click="openInstance" style="width: 100%" size="small" :disabled="instanceInfo.status != 0">开启</el-button>
+            <el-row type="flex" justify="space-between" :gutter="10">
+              <el-col :lg="24">
+                <el-popconfirm title="确定执行此操作？" @confirm="openInstance">
+                  <template #reference>
+                    <el-button
+                      icon="el-icon-video-play"
+                      style="width: 100%"
+                      size="small"
+                      :disabled="instanceInfo.status != 0"
+                    >
+                      开启实例
+                    </el-button>
+                  </template>
+                </el-popconfirm>
               </el-col>
-              <el-col :span="6">
-                <el-button @click="stopInstance" style="width: 100%" size="small" :disabled="instanceInfo.status == 0">关闭</el-button>
+              <el-col :lg="24">
+                <el-popconfirm title="确定执行此操作？" @confirm="stopInstance">
+                  <template #reference>
+                    <el-button
+                      icon="el-icon-video-pause"
+                      style="width: 100%"
+                      size="small"
+                      class="row-mt"
+                      :disabled="instanceInfo.status == 0"
+                      >关闭实例</el-button
+                    >
+                  </template>
+                </el-popconfirm>
               </el-col>
-              <el-col :span="6">
-                <el-button @click="stopInstance" style="width: 100%" size="small" :disabled="instanceInfo.status == 0">重启</el-button>
+              <el-col :lg="24">
+                <el-popconfirm title="确定执行此操作？" @confirm="restartInstance">
+                  <template #reference>
+                    <el-button
+                      icon="el-icon-refresh-right"
+                      style="width: 100%"
+                      size="small"
+                      class="row-mt"
+                      :disabled="instanceInfo.status == 0"
+                    >
+                      重启实例
+                    </el-button>
+                  </template>
+                </el-popconfirm>
               </el-col>
-              <el-col :span="6">
-                <el-button type="danger" plain @click="killInstance" style="width: 100%" size="small" :disabled="instanceInfo.status == 0">终止</el-button>
+              <el-col :lg="24">
+                <el-popconfirm title="确定执行此操作？" @confirm="killInstance">
+                  <template #reference>
+                    <el-button
+                      icon="el-icon-switch-button"
+                      type="danger"
+                      plain
+                      style="width: 100%"
+                      size="small"
+                      class="row-mt"
+                      :disabled="instanceInfo.status == 0"
+                      >强制终止实例</el-button
+                    >
+                  </template>
+                </el-popconfirm>
               </el-col>
             </el-row>
           </div>
         </template>
       </Panel>
       <Panel>
-        <template #title>维护机制</template>
+        <template #title>实例功能组</template>
         <template #default>
           <el-row :gutter="10">
-            <el-col :span="12" :offset="0">
-              <el-button style="width: 100%" size="small">自动重启 <span class="color-green">开启</span> </el-button>
-            </el-col>
-            <el-col :span="12" :offset="0">
-              <el-button @click="toCommandhistoryPanel" style="width: 100%" size="small">
-                命令历史
-                <span v-show="commandhistoryPanel" class="color-gray">关闭</span>
-                <span v-show="!commandhistoryPanel" class="color-green">开启</span>
+            <!-- <el-col :span="12" :offset="0">
+              <el-button style="width: 100%" size="small">自动重启 <span class="color-green">开启</span>
               </el-button>
+            </el-col> -->
+            <el-col :sm="12" :offset="0" class="row-mb">
+              <el-button
+                :disabled="!instanceInfo.config.type"
+                icon="el-icon-s-operation"
+                style="width: 100%"
+                size="small"
+                @click="toProcessConfig"
+                >特定配置</el-button
+              >
+            </el-col>
+            <el-col :sm="12" :offset="0" class="row-mb">
+              <el-button
+                :disabled="!available"
+                icon="el-icon-folder-opened"
+                style="width: 100%"
+                size="small"
+                @click="toFileManager"
+                >文件管理</el-button
+              >
+            </el-col>
+            <el-col :sm="12" :offset="0" class="row-mb">
+              <el-button
+                :disabled="!available"
+                icon="el-icon-mobile"
+                style="width: 100%"
+                size="small"
+                @click="toSchedule"
+                >计划任务</el-button
+              >
+            </el-col>
+            <el-col :sm="12" :offset="0" class="row-mb">
+              <el-button
+                :disabled="!available"
+                icon="el-icon-data-line"
+                style="width: 100%"
+                size="small"
+                @click="toPingPanel"
+                >状态查询</el-button
+              >
+            </el-col>
+            <el-col :sm="12" :offset="0" class="row-mb">
+              <el-button
+                :disabled="!available"
+                icon="el-icon-notebook-2"
+                style="width: 100%"
+                size="small"
+                @click="toEventPanel"
+                >事件任务</el-button
+              >
+            </el-col>
+            <el-col :sm="12" :offset="0" class="row-mb">
+              <el-button
+                :disabled="!available"
+                icon="el-icon-reading"
+                style="width: 100%"
+                size="small"
+                @click="toLogPanel"
+                >终端日志</el-button
+              >
+            </el-col>
+            <el-col :sm="24" :offset="0" v-if="isTopPermission">
+              <el-button
+                :disabled="!available"
+                icon="el-icon-setting"
+                style="width: 100%"
+                size="small"
+                @click="toInstanceDetail"
+                >实例设置</el-button
+              >
             </el-col>
           </el-row>
-
         </template>
       </Panel>
       <Panel>
         <template #title>详细信息</template>
         <template #default>
-          <LineInfo><i class="el-icon-document"></i>
-            <span style="font-size: 12px"> GID{{ serviceUuid }}</span>
-          </LineInfo>
-          <LineInfo><i class="el-icon-document"></i>
-            <span style="font-size: 12px"> UID{{ instanceInfo.instanceUuid }}</span>
-          </LineInfo>
-          <LineInfo>
-            <i class="el-icon-date"></i> 创建日期:
-            {{ instanceInfo.config.createDatetime }}
-          </LineInfo>
-          <LineInfo>
-            <i class="el-icon-date"></i> 最后启动:
-            {{ instanceInfo.config.lastDatetime }}
-          </LineInfo>
-          <LineInfo><i class="el-icon-document"></i> 标签: {{ instanceInfo.tag }}</LineInfo>
-          <LineInfo><i class="el-icon-document"></i> 输入编码: {{ instanceInfo.config.ie }} 输出编码:
-            {{ instanceInfo.config.oe }}</LineInfo>
+          <div v-if="!available">
+            <el-skeleton :rows="5" animated />
+          </div>
+          <div v-else>
+            <LineInfo>
+              <div class="text-overflow-ellipsis">
+                <i class="el-icon-document"></i>
+                <span style="font-size: 12px"> GID {{ serviceUuid }}</span>
+              </div>
+            </LineInfo>
+            <LineInfo>
+              <div class="text-overflow-ellipsis">
+                <i class="el-icon-document"></i>
+                <span class="text-overflow-ellipsis" style="font-size: 12px">
+                  UID {{ instanceInfo.instanceUuid }}</span
+                >
+              </div>
+            </LineInfo>
+            <LineInfo>
+              <i class="el-icon-date"></i> 到期时间:
+              {{
+                instanceInfo.config.endTime
+                  ? new Date(instanceInfo.config.endTime).toLocaleDateString()
+                  : "无限制"
+              }}
+            </LineInfo>
+            <LineInfo>
+              <i class="el-icon-date"></i> 创建日期:
+              {{ instanceInfo.config.createDatetime }}
+            </LineInfo>
+            <LineInfo>
+              <i class="el-icon-date"></i> 最后启动:
+              {{ instanceInfo.config.lastDatetime }}
+            </LineInfo>
+            <!-- <LineInfo><i class="el-icon-document"></i> 标签: {{ instanceInfo.tag }}</LineInfo> -->
+            <LineInfo
+              ><i class="el-icon-document"></i> 输入编码: {{ instanceInfo.config.ie }} 输出编码:
+              {{ instanceInfo.config.oe }}</LineInfo
+            >
+          </div>
         </template>
       </Panel>
     </el-col>
     <el-col :md="18">
-      <Panel>
-        <template #title>实例功能组</template>
-        <template #default>
-          <el-row type="flex" justify="space-between" :gutter="10">
-            <el-col :span="6" :offset="0">
-              <el-button icon="el-icon-s-operation" style="width: 100%" size="small" @click="toProcessConfig">常用配置</el-button>
-            </el-col>
-            <el-col :span="6" :offset="0">
-              <el-button icon="el-icon-folder-opened" style="width: 100%" size="small" @click="toFileManager">文件管理</el-button>
-            </el-col>
-            <el-col :span="6" :offset="0">
-              <el-button icon="el-icon-mobile" style="width: 100%" size="small">计划任务</el-button>
-            </el-col>
-            <el-col :span="6" :offset="0">
-              <el-button icon="el-icon-user" style="width: 100%" size="small">10 / 100</el-button>
-            </el-col>
-          </el-row>
-        </template>
-      </Panel>
       <Panel v-loading="!available" element-loading-text="连接中">
         <template #title>实例控制台</template>
         <template #default>
           <div class="terminal-wrapper">
-            <div id="terminal-container" style="height: 500px; width: 100%"></div>
+            <div id="terminal-container" style="height: 550px; width: 100%"></div>
             <div id="terminal-input-wrapper">
-              <el-input placeholder="此处可输入命令，按回车键执行" prefix-icon="el-icon-arrow-right" size="mini" v-model="command" @keyup.enter="sendCommand(command)">
+              <el-input
+                placeholder="此处可输入命令，按回车键执行"
+                prefix-icon="el-icon-arrow-right"
+                size="mini"
+                v-model="command"
+                ref="terminalCommandInput"
+                @keyup.enter="sendCommand(command)"
+              >
               </el-input>
             </div>
           </div>
         </template>
       </Panel>
-      <Panel v-show="commandhistoryPanel">
+      <Panel>
         <template #title>命令历史</template>
         <template #default>
-          <div class="flex flex-wrap" style="overflow: hidden;" v-if="commandhistory.length >0">
-            <div class="margin-4" v-for="(item,index) in commandhistory" :key="index">
-              <el-tag type="info" size="small" style="cursor: pointer;max-width:250px;" class="text-overflow-ellipsis" @click="sendCommand(item,1)">
-                {{item}}
+          <div v-if="commandhistory.length > 0">
+            <ItemGroup>
+              <el-tag
+                v-for="(item, index) in commandhistory"
+                :key="index"
+                @click="selectHistoryCommand(item)"
+                size="small"
+                type="info"
+                class="text-overflow-ellipsis"
+                style="max-width: 23%; cursor: pointer; font-size: 13px"
+              >
+                {{ item }}
               </el-tag>
-            </div>
+            </ItemGroup>
           </div>
           <div v-else>
             <p class="color-gray">暂无任何命令历史</p>
@@ -124,11 +268,137 @@
       </Panel>
     </el-col>
   </el-row>
+
+  <Dialog v-model="pingConfigForm.is">
+    <template #title>实例状态查询协议配置</template>
+    <template #default>
+      <div class="sub-title">
+        <p class="sub-title-title">更好的监控服务端状态</p>
+        <p class="sub-title-info">
+          此功能将根据管理员设置的实例类型自动选择相应协议，获取服务端进程的具体信息和参数（如：游戏人数，版本等）
+        </p>
+      </div>
+      <div class="sub-title">
+        <p class="sub-title-title">服务端访问地址</p>
+        <p class="sub-title-info">必填，支持域名与IP地址，不填写则自动为 localhost 地址</p>
+      </div>
+      <el-input v-model="pingConfigForm.ip" placeholder="如 mcsmanager.com" size="small"></el-input>
+      <div class="sub-title row-mt">
+        <p class="sub-title-title">服务端访问端口</p>
+        <p class="sub-title-info">必填，仅可输入数字端口号</p>
+      </div>
+      <el-input v-model="pingConfigForm.port" placeholder="如 25565" size="small"></el-input>
+      <div class="row-mt">
+        <ItemGroup>
+          <el-button type="success" size="small" @click="instanceConfigUpdate">更新数据</el-button>
+          <el-button @click="pingConfigForm.is = !pingConfigForm.is" size="small">取消</el-button>
+        </ItemGroup>
+      </div>
+    </template>
+  </Dialog>
+
+  <Dialog v-model="eventConfigPanel.visible">
+    <template #title>事件触发型任务</template>
+    <template #default>
+      <div class="sub-title">
+        <p class="sub-title-title">自动重启</p>
+        <p class="sub-title-info">
+          若实例状态在未经面板操作的情况下变为非运行状态将立刻发起启动实例操作。<br />可用于崩溃后自动重启功能。
+        </p>
+        <div class="row-mt">
+          <el-switch v-model="eventConfigPanel.autoRestart"> </el-switch>
+        </div>
+      </div>
+
+      <div class="sub-title">
+        <p class="sub-title-title">自动启动</p>
+        <p class="sub-title-info">
+          只要守护进程（远程节点）运行，就自动发起一次启动实例操作。<br />如果将守护进程开机自启则可用于开机自启实例。
+        </p>
+        <div class="row-mt">
+          <el-switch v-model="eventConfigPanel.autoStart"> </el-switch>
+        </div>
+      </div>
+
+      <div class="row-mt">
+        <ItemGroup>
+          <el-button type="success" size="small" @click="instanceConfigUpdate">保存</el-button>
+          <el-button size="small" @click="eventConfigPanel.visible = false">取消</el-button>
+        </ItemGroup>
+      </div>
+    </template>
+  </Dialog>
+
+  <Dialog v-model="logPanel.visible">
+    <template #title>终端日志</template>
+    <template #default>
+      <div class="sub-title">
+        <div class="sub-title-info">
+          终端日志仅会记录 1MB 的日常日志，超过 1MB
+          后会删除重新记录，若需要更多日志可前往文件管理下载日志文件。
+        </div>
+      </div>
+
+      <div style="width: 80vw">
+        <el-input
+          ref="logPanelTextArea"
+          v-loading="!logPanel.data"
+          element-loading-text="获取中"
+          v-model="logPanel.data"
+          :rows="30"
+          style="width: 100%; font-size: 12px"
+          type="textarea"
+          placeholder="暂无内容，请先启动实例稍等一段时间"
+        />
+      </div>
+
+      <div class="row-mt">
+        <ItemGroup>
+          <el-button
+            type="success"
+            size="small"
+            @click="
+              () => {
+                logPanel.visible = false;
+                this.logPanel.data = '';
+              }
+            "
+            >关闭</el-button
+          >
+        </ItemGroup>
+      </div>
+    </template>
+  </Dialog>
+
+  <Dialog v-model="unavailableTerminal" style="z-index: 9999">
+    <template #title>无法与守护进程建立连接</template>
+    <template #default>
+      <div class="sub-title">
+        <p class="sub-title-title">网页无法与远程服务建立直接连接通道</p>
+        <p class="sub-title-info">
+          <span>可能是您未开放远程服务的端口导致，或是使用了内网地址的缘故</span>
+          <br />
+          <span>请您尝试一下操作进行修复</span>
+        </p>
+        <ul style="padding-left: 20px">
+          <li>检查您自己的网络是否通畅，远程服务是否在线状态</li>
+          <li>检查<b>分布式服务界面</b>连接的远程服务<b>是否为公网地址</b></li>
+          <li>检查<b>远程服务是否已经开放端口</b>，一般默认是 24444 端口</li>
+          <li>检查分布式服务界面连接的远程服务<b>密钥是否正确</b></li>
+          <br />
+          <li>重启 Web 面板端程序</li>
+          <li>重启远程服务守护进程 (Daemon) 程序</li>
+          <br />
+          <li>若有反向代理，FRP，SSL 等，需兼容 Websocket 功能</li>
+          <li>前往 Github 仓库的 Wiki 搜索您的情况</li>
+        </ul>
+      </div>
+    </template>
+  </Dialog>
 </template>
 
 <script>
-import { Terminal } from "xterm";
-import { FitAddon } from "xterm-addon-fit";
+import Dialog from "../../components/Dialog";
 import Panel from "../../components/Panel";
 import "../../assets/xterm/xterm.css";
 import LineInfo from "../../components/LineInfo";
@@ -139,12 +409,16 @@ import {
   API_INSTANCE_KILL,
   API_INSTANCE_OPEN,
   API_INSTANCE_REMOTE_SERVICE_STREAM,
-  API_INSTANCE_STOP
+  API_INSTANCE_RESTART,
+  API_INSTANCE_UPDATE,
+  API_INSTANCE_STOP,
+  API_INSTANCE_OUTPUT
 } from "../service/common";
 import router from "../router";
-import { request } from "../service/protocol";
+import { parseforwardAddress, request } from "../service/protocol";
 import { ElNotification } from "element-plus";
-import { statusCodeToText } from "../service/instance_tools";
+import { statusCodeToText, typeTextToReadableText } from "../service/instance_tools";
+import { initTerminalWindow, textToTermText } from "../service/term";
 
 export default {
   data: function () {
@@ -160,19 +434,41 @@ export default {
       },
       renderTask: null,
       commandhistory: [],
-      commandhistoryPanel: true,
       busy: false,
 
-      bool: false
+      bool: false,
+
+      pingConfigForm: {
+        is: false,
+        ip: "",
+        port: "",
+        type: 1
+      },
+
+      eventConfigPanel: {
+        visible: false,
+        autoRestart: false,
+        autoStart: false
+      },
+
+      logPanel: {
+        visible: false,
+        data: ""
+      },
+
+      unavailableTerminal: false
     };
   },
   computed: {
     isStarted() {
       return this.instanceInfo.status !== 0;
+    },
+    isTopPermission() {
+      return this.$store.state.userInfo.permission >= 10;
     }
   },
   // eslint-disable-next-line vue/no-unused-components
-  components: { Panel, LineInfo, LineButton },
+  components: { Panel, LineInfo, LineButton, Dialog },
   methods: {
     // 请求数据源(Ajax)
     async renderFromAjax() {
@@ -210,22 +506,23 @@ export default {
           type: "error",
           duration: 0
         });
+        this.unavailableTerminal = true;
+        return;
       }
 
-      const password = res.password;
-      const addr = res.addr;
-      console.log("准备验证:", res, password, addr);
-
       // 直接与守护进程建立频道
+      const password = res.password;
+      let addr = parseforwardAddress(res.addr);
       this.socket = connectRemoteService(addr, password);
 
       // 监听输出流
       this.socket.on("instance/stdout", (packet) => {
-        this.term.write(packet.data.text);
+        this.term.write(textToTermText(packet.data.text));
       });
       // 监听实例详细信息
       this.socket.on("stream/detail", (packet) => {
         this.instanceInfo = packet.data;
+        console.log("实例信息", this.instanceInfo);
       });
       // 断开事件
       this.socket.on("disconnect", () => {
@@ -240,10 +537,15 @@ export default {
         });
       });
     },
-    toCommandhistoryPanel() {
-      this.commandhistoryPanel = !this.commandhistoryPanel;
+    typeToText(v) {
+      return typeTextToReadableText(v);
+    },
+    selectHistoryCommand(item) {
+      this.command = item;
+      console.log(this.$refs.terminalCommandInput.focus());
     },
     pushHistoryCommand(cmd) {
+      if (cmd.trim().length <= 0) return;
       this.commandhistory.unshift(cmd);
       if (this.commandhistory.length > 40) {
         this.commandhistory.pop();
@@ -258,69 +560,66 @@ export default {
     },
     // 初始化 Terminal 窗口
     initTerm() {
-      const term = (this.term = new Terminal({
-        rendererType: "canvas",
-        convertEol: true,
-        disableStdin: false,
-        cursorStyle: "underline",
-        cursorBlink: true,
-        fontSize: 12,
-        theme: {
-          background: "#1e1e1e"
-        }
-      }));
-      const fitAddon = new FitAddon();
-      term.loadAddon(fitAddon);
-      term.open(document.getElementById("terminal-container"));
-      fitAddon.fit();
-      term.writeln("MCSManager Terminal [Power by Term.js]");
-      term.writeln("© 2021 MCSManager. All rights reserved.");
-      // term.writeln(new Date().toString());
-      term.info = (msg) => {
-        term.writeln(`\r\n[MCSManager] [INFO] ${msg}`);
-      };
-      term.prompt = () => {
-        term.write("\r\n$");
-      };
-      term.prompt();
+      this.term = initTerminalWindow(document.getElementById("terminal-container"));
     },
     // 开启实例（Ajax）
     async openInstance() {
-      this.busy = true;
+      // this.busy = true;
       try {
         await request({
           method: "GET",
           url: API_INSTANCE_OPEN,
           params: { remote_uuid: this.serviceUuid, uuid: this.instanceUuid }
         });
+      } catch (error) {
+        this.$message({ message: error.toString(), type: "error" });
       } finally {
         setTimeout(() => (this.busy = false), 200);
       }
     },
     // 关闭实例（Ajax）
     async stopInstance() {
-      this.busy = true;
+      // this.busy = true;
       try {
         await request({
           method: "GET",
           url: API_INSTANCE_STOP,
           params: { remote_uuid: this.serviceUuid, uuid: this.instanceUuid }
         });
+      } catch (error) {
+        this.$message({ message: error.toString(), type: "error" });
       } finally {
         setTimeout(() => (this.busy = false), 200);
       }
     },
     // 终止实例（Ajax）
     async killInstance() {
-      this.busy = true;
+      // this.busy = true;
       try {
         await request({
           method: "GET",
           url: API_INSTANCE_KILL,
           params: { remote_uuid: this.serviceUuid, uuid: this.instanceUuid }
         });
+      } catch (error) {
+        this.$message({ message: error.toString(), type: "error" });
       } finally {
         setTimeout(() => (this.busy = false), 200);
+      }
+    },
+    // 重启实例（Ajax）
+    async restartInstance() {
+      // this.busy = true;
+      try {
+        await request({
+          method: "GET",
+          url: API_INSTANCE_RESTART,
+          params: { remote_uuid: this.serviceUuid, uuid: this.instanceUuid }
+        });
+      } catch (error) {
+        this.$message({ message: error.toString(), type: "error" });
+      } finally {
+        setTimeout(() => (this.busy = false), 2000);
       }
     },
     // 使用Websocket发送命令
@@ -337,18 +636,90 @@ export default {
       router.push({ path: `/file/${this.serviceUuid}/${this.instanceUuid}/` });
     },
     toProcessConfig() {
-      router.push({ path: `/process_config/${this.serviceUuid}/${this.instanceUuid}/` });
+      router.push({
+        path: `/process_config/${this.serviceUuid}/${this.instanceUuid}/`,
+        query: {
+          type: this.instanceInfo.config.type
+        }
+      });
+    },
+    toSchedule() {
+      router.push({ path: `/schedule/${this.serviceUuid}/${this.instanceUuid}/` });
+    },
+    toPingPanel() {
+      if (this.instanceInfo.config && this.instanceInfo.config.pingConfig) {
+        this.pingConfigForm.ip = this.instanceInfo.config.pingConfig.ip;
+        this.pingConfigForm.port = this.instanceInfo.config.pingConfig.port;
+      }
+      this.pingConfigForm.is = true;
+    },
+    toEventPanel() {
+      if (this.instanceInfo.config && this.instanceInfo.config.eventTask) {
+        this.eventConfigPanel.autoRestart = this.instanceInfo.config.eventTask.autoRestart;
+        this.eventConfigPanel.autoStart = this.instanceInfo.config.eventTask.autoStart;
+      }
+      this.eventConfigPanel.visible = true;
+    },
+    async toLogPanel() {
+      this.logPanel.data = "";
+      this.logPanel.visible = true;
+      try {
+        const text = await request({
+          url: API_INSTANCE_OUTPUT,
+          method: "GET",
+          params: { remote_uuid: this.serviceUuid, uuid: this.instanceUuid }
+        });
+        this.logPanel.data = text;
+      } catch (error) {
+        this.logPanel.data = error;
+      }
+      this.$nextTick(() => {
+        const tr = this.$refs.logPanelTextArea.textarea;
+        window.tr = tr;
+        if (tr) {
+          tr.scrollTop = tr.scrollHeight;
+        }
+      });
+    },
+    // 普通用户更新配置
+    async instanceConfigUpdate() {
+      try {
+        await request({
+          method: "PUT",
+          url: API_INSTANCE_UPDATE,
+          params: { remote_uuid: this.serviceUuid, uuid: this.instanceUuid },
+          data: {
+            pingConfig: this.pingConfigForm,
+            eventTask: this.eventConfigPanel
+          }
+        });
+        this.$message({
+          type: "success",
+          message: "实例配置已更新，部分配置可能需要重启实例生效"
+        });
+        this.pingConfigForm.is = false;
+        this.eventConfigPanel.visible = false;
+      } catch (error) {
+        this.$message({
+          type: "error",
+          message: error.message
+        });
+      }
     },
     codeToText(p) {
       return statusCodeToText(p);
     },
     initStorage() {
       const ch = localStorage.getItem("CommandHistory");
+      // 记录已执行命令历史
       if (ch) {
         this.commandhistory = JSON.parse(ch);
       } else {
         localStorage.setItem("CommandHistory", JSON.stringify([]));
       }
+    },
+    toInstanceDetail() {
+      this.$router.push({ path: `/instance_detail/${this.serviceUuid}/${this.instanceUuid}/` });
     }
   },
   // 装载事件
@@ -388,11 +759,12 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 .terminal-wrapper {
   background-color: rgb(30, 30, 30);
   padding: 4px;
   border-radius: 4px;
+  /* overflow: hidden; */
 }
 #terminal-input-wrapper input {
   width: 100%;

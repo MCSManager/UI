@@ -1,7 +1,7 @@
 <!--
  * @Author: Copyright(c) 2020 Suwings
  * @Date: 2021-05-08 11:53:54
- * @LastEditTime: 2021-07-19 11:11:40
+ * @LastEditTime: 2021-09-05 16:34:45
  * @Description: 
 -->
 
@@ -9,97 +9,98 @@
   <el-row :gutter="20">
     <el-col :md="16" :offset="0">
       <Panel>
-        <template #title>最新动态</template>
+        <template #title>在线通知</template>
         <template #default>
-          <el-timeline style="margin-left: -36px">
-            <el-timeline-item
-              v-for="(activity, index) in activities"
-              :key="index"
-              :icon="activity.icon"
-              :type="activity.type"
-              :color="activity.color"
-              :size="activity.size"
-              :timestamp="activity.time"
+          <div v-if="notice" style="height: 280px; overflow: auto">
+            <div class="sub-title row-mb" v-for="(item, index) in notice" :key="index">
+              <div class="sub-title-title">{{ item.title }}</div>
+              <div class="sub-title-info">{{ item.info }}</div>
+            </div>
+          </div>
+          <div v-else>
+            <el-alert
+              title="无法获取到最新信息"
+              type="warning"
+              description="可能是官方服务器维护或您本地网络问题，请稍等一段时间后再试或检查互联网连接"
+              show-icon
+              :closable="false"
             >
-              <div class="sub-title">
-                <p class="sub-title-title">{{ activity.title }}</p>
-                <p class="sub-title-info">{{ activity.msg }}</p>
-              </div>
-            </el-timeline-item>
-          </el-timeline>
+            </el-alert>
+          </div>
         </template>
       </Panel>
     </el-col>
     <el-col :md="8" :offset="0">
       <Panel>
-        <template #title>官方公告</template>
+        <template #title>版本更新</template>
         <template #default>
-          <div
-            class="sub-title component-message-item"
-            v-for="(item, index) in notice"
-            :key="index"
-          >
-            <p class="sub-title-title row-mb">{{ item.title }}</p>
-            <p class="sub-title-info">{{ item.msg }}</p>
-          </div>
-        </template>
-      </Panel>
-
-      <Panel>
-        <template #title>重要通知</template>
-        <template #default>
-          <div
-            class="sub-title component-message-item"
-            v-for="(item, index) in notice"
-            :key="index"
-          >
-            <p class="sub-title-title row-mb">{{ item.title }}</p>
-            <p class="sub-title-info">{{ item.msg }}</p>
+          <div style="height: 280px; overflow: auto">
+            <div class="sub-title">
+              <div class="sub-title-title">最新版本</div>
+              <div class="sub-title-info">
+                控制面板版本代指主控端（此网页）后端的官方最新版本，守护进程端版本代指被控端（实际进程处，远程主机）的官方最新版本。如果您要查看您自己的版本，请前往数据监控界面查看。
+              </div>
+            </div>
+            <LineLabel>
+              <template #title>最新控制面板端</template>
+              <template #default> {{ latestVersion }}</template>
+            </LineLabel>
+            <LineLabel>
+              <template #title>最新守护进程端</template>
+              <template #default> {{ latestVersion2 }}</template>
+            </LineLabel>
           </div>
         </template>
       </Panel>
     </el-col>
   </el-row>
+
+  <Panel v-if="activities">
+    <template #title>产品动态</template>
+    <template #default>
+      <div>
+        <el-timeline style="margin-left: -36px">
+          <el-timeline-item
+            v-for="(activity, index) in activities"
+            :key="index"
+            :icon="activity.icon"
+            :type="activity.type"
+            :color="activity.color"
+            :size="activity.size"
+            :timestamp="activity.time"
+          >
+            <div class="sub-title">
+              <p class="sub-title-title">{{ activity.title }}</p>
+              <p class="sub-title-info">{{ activity.info }}</p>
+            </div>
+          </el-timeline-item>
+        </el-timeline>
+      </div>
+    </template>
+  </Panel>
 </template>
 
 <script>
 import Panel from "../../components/Panel";
+import LineLabel from "../../components/LineLabel";
+
 export default {
-  components: { Panel },
+  components: { Panel, LineLabel },
   data: function () {
     return {
-      activities: [
-        {
-          title: "TDSQL-A PostgreSQL 版-新品上线",
-          msg: "提供高性能、高扩展、高安全、高性价比的在线关系型实时数仓服务，自研列式存储引擎，支持完整事务能力，全面兼容 PostgreSQL，高度兼",
-          time: "2021年7月"
-        },
-        {
-          title: "边缘可用区-开放专用可用区申请",
-          msg: "专用可用区（CDZ）是一种特殊的边缘可用区，旨在帮助中大型企业、政府/机构、IDC 服务商在本地机房快速搭建专属的云计算服务，用户可根据",
-          time: "2021年8月"
-        }
-      ],
-      notice: [
-        {
-          title: "TDSQL-A PostgreSQL 版-新品上线",
-          msg: "提供高性能、高扩展、高安全、高性价比的在线关系型实时数仓服务，自研列式存储引擎，支持完整事务能力，全面兼容 PostgreSQL，高度兼",
-          time: "2021年9月"
-        },
-        {
-          title: "边缘可用区-开放专用可用区申请",
-          msg: "专用可用区（CDZ）是一种特殊的边缘可用区，旨在帮助中大型企业、政府/机构、IDC 服务商在本地机房快速搭建专属的云计算服务，用户可根据"
-        }
-      ]
+      activities: null,
+      notice: null,
+      latestVersion: "",
+      latestVersion2: ""
     };
   },
   methods: {},
-  mounted() {}
+  mounted() {
+    const onlineNotice = this.$store.state.onlineNotice ? this.$store.state.onlineNotice : {};
+    this.activities = onlineNotice["news"];
+    this.notice = onlineNotice["notice"];
+    this.latestVersion = onlineNotice["version"];
+    this.latestVersion2 = onlineNotice["version2"];
+  }
 };
 </script>
-
-<style>
-.component-message-item {
-  margin: 18px 0px;
-}
-</style>

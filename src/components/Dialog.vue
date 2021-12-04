@@ -1,29 +1,31 @@
 <!--
  * @Author: Copyright 2021 Suwings
  * @Date: 2021-07-03 21:29:11
- * @LastEditTime: 2021-07-31 20:29:07
+ * @LastEditTime: 2021-10-20 14:30:27
  * @Description: 基于 Element UI 的对话框
 -->
 
 <template>
-  <transition name="fade2">
-    <div v-show="modelValue" class="component-dialog-wrapper">
+  <transition name="el-fade-in-linear">
+    <div v-show="modelValue" class="component-dialog-wrapper" :style="style">
       <div class="component-dialog-overflow">
-        <Panel style="margin-bottom: 0px">
-          <template #title>
-            <div class="flex flex-space-between flex-align-items-center" style="width: 100%">
-              <slot name="title"></slot>
-              <div class="component-dialog-close-button" @click="close">
-                <i class="el-icon-close"></i>
+        <transition name="el-zoom-in-center">
+          <Panel v-show="modelValue" style="margin-bottom: 0px">
+            <template #title>
+              <div class="flex flex-space-between flex-align-items-center" style="width: 100%">
+                <slot name="title"></slot>
+                <div class="component-dialog-close-button" @click="close">
+                  <i class="el-icon-close"></i>
+                </div>
               </div>
-            </div>
-          </template>
-          <template #default>
-            <div class="component-dialog-body">
-              <slot></slot>
-            </div>
-          </template>
-        </Panel>
+            </template>
+            <template #default>
+              <div class="component-dialog-body">
+                <slot></slot>
+              </div>
+            </template>
+          </Panel>
+        </transition>
       </div>
     </div>
   </transition>
@@ -35,7 +37,8 @@ import Panel from "./Panel";
 export default {
   props: {
     modelValue: Boolean,
-    cancel: Function
+    cancel: Function,
+    style: String
   },
   emits: ["update:modelValue"],
   data: function () {
@@ -53,7 +56,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 .component-dialog-overflow {
   max-height: 90%;
   max-width: 90%;
@@ -70,6 +73,7 @@ export default {
   display: flex;
   align-items: center;
   justify-content: center;
+  transition: all 0.4s;
 }
 .component-dialog-body {
   word-break: break-all;

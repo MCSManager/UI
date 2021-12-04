@@ -1,121 +1,151 @@
 <!--
  * @Author: Copyright(c) 2020 Suwings
  * @Date: 2021-05-08 11:53:54
- * @LastEditTime: 2021-08-02 16:01:29
+ * @LastEditTime: 2021-12-04 17:28:38
  * @Description: 
 -->
 
 <template>
   <Panel>
-    <template #title>分布式服务状态</template>
-    <template #default>
-      <el-row :gutter="20">
-        <el-col :span="6">
-          <LineLabel size="small">
-            <template #title>在线远程服务: </template>
-            <template #default> {{ availableService.length }} 个 </template>
-          </LineLabel>
-        </el-col>
-        <el-col :span="6">
-          <LineLabel size="small">
-            <template #title>离线远程服务: </template>
-            <template #default> {{ unavailableService.length }} 个 </template>
-          </LineLabel>
-        </el-col>
-        <el-col :span="6">
-          <LineLabel size="small">
-            <template #title>实例总数: </template>
-            <template #default> {{ instances.length }} 个 </template>
-          </LineLabel>
-        </el-col>
-        <el-col :span="6">
-          <LineLabel size="small">
-            <template #title>运行中: </template>
-            <template #default> {{ startedInstance }} 个 </template>
-          </LineLabel>
-        </el-col>
-      </el-row>
-      <div v-show="unavailableService.length != 0">
-        <span style="color: red">
-          <b>警告：</b> 检测到您有一个或以上远程服务无法建立连接，请前往
-          <a class="alink" href="./services">分布式服务</a>
-          功能确认各个远程服务器状态，若不修复此问题，则有部分远程实例您可能无法访问和显示。
-        </span>
-      </div>
-    </template>
-  </Panel>
-
-  <Panel v-loading="loading">
     <template #title>分布式应用实例列表</template>
     <template #default>
-      <div class="instance-table-warpper">
-        <div>
-          <el-select v-model="currentRemoteUuid" filterable placeholder="请选择远程服务地址" size="small" style="margin-right: 10px" @change="remoteSelectHandle">
-            <el-option v-for="item in remoteList" :key="item.value" :label="item.label" :value="item.value">
-            </el-option>
-          </el-select>
-          <el-input v-model="query.instanceName" placeholder="实例名称" size="small" style="width: 180px; margin-right: 10px"></el-input>
-          <el-button size="small" type="success" @click="refresh">
-            <i class="el-icon-refresh"></i> 刷新
-          </el-button>
-        </div>
-        <div>
-          <el-button size="small" type="success" @click="toNewInstance">
-            <i class="el-icon-plus"></i> 新建实例
-          </el-button>
-          <el-button size="small" type="primary" @click="batOpen">
-            <i class="el-icon-video-play"></i> 开启
-          </el-button>
-          <el-button size="small" type="primary" @click="batStop">
-            <i class="el-icon-video-pause"></i> 关闭
-          </el-button>
-          <el-button size="small" type="primary" @click="batKill">
-            <i class="el-icon-video-pause"></i> 终止
-          </el-button>
-          <el-button size="small" type="danger" @click="batDelete">
-            <i class="el-icon-delete"></i> 删除
-          </el-button>
-        </div>
-      </div>
-
-      <div class="instance-table-warpper">
-        <div></div>
-        <div>
-          <el-pagination background layout="prev, pager, next" :total="maxPage" v-model:currentPage="page" :page-size="1" @current-change="handleCurrentChange" small></el-pagination>
-        </div>
-      </div>
-
-      <el-table :data="instances" stripe style="width: 100%" size="mini" ref="multipleTable" @selection-change="selectionChange">
-        <el-table-column type="selection" width="55"> </el-table-column>
-        <el-table-column prop="nickname" label="实例昵称" min-width="240"></el-table-column>
-        <el-table-column prop="status" label="运行状态" width="120"></el-table-column>
-        <el-table-column prop="type" label="实例类型" width="140"></el-table-column>
-        <el-table-column label="操作" style="text-align: center" width="180">
-          <template #default="scope">
-            <el-button size="mini" @click="editInstance(scope.row.serviceUuid, scope.row.instanceUuid)">
-              编辑
+      <el-row :gutter="20" justify="space-between" class="row-mb">
+        <el-col :md="12" :offset="0">
+          <ItemGroup>
+            <el-select
+              style="width: 320px"
+              v-model="currentRemoteUuid"
+              filterable
+              placeholder="请选择远程服务地址"
+              size="small"
+              @change="remoteSelectHandle"
+            >
+              <el-option
+                v-for="item in remoteList"
+                :key="item.value"
+                :label="item.label"
+                :value="item.value"
+              >
+              </el-option>
+            </el-select>
+            <el-input
+              v-model="query.instanceName"
+              placeholder="实例名称"
+              size="small"
+              style="width: 160px"
+            ></el-input>
+            <el-button size="small" @click="refresh">
+              <i class="el-icon-refresh"></i> 刷新
             </el-button>
-            <el-button size="mini" @click="toInstance(scope.row.serviceUuid, scope.row.instanceUuid)">
-              管理
+          </ItemGroup>
+        </el-col>
+        <el-col :md="12" :offset="0">
+          <ItemGroup style="text-align: right">
+            <el-button size="small" type="success" @click="toNewInstance">
+              <i class="el-icon-plus"></i> 新建实例
             </el-button>
-          </template>
-        </el-table-column>
-      </el-table>
+            <el-button size="small" @click="batOpen">
+              <i class="el-icon-video-play"></i> 开启
+            </el-button>
+            <el-button size="small" @click="batStop">
+              <i class="el-icon-video-pause"></i> 关闭
+            </el-button>
+            <el-button size="small" @click="batKill">
+              <i class="el-icon-video-pause"></i> 终止
+            </el-button>
+            <el-button size="small" type="danger" plain @click="batDelete(1)">
+              <i class="el-icon-delete"></i> 移除
+            </el-button>
+            <el-button size="small" type="danger" @click="batDelete(2)">
+              <i class="el-icon-delete"></i> 删除
+            </el-button>
+          </ItemGroup>
+        </el-col>
+      </el-row>
+
+      <div>
+        <div class="instance-table-warpper">
+          <div>
+            <p class="color-red" v-if="!currentRemoteUuid">
+              未选择任何远程服务，请通过这里选择一个地址。若没有任何可选项，请前往“分布式服务”界面进行设置
+            </p>
+          </div>
+          <div>
+            <el-pagination
+              background
+              layout="prev, pager, next"
+              :total="maxPage"
+              v-model:currentPage="page"
+              :page-size="1"
+              @current-change="handleCurrentChange"
+              small
+            ></el-pagination>
+          </div>
+        </div>
+
+        <el-table
+          :data="instances"
+          stripe
+          style="width: 100%"
+          size="mini"
+          ref="multipleTable"
+          @selection-change="selectionChange"
+        >
+          <el-table-column type="selection" width="55"> </el-table-column>
+          <el-table-column prop="nickname" label="实例昵称" min-width="240"></el-table-column>
+          <el-table-column prop="status" label="运行状态" width="120">
+            <template #default="scope">
+              <div class="color-gray" v-if="scope.row.status == 0">
+                <i class="el-icon-video-pause"></i>
+                <span> 未运行</span>
+              </div>
+              <div class="color-green" v-else-if="scope.row.status == 3">
+                <i class="el-icon-video-play"></i>
+                <span> 运行中</span>
+              </div>
+              <span class="color-yellow" v-else-if="scope.row.status == 1">停止中</span>
+              <span class="color-yellow" v-else-if="scope.row.status == 2">启动中</span>
+
+              <span class="color-red" v-else-if="scope.row.status == -1">忙碌</span>
+              <span class="color-red" v-else>忙碌</span>
+            </template>
+          </el-table-column>
+          <el-table-column prop="type" label="实例类型" width="140"></el-table-column>
+          <el-table-column label="操作" style="text-align: center" width="180">
+            <template #default="scope">
+              <el-button
+                size="mini"
+                @click="editInstance(scope.row.serviceUuid, scope.row.instanceUuid)"
+              >
+                设置
+              </el-button>
+              <el-button
+                size="mini"
+                @click="toInstance(scope.row.serviceUuid, scope.row.instanceUuid)"
+              >
+                管理
+              </el-button>
+            </template>
+          </el-table-column>
+        </el-table>
+      </div>
     </template>
   </Panel>
 </template>
 
 <script>
+import { CircleCheckFilled, CircleCloseFilled } from "@element-plus/icons";
 import Panel from "../../components/Panel";
-import LineLabel from "../../components/LineLabel";
+// import LineLabel from "../../components/LineLabel";
 import { ElMessage } from "element-plus";
 import axios from "axios";
 import { API_INSTANCE, API_SERVICE_INSTANCES, API_SERVICE_LIST, API_URL } from "../service/common";
 import router from "../router";
 import { request } from "../service/protocol";
-import { statusCodeToText, typeTextToReadableText } from "../service/instance_tools";
+import { typeTextToReadableText } from "../service/instance_tools";
 export default {
-  components: { Panel, LineLabel },
+  // eslint-disable-next-line vue/no-unused-components
+  components: { Panel, CircleCheckFilled, CircleCloseFilled },
   data() {
     return {
       remoteList: [],
@@ -123,7 +153,7 @@ export default {
       instances: [],
       multipleSelection: [], // 表格多选属性
       startedInstance: 0,
-      loading: false,
+      loading: true,
       availableService: [], // 可用和不可用远程服务列表
       unavailableService: [],
 
@@ -147,18 +177,18 @@ export default {
         url: API_SERVICE_LIST
       });
       for (const service of data) {
+        const ip = `${service.ip}:${service.port}`;
+        const remarks = `${service.remarks}`;
         if (service.available) {
-          const ip = `${service.ip}:${service.port}`;
           this.remoteList.push({
             value: service.uuid,
-            label: ip
+            label: `${ip} ${remarks}`
           });
           this.availableService.push(service);
         } else {
-          const ip = `${service.ip}:${service.port}`;
           this.remoteList.push({
             value: service.uuid,
-            label: `${ip} (离线)`
+            label: `${ip} ${remarks} (离线)`
           });
           this.unavailableService.push(service);
         }
@@ -181,13 +211,14 @@ export default {
         if (!this.currentRemoteUuid) throw new Error("还未选择远程服务器");
         this.startedInstance = 0;
         this.instances = [];
+        this.loading = true;
         const result = await request({
           method: "GET",
           url: API_SERVICE_INSTANCES,
           params: {
             remote_uuid: this.currentRemoteUuid,
             page: this.page,
-            page_size: 40,
+            page_size: 20,
             instance_name: this.query.instanceName
           }
         });
@@ -196,7 +227,7 @@ export default {
         this.maxPage = result.maxPage;
         const instances = result.data;
         instances.forEach((instance) => {
-          const status = statusCodeToText(instance.status);
+          const status = instance.status;
           const type = typeTextToReadableText(instance.config.type);
           // 计算正在运行的实例
           if (instance.status != 0) this.startedInstance++;
@@ -209,6 +240,7 @@ export default {
             status
           });
         });
+        this.loading = false;
         // 记录当前选择的远程服务，方便下次直接加载
         localStorage.setItem("pageSelectedRemoteUuid", this.currentRemoteUuid);
       } catch (error) {
@@ -240,14 +272,35 @@ export default {
       router.push({ path: `/instance_detail/${serviceUuid}/${instanceUuid}/` });
     },
     toNewInstance() {
-      router.push({ path: `/new_instace` });
+      if (!this.currentRemoteUuid) {
+        return this.$message({ type: "info", message: "请先在左侧下拉框中选择远程服务" });
+      }
+      router.push({ path: `/new_instace/${this.currentRemoteUuid}` });
     },
     toInstance(serviceUuid, instanceUuid) {
       console.log("访问实例:", serviceUuid, instanceUuid);
       router.push({ path: `/terminal/${serviceUuid}/${instanceUuid}/` });
     },
     // 批量删除
-    async batDelete() {
+    async batDelete(type) {
+      if (type === 1) {
+        await this.$confirm(
+          "确定要进行批量移除嘛？此操作不会删除实例实际文件，只会删除实例",
+          "最终确认",
+          {
+            confirmButtonText: "确定",
+            cancelButtonText: "取消",
+            type: "warning"
+          }
+        );
+      } else {
+        await this.$confirm("确定要进行批量删除吗？此操作将会一并删除文件", "最终确认", {
+          confirmButtonText: "确定",
+          cancelButtonText: "取消",
+          type: "warning"
+        });
+      }
+
       const uuids = [];
       for (const iterator of this.multipleSelection) {
         uuids.push(iterator.instanceUuid);
@@ -258,13 +311,12 @@ export default {
         params: {
           remote_uuid: this.currentRemoteUuid
         },
-        data: { uuids }
+        data: { uuids, deleteFile: type === 1 ? false : true }
       });
       this.$notify({
         title: "批量删除成功",
         message: "可能会存在一定延迟，文件删除需要一定的时间"
       });
-      console.log("Delete:", this.multipleSelection);
     },
     async batKill() {
       if (this.multipleSelection.length == 0)
@@ -282,7 +334,6 @@ export default {
     async batOpen() {
       if (this.multipleSelection.length == 0)
         return ElMessage.error("无法执行，请至少选择一个实例");
-      console.log("Open:", this.multipleSelection);
       await axios.request({
         method: "POST",
         url: `${API_URL}/api/instance/multi_open/`,

@@ -1,7 +1,7 @@
 /*
  * @Author: Copyright(c) 2020 Suwings
  * @Date: 2021-05-18 16:16:27
- * @LastEditTime: 2021-07-17 13:17:57
+ * @LastEditTime: 2021-09-09 11:57:06
  * @Description:
  */
 import { io } from "socket.io-client";
@@ -10,6 +10,8 @@ import { ElNotification } from "element-plus";
 // import { API_URL } from "./common";
 
 export function connectRemoteService(addr, password) {
+
+  console.log("Websocket 连接守护进程:", password, addr);
   const socket = io(addr, {}).connect();
 
   socket.on("connect", () => {
@@ -50,8 +52,9 @@ export function connectRemoteService(addr, password) {
     }
   });
 
+  // eslint-disable-next-line no-unused-vars
   socket.on("instance/stdout", (packet) => {
-    console.log("Event: instance/stdout data:", packet);
+    // console.log("Event: instance/stdout data:", packet);
   });
 
   socket.on("instance/stopped", (packet) => {

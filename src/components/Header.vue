@@ -1,12 +1,17 @@
 <!--
  * @Author: Copyright(c) 2020 Suwings
  * @Date: 2021-05-08 11:53:54
- * @LastEditTime: 2021-07-28 15:00:20
+ * @LastEditTime: 2021-10-20 16:31:14
  * @Description: 
 -->
 
 <template>
-  <el-card class="box-card" body-style="padding: 12px;" style="margin-bottom: 20px">
+  <el-card
+    v-if="isTopPermission"
+    class="box-card"
+    body-style="padding: 12px;"
+    style="margin-bottom: 20px; border-radius: 4px"
+  >
     <el-row>
       <el-col :span="12">
         <!-- 手机端只显示扩展按钮 -->
@@ -15,9 +20,13 @@
         </div>
         <!-- 电脑端显示全部内容 -->
         <el-breadcrumb separator="/" style="line-height: 28px" class="only-pc-display">
-          <el-breadcrumb-item :to="{ path: '/' }">控制面板</el-breadcrumb-item>
-          <el-breadcrumb-item>
-            <a href="#" v-text="breadcrumbs"></a>
+          <el-breadcrumb-item :to="{ path: '/overview' }">控制面板</el-breadcrumb-item>
+          <el-breadcrumb-item
+            v-for="(item, index) in breadcrumbsList"
+            :to="{ path: item.path }"
+            :key="index"
+          >
+            {{ item.title }}
           </el-breadcrumb-item>
         </el-breadcrumb>
       </el-col>
@@ -30,7 +39,6 @@
           <template #dropdown>
             <el-dropdown-menu>
               <el-dropdown-item @click="toPrivate">个人资料</el-dropdown-item>
-              <!-- <el-dropdown-item>修改密码</el-dropdown-item> -->
               <el-dropdown-item @click="logout">退出</el-dropdown-item>
             </el-dropdown-menu>
           </template>
@@ -44,6 +52,34 @@
       </el-col>
     </el-row>
   </el-card>
+
+  <el-card
+    v-if="!isTopPermission"
+    class="box-card page-header-img"
+    body-style="padding: 12px;"
+    style="margin-bottom: 20px; border-radius: 4px; color: white"
+  >
+    <div class="flex flex-space-between">
+      <div style="height: 36px; line-height: 36px">
+        <router-link to="/home">
+          <img
+            :src="require('../assets/logo.png')"
+            fit="contain"
+            style="vertical-align: text-top"
+          />
+        </router-link>
+      </div>
+      <div style="height: 36px; line-height: 36px">
+        <ItemGroup :lr="true">
+          <router-link to="/home">
+            <el-link :underline="false" class="header-a">欢迎您，{{ userInfo.userName }}</el-link>
+          </router-link>
+          <el-link @click="toPrivate" class="header-a">个人资料</el-link>
+          <el-link @click="logout" class="header-a">退出</el-link>
+        </ItemGroup>
+      </div>
+    </div>
+  </el-card>
 </template>
 
 <script>
@@ -52,6 +88,7 @@ import { API_USER_LOGOUT } from "../app/service/common";
 import { request } from "../app/service/protocol";
 export default {
   props: {
+    breadcrumbsList: Array,
     breadcrumbs: String,
     aside: Function
   },
@@ -61,6 +98,9 @@ export default {
   computed: {
     userInfo() {
       return this.$store.state.userInfo;
+    },
+    isTopPermission() {
+      return this.$store.state.userInfo.permission >= 10;
     }
   },
   methods: {
@@ -68,15 +108,15 @@ export default {
       this.$props.aside();
     },
     toPrivate() {
-      router.push({ path: "private" });
+      router.push({ path: "/private" });
     },
     async logout() {
       try {
-        request({
+        await request({
           method: "GET",
           url: API_USER_LOGOUT
         });
-        window.location.href = "/login";
+        window.location.href = "/";
         this.$notify({
           title: "退出成功",
           message: "欢迎下次使用",
@@ -96,7 +136,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 .el-dropdown-link {
   cursor: pointer;
   color: #409eff;
@@ -110,5 +150,20 @@ export default {
   line-height: 28px;
   font-size: 22px;
   cursor: pointer;
+}
+
+.page-header-img {
+  background: url("../assets/side.png");
+  background-position-y: 40px;
+  transition: all 1s;
+}
+
+.page-header-img:hover {
+  background-position-y: 100px;
+}
+
+.header-a {
+  color: rgb(235, 235, 235);
+  font-weight: 400;
 }
 </style>
