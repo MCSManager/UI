@@ -1,7 +1,7 @@
 <!--
  * @Author: Copyright(c) 2021 Suwings
  * @Date: 2021-05-08 11:08:44
- * @LastEditTime: 2021-12-22 21:58:06
+ * @LastEditTime: 2021-12-22 22:14:04
  * @Description: 
 -->
 <template>
@@ -30,13 +30,13 @@
           <i class="el-icon-coin"></i>
           <template #title>应用实例</template>
         </el-menu-item>
-        <el-menu-item key="/home" index="/home">
-          <i class="el-icon-pie-chart"></i>
-          <template #title>信息总览</template>
-        </el-menu-item>
         <el-menu-item key="/users" index="/users">
           <i class="el-icon-user"></i>
           <template #title>用户管理</template>
+        </el-menu-item>
+        <el-menu-item key="/home" index="/home">
+          <i class="el-icon-pie-chart"></i>
+          <template #title>个人简报</template>
         </el-menu-item>
       </el-menu-item-group>
       <el-menu-item-group>

@@ -1,7 +1,7 @@
 <!--
  * @Author: Copyright 2021 Suwings
  * @Date: 2021-07-18 14:32:17
- * @LastEditTime: 2021-12-04 18:03:32
+ * @LastEditTime: 2021-12-22 22:15:47
  * @Description: 
 -->
 <template>
@@ -101,7 +101,7 @@
           </LineLabel>
           <LineLabel space="small">
             <template #title>权限</template>
-            <template #default>普通用户</template>
+            <template #default>{{ userInfo.permission >= 10 ? "管理用户" : "普通用户" }}</template>
           </LineLabel>
         </template>
       </Panel>
