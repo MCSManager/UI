@@ -1,7 +1,7 @@
 /*
  * @Author: Copyright 2021 Suwings
  * @Date: 2021-07-19 10:59:17
- * @LastEditTime: 2021-09-07 21:06:36
+ * @LastEditTime: 2021-12-22 22:01:02
  * @Description: Vuex 状态管理
  */
 
@@ -14,7 +14,7 @@ const stateModel = {
     userName: "",
     loginTime: "",
     registerTime: "",
-    permission: 0,
+    permission: 10,
     instances: [],
     apiKey: ""
   },

@@ -1,7 +1,7 @@
 /*
  * @Author: Suwings
  * @Date: 2021-12-04 19:38:03
- * @LastEditTime: 2021-12-22 21:52:23
+ * @LastEditTime: 2021-12-22 22:02:45
  */
 import { Terminal } from "xterm";
 import { FitAddon } from "xterm-addon-fit";
@@ -31,11 +31,11 @@ export function initTerminalWindow(elem) {
   term.loadAddon(fitAddon);
   term.open(elem);
 
+  // 设置终端宽度，报险起见设置两次
   fitAddon.fit();
-  // TODO: 临时解决方案，菜单栏影响外层 DIV 宽度导致终端宽度错误
   setTimeout(() => {
     fitAddon.fit();
-  }, 200);
+  }, 3000);
 
   term.writeln(`${TERM_TEXT_YELLOW}MCSManager Terminal ${TERM_TEXT_CYAN}[Powered by Term.js]`);
   term.writeln(`${TERM_TEXT_YELLOW}Copyright Suwings All rights reserved${TERM_TEXT_WHITE}`);

@@ -1,14 +1,10 @@
 <!--
  * @Author: Copyright(c) 2021 Suwings
  * @Date: 2021-05-08 10:07:55
- * @LastEditTime: 2021-10-20 14:56:35
+ * @LastEditTime: 2021-12-22 21:59:42
  * @Description: 
 -->
 <template>
-  <!-- 普通用户 通用导航栏 -->
-  <!-- <el-header style="padding:0px" v-if="!isTopPermission">
-    <TopHeader />
-  </el-header> -->
   <el-container>
     <!-- 管理用户 手机屏幕菜单栏 -->
     <el-drawer
