@@ -1,3 +1,8 @@
+/*
+ * @Author: Suwings
+ * @Date: 2021-12-04 19:38:03
+ * @LastEditTime: 2021-12-22 21:52:23
+ */
 import { Terminal } from "xterm";
 import { FitAddon } from "xterm-addon-fit";
 
@@ -11,62 +16,67 @@ export const TERM_TEXT_WHITE = "\x1B[37m";
 export const TERM_TEXT_B = "\x1B[1m";
 
 export function initTerminalWindow(elem) {
-    const term = new Terminal({
-        rendererType: "canvas",
-        convertEol: true,
-        disableStdin: false,
-        cursorStyle: "underline",
-        cursorBlink: true,
-        fontSize: 12,
-        theme: {
-            background: "#1e1e1e"
-        }
-    });
-    const fitAddon = new FitAddon();
-    term.loadAddon(fitAddon);
-    term.open(elem);
-    fitAddon.fit();
+  const term = new Terminal({
+    rendererType: "canvas",
+    convertEol: true,
+    disableStdin: false,
+    cursorStyle: "underline",
+    cursorBlink: true,
+    fontSize: 12,
+    theme: {
+      background: "#1e1e1e"
+    }
+  });
+  const fitAddon = new FitAddon();
+  term.loadAddon(fitAddon);
+  term.open(elem);
 
-    term.writeln(`${TERM_TEXT_YELLOW}MCSManager Terminal ${TERM_TEXT_CYAN}[Powered by Term.js]`);
-    term.writeln(`${TERM_TEXT_YELLOW}Copyright Suwings All rights reserved${TERM_TEXT_WHITE}`);
-    term.info = (msg) => {
-        term.writeln(`\r\n[MCSManager] [INFO] ${msg}`);
-    };
-    term.prompt = () => {
-        term.write(`${TERM_TEXT_WHITE}\r\n$`);
-    };
-    term.prompt();
-    return term;
+  fitAddon.fit();
+  // TODO: 临时解决方案，菜单栏影响外层 DIV 宽度导致终端宽度错误
+  setTimeout(() => {
+    fitAddon.fit();
+  }, 200);
+
+  term.writeln(`${TERM_TEXT_YELLOW}MCSManager Terminal ${TERM_TEXT_CYAN}[Powered by Term.js]`);
+  term.writeln(`${TERM_TEXT_YELLOW}Copyright Suwings All rights reserved${TERM_TEXT_WHITE}`);
+  term.info = (msg) => {
+    term.writeln(`\r\n[MCSManager] [INFO] ${msg}`);
+  };
+  term.prompt = () => {
+    term.write(`${TERM_TEXT_WHITE}\r\n$`);
+  };
+  term.prompt();
+  return term;
 }
 
 export function textToTermText(data) {
-    let text = `${data}`
-    text = text.replace(/§0/igm, TERM_TEXT_WHITE);
-    text = text.replace(/§1/igm, TERM_TEXT_BLUE);
-    text = text.replace(/§2/igm, TERM_TEXT_GREEN);
-    text = text.replace(/§3/igm, TERM_TEXT_BLUE);
-    text = text.replace(/§4/igm, TERM_TEXT_RED);
-    text = text.replace(/§5/igm, TERM_TEXT_FUCHSIA);
-    text = text.replace(/§6/igm, TERM_TEXT_YELLOW);
-    text = text.replace(/§7/igm, TERM_TEXT_WHITE);
-    text = text.replace(/§8/igm, TERM_TEXT_WHITE);
-    text = text.replace(/§9/igm, TERM_TEXT_BLUE);
-    text = text.replace(/§a/igm, TERM_TEXT_GREEN);
-    text = text.replace(/§b/igm, TERM_TEXT_GREEN);
-    text = text.replace(/§c/igm, TERM_TEXT_RED);
-    text = text.replace(/§d/igm, TERM_TEXT_CYAN);
-    text = text.replace(/§e/igm, TERM_TEXT_YELLOW);
-    text = text.replace(/§f/igm, TERM_TEXT_WHITE);
-    text = text.replace(/§g/igm, TERM_TEXT_YELLOW);
-    text = text.replace(/§k/igm, TERM_TEXT_WHITE);
-    text = text.replace(/§i/igm, TERM_TEXT_B);
-    text = text.replace(/§l/igm, TERM_TEXT_B);
-    text = text.replace(/§m/igm, TERM_TEXT_WHITE);
-    text = text.replace(/§n/igm, TERM_TEXT_WHITE);
-    text = text.replace(/§o/igm, TERM_TEXT_WHITE);
-    text = text.replace(/§r/igm, TERM_TEXT_WHITE);
-    text = text.replace(/\r\n/igm, `\n`);
-    text = text.replace(/\r/igm, `\n`);
-    text = text.replace(/\n/igm, `${TERM_TEXT_WHITE}\n`);
-    return text;
+  let text = `${data}`;
+  text = text.replace(/§0/gim, TERM_TEXT_WHITE);
+  text = text.replace(/§1/gim, TERM_TEXT_BLUE);
+  text = text.replace(/§2/gim, TERM_TEXT_GREEN);
+  text = text.replace(/§3/gim, TERM_TEXT_BLUE);
+  text = text.replace(/§4/gim, TERM_TEXT_RED);
+  text = text.replace(/§5/gim, TERM_TEXT_FUCHSIA);
+  text = text.replace(/§6/gim, TERM_TEXT_YELLOW);
+  text = text.replace(/§7/gim, TERM_TEXT_WHITE);
+  text = text.replace(/§8/gim, TERM_TEXT_WHITE);
+  text = text.replace(/§9/gim, TERM_TEXT_BLUE);
+  text = text.replace(/§a/gim, TERM_TEXT_GREEN);
+  text = text.replace(/§b/gim, TERM_TEXT_GREEN);
+  text = text.replace(/§c/gim, TERM_TEXT_RED);
+  text = text.replace(/§d/gim, TERM_TEXT_CYAN);
+  text = text.replace(/§e/gim, TERM_TEXT_YELLOW);
+  text = text.replace(/§f/gim, TERM_TEXT_WHITE);
+  text = text.replace(/§g/gim, TERM_TEXT_YELLOW);
+  text = text.replace(/§k/gim, TERM_TEXT_WHITE);
+  text = text.replace(/§i/gim, TERM_TEXT_B);
+  text = text.replace(/§l/gim, TERM_TEXT_B);
+  text = text.replace(/§m/gim, TERM_TEXT_WHITE);
+  text = text.replace(/§n/gim, TERM_TEXT_WHITE);
+  text = text.replace(/§o/gim, TERM_TEXT_WHITE);
+  text = text.replace(/§r/gim, TERM_TEXT_WHITE);
+  text = text.replace(/\r\n/gim, `\n`);
+  text = text.replace(/\r/gim, `\n`);
+  text = text.replace(/\n/gim, `${TERM_TEXT_WHITE}\n`);
+  return text;
 }
