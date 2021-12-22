@@ -41,7 +41,7 @@
         </template>
       </Panel>
 
-      <Panel style="height: 100px">
+      <Panel style="min-height: 120px">
         <template #title>快捷链接</template>
         <template #default>
           <el-row type="flex" class="row-bg" justify="space-between">
@@ -80,7 +80,7 @@
 
     <!-- 右侧用户信息栏 -->
     <el-col :md="8" :offset="0">
-      <Panel style="height: 240px">
+      <Panel style="min-height: 240px">
         <template #title>个人信息</template>
         <template #default>
           <LineLabel space="small">
