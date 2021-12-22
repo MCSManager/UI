@@ -1,7 +1,7 @@
 <!--
  * @Author: Copyright(c) 2020 Suwings
  * @Date: 2021-05-08 11:53:54
- * @LastEditTime: 2021-10-20 16:38:20
+ * @LastEditTime: 2021-12-22 23:19:35
  * @Description: 
 -->
 
@@ -366,5 +366,41 @@ export default {
   color: rgb(170, 8, 8);
   font-size: 12px;
   margin-right: 18px;
+}
+
+/* 针对手机的登录界面 */
+@media (max-width: 900px) {
+  #login-panel {
+    text-align: center;
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    border-radius: 0px;
+  }
+  #login-panel:hover {
+    border: none;
+  }
+  .login-btn-wrapper {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    flex-direction: column-reverse;
+    text-align: center;
+  }
+  #login-cause {
+    margin-top: 12px;
+    margin-right: 0px;
+  }
+  .login-info-wrapper {
+    text-align: center;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+  }
 }
 </style>
