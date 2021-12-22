@@ -1,7 +1,7 @@
 <!--
  * @Author: Copyright(c) 2020 Suwings
  * @Date: 2021-05-08 11:53:54
- * @LastEditTime: 2021-09-09 16:00:32
+ * @LastEditTime: 2021-12-22 22:25:51
  * @Description: 
 -->
 
@@ -422,8 +422,10 @@ export default {
           }
         });
         this.$message({ message: "文件已删除", type: "success" });
+        this.render();
       } catch (error) {
         this.$message({ message: `错误:${error}`, type: "error" });
+        this.render();
       }
     },
 
