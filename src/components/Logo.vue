@@ -1,12 +1,12 @@
 <!--
  * @Author: Suwings
  * @Date: 2021-12-25 10:51:46
- * @LastEditTime: 2021-12-25 11:40:51
+ * @LastEditTime: 2021-12-25 17:41:40
 -->
 <template>
   <div>
     <div class="logo-wrapper" :style="{ margin }">
-      <img class="logo-img" :src="require('../assets/logo.png')" width="180" />
+      <img class="logo-img" :src="require('../assets/logo.png')" width="172" />
     </div>
   </div>
 </template>
