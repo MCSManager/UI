@@ -1,7 +1,7 @@
 <!--
  * @Author: Copyright(c) 2020 Suwings
  * @Date: 2021-05-08 11:53:54
- * @LastEditTime: 2021-09-09 16:01:11
+ * @LastEditTime: 2021-12-25 14:20:33
  * @Description: 
 -->
 
@@ -414,14 +414,17 @@ export default {
       if (v === 1) {
         this.form.type = TYPE_MINECRAFT_JAVA;
         this.assist.commandtemplate = "java -jar {{ProgramName}}";
+        this.form.stopCommand = "stop";
       }
       if (v === 2) {
         this.form.type = TYPE_MINECRAFT_BEDROCK;
         this.assist.commandtemplate = "{{ProgramName}}";
+        this.form.stopCommand = "stop";
       }
       if (v === 3) {
         this.form.type = TYPE_UNIVERSAL;
         this.assist.commandtemplate = "{{ProgramName}}";
+        this.form.stopCommand = "^c";
       }
       this.title = "选择创建方式";
       this.typeA = v;

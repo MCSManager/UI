@@ -1,7 +1,7 @@
 <!--
  * @Author: Copyright(c) 2020 Suwings
  * @Date: 2021-05-08 11:53:54
- * @LastEditTime: 2021-10-20 16:31:14
+ * @LastEditTime: 2021-12-25 14:21:57
  * @Description: 
 -->
 
@@ -60,22 +60,18 @@
     style="margin-bottom: 20px; border-radius: 4px; color: white"
   >
     <div class="flex flex-space-between">
-      <div style="height: 36px; line-height: 36px">
-        <router-link to="/home">
-          <img
-            :src="require('../assets/logo.png')"
-            fit="contain"
-            style="vertical-align: text-top"
-          />
-        </router-link>
-      </div>
+      <router-link to="/home">
+        <div style="height: 36px; line-height: 36px">
+          <div>
+            <Logo style="vertical-align: text-top" margin="0px"></Logo>
+          </div>
+        </div>
+      </router-link>
       <div style="height: 36px; line-height: 36px">
         <ItemGroup :lr="true">
-          <div class="only-pc-display">
-            <router-link to="/home">
-              <el-link :underline="false" class="header-a">欢迎您，{{ userInfo.userName }}</el-link>
-            </router-link>
-          </div>
+          <router-link to="/home">
+            <el-link :underline="false" class="header-a">欢迎您，{{ userInfo.userName }}</el-link>
+          </router-link>
           <el-link @click="toPrivate" class="header-a">个人资料</el-link>
           <el-link @click="logout" class="header-a">退出</el-link>
         </ItemGroup>
@@ -88,6 +84,8 @@
 import router from "../app/router";
 import { API_USER_LOGOUT } from "../app/service/common";
 import { request } from "../app/service/protocol";
+import Logo from "./Logo.vue";
+
 export default {
   props: {
     breadcrumbsList: Array,
@@ -134,7 +132,7 @@ export default {
       }
     }
   },
-  components: {}
+  components: { Logo }
 };
 </script>
 

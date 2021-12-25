@@ -17,9 +17,7 @@
     :default-active="$route.path"
   >
     <el-scrollbar>
-      <div class="logo-wrapper">
-        <el-image :src="require('../assets/logo.png')" fit="contain"> </el-image>
-      </div>
+      <Logo></Logo>
       <el-menu-item-group>
         <template #title>基础功能</template>
         <el-menu-item key="/overview" index="/overview">
