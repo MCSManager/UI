@@ -1,7 +1,7 @@
 <!--
  * @Author: Copyright(c) 2020 Suwings
  * @Date: 2021-05-08 11:53:54
- * @LastEditTime: 2021-09-08 17:12:24
+ * @LastEditTime: 2021-12-25 17:49:35
  * @Description: 
 -->
 
@@ -112,19 +112,14 @@
                 </div>
                 <el-input v-model="instanceInfo.config.stopCommand" type="text"> </el-input>
               </el-col>
-
-              <el-col :md="16" class="row-mt">
+              <el-col :md="8" class="row-mt">
                 <div class="sub-title">
-                  <div class="sub-title-title">进程类型</div>
-                  <div class="sub-title-info">
-                    进程启动方式和交互方式，一般情况下选择默认类型即可
-                  </div>
+                  <div class="sub-title-title">文件管理编码</div>
+                  <div class="sub-title-info">文件管理功能的解压缩，编辑等编码</div>
                 </div>
-                <el-select v-model="instanceInfo.config.processType" style="width: 100%">
-                  <el-option label="默认类型" value="general"></el-option>
-                  <el-option label="Linux Docker 容器" value="docker"></el-option>
-                </el-select>
+                <el-input v-model="instanceInfo.config.fileCode" type="text"> </el-input>
               </el-col>
+
               <el-col :md="8" class="row-mt" :offset="0">
                 <div class="sub-title">
                   <div class="sub-title-title">到期时间</div>
@@ -137,6 +132,16 @@
                   style="width: 100%"
                 >
                 </el-date-picker>
+              </el-col>
+              <el-col :md="8" class="row-mt">
+                <div class="sub-title">
+                  <div class="sub-title-title">进程启动方式</div>
+                  <div class="sub-title-info">可选择 Docker，默认等</div>
+                </div>
+                <el-select v-model="instanceInfo.config.processType" style="width: 100%">
+                  <el-option label="默认类型" value="general"></el-option>
+                  <el-option label="Linux Docker 容器" value="docker"></el-option>
+                </el-select>
               </el-col>
             </el-row>
           </el-col>
