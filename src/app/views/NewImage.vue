@@ -1,7 +1,7 @@
 <!--
  * @Author: Copyright(c) 2020 Suwings
  * @Date: 2021-05-08 11:53:54
- * @LastEditTime: 2021-09-08 17:40:29
+ * @LastEditTime: 2021-12-25 14:18:23
  * @Description: 
 -->
 
@@ -37,7 +37,7 @@
         <el-row :gutter="10">
           <el-col :span="6" :offset="0">
             <SelectBlock style="min-height: 120px" @click="selectType(1)">
-              <template #title>创建 Java 8 环境镜像</template>
+              <template #title>创建 OpenJDK 8 环境镜像</template>
               <template #info
                 >适用于需要 Java 8 的服务端软件，属于经典的 Java 运行时版本，适用于 Minecraft 1.17
                 以下的所有版本</template
@@ -47,8 +47,14 @@
           <el-col :span="6" :offset="0">
             <SelectBlock style="min-height: 120px" @click="selectType(2)">
               <template #title>创建 OpenJDK 16 环境镜像</template>
+              <template #info>内置 Java 16 运行时环境，适用于 Minecraft 1.17 版本的服务端</template>
+            </SelectBlock>
+          </el-col>
+          <el-col :span="6" :offset="0">
+            <SelectBlock style="min-height: 120px" @click="selectType(5)">
+              <template #title>创建 OpenJDK 17 环境镜像</template>
               <template #info
-                >内置 Java 16 运行时环境，适用于 Minecraft 1.17 版本以上的服务端</template
+                >内置 Java 17 运行时环境，适用于 Minecraft 1.18 版本以上的服务端</template
               >
             </SelectBlock>
           </el-col>
@@ -58,6 +64,8 @@
               <template #info>适用于 MC 基岩版服务端运行环境或者其他 Linux 程序</template>
             </SelectBlock>
           </el-col>
+        </el-row>
+        <el-row :gutter="10" class="row-mt">
           <el-col :span="6" :offset="0">
             <SelectBlock style="min-height: 120px" @click="selectType(4)">
               <template #title>使用 DockerFile 自定义创建</template>
@@ -88,6 +96,9 @@
         <div class="row-mt">
           <el-input type="textarea" :rows="14" placeholder="必填，请输入内容" v-model="dockerFile">
           </el-input>
+        </div>
+        <div class="sub-title row-mt">
+          <p class="sub-title-title">创建后的镜像名与版本标识</p>
         </div>
         <div class="flex row-mt">
           <el-input
@@ -202,6 +213,20 @@ WORKDIR /workspace
 `;
         this.name = "mubuntu";
         this.version = "latest";
+      }
+      if (type === 5) {
+        this.dockerFile = `FROM openjdk:17
+RUN mkdir -p /workspace
+RUN apt update && apt install -y locales
+RUN echo "zh_CN.UTF-8 UTF-8">/etc/locale.gen && locale-gen
+ENV LANG=zh_CN.UTF-8
+ENV LANGUAGE=zh_CN.UTF-8
+ENV LC_ALL=zh_CN.UTF-8
+ENV TZ=Asia/Shanghai
+WORKDIR /workspace
+`;
+        this.name = "mopenjdk";
+        this.version = "17";
       }
       this.step = 2;
     },
