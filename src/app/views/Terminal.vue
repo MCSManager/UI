@@ -225,7 +225,7 @@
     </el-col>
     <el-col :md="18">
       <Panel v-loading="!available" element-loading-text="连接中">
-        <template #title>实例控制台</template>
+        <template #title>实例操作终端</template>
         <template #default>
           <div class="terminal-wrapper">
             <div id="terminal-container" style="height: 550px; width: 100%"></div>

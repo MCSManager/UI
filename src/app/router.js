@@ -1,7 +1,7 @@
 /*
  * @Author: Copyright(c) 2020 Suwings
  * @Date: 2021-05-08 22:54:31
- * @LastEditTime: 2021-09-09 16:13:13
+ * @LastEditTime: 2021-12-25 22:43:06
  * @Description:
  */
 import { createRouter, createWebHashHistory } from "vue-router";
@@ -31,7 +31,7 @@ import UserResources from "./views/UserResources";
 import ProcessConfig from "./views/ProcessConfig";
 import ProcessConfigFile from "./views/ProcessConfigFile";
 import Schedule from "./views/Schedule";
-import Update from "./views/Update"
+import Update from "./views/Update";
 
 const routes = [
   {
@@ -41,7 +41,7 @@ const routes = [
   },
   {
     path: "/overview",
-    name: "数据监控 ",
+    name: "数据监控",
     component: Overview
   },
   {
@@ -71,7 +71,7 @@ const routes = [
   },
   {
     path: "/analysis",
-    name: "分析",
+    name: "面板数据分析",
     component: Analysis
   },
   {
@@ -81,7 +81,7 @@ const routes = [
   },
   {
     path: "/container",
-    name: "服务环境",
+    name: "远程服务环境",
     component: Container
   },
   {
@@ -91,7 +91,7 @@ const routes = [
   },
   {
     path: "/trigger",
-    name: "触发器",
+    name: "面板触发器",
     component: Trigger
   },
   {
@@ -101,7 +101,7 @@ const routes = [
   },
   {
     path: "/settings",
-    name: "设置",
+    name: "面板设置",
     component: Settings
   },
   {
@@ -111,7 +111,7 @@ const routes = [
   },
   {
     path: "/terminal/:serviceUuid/:instanceUuid",
-    name: "终端",
+    name: "实例控制台",
     component: Terminal
   },
   {
@@ -121,22 +121,22 @@ const routes = [
   },
   {
     path: "/process_config/:serviceUuid/:instanceUuid/",
-    name: "常用配置",
+    name: "实例特定配置",
     component: ProcessConfig
   },
   {
     path: "/file/:serviceUuid/:instanceUuid",
-    name: "文件管理",
+    name: "实例文件管理",
     component: FileManager
   },
   {
     path: "/file_editor/:serviceUuid/:instanceUuid/",
-    name: "文件编辑",
+    name: "实例文件编辑",
     component: FileManagerEditor
   },
   {
     path: "/instance_detail/:serviceUuid/:instanceUuid",
-    name: "实例详情",
+    name: "实例配置详情",
     component: InstanceDetail
   },
   {

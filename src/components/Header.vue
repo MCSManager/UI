@@ -1,7 +1,7 @@
 <!--
  * @Author: Copyright(c) 2020 Suwings
  * @Date: 2021-05-08 11:53:54
- * @LastEditTime: 2021-12-25 14:21:57
+ * @LastEditTime: 2021-12-25 22:46:13
  * @Description: 
 -->
 
@@ -18,8 +18,16 @@
         <div class="only-phone-display header-left-buttion" @click="toAside">
           <i class="el-icon-s-operation"></i>
         </div>
+        <div
+          style="font-size: 14px; font-weight: 700; line-height: 28px"
+          v-for="(item, index) in breadcrumbsList"
+          :to="{ path: item.path }"
+          :key="index"
+        >
+          控制面板 / {{ item.title }}
+        </div>
         <!-- 电脑端显示全部内容 -->
-        <el-breadcrumb separator="/" style="line-height: 28px" class="only-pc-display">
+        <!-- <el-breadcrumb separator="/" style="line-height: 28px" class="only-pc-display">
           <el-breadcrumb-item :to="{ path: '/overview' }">控制面板</el-breadcrumb-item>
           <el-breadcrumb-item
             v-for="(item, index) in breadcrumbsList"
@@ -28,7 +36,7 @@
           >
             {{ item.title }}
           </el-breadcrumb-item>
-        </el-breadcrumb>
+        </el-breadcrumb> -->
       </el-col>
       <el-col :span="12" style="text-align: right; line-height: 28px">
         <el-dropdown style="margin: 0px 10px">
