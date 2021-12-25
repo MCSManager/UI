@@ -1,7 +1,7 @@
 <!--
  * @Author: Copyright(c) 2021 Suwings
  * @Date: 2021-05-08 11:08:44
- * @LastEditTime: 2021-12-22 22:14:04
+ * @LastEditTime: 2021-12-25 14:33:30
  * @Description: 
 -->
 <template>
@@ -32,10 +32,10 @@
           <i class="el-icon-user"></i>
           <template #title>用户管理</template>
         </el-menu-item>
-        <el-menu-item key="/home" index="/home">
+        <!-- <el-menu-item key="/home" index="/home">
           <i class="el-icon-pie-chart"></i>
           <template #title>个人简报</template>
-        </el-menu-item>
+        </el-menu-item> -->
       </el-menu-item-group>
       <el-menu-item-group>
         <template #title>高级功能</template>
@@ -87,8 +87,10 @@
 
 <script>
 import router from "../app/router";
+import Logo from "../components/Logo.vue";
 
 export default {
+  components: { Logo },
   data: function () {
     return {};
   },
