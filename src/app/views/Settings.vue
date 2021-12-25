@@ -1,7 +1,7 @@
 <!--
  * @Author: Copyright(c) 2020 Suwings
  * @Date: 2021-05-08 11:53:54
- * @LastEditTime: 2021-12-25 14:24:11
+ * @LastEditTime: 2021-12-25 22:51:57
  * @Description: 
 -->
 
@@ -236,6 +236,18 @@
         </div>
 
         <div class="sub-title">
+          <p class="sub-title-title">闭源商业许可证</p>
+          <p class="sub-title-info">
+            若您想二次开发并且闭源使用于任何活动（包括但不限于商业，个人）。<br />
+            请参考:
+            <a href="https://mcsmanager.com/" target="_blank" rel="noopener noreferrer">
+              相关许可证
+            </a>
+          </p>
+          <p class="sub-title-info"></p>
+        </div>
+
+        <div class="sub-title">
           <p class="sub-title-title">项目赞助者</p>
           <p class="sub-title-info">没有以下名单的重点支持，就不会有 MCSManager 的长期维护。</p>
           <p class="sub-title-info"></p>
@@ -245,7 +257,7 @@
           <el-row :gutter="10" v-if="sponsorList">
             <el-col :md="4" v-for="(item, index) in sponsorList" :key="index">
               <a
-                :href="item.link || 'javascript:void(0);'"
+                :href="item.link || 'https://mcsmanager.com'"
                 target="_blank"
                 rel="noopener noreferrer"
               >
