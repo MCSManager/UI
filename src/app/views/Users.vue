@@ -1,7 +1,7 @@
 <!--
  * @Author: Copyright(c) 2020 Suwings
  * @Date: 2021-05-08 11:53:54
- * @LastEditTime: 2021-10-20 13:58:15
+ * @LastEditTime: 2021-12-25 14:23:53
  * @Description: 
 -->
 
@@ -135,12 +135,7 @@
           <p class="sub-title-title">重置密码</p>
           <p class="sub-title-info">不填写则不更变原有值</p>
         </div>
-        <el-input
-          v-model="editUserInfo.password"
-          placeholder="原值"
-          size="small"
-          type="password"
-        ></el-input>
+        <el-input v-model="editUserInfo.passWord" placeholder="原值" size="small"></el-input>
         <div class="sub-title row-mt">
           <p class="sub-title-title">权限</p>
           <p class="sub-title-info">普通权限适用于商业用户，最高权限适用于管理人员</p>

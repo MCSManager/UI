@@ -1,7 +1,7 @@
 <!--
  * @Author: Copyright(c) 2020 Suwings
  * @Date: 2021-05-08 11:53:54
- * @LastEditTime: 2021-12-22 20:55:32
+ * @LastEditTime: 2021-12-25 14:24:11
  * @Description: 
 -->
 
@@ -227,9 +227,11 @@
             开源软件协议发行
           </p>
           <p class="sub-title-info">
-            任何人均可以对这份代码进行修改，复制，分发和使用。<br />
-            可以对使用者收取服务费用，但必须无偿的公开修改后的软件源代码，并声明所修改代码处。
+            此协议准许每个人都可以复制和分发代码副本，但不允许对其进行任何更改（其中前端网页界面准许自由修改）。<br />
+            可以对使用者收取服务费用，但必须无偿提供软件的完整源代码。
             <br />
+            Everyone is permitted to copy and distribute verbatim copies of this license document,
+            but changing it is not allowed (Except UI).
           </p>
         </div>
 
@@ -242,18 +244,24 @@
         <div class="contributors">
           <el-row :gutter="10" v-if="sponsorList">
             <el-col :md="4" v-for="(item, index) in sponsorList" :key="index">
-              <el-card
-                shadow="hover"
-                :body-style="{ padding: '16px' }"
-                style="height: 70px; margin-bottom: 10px"
+              <a
+                :href="item.link || 'javascript:void(0);'"
+                target="_blank"
+                rel="noopener noreferrer"
               >
-                <p style="margin: 0px; font-size: 13px">
-                  <b>{{ item.name }}</b>
-                </p>
-                <p style="margin: 0px; font-size: 12px; color: gray">
-                  {{ item.message ? item.message : "--" }}
-                </p>
-              </el-card>
+                <el-card
+                  shadow="hover"
+                  :body-style="{ padding: '16px' }"
+                  style="height: 70px; margin-bottom: 10px"
+                >
+                  <p style="margin: 0px; font-size: 13px">
+                    <b>{{ item.name }}</b>
+                  </p>
+                  <p style="margin: 0px; font-size: 12px; color: gray">
+                    {{ item.message ? item.message : "--" }}
+                  </p>
+                </el-card>
+              </a>
             </el-col>
             <el-col :span="24">
               <p class="color-gray text-center">
