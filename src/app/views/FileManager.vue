@@ -1,7 +1,7 @@
 <!--
  * @Author: Copyright(c) 2020 Suwings
  * @Date: 2021-05-08 11:53:54
- * @LastEditTime: 2021-12-22 22:25:51
+ * @LastEditTime: 2021-12-25 16:44:15
  * @Description: 
 -->
 
@@ -23,7 +23,7 @@
         <el-col :xs="24" :md="18" :offset="0" class="text-align-right">
           <ItemGroup>
             <el-button size="small" @click="toUpDir">
-              <i class="el-icon-pie-chart"></i> 返回上层
+              <i class="el-icon-pie-chart"></i> 上层目录
             </el-button>
             <el-button size="small" @click="mkdir">
               <i class="el-icon-folder-add"></i> 新建目录
