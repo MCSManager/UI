@@ -1,9 +1,23 @@
 /*
- * @Author: Copyright(c) 2020 Suwings
- * @Date: 2021-05-18 10:00:35
- * @LastEditTime: 2021-09-07 11:18:08
- * @Description:
- */
+  Copyright (C) 2022 Suwings(https://github.com/Suwings)
+
+  This program is free software: you can redistribute it and/or modify
+  it under the terms of the GNU General Public License as published by
+  the Free Software Foundation, either version 3 of the License, or
+  (at your option) any later version.
+
+  This program is distributed in the hope that it will be useful,
+  but WITHOUT ANY WARRANTY; without even the implied warranty of
+  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  GNU General Public License for more details.
+  
+
+  版权所有 (C) 2021 Suwings(https://github.com/Suwings)
+
+  本程序为自由软件，你可以依据 GPL 的条款（第三版或者更高），再分发和/或修改它。
+  该程序以具有实际用途为目的发布，但是并不包含任何担保，
+  也不包含基于特定商用或健康用途的默认担保。具体细节请查看 GPL 协议。
+*/
 
 export const API_URL = "//" + window.location.host;
 
@@ -45,7 +59,7 @@ export const API_INSTANCE_KILL = `${API_URL}/api/protected_instance/kill`;
 export const API_INSTANCE_REMOTE_SERVICE_STREAM = `${API_URL}/api/protected_instance/stream_channel`;
 export const API_INSTANCE_UPDATE = `${API_URL}/api/protected_instance/instance_update`;
 export const API_INSTANCE_RESTART = `${API_URL}/api/protected_instance/restart`;
-export const API_INSTANCE_OUTPUT = `${API_URL}/api/protected_instance/outputlog`
+export const API_INSTANCE_OUTPUT = `${API_URL}/api/protected_instance/outputlog`;
 
 export const API_PROCESS_CONFIG_LIST = `${API_URL}/api/protected_instance/process_config/list`;
 export const API_PROCESS_CONFIG_FILE = `${API_URL}/api/protected_instance/process_config/file`;

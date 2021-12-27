@@ -1,9 +1,23 @@
 /*
- * @Author: Copyright 2021 Suwings
- * @Date: 2021-08-08 14:41:42
- * @LastEditTime: 2021-09-07 22:13:47
- * @Description:
- */
+  Copyright (C) 2022 Suwings(https://github.com/Suwings)
+
+  This program is free software: you can redistribute it and/or modify
+  it under the terms of the GNU General Public License as published by
+  the Free Software Foundation, either version 3 of the License, or
+  (at your option) any later version.
+
+  This program is distributed in the hope that it will be useful,
+  but WITHOUT ANY WARRANTY; without even the implied warranty of
+  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  GNU General Public License for more details.
+  
+
+  版权所有 (C) 2021 Suwings(https://github.com/Suwings)
+
+  本程序为自由软件，你可以依据 GPL 的条款（第三版或者更高），再分发和/或修改它。
+  该程序以具有实际用途为目的发布，但是并不包含任何担保，
+  也不包含基于特定商用或健康用途的默认担保。具体细节请查看 GPL 协议。
+*/
 
 import {
   TYPE_MINECRAFT_JAVA,
@@ -42,7 +56,12 @@ export const INSTANCE_CONFIGS = [
     // 配置文件 Github 地址（只能放置 Github 地址）
     github: "https://github.com/Suwings",
     // 在哪些服务端类型下此配置文件可见
-    category: [TYPE_MINECRAFT_SPIGOT, TYPE_MINECRAFT_PAPER, TYPE_MINECRAFT_JAVA, TYPE_MINECRAFT_BUKKIT]
+    category: [
+      TYPE_MINECRAFT_SPIGOT,
+      TYPE_MINECRAFT_PAPER,
+      TYPE_MINECRAFT_JAVA,
+      TYPE_MINECRAFT_BUKKIT
+    ]
   },
   {
     fileName: "[Spigot] spigot.yml",
@@ -52,7 +71,12 @@ export const INSTANCE_CONFIGS = [
     info: "Spigot 配置文件，能够进一步的控制服务器的行为和具体参数，一些更为高级的限制都在此配置文件中",
     author: "Suwings",
     github: "https://github.com/Suwings",
-    category: [TYPE_MINECRAFT_SPIGOT, TYPE_MINECRAFT_PAPER, TYPE_MINECRAFT_JAVA, TYPE_MINECRAFT_BUKKIT]
+    category: [
+      TYPE_MINECRAFT_SPIGOT,
+      TYPE_MINECRAFT_PAPER,
+      TYPE_MINECRAFT_JAVA,
+      TYPE_MINECRAFT_BUKKIT
+    ]
   },
   // {
   //   fileName: "[Bukkit] permissions.yml",
@@ -82,7 +106,12 @@ export const INSTANCE_CONFIGS = [
     info: "Bukkit 原始配置文件",
     author: "AlexanderMC8533 & Lazy",
     github: "https://github.com/AlexanderMC8533/",
-    category: [TYPE_MINECRAFT_SPIGOT, TYPE_MINECRAFT_PAPER, TYPE_MINECRAFT_JAVA, TYPE_MINECRAFT_BUKKIT]
+    category: [
+      TYPE_MINECRAFT_SPIGOT,
+      TYPE_MINECRAFT_PAPER,
+      TYPE_MINECRAFT_JAVA,
+      TYPE_MINECRAFT_BUKKIT
+    ]
   },
   // {
   //   fileName: "[Bukkit] whitelist.json",
@@ -112,7 +141,12 @@ export const INSTANCE_CONFIGS = [
     redirect: "bukkit/eula.txt",
     author: "Lazy",
     github: "https://github.com/LazyCreeper/",
-    category: [TYPE_MINECRAFT_SPIGOT, TYPE_MINECRAFT_PAPER, TYPE_MINECRAFT_JAVA, TYPE_MINECRAFT_BUKKIT]
+    category: [
+      TYPE_MINECRAFT_SPIGOT,
+      TYPE_MINECRAFT_PAPER,
+      TYPE_MINECRAFT_JAVA,
+      TYPE_MINECRAFT_BUKKIT
+    ]
   },
   {
     fileName: "[Bungeecord] config.yml",

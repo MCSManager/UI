@@ -1,4 +1,25 @@
 /*
+  Copyright (C) 2022 Suwings(https://github.com/Suwings)
+
+  This program is free software: you can redistribute it and/or modify
+  it under the terms of the GNU General Public License as published by
+  the Free Software Foundation, either version 3 of the License, or
+  (at your option) any later version.
+
+  This program is distributed in the hope that it will be useful,
+  but WITHOUT ANY WARRANTY; without even the implied warranty of
+  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  GNU General Public License for more details.
+  
+
+  版权所有 (C) 2021 Suwings(https://github.com/Suwings)
+
+  本程序为自由软件，你可以依据 GPL 的条款（第三版或者更高），再分发和/或修改它。
+  该程序以具有实际用途为目的发布，但是并不包含任何担保，
+  也不包含基于特定商用或健康用途的默认担保。具体细节请查看 GPL 协议。
+*/
+
+/*
 Write your variables here. All available variables can be
 found in element-plus/packages/theme-chalk/src/common/var.scss.
 For example, to overwrite the theme color:
@@ -7,7 +28,8 @@ $--color-primary: #409eff;
 
 body,
 html {
-  font-family: "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", Arial, sans-serif;
+  font-family: "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei",
+    Arial, sans-serif;
   margin: 0;
   height: 100%;
   background-color: #eef1f5;
@@ -36,12 +58,12 @@ a {
 .el-menu-item {
   height: 45px;
   line-height: 45px;
-  transition: all .6s;
+  transition: all 0.6s;
   border-radius: 8px;
-  margin:4px 0px;
+  margin: 4px 0px;
 }
 
-.el-menu-item:hover{
+.el-menu-item:hover {
   background-color: rgb(66, 66, 66);
 }
 
@@ -62,15 +84,14 @@ a {
   border: 1px solid #dcdfe6;
 }
 
-
 $item-group-margin: 5px;
 
-.el-button+.el-button {
-  margin-left:$item-group-margin;
+.el-button + .el-button {
+  margin-left: $item-group-margin;
 }
 
 .item-group-warpper {
-  margin:0px -5px;
+  margin: 0px -5px;
 }
 
 .item-responsive-group > * {
@@ -80,11 +101,11 @@ $item-group-margin: 5px;
   margin-top: $item-group-margin;
 }
 
-.item-responsive-group-only-lr > *{
+.item-responsive-group-only-lr > * {
   margin-left: $item-group-margin;
   margin-right: $item-group-margin;
 }
 
-.el-drawer__body{
+.el-drawer__body {
   padding: 0px;
 }
