@@ -241,11 +241,8 @@
             开源软件协议发行
           </p>
           <p class="sub-title-info">
-            此协议准许每个人都可以复制和分发代码副本，但不允许对其进行任何更改（其中前端网页界面准许自由修改）。<br />
-            可以对使用者收取服务费用，但必须无偿提供软件的完整源代码。
-            <br />
-            Everyone is permitted to copy and distribute verbatim copies of this license document,
-            but changing it is not allowed (Except UI).
+            此协议准许每个人都可以复制和分发代码副本，并且可以对使用者收取服务费用。<br />
+            若对代码任何修改，则必须无偿提供软件的完整源代码下载。
           </p>
         </div>
 
@@ -305,7 +302,7 @@
 
         <div>
           <p class="color-gray text-center">
-            软件著作权，版权所有
+            版权所有
             <a target="black" href="https://github.com/Suwings">Suwings</a>
           </p>
         </div>
