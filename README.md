@@ -60,9 +60,6 @@ npm run serve
 -----------
 本项目为 MCSManager 软件的前端界面设计，遵循 GPL License。
 
-在公开源代码的情况下，准许自定义界面，二次开发，商业使用和主题开发等。
+在公开完整源代码的情况下，准许自定义界面，二次开发，商业使用和主题开发等。
 
 <br />
-
-
-**注意：** 此协议仅仅使用前端界面项目代码，[MCSManager-Daemon](https://github.com/Suwings/MCSManager-Daemon) 和 [MCSManager](https://github.com/Suwings/MCSManager) 项目遵循协议其他使用。
