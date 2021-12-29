@@ -93,7 +93,7 @@
               <div class="login-info-wrapper row-mt">
                 <div>
                   <span class="color-gray"
-                    >版权所有 2021
+                    >版权所有 2022
                     <a target="black" href="https://github.com/Suwings">Suwings</a></span
                   >
                 </div>
