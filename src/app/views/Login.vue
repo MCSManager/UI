@@ -93,16 +93,6 @@
               <div class="login-info-wrapper row-mt">
                 <div>
                   <span class="color-gray"
-                    >根据
-                    <a
-                      target="black"
-                      href="https://github.com/Suwings/MCSManager-Daemon/blob/master/LICENSE"
-                      >GPL-3.0</a
-                    >
-                    开源软件协议发行</span
-                  >
-                  <br />
-                  <span class="color-gray"
                     >版权所有 2021
                     <a target="black" href="https://github.com/Suwings">Suwings</a></span
                   >
