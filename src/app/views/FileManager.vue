@@ -291,7 +291,8 @@ export default {
       try {
         if (this.multipleSelection.length !== 1) throw new Error("必须选择一个文件进行重命名操作");
         const file = this.multipleSelection[0];
-        const { value } = await this.$prompt("新的名字");
+        let { value } = await this.$prompt("新的名字");
+        if (!value) throw new Error("请输入一个有效值");
         const oldFilePath = path.join(this.currentDir, file.name);
         const newFilePath = path.join(this.currentDir, value);
         await request({
@@ -382,6 +383,7 @@ export default {
     async mkdir() {
       const { value } = await this.$prompt("新建目录名");
       try {
+        if (!value) throw new Error("请输入一个有效值");
         const p = path.normalize(path.join(this.currentDir, value));
         await request({
           method: "POST",
@@ -457,6 +459,7 @@ export default {
             confirmButtonText: "确定",
             cancelButtonText: "取消"
           });
+          if (!text.value) throw new Error("请输入一个有效值");
           const zipName = text.value;
           for (const k in fileNames) {
             fileNames[k] = path.join(cwd, fileNames[k]);
@@ -486,6 +489,7 @@ export default {
             confirmButtonText: "确定",
             cancelButtonText: "取消"
           });
+          if (!text.value) throw new Error("请输入一个有效值");
           const dirName = text.value;
           await request({
             method: "POST",
