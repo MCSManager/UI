@@ -28,8 +28,12 @@ axios.defaults.headers.common["X-Requested-With"] = "XMLHttpRequest";
 // axios.defaults.withCredentials = true;
 
 // axios 请求 token 必须携带
-axios.interceptors.request.use(function (config) {
-  // console.log("请求:", config);
+axios.interceptors.request.use(async function (config) {
+  let token = store.state.token;
+  if (!token && !config.url?.includes(API_USER)) {
+    console.log("Token 未获取，正在尝试初始化...");
+    await setupUserInfo();
+  }
   if (!config.params) config.params = {};
   config.params.token = store.state.token;
   return config;
