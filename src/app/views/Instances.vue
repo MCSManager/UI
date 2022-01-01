@@ -12,7 +12,7 @@
   GNU General Public License for more details.
   
 
-  版权所有 (C) 2021 Suwings(https://github.com/Suwings)
+  版权所有 (C) 2022 Suwings(https://github.com/Suwings)
 
   本程序为自由软件，你可以依据 GPL 的条款（第三版或者更高），再分发和/或修改它。
   该程序以具有实际用途为目的发布，但是并不包含任何担保，
