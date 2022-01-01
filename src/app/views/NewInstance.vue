@@ -405,6 +405,9 @@ export default {
         cancelButtonText: "取消",
         type: "warning"
       });
+      if (this.form.nickname === "" || this.form.startCommand === "") {
+        return this.$message({ message: "参数不完整，请填写", type: "error" });
+      }
       try {
         if (!this.form.cwd) this.form.cwd = ".";
         const data = await request({
