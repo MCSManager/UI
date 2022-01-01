@@ -23,7 +23,7 @@
 
 import { createApp } from "vue";
 import elementPlus from "element-plus";
-// import locale from "element-plus/dist/locale/zh-cn";
+import zhCn from "element-plus/es/locale/lang/zh-cn";
 import * as elementIcons from "@element-plus/icons";
 
 import "element-plus/dist/index.css";
@@ -48,7 +48,7 @@ import router from "./router";
 app.use(router);
 
 // Install element-plus
-app.use(elementPlus, {});
+app.use(elementPlus, { locale: zhCn });
 app.use(elementIcons);
 
 // 全局组件

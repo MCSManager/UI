@@ -48,7 +48,7 @@
               <div>
                 <el-input
                   type="text"
-                  name="username"
+                  name="mcsm_username"
                   v-model="form.username"
                   placeholder="账号"
                   autocomplete="on"
@@ -63,7 +63,7 @@
               <div class="row-mt">
                 <el-input
                   type="password"
-                  name="password"
+                  name="mcsm_password"
                   v-model="form.password"
                   placeholder="密码"
                   autocomplete="on"

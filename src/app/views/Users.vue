@@ -33,7 +33,9 @@
                 placeholder="根据名字搜索"
                 size="small"
                 style="width: 180px; margin-right: 10px"
-                autocomplete="false"
+                autocomplete="off"
+                :readonly="readonly"
+                @focus="() => (readonly = false)"
               ></el-input>
               <el-button size="small" type="primary" @click="refresh">
                 <i class="el-icon-refresh"></i> 刷新/搜索
@@ -237,7 +239,9 @@ export default {
       objects: [],
       remoteObjects: [], // 以远程服务器为主键的列表
       instances: [], // 以实例为主键的列表
-      multipleSelection: [] // 表格多选属性
+      multipleSelection: [], // 表格多选属性
+
+      readonly: true
     };
   },
   methods: {
