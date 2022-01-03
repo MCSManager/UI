@@ -110,8 +110,6 @@ export function parseforwardAddress(addr) {
 
 // Daemon 端的 ws 地址转换成 http 地址
 export function daemonWsAddressToHttp(wsAddr = "") {
-  // eslint-disable-next-line no-debugger
-  debugger;
   if (wsAddr.toLocaleLowerCase().indexOf("ws://") === 0) {
     return `http://${wsAddr.slice(5)}`;
   } else if (wsAddr.toLocaleLowerCase().indexOf("wss://") === 0) {
