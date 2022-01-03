@@ -522,7 +522,7 @@ export default {
         formData.append("file", file);
         formData.append("source", "MCSManager/FileManager");
         formData.append("time", new Date().toUTCString());
-        const fullAddress = `http://${this.uploadConfig.addr}/upload/${this.uploadConfig.password}`;
+        const fullAddress = `//${this.uploadConfig.addr}/upload/${this.uploadConfig.password}`;
         console.log("上传文件:", fullAddress);
         // 上传文件
         await axios.post(fullAddress, formData, {
@@ -571,7 +571,7 @@ export default {
       const cfg = result.data.data;
       const addr = parseforwardAddress(cfg.addr);
       const password = cfg.password;
-      window.open(`http://${addr}/download/${password}/${fileName}`);
+      window.open(`//${addr}/download/${password}/${fileName}`);
     }
   }
 };
