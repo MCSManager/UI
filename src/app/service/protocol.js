@@ -95,14 +95,47 @@ export async function setupUserInfo() {
 }
 
 export function parseforwardAddress(addr) {
-  const daemonPort = addr.split(":")[1];
+  // ws : //127.0.0.1 : 25565
+  const daemonPort = addr.split(":").pop();
   const checkAddr = addr.toLocaleLowerCase();
   if (
     checkAddr.indexOf("localhost") === 0 ||
     checkAddr.indexOf("127.") === 0 ||
-    checkAddr.indexOf("192.") === 0
+    checkAddr.indexOf("192.168") === 0
   ) {
     addr = `${window.location.hostname}:${daemonPort ? daemonPort : 24444}`;
   }
   return addr;
+}
+
+// Daemon 端的 ws 地址转换成 http 地址
+export function daemonWsAddressToHttp(wsAddr = "") {
+  // eslint-disable-next-line no-debugger
+  debugger;
+  if (wsAddr.toLocaleLowerCase().indexOf("ws://") === 0) {
+    return `http://${wsAddr.slice(5)}`;
+  } else if (wsAddr.toLocaleLowerCase().indexOf("wss://") === 0) {
+    return `https://${wsAddr.slice(6)}`;
+  }
+  return wsAddr;
+}
+
+export function deleteWebsocketHeader(wsAddr) {
+  if (wsAddr.toLocaleLowerCase().indexOf("ws://") === 0) {
+    return `${wsAddr.slice(5)}`;
+  } else if (wsAddr.toLocaleLowerCase().indexOf("wss://") === 0) {
+    return `${wsAddr.slice(6)}`;
+  }
+  return wsAddr;
+}
+
+// Daemon 端的 ws 地址转为本地 ws 地址
+export function daemonWsAddressToWs(wsAddr = "") {
+  if (
+    wsAddr.toLocaleLowerCase().indexOf("ws://") !== 0 &&
+    wsAddr.toLocaleLowerCase().indexOf("wss://") !== 0
+  ) {
+    return `ws://${wsAddr}`;
+  }
+  return wsAddr;
 }

@@ -436,7 +436,7 @@ import {
   API_INSTANCE_OUTPUT
 } from "../service/common";
 import router from "../router";
-import { parseforwardAddress, request } from "../service/protocol";
+import { daemonWsAddressToWs, parseforwardAddress, request } from "../service/protocol";
 import { ElNotification } from "element-plus";
 import { statusCodeToText, typeTextToReadableText } from "../service/instance_tools";
 import { initTerminalWindow, textToTermText } from "../service/term";
@@ -533,7 +533,7 @@ export default {
 
       // 直接与守护进程建立频道
       const password = res.password;
-      let addr = parseforwardAddress(res.addr);
+      let addr = parseforwardAddress(daemonWsAddressToWs(res.addr));
       this.socket = connectRemoteService(addr, password);
 
       // 监听输出流

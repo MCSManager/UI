@@ -25,11 +25,6 @@ import { ElNotification } from "element-plus";
 // import { API_URL } from "./common";
 
 export function connectRemoteService(addr, password) {
-  if (window.location.protocol === "https:") {
-    addr = `wss://${addr}`;
-  } else {
-    addr = `ws://${addr}`;
-  }
   console.log("浏览器正在连接守护进程:", addr);
   console.log("临时密码:", password);
   const socket = io(addr, {}).connect();

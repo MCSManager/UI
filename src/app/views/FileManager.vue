@@ -163,7 +163,7 @@ import {
   API_FILE_URL
 } from "../service/common";
 import path from "path";
-import { parseforwardAddress, request } from "../service/protocol";
+import { deleteWebsocketHeader, parseforwardAddress, request } from "../service/protocol";
 
 export default {
   components: { Panel },
@@ -552,7 +552,7 @@ export default {
         }
       });
       const cfg = result.data.data;
-      this.uploadConfig.addr = parseforwardAddress(cfg.addr);
+      this.uploadConfig.addr = parseforwardAddress(deleteWebsocketHeader(cfg.addr));
       this.uploadConfig.password = cfg.password;
       this.$refs.fileButtonHidden.click();
     },
@@ -569,7 +569,7 @@ export default {
         }
       });
       const cfg = result.data.data;
-      const addr = parseforwardAddress(cfg.addr);
+      const addr = parseforwardAddress(deleteWebsocketHeader(cfg.addr));
       const password = cfg.password;
       window.open(`//${addr}/download/${password}/${fileName}`);
     }

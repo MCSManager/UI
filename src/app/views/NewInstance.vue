@@ -294,7 +294,7 @@ import {
   TYPE_MINECRAFT_BEDROCK,
   TYPE_UNIVERSAL
 } from "../service/instance_type";
-import { parseforwardAddress, request } from "../service/protocol";
+import { deleteWebsocketHeader, parseforwardAddress, request } from "../service/protocol";
 
 export default {
   components: { Panel, SelectBlock, CommandAssist },
@@ -371,7 +371,7 @@ export default {
           },
           data: this.form
         });
-        this.uploadConfig.addr = parseforwardAddress(cfg.addr);
+        this.uploadConfig.addr = parseforwardAddress(deleteWebsocketHeader(cfg.addr));
         this.uploadConfig.password = cfg.password;
         this.newInstanceUuid = cfg.instanceUuid;
         // 上传文件参数准备
