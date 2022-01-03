@@ -77,7 +77,7 @@
             </div>
           </template>
         </el-table-column>
-        <el-table-column label="内存">
+        <el-table-column label="内存" width="160">
           <template #default="scope">
             <div v-if="scope.row.system">{{ scope.row.system.memText }}</div>
           </template>
