@@ -500,7 +500,7 @@ export default {
           params: { uuid: this.instanceUuid, remote_uuid: this.serviceUuid }
         });
         this.instanceInfo = result;
-        console.log("实例信息:", this.instanceInfo);
+        // console.log("实例信息:", this.instanceInfo);
       } catch (err) {
         console.log("错误", err);
       }
@@ -543,7 +543,7 @@ export default {
       // 监听实例详细信息
       this.socket.on("stream/detail", (packet) => {
         this.instanceInfo = packet.data;
-        console.log("实例信息", this.instanceInfo);
+        console.log("[WS->Daemon] 实例信息", this.instanceInfo);
       });
       // 断开事件
       this.socket.on("disconnect", () => {

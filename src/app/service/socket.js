@@ -25,36 +25,41 @@ import { ElNotification } from "element-plus";
 // import { API_URL } from "./common";
 
 export function connectRemoteService(addr, password) {
-  console.log("Websocket 连接守护进程:", password, addr);
+  if (window.location.protocol === "https:") {
+    addr = `wss://${addr}`;
+  } else {
+    addr = `ws://${addr}`;
+  }
+  console.log("浏览器正在连接守护进程:", addr);
+  console.log("临时密码:", password);
   const socket = io(addr, {}).connect();
 
   socket.on("connect", () => {
-    console.log("【重要事件】Websocket 成功连接");
+    console.log("[WS->Daemon] Websocket 成功连接");
     socket.emit("stream/auth", {
       data: { password }
     });
-    console.log("连接密钥:", password);
   });
 
   socket.on("reconnect", () => {
-    console.log("【重要事件】Websocket 重连成功");
+    console.log("[WS->Daemon] Websocket 重连成功");
     socket.emit("stream/auth", {
       data: { password }
     });
   });
 
   socket.on("disconnect", () => {
-    console.log("【重要事件】Websocket 连接断开");
+    console.log("[WS->Daemon] Websocket 连接断开");
   });
 
   socket.on("connect_error", (error) => {
-    console.log("【Websocket】连接错误:", error);
+    console.log("[WS->Daemon] 连接错误:", error);
   });
 
   socket.on("stream/auth", (packet) => {
     const data = packet.data;
     if (data === true) {
-      console.log("【重要事件/stream/auth】Websocket 身份验证成功");
+      console.log("[WS->Daemon/stream/auth] Websocket 身份验证成功");
     } else {
       ElNotification({
         title: "无法与终端建立连接",
