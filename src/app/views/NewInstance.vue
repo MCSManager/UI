@@ -294,7 +294,7 @@ import {
   TYPE_MINECRAFT_BEDROCK,
   TYPE_UNIVERSAL
 } from "../service/instance_type";
-import { deleteWebsocketHeader, parseforwardAddress, request } from "../service/protocol";
+import { parseforwardAddress, request } from "../service/protocol";
 
 export default {
   components: { Panel, SelectBlock, CommandAssist },
@@ -371,13 +371,13 @@ export default {
           },
           data: this.form
         });
-        this.uploadConfig.addr = parseforwardAddress(deleteWebsocketHeader(cfg.addr));
+        this.uploadConfig.addr = parseforwardAddress(cfg.addr, "http");
         this.uploadConfig.password = cfg.password;
         this.newInstanceUuid = cfg.instanceUuid;
         // 上传文件参数准备
         const formData = new FormData();
         formData.append("file", file);
-        const fullAddress = `//${this.uploadConfig.addr}/upload/${this.uploadConfig.password}`;
+        const fullAddress = `${this.uploadConfig.addr}/upload/${this.uploadConfig.password}`;
         console.log("新建实例 - 文件上传:", fullAddress, "\n", file);
         // 上传文件
         const fileName = file.name;

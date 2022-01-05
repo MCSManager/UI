@@ -163,7 +163,7 @@ import {
   API_FILE_URL
 } from "../service/common";
 import path from "path";
-import { deleteWebsocketHeader, parseforwardAddress, request } from "../service/protocol";
+import { parseforwardAddress, request } from "../service/protocol";
 
 export default {
   components: { Panel },
@@ -522,7 +522,7 @@ export default {
         formData.append("file", file);
         formData.append("source", "MCSManager/FileManager");
         formData.append("time", new Date().toUTCString());
-        const fullAddress = `//${this.uploadConfig.addr}/upload/${this.uploadConfig.password}`;
+        const fullAddress = `${this.uploadConfig.addr}/upload/${this.uploadConfig.password}`;
         console.log("上传文件:", fullAddress);
         // 上传文件
         await axios.post(fullAddress, formData, {
@@ -552,7 +552,7 @@ export default {
         }
       });
       const cfg = result.data.data;
-      this.uploadConfig.addr = parseforwardAddress(deleteWebsocketHeader(cfg.addr));
+      this.uploadConfig.addr = parseforwardAddress(cfg.addr, "http");
       this.uploadConfig.password = cfg.password;
       this.$refs.fileButtonHidden.click();
     },
@@ -569,9 +569,9 @@ export default {
         }
       });
       const cfg = result.data.data;
-      const addr = parseforwardAddress(deleteWebsocketHeader(cfg.addr));
+      const addr = parseforwardAddress(cfg.addr, "http");
       const password = cfg.password;
-      window.open(`//${addr}/download/${password}/${fileName}`);
+      window.open(`${addr}/download/${password}/${fileName}`);
     }
   }
 };
