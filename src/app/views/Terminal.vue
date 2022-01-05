@@ -533,7 +533,7 @@ export default {
 
       // 直接与守护进程建立频道
       const password = res.password;
-      let addr = parseforwardAddress(daemonWsAddressToWs(res.addr));
+      const addr = daemonWsAddressToWs(parseforwardAddress(res.addr));
       this.socket = connectRemoteService(addr, password);
 
       // 监听输出流

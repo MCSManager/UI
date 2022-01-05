@@ -94,19 +94,55 @@ export async function setupUserInfo() {
   await requestUserInfo();
 }
 
-export function parseforwardAddress(addr) {
-  // ws : //127.0.0.1 : 25565
-  const daemonPort = addr.split(":").pop();
-  const checkAddr = addr.toLocaleLowerCase();
+export function parseforwardAddress(addr = "", require = "http") {
+  // 保存其协议头
+  // ws://127.0.0.1:25565
+  let protocol = `${window.location.protocol}//`;
+  const addrProtocolString = addr.toLocaleLowerCase();
+  if (require === "http") {
+    if (addrProtocolString.indexOf("ws://") === 0) protocol = "http://";
+    else if (addrProtocolString.indexOf("wss://") === 0) protocol = "https://";
+    else if (addrProtocolString.indexOf("http://") === 0) protocol = "http://";
+    else if (addrProtocolString.indexOf("https://") === 0) protocol = "https://";
+    else protocol = `http://`;
+  }
+  if (require === "ws") {
+    if (addrProtocolString.indexOf("http://") === 0) protocol = "ws://";
+    else if (addrProtocolString.indexOf("https://") === 0) protocol = "wss://";
+    else if (addrProtocolString.indexOf("ws://") === 0) protocol = "ws://";
+    else if (addrProtocolString.indexOf("wss://") === 0) protocol = "wss://";
+    else protocol = "ws://";
+  }
+
+  // 删除潜在的多余头
+  addr = deleteWebsocketHeader(deleteHttpHeader(addr));
+
+  // 端口与ip分开
+  let daemonPort = null;
+  let onlyAddr = null;
+  if (addr.split(":").length === 2) {
+    onlyAddr = addr.split(":")[0];
+    daemonPort = parseInt(addr.split(":")[1]);
+    if (isNaN(daemonPort)) throw new Error(`地址 ${addr} 解析失败，端口不正确`);
+  } else {
+    onlyAddr = addr;
+  }
+
+  // 根据分开的端口和ip重新组合地址
+  const checkAddr = onlyAddr.toLocaleLowerCase();
   if (
     checkAddr.indexOf("localhost") === 0 ||
     checkAddr.indexOf("127.") === 0 ||
     checkAddr.indexOf("192.168") === 0
   ) {
-    addr = `${window.location.hostname}:${daemonPort ? daemonPort : 24444}`;
+    addr = `${protocol}${window.location.hostname}${daemonPort ? `:${daemonPort}` : ""}`;
+  } else {
+    addr = `${protocol}${onlyAddr}${daemonPort ? `:${daemonPort}` : ""}`;
   }
   return addr;
 }
+
+window.parseforwardAddress = parseforwardAddress;
 
 // Daemon 端的 ws 地址转换成 http 地址
 export function daemonWsAddressToHttp(wsAddr = "") {
@@ -125,6 +161,15 @@ export function deleteWebsocketHeader(wsAddr) {
     return `${wsAddr.slice(6)}`;
   }
   return wsAddr;
+}
+
+export function deleteHttpHeader(addr) {
+  if (addr.toLocaleLowerCase().indexOf("http://") === 0) {
+    return `${addr.slice(7)}`;
+  } else if (addr.toLocaleLowerCase().indexOf("https://") === 0) {
+    return `${addr.slice(8)}`;
+  }
+  return addr;
 }
 
 // Daemon 端的 ws 地址转为本地 ws 地址
