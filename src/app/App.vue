@@ -97,6 +97,7 @@ export default {
   },
   async beforeCreate() {
     try {
+      console.log("正在初始化用户信息，执行: await setupUserInfo()");
       await setupUserInfo();
       this.nav();
     } catch (error) {

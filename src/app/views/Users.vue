@@ -143,7 +143,7 @@
         </div>
         <div class="row-mt">
           <el-button type="success" size="small" @click="createUser">新增</el-button>
-          <el-button @click="isNewUser = !isNewUser" size="small">取消</el-button>
+          <el-button @click="cancelEditPanel" size="small">取消</el-button>
         </div>
       </div>
     </template>
@@ -179,7 +179,7 @@
         </el-select>
         <div class="row-mt">
           <el-button type="success" size="small" @click="updateUser">更新数据</el-button>
-          <el-button @click="isEditUser = !isEditUser" size="small">取消</el-button>
+          <el-button @click="cancelEditPanel" size="small">取消</el-button>
         </div>
       </div>
     </template>
@@ -218,6 +218,12 @@ export default {
 
       readonly: true
     };
+  },
+  async mounted() {
+    // 请求并渲染所有用户
+    await this.render();
+    // 异步请求所有实例缓存结果
+    this.renderServices();
   },
   methods: {
     // 用户数据渲染
@@ -275,6 +281,10 @@ export default {
     },
     toNewUserPanel() {
       this.isNewUser = true;
+    },
+    async cancelEditPanel() {
+      this.isEditUser = false;
+      await this.render();
     },
     async toAssignPanel(row) {
       const uuid = row.uuid;
@@ -368,12 +378,6 @@ export default {
     refresh() {
       this.render();
     }
-  },
-  async mounted() {
-    // 请求并渲染所有用户
-    await this.render();
-    // 异步请求所有实例缓存结果
-    this.renderServices();
   }
 };
 </script>

@@ -30,7 +30,7 @@ axios.defaults.headers.common["X-Requested-With"] = "XMLHttpRequest";
 // axios 请求 token 必须携带
 axios.interceptors.request.use(async function (config) {
   let token = store.state.token;
-  if (!token && !config.url?.includes(API_USER)) {
+  if (!token && !config?.params?.__mcsm_init__) {
     console.log("Token 未获取，正在尝试初始化...");
     await setupUserInfo();
   }
@@ -82,7 +82,7 @@ export async function requestUserInfo(advanced = null) {
   const info = await request({
     method: "GET",
     url: API_USER,
-    params: { advanced }
+    params: { advanced, __mcsm_init__: true }
   });
   store.commit("setUserInfo", info);
   store.commit("setToken", info.token);
