@@ -134,6 +134,7 @@ import Panel from "../../components/Panel";
 // import router from "../router";
 import { API_USER_LOGIN, sleep } from "../service/common";
 import { request, setupUserInfo } from "../service/protocol";
+
 export default {
   components: { Panel },
   data: function () {
@@ -214,7 +215,12 @@ export default {
   },
   async mounted() {
     console.log("Welcome use MCSManager.");
-    console.log("Copyright 2021 Suwings All rights reserved.");
+    console.log("Copyright 2022 Suwings All rights reserved.");
+    await setupUserInfo();
+    if (this.$store.state?.userInfo?.uuid) {
+      console.log("用户已登录，正在跳转");
+      window.location.href = "/";
+    }
   }
 };
 </script>
