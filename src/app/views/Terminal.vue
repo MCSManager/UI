@@ -575,6 +575,12 @@ export default {
     },
     startInterval() {
       if (!this.renderTask) this.renderTask = setInterval(this.renderFromSocket, 1000);
+      // 设置连接超时定时器
+      setTimeout(() => {
+        if (!this.available && this.unavailableTerminal === false) {
+          this.unavailableTerminal = true;
+        }
+      }, 8000);
     },
     stopInterval() {
       clearInterval(this.renderTask);
