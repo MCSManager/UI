@@ -157,62 +157,98 @@
                 </el-select>
               </el-col>
             </el-row>
-          </el-col>
-        </el-row>
 
-        <div class="dokcer-config-view row-mt" v-if="instanceInfo.config.processType === 'docker'">
-          <div class="sub-title">
-            <div class="sub-title-title">Docker 容器配置</div>
-            <div class="sub-title-info">
-              Docker
-              是一种轻量级虚拟化软件，可以给每个实例使用“环境镜像”来随时启动全新的系统容器，使用完毕后立刻删除，可保证宿主机安全和稳定性
-            </div>
-          </div>
-          <el-row :gutter="20">
-            <el-col :md="6" class="row-mt" :offset="0">
+            <div
+              class="dokcer-config-view row-mt"
+              v-if="instanceInfo.config.processType === 'docker'"
+            >
               <div class="sub-title">
-                <div class="sub-title-title">环境镜像</div>
-                <div class="sub-title-info">指定实例镜像</div>
-              </div>
-              <el-select
-                filterable
-                v-model="instanceInfo.config.docker.image"
-                placeholder="请选择"
-                @focus="loadImages"
-                style="width: 100%"
-                v-loading="componentsLoading"
-              >
-                <el-option
-                  v-for="item in images"
-                  :key="item.RepoTags[0]"
-                  :label="item.RepoTags[0]"
-                  :value="item.RepoTags[0]"
-                >
-                </el-option>
-              </el-select>
-            </el-col>
-            <el-col :md="18" class="row-mt" :offset="0">
-              <div class="sub-title">
-                <div class="sub-title-title">开放端口</div>
+                <div class="sub-title-title">Docker 容器配置</div>
                 <div class="sub-title-info">
-                  多个以空格分割，冒号左边为宿主机暴露端口，右边为容器暴露端口，通常保持一致即可
+                  Docker
+                  是一种轻量级虚拟化软件，可以给每个实例使用“环境镜像”来随时启动全新的系统容器，使用完毕后立刻删除，可保证宿主机安全和稳定性
                 </div>
               </div>
-              <el-input
-                v-model="instanceInfo.config.docker.ports"
-                type="text"
-                placeholder="示例 25565:25565/tcp 3380:3380/udp"
-              >
-              </el-input>
-            </el-col>
-          </el-row>
-          <el-row :gutter="20">
-            <el-col :md="6" class="row-mt">
-              <div class="sub-title">最大内存（单位 MB）</div>
-              <el-input v-model="instanceInfo.config.docker.memory" type="text"> </el-input>
-            </el-col>
-          </el-row>
-        </div>
+              <el-row :gutter="20">
+                <el-col :md="6" class="row-mt" :offset="0">
+                  <div class="sub-title">
+                    <div class="sub-title-title">环境镜像</div>
+                    <div class="sub-title-info">指定实例镜像</div>
+                  </div>
+                  <el-select
+                    filterable
+                    v-model="instanceInfo.config.docker.image"
+                    placeholder="请选择"
+                    @focus="loadImages"
+                    style="width: 100%"
+                    v-loading="componentsLoading"
+                  >
+                    <el-option
+                      v-for="item in images"
+                      :key="item.RepoTags[0]"
+                      :label="item.RepoTags[0]"
+                      :value="item.RepoTags[0]"
+                    >
+                    </el-option>
+                  </el-select>
+                </el-col>
+                <el-col :md="18" class="row-mt" :offset="0">
+                  <div class="sub-title">
+                    <div class="sub-title-title">开放端口</div>
+                    <div class="sub-title-info">
+                      多个以空格分割，冒号左边为宿主机暴露端口，右边为容器暴露端口，通常保持一致即可
+                    </div>
+                  </div>
+                  <el-input
+                    v-model="instanceInfo.config.docker.ports"
+                    type="text"
+                    placeholder="示例 25565:25565/tcp 3380:3380/udp"
+                  >
+                  </el-input>
+                </el-col>
+              </el-row>
+              <el-row :gutter="20">
+                <el-col :md="8" class="row-mt">
+                  <div class="sub-title">
+                    <div class="sub-title-title">最大内存（单位 MB）</div>
+                    <div class="sub-title-info">列如 1024，2048 等，请勿加单位</div>
+                  </div>
+
+                  <el-input
+                    v-model="instanceInfo.config.docker.memory"
+                    type="text"
+                    placeholder="列如 1024"
+                  >
+                  </el-input>
+                </el-col>
+                <el-col :md="8" class="row-mt">
+                  <div class="sub-title">
+                    <div class="sub-title-title">CPU 使用率限制（百分比）</div>
+                    <div class="sub-title-info">尽可能的限制其 CPU 使用率，可能会有偶尔波动</div>
+                  </div>
+                  <el-input
+                    v-model="instanceInfo.config.docker.cpuUsage"
+                    type="text"
+                    placeholder="填写 50 代表 CPU 使用率最大 50%"
+                  >
+                  </el-input>
+                </el-col>
+                <el-col :md="8" class="row-mt">
+                  <div class="sub-title">
+                    <div class="sub-title-title">CPU 核心限制（指定核心）</div>
+                    <div class="sub-title-info">限制容器可在哪些CPU核心上运作</div>
+                  </div>
+                  <el-input
+                    v-model="instanceInfo.config.docker.cpusetCpus"
+                    type="text"
+                    placeholder="列如 0,1 代表在第1，2核心上运作"
+                  >
+                  </el-input>
+                </el-col>
+              </el-row>
+            </div>
+          </el-col>
+        </el-row>
 
         <el-row :gutter="20" class="row-mt">
           <el-col :md="24" style="text-align: right">
