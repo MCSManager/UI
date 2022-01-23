@@ -35,6 +35,9 @@
             <el-button size="small" @click="back" v-if="!backType">
               <i class="el-icon-pie-chart"></i> 回到文件列表
             </el-button>
+            <!-- <el-button size="small" @click="backTerminal" plain v-if="backType == 1">
+              回到控制台
+            </el-button> -->
           </ItemGroup>
         </div>
         <div>
@@ -100,6 +103,11 @@ export default {
     async refresh() {
       await this.render();
       this.$message({ message: "已刷新", type: "success" });
+    },
+    async backTerminal() {
+      this.$router.push({
+        path: `/terminal/${this.serviceUuid}/${this.instanceUuid}/`
+      });
     },
     async back() {
       this.$router.push({

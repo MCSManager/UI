@@ -34,7 +34,7 @@
             <div class="row-mb">
               <ItemGroup>
                 <el-button type="success" size="small" @click="save">保存配置</el-button>
-                <el-button type="danger" size="small" @click="rf">放弃并刷新</el-button>
+                <el-button type="danger" size="small" @click="rf">重新加载</el-button>
                 <el-button size="small" @click="back">回到配置文件列表</el-button>
               </ItemGroup>
             </div>
