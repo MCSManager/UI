@@ -74,8 +74,10 @@
           </div>
           <el-input
             size="small"
-            placeholder=""
+            placeholder="保持原值"
             v-model="userData.userName"
+            :readonly="readonly.a"
+            @focus="() => (readonly.a = false)"
             autocomplete="off"
           ></el-input>
           <div style="text-align: right">
@@ -90,13 +92,29 @@
             <p class="sub-title-title">新密码</p>
             <p class="sub-title-info">长度必须 6 到 18 位，尽可能包含字母数字加符号组合方式</p>
           </div>
-          <el-input size="small" type="password" v-model="userData.passWord" :autocomplete="'off'">
+          <el-input
+            size="small"
+            type="password"
+            v-model="userData.passWord"
+            autocomplete="off"
+            placeholder="保持原值"
+            :readonly="readonly.b"
+            @focus="() => (readonly.b = false)"
+          >
           </el-input>
           <div class="sub-title row-mt">
             <p class="sub-title-title">确认新密码</p>
             <p class="sub-title-info">为防止新密码误输入，您必须确认一次新密码</p>
           </div>
-          <el-input size="small" type="password" v-model="userData.passWord2" autocomplete="off">
+          <el-input
+            size="small"
+            type="password"
+            v-model="userData.passWord2"
+            placeholder="保持原值"
+            :readonly="readonly.c"
+            @focus="() => (readonly.c = false)"
+            autocomplete="off"
+          >
           </el-input>
           <div style="text-align: right">
             <el-button size="small" class="row-mt" @click="update(2)">更新密码</el-button>
@@ -174,6 +192,11 @@ import { request } from "../service/protocol";
 export default {
   data() {
     return {
+      readonly: {
+        a: true,
+        b: true,
+        c: true
+      },
       userData: {
         userName: "",
         passWord: "",
