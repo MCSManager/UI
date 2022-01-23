@@ -30,12 +30,17 @@ axios.defaults.headers.common["X-Requested-With"] = "XMLHttpRequest";
 // axios 请求 token 必须携带
 axios.interceptors.request.use(async function (config) {
   let token = store.state.token;
-  if (!token && !config?.params?.__mcsm_init__) {
+  if (!token && !config.params?.__mcsm_init__) {
     console.log("Token 未获取，正在尝试初始化...");
-    await setupUserInfo();
+    try {
+      await setupUserInfo();
+    } catch (err) {
+      console.log("初始化 Token 错误:", err);
+    }
   }
   if (!config.params) config.params = {};
   config.params.token = store.state.token;
+  delete config.params?.__mcsm_init__;
   return config;
 });
 

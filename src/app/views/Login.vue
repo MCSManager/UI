@@ -216,11 +216,15 @@ export default {
   async mounted() {
     console.log("Welcome use MCSManager.");
     console.log("Copyright 2022 Suwings All rights reserved.");
-    await setupUserInfo();
-    if (this.$store.state?.userInfo?.uuid) {
-      console.log("用户已登录，正在跳转");
-      window.location.href = "/";
-    }
+    // try {
+    //   await setupUserInfo();
+    //   if (this.$store.state?.userInfo?.uuid) {
+    //     console.log("用户已登录，正在跳转");
+    //     window.location.href = "/";
+    //   }
+    // } catch (err) {
+    //   // 忽略
+    // }
   }
 };
 </script>
