@@ -60,6 +60,22 @@
           当前子用户可管理的所有实例，若实例状态显示“忙碌”代表此实例不存在或远程主机已经离线。
         </p>
       </div>
+
+      <div>
+        <p class="sub-title-title">出租安全风险</p>
+        <p class="sub-title-info">
+          为确保您宿主机安全，您必须将任何运行的程序包含在 Docker
+          虚拟化容器中运行，否则您的用户将有可能入侵破坏宿主机。
+          <br />
+          建议您前往<a
+            class="color-blue"
+            href="https://docs.mcsmanager.com/"
+            target="_blank"
+            rel="noopener noreferrer"
+            >官方文档</a
+          >了解更多
+        </p>
+      </div>
       <div class="row-mt">
         <ItemGroup>
           <el-button size="small" type="success" @click="openAddInstancePanel">

@@ -112,9 +112,9 @@
         </div>
         <el-input
           v-model="newUserInfo.password"
-          placeholder="请输入内容..."
+          placeholder="请输入密码，6到18位"
           size="small"
-          type="password"
+          type="text"
         ></el-input>
         <div class="sub-title row-mt">
           <p class="sub-title-title">权限</p>
@@ -125,6 +125,22 @@
           <el-option label="最高权限" :value="10"></el-option>
           <el-option label="禁封" :value="-1"></el-option>
         </el-select>
+
+        <div class="sub-title row-mt">
+          <p class="sub-title-title">注意事项</p>
+          <p class="sub-title-info">
+            若您从事出租商业活动，请务必保证应用实例运行在 Linux 的 Docker
+            虚拟容器中，否则将有安全隐患。
+            <br />
+            <a
+              class="color-blue"
+              href="https://docs.mcsmanager.com/"
+              target="_blank"
+              rel="noopener noreferrer"
+              >具体信息参考</a
+            >
+          </p>
+        </div>
         <div class="row-mt">
           <el-button type="success" size="small" @click="createUser">新增</el-button>
           <el-button @click="isNewUser = !isNewUser" size="small">取消</el-button>
@@ -168,46 +184,6 @@
       </div>
     </template>
   </Dialog>
-
-  <!-- 分配用户实例对话框 -->
-  <!-- <Dialog v-model="isAssign">
-    <template #title>分配实例</template>
-    <template #default>
-      <div v-loading="isAssignLoading" element-loading-text="正在获取数据">
-        <div class="sub-title">
-          <p class="sub-title-title">用户昵称</p>
-          <p class="sub-title-info">{{ editUserInfo.userName }}</p>
-        </div>
-
-        <div class="sub-title row-mt">
-          <p class="sub-title-title">已有实例</p>
-          <p class="sub-title-info"></p>
-          <div class="inline-block margin-4" v-for="(item, index) in editUserInfo.instances" :key="index">
-            <el-tag type="info" closable @close="cancelInstace(item.uuid)">
-              <span v-if="item.instanceInfo">{{ item.instanceInfo.config.nickname }}</span>
-              <span v-else>{{ item.region }} | {{ item.uuid }}</span>
-            </el-tag>
-          </div>
-        </div>
-        <div style="">
-          <el-table :data="instances" stripe style="width: 100%" size="small" ref="multipleTable">
-            <el-table-column prop="nickname" label="NAME" width="240"></el-table-column>
-            <el-table-column prop="serviceUuid" label="GUID" width="240"></el-table-column>
-            <el-table-column prop="instanceUuid" label="UUID" width="240"></el-table-column>
-            <el-table-column label="操作" style="text-align: center">
-              <template #default="scope">
-                <el-button size="mini" @click="assignInstance(scope.row)">分配</el-button>
-              </template>
-            </el-table-column>
-          </el-table>
-        </div>
-        <div class="row-mt">
-          <el-button type="success" size="small" @click="updateUser">确定</el-button>
-          <el-button @click="isAssign = !isAssign" size="small">取消</el-button>
-        </div>
-      </div>
-    </template>
-  </Dialog> -->
 </template>
 
 <script>
@@ -215,7 +191,6 @@ import Panel from "../../components/Panel";
 import Dialog from "../../components/Dialog";
 import { request } from "../service/protocol";
 import { API_SERVICE, API_USER, API_SEARCH } from "../service/common";
-// import qs from "qs";
 
 export default {
   components: { Panel, Dialog },
