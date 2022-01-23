@@ -223,7 +223,7 @@
                 </el-col>
                 <el-col :md="8" class="row-mt">
                   <div class="sub-title">
-                    <div class="sub-title-title">CPU 使用率限制（百分比）</div>
+                    <div class="sub-title-title">限制 CPU 使用率（百分比）</div>
                     <div class="sub-title-info">限制容器的 CPU 使用，会有少许波动</div>
                   </div>
                   <el-input
