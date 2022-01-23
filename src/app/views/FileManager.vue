@@ -291,7 +291,9 @@ export default {
       try {
         if (this.multipleSelection.length !== 1) throw new Error("必须选择一个文件进行重命名操作");
         const file = this.multipleSelection[0];
-        let { value } = await this.$prompt("新的名字");
+        let { value } = await this.$prompt("新的名字", "重命名", {
+          inputValue: file.name
+        });
         if (!value) throw new Error("请输入一个有效值");
         const oldFilePath = path.join(this.currentDir, file.name);
         const newFilePath = path.join(this.currentDir, value);
@@ -309,7 +311,8 @@ export default {
         this.$message({ message: "操作成功", type: "success" });
         this.render();
       } catch (error) {
-        this.$message({ message: `错误:${error.message}`, type: "error" });
+        if (error && error.message)
+          this.$message({ message: `错误:${error.message}`, type: "error" });
       }
     },
 
