@@ -319,6 +319,9 @@ export default {
       for (const iterator of this.multipleSelection) {
         uuids.push(iterator.instanceUuid);
       }
+      if (uuids.length === 0) {
+        return this.$message({ type: "error", message: "请至少选择一项" });
+      }
       await axios.request({
         method: "DELETE",
         url: API_INSTANCE,
