@@ -384,6 +384,7 @@ export default {
         const extName = path.extname(fileName);
         await axios.post(fullAddress, formData, {
           params: {
+            // 根据后缀自动解压文件
             unzip: extName === ".zip" ? 1 : null
           },
           headers: { "Content-Type": "multipart/form-data" },

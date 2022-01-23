@@ -24,7 +24,7 @@
     <template #default>
       <div v-loading="loading" element-loading-text="获取中">
         <el-row :gutter="20">
-          <el-col :md="8">
+          <el-col :md="6">
             <div class="sub-title">唯一标识符（UUID）</div>
             <p v-text="instanceInfo.instanceUuid"></p>
             <div class="sub-title">远程标识符（GUID）</div>
@@ -42,7 +42,7 @@
             <div class="sub-title">进程类型</div>
             <p v-text="instanceInfo.config.processType"></p>
           </el-col>
-          <el-col :md="16">
+          <el-col :md="18">
             <el-row :gutter="20">
               <el-col :md="24">
                 <div class="sub-title">
