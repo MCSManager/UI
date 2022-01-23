@@ -224,7 +224,7 @@
                 <el-col :md="8" class="row-mt">
                   <div class="sub-title">
                     <div class="sub-title-title">CPU 使用率限制（百分比）</div>
-                    <div class="sub-title-info">尽可能的限制其 CPU 使用率，可能会有偶尔波动</div>
+                    <div class="sub-title-info">限制容器的 CPU 使用，会有少许波动</div>
                   </div>
                   <el-input
                     v-model="instanceInfo.config.docker.cpuUsage"
@@ -235,8 +235,8 @@
                 </el-col>
                 <el-col :md="8" class="row-mt">
                   <div class="sub-title">
-                    <div class="sub-title-title">CPU 核心限制（指定核心）</div>
-                    <div class="sub-title-info">限制容器可在哪些CPU核心上运作</div>
+                    <div class="sub-title-title">指定 CPU 计算核心</div>
+                    <div class="sub-title-info">限制容器在指定的 CPU 核心上运行</div>
                   </div>
                   <el-input
                     v-model="instanceInfo.config.docker.cpusetCpus"
