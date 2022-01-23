@@ -26,8 +26,8 @@
         <template #title>基本信息</template>
         <template #default>
           <el-row :gutter="20">
-            <el-col :span="12" :offset="0">
-              <LineLabel>
+            <el-col :md="12" :offset="0">
+              <LineLabel class="only-pc-display">
                 <template #title>唯一标识符</template>
                 <template #default>{{ userInfo.uuid }}</template>
               </LineLabel>
@@ -42,7 +42,7 @@
                 </template>
               </LineLabel>
             </el-col>
-            <el-col :span="12" :offset="0">
+            <el-col :md="12" :offset="0">
               <LineLabel>
                 <template #title>注册时间</template>
                 <template #default>{{ userInfo.registerTime }}</template>
@@ -51,7 +51,7 @@
                 <template #title>登录时间</template>
                 <template #default>{{ userInfo.loginTime }}</template>
               </LineLabel>
-              <LineLabel>
+              <LineLabel class="only-pc-display">
                 <template #title>接口</template>
                 <template #default>
                   {{ moreUserInfo.api }}

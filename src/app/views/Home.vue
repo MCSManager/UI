@@ -146,7 +146,6 @@
             </div>
             <span class="color-yellow" v-else-if="scope.row.status == 1">停止中</span>
             <span class="color-yellow" v-else-if="scope.row.status == 2">启动中</span>
-
             <span class="color-red" v-else-if="scope.row.status == -1">离线</span>
             <span class="color-red" v-else>离线</span>
             <!-- {{ statusToText(scope.row.status) }} -->
