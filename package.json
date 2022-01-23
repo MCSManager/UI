@@ -1,7 +1,6 @@
 {
-  "name": "project2104-ui",
-  "version": "0.1.0",
-  "private": true,
+  "name": "mcsmanager-ui",
+  "version": "1.2.0",
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
