@@ -305,6 +305,7 @@ export default {
         }
       }
       try {
+        if (this.newServiceInfo.remarks === "") this.newServiceInfo.remarks = "Remote Host";
         await request({
           method: "POST",
           url: API_SERVICE_CURD,
@@ -340,7 +341,7 @@ export default {
     async updateService(row) {
       await axios.put(
         API_SERVICE_CURD,
-        { ip: row.ip, port: row.port, remarks: row.remarks },
+        { ip: row.ip, port: row.port, remarks: row.remarks || "Remote Host" },
         {
           params: { uuid: row.uuid }
         }
