@@ -32,7 +32,8 @@ import {
   TYPE_MINECRAFT_BUNGEECORD,
   TYPE_MINECRAFT_GEYSER,
   TYPE_MINECRAFT_PAPER,
-  TYPE_MINECRAFT_SPIGOT
+  TYPE_MINECRAFT_SPIGOT,
+  TYPE_MINECRAFT_BEDROCK
 } from "./instance_type";
 
 export function getInstanceConfigByType(type) {
@@ -165,14 +166,14 @@ export const INSTANCE_CONFIGS = [
     category: [TYPE_MINECRAFT_JAVA, TYPE_MINECRAFT_BUNGEECORD]
   },
   {
-    fileName: "[BDS] server.properties",
+    fileName: "[Bedrock] server.properties",
     path: "server.properties",
     redirect: "bds/server.properties",
     type: "properties",
     info: `Minecraft Bedrock 服务端极其重要的配置文件，几乎绝大部分常用配置（端口，人数，视距等）均在此文件中进行编辑`,
     author: "Lazy",
     github: "https://github.com/LazyCreeper",
-    category: [TYPE_MINECRAFT_BDS]
+    category: [TYPE_MINECRAFT_BDS, TYPE_MINECRAFT_BEDROCK]
   },
   {
     fileName: "[Mohist] mohist.yml",
