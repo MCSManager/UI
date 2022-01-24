@@ -176,7 +176,7 @@
                 </div>
               </div>
               <el-row :gutter="20">
-                <el-col :md="6" class="row-mt" :offset="0">
+                <el-col :md="8" class="row-mt" :offset="0">
                   <div class="sub-title">
                     <div class="sub-title-title">环境镜像</div>
                     <div class="sub-title-info">指定实例镜像</div>
@@ -198,7 +198,7 @@
                     </el-option>
                   </el-select>
                 </el-col>
-                <el-col :md="18" class="row-mt" :offset="0">
+                <el-col :md="16" class="row-mt" :offset="0">
                   <div class="sub-title">
                     <div class="sub-title-title">开放端口</div>
                     <div class="sub-title-info">
