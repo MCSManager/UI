@@ -401,7 +401,9 @@
     <template #title>无法与守护进程建立连接</template>
     <template #default>
       <div class="sub-title">
-        <p class="sub-title-title">网页无法与远程服务建立直接连接通道</p>
+        <p class="sub-title-title">
+          {{ unavailableIp ? `无法连接到 ${unavailableIp}` : "网页无法与远程服务建立直接连接通道" }}
+        </p>
         <p class="sub-title-info">
           <span>可能是您未开放远程服务的端口导致，或是使用了内网地址的缘故</span>
           <br />
@@ -416,8 +418,15 @@
           <li>重启 Web 面板端程序</li>
           <li>重启远程服务守护进程 (Daemon) 程序</li>
           <br />
-          <li>若有反向代理，FRP，SSL 等，需兼容 Websocket 功能</li>
-          <li>前往 Github 仓库的 Wiki 搜索您的情况</li>
+          <li>如果有 Https 等，则需采用 wss:// 协议连接守护进程</li>
+          <li>若有反向代理，FRP 等，需兼容 Websocket 功能</li>
+          <li>
+            前往
+            <a href="https://docs.mcsmanager.com" target="_blank" rel="noopener noreferrer"
+              >https://docs.mcsmanager.com</a
+            >
+            了解更多
+          </li>
         </ul>
       </div>
     </template>
@@ -483,7 +492,8 @@ export default {
         data: ""
       },
 
-      unavailableTerminal: false
+      unavailableTerminal: false,
+      unavailableIp: null
     };
   },
   computed: {
@@ -544,9 +554,11 @@ export default {
         addr,
         password,
         () => {
+          this.unavailableIp = null;
           this.unavailableTerminal = false;
         },
         () => {
+          this.unavailableIp = addr;
           this.unavailableTerminal = true;
         }
       );
