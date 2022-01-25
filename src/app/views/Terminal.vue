@@ -540,7 +540,16 @@ export default {
       // 直接与守护进程建立频道
       const password = res.password;
       const addr = parseforwardAddress(res.addr, "ws");
-      this.socket = connectRemoteService(addr, password);
+      this.socket = connectRemoteService(
+        addr,
+        password,
+        () => {
+          this.unavailableTerminal = false;
+        },
+        () => {
+          this.unavailableTerminal = true;
+        }
+      );
 
       // 监听输出流
       this.socket.on("instance/stdout", (packet) => {
@@ -581,12 +590,6 @@ export default {
     },
     startInterval() {
       if (!this.renderTask) this.renderTask = setInterval(this.renderFromSocket, 1000);
-      // 设置连接超时定时器
-      setTimeout(() => {
-        if (!this.available && this.unavailableTerminal === false) {
-          this.unavailableTerminal = true;
-        }
-      }, 8000);
     },
     stopInterval() {
       clearInterval(this.renderTask);
