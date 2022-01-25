@@ -36,7 +36,7 @@ export function getDefaultOption() {
       right: 8
     },
     xAxis: { type: "category", show: true },
-    yAxis: { type: "value", min: 0, max: 100, show: true },
+    yAxis: { type: "value", min: 0, max: 100, show: true, minInterval: 1 },
     series: [
       {
         type: "line",
@@ -59,7 +59,7 @@ export function getStatusChartOption1() {
       right: 8
     },
     xAxis: { type: "category", show: true },
-    yAxis: { type: "value", show: true },
+    yAxis: { type: "value", show: true, minInterval: 1 },
     series: [
       {
         type: "line",
@@ -73,10 +73,10 @@ export function getStatusChartOption1() {
 
 export function getStatusChartOption2() {
   return {
-    legend: {
-      left: "center",
-      data: ["总数", "运行数"]
-    },
+    // legend: {
+    //   left: "center",
+    //   data: ["运行数"]
+    // },
     grid: {
       show: false,
       borderWidth: 0,
@@ -86,15 +86,8 @@ export function getStatusChartOption2() {
       right: 8
     },
     xAxis: { type: "category", show: true },
-    yAxis: { type: "value", show: true },
+    yAxis: { type: "value", show: true, minInterval: 1, max: 10 },
     series: [
-      {
-        name: "总数",
-        type: "line",
-        areaStyle: {},
-        smooth: true,
-        symbol: "none"
-      },
       {
         name: "运行数",
         type: "line",

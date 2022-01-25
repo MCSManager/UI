@@ -60,6 +60,35 @@
           </el-row>
         </template>
       </Panel>
+      <Panel v-loading="loading">
+        <template #title>分布式服务总览</template>
+        <template #default>
+          <p>
+            确保所有远程服务均在线，离线状态将导致此远程服务以及相关功能不可用，可能会影响使用体验与数据。
+          </p>
+          <el-table :data="servicesStatus" style="width: 100%" size="medium">
+            <el-table-column prop="ip" label="地址" width="180"> </el-table-column>
+            <el-table-column prop="remarks" label="备注" width="240"> </el-table-column>
+            <el-table-column prop="port" label="端口" width="180"> </el-table-column>
+            <el-table-column prop="cpu" label="CPU"> </el-table-column>
+            <el-table-column prop="mem" label="内存"> </el-table-column>
+            <el-table-column prop="instance" label="已有实例"> </el-table-column>
+            <el-table-column prop="started" label="运行实例"> </el-table-column>
+            <el-table-column prop="status" label="连接状态">
+              <template #default="scope">
+                <span class="color-green" v-if="scope.row.status">
+                  <i class="el-icon-circle-check"></i> 在线
+                </span>
+                <span class="color-red" v-if="!scope.row.status">
+                  <el-tooltip effect="dark" content="无法连接到指定ip或者密钥错误" placement="top">
+                    <span><i class="el-icon-warning-outline"></i> 离线</span>
+                  </el-tooltip>
+                </span>
+              </template>
+            </el-table-column>
+          </el-table>
+        </template>
+      </Panel>
       <el-row :gutter="20">
         <el-col :md="12" :offset="0">
           <Panel v-loading="loading">
@@ -87,7 +116,7 @@
       <el-row :gutter="20">
         <el-col :md="12" :offset="0">
           <Panel v-loading="loading">
-            <template #title>分布式应用实例状态</template>
+            <template #title>分布式实例运行量</template>
             <template #default>
               <p>每1分钟统计间隔，总计1小时的实例状态历史</p>
               <div class="echart-wrapper">
@@ -108,24 +137,6 @@
           </Panel>
         </el-col>
       </el-row>
-
-      <Panel v-loading="loading">
-        <template #title>分布式服务总览</template>
-        <template #default>
-          <p>
-            确保所有远程服务均在线，离线状态将导致此远程服务以及相关功能不可用，可能会影响使用体验与数据。
-          </p>
-          <el-table :data="servicesStatus" style="width: 100%" size="small">
-            <el-table-column prop="ip" label="地址" width="180"> </el-table-column>
-            <el-table-column prop="port" label="端口" width="180"> </el-table-column>
-            <el-table-column prop="cpu" label="CPU"> </el-table-column>
-            <el-table-column prop="mem" label="内存"> </el-table-column>
-            <el-table-column prop="instance" label="已有实例"> </el-table-column>
-            <el-table-column prop="started" label="运行实例"> </el-table-column>
-            <el-table-column prop="status" label="连接状态"> </el-table-column>
-          </el-table>
-        </template>
-      </Panel>
     </el-col>
   </el-row>
 
@@ -173,7 +184,9 @@ export default {
       computerInfoA: [],
       computerInfoB: [],
       servicesStatus: [],
-      manualLink: null
+      manualLink: null,
+
+      forChartTotalInstance: 0
     };
   },
   methods: {
@@ -208,6 +221,8 @@ export default {
           runningInstance += iterator.instance.running;
         }
       }
+      this.forChartTotalInstance = totalInstance;
+
       // 计算内存
       const free = Number(system.freemem / 1024 / 1024 / 1024).toFixed(1);
       const total = Number(system.totalmem / 1024 / 1024 / 1024).toFixed(1);
@@ -302,17 +317,19 @@ export default {
             mem: `${usedmem}GB/${totalmem}GB`,
             instance: iterator.instance.total,
             started: iterator.instance.running,
-            status: iterator.available ? "正常" : "离线"
+            status: iterator.available,
+            remarks: iterator.remarks
           });
         } else {
           this.servicesStatus.push({
             ip: iterator.ip,
             port: iterator.port,
+            remarks: "--",
             cpu: "--",
             mem: "--",
             instance: "--",
             started: "--",
-            status: iterator.available ? "正常" : "离线"
+            status: iterator.available
           });
         }
       }
@@ -344,8 +361,11 @@ export default {
         }
       });
       this.systemChart4.setOption({
+        yAxis: {
+          max: this.forChartTotalInstance <= 1 ? 1 : this.forChartTotalInstance
+        },
         dataset: {
-          dimensions: ["time", "totalInstance", "runningInstance"],
+          dimensions: ["time", "runningInstance"],
           source
         }
       });

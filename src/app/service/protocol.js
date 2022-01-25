@@ -141,11 +141,7 @@ export function parseforwardAddress(addr = "", require = "http") {
 
   // 根据分开的端口和ip重新组合地址
   const checkAddr = onlyAddr.toLocaleLowerCase();
-  if (
-    checkAddr.indexOf("localhost") === 0 ||
-    checkAddr.indexOf("127.") === 0 ||
-    checkAddr.indexOf("192.168") === 0
-  ) {
+  if (checkAddr.indexOf("localhost") === 0 || checkAddr.indexOf("127.0.0.") === 0) {
     addr = `${protocol}${window.location.hostname}${daemonPort ? `:${daemonPort}` : ""}`;
   } else {
     addr = `${protocol}${onlyAddr}${daemonPort ? `:${daemonPort}` : ""}`;
