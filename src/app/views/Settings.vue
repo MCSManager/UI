@@ -55,10 +55,18 @@
             <div class="config-item">
               <div class="sub-title">
                 <p class="sub-title-title">面板访问端口</p>
-                <p class="sub-title-info">建议修改成非默认端口以确保基本的安全性。</p>
+                <p class="sub-title-info">浏览器访问网页面板的端口，必须防火墙放行此端口。</p>
               </div>
-
               <el-input placeholder="请必须填入数字" v-model="settings.httpPort"> </el-input>
+            </div>
+            <div class="config-item">
+              <div class="sub-title">
+                <p class="sub-title-title">面板数据转发端口</p>
+                <p class="sub-title-info">
+                  采用“面板端流量转发模式”时才使用此端口转发数据到守护进程端，必须开放此端口。
+                </p>
+              </div>
+              <el-input placeholder="请必须填入数字" v-model="settings.dataPort"> </el-input>
             </div>
             <div class="config-item">
               <div class="sub-title">
@@ -232,6 +240,57 @@
         </el-row>
       </template>
     </Panel>
+    <Panel>
+      <template #title>分布式通信模式</template>
+      <template #default>
+        <el-row :gutter="20">
+          <el-col :span="24" :offset="0">
+            <div class="sub-title">
+              <p class="sub-title-title">注意事项</p>
+              <p class="sub-title-info">
+                此选择请勿随意更改，更改后需要重新刷新页面才可生效。<br />在您的用户量较少时，可以采用默认的“流量转发模式”，当您的用户量过大导致面板端运行缓慢时，请采用“守护进程直连模式”模式
+              </p>
+            </div>
+          </el-col>
+
+          <el-col :md="6">
+            <SelectBlock
+              @click="changeForwardType(1)"
+              style="height: 240px"
+              :class="settings.forwardType === 1 ? 'selectedForwardMode' : ''"
+            >
+              <template #title>面板端流量转发模式</template>
+              <template #info>
+                <span>
+                  配置简单，所有流量都要经过面板端的数据端口做转发，但会增加中央面板端的流量压力。
+                </span>
+                <div style="margin-top: 8px">
+                  <img :src="require('../../assets/mode2.png')" style="width: 100%" />
+                </div>
+              </template>
+            </SelectBlock>
+          </el-col>
+
+          <el-col :md="6">
+            <SelectBlock
+              @click="changeForwardType(2)"
+              style="height: 240px"
+              :class="settings.forwardType === 2 ? 'selectedForwardMode' : ''"
+            >
+              <template #title>跨面板端远程守护进程直连模式</template>
+              <template #info>
+                <span style="margin-bottom: 4px">
+                  配置复杂，大量流量由远程守护进程与浏览器建立直接连接通道，以减小面板端的流量压力。
+                </span>
+                <div style="margin-top: 8px">
+                  <img :src="require('../../assets/mode1.png')" style="width: 100%" />
+                </div>
+              </template>
+            </SelectBlock>
+          </el-col>
+        </el-row>
+      </template>
+    </Panel>
 
     <Panel>
       <template #title>关于</template>
@@ -317,15 +376,22 @@
   </div>
 </template>
 
+<style scoped>
+.selectedForwardMode {
+  border: 1px solid #0450ff;
+  color: #409eff;
+}
+</style>
+
 <script>
 import Panel from "../../components/Panel";
 import SystemIndex from "../../components/SystemImage.vue";
 import { API_SETTINGS } from "../service/common";
 import { request } from "../service/protocol";
-
+import SelectBlock from "../../components/SelectBlock";
 export default {
   // eslint-disable-next-line vue/no-unused-components
-  components: { Panel, SystemIndex },
+  components: { Panel, SystemIndex, SelectBlock },
   data: function () {
     return {
       settings: {},
@@ -371,6 +437,19 @@ export default {
       } else {
         this.sponsorList = null;
       }
+    },
+    async changeForwardType(v) {
+      await this.$confirm(
+        "您确定要更改分布式流量转发类型吗？更改后某些配置可能需要重新调整，您随时可以调整回来。",
+        "最终确认",
+        {
+          confirmButtonText: "确定",
+          cancelButtonText: "取消",
+          type: "warning"
+        }
+      );
+      this.settings.forwardType = v;
+      this.$message({ message: "点击最上方保存按钮即可更改", type: "info" });
     }
   },
   async mounted() {

@@ -68,7 +68,7 @@
             <br />
             面板端 {{ panelVersion }} 所需最低守护进程版本：{{ specifiedDaemonVersion }}
           </p>
-          <el-table :data="servicesStatus" style="width: 100%" size="medium">
+          <el-table :data="servicesStatus" style="width: 100%" size="small">
             <el-table-column prop="ip" label="地址" width="180"> </el-table-column>
             <el-table-column prop="remarks" label="备注" width="240"> </el-table-column>
             <el-table-column prop="port" label="端口" width="180"> </el-table-column>
