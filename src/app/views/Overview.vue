@@ -314,11 +314,11 @@ export default {
         },
 
         {
-          name: "面板已用内存",
-          value: `${Number(data.process.memory / 1024 / 1024).toFixed(0)}MB`
+          name: "对应守护进程版本",
+          value: this.specifiedDaemonVersion
         },
         {
-          name: "越权请求次数",
+          name: "阻挡请求次数",
           value: data.record.illegalAccess
         },
         {
