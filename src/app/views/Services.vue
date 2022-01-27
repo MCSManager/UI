@@ -49,7 +49,9 @@
         远程服务（远程主机）必须确保全部在线且互相网络畅通，面板连接需公开放行远程服务端口与配置密钥。
         <br />
         网页需要能直接连接远程服务（上传，下载与控制台），避免使用除 localhost
-        外的局域网段任何IP，尽可能使用外网IP或域名进行连接。
+        外的局域网段任何IP，必须使用外网IP或域名进行连接。
+        <br />
+        面板端所需最低守护进程版本：{{ specifiedDaemonVersion }}
       </p>
       <el-table :data="services" style="width: 100%" size="small">
         <el-table-column label="地址" width="170">
@@ -93,6 +95,26 @@
             <div v-if="scope.row.instance">
               {{ scope.row.instance.running }}/{{ scope.row.instance.total }}
             </div>
+          </template>
+        </el-table-column>
+        <el-table-column label="版本">
+          <template #default="scope">
+            <span
+              class="color-green"
+              v-if="scope.row.version && scope.row.version === specifiedDaemonVersion"
+            >
+              <i class="el-icon-circle-check"></i> {{ scope.row.version }}
+            </span>
+            <span class="color-red">
+              <el-tooltip
+                effect="dark"
+                v-if="scope.row.version !== specifiedDaemonVersion"
+                placement="top"
+                content="与面板端要求版本不一致"
+              >
+                <span><i class="el-icon-warning-outline"></i> {{ scope.row.version }}</span>
+              </el-tooltip>
+            </span>
           </template>
         </el-table-column>
         <el-table-column label="连接状态">
@@ -268,7 +290,10 @@ export default {
       selectRow: null,
       isNewService: false,
       isNewServiceWarning: false,
-      isOpenPrinciplePanel: false
+      isOpenPrinciplePanel: false,
+
+      panelVersion: null,
+      specifiedDaemonVersion: null
     };
   },
   methods: {
@@ -293,6 +318,9 @@ export default {
         }
       });
       this.services = result.remote;
+      // 版本相关数据渲染
+      this.specifiedDaemonVersion = result.specifiedDaemonVersion;
+      this.panelVersion = result.version;
     },
     // 新增服务
     async toNewService(enforce = false) {

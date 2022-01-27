@@ -65,6 +65,8 @@
         <template #default>
           <p>
             确保所有远程服务均在线，离线状态将导致此远程服务以及相关功能不可用，可能会影响使用体验与数据。
+            <br />
+            面板端 {{ panelVersion }} 所需最低守护进程版本：{{ specifiedDaemonVersion }}
           </p>
           <el-table :data="servicesStatus" style="width: 100%" size="medium">
             <el-table-column prop="ip" label="地址" width="180"> </el-table-column>
@@ -74,6 +76,26 @@
             <el-table-column prop="mem" label="内存"> </el-table-column>
             <el-table-column prop="instance" label="已有实例"> </el-table-column>
             <el-table-column prop="started" label="运行实例"> </el-table-column>
+            <el-table-column prop="version" label="守护进程版本">
+              <template #default="scope">
+                <span
+                  class="color-green"
+                  v-if="scope.row.version && scope.row.version === specifiedDaemonVersion"
+                >
+                  <i class="el-icon-circle-check"></i> {{ scope.row.version }}
+                </span>
+                <span class="color-red">
+                  <el-tooltip
+                    effect="dark"
+                    v-if="scope.row.version !== specifiedDaemonVersion"
+                    placement="top"
+                    content="与面板端要求版本不一致"
+                  >
+                    <span><i class="el-icon-warning-outline"></i> {{ scope.row.version }}</span>
+                  </el-tooltip>
+                </span>
+              </template>
+            </el-table-column>
             <el-table-column prop="status" label="连接状态">
               <template #default="scope">
                 <span class="color-green" v-if="scope.row.status">
@@ -186,7 +208,10 @@ export default {
       servicesStatus: [],
       manualLink: null,
 
-      forChartTotalInstance: 0
+      forChartTotalInstance: 0,
+
+      specifiedDaemonVersion: null,
+      panelVersion: null
     };
   },
   methods: {
@@ -207,6 +232,10 @@ export default {
       });
     },
     render(data) {
+      // 版本相关数据渲染
+      this.specifiedDaemonVersion = data.specifiedDaemonVersion;
+      this.panelVersion = data.version;
+
       const system = data.system;
       // 表格数据渲染
       if (data.chart) this.systemChartData = data.chart;
@@ -318,6 +347,7 @@ export default {
             instance: iterator.instance.total,
             started: iterator.instance.running,
             status: iterator.available,
+            version: iterator.version,
             remarks: iterator.remarks
           });
         } else {
@@ -329,6 +359,7 @@ export default {
             mem: "--",
             instance: "--",
             started: "--",
+            version: "--",
             status: iterator.available
           });
         }
