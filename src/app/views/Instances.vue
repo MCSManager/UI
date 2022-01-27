@@ -112,7 +112,16 @@
           @selection-change="selectionChange"
         >
           <el-table-column type="selection" width="55"> </el-table-column>
-          <el-table-column prop="nickname" label="实例昵称" min-width="240"></el-table-column>
+          <el-table-column prop="nickname" label="实例昵称" min-width="240">
+            <template #default="scope">
+              <div
+                @click="toInstance(scope.row.serviceUuid, scope.row.instanceUuid)"
+                class="instanceTitle"
+              >
+                {{ scope.row.nickname }}
+              </div>
+            </template>
+          </el-table-column>
           <el-table-column prop="status" label="运行状态" width="120">
             <template #default="scope">
               <div class="color-gray" v-if="scope.row.status == 0">
@@ -152,6 +161,16 @@
     </template>
   </Panel>
 </template>
+
+<style scoped>
+.instanceTitle {
+  cursor: pointer;
+}
+
+.instanceTitle:hover {
+  color: rgb(20, 128, 230);
+}
+</style>
 
 <script>
 import { CircleCheckFilled, CircleCloseFilled } from "@element-plus/icons";
