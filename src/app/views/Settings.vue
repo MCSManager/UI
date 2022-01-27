@@ -241,14 +241,15 @@
       </template>
     </Panel>
     <Panel>
-      <template #title>分布式通信模式</template>
+      <template #title>远程守护进程数据传输模式</template>
       <template #default>
         <el-row :gutter="20">
           <el-col :span="24" :offset="0">
             <div class="sub-title">
-              <p class="sub-title-title">注意事项</p>
+              <p class="sub-title-title">使用须知</p>
               <p class="sub-title-info">
-                此选择请勿随意更改，更改后需要重新刷新页面才可生效。<br />在您的用户量较少时，可以采用默认的“流量转发模式”，当您的用户量过大导致面板端运行缓慢时，请采用“守护进程直连模式”模式
+                在您的用户量较少时，可以采用默认的“流量转发模式”，当您的用户量过大导致面板端运行缓慢时，请采用“守护进程直连模式”模式。<br />
+                为确保高可用性，建议中小型商业用户采用第二种转发模式，更改后需要重启面板端才可生效。
               </p>
             </div>
           </el-col>
