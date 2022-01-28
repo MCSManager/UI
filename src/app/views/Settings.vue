@@ -59,7 +59,7 @@
               </div>
               <el-input placeholder="请必须填入数字" v-model="settings.httpPort"> </el-input>
             </div>
-            <div class="config-item">
+            <!-- <div class="config-item">
               <div class="sub-title">
                 <p class="sub-title-title">面板数据转发端口</p>
                 <p class="sub-title-info">
@@ -67,7 +67,7 @@
                 </p>
               </div>
               <el-input placeholder="请必须填入数字" v-model="settings.dataPort"> </el-input>
-            </div>
+            </div> -->
             <div class="config-item">
               <div class="sub-title">
                 <p class="sub-title-title">面板绑定IP</p>
@@ -240,7 +240,7 @@
         </el-row>
       </template>
     </Panel>
-    <Panel>
+    <!-- <Panel>
       <template #title>远程守护进程数据传输模式</template>
       <template #default>
         <el-row :gutter="20">
@@ -291,7 +291,7 @@
           </el-col>
         </el-row>
       </template>
-    </Panel>
+    </Panel> -->
 
     <Panel>
       <template #title>关于</template>
