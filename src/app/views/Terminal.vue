@@ -793,6 +793,7 @@ export default {
         });
         this.pingConfigForm.is = false;
         this.eventConfigPanel.visible = false;
+        this.terminalSettingPanel.visible = false;
       } catch (error) {
         this.$message({
           type: "error",

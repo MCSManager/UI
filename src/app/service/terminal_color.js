@@ -39,9 +39,10 @@ export function encodeConsoleColor(text) {
   term.TERM_TEXT_B = "\x1B[1m";
 
   // 基本颜色
-  text = text.replace(/([A-Za-z _§&;\-\\.]{1,}:)/gim, "§6$1§r");
-  text = text.replace(/INFO/gm, term.TERM_TEXT_GREEN + "INFO" + term.TERM_NULL);
-  text = text.replace(/(\d{2,}:\d{2,}:\d{2,})/gm, term.TERM_TEXT_CYAN + "$1" + term.TERM_NULL);
+  text = text.replace(/\[([^[\]]+)\]/gim, "[§1$1§r]");
+  text = text.replace(/([A-Za-z0-9 _§&;\-\\.]{1,}: )/gim, "§6$1§r");
+  //   text = text.replace(/INFO/gm, term.TERM_TEXT_GREEN + "INFO" + term.TERM_NULL);
+  //   text = text.replace(/(\d{2,}:\d{2,}:\d{2,})/gm, term.TERM_TEXT_CYAN + "$1" + term.TERM_NULL);
 
   // Minecraft 原生颜色替代解析
   text = text.replace(/§0/gm, term.TERM_TEXT_WHITE);
@@ -119,6 +120,7 @@ export function encodeConsoleColor(text) {
       "\\)",
       "\\{",
       "\\}",
+      '\\"',
       "&lt;",
       "&gt;",
       "Preparing start region for level"
@@ -126,7 +128,14 @@ export function encodeConsoleColor(text) {
     //红色
     ["WARN", "EULA", "Error", "Invalid", "Stopping the server", "Caused by", "Stopping"],
     //黄色
-    ["Starting Minecraft server on", "world_the_end", "world_nether", "Done", "MCSMANAGER"]
+    [
+      "Starting Minecraft server on",
+      "world_the_end",
+      "world_nether",
+      "Done",
+      "MCSMANAGER",
+      "Server thread"
+    ]
   ];
   for (var k in RegExpStringArr) {
     for (var y in RegExpStringArr[k]) {
