@@ -147,6 +147,16 @@
                 icon="el-icon-folder-opened"
                 style="width: 100%"
                 size="small"
+                @click="toTerminalSettingPanel"
+                >终端设置</el-button
+              >
+            </el-col>
+            <el-col :sm="12" :offset="0" class="row-mb">
+              <el-button
+                :disabled="!available"
+                icon="el-icon-folder-opened"
+                style="width: 100%"
+                size="small"
                 @click="toFileManager"
                 >文件管理</el-button
               >
@@ -356,6 +366,27 @@
     </template>
   </Dialog>
 
+  <Dialog v-model="terminalSettingPanel.visible">
+    <template #title>网页终端设置</template>
+    <template #default>
+      <div class="sub-title">
+        <p class="sub-title-title">颜色渲染</p>
+        <p class="sub-title-info">
+          网页自动给输出内容增加颜色渲染，渲染的颜色不一定完全正确。<br />如果颜色渲染功能与软件自带的颜色功能冲突，可以关闭此功能。
+        </p>
+        <div class="row-mt">
+          <el-switch v-model="terminalSettingPanel.haveColor"> </el-switch>
+        </div>
+      </div>
+      <div class="row-mt">
+        <ItemGroup>
+          <el-button type="success" size="small" @click="instanceConfigUpdate">保存</el-button>
+          <el-button size="small" @click="terminalSettingPanel.visible = false">取消</el-button>
+        </ItemGroup>
+      </div>
+    </template>
+  </Dialog>
+
   <Dialog v-model="logPanel.visible">
     <template #title>终端日志</template>
     <template #default>
@@ -490,6 +521,11 @@ export default {
       logPanel: {
         visible: false,
         data: ""
+      },
+
+      terminalSettingPanel: {
+        visible: false,
+        haveColor: true
       },
 
       unavailableTerminal: false,
@@ -708,6 +744,10 @@ export default {
       }
       this.eventConfigPanel.visible = true;
     },
+    toTerminalSettingPanel() {
+      this.terminalSettingPanel.visible = true;
+      this.terminalSettingPanel.haveColor = this.instanceInfo.config.terminalOption.haveColor;
+    },
     async toLogPanel() {
       this.logPanel.data = "";
       this.logPanel.visible = true;
@@ -738,7 +778,8 @@ export default {
           params: { remote_uuid: this.serviceUuid, uuid: this.instanceUuid },
           data: {
             pingConfig: this.pingConfigForm,
-            eventTask: this.eventConfigPanel
+            eventTask: this.eventConfigPanel,
+            terminalOption: this.terminalSettingPanel
           }
         });
         this.$message({
