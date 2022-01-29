@@ -484,6 +484,7 @@ import {
 } from "../service/common";
 import router from "../router";
 import { parseforwardAddress, request } from "../service/protocol";
+import { encodeConsoleColor } from "../service/terminal_color";
 import { ElNotification } from "element-plus";
 import { statusCodeToText, typeTextToReadableText } from "../service/instance_tools";
 import { initTerminalWindow, textToTermText } from "../service/term";
@@ -602,12 +603,15 @@ export default {
 
       // 监听输出流
       this.socket.on("instance/stdout", (packet) => {
-        this.term.write(textToTermText(packet.data.text));
+        if (this.instanceInfo?.config?.terminalOption?.haveColor) {
+          this.term.write(encodeConsoleColor(packet.data.text));
+        } else {
+          this.term.write(textToTermText(packet.data.text));
+        }
       });
       // 监听实例详细信息
       this.socket.on("stream/detail", (packet) => {
         this.instanceInfo = packet.data;
-        console.log("[WS->Daemon] 实例信息", this.instanceInfo);
       });
       // 断开事件
       this.socket.on("disconnect", () => {
