@@ -108,7 +108,7 @@ export default {
         "cache-chunks": "是否启用区块缓存（建议在生产环境中禁用，因为会吃掉大量的内存）",
         "cache-images":
           "设置图像缓存的天数（有助于节省从网络下载它们的时间。设置为 0 即可禁用；默认值：0）",
-        "above-bedrock-nether-building": "阻止在地狱建造和显示高于 Y=127 的方块",
+        "above-bedrock-nether-building": "是否允许在地狱建造和显示高于 Y=127 的方块",
         metrics: {
           enabled: "是否启用bStats统计",
           uuid: "服务器UUID，请勿更改！"
