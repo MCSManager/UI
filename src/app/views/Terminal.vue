@@ -151,16 +151,7 @@
                 >终端设置</el-button
               >
             </el-col>
-            <el-col :sm="12" :offset="0" class="row-mb">
-              <el-button
-                :disabled="!available"
-                icon="el-icon-folder-opened"
-                style="width: 100%"
-                size="small"
-                @click="toFileManager"
-                >文件管理</el-button
-              >
-            </el-col>
+
             <el-col :sm="12" :offset="0" class="row-mb">
               <el-button
                 :disabled="!available"
@@ -199,6 +190,16 @@
                 size="small"
                 @click="toLogPanel"
                 >终端日志</el-button
+              >
+            </el-col>
+            <el-col :sm="24" :offset="0" class="row-mb">
+              <el-button
+                :disabled="!available"
+                icon="el-icon-folder-opened"
+                style="width: 100%"
+                size="small"
+                @click="toFileManager"
+                >文件管理</el-button
               >
             </el-col>
             <el-col :sm="24" :offset="0" v-if="isTopPermission">
