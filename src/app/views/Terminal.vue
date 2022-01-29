@@ -266,7 +266,7 @@
         <template #title>实例操作终端</template>
         <template #default>
           <div class="terminal-wrapper">
-            <div id="terminal-container" style="height: 550px; width: 100%"></div>
+            <div id="terminal-container" style="height: 560px; width: 100%"></div>
             <div id="terminal-input-wrapper">
               <el-input
                 placeholder="此处可输入命令，按回车键执行"

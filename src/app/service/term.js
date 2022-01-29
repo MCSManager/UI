@@ -44,7 +44,7 @@ export function initTerminalWindow(elem) {
     disableStdin: false,
     cursorStyle: "underline",
     cursorBlink: true,
-    fontSize: 12,
+    fontSize: 13,
     theme: {
       background: "#1e1e1e"
     }
