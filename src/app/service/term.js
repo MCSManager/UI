@@ -37,14 +37,14 @@ export const TERM_TEXT_CYAN = "\x1B[36m";
 export const TERM_TEXT_WHITE = "\x1B[37m";
 export const TERM_TEXT_B = "\x1B[1m";
 
-export function initTerminalWindow(elem) {
+export function initTerminalWindow(elem, fontSize = 13) {
   const term = new Terminal({
     rendererType: "canvas",
     convertEol: true,
     disableStdin: false,
     cursorStyle: "underline",
     cursorBlink: true,
-    fontSize: 13,
+    fontSize: fontSize,
     theme: {
       background: "#1e1e1e"
     }
