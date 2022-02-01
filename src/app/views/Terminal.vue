@@ -131,7 +131,7 @@
               <el-button style="width: 100%" size="small">自动重启 <span class="color-green">开启</span>
               </el-button>
             </el-col> -->
-            <el-col :sm="12" :offset="0" class="row-mb">
+            <el-col :lg="12" :offset="0" class="row-mb">
               <el-button
                 :disabled="!instanceInfo.config.type"
                 icon="el-icon-s-operation"
@@ -141,10 +141,10 @@
                 >特定配置</el-button
               >
             </el-col>
-            <el-col :sm="12" :offset="0" class="row-mb">
+            <el-col :lg="12" :offset="0" class="row-mb">
               <el-button
                 :disabled="!available"
-                icon="el-icon-folder-opened"
+                icon="el-icon-monitor"
                 style="width: 100%"
                 size="small"
                 @click="toTerminalSettingPanel"
@@ -152,7 +152,7 @@
               >
             </el-col>
 
-            <el-col :sm="12" :offset="0" class="row-mb">
+            <el-col :lg="12" :offset="0" class="row-mb">
               <el-button
                 :disabled="!available"
                 icon="el-icon-mobile"
@@ -162,7 +162,7 @@
                 >计划任务</el-button
               >
             </el-col>
-            <el-col :sm="12" :offset="0" class="row-mb">
+            <el-col :lg="12" :offset="0" class="row-mb">
               <el-button
                 :disabled="!available"
                 icon="el-icon-data-line"
@@ -172,7 +172,7 @@
                 >状态查询</el-button
               >
             </el-col>
-            <el-col :sm="12" :offset="0" class="row-mb">
+            <el-col :lg="12" :offset="0" class="row-mb">
               <el-button
                 :disabled="!available"
                 icon="el-icon-notebook-2"
@@ -182,7 +182,7 @@
                 >事件任务</el-button
               >
             </el-col>
-            <el-col :sm="12" :offset="0" class="row-mb">
+            <el-col :lg="12" :offset="0" class="row-mb">
               <el-button
                 :disabled="!available"
                 icon="el-icon-reading"
