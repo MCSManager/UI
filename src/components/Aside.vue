@@ -62,11 +62,11 @@
         <template #title>高级功能</template>
         <el-menu-item key="/services" index="/services">
           <i class="el-icon-connection"></i>
-          <template #title>分布式服务</template>
+          <template #title>守护进程管理</template>
         </el-menu-item>
         <el-menu-item key="/container" index="/container">
           <i class="el-icon-copy-document"></i>
-          <template #title>服务环境</template>
+          <template #title>镜像与容器</template>
         </el-menu-item>
         <!-- <el-menu-item key="/update" index="/update">
           <i class="el-icon-guide"></i>

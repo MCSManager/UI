@@ -77,7 +77,7 @@ const routes = [
   },
   {
     path: "/services",
-    name: "分布式服务",
+    name: "守护进程管理",
     component: Services
   },
   {
@@ -102,7 +102,7 @@ const routes = [
   },
   {
     path: "/container",
-    name: "服务环境",
+    name: "镜像与容器",
     component: Container
   },
   {
