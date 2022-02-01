@@ -103,6 +103,34 @@
           </div>
         </div>
 
+        <!-- 未选择守护进程时显示 -->
+        <div v-show="!currentRemoteUuid">
+          <div class="notAnyInstanceTip">
+            <i class="el-icon-guide" style="font-size: 190px"></i>
+            <div class="sub-title">
+              <div class="sub-title-title">请在左侧下拉框中选择远程守护进程</div>
+              <div class="sub-title-info">
+                默认可选择 localhost
+                守护进程，守护进程可以部署在任意主机上，帮助您快速管理多个主机并且分布式部署。
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 第一页且无任何数据时显示 -->
+        <div v-show="notAnyInstance && page === 1">
+          <div class="notAnyInstanceTip">
+            <i class="el-icon-truck" style="font-size: 190px"></i>
+            <div class="sub-title">
+              <div class="sub-title-title">无数据，请点击右上方绿色的“新建实例”按钮创建实例。</div>
+              <div class="sub-title-info">
+                应用实例可以是 Minecraft
+                服务器，也可以是其他任何应用程序，点击创建后将部署在指定的远程守护进程中。
+              </div>
+            </div>
+          </div>
+        </div>
+
         <el-table
           :data="instances"
           stripe
@@ -110,6 +138,7 @@
           size="mini"
           ref="multipleTable"
           @selection-change="selectionChange"
+          v-show="!notAnyInstance"
         >
           <el-table-column type="selection" width="55"> </el-table-column>
           <el-table-column prop="nickname" label="实例昵称" min-width="240">
@@ -170,6 +199,10 @@
 .instanceTitle:hover {
   color: rgb(20, 128, 230);
 }
+.notAnyInstanceTip {
+  text-align: center;
+  margin: 100px 0px;
+}
 </style>
 
 <script>
@@ -195,6 +228,8 @@ export default {
       loading: true,
       availableService: [], // 可用和不可用守护进程列表
       unavailableService: [],
+
+      notAnyInstance: false, // 无任何实例
 
       page: 1,
       maxPage: 1,
@@ -289,6 +324,11 @@ export default {
         this.loading = false;
         // 记录当前选择的守护进程，方便下次直接加载
         localStorage.setItem("pageSelectedRemoteUuid", this.currentRemoteUuid);
+
+        // 无任何实例时，显示快速创建界面
+        if (this.instances.length === 0) {
+          this.notAnyInstance = true;
+        }
       } catch (error) {
         this.$notify({
           title: "访问远程守护进程异常",
