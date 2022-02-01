@@ -221,13 +221,15 @@ export default {
         if (service.available) {
           this.remoteList.push({
             value: service.uuid,
-            label: `${ip} ${remarks}`
+            label: `${ip} ${remarks}`,
+            available: true
           });
           this.availableService.push(service);
         } else {
           this.remoteList.push({
             value: service.uuid,
-            label: `${ip} ${remarks} (离线)`
+            label: `${ip} ${remarks} (离线)`,
+            available: false
           });
           this.unavailableService.push(service);
         }
@@ -242,6 +244,11 @@ export default {
             return this.remoteSelectHandle();
           }
         });
+      } else {
+        this.remoteList.forEach((v) => {
+          if (v.available) this.currentRemoteUuid = v.value;
+        });
+        this.remoteSelectHandle();
       }
     },
     // 获取分布式服务具体实例列表
