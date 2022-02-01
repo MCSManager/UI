@@ -86,9 +86,9 @@
       <div>
         <div class="instance-table-warpper">
           <div>
-            <p class="color-red" v-if="!currentRemoteUuid">
-              未选择任何远程守护进程，请通过这里选择一个地址。若没有任何可选项，请前往“分布式服务”界面进行设置
-            </p>
+            <div class="color-red" v-if="!currentRemoteUuid">
+              &nbsp;错误：未选择任何远程守护进程
+            </div>
           </div>
           <div>
             <el-pagination
@@ -108,7 +108,7 @@
           <div class="notAnyInstanceTip">
             <i class="el-icon-guide" style="font-size: 190px"></i>
             <div class="sub-title">
-              <div class="sub-title-title">请在左侧下拉框中选择远程守护进程</div>
+              <div class="sub-title-title">请在左上方的下拉框中选择远程守护进程</div>
               <div class="sub-title-info">
                 默认可选择 localhost
                 守护进程，守护进程可以部署在任意主机上，帮助您快速管理多个主机并且分布式部署。
@@ -138,7 +138,7 @@
           size="mini"
           ref="multipleTable"
           @selection-change="selectionChange"
-          v-show="!notAnyInstance"
+          v-show="!notAnyInstance && currentRemoteUuid"
         >
           <el-table-column type="selection" width="55"> </el-table-column>
           <el-table-column prop="nickname" label="实例昵称" min-width="240">
@@ -328,6 +328,8 @@ export default {
         // 无任何实例时，显示快速创建界面
         if (this.instances.length === 0) {
           this.notAnyInstance = true;
+        } else {
+          this.notAnyInstance = false;
         }
       } catch (error) {
         this.$notify({
