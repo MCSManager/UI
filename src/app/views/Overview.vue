@@ -87,7 +87,7 @@
                 <span class="color-red">
                   <el-tooltip
                     effect="dark"
-                    v-if="scope.row.version !== specifiedDaemonVersion"
+                    v-if="scope.row.version !== specifiedDaemonVersion && scope.row.status"
                     placement="top"
                     content="与面板端要求版本不一致"
                   >
