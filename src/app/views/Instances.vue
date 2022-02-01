@@ -27,7 +27,7 @@
 
 <template>
   <Panel>
-    <template #title>分布式应用实例列表</template>
+    <template #title>应用实例列表</template>
     <template #default>
       <el-row :gutter="20" justify="space-between" class="row-mb">
         <el-col :md="12" :offset="0">

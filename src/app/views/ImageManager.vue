@@ -27,7 +27,7 @@
 
 <template>
   <Panel>
-    <template #title>镜像管理</template>
+    <template #title>远程主机镜像管理</template>
     <template #default>
       <div class="flex flex-space-between flex-align-items-center">
         <div>
@@ -45,6 +45,7 @@
   <Panel>
     <template #title>远程主机镜像列表</template>
     <template #default>
+      <p>镜像构建与容器运行依赖于 Docker 软件，物理主机上所有守护进程将共享所有镜像。</p>
       <el-table :data="images" stripe style="width: 100%" size="small">
         <el-table-column label="ID">
           <template #default="scope">
@@ -72,6 +73,7 @@
   <Panel>
     <template #title>远程主机容器列表</template>
     <template #default>
+      <p>容器列表代表所有正在独立镜像环境运行的应用实例，此处列表不仅仅包括面板所启动的容器。</p>
       <el-table :data="containers" stripe style="width: 100%" size="small">
         <el-table-column prop="Command" label="ID">
           <template #default="scope">

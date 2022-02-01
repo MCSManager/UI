@@ -366,7 +366,6 @@ export default {
       }
     },
     initChart() {
-      console.log("正在初始化表格....");
       // 基于准备好的dom，初始化echarts实例
       this.systemChart = echarts.init(document.getElementById("echart-wrapper-main"));
       this.systemChart.setOption(getDefaultOption());

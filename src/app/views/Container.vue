@@ -27,7 +27,7 @@
 
 <template>
   <Panel>
-    <template #title>分布式服务列表</template>
+    <template #title>远程守护进程列表</template>
     <template #default>
       <el-table :data="services" stripe style="width: 100%" size="small">
         <el-table-column prop="ip" label="地址"></el-table-column>
