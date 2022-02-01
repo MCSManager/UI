@@ -434,24 +434,27 @@
     <template #default>
       <div class="sub-title">
         <p class="sub-title-title">
-          {{ unavailableIp ? `无法连接到 ${unavailableIp}` : "网页无法与远程服务建立直接连接通道" }}
+          {{ unavailableIp ? `浏览器无法连接到 ${unavailableIp}` : "浏览器无法与远程服务建立连接" }}
         </p>
         <p class="sub-title-info">
           <span>可能是您未开放远程服务的端口导致，或是使用了内网地址的缘故</span>
-          <br />
-          <span>请您尝试一下操作进行修复</span>
         </p>
-        <ul style="padding-left: 20px">
-          <li>检查您自己的网络是否通畅，远程服务是否在线状态</li>
-          <li>检查<b>分布式服务界面</b>连接的远程服务<b>是否为公网地址</b></li>
-          <li>检查<b>远程服务是否已经开放端口</b>，一般默认是 24444 端口</li>
-          <li>检查分布式服务界面连接的远程服务<b>密钥是否正确</b></li>
-          <br />
-          <li>重启 Web 面板端程序</li>
-          <li>重启远程服务守护进程 (Daemon) 程序</li>
-          <br />
-          <li>如果有 Https 等，则需采用 wss:// 协议连接守护进程</li>
-          <li>若有反向代理，FRP 等，需兼容 Websocket 功能</li>
+        <div>
+          <img
+            :src="require('../../assets/daemon_connection_error.png')"
+            alt=""
+            srcset=""
+            style="width: 460px"
+          />
+        </div>
+        <div class="sub-title">可能的解决方案</div>
+        <ol style="padding-left: 20px">
+          <li>确保守护进程的地址是公网地址，且守护进程端口已经开放。</li>
+          <li>
+            若有反向代理，FRP，HTTPS 等，请采用 wss:// 协议连接，
+            <br />
+            并且守护进程端地址也需要 HTTPS，WSS 支持。
+          </li>
           <li>
             前往
             <a href="https://docs.mcsmanager.com" target="_blank" rel="noopener noreferrer"
@@ -459,7 +462,7 @@
             >
             了解更多
           </li>
-        </ul>
+        </ol>
       </div>
     </template>
   </Dialog>
@@ -593,7 +596,7 @@ export default {
         password,
         () => {
           this.unavailableIp = null;
-          this.unavailableTerminal = false;
+          this.unavailableTerminal = true;
         },
         () => {
           this.unavailableIp = addr;
