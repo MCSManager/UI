@@ -43,7 +43,7 @@
   </Panel>
 
   <Panel>
-    <template #title>远程服务镜像列表</template>
+    <template #title>远程主机镜像列表</template>
     <template #default>
       <el-table :data="images" stripe style="width: 100%" size="small">
         <el-table-column label="ID">
@@ -70,7 +70,7 @@
   </Panel>
 
   <Panel>
-    <template #title>远程服务容器列表</template>
+    <template #title>远程主机容器列表</template>
     <template #default>
       <el-table :data="containers" stripe style="width: 100%" size="small">
         <el-table-column prop="Command" label="ID">

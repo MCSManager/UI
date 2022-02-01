@@ -434,10 +434,10 @@
     <template #default>
       <div class="sub-title">
         <p class="sub-title-title">
-          {{ unavailableIp ? `浏览器无法连接到 ${unavailableIp}` : "浏览器无法与远程服务建立连接" }}
+          {{ unavailableIp ? `浏览器无法连接到 ${unavailableIp}` : "浏览器无法与守护进程建立连接" }}
         </p>
         <p class="sub-title-info">
-          <span>可能是您未开放远程服务的端口导致，或是使用了内网地址的缘故</span>
+          <span>可能是您未开放守护进程的端口导致，或是使用了内网地址的缘故</span>
         </p>
         <div>
           <img

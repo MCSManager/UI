@@ -102,7 +102,7 @@ const routes = [
   },
   {
     path: "/container",
-    name: "远程服务环境",
+    name: "服务环境",
     component: Container
   },
   {

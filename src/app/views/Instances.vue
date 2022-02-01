@@ -36,7 +36,7 @@
               style="width: 320px"
               v-model="currentRemoteUuid"
               filterable
-              placeholder="请选择远程服务地址"
+              placeholder="请选择远程守护进程地址"
               size="small"
               @change="remoteSelectHandle"
             >
@@ -87,7 +87,7 @@
         <div class="instance-table-warpper">
           <div>
             <p class="color-red" v-if="!currentRemoteUuid">
-              未选择任何远程服务，请通过这里选择一个地址。若没有任何可选项，请前往“分布式服务”界面进行设置
+              未选择任何远程守护进程，请通过这里选择一个地址。若没有任何可选项，请前往“分布式服务”界面进行设置
             </p>
           </div>
           <div>
@@ -193,7 +193,7 @@ export default {
       multipleSelection: [], // 表格多选属性
       startedInstance: 0,
       loading: true,
-      availableService: [], // 可用和不可用远程服务列表
+      availableService: [], // 可用和不可用守护进程列表
       unavailableService: [],
 
       page: 1,
@@ -251,10 +251,10 @@ export default {
         this.remoteSelectHandle();
       }
     },
-    // 获取分布式服务具体实例列表
+    // 获取守护进程具体实例列表
     async remoteSelectHandle() {
       try {
-        if (!this.currentRemoteUuid) throw new Error("还未选择远程服务器");
+        if (!this.currentRemoteUuid) throw new Error("还未选择远程守护进程");
         this.startedInstance = 0;
         this.instances = [];
         this.loading = true;
@@ -287,11 +287,11 @@ export default {
           });
         });
         this.loading = false;
-        // 记录当前选择的远程服务，方便下次直接加载
+        // 记录当前选择的守护进程，方便下次直接加载
         localStorage.setItem("pageSelectedRemoteUuid", this.currentRemoteUuid);
       } catch (error) {
         this.$notify({
-          title: "访问远程服务异常",
+          title: "访问远程守护进程异常",
           message: error.toString(),
           type: "error"
         });
@@ -319,7 +319,7 @@ export default {
     },
     toNewInstance() {
       if (!this.currentRemoteUuid) {
-        return this.$message({ type: "info", message: "请先在左侧下拉框中选择远程服务" });
+        return this.$message({ type: "info", message: "请先在左侧下拉框中选择守护进程" });
       }
       router.push({ path: `/new_instace/${this.currentRemoteUuid}` });
     },

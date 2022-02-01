@@ -132,7 +132,7 @@ export default {
     },
     async remoteSelectHandle() {
       try {
-        if (!this.selectedServiceUuid) throw new Error("还未选择远程服务器");
+        if (!this.selectedServiceUuid) throw new Error("还未选择远程守护进程");
         const hostIp = this.selectedServiceUuid.split(" ")[1];
         const serviceUuid = this.selectedServiceUuid.split(" ")[0];
         this.loading = true;

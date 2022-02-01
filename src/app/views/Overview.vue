@@ -64,7 +64,7 @@
         <template #title>分布式服务总览</template>
         <template #default>
           <p>
-            确保所有远程服务均在线，离线状态将导致此远程服务以及相关功能不可用，可能会影响使用体验与数据。
+            确保所有守护进程均在线，离线状态将导致此守护进程以及相关功能不可用，可能会影响使用体验与数据。
             <br />
             面板端 {{ panelVersion }} 所需最低守护进程版本：{{ specifiedDaemonVersion }}
           </p>
@@ -331,7 +331,7 @@ export default {
           warn: data.record.banips > 0
         }
       ];
-      // 装载远程服务信息
+      // 装载守护进程信息
       this.servicesStatus = [];
       for (const iterator of remote) {
         if (iterator.system) {

@@ -27,7 +27,7 @@
 
 <template>
   <Panel>
-    <template #title>远程服务管理</template>
+    <template #title>远程守护进程管理</template>
     <template #default>
       <div class="flex flex-space-between">
         <ItemGroup>
@@ -43,15 +43,15 @@
     </template>
   </Panel>
   <Panel>
-    <template #title>所有分布式服务总览</template>
+    <template #title>已配置的守护进程</template>
     <template #default>
       <p>
-        远程服务（远程主机）必须确保全部在线且互相网络畅通，面板连接需公开放行远程服务端口与配置密钥。
+        远程守护进程（在任何物理主机上）必须确保全部在线且互相网络畅通，面板连接需公开放行守护进程端口与配置密钥。
         <br />
-        网页需要能直接连接远程服务（上传，下载与控制台），避免使用除 localhost
+        网页需要能直接连接远程守护进程（上传，下载与控制台），避免使用除 localhost
         外的局域网段任何IP，必须使用外网IP或域名进行连接。
         <br />
-        面板端所需最低守护进程版本：{{ specifiedDaemonVersion }}
+        面板端对应的守护进程版本：{{ specifiedDaemonVersion }}
       </p>
       <el-table :data="services" style="width: 100%" size="small">
         <el-table-column label="地址" width="170">
@@ -145,7 +145,7 @@
   </Panel>
 
   <Dialog v-model="isNewService">
-    <template #title>新增远程服务</template>
+    <template #title>新增远程守护进程</template>
     <template #default>
       <div>
         <div class="sub-title">备注信息</div>
@@ -155,7 +155,7 @@
           size="small"
         ></el-input>
         <div class="sub-title row-mt">
-          <div class="sub-title-title">远程服务所在主机的IP地址</div>
+          <div class="sub-title-title">守护进程所在主机的IP地址</div>
           <div class="sub-title-info">
             <b>必须使用外网地址</b>或 localhost 地址，否则将导致远程实例无法连接
           </div>
@@ -165,7 +165,7 @@
           placeholder="必填，列如 mcsmanager.com，43.123.211.12"
           size="small"
         ></el-input>
-        <div class="sub-title row-mt">远程服务端口</div>
+        <div class="sub-title row-mt">守护进程端口</div>
         <el-input
           v-model="newServiceInfo.port"
           placeholder="必填，列如 24444"
@@ -207,7 +207,7 @@
           检测到您的连接IP为 :{{ newServiceInfo.ip }}，似乎是一个内网地址？
         </div>
         <div class="sub-title-info">
-          面板与远程服务端均要能够让用户访问，以此行为设计即可实现流量分流减轻中心面板端的压力。
+          面板与守护进程端均要能够让用户访问，以此行为设计即可实现流量分流减轻中心面板端的压力。
         </div>
       </div>
       <div class="sub-title">
@@ -383,7 +383,7 @@ export default {
     },
     // 删除服务
     async deleteService(uuid) {
-      await this.$confirm("此操作将永久删除该远程服务，是否继续？", "警告", {
+      await this.$confirm("此操作将永久删除该守护进程，是否继续？", "警告", {
         confirmButtonText: "删除",
         cancelButtonText: "取消",
         type: "warning"
