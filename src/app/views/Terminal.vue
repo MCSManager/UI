@@ -596,7 +596,7 @@ export default {
         password,
         () => {
           this.unavailableIp = null;
-          this.unavailableTerminal = true;
+          this.unavailableTerminal = false;
         },
         () => {
           this.unavailableIp = addr;
