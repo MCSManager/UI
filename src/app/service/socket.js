@@ -69,6 +69,7 @@ export function connectRemoteService(
       console.log("[WS->Daemon/stream/auth] Websocket 身份验证成功");
       connectCallback();
     } else {
+      console.log("身份认证错误:", data);
       ElNotification({
         title: "无法与终端建立连接",
         message: `<span style="font-size: 12px;">身份验证(stream/auth)失败，可能是守护进程导致，请刷新页面重试。</span>`,

@@ -176,12 +176,7 @@
           <div class="sub-title-info">
             在守护进程启动时控制台上会输出显示，务必确保密钥安全
             <br />
-            <a
-              href="https://github.com/Suwings/MCSManager-Document/wiki/%E5%AE%88%E6%8A%A4%E8%BF%9B%E7%A8%8B%E5%AF%86%E9%92%A5%E6%9C%89%E4%BD%95%E4%BD%9C%E7%94%A8%EF%BC%9F"
-              class="color-blue"
-            >
-              如何获取密钥？
-            </a>
+            <a href="https://docs.mcsmanager.com/" class="color-blue"> 如何获取密钥？ </a>
           </div>
         </div>
         <el-input

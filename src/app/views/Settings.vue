@@ -301,7 +301,7 @@
             软件根据
             <a
               target="black"
-              href="https://github.com/Suwings/MCSManager-Daemon/blob/master/LICENSE"
+              href="https://github.com/MCSManager/MCSManager-Daemon/blob/master/LICENSE"
               >GPL-3.0</a
             >
             开源软件协议发行

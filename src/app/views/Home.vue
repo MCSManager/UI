@@ -89,7 +89,7 @@
             </el-col>
             <el-col :span="6">
               <div class="manual-link-block-wrapper">
-                <a class="manual-link-block" href="https://github.com/Suwings/MCSManager/wiki"
+                <a class="manual-link-block" href="https://github.com/MCSManager/MCSManager/wiki"
                   ><i class="el-icon-link"></i> 维基百科</a
                 >
               </div>
