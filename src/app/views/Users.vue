@@ -218,7 +218,7 @@ export default {
       // isAssignLoading: true,
       editUserInfo: {},
       objects: [],
-      remoteObjects: [], // 以远程服务器为主键的列表
+      remoteObjects: [], // 以守护进程为主键的列表
       instances: [], // 以实例为主键的列表
       multipleSelection: [], // 表格多选属性
 
