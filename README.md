@@ -25,12 +25,15 @@ MCSManager 面板（简称：MCSM 面板）是一款全中文，轻量级，开�
 
 ## 搭建开发环境
 
-```
+```bash
 git clone https://github.com/MCSManager/MCSManager-UI.git
 cd MCSManager-UI
 npm install
 npm run serve
+# 访问 http://localhost:8080/ 即可预览界面
 ```
+
+> 需要面板端项目同时运行以提供后端接口能力，默认所有请求转发到 23333 端口。
 
 <br />
 
