@@ -1,62 +1,70 @@
-<!--
- * @Author: your name
- * @Date: 2021-12-04 19:37:37
- * @LastEditTime: 2021-12-04 19:47:44
- * @LastEditors: Please set LastEditors
- * @Description: 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
- * @FilePath: \MCSManager-UI\README.md
--->
-
-```
-______  _______________________  ___
-___   |/  /_  ____/_  ___/__   |/  /_____ _____________ _______ _____________
-__  /|_/ /_  /    _____ \__  /|_/ /_  __  /_  __ \  __  /_  __  /  _ \_  ___/
-_  /  / / / /___  ____/ /_  /  / / / /_/ /_  / / / /_/ /_  /_/ //  __/  /
-/_/  /_/  \____/  /____/ /_/  /_/  \__,_/ /_/ /_/\__,_/ _\__, / \___//_/
-                                                        /____/
-```
-
-[![Status](https://img.shields.io/badge/npm-v8.1.0-blue.svg)](https://www.npmjs.com/)
-[![Status](https://img.shields.io/badge/node-v14.17.6-blue.svg)](https://nodejs.org/en/download/)
-[![Status](https://img.shields.io/badge/License-GPL-red.svg)](https://github.com/MCSManager)
-
-适用于 MCSManager 未来版本的 Web 界面项目。
-
-[官方网站](http://mcsm.suwings.top/) | 当前正在开发中
+<img src="https://public-link.oss-cn-shenzhen.aliyuncs.com/mcsm_picture/logo.png" alt="MCSManager 图标.png" width="500px" />
 
 <br />
 
-## 相关项目
+[![Status](https://img.shields.io/badge/npm-v6.14.15-blue.svg)](https://www.npmjs.com/)
+[![Status](https://img.shields.io/badge/node-v14.17.6-blue.svg)](https://nodejs.org/en/download/)
+[![Status](https://img.shields.io/badge/License-GPL-red.svg)](https://github.com/Suwings/MCSManager)
 
-[MCSManager 守护进程项目](https://github.com/MCSManager/MCSManager-Daemon)
-[MCSManager 前端项目](https://github.com/MCSManager/MCSManager-UI)
-[MCSManager 8.X 版本主项目](https://github.com/MCSManager/MCSManager)
+[官方网站](http://mcsmanager.com/) | [使用文档](https://docs.mcsmanager.com/) | [团队主页](https://github.com/MCSManager) | [面板端项目](https://github.com/MCSManager/MCSManager) | [网页前端项目](https://github.com/MCSManager/UI) | [守护进程项目](https://github.com/MCSManager/Daemon)
+
+**适用于 MCSManager 的 Web 界面项目。**
 
 <br />
 
 ## MCSManager 简介
 
-这是一款可以管理多个 Minecraft 服务端（支持群组端）的 Web 管理面板，并且可以分配多个子账号来分别管理不同的 Minecraft 服务端，支持绝大部分主流的服务端，甚至是其他非 Minecraft 的程序。
 
-控制面板可运行在 Windows 与 Linux 平台，无需数据库与任何系统配置，只需安装 node 环境即可快速运行，属于轻量级的 Minecraft 服务端控制面板。
+**分布式，稳定可靠，开箱即用，高扩展性，支持 Minecraft 和其他少数游戏的控制面板。**
+
+MCSManager 面板（简称：MCSM 面板）是一款全中文，轻量级，开箱即用，多实例和支持 Docker 的 Minecraft 服务端管理面板。
+
+此软件在 Minecraft 和其他游戏社区内中已有一定的流行程度，它可以帮助你集中管理多个物理服务器，动态在任何主机上创建游戏服务端，并且提供安全可靠的多用户权限系统，可以很轻松的帮助你管理多个服务器。
 
 <br />
 
 ## 搭建开发环境
 
-```
+```bash
 git clone https://github.com/MCSManager/MCSManager-UI.git
 cd MCSManager-UI
 npm install
 npm run serve
+# 访问 http://localhost:8080/ 即可预览界面
 ```
 
-<br />
-
-## 开源协议
-
-本项目为 MCSManager 软件的前端界面设计，遵循 GPL License。
-
-在公开完整源代码的情况下，准许自定义界面，二次开发，商业使用和主题开发等。
+> 需要面板端项目同时运行以提供后端接口能力，默认所有请求转发到 23333 端口。
 
 <br />
+
+## 问题报告
+
+欢迎发现的任何问题进行反馈，必当及时修复。
+
+若发现严重安全漏洞又不便公开发布，请发送邮件至: Suwings@outlook.com，安全问题修复后将在代码中附加漏洞发现者姓名。
+
+<br />
+
+## 版权约束
+
+此开源项目使用 [GPL 协议](LICENSE) 作为开源协议，未经过官方闭源开发授权，您如果对代码有任何修改，则必须要公开您修改后的源代码，具体约束如下。
+
+**准许**
+
+- 对软件源代码进行修改，复制，分发。
+- 利用软件进行商业使用，赚取利润。
+
+**必须**
+
+- 公开提供您修改后的完整源代码。
+- 在代码文件、界面中保留版权声明。
+
+**禁止**
+
+- 禁止售卖此软件，申请专利，著作权等。
+
+> 更多授权与版权约束详情，请前往官方网站界面了解更多。
+
+<br />
+
+
