@@ -1,6 +1,10 @@
 {
   "name": "mcsmanager-ui",
   "version": "1.6.0",
+  "description": "ui for mcsmanager",
+  "homepage": "https://mcsmanager.com/",
+  "author": "https://github.com/Suwings",
+  "license": "GPL-3.0",
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
