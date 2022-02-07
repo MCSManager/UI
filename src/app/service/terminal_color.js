@@ -19,7 +19,7 @@
   可以前往 https://mcsmanager.com/ 阅读用户协议，申请闭源开发授权等。
 */
 
-import {termColor} from './term';
+import { termColor } from './term';
 
 // 用于 Terminal 视图中终端组件的文字颜色渲染
 export function encodeConsoleColor(text) {

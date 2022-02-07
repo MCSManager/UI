@@ -19,8 +19,8 @@
   可以前往 https://mcsmanager.com/ 阅读用户协议，申请闭源开发授权等。
 */
 
-import {Terminal} from "xterm";
-import {FitAddon} from "xterm-addon-fit";
+import { Terminal } from "xterm";
+import { FitAddon } from "xterm-addon-fit";
 
 export const termColor = {};
 termColor.TERM_RESET = "\x1B[0m";
