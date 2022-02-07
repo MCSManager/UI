@@ -4,7 +4,7 @@
 
 [![Status](https://img.shields.io/badge/npm-v6.14.15-blue.svg)](https://www.npmjs.com/)
 [![Status](https://img.shields.io/badge/node-v14.17.6-blue.svg)](https://nodejs.org/en/download/)
-[![Status](https://img.shields.io/badge/License-GPL-red.svg)](https://github.com/Suwings/MCSManager)
+[![Status](https://img.shields.io/badge/License-AGPL-red.svg)](https://github.com/Suwings/MCSManager)
 
 [官方网站](http://mcsmanager.com/) | [使用文档](https://docs.mcsmanager.com/) | [团队主页](https://github.com/MCSManager) | [面板端项目](https://github.com/MCSManager/MCSManager) | [网页前端项目](https://github.com/MCSManager/UI) | [守护进程项目](https://github.com/MCSManager/Daemon)
 
@@ -15,7 +15,6 @@
 <br />
 
 ## MCSManager 简介
-
 
 **分布式，稳定可靠，开箱即用，高扩展性，支持 Minecraft 和其他少数游戏的控制面板。**
 
@@ -47,16 +46,13 @@ npm run serve
 
 <br />
 
-
 ## 贡献
 
 如果你在使用过程中发现任何问题，可以提交 Issue 或自行 Fork 修改后提交 Pull Request。
 
 代码需要保持现有格式，不得格式化多余代码，具体可[参考这里](https://github.com/MCSManager/MCSManager/issues/544)。
 
-
 <br />
-
 
 ## 版权约束
 
@@ -79,5 +75,3 @@ npm run serve
 > 更多授权与版权约束详情，请前往官方网站界面了解更多。
 
 <br />
-
-
