@@ -216,7 +216,7 @@
                     </div>
                   </div>
                   <el-input
-                    v-model="instanceInfo.config.docker.name"
+                    v-model="instanceInfo.config.docker.containerName"
                     type="text"
                     placeholder="示例 lobby-1"
                   >
