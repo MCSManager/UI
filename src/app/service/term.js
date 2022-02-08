@@ -71,14 +71,14 @@ export function initTerminalWindow(elem, fontSize = 14) {
   }, 3000);
 
   term.writeln(`${termColor.TERM_TEXT_GOLD}MCSManager Terminal ${termColor.TERM_TEXT_DARK_AQUA}[Powered by Term.js]`);
-  term.writeln(`${termColor.TERM_TEXT_GOLD}Copyright Suwings All rights reserved`);
+  term.writeln(`${termColor.TERM_TEXT_GOLD}Copyright Suwings All rights reserved${termColor.TERM_RESET}\r\n`);
   term.info = (msg) => {
     term.writeln(`\r\n[MCSManager] [INFO] ${msg}`);
   };
-  term.prompt = () => {
-    term.write(`${termColor.TERM_RESET}\r\n$`);
-  };
-  term.prompt();
+  // term.prompt = () => {
+  //   term.write(`${termColor.TERM_RESET}\r\n$ `);
+  // };
+  //term.prompt();
   return term;
 }
 
