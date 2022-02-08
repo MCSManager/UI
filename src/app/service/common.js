@@ -70,6 +70,7 @@ export const API_SETTINGS = `${API_URL}/api/overview/setting`;
 
 export const API_IMAGES = `${API_URL}/api/environment/image`;
 export const API_CONTAINERS = `${API_URL}/api/environment/containers`;
+export const API_NETWORK_MODES = `${API_URL}/api/environment/networkModes`;
 export const API_PROGRESS = `${API_URL}/api/environment/progress`;
 
 export function sleep(t) {

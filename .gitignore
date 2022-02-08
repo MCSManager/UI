@@ -114,3 +114,6 @@ dist
 # TernJS port file
 .tern-port
 workspace.code-workspace
+
+# InteliJ IDEA project files
+/.idea/*
