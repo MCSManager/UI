@@ -26,7 +26,7 @@ export function encodeConsoleColor(text) {
 
   // 基本颜色
   text = text.replace(/ \[([A-Za-z0-9 _§&;\-\\.]+)]/gim, " [§3$1§r]");
-  text = text.replace(/^\[([A-Za-z0-9 :_§&;\-\\.]+)]/gim, "[§3$1§r]");
+  text = text.replace(/^\[([A-Za-z0-9 _§&;\-\\.]+)]/gim, "[§3$1§r]");
   text = text.replace(/([A-Za-z0-9 _§&;\-\\.]+: )/gim, "§6$1§r");
   //   text = text.replace(/INFO/gm, term.TERM_TEXT_GREEN + "INFO" + term.TERM_NULL);
   //   text = text.replace(/(\d{2,}:\d{2,}:\d{2,})/gm, term.TERM_TEXT_CYAN + "$1" + term.TERM_NULL);
