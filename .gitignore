@@ -115,5 +115,5 @@ dist
 .tern-port
 workspace.code-workspace
 
-# InteliJ IDEA project files
+# IntelliJ IDEA project files
 /.idea/*
