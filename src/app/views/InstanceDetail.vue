@@ -212,7 +212,7 @@
                   <div class="sub-title">
                     <div class="sub-title-title">容器名</div>
                     <div class="sub-title-info">
-                      容器创建使用的名字
+                      容器创建使用的名字 为空随机生成 长度 (2, 64)
                     </div>
                   </div>
                   <el-input
@@ -224,9 +224,9 @@
                 </el-col>
                 <el-col :md="8" class="row-mt" :offset="0">
                   <div class="sub-title">
-                    <div class="sub-title-title">网桥</div>
+                    <div class="sub-title-title">网络模式</div>
                     <div class="sub-title-info">
-                      选择容器接入的网桥
+                      选择容器接入的网络模式 如 bridge 网桥
                     </div>
                   </div>
                   <el-select
@@ -239,9 +239,9 @@
                   >
                     <el-option
                       v-for="item in networkModes"
-                      :key="item.RepoTags[0]"
-                      :label="item.RepoTags[0]"
-                      :value="item.RepoTags[0]"
+                      :key="item.Name"
+                      :label="item.Name"
+                      :value="item.Name"
                     >
                     </el-option>
                   </el-select>
@@ -250,7 +250,7 @@
                   <div class="sub-title">
                     <div class="sub-title-title">网络别名</div>
                     <div class="sub-title-info">
-                      用于容器互相访问 空格分隔
+                      用于容器互相访问 空格分隔 只有用户定义的网络才能使用
                     </div>
                   </div>
                   <el-input
