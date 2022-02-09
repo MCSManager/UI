@@ -181,7 +181,7 @@
                     placeholder="请选择"
                     @focus="loadImages"
                     style="width: 100%"
-                    v-loading="componentsLoading"
+                    v-loading="imageListLoading"
                   >
                     <el-option
                       v-for="item in images"
@@ -226,16 +226,16 @@
                   <div class="sub-title">
                     <div class="sub-title-title">网桥</div>
                     <div class="sub-title-info">
-                      选择容器接入的网桥，如果不选择，则默认使用 Host 模式
+                      选择容器接入的网桥
                     </div>
                   </div>
                   <el-select
                     filterable
-                    v-model="instanceInfo.config.docker.bridge"
+                    v-model="instanceInfo.config.docker.networkMode"
                     placeholder="请选择"
                     @focus="loadNetworkModes"
                     style="width: 100%"
-                    v-loading="componentsLoading"
+                    v-loading="networkModeListLoading"
                   >
                     <el-option
                       v-for="item in networkModes"
@@ -345,7 +345,8 @@ export default {
       loading: true,
       images: [],
       networkModes: [],
-      componentsLoading: false,
+      imageListLoading: false,
+      networkModeListLoading: false,
       commandAssistPanel: false
     };
   },
@@ -393,7 +394,7 @@ export default {
       return statusCodeToText(p);
     },
     async loadImages() {
-      this.componentsLoading = true;
+      this.imageListLoading = true;
       try {
         this.images = await request({
           method: "GET",
@@ -408,13 +409,13 @@ export default {
           type: "error"
         });
       } finally {
-        this.componentsLoading = false;
+        this.imageListLoading = false;
       }
       return this.images;
     },
 
     async loadNetworkModes() {
-      this.componentsLoading = true;
+      this.networkModeListLoading = true;
       try {
         this.networkModes = await request({
           method: "GET",
@@ -429,7 +430,7 @@ export default {
           type: "error"
         });
       } finally {
-        this.componentsLoading = false;
+        this.networkModeListLoading = false;
       }
       return this.networkModes;
     },
