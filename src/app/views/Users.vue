@@ -143,7 +143,7 @@
         </div>
         <div class="row-mt">
           <el-button type="success" size="small" @click="createUser">新增</el-button>
-          <el-button @click="cancelEditPanel" size="small">取消</el-button>
+          <el-button @click="cancelNewPanel" size="small">取消</el-button>
         </div>
       </div>
     </template>
@@ -284,6 +284,10 @@ export default {
     },
     async cancelEditPanel() {
       this.isEditUser = false;
+      await this.render();
+    },
+    async cancelNewPanel() {
+      this.isNewUser = false;
       await this.render();
     },
     async toAssignPanel(row) {
