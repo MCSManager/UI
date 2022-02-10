@@ -463,6 +463,8 @@ export default {
       serviceUuid: this.$route.params.serviceUuid,
       instanceUuid: this.$route.params.instanceUuid,
       term: null,
+      terminalWidth: 0,
+      terminalHeight: 0,
       command: "",
       available: false,
       socket: null,
@@ -524,6 +526,7 @@ export default {
     },
     // 请求数据源（Websocket）
     async renderFromSocket() {
+      this.sendResize(this.terminalWidth, this.terminalHeight);
       this.socket.emit("stream/detail", {});
     },
     // 与守护进程建立连接
@@ -675,14 +678,22 @@ export default {
         setTimeout(() => (this.busy = false), 2000);
       }
     },
-    // 使用Websocket发送命令
+    sendResize(w, h) {
+      if (this.instanceInfo.config.processType !== "docker") return;
+      if (!this.socket || !this.available) return;
+      if (!this.isStarted) return;
+      this.socket.emit("stream/resize", {
+        data: { w, h }
+      });
+    },
+    // 使用Websocket发送输入
     sendInput(input) {
       if (this.instanceInfo.config.processType !== "docker") return this.$message({
         message: "只有docker实例支持直接使用控制台输入",
         type: "error"
       });
       if (!this.socket || !this.available) return this.$message({ message: "无法输入到终端，数据流通道不可用", type: "error" });
-      if (this.instanceInfo.started === 0) return this.$message({ message: "无法输入到终端，服务器未开启", type: "error" });
+      if (!this.isStarted) return this.$message({ message: "无法输入到终端，服务器未开启", type: "error" });
       this.socket.emit("stream/input", {
         data: { input }
       });
@@ -690,7 +701,7 @@ export default {
     // 使用Websocket发送命令
     sendCommand(command, method) {
       if (!this.socket || !this.available) return this.$message({ message: "无法执行命令，数据流通道不可用", type: "error" });
-      if (this.instanceInfo.started === 0) return this.$message({ message: "无法执行命令，服务器未开启", type: "error" });
+      if (!this.isStarted) return this.$message({ message: "无法执行命令，服务器未开启", type: "error" });
       if (method !== 1) this.pushHistoryCommand(command);
       this.socket.emit("stream/command", {
         data: { command }
@@ -739,6 +750,7 @@ export default {
         });
         this.term.clear();
         this.term.write(text);
+        this.term.scrollToBottom();
       } catch (error) {
         this.term.write(error);
       }
@@ -794,10 +806,18 @@ export default {
 
       // 初始化终端窗口
       this.initTerm();
+      this.term.onResize(size => {
+        this.terminalHeight = size.rows
+        this.terminalWidth = size.cols
+        this.sendResize(size.cols, size.rows);
+      });
+      this.term.fitAddon.fit();
+      window.onresize = () => {
+        this.term.fitAddon.fit();
+      };
 
       // 与守护进程建立 Websocket 连接
       await this.setUpWebsocket();
-
       // 请求数据 & 启用状态获取定时器
       await this.renderFromSocket();
       this.startInterval();
