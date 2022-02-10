@@ -49,7 +49,7 @@
                   <div class="sub-title-title">实例名称</div>
                   <div class="sub-title-info">支持中文，尽可能保证唯一性</div>
                 </div>
-                <el-input v-model="instanceInfo.config.nickname" type="text"> </el-input>
+                <el-input v-model="instanceInfo.config.nickname" type="text"></el-input>
               </el-col>
               <el-col :md="24" class="row-mt">
                 <div class="sub-title">
@@ -91,7 +91,7 @@
                   </div>
                 </div>
                 <div class="flex">
-                  <el-input v-model="instanceInfo.config.startCommand" type="text"> </el-input>
+                  <el-input v-model="instanceInfo.config.startCommand" type="text"></el-input>
                   <el-button type="primary" plain @click="openCommandAssistCall(1)">
                     命令生成
                   </el-button>
@@ -102,35 +102,35 @@
                   <div class="sub-title-title">工作目录</div>
                   <div class="sub-title-info">实例运行的工作目录，可填绝对路径与相对路径</div>
                 </div>
-                <el-input v-model="instanceInfo.config.cwd" type="text"> </el-input>
+                <el-input v-model="instanceInfo.config.cwd" type="text"></el-input>
               </el-col>
               <el-col :md="8" class="row-mt">
                 <div class="sub-title">
                   <div class="sub-title-title">终端输入编码</div>
                   <div class="sub-title-info">如 GBK/UTF-8/big5 等</div>
                 </div>
-                <el-input v-model="instanceInfo.config.ie" type="text"> </el-input>
+                <el-input v-model="instanceInfo.config.ie" type="text"></el-input>
               </el-col>
               <el-col :md="8" class="row-mt">
                 <div class="sub-title">
                   <div class="sub-title-title">终端输出编码</div>
                   <div class="sub-title-info">如 GBK/UTF-8/big5 等</div>
                 </div>
-                <el-input v-model="instanceInfo.config.oe" type="text"> </el-input>
+                <el-input v-model="instanceInfo.config.oe" type="text"></el-input>
               </el-col>
               <el-col :md="8" class="row-mt">
                 <div class="sub-title">
                   <div class="sub-title-title">关闭实例命令</div>
                   <div class="sub-title-info">^C 代表发送 Ctrl+C 组合键</div>
                 </div>
-                <el-input v-model="instanceInfo.config.stopCommand" type="text"> </el-input>
+                <el-input v-model="instanceInfo.config.stopCommand" type="text"></el-input>
               </el-col>
               <el-col :md="8" class="row-mt">
                 <div class="sub-title">
                   <div class="sub-title-title">文件管理编码</div>
                   <div class="sub-title-info">文件管理功能的解压缩，编辑等编码</div>
                 </div>
-                <el-input v-model="instanceInfo.config.fileCode" type="text"> </el-input>
+                <el-input v-model="instanceInfo.config.fileCode" type="text"></el-input>
               </el-col>
 
               <el-col :md="8" class="row-mt" :offset="0">
@@ -181,7 +181,7 @@
                     placeholder="请选择"
                     @focus="loadImages"
                     style="width: 100%"
-                    v-loading="componentsLoading"
+                    v-loading="imageListLoading"
                   >
                     <el-option
                       v-for="item in images"
@@ -203,6 +203,60 @@
                     v-model="instanceInfo.config.docker.ports"
                     type="text"
                     placeholder="示例 25565:25565/tcp 3380:3380/udp"
+                  >
+                  </el-input>
+                </el-col>
+              </el-row>
+              <el-row :gutter="20">
+                <el-col :md="8" class="row-mt" :offset="0">
+                  <div class="sub-title">
+                    <div class="sub-title-title">容器名</div>
+                    <div class="sub-title-info">
+                      容器创建使用的名字 为空随机生成 长度 (2, 64)
+                    </div>
+                  </div>
+                  <el-input
+                    v-model="instanceInfo.config.docker.containerName"
+                    type="text"
+                    placeholder="示例 lobby-1"
+                  >
+                  </el-input>
+                </el-col>
+                <el-col :md="8" class="row-mt" :offset="0">
+                  <div class="sub-title">
+                    <div class="sub-title-title">网络模式</div>
+                    <div class="sub-title-info">
+                      选择容器接入的网络模式 如 bridge 网桥
+                    </div>
+                  </div>
+                  <el-select
+                    filterable
+                    v-model="instanceInfo.config.docker.networkMode"
+                    placeholder="请选择"
+                    @focus="loadNetworkModes"
+                    style="width: 100%"
+                    v-loading="networkModeListLoading"
+                  >
+                    <el-option
+                      v-for="item in networkModes"
+                      :key="item.Name"
+                      :label="item.Name"
+                      :value="item.Name"
+                    >
+                    </el-option>
+                  </el-select>
+                </el-col>
+                <el-col :md="8" class="row-mt" :offset="0">
+                  <div class="sub-title">
+                    <div class="sub-title-title">网络别名</div>
+                    <div class="sub-title-info">
+                      用于容器互相访问 空格分隔 只有用户定义的网络才能使用
+                    </div>
+                  </div>
+                  <el-input
+                    v-model="instanceInfo.config.docker.networkAliases"
+                    type="text"
+                    placeholder="示例 login-server-1"
                   >
                   </el-input>
                 </el-col>
@@ -269,7 +323,7 @@
 </template>
 
 <script>
-import { API_IMAGES, API_INSTANCE } from "../service/common";
+import { API_IMAGES, API_INSTANCE, API_NETWORK_MODES } from "../service/common";
 import { processTypeList, statusCodeToText } from "../service/instance_tools";
 import Panel from "../../components/Panel";
 import router from "../router";
@@ -290,7 +344,9 @@ export default {
       display: false,
       loading: true,
       images: [],
-      componentsLoading: false,
+      networkModes: [],
+      imageListLoading: false,
+      networkModeListLoading: false,
       commandAssistPanel: false
     };
   },
@@ -308,7 +364,15 @@ export default {
       // 保存实例配置文件
       try {
         const postData = JSON.parse(JSON.stringify(this.instanceInfo.config));
-        postData.docker.ports = this.instanceInfo.config.docker.ports.split(" ");
+        if (this.instanceInfo.config.docker.ports)
+          postData.docker.ports = this.instanceInfo.config.docker.ports.split(" ");
+        else
+          postData.docker.ports = [];
+        if (this.instanceInfo.config.docker.networkAliases) {
+          postData.docker.networkAliases = this.instanceInfo.config.docker.networkAliases.split(" ");
+        } else {
+          postData.docker.networkAliases = [];
+        }
         console.log(this.instanceInfo.config);
         if (!this.instanceInfo.config.endTime) postData.endTime = "";
         else if (typeof this.instanceInfo.config.endTime === "object")
@@ -330,7 +394,7 @@ export default {
       return statusCodeToText(p);
     },
     async loadImages() {
-      this.componentsLoading = true;
+      this.imageListLoading = true;
       try {
         this.images = await request({
           method: "GET",
@@ -345,9 +409,30 @@ export default {
           type: "error"
         });
       } finally {
-        this.componentsLoading = false;
+        this.imageListLoading = false;
       }
       return this.images;
+    },
+
+    async loadNetworkModes() {
+      this.networkModeListLoading = true;
+      try {
+        this.networkModes = await request({
+          method: "GET",
+          url: API_NETWORK_MODES,
+          params: {
+            remote_uuid: this.serviceUuid
+          }
+        });
+      } catch (error) {
+        this.$message({
+          message: "无法获得远程主机网络列表，建议检查docker配置",
+          type: "error"
+        });
+      } finally {
+        this.networkModeListLoading = false;
+      }
+      return this.networkModes;
     },
 
     openCommandAssistCall() {
@@ -367,6 +452,9 @@ export default {
     // 特殊处理字段
     if (this.instanceInfo.config.docker && this.instanceInfo.config.docker.ports) {
       this.instanceInfo.config.docker.ports = this.instanceInfo.config.docker.ports.join(" ");
+    }
+    if (this.instanceInfo.config.docker && this.instanceInfo.config.docker.networkAliases) {
+      this.instanceInfo.config.docker.networkAliases = this.instanceInfo.config.docker.networkAliases.join(" ");
     }
     this.loading = false;
   }
