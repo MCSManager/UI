@@ -36,8 +36,9 @@
               <i class="el-icon-tickets"></i> 类型: {{ typeToText(instanceInfo.config.type) }}
             </LineInfo>
             <LineInfo
-              ><i class="el-icon-finished"></i> 状态:
-              {{ codeToText(instanceInfo.status) }}</LineInfo
+            ><i class="el-icon-finished"></i> 状态:
+              {{ codeToText(instanceInfo.status) }}
+            </LineInfo
             >
             <LineInfo v-if="instanceInfo.info && instanceInfo.info.currentPlayers != -1">
               <i class="el-icon-user"></i> 玩家数: {{ instanceInfo.info.currentPlayers }} /
@@ -77,7 +78,8 @@
                       size="small"
                       class="row-mt"
                       :disabled="instanceInfo.status == 0"
-                      >关闭实例</el-button
+                    >关闭实例
+                    </el-button
                     >
                   </template>
                 </el-popconfirm>
@@ -108,7 +110,8 @@
                       size="small"
                       class="row-mt"
                       :disabled="instanceInfo.status == 0"
-                      >强制终止实例</el-button
+                    >强制终止实例
+                    </el-button
                     >
                   </template>
                 </el-popconfirm>
@@ -132,7 +135,8 @@
                 style="width: 100%"
                 size="small"
                 @click="toProcessConfig"
-                >特定配置</el-button
+              >特定配置
+              </el-button
               >
             </el-col>
             <el-col :lg="12" :offset="0" class="row-mb">
@@ -142,7 +146,8 @@
                 style="width: 100%"
                 size="small"
                 @click="toTerminalSettingPanel"
-                >终端设置</el-button
+              >终端设置
+              </el-button
               >
             </el-col>
 
@@ -153,7 +158,8 @@
                 style="width: 100%"
                 size="small"
                 @click="toSchedule"
-                >计划任务</el-button
+              >计划任务
+              </el-button
               >
             </el-col>
             <el-col :lg="12" :offset="0" class="row-mb">
@@ -163,7 +169,8 @@
                 style="width: 100%"
                 size="small"
                 @click="toPingPanel"
-                >状态查询</el-button
+              >状态查询
+              </el-button
               >
             </el-col>
             <el-col :lg="12" :offset="0" class="row-mb">
@@ -173,7 +180,8 @@
                 style="width: 100%"
                 size="small"
                 @click="toEventPanel"
-                >事件任务</el-button
+              >事件任务
+              </el-button
               >
             </el-col>
             <el-col :lg="12" :offset="0" class="row-mb">
@@ -182,8 +190,9 @@
                 icon="el-icon-reading"
                 style="width: 100%"
                 size="small"
-                @click="toLogPanel"
-                >终端日志</el-button
+                @click="syncLog"
+              >同步日志
+              </el-button
               >
             </el-col>
             <el-col :sm="24" :offset="0" class="row-mb">
@@ -193,7 +202,8 @@
                 style="width: 100%"
                 size="small"
                 @click="toFileManager"
-                >文件管理</el-button
+              >文件管理
+              </el-button
               >
             </el-col>
             <el-col :sm="24" :offset="0" v-if="isTopPermission">
@@ -203,7 +213,8 @@
                 style="width: 100%"
                 size="small"
                 @click="toInstanceDetail"
-                >实例设置</el-button
+              >实例设置
+              </el-button
               >
             </el-col>
           </el-row>
@@ -248,8 +259,9 @@
             </LineInfo>
             <!-- <LineInfo><i class="el-icon-document"></i> 标签: {{ instanceInfo.tag }}</LineInfo> -->
             <LineInfo
-              ><i class="el-icon-document"></i> 输入编码: {{ instanceInfo.config.ie }} 输出编码:
-              {{ instanceInfo.config.oe }}</LineInfo
+            ><i class="el-icon-document"></i> 输入编码: {{ instanceInfo.config.ie }} 输出编码:
+              {{ instanceInfo.config.oe }}
+            </LineInfo
             >
           </div>
         </template>
@@ -338,7 +350,7 @@
           若实例状态在未经面板操作的情况下变为非运行状态将立刻发起启动实例操作。<br />可用于崩溃后自动重启功能。
         </p>
         <div class="row-mt">
-          <el-switch v-model="eventConfigPanel.autoRestart"> </el-switch>
+          <el-switch v-model="eventConfigPanel.autoRestart"></el-switch>
         </div>
       </div>
 
@@ -348,7 +360,7 @@
           只要守护进程（远程节点）运行，就自动发起一次启动实例操作。<br />如果将守护进程开机自启则可用于开机自启实例。
         </p>
         <div class="row-mt">
-          <el-switch v-model="eventConfigPanel.autoStart"> </el-switch>
+          <el-switch v-model="eventConfigPanel.autoStart"></el-switch>
         </div>
       </div>
 
@@ -370,54 +382,13 @@
           网页自动给输出内容增加颜色渲染，渲染的颜色不一定完全正确。<br />如果颜色渲染功能与软件自带的颜色功能冲突，可以关闭此功能。
         </p>
         <div class="row-mt">
-          <el-switch v-model="terminalSettingPanel.haveColor"> </el-switch>
+          <el-switch v-model="terminalSettingPanel.haveColor"></el-switch>
         </div>
       </div>
       <div class="row-mt">
         <ItemGroup>
           <el-button type="success" size="small" @click="instanceConfigUpdate">保存</el-button>
           <el-button size="small" @click="terminalSettingPanel.visible = false">取消</el-button>
-        </ItemGroup>
-      </div>
-    </template>
-  </Dialog>
-
-  <Dialog v-model="logPanel.visible">
-    <template #title>终端日志</template>
-    <template #default>
-      <div class="sub-title">
-        <div class="sub-title-info">
-          终端日志仅会记录 1MB 的日常日志，超过 1MB
-          后会删除重新记录，若需要更多日志可前往文件管理下载日志文件。
-        </div>
-      </div>
-
-      <div style="width: 80vw">
-        <el-input
-          ref="logPanelTextArea"
-          v-loading="!logPanel.data"
-          element-loading-text="获取中"
-          v-model="logPanel.data"
-          :rows="30"
-          style="width: 100%; font-size: 12px"
-          type="textarea"
-          placeholder="暂无内容，请先启动实例稍等一段时间"
-        />
-      </div>
-
-      <div class="row-mt">
-        <ItemGroup>
-          <el-button
-            type="success"
-            size="small"
-            @click="
-              () => {
-                logPanel.visible = false;
-                this.logPanel.data = '';
-              }
-            "
-            >关闭</el-button
-          >
         </ItemGroup>
       </div>
     </template>
@@ -452,7 +423,7 @@
           <li>
             前往
             <a href="https://docs.mcsmanager.com" target="_blank" rel="noopener noreferrer"
-              >https://docs.mcsmanager.com</a
+            >https://docs.mcsmanager.com</a
             >
             了解更多
           </li>
@@ -487,11 +458,13 @@ import { statusCodeToText, typeTextToReadableText } from "../service/instance_to
 import { initTerminalWindow, textToTermText } from "../service/term";
 
 export default {
-  data: function () {
+  data: function() {
     return {
       serviceUuid: this.$route.params.serviceUuid,
       instanceUuid: this.$route.params.instanceUuid,
       term: null,
+      terminalWidth: 0,
+      terminalHeight: 0,
       command: "",
       available: false,
       socket: null,
@@ -515,11 +488,6 @@ export default {
         visible: false,
         autoRestart: false,
         autoStart: false
-      },
-
-      logPanel: {
-        visible: false,
-        data: ""
       },
 
       terminalSettingPanel: {
@@ -558,6 +526,7 @@ export default {
     },
     // 请求数据源（Websocket）
     async renderFromSocket() {
+      this.sendResize(this.terminalWidth, this.terminalHeight);
       this.socket.emit("stream/detail", {});
     },
     // 与守护进程建立连接
@@ -647,6 +616,7 @@ export default {
     // 初始化 Terminal 窗口
     initTerm() {
       this.term = initTerminalWindow(document.getElementById("terminal-container"));
+      this.term.onData(this.sendInput);
     },
     // 开启实例（Ajax）
     async openInstance() {
@@ -708,11 +678,32 @@ export default {
         setTimeout(() => (this.busy = false), 2000);
       }
     },
+    sendResize(w, h) {
+      if (this.instanceInfo.config.processType !== "docker") return;
+      if (!this.socket || !this.available) return;
+      if (!this.isStarted) return;
+      this.socket.emit("stream/resize", {
+        data: { w, h }
+      });
+    },
+    // 使用Websocket发送输入
+    sendInput(input) {
+      if (this.instanceInfo.config.processType !== "docker") return this.$message({
+        message: "只有docker实例支持直接使用控制台输入",
+        type: "error"
+      });
+      if (!this.socket || !this.available) return this.$message({ message: "无法输入到终端，数据流通道不可用", type: "error" });
+      if (!this.isStarted) return this.$message({ message: "无法输入到终端，服务器未开启", type: "error" });
+      this.socket.emit("stream/input", {
+        data: { input }
+      });
+    },
     // 使用Websocket发送命令
     sendCommand(command, method) {
-      if (!this.socket || !this.available) return this.$message("无法执行命令，数据流通道不可用");
+      if (!this.socket || !this.available) return this.$message({ message: "无法执行命令，数据流通道不可用", type: "error" });
+      if (!this.isStarted) return this.$message({ message: "无法执行命令，服务器未开启", type: "error" });
       if (method !== 1) this.pushHistoryCommand(command);
-      this.socket.emit("stream/input", {
+      this.socket.emit("stream/command", {
         data: { command }
       });
       this.command = "";
@@ -750,26 +741,19 @@ export default {
       this.terminalSettingPanel.visible = true;
       this.terminalSettingPanel.haveColor = this.instanceInfo.config.terminalOption.haveColor;
     },
-    async toLogPanel() {
-      this.logPanel.data = "";
-      this.logPanel.visible = true;
+    async syncLog() {
       try {
         const text = await request({
           url: API_INSTANCE_OUTPUT,
           method: "GET",
           params: { remote_uuid: this.serviceUuid, uuid: this.instanceUuid }
         });
-        this.logPanel.data = text;
+        this.term.clear();
+        this.term.write(text);
+        this.term.scrollToBottom();
       } catch (error) {
-        this.logPanel.data = error;
+        this.term.write(error);
       }
-      this.$nextTick(() => {
-        const tr = this.$refs.logPanelTextArea.textarea;
-        window.tr = tr;
-        if (tr) {
-          tr.scrollTop = tr.scrollHeight;
-        }
-      });
     },
     // 普通用户更新配置
     async instanceConfigUpdate() {
@@ -822,10 +806,18 @@ export default {
 
       // 初始化终端窗口
       this.initTerm();
+      this.term.onResize(size => {
+        this.terminalHeight = size.rows
+        this.terminalWidth = size.cols
+        this.sendResize(size.cols, size.rows);
+      });
+      this.term.fitAddon.fit();
+      window.onresize = () => {
+        this.term.fitAddon.fit();
+      };
 
       // 与守护进程建立 Websocket 连接
       await this.setUpWebsocket();
-
       // 请求数据 & 启用状态获取定时器
       await this.renderFromSocket();
       this.startInterval();
@@ -858,6 +850,7 @@ export default {
   border-radius: 4px;
   /* overflow: hidden; */
 }
+
 #terminal-input-wrapper input {
   width: 100%;
   font-size: 12px;
