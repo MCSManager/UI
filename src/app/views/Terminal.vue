@@ -36,10 +36,9 @@
               <i class="el-icon-tickets"></i> 类型: {{ typeToText(instanceInfo.config.type) }}
             </LineInfo>
             <LineInfo
-            ><i class="el-icon-finished"></i> 状态:
+              ><i class="el-icon-finished"></i> 状态:
               {{ codeToText(instanceInfo.status) }}
-            </LineInfo
-            >
+            </LineInfo>
             <LineInfo v-if="instanceInfo.info && instanceInfo.info.currentPlayers != -1">
               <i class="el-icon-user"></i> 玩家数: {{ instanceInfo.info.currentPlayers }} /
               {{ instanceInfo.info.maxPlayers }}
@@ -78,9 +77,8 @@
                       size="small"
                       class="row-mt"
                       :disabled="instanceInfo.status == 0"
-                    >关闭实例
-                    </el-button
-                    >
+                      >关闭实例
+                    </el-button>
                   </template>
                 </el-popconfirm>
               </el-col>
@@ -110,9 +108,8 @@
                       size="small"
                       class="row-mt"
                       :disabled="instanceInfo.status == 0"
-                    >强制终止实例
-                    </el-button
-                    >
+                      >强制终止实例
+                    </el-button>
                   </template>
                 </el-popconfirm>
               </el-col>
@@ -135,9 +132,8 @@
                 style="width: 100%"
                 size="small"
                 @click="toProcessConfig"
-              >特定配置
-              </el-button
-              >
+                >特定配置
+              </el-button>
             </el-col>
             <el-col :lg="12" :offset="0" class="row-mb">
               <el-button
@@ -146,9 +142,8 @@
                 style="width: 100%"
                 size="small"
                 @click="toTerminalSettingPanel"
-              >终端设置
-              </el-button
-              >
+                >终端设置
+              </el-button>
             </el-col>
 
             <el-col :lg="12" :offset="0" class="row-mb">
@@ -158,9 +153,8 @@
                 style="width: 100%"
                 size="small"
                 @click="toSchedule"
-              >计划任务
-              </el-button
-              >
+                >计划任务
+              </el-button>
             </el-col>
             <el-col :lg="12" :offset="0" class="row-mb">
               <el-button
@@ -169,9 +163,8 @@
                 style="width: 100%"
                 size="small"
                 @click="toPingPanel"
-              >状态查询
-              </el-button
-              >
+                >状态查询
+              </el-button>
             </el-col>
             <el-col :lg="12" :offset="0" class="row-mb">
               <el-button
@@ -180,9 +173,8 @@
                 style="width: 100%"
                 size="small"
                 @click="toEventPanel"
-              >事件任务
-              </el-button
-              >
+                >事件任务
+              </el-button>
             </el-col>
             <el-col :lg="12" :offset="0" class="row-mb">
               <el-button
@@ -191,9 +183,8 @@
                 style="width: 100%"
                 size="small"
                 @click="syncLog"
-              >同步日志
-              </el-button
-              >
+                >同步日志
+              </el-button>
             </el-col>
             <el-col :sm="24" :offset="0" class="row-mb">
               <el-button
@@ -202,9 +193,8 @@
                 style="width: 100%"
                 size="small"
                 @click="toFileManager"
-              >文件管理
-              </el-button
-              >
+                >文件管理
+              </el-button>
             </el-col>
             <el-col :sm="24" :offset="0" v-if="isTopPermission">
               <el-button
@@ -213,9 +203,8 @@
                 style="width: 100%"
                 size="small"
                 @click="toInstanceDetail"
-              >实例设置
-              </el-button
-              >
+                >实例设置
+              </el-button>
             </el-col>
           </el-row>
         </template>
@@ -259,10 +248,9 @@
             </LineInfo>
             <!-- <LineInfo><i class="el-icon-document"></i> 标签: {{ instanceInfo.tag }}</LineInfo> -->
             <LineInfo
-            ><i class="el-icon-document"></i> 输入编码: {{ instanceInfo.config.ie }} 输出编码:
+              ><i class="el-icon-document"></i> 输入编码: {{ instanceInfo.config.ie }} 输出编码:
               {{ instanceInfo.config.oe }}
-            </LineInfo
-            >
+            </LineInfo>
           </div>
         </template>
       </Panel>
@@ -423,7 +411,7 @@
           <li>
             前往
             <a href="https://docs.mcsmanager.com" target="_blank" rel="noopener noreferrer"
-            >https://docs.mcsmanager.com</a
+              >https://docs.mcsmanager.com</a
             >
             了解更多
           </li>
@@ -458,7 +446,7 @@ import { statusCodeToText, typeTextToReadableText } from "../service/instance_to
 import { initTerminalWindow, textToTermText } from "../service/term";
 
 export default {
-  data: function() {
+  data: function () {
     return {
       serviceUuid: this.$route.params.serviceUuid,
       instanceUuid: this.$route.params.instanceUuid,
@@ -615,6 +603,7 @@ export default {
     },
     // 初始化 Terminal 窗口
     initTerm() {
+      // 创建窗口与输入事件传递
       this.term = initTerminalWindow(document.getElementById("terminal-container"));
       this.term.onData(this.sendInput);
     },
@@ -688,20 +677,22 @@ export default {
     },
     // 使用Websocket发送输入
     sendInput(input) {
-      if (this.instanceInfo.config.processType !== "docker") return this.$message({
-        message: "只有docker实例支持直接使用控制台输入",
-        type: "error"
-      });
-      if (!this.socket || !this.available) return this.$message({ message: "无法输入到终端，数据流通道不可用", type: "error" });
-      if (!this.isStarted) return this.$message({ message: "无法输入到终端，服务器未开启", type: "error" });
+      // 非 Docker 类型拒绝终端直接输入，不需要提示。
+      if (this.instanceInfo.config.processType !== "docker") return;
+      if (!this.socket || !this.available)
+        return this.$message({ message: "无法输入到终端，数据流通道不可用", type: "error" });
+      if (!this.isStarted)
+        return this.$message({ message: "无法输入到终端，服务器未开启", type: "error" });
       this.socket.emit("stream/input", {
         data: { input }
       });
     },
     // 使用Websocket发送命令
     sendCommand(command, method) {
-      if (!this.socket || !this.available) return this.$message({ message: "无法执行命令，数据流通道不可用", type: "error" });
-      if (!this.isStarted) return this.$message({ message: "无法执行命令，服务器未开启", type: "error" });
+      if (!this.socket || !this.available)
+        return this.$message({ message: "无法执行命令，数据流通道不可用", type: "error" });
+      if (!this.isStarted)
+        return this.$message({ message: "无法执行命令，服务器未开启", type: "error" });
       if (method !== 1) this.pushHistoryCommand(command);
       this.socket.emit("stream/command", {
         data: { command }
@@ -806,9 +797,9 @@ export default {
 
       // 初始化终端窗口
       this.initTerm();
-      this.term.onResize(size => {
-        this.terminalHeight = size.rows
-        this.terminalWidth = size.cols
+      this.term.onResize((size) => {
+        this.terminalHeight = size.rows;
+        this.terminalWidth = size.cols;
         this.sendResize(size.cols, size.rows);
       });
       this.term.fitAddon.fit();
