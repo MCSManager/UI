@@ -5,8 +5,8 @@
   it under the terms of the GNU Affero General Public License as published by
   the Free Software Foundation, either version 3 of the License, or
   (at your option) any later version.
-  
-  According to the AGPL, it is forbidden to delete all copyright notices, 
+
+  According to the AGPL, it is forbidden to delete all copyright notices,
   and if you modify the source code, you must open source the
   modified source code.
 
@@ -208,6 +208,22 @@
                 </el-col>
               </el-row>
               <el-row :gutter="20">
+                <el-col class="row-mt" :offset="0">
+                  <div class="sub-title">
+                    <div class="sub-title-title">额外挂载路径</div>
+                    <div class="sub-title-info">
+                      向容器内挂载除工作目录外的其他目录，多个以空格分割，冒号左边为宿主机路径，右边为容器路径
+                    </div>
+                  </div>
+                  <el-input
+                      v-model="instanceInfo.config.docker.extraVolumes"
+                      type="text"
+                      placeholder="示例 /backups/test1:/workspace/backups /var/logs/test1:/workspace/logs"
+                  >
+                  </el-input>
+                </el-col>
+              </el-row>
+              <el-row :gutter="20">
                 <el-col :md="8" class="row-mt" :offset="0">
                   <div class="sub-title">
                     <div class="sub-title-title">容器名</div>
@@ -367,6 +383,11 @@ export default {
         } else {
           postData.docker.networkAliases = [];
         }
+        if (this.instanceInfo.config.docker.extraVolumes) {
+          postData.docker.extraVolumes = this.instanceInfo.config.docker.extraVolumes.split(" ");
+        } else {
+          postData.docker.extraVolumes = [];
+        }
         console.log(this.instanceInfo.config);
         if (!this.instanceInfo.config.endTime) postData.endTime = "";
         else if (typeof this.instanceInfo.config.endTime === "object")
@@ -450,6 +471,9 @@ export default {
     if (this.instanceInfo.config.docker && this.instanceInfo.config.docker.networkAliases) {
       this.instanceInfo.config.docker.networkAliases =
         this.instanceInfo.config.docker.networkAliases.join(" ");
+    }
+    if (this.instanceInfo.config.docker && this.instanceInfo.config.docker.extraVolumes) {
+      this.instanceInfo.config.docker.extraVolumes = this.instanceInfo.config.docker.extraVolumes.join(" ");
     }
     this.loading = false;
   }
