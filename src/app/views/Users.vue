@@ -365,6 +365,9 @@ export default {
         for (const v of this.multipleSelection) {
           uuids.push(v.uuid);
         }
+        if(!uuids.length){
+          throw new Error("请至少选择一个用户");
+        }
         await request({
           method: "DELETE",
           url: API_USER,
