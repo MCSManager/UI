@@ -172,7 +172,7 @@
               <el-row :gutter="20">
                 <el-col :md="8" class="row-mt" :offset="0">
                   <div class="sub-title">
-                    <div class="sub-title-title">环境镜像</div>
+                    <div class="sub-title-title">环境镜像（必填）</div>
                     <div class="sub-title-info">指定实例镜像</div>
                   </div>
                   <el-select
@@ -202,7 +202,7 @@
                   <el-input
                     v-model="instanceInfo.config.docker.ports"
                     type="text"
-                    placeholder="示例 25565:25565/tcp 3380:3380/udp"
+                    placeholder="选填，示例 25565:25565/tcp 3380:3380/udp"
                   >
                   </el-input>
                 </el-col>
@@ -211,23 +211,19 @@
                 <el-col :md="8" class="row-mt" :offset="0">
                   <div class="sub-title">
                     <div class="sub-title-title">容器名</div>
-                    <div class="sub-title-info">
-                      容器创建使用的名字 为空随机生成 长度 (2, 64)
-                    </div>
+                    <div class="sub-title-info">容器创建使用的名字，为空随机生成</div>
                   </div>
                   <el-input
                     v-model="instanceInfo.config.docker.containerName"
                     type="text"
-                    placeholder="示例 lobby-1"
+                    placeholder="选填，示例 lobby-1"
                   >
                   </el-input>
                 </el-col>
                 <el-col :md="8" class="row-mt" :offset="0">
                   <div class="sub-title">
                     <div class="sub-title-title">网络模式</div>
-                    <div class="sub-title-info">
-                      选择容器接入的网络模式 如 bridge 网桥
-                    </div>
+                    <div class="sub-title-info">选择容器接入的网络模式 如 bridge 网桥</div>
                   </div>
                   <el-select
                     filterable
@@ -249,14 +245,12 @@
                 <el-col :md="8" class="row-mt" :offset="0">
                   <div class="sub-title">
                     <div class="sub-title-title">网络别名</div>
-                    <div class="sub-title-info">
-                      用于容器互相访问 空格分隔 只有用户定义的网络才能使用
-                    </div>
+                    <div class="sub-title-info">用于在自定义网络中容器互相访问，空格分隔</div>
                   </div>
                   <el-input
                     v-model="instanceInfo.config.docker.networkAliases"
                     type="text"
-                    placeholder="示例 login-server-1"
+                    placeholder="选填，示例 login-server-1"
                   >
                   </el-input>
                 </el-col>
@@ -271,7 +265,7 @@
                   <el-input
                     v-model="instanceInfo.config.docker.memory"
                     type="text"
-                    placeholder="列如 1024"
+                    placeholder="选填，列如 1024"
                   >
                   </el-input>
                 </el-col>
@@ -283,7 +277,7 @@
                   <el-input
                     v-model="instanceInfo.config.docker.cpuUsage"
                     type="text"
-                    placeholder="填写 50 代表 CPU 使用率最大 50%"
+                    placeholder="选填，填写 50 代表 CPU 使用率最大 50%"
                   >
                   </el-input>
                 </el-col>
@@ -295,7 +289,7 @@
                   <el-input
                     v-model="instanceInfo.config.docker.cpusetCpus"
                     type="text"
-                    placeholder="列如 0,1 代表在第1，2核心上运作"
+                    placeholder="选填，列如 0,1 代表在第1，2核心上运作"
                   >
                   </el-input>
                 </el-col>
@@ -366,10 +360,10 @@ export default {
         const postData = JSON.parse(JSON.stringify(this.instanceInfo.config));
         if (this.instanceInfo.config.docker.ports)
           postData.docker.ports = this.instanceInfo.config.docker.ports.split(" ");
-        else
-          postData.docker.ports = [];
+        else postData.docker.ports = [];
         if (this.instanceInfo.config.docker.networkAliases) {
-          postData.docker.networkAliases = this.instanceInfo.config.docker.networkAliases.split(" ");
+          postData.docker.networkAliases =
+            this.instanceInfo.config.docker.networkAliases.split(" ");
         } else {
           postData.docker.networkAliases = [];
         }
@@ -454,7 +448,8 @@ export default {
       this.instanceInfo.config.docker.ports = this.instanceInfo.config.docker.ports.join(" ");
     }
     if (this.instanceInfo.config.docker && this.instanceInfo.config.docker.networkAliases) {
-      this.instanceInfo.config.docker.networkAliases = this.instanceInfo.config.docker.networkAliases.join(" ");
+      this.instanceInfo.config.docker.networkAliases =
+        this.instanceInfo.config.docker.networkAliases.join(" ");
     }
     this.loading = false;
   }
