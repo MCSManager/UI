@@ -176,16 +176,6 @@
                 >事件任务
               </el-button>
             </el-col>
-            <el-col :lg="12" :offset="0" class="row-mb">
-              <el-button
-                :disabled="!available"
-                icon="el-icon-reading"
-                style="width: 100%"
-                size="small"
-                @click="syncLog"
-                >同步日志
-              </el-button>
-            </el-col>
             <el-col :sm="24" :offset="0" class="row-mb">
               <el-button
                 :disabled="!available"
@@ -548,6 +538,8 @@ export default {
         () => {
           this.unavailableIp = null;
           this.unavailableTerminal = false;
+          // 获取一次系统日志
+          this.syncLog();
         },
         () => {
           this.unavailableIp = addr;
