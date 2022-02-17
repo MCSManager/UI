@@ -27,7 +27,9 @@ import {
   TYPE_MINECRAFT_GEYSER,
   TYPE_MINECRAFT_PAPER,
   TYPE_MINECRAFT_SPIGOT,
-  TYPE_MINECRAFT_BEDROCK
+  TYPE_MINECRAFT_BEDROCK,
+  TYPE_MINECRAFT_FORGE,
+  TYPE_MINECRAFT_MOHIST
 } from "./instance_type";
 
 export function getInstanceConfigByType(type) {
@@ -43,7 +45,7 @@ export function getInstanceConfigByType(type) {
 export const INSTANCE_CONFIGS = [
   {
     // 配置文件显示名
-    fileName: "[Bukkit] server.properties",
+    fileName: "[通用] server.properties",
     // 配置文件对应的实际路径（相对于实例根目录）
     path: "server.properties",
     // 配置文件用于显示界面的组件名（参考 ProcessConfigFile.vue 的 components 属性）
@@ -61,7 +63,8 @@ export const INSTANCE_CONFIGS = [
       TYPE_MINECRAFT_SPIGOT,
       TYPE_MINECRAFT_PAPER,
       TYPE_MINECRAFT_JAVA,
-      TYPE_MINECRAFT_BUKKIT
+      TYPE_MINECRAFT_BUKKIT,
+      TYPE_MINECRAFT_FORGE
     ]
   },
   {
@@ -177,7 +180,7 @@ export const INSTANCE_CONFIGS = [
     info: "mohist.yml 服务端配置文件",
     author: "Suwings",
     github: "https://github.com/LazyCreeper",
-    category: [TYPE_MINECRAFT_JAVA]
+    category: [TYPE_MINECRAFT_JAVA, TYPE_MINECRAFT_MOHIST]
   },
   {
     fileName: "[Paper] paper.yml",
