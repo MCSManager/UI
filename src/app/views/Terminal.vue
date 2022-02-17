@@ -675,7 +675,7 @@ export default {
         return this.$message({ message: "无法输入到终端，数据流通道不可用", type: "error" });
       if (!this.isStarted)
         return this.$message({ message: "无法输入到终端，服务器未开启", type: "error" });
-      this.socket.emit("stream/input", {
+      this.socket.emit("stream/write", {
         data: { input }
       });
     },
@@ -686,7 +686,7 @@ export default {
       if (!this.isStarted)
         return this.$message({ message: "无法执行命令，服务器未开启", type: "error" });
       if (method !== 1) this.pushHistoryCommand(command);
-      this.socket.emit("stream/command", {
+      this.socket.emit("stream/input", {
         data: { command }
       });
       this.command = "";
