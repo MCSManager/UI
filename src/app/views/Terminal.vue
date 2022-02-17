@@ -176,7 +176,7 @@
                 >事件任务
               </el-button>
             </el-col>
-            <el-col :sm="24" :offset="0" class="row-mb">
+            <el-col :sm="12" :offset="0" class="row-mb">
               <el-button
                 :disabled="!available"
                 icon="el-icon-folder-opened"

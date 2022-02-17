@@ -60,7 +60,7 @@
           <p>
             确保所有守护进程均在线，离线状态将导致此守护进程以及相关功能不可用，可能会影响使用体验与数据。
             <br />
-            面板端 {{ panelVersion }} 所需最低守护进程版本：{{ specifiedDaemonVersion }}
+            面板端 {{ panelVersion }} 必须对应的守护进程版本：{{ specifiedDaemonVersion }}
           </p>
           <el-table :data="servicesStatus" style="width: 100%" size="small">
             <el-table-column prop="ip" label="地址" width="180"> </el-table-column>
