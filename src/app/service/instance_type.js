@@ -51,4 +51,44 @@ INSTANCE_TYPE_TRANSLATION[TYPE_MINECRAFT_FORGE] = "MC Forge";
 INSTANCE_TYPE_TRANSLATION[TYPE_MINECRAFT_BUKKIT] = "MC Bukkit";
 INSTANCE_TYPE_TRANSLATION[TYPE_MINECRAFT_GEYSER] = "MC Geyser";
 
-export { INSTANCE_TYPE_TRANSLATION };
+// 不同类型的具体配置文件
+const INSTANCE_TYPE_DEF_CONFIG = {
+  [TYPE_MINECRAFT_BUNGEECORD]: {
+    stopCommand: "end"
+  },
+  [TYPE_WEB_SHELL]: {
+    stopCommand: "^c"
+  },
+  [TYPE_UNIVERSAL]: {
+    stopCommand: "^c"
+  },
+  [TYPE_MINECRAFT_JAVA]: {
+    stopCommand: "stop"
+  },
+  [TYPE_MINECRAFT_BEDROCK]: {
+    stopCommand: "stop"
+  },
+  [TYPE_MINECRAFT_SPIGOT]: {
+    stopCommand: "stop"
+  },
+  [TYPE_MINECRAFT_PAPER]: {
+    stopCommand: "stop"
+  },
+  [TYPE_MINECRAFT_BDS]: {
+    stopCommand: "stop"
+  },
+  [TYPE_MINECRAFT_SPONGE]: {
+    stopCommand: "stop"
+  },
+  [TYPE_MINECRAFT_FORGE]: {
+    stopCommand: "stop"
+  },
+  [TYPE_MINECRAFT_BUKKIT]: {
+    stopCommand: "stop"
+  },
+  [TYPE_MINECRAFT_GEYSER]: {
+    stopCommand: "stop"
+  }
+};
+
+export { INSTANCE_TYPE_TRANSLATION, INSTANCE_TYPE_DEF_CONFIG };

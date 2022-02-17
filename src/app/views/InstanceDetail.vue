@@ -60,6 +60,7 @@
                   </div>
                 </div>
                 <el-select
+                  @change="instanceTypeChange(instanceInfo.config.type)"
                   v-model="instanceInfo.config.type"
                   placeholder="请选择"
                   style="width: 100%"
@@ -216,9 +217,9 @@
                     </div>
                   </div>
                   <el-input
-                      v-model="instanceInfo.config.docker.extraVolumes"
-                      type="text"
-                      placeholder="示例 /backups/test1:/workspace/backups /var/logs/test1:/workspace/logs"
+                    v-model="instanceInfo.config.docker.extraVolumes"
+                    type="text"
+                    placeholder="示例 /backups/test1:/workspace/backups /var/logs/test1:/workspace/logs"
                   >
                   </el-input>
                 </el-col>
@@ -339,6 +340,7 @@ import Panel from "../../components/Panel";
 import router from "../router";
 import { request } from "../service/protocol";
 import CommandAssist from "../../components/CommandAssist";
+import { INSTANCE_TYPE_DEF_CONFIG } from "../service/instance_type";
 // import qs from "qs";
 
 export default {
@@ -363,6 +365,12 @@ export default {
   methods: {
     back() {
       router.go(-1);
+    },
+    instanceTypeChange(type) {
+      const config = INSTANCE_TYPE_DEF_CONFIG[type];
+      if (config?.stopCommand) {
+        this.instanceInfo.config.stopCommand = config?.stopCommand;
+      }
     },
     toFileManager() {
       router.push({ path: `/file/${this.serviceUuid}/${this.instanceUuid}/` });
@@ -473,7 +481,8 @@ export default {
         this.instanceInfo.config.docker.networkAliases.join(" ");
     }
     if (this.instanceInfo.config.docker && this.instanceInfo.config.docker.extraVolumes) {
-      this.instanceInfo.config.docker.extraVolumes = this.instanceInfo.config.docker.extraVolumes.join(" ");
+      this.instanceInfo.config.docker.extraVolumes =
+        this.instanceInfo.config.docker.extraVolumes.join(" ");
     }
     this.loading = false;
   }
