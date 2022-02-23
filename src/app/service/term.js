@@ -47,7 +47,7 @@ termColor.TERM_TEXT_UNDERLINE = "\x1B[4m"; // Underline §n
 termColor.TERM_TEXT_ITALIC = "\x1B[3m"; // Italic §o
 termColor.TERM_TEXT_B = "\x1B[1m";
 
-export function initTerminalWindow(elem, fontSize = 14) {
+export function initTerminalWindow(elem, fontSize = 13) {
   const term = new Terminal({
     rendererType: "canvas",
     convertEol: true,
@@ -67,8 +67,12 @@ export function initTerminalWindow(elem, fontSize = 14) {
   // 设置终端宽度，报险起见设置两次
   term.fitAddon = fitAddon;
 
-  term.writeln(`${termColor.TERM_TEXT_GOLD}MCSManager Terminal ${termColor.TERM_TEXT_DARK_AQUA}[Powered by Term.js]`);
-  term.writeln(`${termColor.TERM_TEXT_GOLD}Copyright Suwings All rights reserved${termColor.TERM_RESET}\r\n`);
+  term.writeln(
+    `${termColor.TERM_TEXT_GOLD}MCSManager Terminal ${termColor.TERM_TEXT_DARK_AQUA}[Powered by Term.js]`
+  );
+  term.writeln(
+    `${termColor.TERM_TEXT_GOLD}Copyright Suwings All rights reserved${termColor.TERM_RESET}\r\n`
+  );
   term.info = (msg) => {
     term.writeln(`\r\n[MCSManager] [INFO] ${msg}`);
   };
