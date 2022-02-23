@@ -184,12 +184,7 @@
                     style="width: 100%"
                     v-loading="imageListLoading"
                   >
-                    <el-option
-                      v-for="item in images"
-                      :key="item.RepoTags[0]"
-                      :label="item.RepoTags[0]"
-                      :value="item.RepoTags[0]"
-                    >
+                    <el-option v-for="item in dockerImages" :key="item" :label="item" :value="item">
                     </el-option>
                   </el-select>
                 </el-col>
@@ -355,11 +350,13 @@ export default {
       typeList: processTypeList(),
       display: false,
       loading: true,
-      images: [],
+
       networkModes: [],
       imageListLoading: false,
       networkModeListLoading: false,
-      commandAssistPanel: false
+      commandAssistPanel: false,
+
+      dockerImages: []
     };
   },
   methods: {
@@ -419,13 +416,19 @@ export default {
     async loadImages() {
       this.imageListLoading = true;
       try {
-        this.images = await request({
+        const images = await request({
           method: "GET",
           url: API_IMAGES,
           params: {
             remote_uuid: this.serviceUuid
           }
         });
+        if (images) {
+          for (const iterator of images) {
+            const repoTags = (iterator?.RepoTags ?? [])[0];
+            if (repoTags) this.dockerImages.push(repoTags);
+          }
+        }
       } catch (error) {
         this.$message({
           message: "无法获得远程主机镜像列表，建议前往“服务环境”界面创建镜像",
@@ -484,6 +487,7 @@ export default {
       this.instanceInfo.config.docker.extraVolumes =
         this.instanceInfo.config.docker.extraVolumes.join(" ");
     }
+
     this.loading = false;
   }
 };
