@@ -132,7 +132,7 @@
             </el-row>
           </el-tab-pane>
 
-          <el-tab-pane label="控制台程序" name="program">
+          <el-tab-pane label="通用控制台程序" name="program">
             <el-row>
               <el-col :md="24" :offset="0">
                 <div class="sub-title row-mt">
@@ -244,6 +244,10 @@ export default {
         cmd = `${this.command.programName}`;
       } else {
         cmd = `LD_LIBRARY_PATH=. ${this.command.programName}`;
+        return this.$message({
+          type: "error",
+          message: "因为 Linux 系统环境复杂多变，我们无法生成一个正确的启动命令，请手动编写启动命令"
+        });
       }
       this.result(cmd);
       this.close();

@@ -25,9 +25,9 @@
       <div v-loading="loading" element-loading-text="获取中">
         <el-row :gutter="20">
           <el-col :md="6">
-            <div class="sub-title">唯一标识符（UUID）</div>
+            <div class="sub-title">远程/本地实例标识符</div>
             <p v-text="instanceInfo.instanceUuid"></p>
-            <div class="sub-title">远程标识符（GUID）</div>
+            <div class="sub-title">守护进程标识符</div>
             <p v-text="serviceUuid"></p>
             <div class="sub-title">当前状态</div>
             <p v-text="codeToText(instanceInfo.status)"></p>
