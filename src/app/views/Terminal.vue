@@ -288,6 +288,15 @@
           </div>
         </template>
       </Panel>
+      <Panel v-loading="loading">
+        <template #title>面板端在线人数</template>
+        <template #default>
+          <p>每5分钟统计间隔，总5小时的内存历史使用率</p>
+          <div class="echart-wrapper">
+            <div id="echart-wrapper-players" style="width: 100%; height: 200px"></div>
+          </div>
+        </template>
+      </Panel>
     </el-col>
   </el-row>
 
@@ -414,6 +423,7 @@
 </template>
 
 <script>
+import * as echarts from "echarts";
 import Dialog from "../../components/Dialog";
 import Panel from "../../components/Panel";
 import "../../assets/xterm/xterm.css";
@@ -436,6 +446,7 @@ import { encodeConsoleColor } from "../service/terminal_color";
 import { ElNotification } from "element-plus";
 import { statusCodeToText, typeTextToReadableText } from "../service/instance_tools";
 import { initTerminalWindow, textToTermText } from "../service/term";
+import { getDefaultOption } from "../service/chart_option";
 
 export default {
   data: function () {
@@ -476,7 +487,9 @@ export default {
       },
 
       unavailableTerminal: false,
-      unavailableIp: null
+      unavailableIp: null,
+
+      playersChart: null
     };
   },
   computed: {
@@ -560,6 +573,7 @@ export default {
       // 监听实例详细信息
       this.socket.on("stream/detail", (packet) => {
         this.instanceInfo = packet.data;
+        this.setPlayersChart();
       });
       // 断开事件
       this.socket.on("disconnect", () => {
@@ -781,6 +795,25 @@ export default {
     },
     toInstanceDetail() {
       this.$router.push({ path: `/instance_detail/${this.serviceUuid}/${this.instanceUuid}/` });
+    },
+    initChart() {
+      // 基于准备好的dom，初始化echarts实例
+      this.playersChart = echarts.init(document.getElementById("echart-wrapper-players"));
+      this.playersChart.setOption(getDefaultOption());
+    },
+    setPlayersChart() {
+      if (!this.instanceInfo.info.playersChart) return;
+      const MAX_TIME = this.instanceInfo.info.playersChart.length - 1;
+      const source = this.instanceInfo.info.playersChart;
+      for (const key in source) {
+        source[key]["time"] = `${(MAX_TIME - key) * 5} 分前`;
+      }
+      this.playersChart.setOption({
+        dataset: {
+          dimensions: ["time", "value"],
+          source
+        }
+      });
     }
   },
   // 装载事件
@@ -806,6 +839,7 @@ export default {
       // 请求数据 & 启用状态获取定时器
       await this.renderFromSocket();
       this.startInterval();
+      this.initChart();
     } catch (error) {
       console.error(error);
       // 忽略

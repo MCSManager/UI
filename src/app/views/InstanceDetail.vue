@@ -108,16 +108,44 @@
               <el-col :md="8" class="row-mt">
                 <div class="sub-title">
                   <div class="sub-title-title">终端输入编码</div>
-                  <div class="sub-title-info">如 GBK/UTF-8/big5 等</div>
+                  <div class="sub-title-info">其他编码可以输入编码按回车生成</div>
                 </div>
-                <el-input v-model="instanceInfo.config.ie" type="text"></el-input>
+                <el-select
+                  v-model="instanceInfo.config.ie"
+                  filterable
+                  allow-create
+                  default-first-option
+                  placeholder="请选择终端输入编码"
+                >
+                  <el-option
+                    v-for="item in characters"
+                    :key="item.value"
+                    :label="item.label"
+                    :value="item.value"
+                  >
+                  </el-option>
+                </el-select>
               </el-col>
               <el-col :md="8" class="row-mt">
                 <div class="sub-title">
                   <div class="sub-title-title">终端输出编码</div>
-                  <div class="sub-title-info">如 GBK/UTF-8/big5 等</div>
+                  <div class="sub-title-info">其他编码可以输入编码按回车生成</div>
                 </div>
-                <el-input v-model="instanceInfo.config.oe" type="text"></el-input>
+                <el-select
+                  v-model="instanceInfo.config.oe"
+                  filterable
+                  allow-create
+                  default-first-option
+                  placeholder="请选择终端输入编码"
+                >
+                  <el-option
+                    v-for="item in characters"
+                    :key="item.value"
+                    :label="item.label"
+                    :value="item.value"
+                  >
+                  </el-option>
+                </el-select>
               </el-col>
               <el-col :md="8" class="row-mt">
                 <div class="sub-title">
@@ -131,7 +159,21 @@
                   <div class="sub-title-title">文件管理编码</div>
                   <div class="sub-title-info">文件管理功能的解压缩，编辑等编码</div>
                 </div>
-                <el-input v-model="instanceInfo.config.fileCode" type="text"></el-input>
+                <el-select
+                  v-model="instanceInfo.config.fileCode"
+                  filterable
+                  allow-create
+                  default-first-option
+                  placeholder="请选择终端输入编码"
+                >
+                  <el-option
+                    v-for="item in characters"
+                    :key="item.value"
+                    :label="item.label"
+                    :value="item.value"
+                  >
+                  </el-option>
+                </el-select>
               </el-col>
 
               <el-col :md="8" class="row-mt" :offset="0">
@@ -356,7 +398,15 @@ export default {
       networkModeListLoading: false,
       commandAssistPanel: false,
 
-      dockerImages: []
+      dockerImages: [],
+      characters: [
+        { label: "GBK(国标)", value: "GBK" },
+        { label: "UTF-8", value: "UTF-8" },
+        { label: "GB2312(简中)", value: "GB2312" },
+        { label: "BIG5(繁中)", value: "BIG5" },
+        { label: "GB18030", value: "GB18030" },
+        { label: "UTF-16", value: "UTF-16" }
+      ]
     };
   },
   methods: {
@@ -487,7 +537,14 @@ export default {
       this.instanceInfo.config.docker.extraVolumes =
         this.instanceInfo.config.docker.extraVolumes.join(" ");
     }
-
+    this.instanceInfo.config = {
+      ...this.instanceInfo.config,
+      ie: this.instanceInfo.config.ie ? this.instanceInfo.config.ie.toUpperCase() : "GBK",
+      oe: this.instanceInfo.config.oe ? this.instanceInfo.config.oe.toUpperCase() : "GBK",
+      fileCode: this.instanceInfo.config.fileCode
+        ? this.instanceInfo.config.fileCode.toUpperCase()
+        : "GBK"
+    };
     this.loading = false;
   }
 };

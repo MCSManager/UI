@@ -27,6 +27,7 @@ export const TYPE_MINECRAFT_BUKKIT = "minecraft/java/bukkit";
 export const TYPE_MINECRAFT_SPIGOT = "minecraft/java/spigot";
 export const TYPE_MINECRAFT_PAPER = "minecraft/java/paper";
 export const TYPE_MINECRAFT_FORGE = "minecraft/java/forge";
+export const TYPE_MINECRAFT_FABRIC = "minecraft/java/fabric";
 export const TYPE_MINECRAFT_BUNGEECORD = "minecraft/java/bungeecord";
 export const TYPE_MINECRAFT_GEYSER = "minecraft/java/geyser";
 export const TYPE_MINECRAFT_SPONGE = "minecraft/java/sponge";
@@ -48,6 +49,7 @@ INSTANCE_TYPE_TRANSLATION[TYPE_MINECRAFT_BUNGEECORD] = "MC BungeeCord";
 INSTANCE_TYPE_TRANSLATION[TYPE_MINECRAFT_BDS] = "MC Bedrock";
 INSTANCE_TYPE_TRANSLATION[TYPE_MINECRAFT_SPONGE] = "MC Sponge";
 INSTANCE_TYPE_TRANSLATION[TYPE_MINECRAFT_FORGE] = "MC Forge";
+INSTANCE_TYPE_TRANSLATION[TYPE_MINECRAFT_FABRIC] = "MC Fabric";
 INSTANCE_TYPE_TRANSLATION[TYPE_MINECRAFT_BUKKIT] = "MC Bukkit";
 INSTANCE_TYPE_TRANSLATION[TYPE_MINECRAFT_GEYSER] = "MC Geyser";
 
@@ -81,6 +83,9 @@ const INSTANCE_TYPE_DEF_CONFIG = {
     stopCommand: "stop"
   },
   [TYPE_MINECRAFT_FORGE]: {
+    stopCommand: "stop"
+  },
+  [TYPE_MINECRAFT_FABRIC]: {
     stopCommand: "stop"
   },
   [TYPE_MINECRAFT_BUKKIT]: {
