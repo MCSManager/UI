@@ -136,7 +136,7 @@
                   filterable
                   allow-create
                   default-first-option
-                  placeholder="请选择终端输入编码"
+                  placeholder="请选择终端输出编码"
                 >
                   <el-option
                     v-for="item in characters"
@@ -164,7 +164,7 @@
                   filterable
                   allow-create
                   default-first-option
-                  placeholder="请选择终端输入编码"
+                  placeholder="请选择文件管理编码"
                 >
                   <el-option
                     v-for="item in characters"

@@ -446,7 +446,7 @@ import { encodeConsoleColor } from "../service/terminal_color";
 import { ElNotification } from "element-plus";
 import { statusCodeToText, typeTextToReadableText } from "../service/instance_tools";
 import { initTerminalWindow, textToTermText } from "../service/term";
-import { getDefaultOption } from "../service/chart_option";
+import { getPlayersOption } from "../service/chart_option";
 
 export default {
   data: function () {
@@ -799,10 +799,10 @@ export default {
     initChart() {
       // 基于准备好的dom，初始化echarts实例
       this.playersChart = echarts.init(document.getElementById("echart-wrapper-players"));
-      this.playersChart.setOption(getDefaultOption());
+      this.playersChart.setOption(getPlayersOption());
     },
     setPlayersChart() {
-      if (!this.instanceInfo.info.playersChart) return;
+      if (!this.instanceInfo.info.playersChart && this.instanceInfo.info.playersChart.length) return;
       const MAX_TIME = this.instanceInfo.info.playersChart.length - 1;
       const source = this.instanceInfo.info.playersChart;
       for (const key in source) {

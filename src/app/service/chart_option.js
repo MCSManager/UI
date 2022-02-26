@@ -92,3 +92,26 @@ export function getStatusChartOption2() {
     ]
   };
 }
+
+export function getPlayersOption() {
+  return {
+    grid: {
+      show: false,
+      borderWidth: 0,
+      top: 8,
+      bottom: 30,
+      left: 30,
+      right: 8
+    },
+    xAxis: { type: "category", show: true },
+    yAxis: { type: "value", alignTicks: true, min: 0, show: true, minInterval: 1 },
+    series: [
+      {
+        type: "line",
+        areaStyle: {},
+        smooth: true,
+        symbol: "none"
+      }
+    ]
+  };
+}
