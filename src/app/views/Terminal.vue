@@ -288,7 +288,7 @@
           </div>
         </template>
       </Panel>
-      <Panel v-loading="loading">
+      <Panel v-if="isShowPlayersChart">
         <template #title>面板端在线人数</template>
         <template #default>
           <p>每5分钟统计间隔，总5小时的内存历史使用率</p>
@@ -489,7 +489,8 @@ export default {
       unavailableTerminal: false,
       unavailableIp: null,
 
-      playersChart: null
+      playersChart: null,
+      isShowPlayersChart: false
     };
   },
   computed: {
@@ -573,7 +574,7 @@ export default {
       // 监听实例详细信息
       this.socket.on("stream/detail", (packet) => {
         this.instanceInfo = packet.data;
-        this.setPlayersChart();
+        this.initChart();
       });
       // 断开事件
       this.socket.on("disconnect", () => {
@@ -797,12 +798,24 @@ export default {
       this.$router.push({ path: `/instance_detail/${this.serviceUuid}/${this.instanceUuid}/` });
     },
     initChart() {
-      // 基于准备好的dom，初始化echarts实例
-      this.playersChart = echarts.init(document.getElementById("echart-wrapper-players"));
-      this.playersChart.setOption(getPlayersOption());
+      if (!this.instanceInfo.info.playersChart || !this.instanceInfo.info.playersChart.length) {
+        this.isShowPlayersChart = false;
+        return;
+      }
+      if (!this.isShowPlayersChart) {
+        this.isShowPlayersChart = true;
+        setTimeout(() => {
+          // 基于准备好的dom，初始化echarts实例
+          this.playersChart = echarts.init(document.getElementById("echart-wrapper-players"));
+          this.playersChart.setOption(getPlayersOption());
+          this.setPlayersChart();
+        }, 200);
+      } else {
+        this.setPlayersChart();
+      }
     },
     setPlayersChart() {
-      if (!this.instanceInfo.info.playersChart && this.instanceInfo.info.playersChart.length) return;
+      if (!this.playersChart) return;
       const MAX_TIME = this.instanceInfo.info.playersChart.length - 1;
       const source = this.instanceInfo.info.playersChart;
       for (const key in source) {
@@ -839,7 +852,6 @@ export default {
       // 请求数据 & 启用状态获取定时器
       await this.renderFromSocket();
       this.startInterval();
-      this.initChart();
     } catch (error) {
       console.error(error);
       // 忽略
