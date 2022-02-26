@@ -291,7 +291,7 @@
       <Panel v-if="isShowPlayersChart">
         <template #title>面板端在线人数</template>
         <template #default>
-          <p>每5分钟统计间隔，总5小时的内存历史使用率</p>
+          <p>每10分钟统计间隔，总10小时的在线人数趋势</p>
           <div class="echart-wrapper">
             <div id="echart-wrapper-players" style="width: 100%; height: 200px"></div>
           </div>
@@ -819,7 +819,7 @@ export default {
       const MAX_TIME = this.instanceInfo.info.playersChart.length - 1;
       const source = this.instanceInfo.info.playersChart;
       for (const key in source) {
-        source[key]["time"] = `${(MAX_TIME - key) * 5} 分前`;
+        source[key]["time"] = `${(MAX_TIME - key) * 10} 分前`;
       }
       this.playersChart.setOption({
         dataset: {
