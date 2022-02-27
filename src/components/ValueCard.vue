@@ -77,7 +77,7 @@ export default {
 }
 
 .guser-top-info-text > div > p {
-  margin: 8px;
+  margin: 8px 2px;
   font-size: 40px;
   font-weight: 800;
 }
