@@ -145,6 +145,18 @@
               </div>
             </template>
           </el-table-column>
+          <el-table-column prop="currentPlayers" label="详细信息" width="240">
+            <template #default="scope">
+              <div>
+                <span v-if="scope.row.info && scope.row.info.currentPlayers >= 0">
+                  人数: {{ scope.row.info.currentPlayers }}/{{ scope.row.info.maxPlayers }}
+                </span>
+                <span v-if="scope.row.info && scope.row.version">
+                  &nbsp;版本: {{ scope.row.version }}
+                </span>
+              </div>
+            </template>
+          </el-table-column>
           <el-table-column prop="status" label="运行状态" width="120">
             <template #default="scope">
               <div class="color-gray" v-if="scope.row.status == 0">
@@ -162,16 +174,6 @@
               <span class="color-red" v-else>忙碌</span>
             </template>
           </el-table-column>
-          <el-table-column prop="currentPlayers" label="在线人数" width="120">
-            <template #default="scope">
-              <div class="color-green">
-                <span v-if="scope.row.info && scope.row.info.currentPlayers >= 0"
-                  >{{ scope.row.info.currentPlayers }}/{{ scope.row.info.maxPlayers }}</span
-                >
-              </div>
-            </template>
-          </el-table-column>
-          <el-table-column prop="version" label="版本" width="120"></el-table-column>
           <el-table-column prop="type" label="实例类型" width="140"></el-table-column>
           <el-table-column label="操作" style="text-align: center" width="180">
             <template #default="scope">
