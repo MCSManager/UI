@@ -85,42 +85,13 @@ export function encodeConsoleColor(text) {
   // 特殊文本替换
   const RegExpStringArr = [
     //蓝色
-    [
-      "Unknown command",
-      "Loading libraries, please wait...",
-      "Loading",
-      "Loaded",
-      "\\d{1,3}%",
-      "true",
-      "false",
-      "plugin.yml"
-    ],
+    ["Loading libraries, please wait...", "\\d{1,3}%", "true", "false"],
     //绿色
-    [
-      "INFO",
-      "EULA",
-      "/help",
-      "left the game",
-      "Enabling",
-      "Server thread",
-      "Saving chunks for level",
-      "----",
-      "UUID",
-      "Starting minecraft server version",
-      "Timings Reset",
-      "\\(",
-      "\\)",
-      "\\{",
-      "\\}",
-      '\\"',
-      "&lt;",
-      "&gt;",
-      "Preparing start region for level"
-    ],
+    ["INFO", "EULA", "----", "\\(", "\\)", "\\{", "\\}", '\\"', "&lt;", "&gt;"],
     //红色
-    ["Error", "Invalid", "Stopping the server", "Caused by", "Stopping"],
+    ["Error", "Caused by"],
     //黄色
-    ["WARN", "Starting Minecraft server on", "Done", "MCSMANAGER", "Server thread"]
+    ["WARN", "Server thread"]
   ];
   for (const k in RegExpStringArr) {
     for (const y in RegExpStringArr[k]) {
