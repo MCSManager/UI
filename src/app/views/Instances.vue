@@ -162,6 +162,16 @@
               <span class="color-red" v-else>忙碌</span>
             </template>
           </el-table-column>
+          <el-table-column prop="currentPlayers" label="在线人数" width="120">
+            <template #default="scope">
+              <div class="color-green">
+                <span v-if="scope.row.info && scope.row.info.currentPlayers >= 0"
+                  >{{ scope.row.info.currentPlayers }}/{{ scope.row.info.maxPlayers }}</span
+                >
+              </div>
+            </template>
+          </el-table-column>
+          <el-table-column prop="version" label="版本" width="120"></el-table-column>
           <el-table-column prop="type" label="实例类型" width="140"></el-table-column>
           <el-table-column label="操作" style="text-align: center" width="180">
             <template #default="scope">
@@ -275,7 +285,11 @@ export default {
         });
       } else {
         this.remoteList.forEach((v) => {
-          if (v.available) this.currentRemoteUuid = v.value;
+          if (v.available) {
+            // 默认取第一个开启的实例
+            this.currentRemoteUuid = v.value;
+            return;
+          }
         });
         this.remoteSelectHandle();
       }
@@ -311,10 +325,14 @@ export default {
             instanceUuid: instance.instanceUuid,
             serviceUuid: this.currentRemoteUuid,
             nickname: instance.config.nickname,
+            info: instance.info,
+            currentPlayers: instance.info ? instance.info.currentPlayers : "0",
+            version: instance.info ? instance.info.version : "",
             type,
             status
           });
         });
+        console.log(this.instances);
         this.loading = false;
         // 记录当前选择的守护进程，方便下次直接加载
         localStorage.setItem("pageSelectedRemoteUuid", this.currentRemoteUuid);

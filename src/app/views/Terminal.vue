@@ -288,6 +288,15 @@
           </div>
         </template>
       </Panel>
+      <Panel v-if="isShowPlayersChart">
+        <template #title>面板端在线人数</template>
+        <template #default>
+          <p>每10分钟统计间隔，总10小时的在线人数趋势</p>
+          <div class="echart-wrapper">
+            <div id="echart-wrapper-players" style="width: 100%; height: 200px"></div>
+          </div>
+        </template>
+      </Panel>
     </el-col>
   </el-row>
 
@@ -414,6 +423,7 @@
 </template>
 
 <script>
+import * as echarts from "echarts";
 import Dialog from "../../components/Dialog";
 import Panel from "../../components/Panel";
 import "../../assets/xterm/xterm.css";
@@ -436,6 +446,7 @@ import { encodeConsoleColor } from "../service/terminal_color";
 import { ElNotification } from "element-plus";
 import { statusCodeToText, typeTextToReadableText } from "../service/instance_tools";
 import { initTerminalWindow, textToTermText } from "../service/term";
+import { getPlayersOption } from "../service/chart_option";
 
 export default {
   data: function () {
@@ -476,7 +487,10 @@ export default {
       },
 
       unavailableTerminal: false,
-      unavailableIp: null
+      unavailableIp: null,
+
+      playersChart: null,
+      isShowPlayersChart: false
     };
   },
   computed: {
@@ -560,6 +574,7 @@ export default {
       // 监听实例详细信息
       this.socket.on("stream/detail", (packet) => {
         this.instanceInfo = packet.data;
+        this.initChart();
       });
       // 断开事件
       this.socket.on("disconnect", () => {
@@ -781,6 +796,37 @@ export default {
     },
     toInstanceDetail() {
       this.$router.push({ path: `/instance_detail/${this.serviceUuid}/${this.instanceUuid}/` });
+    },
+    initChart() {
+      if (!this.instanceInfo.info.playersChart || !this.instanceInfo.info.playersChart.length) {
+        this.isShowPlayersChart = false;
+        return;
+      }
+      if (!this.isShowPlayersChart) {
+        this.isShowPlayersChart = true;
+        setTimeout(() => {
+          // 基于准备好的dom，初始化echarts实例
+          this.playersChart = echarts.init(document.getElementById("echart-wrapper-players"));
+          this.playersChart.setOption(getPlayersOption());
+          this.setPlayersChart();
+        }, 200);
+      } else {
+        this.setPlayersChart();
+      }
+    },
+    setPlayersChart() {
+      if (!this.playersChart) return;
+      const MAX_TIME = this.instanceInfo.info.playersChart.length - 1;
+      const source = this.instanceInfo.info.playersChart;
+      for (const key in source) {
+        source[key]["time"] = `${(MAX_TIME - key) * 10} 分前`;
+      }
+      this.playersChart.setOption({
+        dataset: {
+          dimensions: ["time", "value"],
+          source
+        }
+      });
     }
   },
   // 装载事件
