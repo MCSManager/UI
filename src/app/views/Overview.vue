@@ -23,7 +23,7 @@
   <el-row :gutter="20">
     <el-col :span="24">
       <Panel v-loading="loading">
-        <template #title>控制面板基础数据</template>
+        <template #title>面板端详细数据</template>
         <template #default>
           <el-row :gutter="20">
             <el-col :xs="12" :md="6" v-for="(item, index) in computerInfoA" :key="index">
@@ -59,7 +59,7 @@
               sub-title="正在运行数 / 全部实例总数"
               :value="`${valueCard.runningInstance}/${valueCard.totalInstance}`"
               style="height: 260px"
-              font-class="el-icon-s-cooperation"
+              font-class="el-icon-s-promotion"
             >
             </ValueCard>
           </el-col>
@@ -85,6 +85,7 @@
           </el-col>
         </el-row>
       </div>
+
       <Panel v-loading="loading">
         <template #title>分布式服务总览</template>
         <template #default>
