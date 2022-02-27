@@ -24,7 +24,7 @@
     <template #default>
       <div v-loading="loading" element-loading-text="获取中">
         <el-row :gutter="20">
-          <el-col :md="6">
+          <el-col :lg="6">
             <div class="sub-title">远程/本地实例标识符</div>
             <p v-text="instanceInfo.instanceUuid"></p>
             <div class="sub-title">守护进程标识符</div>
@@ -42,7 +42,7 @@
             <div class="sub-title">进程类型</div>
             <p v-text="instanceInfo.config.processType"></p>
           </el-col>
-          <el-col :md="18">
+          <el-col :lg="18">
             <el-row :gutter="20">
               <el-col :md="24">
                 <div class="sub-title">
@@ -105,7 +105,7 @@
                 </div>
                 <el-input v-model="instanceInfo.config.cwd" type="text"></el-input>
               </el-col>
-              <el-col :md="8" class="row-mt">
+              <el-col :lg="8" class="row-mt">
                 <div class="sub-title">
                   <div class="sub-title-title">终端输入编码</div>
                   <div class="sub-title-info">其他编码可以输入编码按回车生成</div>
@@ -127,7 +127,7 @@
                   </el-option>
                 </el-select>
               </el-col>
-              <el-col :md="8" class="row-mt">
+              <el-col :lg="8" class="row-mt">
                 <div class="sub-title">
                   <div class="sub-title-title">终端输出编码</div>
                   <div class="sub-title-info">其他编码可以输入编码按回车生成</div>
@@ -149,14 +149,14 @@
                   </el-option>
                 </el-select>
               </el-col>
-              <el-col :md="8" class="row-mt">
+              <el-col :lg="8" class="row-mt">
                 <div class="sub-title">
                   <div class="sub-title-title">关闭实例命令</div>
                   <div class="sub-title-info">^C 代表发送 Ctrl+C 组合键</div>
                 </div>
                 <el-input v-model="instanceInfo.config.stopCommand" type="text"></el-input>
               </el-col>
-              <el-col :md="8" class="row-mt">
+              <el-col :lg="8" class="row-mt">
                 <div class="sub-title">
                   <div class="sub-title-title">文件管理编码</div>
                   <div class="sub-title-info">文件管理功能的解压缩，编辑等编码</div>
@@ -179,7 +179,7 @@
                 </el-select>
               </el-col>
 
-              <el-col :md="8" class="row-mt" :offset="0">
+              <el-col :lg="8" class="row-mt" :offset="0">
                 <div class="sub-title">
                   <div class="sub-title-title">到期时间</div>
                   <div class="sub-title-info">到期后无法启动</div>
@@ -192,7 +192,7 @@
                 >
                 </el-date-picker>
               </el-col>
-              <el-col :md="8" class="row-mt">
+              <el-col :lg="8" class="row-mt">
                 <div class="sub-title">
                   <div class="sub-title-title">进程启动方式</div>
                   <div class="sub-title-info">可选择 Docker，默认等</div>
@@ -403,11 +403,14 @@ export default {
 
       dockerImages: [],
       characters: [
-        { label: "GBK(国标)", value: "GBK" },
-        { label: "UTF-8", value: "UTF-8" },
-        { label: "GB2312(简中)", value: "GB2312" },
-        { label: "BIG5(繁中)", value: "BIG5" },
-        { label: "GB18030", value: "GB18030" },
+        { label: "UTF-8（通用）", value: "UTF-8" },
+        { label: "GBK（中文）", value: "GBK" },
+        { label: "GB2312（中文）", value: "GB2312" },
+        { label: "GB18030（中文）", value: "GB18030" },
+        { label: "BIG5（繁中）", value: "BIG5" },
+        { label: "Big5-HKSCS（繁中）", value: "Big5-HKSCS" },
+        { label: "Shift_JIS（日文）", value: "Shift_JIS" },
+        { label: "KS_C_5601（韩文）", value: "KS_C_5601" },
         { label: "UTF-16", value: "UTF-16" }
       ]
     };
