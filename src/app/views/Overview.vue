@@ -23,7 +23,7 @@
   <el-row :gutter="20">
     <el-col :span="24">
       <Panel v-loading="loading">
-        <template #title>面板端系统数据</template>
+        <template #title>控制面板基础数据</template>
         <template #default>
           <el-row :gutter="20">
             <el-col :xs="12" :md="6" v-for="(item, index) in computerInfoA" :key="index">
