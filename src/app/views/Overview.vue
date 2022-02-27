@@ -54,6 +54,50 @@
           </el-row>
         </template>
       </Panel>
+      <div>
+        <el-row :gutter="20">
+          <el-col :span="6" :offset="0">
+            <ValueCard
+              title="守护进程状态"
+              sub-title="已正确连接数 / 已配置总数"
+              :value="`${valueCard.availableDaemon}/${valueCard.totalDaemon}`"
+              style="height: 260px"
+              font-class="el-icon-s-data"
+            >
+            </ValueCard>
+          </el-col>
+          <el-col :span="6" :offset="0">
+            <ValueCard
+              title="实例运行状态"
+              sub-title="正在运行数 / 全部实例总数"
+              :value="`${valueCard.runningInstance}/${valueCard.totalInstance}`"
+              style="height: 260px"
+              font-class="el-icon-s-cooperation"
+            >
+            </ValueCard>
+          </el-col>
+          <el-col :span="6" :offset="0">
+            <ValueCard
+              title="用户登录次数"
+              sub-title="登录失败次数 : 登录成功次数"
+              :value="`${valueCard.failedLogin}:${valueCard.Logined}`"
+              style="height: 260px"
+              font-class="el-icon-upload"
+            >
+            </ValueCard>
+          </el-col>
+          <el-col :span="6" :offset="0">
+            <ValueCard
+              title="系统负载"
+              sub-title="面板所在主机 CPU，RAM 百分比"
+              :value="`${valueCard.cpu}% ${valueCard.mem}%`"
+              style="height: 260px"
+              font-class="el-icon-s-flag"
+            >
+            </ValueCard>
+          </el-col>
+        </el-row>
+      </div>
       <Panel v-loading="loading">
         <template #title>分布式服务总览</template>
         <template #default>
@@ -186,8 +230,9 @@ import {
   getStatusChartOption1,
   getStatusChartOption2
 } from "../service/chart_option";
+import ValueCard from "../../components/ValueCard";
 export default {
-  data: function () {
+  data() {
     return {
       loading: true,
 
@@ -205,7 +250,22 @@ export default {
       forChartTotalInstance: 0,
 
       specifiedDaemonVersion: null,
-      panelVersion: null
+      panelVersion: null,
+
+      valueCard: {
+        runningInstance: 0,
+        totalInstance: 0,
+        cpu: 0,
+        mem: 0,
+        freemem: 0,
+        totalmem: 0,
+        usedmem: 0,
+        availableDaemon: 0,
+        totalDaemon: 0,
+        totalLogin: 0,
+        failedLogin: 0,
+        Logined: 0
+      }
     };
   },
   methods: {
@@ -244,12 +304,27 @@ export default {
           runningInstance += iterator.instance.running;
         }
       }
+
       this.forChartTotalInstance = totalInstance;
 
       // 计算内存
       const free = Number(system.freemem / 1024 / 1024 / 1024).toFixed(1);
       const total = Number(system.totalmem / 1024 / 1024 / 1024).toFixed(1);
       const used = Number(total - free).toFixed(1);
+
+      // 数值卡片列表赋值
+      this.valueCard.totalInstance = totalInstance;
+      this.valueCard.runningInstance = runningInstance;
+      this.valueCard.freemem = free;
+      this.valueCard.totalmem = total;
+      this.valueCard.usedmem = used;
+      this.valueCard.availableDaemon = remoteCount.available;
+      this.valueCard.totalDaemon = remoteCount.total;
+      this.valueCard.failedLogin = data.record.loginFailed;
+      this.valueCard.totalLogin = parseInt(data.record.logined) + parseInt(data.record.loginFailed);
+      this.valueCard.Logined = data.record.logined;
+      this.valueCard.cpu = Number(system.cpu * 100).toFixed(0);
+      this.valueCard.mem = Number((used / total) * 100).toFixed(0);
       // 计算已正常运行时间
       // const uptime = Number(system.uptime / 60 / 60).toFixed(0);
       this.computerInfoA = [
@@ -418,7 +493,7 @@ export default {
       this.setSystemChart();
     }
   },
-  components: { Panel },
+  components: { Panel, ValueCard },
   async mounted() {
     this.loading = true;
     const data = await this.request();

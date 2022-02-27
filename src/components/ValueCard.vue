@@ -70,10 +70,10 @@ export default {
 }
 .guser-top-info-text > i {
   font-size: 100px;
-  color: #d1d1d12b;
+  color: #d1d1d11c;
   position: absolute;
-  right: 0px;
-  bottom: 6px;
+  right: 2px;
+  bottom: 4px;
 }
 
 .guser-top-info-text > div > p {
