@@ -27,7 +27,7 @@
         <el-col :xs="12" :md="6" :offset="0">
           <ValueCard
             title="实例总计"
-            sub-title="管理员所分配给您的所有可控实例总数"
+            sub-title="管理员所分配给您的所有实例总数"
             :value="this.info.total"
             style="height: 260px"
             font-class="el-icon-s-data"
@@ -57,7 +57,7 @@
         <el-col :xs="12" :md="6" :offset="0">
           <ValueCard
             title="不可用"
-            sub-title="因远程主机失联导致实例暂时不可用的数量"
+            sub-title="因主机失联而暂时不可用的实例数量"
             :value="this.info.unknown"
             style="height: 260px"
             font-class="el-icon-s-opportunity"
