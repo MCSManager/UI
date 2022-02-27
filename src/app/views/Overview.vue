@@ -28,22 +28,9 @@
           <el-row :gutter="20">
             <el-col :xs="12" :md="6" v-for="(item, index) in computerInfoA" :key="index">
               <div class="overview-info-warpper">
-                <p class="overview-info-title" v-html="item.name"></p>
-                <p
-                  class="overview-info-value"
-                  v-text="item.value"
-                  :class="{ 'color-red': item.warn }"
-                ></p>
-              </div>
-            </el-col>
-
-            <el-col :span="24" :offset="0">
-              <div class="box-card-title-more">面板总览数据</div>
-            </el-col>
-
-            <el-col :xs="12" :md="6" v-for="(item, index) in computerInfoB" :key="index">
-              <div class="overview-info-warpper">
-                <p class="overview-info-title" v-html="item.name"></p>
+                <p class="overview-info-title">
+                  <b v-text="item.name"></b>
+                </p>
                 <p
                   class="overview-info-value"
                   v-text="item.value"
@@ -56,7 +43,7 @@
       </Panel>
       <div>
         <el-row :gutter="20">
-          <el-col :span="6" :offset="0">
+          <el-col :md="6" :xs="12" :offset="0">
             <ValueCard
               title="守护进程状态"
               sub-title="已正确连接数 / 已配置总数"
@@ -66,7 +53,7 @@
             >
             </ValueCard>
           </el-col>
-          <el-col :span="6" :offset="0">
+          <el-col :md="6" :xs="12" :offset="0">
             <ValueCard
               title="实例运行状态"
               sub-title="正在运行数 / 全部实例总数"
@@ -76,7 +63,7 @@
             >
             </ValueCard>
           </el-col>
-          <el-col :span="6" :offset="0">
+          <el-col :md="6" :xs="12" :offset="0">
             <ValueCard
               title="用户登录次数"
               sub-title="登录失败次数 : 登录成功次数"
@@ -86,7 +73,7 @@
             >
             </ValueCard>
           </el-col>
-          <el-col :span="6" :offset="0">
+          <el-col :md="6" :xs="12" :offset="0">
             <ValueCard
               title="系统负载"
               sub-title="面板所在主机 CPU，RAM 百分比"
@@ -353,17 +340,16 @@ export default {
           value: system.user.username
         },
         {
-          name: "内存使用",
+          name: "内存使用数值",
           value: `${used}GB/${total}GB`,
           warn: used / total > 0.9
         },
-        {
-          name: "系统 CPU 使用率",
-          value: `${Number(system.cpu * 100).toFixed(1)}%`,
-          warn: system.cpu * 100 > 90
-        }
-      ];
-      this.computerInfoB = [
+        // {
+        //   name: "系统 CPU 使用率",
+        //   value: `${Number(system.cpu * 100).toFixed(1)}%`,
+        //   warn: system.cpu * 100 > 90
+        // }
+
         {
           name: "Node 版本",
           value: system.node
@@ -372,15 +358,15 @@ export default {
           name: "面板版本",
           value: data.version
         },
-        {
-          name: "分布式在线",
-          value: `${remoteCount.available}/${remoteCount.total}`,
-          warn: remoteCount.available !== remoteCount.total
-        },
-        {
-          name: "实例运行数",
-          value: `${runningInstance}/${totalInstance}`
-        },
+        // {
+        //   name: "分布式在线",
+        //   value: `${remoteCount.available}/${remoteCount.total}`,
+        //   warn: remoteCount.available !== remoteCount.total
+        // },
+        // {
+        //   name: "实例运行数",
+        //   value: `${runningInstance}/${totalInstance}`
+        // },
 
         {
           name: "对应守护进程版本",
@@ -390,10 +376,10 @@ export default {
           name: "阻挡请求次数",
           value: data.record.illegalAccess
         },
-        {
-          name: "登录失败与总次数",
-          value: `${data.record.loginFailed}/${data.record.logined}`
-        },
+        // {
+        //   name: "登录失败与总次数",
+        //   value: `${data.record.loginFailed}/${data.record.logined}`
+        // },
         {
           name: "封禁 IP 数",
           value: data.record.banips,
