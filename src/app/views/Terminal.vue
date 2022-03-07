@@ -749,7 +749,11 @@ export default {
           params: { remote_uuid: this.serviceUuid, uuid: this.instanceUuid }
         });
         this.term.clear();
-        this.term.write(text);
+        if (this.instanceInfo?.config?.terminalOption?.haveColor) {
+          this.term.write(encodeConsoleColor(text));
+        } else {
+          this.term.write(text);
+        }
         this.term.scrollToBottom();
       } catch (error) {
         this.term.write(error);
