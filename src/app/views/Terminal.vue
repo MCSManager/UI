@@ -113,6 +113,21 @@
                   </template>
                 </el-popconfirm>
               </el-col>
+              <el-col :lg="24" v-if="instanceInfo.config.updateCommand">
+                <el-popconfirm title="确定执行此操作？" @confirm="killInstance">
+                  <template #reference>
+                    <el-button
+                      icon="el-icon-files"
+                      plain
+                      style="width: 100%"
+                      size="small"
+                      class="row-mt"
+                      :disabled="instanceInfo.status != 0"
+                      >更新/安装实例
+                    </el-button>
+                  </template>
+                </el-popconfirm>
+              </el-col>
             </el-row>
           </div>
         </template>
