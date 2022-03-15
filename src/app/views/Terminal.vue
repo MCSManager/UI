@@ -114,7 +114,7 @@
                 </el-popconfirm>
               </el-col>
               <el-col :lg="24" v-if="instanceInfo.config.updateCommand">
-                <el-popconfirm title="确定执行此操作？" @confirm="killInstance">
+                <el-popconfirm title="确定执行此操作？" @confirm="updateInstace">
                   <template #reference>
                     <el-button
                       icon="el-icon-files"
@@ -122,7 +122,6 @@
                       style="width: 100%"
                       size="small"
                       class="row-mt"
-                      :disabled="instanceInfo.status != 0"
                       >更新/安装实例
                     </el-button>
                   </template>
@@ -453,7 +452,8 @@ import {
   API_INSTANCE_RESTART,
   API_INSTANCE_UPDATE,
   API_INSTANCE_STOP,
-  API_INSTANCE_OUTPUT
+  API_INSTANCE_OUTPUT,
+  API_INSTANCE_ASYNC_TASK
 } from "../service/common";
 import router from "../router";
 import { parseforwardAddress, request } from "../service/protocol";
@@ -654,6 +654,22 @@ export default {
           method: "GET",
           url: API_INSTANCE_STOP,
           params: { remote_uuid: this.serviceUuid, uuid: this.instanceUuid }
+        });
+      } catch (error) {
+        this.$message({ message: error.toString(), type: "error" });
+      } finally {
+        setTimeout(() => (this.busy = false), 200);
+      }
+    },
+    async updateInstace() {
+      try {
+        await request({
+          method: "POST",
+          url: API_INSTANCE_ASYNC_TASK,
+          params: { remote_uuid: this.serviceUuid, uuid: this.instanceUuid, task_name: "update" },
+          data: {
+            time: new Date().getTime()
+          }
         });
       } catch (error) {
         this.$message({ message: error.toString(), type: "error" });
