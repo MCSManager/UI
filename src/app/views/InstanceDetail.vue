@@ -105,6 +105,16 @@
                 </div>
                 <el-input v-model="instanceInfo.config.cwd" type="text"></el-input>
               </el-col>
+              <el-col :md="24" class="row-mt">
+                <div class="sub-title">
+                  <div class="sub-title-title">更新/安装服务端命令</div>
+                  <div class="sub-title-info">
+                    当用户执行更新/安装操作时，将会执行此命令，{workspace}
+                    代表工作目录，为空则不提供此功能
+                  </div>
+                </div>
+                <el-input v-model="instanceInfo.config.updateCommand" type="text"></el-input>
+              </el-col>
               <el-col :lg="8" class="row-mt">
                 <div class="sub-title">
                   <div class="sub-title-title">终端输入编码</div>
