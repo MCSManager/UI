@@ -25,6 +25,16 @@
       <div v-loading="loading" element-loading-text="获取中">
         <el-row :gutter="20">
           <el-col :lg="6">
+            <div class="only-pc-display" style="margin: 0 0 10px 0">
+              <div class="sub-title">
+                <div class="sub-title-title">使用须知</div>
+                <div class="sub-title-info">
+                  实例功能将涉及到远程命令执行，MCSManager
+                  会尽可能的保护您的宿主机安全，但是如果需要出售给陌生用户，则必须使用 Linux Docker
+                  的虚拟化隔离功能才可以完成安全风险控制。
+                </div>
+              </div>
+            </div>
             <div class="sub-title">远程/本地实例标识符</div>
             <p v-text="instanceInfo.instanceUuid"></p>
             <div class="sub-title">守护进程标识符</div>
