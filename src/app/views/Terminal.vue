@@ -54,7 +54,7 @@
         <template #default>
           <div v-loading="busy">
             <el-row type="flex" justify="space-between" :gutter="10">
-              <el-col :lg="24">
+              <el-col :lg="24" v-show="instanceInfo.status !== -1">
                 <el-popconfirm title="确定执行此操作？" @confirm="openInstance">
                   <template #reference>
                     <el-button
@@ -68,7 +68,7 @@
                   </template>
                 </el-popconfirm>
               </el-col>
-              <el-col :lg="24">
+              <el-col :lg="24" v-show="instanceInfo.status !== -1">
                 <el-popconfirm title="确定执行此操作？" @confirm="stopInstance">
                   <template #reference>
                     <el-button
@@ -82,7 +82,7 @@
                   </template>
                 </el-popconfirm>
               </el-col>
-              <el-col :lg="24">
+              <el-col :lg="24" v-show="instanceInfo.status !== -1">
                 <el-popconfirm title="确定执行此操作？" @confirm="restartInstance">
                   <template #reference>
                     <el-button
@@ -97,7 +97,7 @@
                   </template>
                 </el-popconfirm>
               </el-col>
-              <el-col :lg="24">
+              <el-col :lg="24" v-show="instanceInfo.status !== -1">
                 <el-popconfirm title="确定执行此操作？" @confirm="killInstance">
                   <template #reference>
                     <el-button
@@ -109,6 +109,21 @@
                       class="row-mt"
                       :disabled="instanceInfo.status == 0"
                       >强制终止实例
+                    </el-button>
+                  </template>
+                </el-popconfirm>
+              </el-col>
+              <el-col :lg="24" v-show="instanceInfo.status === -1">
+                <el-popconfirm title="确定执行此操作？" @confirm="stopAsynchronousTask">
+                  <template #reference>
+                    <el-button
+                      icon="el-icon-switch-button"
+                      type="danger"
+                      plain
+                      style="width: 100%"
+                      size="small"
+                      class="row-mt"
+                      >终止正在运行的任务
                     </el-button>
                   </template>
                 </el-popconfirm>
@@ -453,7 +468,8 @@ import {
   API_INSTANCE_UPDATE,
   API_INSTANCE_STOP,
   API_INSTANCE_OUTPUT,
-  API_INSTANCE_ASYNC_TASK
+  API_INSTANCE_ASYNC_TASK,
+  API_INSTANCE_ASYNC_STOP
 } from "../service/common";
 import router from "../router";
 import { parseforwardAddress, request } from "../service/protocol";
@@ -661,6 +677,21 @@ export default {
         setTimeout(() => (this.busy = false), 200);
       }
     },
+    // 终止正在进行异步任务（如更新）
+    async stopAsynchronousTask() {
+      try {
+        await request({
+          method: "GET",
+          url: API_INSTANCE_ASYNC_STOP,
+          params: { remote_uuid: this.serviceUuid, uuid: this.instanceUuid }
+        });
+      } catch (error) {
+        this.$message({ message: error.toString(), type: "error" });
+      } finally {
+        setTimeout(() => (this.busy = false), 200);
+      }
+    },
+    // 更新实例
     async updateInstace() {
       try {
         await request({
