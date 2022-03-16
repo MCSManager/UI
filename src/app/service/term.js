@@ -55,7 +55,6 @@ export function initTerminalWindow(elem, fontSize = 13) {
     cursorStyle: "underline",
     cursorBlink: true,
     fontSize: fontSize,
-    fontFamily: "Fira Code",
     theme: {
       background: "#1e1e1e"
     }
