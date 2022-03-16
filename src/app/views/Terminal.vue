@@ -37,7 +37,13 @@
             </LineInfo>
             <LineInfo
               ><i class="el-icon-finished"></i> 状态:
-              {{ codeToText(instanceInfo.status) }}
+              <!-- {{ codeToText(instanceInfo.status) }} -->
+              <span v-if="instanceInfo.status === -1" class="color-red">忙碌中</span>
+              <span v-else-if="instanceInfo.status === 0" class="color-gray">未运行</span>
+              <span v-else-if="instanceInfo.status === 1" class="color-yellow">停止中</span>
+              <span v-else-if="instanceInfo.status === 2" class="color-yellow">启动中</span>
+              <span v-else-if="instanceInfo.status === 3" class="color-green">正在运行</span>
+              <span v-else class="color-red">未知</span>
             </LineInfo>
             <LineInfo v-if="instanceInfo.info && instanceInfo.info.currentPlayers != -1">
               <i class="el-icon-user"></i> 玩家数: {{ instanceInfo.info.currentPlayers }} /
@@ -137,6 +143,7 @@
                       style="width: 100%"
                       size="small"
                       class="row-mt"
+                      :disabled="instanceInfo.status !== 0"
                       >更新/安装实例
                     </el-button>
                   </template>
