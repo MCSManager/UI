@@ -87,7 +87,8 @@
                     </span>
                     <br />
                     <span>
-                      列如 "C:\Program Files\Java\bin\java.exe" -server -jar "my server.jar" -nogui
+                      列如 "C:\Program Files\Java\bin\java.exe" -Dfile.encoding=utf-8 -jar "my
+                      server.jar" -nogui
                     </span>
                   </div>
                 </div>
@@ -288,12 +289,19 @@
                     <div class="sub-title-title">容器名</div>
                     <div class="sub-title-info">容器创建使用的名字，为空随机生成</div>
                   </div>
-                  <el-input
-                    v-model="instanceInfo.config.docker.containerName"
-                    type="text"
-                    placeholder="选填，示例 lobby-1"
+                  <el-tooltip
+                    class="box-item"
+                    effect="dark"
+                    content="选填，无特殊需求不建议填写此项"
+                    placement="bottom"
                   >
-                  </el-input>
+                    <el-input
+                      v-model="instanceInfo.config.docker.containerName"
+                      type="text"
+                      placeholder="选填，示例 lobby-1"
+                    >
+                    </el-input>
+                  </el-tooltip>
                 </el-col>
                 <el-col :md="8" class="row-mt" :offset="0">
                   <div class="sub-title">
@@ -322,12 +330,19 @@
                     <div class="sub-title-title">网络别名</div>
                     <div class="sub-title-info">用于在自定义网络中容器互相访问，空格分隔</div>
                   </div>
-                  <el-input
-                    v-model="instanceInfo.config.docker.networkAliases"
-                    type="text"
-                    placeholder="选填，示例 login-server-1"
+                  <el-tooltip
+                    class="box-item"
+                    effect="dark"
+                    content="选填，无特殊需求不建议填写此项"
+                    placement="bottom"
                   >
-                  </el-input>
+                    <el-input
+                      v-model="instanceInfo.config.docker.networkAliases"
+                      type="text"
+                      placeholder="选填，示例 login-server-1"
+                    >
+                    </el-input>
+                  </el-tooltip>
                 </el-col>
               </el-row>
               <el-row :gutter="20">
@@ -347,26 +362,40 @@
                 <el-col :md="8" class="row-mt">
                   <div class="sub-title">
                     <div class="sub-title-title">限制 CPU 使用率（百分比）</div>
-                    <div class="sub-title-info">限制容器的 CPU 使用，会有少许波动</div>
+                    <div class="sub-title-info">限制所有 CPU 总和使用率，会有少许偏差</div>
                   </div>
-                  <el-input
-                    v-model="instanceInfo.config.docker.cpuUsage"
-                    type="text"
-                    placeholder="选填，填写 50 代表 CPU 使用率最大 50%"
+                  <el-tooltip
+                    class="box-item"
+                    effect="dark"
+                    content="填写 50 代表所有核心使用率和限制在 50%，若填写 200 则代表准许使用所有核心使用率总和为 200%"
+                    placement="bottom"
                   >
-                  </el-input>
+                    <el-input
+                      v-model="instanceInfo.config.docker.cpuUsage"
+                      type="text"
+                      placeholder="选填，0 到 无限大"
+                    >
+                    </el-input>
+                  </el-tooltip>
                 </el-col>
                 <el-col :md="8" class="row-mt">
                   <div class="sub-title">
                     <div class="sub-title-title">指定 CPU 计算核心</div>
                     <div class="sub-title-info">限制容器在指定的 CPU 核心上运行</div>
                   </div>
-                  <el-input
-                    v-model="instanceInfo.config.docker.cpusetCpus"
-                    type="text"
-                    placeholder="选填，列如 0,1 代表在第1，2核心上运作"
+                  <el-tooltip
+                    class="box-item"
+                    effect="dark"
+                    content="指定进程在某些核心上运行，合理分配可以更好的利用您的系统硬件资源，列如 0,1 代表在第1，2核心上运作，逗号隔开"
+                    placement="bottom"
                   >
-                  </el-input>
+                    <el-input
+                      v-model="instanceInfo.config.docker.cpusetCpus"
+                      type="text"
+                      placeholder="选填，列如 0,1,2,3"
+                    >
+                    </el-input>
+                  </el-tooltip>
                 </el-col>
               </el-row>
             </div>
@@ -423,12 +452,12 @@ export default {
       characters: [
         { label: "UTF-8（通用）", value: "UTF-8" },
         { label: "GBK（中文）", value: "GBK" },
-        { label: "GB2312（中文）", value: "GB2312" },
-        { label: "GB18030（中文）", value: "GB18030" },
         { label: "BIG5（繁中）", value: "BIG5" },
-        { label: "Big5-HKSCS（繁中）", value: "Big5-HKSCS" },
         { label: "Shift_JIS（日文）", value: "Shift_JIS" },
         { label: "KS_C_5601（韩文）", value: "KS_C_5601" },
+        { label: "GB2312（中文）", value: "GB2312" },
+        { label: "GB18030（中文）", value: "GB18030" },
+        { label: "Big5-HKSCS（繁中）", value: "Big5-HKSCS" },
         { label: "UTF-16", value: "UTF-16" }
       ]
     };
