@@ -103,17 +103,25 @@
                   <div class="sub-title-title">工作目录</div>
                   <div class="sub-title-info">实例运行的工作目录，可填绝对路径与相对路径</div>
                 </div>
-                <el-input v-model="instanceInfo.config.cwd" type="text"></el-input>
+                <el-input
+                  v-model="instanceInfo.config.cwd"
+                  type="text"
+                  placeholder="列如: D:/MyServers/0001"
+                ></el-input>
               </el-col>
               <el-col :md="24" class="row-mt">
                 <div class="sub-title">
                   <div class="sub-title-title">更新/安装服务端命令</div>
                   <div class="sub-title-info">
-                    当用户执行更新/安装操作时，将会执行此命令，{workspace}
+                    当用户执行更新/安装操作时，将会执行此命令，${mcsm_workspace}
                     代表工作目录，为空则不提供此功能
                   </div>
                 </div>
-                <el-input v-model="instanceInfo.config.updateCommand" type="text"></el-input>
+                <el-input
+                  v-model="instanceInfo.config.updateCommand"
+                  type="text"
+                  placeholder='列如: "D:/SteamCMD/steamcmd.exe" +login anonymous +force_install_dir "${mcsm_workspace}" "+app_update 380870 validate" +quit'
+                ></el-input>
               </el-col>
               <el-col :lg="8" class="row-mt">
                 <div class="sub-title">
