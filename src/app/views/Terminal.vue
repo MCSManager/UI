@@ -60,21 +60,22 @@
         <template #default>
           <div v-loading="busy">
             <el-row type="flex" justify="space-between" :gutter="10">
-              <el-col :lg="24" v-show="instanceInfo.status !== -1">
+              <el-col :lg="24" v-show="instanceInfo.status === 0">
                 <el-popconfirm title="确定执行此操作？" @confirm="openInstance">
                   <template #reference>
                     <el-button
                       icon="el-icon-video-play"
+                      type="warning"
                       style="width: 100%"
                       size="small"
-                      :disabled="instanceInfo.status != 0"
+                      plain
                     >
                       开启实例
                     </el-button>
                   </template>
                 </el-popconfirm>
               </el-col>
-              <el-col :lg="24" v-show="instanceInfo.status !== -1">
+              <el-col :lg="24" v-show="instanceInfo.status === 3">
                 <el-popconfirm title="确定执行此操作？" @confirm="stopInstance">
                   <template #reference>
                     <el-button
@@ -82,13 +83,12 @@
                       style="width: 100%"
                       size="small"
                       class="row-mt"
-                      :disabled="instanceInfo.status == 0"
                       >关闭实例
                     </el-button>
                   </template>
                 </el-popconfirm>
               </el-col>
-              <el-col :lg="24" v-show="instanceInfo.status !== -1">
+              <el-col :lg="24" v-show="instanceInfo.status === 3">
                 <el-popconfirm title="确定执行此操作？" @confirm="restartInstance">
                   <template #reference>
                     <el-button
@@ -96,14 +96,13 @@
                       style="width: 100%"
                       size="small"
                       class="row-mt"
-                      :disabled="instanceInfo.status == 0"
                     >
                       重启实例
                     </el-button>
                   </template>
                 </el-popconfirm>
               </el-col>
-              <el-col :lg="24" v-show="instanceInfo.status !== -1">
+              <el-col :lg="24" v-show="instanceInfo.status > 0">
                 <el-popconfirm title="确定执行此操作？" @confirm="killInstance">
                   <template #reference>
                     <el-button
@@ -113,7 +112,6 @@
                       style="width: 100%"
                       size="small"
                       class="row-mt"
-                      :disabled="instanceInfo.status == 0"
                       >强制终止实例
                     </el-button>
                   </template>
@@ -134,7 +132,10 @@
                   </template>
                 </el-popconfirm>
               </el-col>
-              <el-col :lg="24" v-if="instanceInfo.config.updateCommand">
+              <el-col
+                :lg="24"
+                v-show="instanceInfo.config.updateCommand && instanceInfo.status === 0"
+              >
                 <el-popconfirm title="确定执行此操作？" @confirm="updateInstace">
                   <template #reference>
                     <el-button
@@ -143,7 +144,6 @@
                       style="width: 100%"
                       size="small"
                       class="row-mt"
-                      :disabled="instanceInfo.status !== 0"
                       >更新/安装实例
                     </el-button>
                   </template>
