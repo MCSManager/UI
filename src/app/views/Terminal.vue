@@ -822,8 +822,9 @@ export default {
       if (!this.playersChart) return;
       const MAX_TIME = this.instanceInfo.info.playersChart.length - 1;
       const source = this.instanceInfo.info.playersChart;
+      const now = Date.now();
       for (const key in source) {
-        source[key]["time"] = `${(MAX_TIME - key) * 10} 分前`;
+        source[key]["time"] = this.showTimeStr((MAX_TIME - key) * 600000, now);
       }
       this.playersChart.setOption({
         dataset: {
@@ -831,6 +832,10 @@ export default {
           source
         }
       });
+    },
+    showTimeStr(time, now) {
+      const date = new Date(now - time);
+      return `${date.getHours()}:${(Array(2).join(0) + date.getMinutes()).slice(-2)}`;
     }
   },
   // 装载事件
