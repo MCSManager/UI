@@ -288,7 +288,14 @@
           </div>
         </template>
       </Panel>
-      <Panel v-if="isShowPlayersChart">
+      <Panel
+        v-if="
+          instanceInfo &&
+          instanceInfo.info &&
+          instanceInfo.info.playersChart &&
+          instanceInfo.info.playersChart.length
+        "
+      >
         <template #title>面板端在线人数</template>
         <template #default>
           <p>每10分钟统计间隔，总10小时的在线人数趋势</p>
@@ -799,17 +806,14 @@ export default {
     },
     initChart() {
       if (!this.instanceInfo.info.playersChart || !this.instanceInfo.info.playersChart.length) {
-        this.isShowPlayersChart = false;
         return;
       }
-      if (!this.isShowPlayersChart) {
-        this.isShowPlayersChart = true;
+      if (!this.playersChart) {
         setTimeout(() => {
-          // 基于准备好的dom，初始化echarts实例
           this.playersChart = echarts.init(document.getElementById("echart-wrapper-players"));
           this.playersChart.setOption(getPlayersOption());
           this.setPlayersChart();
-        }, 200);
+        }, 100);
       } else {
         this.setPlayersChart();
       }
