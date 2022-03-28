@@ -23,79 +23,53 @@
   <el-row :gutter="20">
     <!-- 左侧用户数据栏 -->
     <el-col :md="16" :offset="0">
-      <Panel style="min-height: 120px">
-        <template #title>数据总览</template>
-        <template #default>
-          <el-row :gutter="20">
-            <el-col :xs="12" :md="6" :offset="0">
-              <div class="overview-info-warpper">
-                <p class="overview-info-title">实例总计</p>
-                <p class="overview-info-value color-green">{{ this.info.total }}</p>
-              </div>
-            </el-col>
-            <el-col :xs="12" :md="6" :offset="0">
-              <div class="overview-info-warpper">
-                <p class="overview-info-title">正在运行</p>
-                <p class="overview-info-value color-green">{{ this.info.running }}</p>
-              </div>
-            </el-col>
-            <el-col :xs="12" :md="6" :offset="0">
-              <div class="overview-info-warpper">
-                <p class="overview-info-title">未运行</p>
-                <p class="overview-info-value color-green">{{ this.info.stopped }}</p>
-              </div>
-            </el-col>
-            <el-col :xs="12" :md="6" :offset="0">
-              <div class="overview-info-warpper">
-                <p class="overview-info-title">离线/不可用</p>
-                <p class="overview-info-value color-red">{{ this.info.unknown }}</p>
-              </div>
-            </el-col>
-            <el-col :md="6" :offset="0"></el-col>
-          </el-row>
-        </template>
-      </Panel>
-
-      <Panel style="min-height: 120px">
-        <template #title>快捷链接</template>
-        <template #default>
-          <el-row type="flex" class="row-bg" justify="space-between">
-            <el-col :span="6">
-              <div class="manual-link-block-wrapper">
-                <a class="manual-link-block" href="https://guide.mcsmanager.com/"
-                  ><i class="el-icon-link"></i> 用户手册</a
-                >
-              </div>
-            </el-col>
-            <el-col :span="6">
-              <div class="manual-link-block-wrapper">
-                <a class="manual-link-block" href="https://docs.mcsmanager.com/"
-                  ><i class="el-icon-link"></i> 接口文档</a
-                >
-              </div>
-            </el-col>
-            <el-col :span="6">
-              <div class="manual-link-block-wrapper">
-                <a class="manual-link-block" href="https://guide.mcsmanager.com/"
-                  ><i class="el-icon-link"></i> 常见问题</a
-                >
-              </div>
-            </el-col>
-            <el-col :span="6">
-              <div class="manual-link-block-wrapper">
-                <a class="manual-link-block" href="https://github.com/MCSManager/MCSManager/wiki"
-                  ><i class="el-icon-link"></i> 维基百科</a
-                >
-              </div>
-            </el-col>
-          </el-row>
-        </template>
-      </Panel>
+      <el-row :gutter="20">
+        <el-col :xs="12" :md="6" :offset="0">
+          <ValueCard
+            title="实例总计"
+            sub-title="管理员所分配给您的所有实例总数"
+            :value="this.info.total"
+            style="height: 260px"
+            font-class="el-icon-s-data"
+          >
+          </ValueCard>
+        </el-col>
+        <el-col :xs="12" :md="6" :offset="0">
+          <ValueCard
+            title="正在运行"
+            sub-title="实例正在运行中的数量"
+            :value="this.info.running"
+            style="height: 260px"
+            font-class="el-icon-s-promotion"
+          >
+          </ValueCard>
+        </el-col>
+        <el-col :xs="12" :md="6" :offset="0">
+          <ValueCard
+            title="未运行"
+            sub-title="实例未处于运行中的数量"
+            :value="this.info.stopped"
+            style="height: 260px"
+            font-class="el-icon-s-flag"
+          >
+          </ValueCard>
+        </el-col>
+        <el-col :xs="12" :md="6" :offset="0">
+          <ValueCard
+            title="不可用"
+            sub-title="因主机失联而暂时不可用的实例数量"
+            :value="this.info.unknown"
+            style="height: 260px"
+            font-class="el-icon-s-opportunity"
+          >
+          </ValueCard>
+        </el-col>
+      </el-row>
     </el-col>
 
     <!-- 右侧用户信息栏 -->
     <el-col :md="8" :offset="0">
-      <Panel style="min-height: 240px">
+      <Panel style="height: 260px">
         <template #title>个人信息</template>
         <template #default>
           <LineLabel space="small">
@@ -189,9 +163,9 @@
     style="font-size: 12px; color: #cdcdcd; text-align: center; margin-top: 40px"
   >
     <div>
-      <span>MCSManager is released under the GPL-3.0 License</span>
+      <span>MCSManager is released under the AGPL-3.0 License</span>
       <br />
-      <span>Copyright © 2021 Suwings</span>
+      <span>Copyright © 2022 Suwings</span>
     </div>
   </div>
 
@@ -226,15 +200,18 @@
   </Dialog>
 </template>
 
+<style></style>
+
 <script>
 import Dialog from "../../components/Dialog";
 import Panel from "../../components/Panel";
+import ValueCard from "../../components/ValueCard";
 import LineLabel from "../../components/LineLabel";
 import { request, requestUserInfo } from "../service/protocol";
 import { API_INSTANCE_LOW_PERMISSION_PUT } from "../service/common";
 import { statusCodeToText } from "../service/instance_tools";
 export default {
-  components: { Panel, LineLabel, Dialog },
+  components: { Panel, LineLabel, Dialog, ValueCard },
   data: function () {
     return {
       editInstance: {

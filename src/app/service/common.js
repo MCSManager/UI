@@ -60,6 +60,8 @@ export const API_INSTANCE_REMOTE_SERVICE_STREAM = `${API_URL}/api/protected_inst
 export const API_INSTANCE_UPDATE = `${API_URL}/api/protected_instance/instance_update`;
 export const API_INSTANCE_RESTART = `${API_URL}/api/protected_instance/restart`;
 export const API_INSTANCE_OUTPUT = `${API_URL}/api/protected_instance/outputlog`;
+export const API_INSTANCE_ASYNC_TASK = `${API_URL}/api/protected_instance/asynchronous`;
+export const API_INSTANCE_ASYNC_STOP = `${API_URL}/api/protected_instance/stop_asynchronous`;
 
 export const API_PROCESS_CONFIG_LIST = `${API_URL}/api/protected_instance/process_config/list`;
 export const API_PROCESS_CONFIG_FILE = `${API_URL}/api/protected_instance/process_config/file`;

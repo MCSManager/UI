@@ -37,7 +37,13 @@
             </LineInfo>
             <LineInfo
               ><i class="el-icon-finished"></i> 状态:
-              {{ codeToText(instanceInfo.status) }}
+              <!-- {{ codeToText(instanceInfo.status) }} -->
+              <span v-if="instanceInfo.status === -1" class="color-red">忙碌中</span>
+              <span v-else-if="instanceInfo.status === 0" class="color-gray">未运行</span>
+              <span v-else-if="instanceInfo.status === 1" class="color-yellow">停止中</span>
+              <span v-else-if="instanceInfo.status === 2" class="color-yellow">启动中</span>
+              <span v-else-if="instanceInfo.status === 3" class="color-green">正在运行</span>
+              <span v-else class="color-red">未知</span>
             </LineInfo>
             <LineInfo v-if="instanceInfo.info && instanceInfo.info.currentPlayers != -1">
               <i class="el-icon-user"></i> 玩家数: {{ instanceInfo.info.currentPlayers }} /
@@ -54,21 +60,22 @@
         <template #default>
           <div v-loading="busy">
             <el-row type="flex" justify="space-between" :gutter="10">
-              <el-col :lg="24">
+              <el-col :lg="24" v-show="instanceInfo.status === 0">
                 <el-popconfirm title="确定执行此操作？" @confirm="openInstance">
                   <template #reference>
                     <el-button
                       icon="el-icon-video-play"
+                      type="warning"
                       style="width: 100%"
                       size="small"
-                      :disabled="instanceInfo.status != 0"
+                      plain
                     >
                       开启实例
                     </el-button>
                   </template>
                 </el-popconfirm>
               </el-col>
-              <el-col :lg="24">
+              <el-col :lg="24" v-show="instanceInfo.status === 3">
                 <el-popconfirm title="确定执行此操作？" @confirm="stopInstance">
                   <template #reference>
                     <el-button
@@ -76,13 +83,12 @@
                       style="width: 100%"
                       size="small"
                       class="row-mt"
-                      :disabled="instanceInfo.status == 0"
                       >关闭实例
                     </el-button>
                   </template>
                 </el-popconfirm>
               </el-col>
-              <el-col :lg="24">
+              <el-col :lg="24" v-show="instanceInfo.status === 3">
                 <el-popconfirm title="确定执行此操作？" @confirm="restartInstance">
                   <template #reference>
                     <el-button
@@ -90,14 +96,13 @@
                       style="width: 100%"
                       size="small"
                       class="row-mt"
-                      :disabled="instanceInfo.status == 0"
                     >
                       重启实例
                     </el-button>
                   </template>
                 </el-popconfirm>
               </el-col>
-              <el-col :lg="24">
+              <el-col :lg="24" v-show="instanceInfo.status > 0">
                 <el-popconfirm title="确定执行此操作？" @confirm="killInstance">
                   <template #reference>
                     <el-button
@@ -107,8 +112,39 @@
                       style="width: 100%"
                       size="small"
                       class="row-mt"
-                      :disabled="instanceInfo.status == 0"
                       >强制终止实例
+                    </el-button>
+                  </template>
+                </el-popconfirm>
+              </el-col>
+              <el-col :lg="24" v-show="instanceInfo.status === -1">
+                <el-popconfirm title="确定执行此操作？" @confirm="stopAsynchronousTask">
+                  <template #reference>
+                    <el-button
+                      icon="el-icon-switch-button"
+                      type="danger"
+                      plain
+                      style="width: 100%"
+                      size="small"
+                      class="row-mt"
+                      >终止正在运行的任务
+                    </el-button>
+                  </template>
+                </el-popconfirm>
+              </el-col>
+              <el-col
+                :lg="24"
+                v-show="instanceInfo.config.updateCommand && instanceInfo.status === 0"
+              >
+                <el-popconfirm title="确定执行此操作？" @confirm="updateInstace">
+                  <template #reference>
+                    <el-button
+                      icon="el-icon-files"
+                      plain
+                      style="width: 100%"
+                      size="small"
+                      class="row-mt"
+                      >更新/安装实例
                     </el-button>
                   </template>
                 </el-popconfirm>
@@ -176,7 +212,7 @@
                 >事件任务
               </el-button>
             </el-col>
-            <el-col :sm="12" :offset="0" class="row-mb">
+            <el-col :lg="12" :offset="0" class="row-mb">
               <el-button
                 :disabled="!available"
                 icon="el-icon-folder-opened"
@@ -186,7 +222,7 @@
                 >文件管理
               </el-button>
             </el-col>
-            <el-col :sm="24" :offset="0" v-if="isTopPermission">
+            <el-col :lg="24" :offset="0" v-if="isTopPermission">
               <el-button
                 :disabled="!available"
                 icon="el-icon-setting"
@@ -445,7 +481,9 @@ import {
   API_INSTANCE_RESTART,
   API_INSTANCE_UPDATE,
   API_INSTANCE_STOP,
-  API_INSTANCE_OUTPUT
+  API_INSTANCE_OUTPUT,
+  API_INSTANCE_ASYNC_TASK,
+  API_INSTANCE_ASYNC_STOP
 } from "../service/common";
 import router from "../router";
 import { parseforwardAddress, request } from "../service/protocol";
@@ -653,6 +691,37 @@ export default {
         setTimeout(() => (this.busy = false), 200);
       }
     },
+    // 终止正在进行异步任务（如更新）
+    async stopAsynchronousTask() {
+      try {
+        await request({
+          method: "GET",
+          url: API_INSTANCE_ASYNC_STOP,
+          params: { remote_uuid: this.serviceUuid, uuid: this.instanceUuid }
+        });
+      } catch (error) {
+        this.$message({ message: error.toString(), type: "error" });
+      } finally {
+        setTimeout(() => (this.busy = false), 200);
+      }
+    },
+    // 更新实例
+    async updateInstace() {
+      try {
+        await request({
+          method: "POST",
+          url: API_INSTANCE_ASYNC_TASK,
+          params: { remote_uuid: this.serviceUuid, uuid: this.instanceUuid, task_name: "update" },
+          data: {
+            time: new Date().getTime()
+          }
+        });
+      } catch (error) {
+        this.$message({ message: error.toString(), type: "error" });
+      } finally {
+        setTimeout(() => (this.busy = false), 200);
+      }
+    },
     // 终止实例（Ajax）
     async killInstance() {
       // this.busy = true;
@@ -756,7 +825,11 @@ export default {
           params: { remote_uuid: this.serviceUuid, uuid: this.instanceUuid }
         });
         this.term.clear();
-        this.term.write(text);
+        if (this.instanceInfo?.config?.terminalOption?.haveColor) {
+          this.term.write(encodeConsoleColor(text));
+        } else {
+          this.term.write(text);
+        }
         this.term.scrollToBottom();
       } catch (error) {
         this.term.write(error);
