@@ -877,20 +877,29 @@ export default {
     toInstanceDetail() {
       this.$router.push({ path: `/instance_detail/${this.serviceUuid}/${this.instanceUuid}/` });
     },
+    /**
+     * 初始化人数显示报表
+     */
     initChart() {
       if (!this.instanceInfo.info.playersChart || !this.instanceInfo.info.playersChart.length) {
         return;
       }
       if (!this.playersChart) {
-        setTimeout(() => {
-          this.playersChart = echarts.init(document.getElementById("echart-wrapper-players"));
-          this.playersChart.setOption(getPlayersOption());
-          this.setPlayersChart();
-        }, 100);
+        // 判断div是否存在（要下次执行的时候才会渲染）
+        const echartDiv = document.getElementById("echart-wrapper-players");
+        if (!echartDiv) {
+          return;
+        }
+        this.playersChart = echarts.init(echartDiv);
+        this.playersChart.setOption(getPlayersOption());
+        this.setPlayersChart();
       } else {
         this.setPlayersChart();
       }
     },
+    /**
+     * 设置人数显示报表显示值
+     */
     setPlayersChart() {
       if (!this.playersChart) return;
       const MAX_TIME = this.instanceInfo.info.playersChart.length - 1;
@@ -906,6 +915,9 @@ export default {
         }
       });
     },
+    /**
+     * 处理人数显示报表横坐标时间显示值
+     */
     showTimeStr(time, now) {
       const date = new Date(now - time);
       return `${date.getHours()}:${(Array(2).join(0) + date.getMinutes()).slice(-2)}`;
@@ -948,6 +960,11 @@ export default {
       this.socket.disconnect();
       // 卸载终端窗口
       this.term.dispose();
+      // 卸载人数报表
+      if (this.playersChart) {
+        this.playersChart.dispose();
+        this.playersChart = null;
+      }
     } catch (error) {
       // 忽略
       console.error(error);
