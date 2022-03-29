@@ -167,3 +167,24 @@ export function jsonToMap(json, topTitle = "", map = {}) {
   }
   return map;
 }
+
+export function toUnicode(str) {
+  var value = "";
+  for (var i = 0; i < str.length; i++) {
+    if ((/([\u4E00-\u9FA5]|[\uFE30-\uFFA0])/g).test(str[i])) {
+      value += "\\u" + leftZero4(parseInt(str.charCodeAt(i)).toString(16));
+    } else {
+      value += str[i];
+    }
+
+  }
+  return value;
+}
+function leftZero4(str) {
+  if (str != null && str != "" && str != "undefined") {
+    if (str.length == 2) {
+      return "00" + str;
+    }
+  }
+  return str;
+}
