@@ -101,6 +101,7 @@ export default {
       this.$router.push({
         path: `/process_config_file/${this.serviceUuid}/${this.instanceUuid}/`,
         query: {
+          type: this.type,
           configName,
           configPath,
           extName

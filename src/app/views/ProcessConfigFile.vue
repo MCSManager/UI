@@ -101,6 +101,7 @@ export default {
   },
   data: function () {
     return {
+      type: this.$route.query.type,
       serviceUuid: this.$route.params.serviceUuid,
       instanceUuid: this.$route.params.instanceUuid,
       configName: null,
@@ -134,11 +135,14 @@ export default {
     async save() {
       try {
         const config = { ...this.config };
-        if (this.configPath == "server.properties") {
+        if (
+          this.configPath == "server.properties" &&
+          this.type &&
+          this.type.startsWith("minecraft/java")
+        ) {
           for (const key in config) {
             const value = config[key];
             if (value && typeof value == "string") {
-              console.log(value);
               config[key] = toUnicode(value);
             }
           }
