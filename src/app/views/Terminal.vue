@@ -324,7 +324,14 @@
           </div>
         </template>
       </Panel>
-      <Panel v-if="isShowPlayersChart">
+      <Panel
+        v-if="
+          instanceInfo &&
+          instanceInfo.info &&
+          instanceInfo.info.playersChart &&
+          instanceInfo.info.playersChart.length
+        "
+      >
         <template #title>面板端在线人数</template>
         <template #default>
           <p>每10分钟统计间隔，总10小时的在线人数趋势</p>
@@ -870,29 +877,36 @@ export default {
     toInstanceDetail() {
       this.$router.push({ path: `/instance_detail/${this.serviceUuid}/${this.instanceUuid}/` });
     },
+    /**
+     * 初始化人数显示报表
+     */
     initChart() {
       if (!this.instanceInfo.info.playersChart || !this.instanceInfo.info.playersChart.length) {
-        this.isShowPlayersChart = false;
         return;
       }
-      if (!this.isShowPlayersChart) {
-        this.isShowPlayersChart = true;
-        setTimeout(() => {
-          // 基于准备好的dom，初始化echarts实例
-          this.playersChart = echarts.init(document.getElementById("echart-wrapper-players"));
-          this.playersChart.setOption(getPlayersOption());
-          this.setPlayersChart();
-        }, 200);
+      if (!this.playersChart) {
+        // 判断div是否存在（要下次执行的时候才会渲染）
+        const echartDiv = document.getElementById("echart-wrapper-players");
+        if (!echartDiv) {
+          return;
+        }
+        this.playersChart = echarts.init(echartDiv);
+        this.playersChart.setOption(getPlayersOption());
+        this.setPlayersChart();
       } else {
         this.setPlayersChart();
       }
     },
+    /**
+     * 设置人数显示报表显示值
+     */
     setPlayersChart() {
       if (!this.playersChart) return;
       const MAX_TIME = this.instanceInfo.info.playersChart.length - 1;
       const source = this.instanceInfo.info.playersChart;
+      const now = Date.now();
       for (const key in source) {
-        source[key]["time"] = `${(MAX_TIME - key) * 10} 分前`;
+        source[key]["time"] = this.showTimeStr((MAX_TIME - key) * 600000, now);
       }
       this.playersChart.setOption({
         dataset: {
@@ -900,6 +914,13 @@ export default {
           source
         }
       });
+    },
+    /**
+     * 处理人数显示报表横坐标时间显示值
+     */
+    showTimeStr(time, now) {
+      const date = new Date(now - time);
+      return `${date.getHours()}:${(Array(2).join(0) + date.getMinutes()).slice(-2)}`;
     }
   },
   // 装载事件
@@ -939,6 +960,11 @@ export default {
       this.socket.disconnect();
       // 卸载终端窗口
       this.term.dispose();
+      // 卸载人数报表
+      if (this.playersChart) {
+        this.playersChart.dispose();
+        this.playersChart = null;
+      }
     } catch (error) {
       // 忽略
       console.error(error);

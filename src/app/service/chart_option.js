@@ -109,7 +109,6 @@ export function getPlayersOption() {
       {
         type: "line",
         areaStyle: {},
-        smooth: true,
         symbol: "none"
       }
     ]
