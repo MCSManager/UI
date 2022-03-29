@@ -172,7 +172,7 @@ export function toUnicode(str) {
   var value = "";
   for (var i = 0; i < str.length; i++) {
     if ((/([\u4E00-\u9FA5]|[\uFE30-\uFFA0])/g).test(str[i])) {
-      value += "\\u" + left_zero_4(parseInt(str.charCodeAt(i)).toString(16));
+      value += "\\u" + leftZero4(parseInt(str.charCodeAt(i)).toString(16));
     } else {
       value += str[i];
     }
@@ -180,7 +180,7 @@ export function toUnicode(str) {
   }
   return value;
 }
-function left_zero_4(str) {
+function leftZero4(str) {
   if (str != null && str != "" && str != "undefined") {
     if (str.length == 2) {
       return "00" + str;
