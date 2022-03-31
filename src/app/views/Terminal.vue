@@ -643,6 +643,9 @@ export default {
     },
     pushHistoryCommand(cmd) {
       if (cmd.trim().length <= 0) return;
+      // 清除重复的记录和当前指令一样的记录
+      this.commandhistory = Array.from(new Set(this.commandhistory)).filter((r) => r != cmd);
+      // 往前方插入当前输入的指令
       this.commandhistory.unshift(cmd);
       if (this.commandhistory.length > 40) {
         this.commandhistory.pop();
