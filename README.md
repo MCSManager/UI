@@ -28,10 +28,12 @@ MCSManager 面板（简称：MCSM 面板）是一款全中文，轻量级，开�
 
 基于 MCSManager/UI 的 魔改UI 项目，您可以叫他 MCSM/UI Plus 或者UI+面板 均可
 
+> 请注意，面板中的 RealMC 与 RealMCLogo 均已申请相关专利，受到 中华人民共和国 法律保护。
+
 ## 搭建开发环境
 
 ```bash
-git clone https://github.com/MCSManager/MCSManager-UI.git
+git clone https://github.com/TalexDreamSoul/UIPlus.git
 cd MCSManager-UI
 npm install
 npm run serve
