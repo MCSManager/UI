@@ -5,8 +5,8 @@
   it under the terms of the GNU Affero General Public License as published by
   the Free Software Foundation, either version 3 of the License, or
   (at your option) any later version.
-  
-  According to the AGPL, it is forbidden to delete all copyright notices, 
+
+  According to the AGPL, it is forbidden to delete all copyright notices,
   and if you modify the source code, you must open source the
   modified source code.
 
@@ -129,16 +129,7 @@
         <div class="sub-title row-mt">
           <p class="sub-title-title">注意事项</p>
           <p class="sub-title-info">
-            若您从事出租商业活动，请务必保证应用实例运行在 Linux 的 Docker
-            虚拟容器中，否则将有安全隐患。
-            <br />
-            <a
-              class="color-blue"
-              href="https://docs.mcsmanager.com/"
-              target="_blank"
-              rel="noopener noreferrer"
-              >具体信息参考</a
-            >
+            RealMCServerManager
           </p>
         </div>
         <div class="row-mt">

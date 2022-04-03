@@ -5,8 +5,8 @@
   it under the terms of the GNU Affero General Public License as published by
   the Free Software Foundation, either version 3 of the License, or
   (at your option) any later version.
-  
-  According to the AGPL, it is forbidden to delete all copyright notices, 
+
+  According to the AGPL, it is forbidden to delete all copyright notices,
   and if you modify the source code, you must open source the
   modified source code.
 
@@ -53,18 +53,19 @@
         </el-breadcrumb> -->
       </el-col>
       <el-col :span="12" style="text-align: right; line-height: 28px">
-        <el-dropdown style="margin: 0px 10px">
-          <span class="el-dropdown-link">
-            {{ userInfo.userName }}
-            <i class="el-icon-arrow-down el-icon--right"></i>
-          </span>
-          <template #dropdown>
-            <el-dropdown-menu>
-              <el-dropdown-item @click="toPrivate">个人资料</el-dropdown-item>
-              <el-dropdown-item @click="logout">退出</el-dropdown-item>
-            </el-dropdown-menu>
-          </template>
-        </el-dropdown>
+        <el-button @click="logout" size="small" type="danger">退出</el-button>
+<!--        <el-dropdown style="margin: 0px 10px">-->
+<!--          <span class="el-dropdown-link">-->
+<!--            {{ userInfo.userName }}-->
+<!--            <i class="el-icon-arrow-down el-icon&#45;&#45;right"></i>-->
+<!--          </span>-->
+<!--          <template #dropdown>-->
+<!--            <el-dropdown-menu>-->
+<!--              <el-dropdown-item @click="toPrivate">个人资料</el-dropdown-item>-->
+<!--              <el-dropdown-item @click="logout">退出</el-dropdown-item>-->
+<!--            </el-dropdown-menu>-->
+<!--          </template>-->
+<!--        </el-dropdown>-->
         <!-- <el-tooltip content="消息" class="only-pc-display">
           <el-button size="mini" icon="el-icon-bell" circle></el-button>
         </el-tooltip>

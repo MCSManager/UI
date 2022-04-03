@@ -5,8 +5,8 @@
   it under the terms of the GNU Affero General Public License as published by
   the Free Software Foundation, either version 3 of the License, or
   (at your option) any later version.
-  
-  According to the AGPL, it is forbidden to delete all copyright notices, 
+
+  According to the AGPL, it is forbidden to delete all copyright notices,
   and if you modify the source code, you must open source the
   modified source code.
 
@@ -56,15 +56,75 @@ a {
 }
 
 .el-menu-item {
+  width: 100%;
   height: 45px;
   line-height: 45px;
   transition: all 0.6s;
-  border-radius: 8px;
   margin: 4px 0px;
 }
 
 .el-menu-item:hover {
   background-color: rgb(66, 66, 66);
+}
+
+.el-menu-item::after {
+
+  content: "";
+  position: absolute;
+
+  right: -2px;
+  top: 0;
+
+  width: 5px;
+  height: 100%;
+
+  background-color: var(--el-menu-active-color);;
+
+  transform: scaleY(0);
+  transition: all .25s;
+
+}
+
+.el-menu-item::before {
+
+  content: "";
+  position: absolute;
+
+  left: 0;
+  top: 0;
+
+  width: 100%;
+  height: 100%;
+
+  background-color: rgb(66, 66, 66);
+
+  opacity: 0;
+  transition: all .25s;
+
+}
+
+.el-menu-item:hover::after {
+  transform: scaleY(1);
+}
+
+.el-menu-item.is-active::before {
+
+  opacity: 0.35;
+
+}
+
+.el-menu-item.is-active::after {
+
+  right: 0;
+
+  transform: scaleY(1);
+
+}
+
+.el-menu-item-group__title {
+
+  //padding: 7px 0 7px 0;
+
 }
 
 // .el-card.is-always-shadow {

@@ -5,8 +5,8 @@
   it under the terms of the GNU Affero General Public License as published by
   the Free Software Foundation, either version 3 of the License, or
   (at your option) any later version.
-  
-  According to the AGPL, it is forbidden to delete all copyright notices, 
+
+  According to the AGPL, it is forbidden to delete all copyright notices,
   and if you modify the source code, you must open source the
   modified source code.
 
@@ -22,25 +22,6 @@
 <template>
   <el-row :gutter="20">
     <el-col :span="24">
-      <Panel v-loading="loading">
-        <template #title>面板端详细数据</template>
-        <template #default>
-          <el-row :gutter="20">
-            <el-col :xs="12" :md="6" v-for="(item, index) in computerInfoA" :key="index">
-              <div class="overview-info-warpper">
-                <p class="overview-info-title">
-                  <b v-text="item.name"></b>
-                </p>
-                <p
-                  class="overview-info-value"
-                  v-text="item.value"
-                  :class="{ 'color-red': item.warn }"
-                ></p>
-              </div>
-            </el-col>
-          </el-row>
-        </template>
-      </Panel>
       <div>
         <el-row :gutter="20">
           <el-col :md="6" :xs="12" :offset="0">
@@ -51,7 +32,11 @@
               style="height: 260px"
               font-class="el-icon-s-data"
             >
+
+              <DaemonProgressBar :now="valueCard.availableDaemon" :max="valueCard.totalDaemon"></DaemonProgressBar>
+
             </ValueCard>
+
           </el-col>
           <el-col :md="6" :xs="12" :offset="0">
             <ValueCard
@@ -61,6 +46,9 @@
               style="height: 260px"
               font-class="el-icon-s-promotion"
             >
+
+              <DaemonProgressBar color="#66cc66" :now="valueCard.runningInstance" :max="valueCard.totalInstance"></DaemonProgressBar>
+
             </ValueCard>
           </el-col>
           <el-col :md="6" :xs="12" :offset="0">
@@ -71,6 +59,9 @@
               style="height: 260px"
               font-class="el-icon-upload"
             >
+
+              <DaemonProgressBar color="#ee6291" :now="valueCard.failedLogin" :max="valueCard.Logined"></DaemonProgressBar>
+
             </ValueCard>
           </el-col>
           <el-col :md="6" :xs="12" :offset="0">
@@ -81,10 +72,37 @@
               style="height: 260px"
               font-class="el-icon-s-flag"
             >
+
+              <DaemonProgressBar color="#80cbcf" :now="valueCard.cpu" :max="valueCard.mem"></DaemonProgressBar>
+
             </ValueCard>
           </el-col>
         </el-row>
       </div>
+      <Panel v-loading="loading">
+        <template #title>面板端详细数据</template>
+        <template #default>
+
+            <el-row :gutter="20">
+              <transition-group :css="false"
+                                @enter="onEnter"
+                                @before-enter="beforeInfoEnter">
+              <el-col :data-index="index" :xs="12" :md="6" v-for="(item, index) in computerInfoA" :key="index">
+                <div class="overview-info-warpper">
+                  <p class="overview-info-title">
+                    <b v-text="item.name"></b>
+                  </p>
+                  <p
+                    class="overview-info-value"
+                    v-text="item.value"
+                    :class="{ 'color-red': item.warn }"
+                  ></p>
+                </div>
+              </el-col>
+              </transition-group>
+            </el-row>
+        </template>
+      </Panel>
 
       <Panel v-loading="loading">
         <template #title>分布式服务总览</template>
@@ -125,11 +143,11 @@
             <el-table-column prop="status" label="连接状态">
               <template #default="scope">
                 <span class="color-green" v-if="scope.row.status">
-                  <i class="el-icon-circle-check"></i> 在线
+                  <i class="el-icon-dot"></i> 在线
                 </span>
                 <span class="color-red" v-if="!scope.row.status">
                   <el-tooltip effect="dark" content="无法连接到指定ip或者密钥错误" placement="top">
-                    <span><i class="el-icon-warning-outline"></i> 离线</span>
+                    <span><i class="el-icon-dot"></i> 离线</span>
                   </el-tooltip>
                 </span>
               </template>
@@ -187,29 +205,12 @@
       </el-row>
     </el-col>
   </el-row>
-
-  <Panel v-if="manualLink">
-    <template #title>帮助文档</template>
-    <template #default>
-      <el-row :gutter="20">
-        <el-col :md="6" :offset="0" v-for="(item, index) in manualLink['helpLink']" :key="index">
-          <a class="manualLink" :href="item.link" v-text="item.title" target="_black"></a>
-        </el-col>
-
-        <el-col :span="24">
-          <div class="box-card-title-more">常见问题</div>
-        </el-col>
-        <el-col :md="6" :offset="0" v-for="(item, index) in manualLink['faq']" :key="index">
-          <a class="manualLink" :href="item.link" v-text="item.title" target="_black"></a>
-        </el-col>
-      </el-row>
-    </template>
-  </Panel>
 </template>
 
 <script>
 import * as echarts from "echarts";
 import Panel from "../../components/Panel";
+import DaemonProgressBar from '../../components/DaemonProgressBar'
 // import LineLabel from "../../components/LineLabel";
 import { request } from "../service/protocol";
 import { API_OVERVIEW } from "../service/common";
@@ -233,7 +234,6 @@ export default {
       computerInfoA: [],
       computerInfoB: [],
       servicesStatus: [],
-      manualLink: null,
 
       forChartTotalInstance: 0,
 
@@ -257,6 +257,27 @@ export default {
     };
   },
   methods: {
+
+    beforeInfoEnter(el) {
+
+      el.style.opacity = 0;
+      el.style.transform = "translateX(-30px)";
+      el.style.transition = 'all .25s'
+
+    },
+
+    onEnter(el, done) {
+
+      setTimeout(() => {
+
+        el.style.opacity = 1;
+        el.style.transform = "translateX(0px)";
+
+        done();
+
+      }, el.dataset.index * 120)
+
+    },
     startInterval() {
       this.interval = setInterval(async () => {
         const data = await this.request();
@@ -480,14 +501,13 @@ export default {
       this.setSystemChart();
     }
   },
-  components: { Panel, ValueCard },
+  components: { Panel, ValueCard, DaemonProgressBar },
   async mounted() {
     this.loading = true;
     const data = await this.request();
     this.render(data);
     this.initChart();
     this.loading = false;
-    this.manualLink = window.onlineMCSManagerNotice ? window.onlineMCSManagerNotice() : null;
     this.startInterval();
   },
   beforeUnmount() {

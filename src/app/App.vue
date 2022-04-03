@@ -5,8 +5,8 @@
   it under the terms of the GNU Affero General Public License as published by
   the Free Software Foundation, either version 3 of the License, or
   (at your option) any later version.
-  
-  According to the AGPL, it is forbidden to delete all copyright notices, 
+
+  According to the AGPL, it is forbidden to delete all copyright notices,
   and if you modify the source code, you must open source the
   modified source code.
 
@@ -82,7 +82,7 @@ export default {
     },
     nav() {
       // 若用户地址本身不为根目录，则不管
-      console.log("路由地址:", this.$route.path);
+      // console.log("路由地址:", this.$route.path);
       if (this.$route.path != "/") return;
       // 根据不同的用户类型进行跳转
       const userInfo = this.$store.state.userInfo;
@@ -97,11 +97,11 @@ export default {
   },
   async beforeCreate() {
     try {
-      console.log("正在初始化用户信息，执行: await setupUserInfo()");
+      // console.log("正在初始化用户信息，执行: await setupUserInfo()");
       await setupUserInfo();
       this.nav();
     } catch (error) {
-      console.log("App.vue setupUserInfo():", error);
+      // console.log("App.vue setupUserInfo():", error);
       router.push({ path: "/login" });
     }
   },

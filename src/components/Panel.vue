@@ -5,8 +5,8 @@
   it under the terms of the GNU Affero General Public License as published by
   the Free Software Foundation, either version 3 of the License, or
   (at your option) any later version.
-  
-  According to the AGPL, it is forbidden to delete all copyright notices, 
+
+  According to the AGPL, it is forbidden to delete all copyright notices,
   and if you modify the source code, you must open source the
   modified source code.
 
@@ -21,6 +21,7 @@
 
 <template>
   <el-card class="box-card-shadow" :body-style="bodyStyle || 'padding:12px;'" :style="style">
+    <div class="pin" v-if="pin"></div>
     <div class="box-card-title" v-if="$slots.title">
       <slot name="title"></slot>
     </div>
@@ -34,7 +35,8 @@
 export default {
   props: {
     style: String,
-    bodyStyle: String
+    bodyStyle: String,
+    pin: Boolean
   },
   data: function () {
     return {};
@@ -44,6 +46,20 @@ export default {
 </script>
 
 <style scoped>
+.pin {
+
+  position: absolute;
+
+  top: 0;
+  left: 0;
+
+  width: 100%;
+  height: 2px;
+
+  background-color: var(--el-color-primary);
+
+}
+
 .box-card-title {
   font-weight: 800;
   margin-bottom: 12px;

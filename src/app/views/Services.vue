@@ -5,8 +5,8 @@
   it under the terms of the GNU Affero General Public License as published by
   the Free Software Foundation, either version 3 of the License, or
   (at your option) any later version.
-  
-  According to the AGPL, it is forbidden to delete all copyright notices, 
+
+  According to the AGPL, it is forbidden to delete all copyright notices,
   and if you modify the source code, you must open source the
   modified source code.
 
@@ -114,11 +114,11 @@
         <el-table-column label="连接状态">
           <template #default="scope">
             <span class="color-green" v-if="scope.row.available">
-              <i class="el-icon-circle-check"></i> 在线
+              <i class="el-icon-dot"></i> 在线
             </span>
             <span class="color-red" v-if="!scope.row.available">
               <el-tooltip effect="dark" content="无法连接到指定ip或者密钥错误" placement="top">
-                <span><i class="el-icon-warning-outline"></i> 离线</span>
+                <span><i class="el-icon-dot"></i> 离线</span>
               </el-tooltip>
             </span>
           </template>

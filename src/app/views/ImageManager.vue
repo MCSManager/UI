@@ -5,8 +5,8 @@
   it under the terms of the GNU Affero General Public License as published by
   the Free Software Foundation, either version 3 of the License, or
   (at your option) any later version.
-  
-  According to the AGPL, it is forbidden to delete all copyright notices, 
+
+  According to the AGPL, it is forbidden to delete all copyright notices,
   and if you modify the source code, you must open source the
   modified source code.
 
@@ -119,11 +119,10 @@
     <template #title>不受支持的操作系统</template>
     <template #default>
       <div style="margin: 24px 0px">
-        <el-alert :closable="false" title="Windows 系统暂时无法使用" type="error" show-icon>
+        <el-alert :closable="false" title="无效的虚拟化" type="error" show-icon>
           <template #default>
             <span
-              >很抱歉，因为 Windows 下的虚拟化使用较为复杂且安装繁琐，所以 MCSManager
-              面板暂时无法兼容 Docker for Windows 版本。<br />相信在不久后的将来会逐渐支持此功能。</span
+              >抱歉，在 WINDOWS 系统环境下 虚拟化 不可用</span
             >
           </template>
         </el-alert>

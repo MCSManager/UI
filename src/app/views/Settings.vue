@@ -5,8 +5,8 @@
   it under the terms of the GNU Affero General Public License as published by
   the Free Software Foundation, either version 3 of the License, or
   (at your option) any later version.
-  
-  According to the AGPL, it is forbidden to delete all copyright notices, 
+
+  According to the AGPL, it is forbidden to delete all copyright notices,
   and if you modify the source code, you must open source the
   modified source code.
 
@@ -301,69 +301,14 @@
             开源软件协议发行
           </p>
           <p class="sub-title-info">
-            此协议准许每个人都可以复制和分发代码副本，并且可以对使用者收取服务费用。<br />
-            若对代码任何修改，则必须无偿提供软件的完整源代码下载。
+           RealMC Server Manager
           </p>
-        </div>
-
-        <div class="sub-title">
-          <p class="sub-title-title">闭源商业许可证</p>
-          <p class="sub-title-info">
-            若您想二次开发并且闭源使用于任何活动（包括但不限于商业，个人）。<br />
-            请参考:
-            <a href="https://mcsmanager.com/" target="_blank" rel="noopener noreferrer">
-              相关许可证
-            </a>
-          </p>
-          <p class="sub-title-info"></p>
-        </div>
-
-        <div class="sub-title">
-          <p class="sub-title-title">项目赞助者</p>
-          <p class="sub-title-info">没有以下名单的重点支持，就不会有 MCSManager 的长期维护。</p>
-          <p class="sub-title-info"></p>
-        </div>
-
-        <div class="contributors">
-          <el-row :gutter="10" v-if="sponsorList">
-            <el-col :md="4" v-for="(item, index) in sponsorList" :key="index">
-              <a
-                :href="item.link || 'https://mcsmanager.com'"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <el-card
-                  shadow="hover"
-                  :body-style="{ padding: '16px' }"
-                  style="height: 70px; margin-bottom: 10px"
-                >
-                  <p style="margin: 0px; font-size: 13px">
-                    <b>{{ item.name }}</b>
-                  </p>
-                  <p style="margin: 0px; font-size: 12px; color: gray">
-                    {{ item.message ? item.message : "--" }}
-                  </p>
-                </el-card>
-              </a>
-            </el-col>
-            <el-col :span="24">
-              <p class="color-gray text-center">
-                只含前 30 名赞助者，查看完整赞助名单或进行赞助支持请前往
-                <a href="https://mcsmanager.com/" target="_blank" rel="noopener noreferrer">
-                  MCSManager 官方网站
-                </a>
-              </p>
-            </el-col>
-          </el-row>
-          <div v-else>
-            <p>暂无数据</p>
-          </div>
         </div>
 
         <div>
-          <p class="color-gray text-center">
-            版权所有
-            <a target="black" href="https://github.com/Suwings">Suwings</a>
+          <p class="color-gray">
+            Powered by
+            <a target="black" href="https://github.com/Suwings">MCSM</a>
           </p>
         </div>
       </template>

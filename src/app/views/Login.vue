@@ -5,8 +5,8 @@
   it under the terms of the GNU Affero General Public License as published by
   the Free Software Foundation, either version 3 of the License, or
   (at your option) any later version.
-  
-  According to the AGPL, it is forbidden to delete all copyright notices, 
+
+  According to the AGPL, it is forbidden to delete all copyright notices,
   and if you modify the source code, you must open source the
   modified source code.
 
@@ -42,7 +42,7 @@
       <template #default>
         <form action="/login" method="post">
           <div style="font-size: 24px; font-weight: 600">身份验证</div>
-          <p>使用服务器的 MCSManager 账号登录到面板</p>
+          <p>RealMC Server Manager</p>
           <form action="/" method="post">
             <div style="margin-top: 22px">
               <div>
@@ -77,7 +77,7 @@
               </div>
               <div class="login-btn-wrapper row-mt">
                 <transition name="fade">
-                  <div v-if="cause" id="login-cause">{{ cause }}</div>
+                  <div ref="causeTip" id="login-cause">{{ cause }}</div>
                 </transition>
                 <el-button
                   type="primary"
@@ -93,8 +93,8 @@
               <div class="login-info-wrapper row-mt">
                 <div>
                   <span class="color-gray"
-                    >版权所有 2022
-                    <a target="black" href="https://github.com/Suwings">Suwings</a></span
+                    >Powered by
+                    <a target="black" href="https://github.com/MCSManager/MCSManager">MCSM</a></span
                   >
                 </div>
               </div>
@@ -203,7 +203,7 @@ export default {
       } catch (error) {
         this.$notify({
           title: "网页无法正确运作",
-          message: "无法获取身份数据，网页所有功能将全部不可用，请立刻刷新网页或重新登录",
+          message: "请联系管理员获得更多信息",
           type: "error",
           duration: 0
         });
@@ -214,8 +214,9 @@ export default {
     }
   },
   async mounted() {
-    console.log("Welcome use MCSManager.");
-    console.log("Copyright 2022 Suwings All rights reserved.");
+    console.log("RealMC Server Manager");
+    console.log("Powered by MCSM");
+    console.log("Copyright 2022 RealMC All rights reserved.");
     // try {
     //   await setupUserInfo();
     //   if (this.$store.state?.userInfo?.uuid) {
@@ -225,6 +226,34 @@ export default {
     // } catch (err) {
     //   // 忽略
     // }
+  },
+  watch: {
+
+    cause: {
+
+      immediate: false,
+      async handler(latest) {
+
+        const ref = this.$refs.causeTip
+
+        await sleep(200)
+
+        if( latest ) {
+
+          ref.style.transform = 'translateX(0)'
+          ref.style.opacity = '1'
+
+          await sleep(4500)
+
+        }
+
+        ref.style.transform = 'translateX(5px)'
+        ref.style.opacity = '0'
+
+      }
+
+    }
+
   }
 };
 </script>
@@ -380,6 +409,9 @@ export default {
   color: rgb(170, 8, 8);
   font-size: 12px;
   margin-right: 18px;
+  opacity: 0;
+  transform: translateX(5px);
+  transition: all .35s;
 }
 
 /* 针对手机的登录界面 */
