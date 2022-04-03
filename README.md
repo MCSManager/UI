@@ -24,6 +24,10 @@ MCSManager 面板（简称：MCSM 面板）是一款全中文，轻量级，开�
 
 <br />
 
+## MCSManagerPlus 简介
+
+基于 MCSManager/UI 的 魔改UI 项目，您可以叫他 MCSM/UI Plus 或者UI+面板 均可
+
 ## 搭建开发环境
 
 ```bash
