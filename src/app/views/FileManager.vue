@@ -1,156 +1,231 @@
-<!--
-  Copyright (C) 2022 Suwings <Suwings@outlook.com>
-
-  This program is free software: you can redistribute it and/or modify
-  it under the terms of the GNU Affero General Public License as published by
-  the Free Software Foundation, either version 3 of the License, or
-  (at your option) any later version.
-  
-  According to the AGPL, it is forbidden to delete all copyright notices, 
-  and if you modify the source code, you must open source the
-  modified source code.
-
-  版权所有 (C) 2022 Suwings <Suwings@outlook.com>
-
-  该程序是免费软件，您可以重新分发和/或修改据 GNU Affero 通用公共许可证的条款，
-  由自由软件基金会，许可证的第 3 版，或（由您选择）任何更高版本。
-
-  根据 AGPL 与用户协议，您必须保留所有版权声明，如果修改源代码则必须开源修改后的源代码。
-  可以前往 https://mcsmanager.com/ 阅读用户协议，申请闭源开发授权等。
--->
 
 <template>
-  <Panel>
-    <template #title>文件管理</template>
-    <template #default>
-      <el-row :gutter="20">
-        <el-col :xs="24" :md="6" :offset="0">
-          <ItemGroup>
-            <el-button size="small" @click="back">
-              <i class="el-icon-pie-chart"></i> 回到控制台
-            </el-button>
-            <el-button size="small" @click="refresh">
-              <i class="el-icon-refresh"></i> 刷新
-            </el-button>
-          </ItemGroup>
-        </el-col>
-        <el-col :xs="24" :md="18" :offset="0" class="text-align-right">
-          <ItemGroup>
-            <el-button size="small" @click="toUpDir">
-              <i class="el-icon-pie-chart"></i> 上层目录
-            </el-button>
-            <el-button size="small" @click="mkdir">
-              <i class="el-icon-folder-add"></i> 新建目录
-            </el-button>
-            <el-button size="small" @click="compress(1)">
-              <i class="el-icon-box"></i> 压缩
-            </el-button>
-            <el-button size="small" @click="compress(2)">
-              <i class="el-icon-files"></i> 解压
-            </el-button>
-            <el-button size="small" @click="rename">
-              <i class="el-icon-document"></i> 重命名
-            </el-button>
-            <el-button size="small" @click="move">
-              <i class="el-icon-scissors"></i> 剪切
-            </el-button>
-            <el-button size="small" @click="copy">
-              <i class="el-icon-document-copy"></i> 复制
-            </el-button>
-            <el-button size="small" @click="paste">
-              <i class="el-icon-tickets"></i> 粘贴
-            </el-button>
-            <el-button size="small" type="success" @click="upload">
-              <i class="el-icon-plus"></i> 上传文件
-            </el-button>
-            <el-button size="small" type="danger" @click="deleteFiles">
-              <i class="el-icon-document-delete"></i> 删除
-            </el-button>
-          </ItemGroup>
-        </el-col>
-      </el-row>
+  <div @click="closeMenu" @mouseleave="leaveHandle"  @click.right="menuOpen">
 
-      <div class="row-mt" v-show="percentComplete > 0">
-        <el-progress
-          :text-inside="true"
-          :stroke-width="14"
-          :percentage="percentComplete"
-        ></el-progress>
-      </div>
+    <Panel>
+      <template #title>文件管理</template>
+      <template #default>
+        <p>
+          <span class="dir-info" @click="list('/')">...</span>
+          <el-breadcrumb class="breadcrumb" separator="/">
+            <el-breadcrumb-item @click="breadCrumb(index)" :key="index" v-for="(item, index) in paths">{{ item }}</el-breadcrumb-item>
+          </el-breadcrumb>
+        </p>
 
-      <p>当前目录: {{ currentDir }}</p>
+        <el-row :gutter="20">
+          <el-col :xs="24" :md="6" :offset="0">
+            <ItemGroup>
+              <el-button :disabled="pathHistory.length <= 0" size="small" @click="backforward" type="primary">
+                <i class="el-icon-back"></i> 后退
+              </el-button>
+              <el-button size="small" @click="toUpDir">
+                <i class="el-icon-pie-chart"></i> 上层目录
+              </el-button>
+              <el-button size="small" @click="back">
+                <i class="el-icon-pie-chart"></i> 回到控制台
+              </el-button>
+              <el-button size="small" @click="refresh">
+                <i class="el-icon-refresh"></i> 刷新
+              </el-button>
+            </ItemGroup>
+          </el-col>
+          <el-col :xs="24" :md="18" :offset="0" class="text-align-right">
+            <ItemGroup>
+              <el-button size="small" @click="mkdir">
+                <i class="el-icon-folder-add"></i> 新建目录
+              </el-button>
+              <el-button size="small" @click="compress(1)">
+                <i class="el-icon-box"></i> 压缩
+              </el-button>
+              <el-button size="small" @click="compress(2)">
+                <i class="el-icon-files"></i> 解压
+              </el-button>
+              <el-button size="small" @click="rename">
+                <i class="el-icon-document"></i> 重命名
+              </el-button>
+              <el-button size="small" @click="move">
+                <i class="el-icon-scissors"></i> 剪切
+              </el-button>
+              <el-button size="small" @click="copy">
+                <i class="el-icon-document-copy"></i> 复制
+              </el-button>
+              <el-button size="small" @click="paste">
+                <i class="el-icon-tickets"></i> 粘贴
+              </el-button>
+              <el-button size="small" type="success" @click="upload">
+                <i class="el-icon-plus"></i> 上传文件
+              </el-button>
+              <el-button size="small" type="danger" @click="deleteFiles">
+                <i class="el-icon-document-delete"></i> 删除
+              </el-button>
+            </ItemGroup>
+          </el-col>
+        </el-row>
 
-      <el-table
-        :data="files"
-        stripe
-        style="width: 100%"
-        size="mini"
-        ref="multipleTable"
-        @selection-change="selectionChange"
-      >
-        <el-table-column type="selection" width="55"> </el-table-column>
-        <el-table-column prop="name" label="文件命令" min-width="240">
-          <template #default="scope">
-            <div
-              v-if="scope.row.type == 0"
-              class="filemanager-item-dir"
-              @click="toDir(scope.row.name)"
-            >
-              <i class="el-icon-folder"></i>
-              <span>{{ scope.row.name }}</span>
-            </div>
-            <div v-if="scope.row.type == 1" class="filemanager-item-file">
-              <i class="el-icon-document"></i>
-              <span>{{ scope.row.name }}</span>
-            </div>
-          </template>
-        </el-table-column>
-        <el-table-column
-          prop="typeText"
-          label="文件类型"
-          width="120"
-          class="only-pc-display"
-        ></el-table-column>
-        <el-table-column label="文件大小" width="140">
-          <template #default="scope">
+        <div class="row-mt" v-show="percentComplete > 0">
+          <el-progress
+                  :text-inside="true"
+                  :stroke-width="14"
+                  :percentage="percentComplete"
+          ></el-progress>
+        </div>
+
+        <el-table
+                  :data="files"
+                  stripe
+                  style="width: 100%"
+                  size="mini"
+                  ref="multipleTable"
+                  @selection-change="selectionChange"
+        >
+          <el-table-column type="selection" width="55"> </el-table-column>
+          <el-table-column prop="name" label="文件名" min-width="240">
+            <template #default="scope">
+              <div
+                      v-if="scope.row.type == 0"
+                      class="filemanager-item-dir"
+                      @click="toDir(scope.row.name)"
+              >
+                <i class="el-icon-folder"></i>
+                <span>{{ scope.row.name }}</span>
+              </div>
+              <div @dblclick="toEditFilePage(scope.row)" v-if="scope.row.type == 1" class="filemanager-item-file">
+                <i class="el-icon-document"></i>
+                <span>{{ scope.row.name }}</span>
+              </div>
+            </template>
+          </el-table-column>
+          <el-table-column
+                  prop="typeText"
+                  label="文件类型"
+                  width="120"
+                  class="only-pc-display"
+          ></el-table-column>
+          <el-table-column label="文件大小" width="140">
+            <template #default="scope">
             <span v-if="scope.row.size > 1024 * 1024"
-              >{{ Number(Number(scope.row.size) / 1024 / 1024).toFixed(0) }} MB</span
+            >{{ Number(Number(scope.row.size) / 1024 / 1024).toFixed(0) }} MB</span
             >
-            <span v-else-if="scope.row.size > 1024"
+              <span v-else-if="scope.row.size > 1024"
               >{{ Number(Number(scope.row.size) / 1024).toFixed(0) }} KB</span
-            >
-            <span v-else-if="scope.row.size > 0"
+              >
+              <span v-else-if="scope.row.size > 0"
               >{{ Number(Number(scope.row.size)).toFixed(0) }} B</span
-            >
-          </template>
-        </el-table-column>
-        <el-table-column prop="timeText" label="最后修改" width="160"></el-table-column>
-        <el-table-column label="操作" style="text-align: center" width="180">
-          <template #default="scope">
-            <el-button
-              size="mini"
-              :disabled="scope.row.type != 1"
-              @click="toEditFilePage(scope.row)"
-            >
-              编辑
-            </el-button>
-            <el-button size="mini" :disabled="scope.row.type != 1" @click="download(scope.row)">
-              下载
-            </el-button>
-          </template>
-        </el-table-column>
-      </el-table>
-    </template>
-  </Panel>
+              >
+            </template>
+          </el-table-column>
+          <el-table-column prop="timeText" label="最后修改" width="160"></el-table-column>
+          <el-table-column label="操作" style="text-align: center" width="200">
+            <template #default="scope">
+              <el-button
+                      size="mini"
+                      :disabled="scope.row.type != 1"
+                      @click="toEditFilePage(scope.row)"
+              >
+                编辑
+              </el-button>
+              <el-button
+                      size="mini"
+                      :disabled="scope.row.type != 1"
+                      @click="previewFile(scope.row)"
+              >
+                预览
+              </el-button>
+              <el-button size="mini" :disabled="scope.row.type != 1" @click="download(scope.row)">
+                下载
+              </el-button>
+            </template>
+          </el-table-column>
+        </el-table>
+      </template>
+    </Panel>
 
-  <!-- 隐藏的文件上传按钮 -->
-  <form ref="fileForm" action="" method="post">
-    <input type="file" ref="fileButtonHidden" @change="selectedFile" hidden="hidden" />
-  </form>
+    <!-- 隐藏的文件上传按钮 -->
+    <form ref="fileForm" action="" method="post">
+      <input type="file" ref="fileButtonHidden" @change="selectedFile" hidden="hidden" />
+    </form>
+
+    <Panel class="right-click-menu" ref="menuRef">
+      <template #title>菜单</template>
+      <template #default>
+        <ItemGroup>
+          <el-tooltip content="新建目录">
+            <el-button size="small" @click="mkdir" circle plain placement="top-start">
+              <i class="el-icon-folder-add"></i>
+            </el-button>
+          </el-tooltip>
+          <el-tooltip content="压缩">
+            <el-button size="small" @click="compress(1)" circle plain placement="top">
+              <i class="el-icon-box"></i>
+            </el-button>
+          </el-tooltip>
+          <el-tooltip content="解压">
+            <el-button size="small" @click="compress(2)" circle plain placement="top">
+              <i class="el-icon-files"></i>
+            </el-button>
+          </el-tooltip>
+          <el-tooltip content="重命名">
+            <el-button size="small" @click="rename" circle plain  placement="top">
+              <i class="el-icon-document"></i>
+            </el-button>
+          </el-tooltip>
+          <el-tooltip content="剪切">
+            <el-button size="small" @click="move" circle plain  placement="top-end">
+              <i class="el-icon-scissors"></i>
+            </el-button>
+          </el-tooltip>
+          <el-tooltip content="复制">
+            <el-button size="small" @click="copy" circle plain  placement="left-start">
+              <i class="el-icon-document-copy"></i>
+            </el-button>
+          </el-tooltip>
+          <el-tooltip content="粘贴">
+            <el-button size="small" @click="paste" circle plain placement="top">
+              <i class="el-icon-tickets"></i>
+            </el-button>
+          </el-tooltip>
+          <el-tooltip content="上传文件">
+            <el-button size="small" type="success" @click="upload" circle plain  placement="top">
+              <i class="el-icon-plus"></i>
+            </el-button>
+          </el-tooltip>
+          <el-tooltip content="删除">
+            <el-button size="small" type="danger" @click="deleteFiles" circle plain  placement="top">
+              <i class="el-icon-document-delete"></i>
+            </el-button>
+          </el-tooltip>
+        </ItemGroup>
+      </template>
+    </Panel>
+
+    <Dialog v-model="preview.open">
+
+      <template #title>预览文件</template>
+      <tempalte>
+
+        <div>
+
+          <el-image v-if="preview.type === 'image'"
+                  style="width: 400px; height: 300px"
+                  :src="preview.url"
+                  :preview-src-list="[ preview.url ]"
+                  :initial-index="4"
+                  fit="cover"
+          />
+
+          <iframe v-else :url="preview.url" style="border: 0" width="800" height="600" frameborder="0" scrolling="no"></iframe>
+
+        </div>
+
+      </tempalte>
+
+    </Dialog>
+  </div>
 </template>
 
 <script>
 import Panel from "../../components/Panel";
+import Dialog from "../../components/Dialog";
 import axios from "axios";
 import {
   API_FILE_COMPRESS,
@@ -160,13 +235,13 @@ import {
   API_FILE_MKDIR,
   API_FILE_MOVE,
   API_FILE_UPLOAD,
-  API_FILE_URL
+  API_FILE_URL, sleep
 } from "../service/common";
 import path from "path";
 import { parseforwardAddress, request } from "../service/protocol";
 
 export default {
-  components: { Panel },
+  components: { Panel, Dialog },
   data() {
     return {
       serviceUuid: this.$route.params.serviceUuid,
@@ -187,7 +262,27 @@ export default {
         tmpFileNames: null,
         tmpOperationMode: -1,
         tmpDir: null
+      },
+
+      paths: [],
+      pathHistory: [],
+
+      menu: {
+
+        open: false,
+        x: -1,
+        y: -1,
+
+      },
+
+      preview: {
+
+        open: false,
+        type: '',
+        url: ''
+
       }
+
     };
   },
   async mounted() {
@@ -197,7 +292,97 @@ export default {
     await this.render();
   },
   unmounted() {},
+  watch: {
+
+    async 'menu.open'(latest) {
+
+      const ref = this.$refs.menuRef.$el
+
+      if( latest) {
+
+        ref.style.display = 'block'
+        ref.style.left = this.menu.x + 'px'
+        ref.style.top = this.menu.y + 'px'
+        ref.style.transform = 'translateY(-25px)'
+
+        await sleep(250)
+
+        ref.style.opacity = '1'
+        ref.style.transform = 'translateY(0)'
+
+      } else {
+
+        ref.style.transform = 'translateY(-25px)'
+        ref.style.opacity = '0'
+
+        await sleep(250)
+
+        ref.style.display = 'none'
+
+      }
+
+    },
+    currentDir(latest, old) {
+
+      this.paths = [ ...latest.split("/") ];
+
+      const pop = this.paths.pop()
+
+      if( pop ) {
+
+        this.paths = [ ...this.paths, pop, '' ]
+
+      }
+
+      if( this.paths.length === 0 ) {
+
+        this.paths = [ '' ]
+
+      }
+
+      this.pathHistory.push(old);
+
+    }
+
+  },
   methods: {
+    async menuOpen( event ) {
+
+      event.preventDefault();
+
+      this.closeMenu()
+
+      await sleep(300)
+
+      this.menu.x = event.clientX;
+      this.menu.y = event.clientY;
+
+      this.menu.open = true;
+
+    },
+    leaveHandle( event ) {
+
+      if( event?.relatedTarget?.className === 'el-popper__arrow' ) return
+
+      this.closeMenu()
+
+    },
+    closeMenu() {
+      this.menu.open = false;
+    },
+    // 返回上层目录
+    async breadCrumb( index ) {
+
+      let path = '';
+
+      for( let i = 0; i <= index; i++ ) {
+
+        path += this.paths[i] + "/";
+
+      }
+
+      await this.list(path);
+    },
     back() {
       this.$router.push({ path: `/terminal/${this.serviceUuid}/${this.instanceUuid}/` });
     },
@@ -216,6 +401,23 @@ export default {
       } catch (error) {
         this.$message({ message: "错误，无法查看此目录或文件", type: "error" });
       }
+    },
+    // 后退
+    async backforward() {
+
+      if( this.pathHistory.length < 1 ) {
+
+        return await this.toUpDir()
+
+      }
+
+      // 取数组最后一个并删除
+      const backforwardPath = this.pathHistory.pop();
+
+      await this.list( path.normalize(backforwardPath) )
+
+      this.pathHistory.pop()
+
     },
     // 返回上层目录
     async toUpDir() {
@@ -406,15 +608,173 @@ export default {
       }
     },
 
+    getFileType( fileName ) {
+
+      // 后缀获取
+      let suffix = '';
+      // 获取类型结果
+      let result = '';
+
+      try {
+
+        let fileArr = fileName.split('.');
+        suffix = fileArr[fileArr.length - 1];
+
+      } catch (err) {
+
+        suffix = '';
+
+      }
+
+      // fileName无后缀返回 false
+      if (!suffix) return false
+
+      // 图片格式
+      const imgList = ['png', 'jpg', 'jpeg', 'bmp', 'gif'];
+      // 进行图片匹配
+      result = imgList.some(function (item) {
+        return item === suffix;
+      });
+      if (result) {
+        result = 'image';
+        return result;
+      }
+
+      // 匹配txt
+      const txtList = ['txt', 'md', 'sh', 'bat', 'conf', 'ini', 'log', 'sql', 'xml', 'yml', 'yaml', 'json'];
+      result = txtList.some(function (item) {
+        return item == suffix;
+      });
+      if (result) {
+        result = 'text';
+        return result;
+      }
+
+      // 匹配 excel
+      const excelList = ['xls', 'xlsx'];
+      result = excelList.some(function (item) {
+        return item == suffix;
+      });
+      if (result) {
+        result = 'excel';
+        return result;
+      }
+
+      // 匹配 word
+      const wordList = ['doc', 'docx'];
+      result = wordList.some(function (item) {
+        return item == suffix;
+      });
+      if (result) {
+        result = 'word';
+        return result;
+      }
+
+      // 匹配 pdf
+      const pdfList = ['pdf'];
+      result = pdfList.some(function (item) {
+        return item == suffix;
+      });
+      if (result) {
+        result = 'pdf';
+        return result;
+      }
+
+      // 匹配 ppt
+      const pptList = ['ppt'];
+      result = pptList.some(function (item) {
+        return item == suffix;
+      });
+      if (result) {
+        result = 'ppt';
+        return result;
+      }
+
+      // 匹配 视频
+      const videoList = ['mp4', 'm2v', 'mkv'];
+      result = videoList.some(function (item) {
+        return item == suffix;
+      });
+      if (result) {
+        result = 'video';
+        return result;
+      }
+
+      // 匹配 音频
+      const radioList = ['mp3', 'wav', 'wmv'];
+      result = radioList.some(function (item) {
+        return item == suffix;
+      });
+      if (result) {
+        result = 'radio';
+        return result;
+      }
+
+      return false
+
+    },
+
+    // 预览文件
+    async previewFile( row ) {
+
+      let type = this.preview.type = this.getFileType( row.name );
+
+      if( !type ) {
+
+        this.$message({ message: '此文件不支持预览', type: 'error' });
+        return;
+
+      }
+
+      if( type === 'text' ) {
+
+        this.$message({ message: '请直接进行编辑', type: 'error' });
+        return;
+
+      }
+
+      const fileName = row.name;
+      const filePath = path.normalize(path.join(this.currentDir, fileName));
+      const result = await axios.get(API_FILE_DOWNLOAD, {
+        params: {
+          file_name: filePath,
+          remote_uuid: this.serviceUuid,
+          uuid: this.instanceUuid
+        }
+      });
+      const cfg = result.data.data;
+      const addr = parseforwardAddress(cfg.addr, "http");
+      const password = cfg.password;
+
+      this.preview.url = `${addr}/download/${password}/${fileName}`
+
+      if( [ 'doc', 'ppt', 'pdf', 'excel' ].indexOf(type) !== -1 ) {
+
+        this.preview.url = 'https://view.officeapps.live.com/op/view.aspx?src=' + this.preview.url
+
+      }
+
+      // if( type === 'text' ) {
+
+        // this.preview.url = `/file_editor/${this.serviceUuid}/${this.instanceUuid}/` + path.normalize(path.join(this.currentDir, row.name))
+
+      // }
+
+      this.preview.open = true;
+
+    },
+
     // 编辑文件
     async toEditFilePage(row) {
       const target = path.normalize(path.join(this.currentDir, row.name));
-      this.$router.push({
-        path: `/file_editor/${this.serviceUuid}/${this.instanceUuid}/`,
+      await this.$router.push( {
+        path: `/file_editor/${ this.serviceUuid }/${ this.instanceUuid }/`,
         query: {
           target
         }
-      });
+      } );
+
+      location.reload();
     },
 
     // 删除文件
@@ -581,6 +941,54 @@ export default {
 </script>
 
 <style scoped>
+.right-click-menu {
+
+  position: absolute;
+
+  width: 200px;
+  min-height: 50px;
+  height: auto;
+
+  opacity: 0;
+  transition: all .25s;
+
+}
+.breadcrumb {
+
+  position: relative;
+  display: inline-block;
+
+  top: 3px;
+
+  font-size: 16px;
+
+}
+.dir-info {
+
+  position: relative;
+  padding-left: 5px;
+
+  left: 5px;
+
+  font-size: 16px;
+
+  cursor: pointer;
+
+}
+.dir-info::before {
+
+  content: "";
+  position: absolute;
+
+  top: 0;
+  left: 0;
+
+  width: 2px;
+  height: 100%;
+
+  background-color: var(--el-color-primary);
+
+}
 .filemanager-item-dir {
   font-size: 14px;
   text-decoration: underline;
@@ -588,6 +996,13 @@ export default {
 }
 .filemanager-item-file {
   font-size: 14px;
+  cursor: pointer;
+  transition: all .25s;
+}
+.filemanager-item-file:hover {
+
+  opacity: .75;
+
 }
 .filemanager-item-dir span {
   margin-left: 4px;

@@ -16,7 +16,7 @@ module.exports = {
       entry: "src/app/index.js",
       template: "public/index.html",
       filename: "index.html",
-      title: "MCSManager"
+      title: "RMM"
     }
   },
   devServer: {

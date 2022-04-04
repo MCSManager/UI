@@ -1,39 +1,29 @@
-<!--
-  Copyright (C) 2022 Suwings <Suwings@outlook.com>
-
-  This program is free software: you can redistribute it and/or modify
-  it under the terms of the GNU Affero General Public License as published by
-  the Free Software Foundation, either version 3 of the License, or
-  (at your option) any later version.
-  
-  According to the AGPL, it is forbidden to delete all copyright notices, 
-  and if you modify the source code, you must open source the
-  modified source code.
-
-  版权所有 (C) 2022 Suwings <Suwings@outlook.com>
-
-  该程序是免费软件，您可以重新分发和/或修改据 GNU Affero 通用公共许可证的条款，
-  由自由软件基金会，许可证的第 3 版，或（由您选择）任何更高版本。
-
-  根据 AGPL 与用户协议，您必须保留所有版权声明，如果修改源代码则必须开源修改后的源代码。
-  可以前往 https://mcsmanager.com/ 阅读用户协议，申请闭源开发授权等。
--->
 
 <template>
-  <Panel>
+  <Panel class="file-tree">
+
+    <template #title>文件列表</template>
+    <template #default>
+
+      <el-tree :props="tree.props" :load="loadNode" lazy @node-click="handleFileTreeClick" />
+
+    </template>
+
+  </Panel>
+  <Panel class="file-editor" @keydown="handleKeyDown">
     <template #title>编辑文件 {{ target }}</template>
     <template #default>
       <div class="instance-table-warpper">
         <div>
           <ItemGroup>
-            <el-button size="small" type="success" @click="saveFile">
-              <i class="el-icon-refresh"></i> 更新文件
+            <el-button size="small" @click="back" v-if="!backType" type="primary">
+              <i class="el-icon-pie-chart"></i> 返回
             </el-button>
             <el-button size="small" @click="refresh">
               <i class="el-icon-refresh"></i> 刷新
             </el-button>
-            <el-button size="small" @click="back" v-if="!backType">
-              <i class="el-icon-pie-chart"></i> 回到文件列表
+            <el-button size="small" type="success" @click="saveFile" :disabled="edit.originText === edit.text">
+              <i class="el-icon-refresh"></i> 保存
             </el-button>
             <!-- <el-button size="small" @click="backTerminal" plain v-if="backType == 1">
               回到控制台
@@ -58,11 +48,13 @@
 </template>
 <script>
 import Panel from "../../components/Panel";
-import { API_FILE_URL } from "../service/common";
+import { API_FILE_LIST, API_FILE_URL } from "../service/common";
 import path from "path";
 import { request } from "../service/protocol";
+import { inject } from 'vue'
 
 export default {
+  inject: ['reload'],
   components: { Panel },
   data() {
     return {
@@ -73,16 +65,34 @@ export default {
       error: null,
       // 文件编辑功能
       edit: {
+        originText: "",
         text: "",
         fileName: this.$route.query.target
       },
-      editor: null
+      editor: null,
+      reload: null,
+
+      tree: {
+
+        // data: [],
+        props: {
+          label: 'name',
+          children: 'children',
+          isLeaf: 'type',
+        }
+
+      }
     };
   },
   async mounted() {
     await this.render();
     this.editor = window.ace.edit("editor");
-    this.editor.setTheme("ace/theme/monokai");
+    this.editor.setTheme("ace/theme/twilight");
+    this.editor.getSession().on('change', (e) => {
+
+      this.handleEditorChange(e)
+
+    });
     const extName = path.extname(this.target);
     if (extName === ".js") this.editor.session.setMode("ace/mode/javascript");
     if (extName === ".json") this.editor.session.setMode("ace/mode/json");
@@ -97,9 +107,135 @@ export default {
     if (extName === ".bat") this.editor.session.setMode("ace/mode/batchfile");
     if (extName === ".sh") this.editor.session.setMode("ace/mode/sh");
     if (extName === ".c" || extName === ".cpp") this.editor.session.setMode("ace/mode/c_cpp");
-    this.editor.setValue(this.edit.text);
+
+    if( this.edit.text.length > 0 ) {
+
+      this.editor.setValue(this.edit.text);
+      this.edit.originText = this.edit.text;
+
+    }
+
+    this.reload = inject('reload')
   },
   methods: {
+    async handleFileTreeClick( node, attr ) {
+
+      if( node.type === 0 ) return
+
+      let target = path.join(this.target, '../')
+
+      let parent = attr.parent
+
+      while( parent && parent.data.type === 0 ) {
+
+        target = path.join(target, parent.data.name)
+
+        parent = parent.parent
+
+      }
+
+      target = path.join(target, node.name)
+
+      if( this.target === target ) {
+
+        // 试图切换到当前已经打开的文件
+        return this.$message.error('当前文件已经打开')
+
+      }
+
+      const openFile = async() => {
+
+        await this.$router.push({
+          path: `/file_editor/${this.serviceUuid}/${this.instanceUuid}/`,
+          query: {
+            target: path.normalize(target)
+          }
+        });
+
+        location.reload()
+        // this.reload()
+
+      }
+
+      if( !this.edit.originText === this.edit.text ) {
+
+        // 未保存 提示用户
+        this.$confirm('当前文件未保存，是否保存？', '提示', {
+          confirmButtonText: '确定',
+          cancelButtonText: '取消',
+          type: 'warning'
+        }).then(async () => {
+
+          await this.saveFile()
+
+          await openFile()
+
+        }).catch(() => {
+
+          openFile()
+
+        })
+
+      } else await openFile()
+
+    },
+    async loadNode( node, resolve ) {
+
+      if( node.id !== 0 && node?.data.type !== 0 ) {
+
+        return resolve( [] )
+
+      }
+
+      let target = path.join(this.$route.query.target, '../')
+
+      let parent = node.parent
+
+      while( parent && parent.data.type === 0 ) {
+
+        target = path.join(target, parent.data.name)
+
+        parent = parent.parent
+
+      }
+
+      if( node?.data?.name ) {
+
+        target = path.join(target, node.data.name)
+
+      }
+
+      const data = [ ...await this.list( path.normalize(target) ) ]
+
+      resolve( data )
+
+    },
+    // 目录 List 功能
+    async list(cwd = ".") {
+      this.$route.query.path = cwd;
+      const data = await request({
+        method: "GET",
+        url: API_FILE_LIST,
+        params: {
+          remote_uuid: this.serviceUuid,
+          uuid: this.instanceUuid,
+          target: cwd
+        }
+      });
+      return data
+    },
+    handleKeyDown( event ) {
+
+      // Ctrl + S 保存
+      if( event.ctrlKey && event.keyCode === 83 ) {
+
+        event.preventDefault();
+
+        this.saveFile();
+
+      }
+
+    },
     async refresh() {
       await this.render();
       this.$message({ message: "已刷新", type: "success" });
@@ -116,6 +252,13 @@ export default {
           path: path.dirname(this.target)
         }
       });
+    },
+    handleEditorChange(e) {
+
+      this.edit.text = this.editor.getSession().getValue()
+
+      console.log( e )
+
     },
     backViaHistory() {
       this.$router.go(-1);
@@ -145,6 +288,11 @@ export default {
 
     // 保存文件
     async saveFile() {
+
+      if( this.edit.originText === this.edit.text ) return
+
+      this.edit.originText = this.edit.text
+
       this.edit.text = this.editor.getValue();
       await request({
         method: "PUT",
@@ -165,6 +313,37 @@ export default {
 </script>
 
 <style scoped>
+.file-tree {
+
+  position: relative;
+  display: inline-block;
+
+  width: 20%;
+  height: 90%;
+
+}
+.file-editor {
+
+  position: relative;
+  display: inline-block;
+
+  width: 79%;
+  height: 90%;
+
+  left: 1%;
+
+}
+@media screen and (max-width:860px){
+  .file-tree{ display:none; }
+  .file-editor {
+
+    display: block;
+
+    width: 100%;
+    left: 0;
+
+  }
+}
 .editor-code-font {
   font-family: "Monaco", "Menlo", "Ubuntu Mono", "Consolas", "source-code-pro", "Droid Sans Mono",
     monospace;
