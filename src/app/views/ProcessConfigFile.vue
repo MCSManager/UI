@@ -74,7 +74,7 @@
 
 import Panel from "../../components/Panel";
 import { request } from "../service/protocol";
-import { API_PROCESS_CONFIG_FILE } from "../service/common";
+import { API_PROCESS_CONFIG_FILE, toUnicode } from "../service/common";
 
 import serverProperties from "../../components/mc_process_config/server.properties";
 import spigotYml from "../../components/mc_process_config/spigot.yml";
@@ -101,6 +101,7 @@ export default {
   },
   data: function () {
     return {
+      type: this.$route.query.type,
       serviceUuid: this.$route.params.serviceUuid,
       instanceUuid: this.$route.params.instanceUuid,
       configName: null,
@@ -133,6 +134,19 @@ export default {
     },
     async save() {
       try {
+        const config = { ...this.config };
+        if (
+          this.configPath == "server.properties" &&
+          this.type &&
+          this.type.startsWith("minecraft/java")
+        ) {
+          for (const key in config) {
+            const value = config[key];
+            if (value && typeof value == "string") {
+              config[key] = toUnicode(value);
+            }
+          }
+        }
         await request({
           method: "PUT",
           url: API_PROCESS_CONFIG_FILE,
@@ -142,7 +156,7 @@ export default {
             fileName: this.configPath,
             type: this.$route.query.extName
           },
-          data: this.config
+          data: config
         });
         this.$message({ message: "更新成功", type: "success" });
       } catch (err) {
@@ -162,6 +176,7 @@ export default {
             type: this.$route.query.extName
           }
         });
+        console.log(info);
         this.config = info;
         this.configName = configName;
       } catch {
