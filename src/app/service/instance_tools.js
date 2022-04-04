@@ -27,7 +27,7 @@ import { INSTANCE_TYPE_TRANSLATION } from "./instance_type";
  */
 export function statusCodeToText(statusCode) {
   let statusText = "--";
-  if (statusCode == -1) statusText = "忙碌";
+  if (statusCode == -1) statusText = "维护中";
   if (statusCode == 0) statusText = "未运行";
   if (statusCode == 1) statusText = "停止中";
   if (statusCode == 2) statusText = "启动中";

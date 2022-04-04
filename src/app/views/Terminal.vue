@@ -37,8 +37,7 @@
             </LineInfo>
             <LineInfo
               ><i class="el-icon-finished"></i> 状态:
-              <!-- {{ codeToText(instanceInfo.status) }} -->
-              <span v-if="instanceInfo.status === -1" class="color-red">忙碌中</span>
+              <span v-if="instanceInfo.status === -1" class="color-red">维护中</span>
               <span v-else-if="instanceInfo.status === 0" class="color-gray">未运行</span>
               <span v-else-if="instanceInfo.status === 1" class="color-yellow">停止中</span>
               <span v-else-if="instanceInfo.status === 2" class="color-yellow">启动中</span>
