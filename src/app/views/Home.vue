@@ -56,8 +56,8 @@
         </el-col>
         <el-col :xs="12" :md="6" :offset="0">
           <ValueCard
-            title="不可用"
-            sub-title="因主机失联而暂时不可用的实例数量"
+            title="维护中"
+            sub-title="因主机忙碌/维护而暂时不可使用的实例数"
             :value="this.info.unknown"
             style="height: 260px"
             font-class="el-icon-s-opportunity"
@@ -120,8 +120,8 @@
             </div>
             <span class="color-yellow" v-else-if="scope.row.status == 1">停止中</span>
             <span class="color-yellow" v-else-if="scope.row.status == 2">启动中</span>
-            <span class="color-red" v-else-if="scope.row.status == -1">离线</span>
-            <span class="color-red" v-else>离线</span>
+            <span class="color-red" v-else-if="scope.row.status == -1">维护中</span>
+            <span class="color-red" v-else>未知状态</span>
             <!-- {{ statusToText(scope.row.status) }} -->
           </template>
         </el-table-column>
