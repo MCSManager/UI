@@ -50,6 +50,10 @@ export const API_SCHEDULE = `${API_URL}/api/protected_schedule`;
 
 export const API_SETTINGS = `${API_URL}/api/overview/setting`;
 
+export const API_TRANSMISSION_LIST = `${API_URL}/api/overview/transmissions`;
+export const API_TRANSMISSION_GET = `${API_URL}/api/overview/transmission`;
+export const API_TRANSMISSION_UPDATE = `${API_URL}/api/overview/transmission_update`;
+
 export const API_IMAGES = `${API_URL}/api/environment/image`;
 export const API_CONTAINERS = `${API_URL}/api/environment/containers`;
 export const API_NETWORK_MODES = `${API_URL}/api/environment/networkModes`;

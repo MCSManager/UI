@@ -5,7 +5,15 @@
     <template #title>文件列表</template>
     <template #default>
 
-      <el-tree :props="tree.props" :load="loadNode" lazy @node-click="handleFileTreeClick" />
+      <div style="position: absolute;height: 94%;width: 94%;overflow: hidden">
+
+        <el-scrollbar>
+
+          <el-tree :current-node-key="$route.query.target" highlight-current ref="tree" :props="tree.props" :load="loadNode" lazy @node-click="handleFileTreeClick" />
+
+        </el-scrollbar>
+
+      </div>
 
     </template>
 
@@ -38,7 +46,7 @@
       </div>
       <div v-show="!error" style="overflow: auto">
         <!-- <textarea :value="value" id="mcode-editor" style="display:none"></textarea> -->
-        <div id="editor" style="height: 70vh" class="editor-code-font"></div>
+        <div id="editor" style="height: 75vh" class="editor-code-font"></div>
       </div>
       <div v-show="error" style="padding: 16px 0px">
         <el-alert title="编辑文件错误" type="error" :description="error" show-icon></el-alert>
@@ -79,7 +87,9 @@ export default {
           label: 'name',
           children: 'children',
           isLeaf: 'type',
-        }
+        },
+
+        height: '100%',
 
       }
     };
@@ -116,6 +126,8 @@ export default {
     }
 
     this.reload = inject('reload')
+
+    this.tree.height = this.$refs.tree.clientHeight
   },
   methods: {
     async handleFileTreeClick( node, attr ) {

@@ -12,6 +12,7 @@ import Container from "./views/Container";
 import ImageManager from "./views/ImageManager";
 import Extension from "./views/Extension";
 import Settings from "./views/Settings";
+import Transmission from "./views/Transmission";
 import Terminal from "./views/Terminal";
 import InstanceDetail from "./views/InstanceDetail";
 import NewInstance from "./views/NewInstance";
@@ -98,6 +99,11 @@ const routes = [
     path: "/settings",
     name: "面板设置",
     component: Settings
+  },
+  {
+    path: "/transmission",
+    name: "通讯模块",
+    component: Transmission
   },
   {
     path: "/new_image/:serviceUuid",

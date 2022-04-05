@@ -205,22 +205,6 @@
 
 }
 
-::-webkit-scrollbar {
-  width : 5px;
-  height: 5px;
-}
-::-webkit-scrollbar-thumb {
-  /*滚动条里面小方块*/
-  border-radius: 4px;
-  box-shadow   : inset 0 0 5px rgba(2, 9, 30, 0.75);
-  background   : #535353;
-}
-.test-1::-webkit-scrollbar-track {
-  /*滚动条里面轨道*/
-  box-shadow   : inset 0 0 5px #35363a;
-  border-radius: 2px;
-  background   : #ededed;
-}
 .el-breadcrumb__separator {
 
   font-size: 15px;
@@ -285,3 +269,40 @@
   box-shadow: 0 0 4px #eef1f5;
 
 }
+.xterm-viewport {
+
+  overflow-y: hidden !important;
+
+}
+.terminal-wrapper .el-input__prefix {
+
+  top: 5px;
+
+}
+.terminal-wrapper .el-input__inner {
+
+  padding-top: 5px;
+  border: none !important;
+
+  height: 30px;
+  border-radius: 0;
+
+  color: #fff;
+
+  border-top: 1px solid #eef1f5 !important;
+  background-color: inherit !important;
+
+}
+
+.file-tree .box-card-content {
+
+  overflow: hidden;
+
+}
+
+.file-tree .el-tree {
+
+  height: 50%;
+
+}
+

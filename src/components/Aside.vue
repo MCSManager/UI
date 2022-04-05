@@ -62,6 +62,10 @@
 <!--      </el-menu-item-group>-->
       <el-menu-item-group>
         <template #title>更多</template>
+        <el-menu-item key="/transmission" index="/transmission">
+          <i class="el-icon-chat-line-square"></i>
+          <template #title>通讯模块</template>
+        </el-menu-item>
         <el-menu-item key="/settings" index="/settings">
           <i class="el-icon-setting"></i>
           <template #title>设置</template>

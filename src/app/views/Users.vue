@@ -56,7 +56,12 @@
           >
             <el-table-column type="selection" width="55"> </el-table-column>
             <el-table-column prop="uuid" label="UUID" width="240"></el-table-column>
-            <el-table-column prop="userName" label="用户名"></el-table-column>
+            <el-table-column label="用户名">
+              <template #default="scope">
+                <el-icon style="width: 8px;height: 8px" class="el-icon-dot" :style="scope.row.online ? 'color: green' : 'color: red'"></el-icon>
+                {{ scope.row.userName }}
+              </template>
+            </el-table-column>
             <el-table-column prop="permission" label="权限等级"></el-table-column>
             <el-table-column prop="registerTime" label="注册时间"></el-table-column>
             <el-table-column prop="loginTime" label="最后登录"></el-table-column>

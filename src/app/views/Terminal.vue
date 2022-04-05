@@ -957,6 +957,7 @@ export default {
 </script>
 
 <style scoped>
+
 .terminal-wrapper {
   background-color: rgb(30, 30, 30);
   padding: 4px;
