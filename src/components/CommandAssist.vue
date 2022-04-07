@@ -192,7 +192,7 @@ export default {
         maxMemory: "",
         minMemory: "",
         additional: "",
-        suffix: ""
+        suffix: "nogui"
       }
     };
   },
@@ -221,6 +221,7 @@ export default {
       const xmx = this.command.maxMemory ? `-Xmx${this.command.maxMemory}` : null;
       const xms = this.command.minMemory ? `-Xms${this.command.minMemory}` : null;
       const cmdArray = [`${this.command.javaPath ? `"${this.command.javaPath}"` : "java"}`];
+      cmdArray.push("-Dfile.encoding=UTF-8");
       if (xmx) cmdArray.push(xmx);
       if (xms) cmdArray.push(xms);
       if (this.command.additional) cmdArray.push(this.command.additional);
