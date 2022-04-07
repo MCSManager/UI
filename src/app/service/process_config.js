@@ -30,6 +30,7 @@ import {
   TYPE_MINECRAFT_BEDROCK,
   TYPE_MINECRAFT_FORGE,
   TYPE_MINECRAFT_FABRIC,
+  TYPE_MINECRAFT_SPONGE,
   TYPE_MINECRAFT_MOHIST
 } from "./instance_type";
 
@@ -50,7 +51,7 @@ export const INSTANCE_CONFIGS = [
     // 配置文件对应的实际路径（相对于实例根目录）
     path: "server.properties",
     // 配置文件用于显示界面的组件名（参考 ProcessConfigFile.vue 的 components 属性）
-    redirect: "bukkit/server.properties",
+    redirect: "common/server.properties",
     // 配置文件解析类型，支持 yml,json,txt,properties
     type: "properties",
     // 配置文件中文解释
@@ -66,7 +67,25 @@ export const INSTANCE_CONFIGS = [
       TYPE_MINECRAFT_JAVA,
       TYPE_MINECRAFT_BUKKIT,
       TYPE_MINECRAFT_FORGE,
-      TYPE_MINECRAFT_FABRIC
+      TYPE_MINECRAFT_FABRIC,
+      TYPE_MINECRAFT_SPONGE
+    ]
+  },
+  {
+    fileName: "[通用] eula.txt",
+    type: "properties",
+    info: "软件最终用户协议，此协议必须设置同意，否则无法启用服务端软件",
+    path: "eula.txt",
+    redirect: "common/eula.txt",
+    author: "Lazy",
+    github: "https://github.com/LazyCreeper/",
+    category: [
+      TYPE_MINECRAFT_SPIGOT,
+      TYPE_MINECRAFT_PAPER,
+      TYPE_MINECRAFT_JAVA,
+      TYPE_MINECRAFT_BUKKIT,
+      TYPE_MINECRAFT_FABRIC,
+      TYPE_MINECRAFT_SPONGE
     ]
   },
   {
@@ -139,22 +158,6 @@ export const INSTANCE_CONFIGS = [
   //   github: "https://github.com/Suwings",
   //   category: [TYPE_MINECRAFT_SPIGOT, TYPE_MINECRAFT_PAPER, TYPE_MINECRAFT_JAVA, TYPE_MINECRAFT_BUKKIT]
   // },
-  {
-    fileName: "[Bukkit] eula.txt",
-    type: "properties",
-    info: "软件最终用户协议，此协议必须设置同意，否则无法启用服务端软件",
-    path: "eula.txt",
-    redirect: "bukkit/eula.txt",
-    author: "Lazy",
-    github: "https://github.com/LazyCreeper/",
-    category: [
-      TYPE_MINECRAFT_SPIGOT,
-      TYPE_MINECRAFT_PAPER,
-      TYPE_MINECRAFT_JAVA,
-      TYPE_MINECRAFT_BUKKIT,
-      TYPE_MINECRAFT_FABRIC
-    ]
-  },
   {
     fileName: "[Bungeecord] config.yml",
     type: "yml",
