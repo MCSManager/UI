@@ -89,10 +89,10 @@ import geyserYml from "../../components/mc_process_config/geyser.yml";
 export default {
   components: {
     Panel,
-    "bukkit/server.properties": serverProperties,
+    "common/server.properties": serverProperties,
+    "common/eula.txt": eulaTxt,
     "bukkit/spigot.yml": spigotYml,
     "bukkit/bukkit.yml": bukkitYml,
-    "bukkit/eula.txt": eulaTxt,
     "bungeecord/config.yml": configYml,
     "bds/server.properties": bdsServerProperties,
     "mohist/mohist.yml": mohistYml,
