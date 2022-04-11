@@ -191,7 +191,7 @@ export default {
         programName: "",
         maxMemory: "",
         minMemory: "",
-        additional: "",
+        additional: "-Dfile.encoding=UTF-8 -Duser.language=cn -Duser.country=ZH",
         suffix: "nogui"
       }
     };
@@ -205,7 +205,7 @@ export default {
     }
   },
   methods: {
-    init() {
+    clearCommand() {
       this.command = {
         javaPath: "",
         programName: "",
@@ -221,7 +221,6 @@ export default {
       const xmx = this.command.maxMemory ? `-Xmx${this.command.maxMemory}` : null;
       const xms = this.command.minMemory ? `-Xms${this.command.minMemory}` : null;
       const cmdArray = [`${this.command.javaPath ? `"${this.command.javaPath}"` : "java"}`];
-      cmdArray.push("-Dfile.encoding=UTF-8");
       if (xmx) cmdArray.push(xmx);
       if (xms) cmdArray.push(xms);
       if (this.command.additional) cmdArray.push(this.command.additional);
@@ -266,7 +265,7 @@ export default {
     close() {
       if (this.cancel) this.cancel();
       this.$emit("update:modelValue", false);
-      this.init();
+      this.clearCommand();
     }
   },
   components: { Dialog }
