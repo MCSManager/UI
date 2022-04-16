@@ -140,81 +140,12 @@
             </div>
           </div>
         </div>
-
-        <!-- 表格显示 -->
-        <el-table
-          :data="instances"
-          stripe
-          style="width: 100%"
-          size="mini"
-          ref="multipleTable"
-          @selection-change="selectionChange"
-          v-show="!notAnyInstance && currentRemoteUuid && showTableList"
-        >
-          <el-table-column type="selection" width="55"> </el-table-column>
-          <el-table-column prop="nickname" label="实例昵称" min-width="240">
-            <template #default="scope">
-              <div
-                @click="toInstance(scope.row.serviceUuid, scope.row.instanceUuid)"
-                class="instanceTitle"
-              >
-                {{ scope.row.nickname }}
-              </div>
-            </template>
-          </el-table-column>
-          <el-table-column prop="currentPlayers" label="详细信息" width="240">
-            <template #default="scope">
-              <div>
-                <span v-if="scope.row.info && scope.row.info.currentPlayers >= 0">
-                  人数: {{ scope.row.info.currentPlayers }}/{{ scope.row.info.maxPlayers }}
-                </span>
-                <span v-if="scope.row.info && scope.row.version">
-                  &nbsp;版本: {{ scope.row.version }}
-                </span>
-              </div>
-            </template>
-          </el-table-column>
-          <el-table-column prop="status" label="运行状态" width="120">
-            <template #default="scope">
-              <div class="color-gray" v-if="scope.row.status == 0">
-                <i class="el-icon-video-pause"></i>
-                <span> 未运行</span>
-              </div>
-              <div class="color-green" v-else-if="scope.row.status == 3">
-                <i class="el-icon-video-play"></i>
-                <span> 运行中</span>
-              </div>
-              <span class="color-yellow" v-else-if="scope.row.status == 1">停止中</span>
-              <span class="color-yellow" v-else-if="scope.row.status == 2">启动中</span>
-
-              <span class="color-red" v-else-if="scope.row.status == -1">忙碌</span>
-              <span class="color-red" v-else>忙碌</span>
-            </template>
-          </el-table-column>
-          <el-table-column prop="type" label="实例类型" width="140"></el-table-column>
-          <el-table-column label="操作" style="text-align: center" width="180">
-            <template #default="scope">
-              <el-button
-                size="mini"
-                @click="editInstance(scope.row.serviceUuid, scope.row.instanceUuid)"
-              >
-                设置
-              </el-button>
-              <el-button
-                size="mini"
-                @click="toInstance(scope.row.serviceUuid, scope.row.instanceUuid)"
-              >
-                管理
-              </el-button>
-            </template>
-          </el-table-column>
-        </el-table>
       </div>
     </template>
   </Panel>
 
   <!-- 卡片显示风格 -->
-  <el-row :gutter="20" class="row-mb" v-show="showTableList === false">
+  <el-row :gutter="20" class="row-mb" v-show="!showTableList">
     <el-col :md="6" :offset="0" v-for="(item, index) in instances" :key="index">
       <Panel
         :class="{
@@ -292,6 +223,85 @@
             </div>
           </div>
           <div class="InstanceFunctionArea"></div>
+        </template>
+      </Panel>
+    </el-col>
+  </el-row>
+
+  <!-- 卡片显示风格 -->
+  <el-row :gutter="20" class="row-mb" v-show="showTableList">
+    <el-col :span="24" :offset="0">
+      <Panel>
+        <template #title>实例列表</template>
+        <template #default>
+          <!-- 表格显示 -->
+          <el-table
+            :data="instances"
+            stripe
+            style="width: 100%"
+            size="mini"
+            ref="multipleTable"
+            @selection-change="selectionChange"
+            v-show="!notAnyInstance && currentRemoteUuid && showTableList"
+          >
+            <el-table-column type="selection" width="55"> </el-table-column>
+            <el-table-column prop="nickname" label="实例昵称" min-width="240">
+              <template #default="scope">
+                <div
+                  @click="toInstance(scope.row.serviceUuid, scope.row.instanceUuid)"
+                  class="instanceTitle"
+                >
+                  {{ scope.row.nickname }}
+                </div>
+              </template>
+            </el-table-column>
+            <el-table-column prop="currentPlayers" label="详细信息" width="240">
+              <template #default="scope">
+                <div>
+                  <span v-if="scope.row.info && scope.row.info.currentPlayers >= 0">
+                    人数: {{ scope.row.info.currentPlayers }}/{{ scope.row.info.maxPlayers }}
+                  </span>
+                  <span v-if="scope.row.info && scope.row.version">
+                    &nbsp;版本: {{ scope.row.version }}
+                  </span>
+                </div>
+              </template>
+            </el-table-column>
+            <el-table-column prop="status" label="运行状态" width="120">
+              <template #default="scope">
+                <div class="color-gray" v-if="scope.row.status == 0">
+                  <i class="el-icon-video-pause"></i>
+                  <span> 未运行</span>
+                </div>
+                <div class="color-green" v-else-if="scope.row.status == 3">
+                  <i class="el-icon-video-play"></i>
+                  <span> 运行中</span>
+                </div>
+                <span class="color-yellow" v-else-if="scope.row.status == 1">停止中</span>
+                <span class="color-yellow" v-else-if="scope.row.status == 2">启动中</span>
+
+                <span class="color-red" v-else-if="scope.row.status == -1">忙碌</span>
+                <span class="color-red" v-else>忙碌</span>
+              </template>
+            </el-table-column>
+            <el-table-column prop="type" label="实例类型" width="140"></el-table-column>
+            <el-table-column label="操作" style="text-align: center" width="180">
+              <template #default="scope">
+                <el-button
+                  size="mini"
+                  @click="editInstance(scope.row.serviceUuid, scope.row.instanceUuid)"
+                >
+                  设置
+                </el-button>
+                <el-button
+                  size="mini"
+                  @click="toInstance(scope.row.serviceUuid, scope.row.instanceUuid)"
+                >
+                  管理
+                </el-button>
+              </template>
+            </el-table-column>
+          </el-table>
         </template>
       </Panel>
     </el-col>
