@@ -55,22 +55,38 @@
         </el-col>
         <el-col :md="12" :offset="0">
           <ItemGroup style="text-align: right">
+            <el-button
+              type="primary"
+              size="small"
+              plain
+              @click="changeView(1)"
+              v-show="showTableList"
+              >简单视图</el-button
+            >
+            <el-button
+              type="primary"
+              size="small"
+              plain
+              @click="changeView(2)"
+              v-show="!showTableList"
+              >批量操作视图</el-button
+            >
             <el-button size="small" type="success" @click="toNewInstance">
               <i class="el-icon-plus"></i> 新建实例
             </el-button>
-            <el-button size="small" @click="batOpen">
+            <el-button size="small" @click="batOpen" v-if="showTableList">
               <i class="el-icon-video-play"></i> 开启
             </el-button>
-            <el-button size="small" @click="batStop">
+            <el-button size="small" @click="batStop" v-if="showTableList">
               <i class="el-icon-video-pause"></i> 关闭
             </el-button>
-            <el-button size="small" @click="batKill">
+            <el-button size="small" @click="batKill" v-if="showTableList">
               <i class="el-icon-video-pause"></i> 终止
             </el-button>
-            <el-button size="small" type="danger" plain @click="batDelete(1)">
+            <el-button size="small" type="danger" plain @click="batDelete(1)" v-if="showTableList">
               <i class="el-icon-delete"></i> 移除
             </el-button>
-            <el-button size="small" type="danger" @click="batDelete(2)">
+            <el-button size="small" type="danger" @click="batDelete(2)" v-if="showTableList">
               <i class="el-icon-delete"></i> 删除
             </el-button>
           </ItemGroup>
@@ -198,7 +214,7 @@
   </Panel>
 
   <!-- 卡片显示风格 -->
-  <el-row :gutter="20" class="row-mb">
+  <el-row :gutter="20" class="row-mb" v-show="showTableList === false">
     <el-col :md="6" :offset="0" v-for="(item, index) in instances" :key="index">
       <Panel
         :class="{
@@ -229,7 +245,13 @@
                     >编辑配置</el-dropdown-item
                   >
                   <el-dropdown-item @click="toInstance(item.serviceUuid, item.instanceUuid)"
-                    >控制台</el-dropdown-item
+                    >控制面板</el-dropdown-item
+                  >
+                  <el-dropdown-item @click="unlinkInstance(item.instanceUuid)"
+                    >移除实例</el-dropdown-item
+                  >
+                  <el-dropdown-item @click="unlinkInstance(item.instanceUuid, true)"
+                    >删除实例</el-dropdown-item
                   >
                 </el-dropdown-menu>
               </template>
@@ -259,13 +281,13 @@
               <span>{{ item.config.endTime }}</span>
             </div>
             <div>
-              <span>版本信息：</span>
+              <span>其他信息：</span>
               <span>
                 <span v-if="item.info && item.info.currentPlayers >= 0">
-                  人数: {{ item.info.currentPlayers }}/{{ item.info.maxPlayers }}
+                  人数 {{ item.info.currentPlayers }}/{{ item.info.maxPlayers }}
                 </span>
-                <span v-else-if="item.info && item.version"> &nbsp;版本: {{ item.version }} </span>
-                <span v-else>--</span>
+                <span v-else-if="item.info && item.version"> &nbsp;版本 {{ item.version }} </span>
+                <span v-else></span>
               </span>
             </div>
           </div>
@@ -298,8 +320,10 @@
 }
 
 .CradInstance {
+  overflow: hidden;
   cursor: pointer;
   transition: all 1s;
+  height: 146px;
 }
 .CradInstance:hover {
   border-right: 1px solid #409eff;
@@ -488,6 +512,25 @@ export default {
       console.log("访问实例:", serviceUuid, instanceUuid);
       router.push({ path: `/terminal/${serviceUuid}/${instanceUuid}/` });
     },
+    async unlinkInstance(uuid, deleteFile = false) {
+      await this.$confirm("确定要进行移除/删除嘛？", "最终确认", {
+        confirmButtonText: "确定",
+        cancelButtonText: "取消",
+        type: "warning"
+      });
+      await axios.request({
+        method: "DELETE",
+        url: API_INSTANCE,
+        params: {
+          remote_uuid: this.currentRemoteUuid
+        },
+        data: { uuids: [uuid], deleteFile }
+      });
+      this.$notify({
+        title: "删除成功",
+        message: "数据刷新可能存在一定延时"
+      });
+    },
     // 批量删除
     async batDelete(type) {
       if (type === 1) {
@@ -566,6 +609,10 @@ export default {
         title: "关闭命令已发出",
         message: "已成功向各个远程主机发布命令，具体操作可能略有延时，请稍等一段时间后查看结果"
       });
+    },
+    changeView(type = 1) {
+      if (type === 1) this.showTableList = false;
+      if (type === 2) this.showTableList = true;
     }
   }
 };
