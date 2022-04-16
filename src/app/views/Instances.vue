@@ -384,6 +384,8 @@ export default {
     };
   },
   async mounted() {
+    // 初始化数据读取
+    this.showTableList = Number(localStorage.getItem("InstanceView")) === 2 ? true : false;
     await this.render();
   },
   beforeUnmount() {},
@@ -623,6 +625,7 @@ export default {
     changeView(type = 1) {
       if (type === 1) this.showTableList = false;
       if (type === 2) this.showTableList = true;
+      localStorage.setItem("InstanceView", type);
     }
   }
 };
