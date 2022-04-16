@@ -137,7 +137,7 @@
               <el-col :lg="8" class="row-mt">
                 <div class="sub-title">
                   <div class="sub-title-title require-field">终端输入编码</div>
-                  <div class="sub-title-info">其他编码可以输入编码按回车生成</div>
+                  <div class="sub-title-info">命令发送编码，重启实例生效</div>
                 </div>
                 <el-select
                   v-model="instanceInfo.config.ie"
@@ -159,7 +159,7 @@
               <el-col :lg="8" class="row-mt">
                 <div class="sub-title">
                   <div class="sub-title-title require-field">终端输出编码</div>
-                  <div class="sub-title-info">其他编码可以输入编码按回车生成</div>
+                  <div class="sub-title-info">终端输出编码，重启实例生效</div>
                 </div>
                 <el-select
                   v-model="instanceInfo.config.oe"
