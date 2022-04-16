@@ -56,14 +56,14 @@
             <el-row :gutter="20">
               <el-col :md="24">
                 <div class="sub-title">
-                  <div class="sub-title-title">实例名称</div>
+                  <div class="sub-title-title require-field">实例名称</div>
                   <div class="sub-title-info">支持中文，尽可能保证唯一性</div>
                 </div>
                 <el-input v-model="instanceInfo.config.nickname" type="text"></el-input>
               </el-col>
               <el-col :md="24" class="row-mt">
                 <div class="sub-title">
-                  <div class="sub-title-title">实例类型</div>
+                  <div class="sub-title-title require-field">实例类型</div>
                   <div class="sub-title-info">
                     不同类型会导致功能不同，若无需求类型，可以选择较为抽象的通用类型，列如 Java
                     通用版服务端
@@ -86,7 +86,7 @@
               </el-col>
               <el-col :md="24" class="row-mt">
                 <div class="sub-title">
-                  <div class="sub-title-title">启动命令</div>
+                  <div class="sub-title-title require-field">启动命令</div>
                   <div class="sub-title-info">
                     <span>
                       适用于任何程序命令，若程序路径或附加参数中含有空格可使用双引号作为边界，包含的文本将视作一段整体
@@ -111,7 +111,7 @@
               </el-col>
               <el-col :md="24" class="row-mt">
                 <div class="sub-title">
-                  <div class="sub-title-title">工作目录</div>
+                  <div class="sub-title-title require-field">工作目录</div>
                   <div class="sub-title-info">实例运行的工作目录，可填绝对路径与相对路径</div>
                 </div>
                 <el-input
@@ -136,7 +136,7 @@
               </el-col>
               <el-col :lg="8" class="row-mt">
                 <div class="sub-title">
-                  <div class="sub-title-title">终端输入编码</div>
+                  <div class="sub-title-title require-field">终端输入编码</div>
                   <div class="sub-title-info">其他编码可以输入编码按回车生成</div>
                 </div>
                 <el-select
@@ -158,7 +158,7 @@
               </el-col>
               <el-col :lg="8" class="row-mt">
                 <div class="sub-title">
-                  <div class="sub-title-title">终端输出编码</div>
+                  <div class="sub-title-title require-field">终端输出编码</div>
                   <div class="sub-title-info">其他编码可以输入编码按回车生成</div>
                 </div>
                 <el-select
@@ -180,14 +180,14 @@
               </el-col>
               <el-col :lg="8" class="row-mt">
                 <div class="sub-title">
-                  <div class="sub-title-title">关闭实例命令</div>
+                  <div class="sub-title-title require-field">关闭实例命令</div>
                   <div class="sub-title-info">^C 代表发送 Ctrl+C 组合键</div>
                 </div>
                 <el-input v-model="instanceInfo.config.stopCommand" type="text"></el-input>
               </el-col>
               <el-col :lg="8" class="row-mt">
                 <div class="sub-title">
-                  <div class="sub-title-title">文件管理编码</div>
+                  <div class="sub-title-title require-field">文件管理编码</div>
                   <div class="sub-title-info">文件管理功能的解压缩，编辑等编码</div>
                 </div>
                 <el-select
@@ -223,7 +223,7 @@
               </el-col>
               <el-col :lg="8" class="row-mt">
                 <div class="sub-title">
-                  <div class="sub-title-title">进程启动方式</div>
+                  <div class="sub-title-title require-field">进程启动方式</div>
                   <div class="sub-title-info">可选择 Docker，默认等</div>
                 </div>
                 <el-select v-model="instanceInfo.config.processType" style="width: 100%">
@@ -237,17 +237,18 @@
               class="dokcer-config-view row-mt"
               v-if="instanceInfo.config.processType === 'docker'"
             >
+              <br />
               <div class="sub-title">
-                <div class="sub-title-title">Docker 容器配置</div>
+                <div class="sub-title-title"><b>虚拟化容器配置</b></div>
                 <div class="sub-title-info">
-                  Docker
-                  是一种轻量级虚拟化软件，可以给每个实例使用“环境镜像”来随时启动全新的系统容器，使用完毕后立刻删除，可保证宿主机安全和稳定性
+                  一种基于 Docker
+                  的虚拟化方案，可以给每个实例装入一个一次性的盒子中运行，使用后销毁，确保主机安全。
                 </div>
               </div>
               <el-row :gutter="20">
                 <el-col :md="8" class="row-mt" :offset="0">
                   <div class="sub-title">
-                    <div class="sub-title-title">环境镜像（必填）</div>
+                    <div class="sub-title-title require-field">环境镜像</div>
                     <div class="sub-title-info">指定实例镜像</div>
                   </div>
                   <el-select
@@ -315,7 +316,7 @@
                 </el-col>
                 <el-col :md="8" class="row-mt" :offset="0">
                   <div class="sub-title">
-                    <div class="sub-title-title">网络模式</div>
+                    <div class="sub-title-title require-field">网络模式</div>
                     <div class="sub-title-info">选择容器接入的网络模式 如 bridge 网桥</div>
                   </div>
                   <el-select
@@ -536,6 +537,7 @@ export default {
             remote_uuid: this.serviceUuid
           }
         });
+        this.dockerImages = [];
         if (images) {
           for (const iterator of images) {
             const repoTags = (iterator?.RepoTags ?? [])[0];

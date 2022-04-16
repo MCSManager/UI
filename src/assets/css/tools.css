@@ -137,3 +137,9 @@
   text-overflow: ellipsis;
   white-space: nowrap;
 }
+
+.require-field:before {
+  content: "*";
+  color: #f56c6c;
+  margin-right: 4px;
+}
