@@ -90,11 +90,16 @@
                   {{ loginText }}
                 </el-button>
               </div>
+              <div class="login-info-wrapper row-mt" v-if="loginInfo">
+                <span class="color-gray">
+                  {{ loginInfo }}
+                </span>
+              </div>
               <div class="login-info-wrapper row-mt">
                 <div>
                   <span class="color-gray"
-                    >版权所有 2022
-                    <a target="black" href="https://github.com/Suwings">Suwings</a></span
+                    >Powered by
+                    <a target="black" href="https://github.com/Suwings">MCSManager</a></span
                   >
                 </div>
               </div>
@@ -132,7 +137,7 @@
 import Panel from "../../components/Panel";
 // eslint-disable-next-line no-unused-vars
 // import router from "../router";
-import { API_USER_LOGIN, sleep } from "../service/common";
+import { API_USER_LOGIN, API_USER_LOGIN_INFO, sleep } from "../service/common";
 import { request, setupUserInfo } from "../service/protocol";
 
 export default {
@@ -147,7 +152,8 @@ export default {
       closeWindow: false,
       loginText: "登录",
       loading: false,
-      cause: ""
+      cause: "",
+      loginInfo: ""
     };
   },
   methods: {
@@ -211,11 +217,25 @@ export default {
       await sleep(1500);
       // router.push({ path: `/` });
       window.location.href = "/";
+    },
+    async requestLoginInfo() {
+      const res = await request({
+        method: "POST",
+        url: API_USER_LOGIN_INFO,
+        data: {
+          username: this.form.username,
+          password: this.form.password
+        }
+      });
+      this.loginInfo = res?.loginInfo ?? "";
     }
   },
   async mounted() {
     console.log("Welcome use MCSManager.");
     console.log("Copyright 2022 Suwings All rights reserved.");
+    // 请求登录界面文案
+    this.requestLoginInfo();
+
     // try {
     //   await setupUserInfo();
     //   if (this.$store.state?.userInfo?.uuid) {

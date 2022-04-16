@@ -42,6 +42,7 @@ export const API_SEARCH = `${API_URL}/api/auth/search`;
 export const API_USER_LIST = `${API_URL}/api/auth/overview`;
 export const API_USER_REGISTER = `${API_URL}/api/auth/register`;
 export const API_USER_LOGIN = `${API_URL}/api/auth/login`;
+export const API_USER_LOGIN_INFO = `${API_URL}/api/auth/login_info`;
 export const API_USER_TOKEN = `${API_URL}/api/auth/token`;
 export const API_USER_LOGOUT = `${API_URL}/api/auth/logout`;
 export const API_USER_DELETE = `${API_URL}/api/auth/delete`;
