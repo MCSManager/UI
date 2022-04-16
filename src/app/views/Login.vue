@@ -216,7 +216,7 @@ export default {
       }
       await sleep(1500);
       // router.push({ path: `/` });
-      window.location.href = "/";
+      // window.location.href = "/";
     },
     async requestLoginInfo() {
       const res = await request({
