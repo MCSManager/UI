@@ -314,12 +314,7 @@ export default {
     // 新增服务
     async toNewService(enforce = false) {
       const addr = this.newServiceInfo.ip;
-      if (
-        addr.indexOf("192.") == 0 ||
-        addr.indexOf("172.16") == 0 ||
-        addr.indexOf("10.") == 0 ||
-        addr.indexOf("172.31") == 0
-      ) {
+      if (addr.indexOf("192.168") === 0 || addr.indexOf("10.") === 0) {
         if (!enforce) {
           this.isNewServiceWarning = true;
           return;
