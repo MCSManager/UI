@@ -125,6 +125,7 @@
           </div>
         </div>
 
+        <!-- 表格显示 -->
         <el-table
           :data="instances"
           stripe
@@ -132,7 +133,7 @@
           size="mini"
           ref="multipleTable"
           @selection-change="selectionChange"
-          v-show="!notAnyInstance && currentRemoteUuid"
+          v-show="!notAnyInstance && currentRemoteUuid && showTableList"
         >
           <el-table-column type="selection" width="55"> </el-table-column>
           <el-table-column prop="nickname" label="实例昵称" min-width="240">
@@ -195,6 +196,84 @@
       </div>
     </template>
   </Panel>
+
+  <!-- 卡片显示风格 -->
+  <el-row :gutter="20" class="row-mb">
+    <el-col :md="6" :offset="0" v-for="(item, index) in instances" :key="index">
+      <Panel
+        :class="{
+          instanceStatusGreen: item.status === 3,
+          instanceStatusGray: item.status !== 3,
+          CradInstance: true
+        }"
+      >
+        <template #title>
+          <div style="font-size: 13px" class="only-line-text">
+            {{ item.nickname }}
+          </div>
+          <div>
+            <el-dropdown trigger="click">
+              <span class="el-dropdown-link">
+                <i
+                  class="el-icon-more-outline"
+                  style="font-weight: 400; color: #409eff; font-size: 18px"
+                ></i>
+              </span>
+              <template #dropdown>
+                <el-dropdown-menu>
+                  <!-- <el-dropdown-item>开启实例</el-dropdown-item>
+                  <el-dropdown-item>关闭实例</el-dropdown-item>
+                  <el-dropdown-item>重启实例</el-dropdown-item>
+                  <el-dropdown-item>终止实例</el-dropdown-item> -->
+                  <el-dropdown-item @click="editInstance(item.serviceUuid, item.instanceUuid)"
+                    >编辑配置</el-dropdown-item
+                  >
+                  <el-dropdown-item @click="toInstance(item.serviceUuid, item.instanceUuid)"
+                    >控制台</el-dropdown-item
+                  >
+                </el-dropdown-menu>
+              </template>
+            </el-dropdown>
+          </div>
+        </template>
+        <template #default>
+          <div
+            class="instanceInfoArea only-line-text"
+            @click="toInstance(item.serviceUuid, item.instanceUuid)"
+          >
+            <div>
+              状态：
+              <span class="color-gray" v-if="item.status == 0">未运行</span>
+              <span class="color-green" v-else-if="item.status == 3">运行中</span>
+              <span class="color-yellow" v-else-if="item.status == 1">停止中</span>
+              <span class="color-yellow" v-else-if="item.status == 2">启动中</span>
+              <span class="color-red" v-else-if="item.status == -1">忙碌</span>
+              <span class="color-red" v-else>忙碌</span>
+            </div>
+            <div>
+              <span>启动时间：</span>
+              <span>{{ item.config.lastDatetime }}</span>
+            </div>
+            <div>
+              <span>到期时间：</span>
+              <span>{{ item.config.endTime }}</span>
+            </div>
+            <div>
+              <span>版本信息：</span>
+              <span>
+                <span v-if="item.info && item.info.currentPlayers >= 0">
+                  人数: {{ item.info.currentPlayers }}/{{ item.info.maxPlayers }}
+                </span>
+                <span v-else-if="item.info && item.version"> &nbsp;版本: {{ item.version }} </span>
+                <span v-else>--</span>
+              </span>
+            </div>
+          </div>
+          <div class="InstanceFunctionArea"></div>
+        </template>
+      </Panel>
+    </el-col>
+  </el-row>
 </template>
 
 <style scoped>
@@ -208,6 +287,28 @@
 .notAnyInstanceTip {
   text-align: center;
   margin: 100px 0px;
+}
+
+.instanceStatusGreen {
+  border-left: 4px solid rgb(8, 166, 8);
+}
+
+.instanceStatusGray {
+  border-left: 4px solid rgb(175, 175, 175);
+}
+
+.CradInstance {
+  cursor: pointer;
+  transition: all 1s;
+}
+.CradInstance:hover {
+  border-right: 1px solid #409eff;
+  border-top: 1px solid #409eff;
+  border-bottom: 1px solid #409eff;
+  border-left: 4px solid #409eff;
+}
+.instanceInfoArea > * {
+  margin-bottom: 6px;
 }
 </style>
 
@@ -242,7 +343,10 @@ export default {
 
       query: {
         instanceName: ""
-      }
+      },
+
+      // 批量处理模式
+      showTableList: false
     };
   },
   async mounted() {
@@ -330,6 +434,7 @@ export default {
             info: instance.info,
             currentPlayers: instance.info ? instance.info.currentPlayers : "0",
             version: instance.info ? instance.info.version : "",
+            config: instance.config,
             type,
             status
           });

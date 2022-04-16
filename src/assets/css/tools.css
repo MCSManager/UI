@@ -131,3 +131,9 @@
 .text-center {
   text-align: center;
 }
+
+.only-line-text {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
