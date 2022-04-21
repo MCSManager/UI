@@ -91,7 +91,7 @@ export async function requestUserInfo(advanced = null) {
   });
   store.commit("setUserInfo", info);
   store.commit("setToken", info.token);
-  console.log("用户身份", store.state.userInfo);
+  console.log("用户身份信息：", store.state.userInfo);
   return info;
 }
 

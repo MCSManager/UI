@@ -21,7 +21,7 @@
 
 <template>
   <Panel v-loading="true">
-    <template #title>板块</template>
+    <template #title>处理中...</template>
     <template #default>
       <el-skeleton :rows="12" />
     </template>
@@ -29,7 +29,8 @@
 </template>
 <script>
 import Panel from "../../components/Panel";
-// import router from "../router";
+import router from "../router";
+import { setupUserInfo } from "../service/protocol";
 export default {
   components: { Panel },
   data: function () {
@@ -37,16 +38,23 @@ export default {
   },
   methods: {},
   async mounted() {
-    // const userInfo = this.$store.state.userInfo;
-    // if (userInfo.uuid) {
-    //   if (userInfo.permission >= 10) {
-    //     console.log("辅助链接 - 导航跳转至高权限界面");
-    //     router.push({ path: "/overview" });
-    //   } else {
-    //     console.log("辅助链接 - 导航跳转至普通界面");
-    //     router.push({ path: "/home" });
-    //   }
-    // }
+    try {
+      // 为了适配无缝登录，这里必须还需要再请求一次数据
+      await setupUserInfo();
+      const userInfo = this.$store.state.userInfo;
+      if (!userInfo || !userInfo.uuid) throw new Error(`userInfo status error: ${userInfo}`);
+      if (userInfo.permission >= 10) {
+        console.log("辅助链接 - 导航跳转至高权限界面");
+        router.push({ path: "/overview" });
+      } else {
+        console.log("辅助链接 - 导航跳转至普通界面");
+        router.push({ path: "/home" });
+      }
+      return;
+    } catch (error) {
+      console.log("App.vue setupUserInfo() ERROR:", error);
+      router.push({ path: "/login" });
+    }
   }
 };
 </script>

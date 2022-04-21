@@ -79,30 +79,17 @@ export default {
   methods: {
     toAside() {
       this.drawer = !this.drawer;
-    },
-    nav() {
-      // 若用户地址本身不为根目录，则不管
-      console.log("路由地址:", this.$route.path);
-      if (this.$route.path != "/") return;
-      // 根据不同的用户类型进行跳转
-      const userInfo = this.$store.state.userInfo;
-      if (userInfo && userInfo.permission >= 10) {
-        console.log("导航至管理界面");
-        router.push({ path: "/overview" });
-      } else {
-        console.log("导航至普通界面");
-        router.push({ path: "/home" });
-      }
     }
   },
   async beforeCreate() {
+    // 第一次刷新后，尝试获取一次用户数据
+    // 如果失败，则导航至 / 视图进一步决定跳转路由
     try {
-      console.log("正在初始化用户信息，执行: await setupUserInfo()");
       await setupUserInfo();
-      this.nav();
+      const userInfo = this.$store.state.userInfo;
+      if (!userInfo || !userInfo.uuid) throw new Error("userInfo.uuid is null");
     } catch (error) {
-      console.log("App.vue setupUserInfo():", error);
-      router.push({ path: "/login" });
+      router.push({ path: "/" });
     }
   },
   async mounted() {

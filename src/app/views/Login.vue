@@ -214,18 +214,15 @@ export default {
           duration: 0
         });
       }
+      // 等待动画效果完毕
       await sleep(1500);
-      // router.push({ path: `/` });
-      // window.location.href = "/";
+      // 无缝切换，不采用刷新方法登录系统
+      this.$router.push({ path: `/` });
     },
     async requestLoginInfo() {
       const res = await request({
         method: "POST",
-        url: API_USER_LOGIN_INFO,
-        data: {
-          username: this.form.username,
-          password: this.form.password
-        }
+        url: API_USER_LOGIN_INFO
       });
       this.loginInfo = res?.loginInfo ?? "";
     }
