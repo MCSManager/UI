@@ -90,7 +90,11 @@
         ></el-progress>
       </div>
 
-      <p>当前目录: {{ currentDir }}</p>
+      <p>
+        <el-tag type="success" size="small">当前目录</el-tag>
+        &nbsp;
+        <el-tag type="info" size="small"> {{ currentDir }}</el-tag>
+      </p>
 
       <el-table
         :data="files"
@@ -193,7 +197,7 @@ export default {
       },
       pageParam: {
         page: 1,
-        pageSize: 40,
+        pageSize: 30,
         total: 1
       },
 
@@ -229,6 +233,7 @@ export default {
     async toDir(name) {
       try {
         const p = path.normalize(path.join(this.currentDir, name));
+        console.log("EN：", p);
         await this.list(p);
       } catch (error) {
         this.$message({ message: "错误，无法查看此目录或文件", type: "error" });
