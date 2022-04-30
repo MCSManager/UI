@@ -228,7 +228,7 @@
                 </div>
                 <el-select v-model="instanceInfo.config.processType" style="width: 100%">
                   <el-option label="默认类型" value="general"></el-option>
-                  <el-option label="Linux Docker 容器" value="docker"></el-option>
+                  <el-option label="虚拟化容器（Linux Docker）" value="docker"></el-option>
                 </el-select>
               </el-col>
             </el-row>

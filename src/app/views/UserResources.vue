@@ -126,6 +126,8 @@
       <SelectInstance :callback="selectedInstance"></SelectInstance>
     </template>
   </Dialog>
+
+  <BusinessWarning v-model:visible="businessWarning" />
 </template>
 
 <script>
@@ -135,9 +137,10 @@ import SelectInstance from "../../components/SelectInstance";
 import { API_USER } from "../service/common";
 import { request } from "../service/protocol";
 import { statusCodeToText } from "../service/instance_tools";
+import BusinessWarning from "../../components/BusinessWarning";
 
 export default {
-  components: { Panel, SelectInstance, Dialog },
+  components: { Panel, SelectInstance, Dialog, BusinessWarning },
   data() {
     return {
       userUuid: this.$route.params.userUuid,
@@ -145,7 +148,9 @@ export default {
         instances: []
       },
       isAddInstanceForUser: false,
-      loading: true
+      loading: true,
+
+      businessWarning: false
     };
   },
   methods: {
@@ -209,6 +214,12 @@ export default {
     }
   },
   async mounted() {
+    const isTip = localStorage.getItem("hasBusinessTip") ?? false;
+    if (!isTip) {
+      localStorage.setItem("hasBusinessTip", true);
+      this.businessWarning = true;
+    }
+
     await this.render();
   }
 };
