@@ -162,18 +162,18 @@
           <el-input
             v-model="editUserInfo.userName"
             placeholder="请输入内容..."
-            size="small"
+            size="medium"
           ></el-input>
           <div class="sub-title row-mt">
             <p class="sub-title-title require-field">重置密码</p>
             <p class="sub-title-info">不填写则不更变原有值</p>
           </div>
-          <el-input v-model="editUserInfo.passWord" placeholder="原值" size="small"></el-input>
+          <el-input v-model="editUserInfo.passWord" placeholder="原值" size="medium"></el-input>
           <div class="sub-title row-mt">
             <p class="sub-title-title require-field">权限</p>
             <p class="sub-title-info">普通权限适用于商业用户，最高权限适用于管理人员</p>
           </div>
-          <el-select v-model="editUserInfo.permission" placeholder="请选择" size="small">
+          <el-select v-model="editUserInfo.permission" placeholder="请选择" size="medium">
             <el-option label="普通权限" :value="1"></el-option>
             <el-option label="最高权限" :value="10"></el-option>
             <el-option label="禁封" :value="-1"></el-option>
