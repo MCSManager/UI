@@ -78,6 +78,9 @@
               <div class="login-btn-wrapper row-mt">
                 <transition name="fade">
                   <div v-if="cause" id="login-cause">{{ cause }}</div>
+                  <div v-else class="login-info-wrapper fgp" @click="forgotPassword">
+                    <a href="javascript:void(0)" rel="noopener noreferrer"> 忘记密码 </a>
+                  </div>
                 </transition>
                 <el-button
                   type="primary"
@@ -225,6 +228,16 @@ export default {
         url: API_USER_LOGIN_INFO
       });
       this.loginInfo = res?.loginInfo ?? "";
+    },
+    forgotPassword() {
+      this.$confirm(
+        `如果您是管理员且第一次登录，默认账号密码为：root，123456。如果您是普通用户，请要求您的服务商帮助您重置密码。如果您是管理员，请删除 mcsmanager/web/data/Users 文件夹重启面板端以重新加载用户。`,
+        "忘记密码",
+        {
+          confirmButtonText: "好的",
+          cancelButtonText: "关闭"
+        }
+      );
     }
   },
   async mounted() {
@@ -395,6 +408,11 @@ export default {
 
 #login-cause {
   color: rgb(170, 8, 8);
+  font-size: 12px;
+  margin-right: 18px;
+}
+
+.fgp {
   font-size: 12px;
   margin-right: 18px;
 }
