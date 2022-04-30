@@ -155,7 +155,7 @@
     <template #default>
       <div>
         <div class="sub-title">
-          <p class="sub-title-title">用户昵称</p>
+          <p class="sub-title-title require-field">用户昵称</p>
           <p class="sub-title-info">必填，6到12个字符，支持中文，英文和字符</p>
         </div>
         <el-input
@@ -164,12 +164,12 @@
           size="small"
         ></el-input>
         <div class="sub-title row-mt">
-          <p class="sub-title-title">重置密码</p>
+          <p class="sub-title-title require-field">重置密码</p>
           <p class="sub-title-info">不填写则不更变原有值</p>
         </div>
         <el-input v-model="editUserInfo.passWord" placeholder="原值" size="small"></el-input>
         <div class="sub-title row-mt">
-          <p class="sub-title-title">权限</p>
+          <p class="sub-title-title require-field">权限</p>
           <p class="sub-title-info">普通权限适用于商业用户，最高权限适用于管理人员</p>
         </div>
         <el-select v-model="editUserInfo.permission" placeholder="请选择" size="small">
@@ -365,7 +365,7 @@ export default {
         for (const v of this.multipleSelection) {
           uuids.push(v.uuid);
         }
-        if(!uuids.length){
+        if (!uuids.length) {
           throw new Error("请至少选择一个用户");
         }
         await request({
