@@ -28,7 +28,7 @@
             <template #title>
               <div class="flex flex-space-between flex-align-items-center" style="width: 100%">
                 <slot name="title"></slot>
-                <div class="component-dialog-close-button" @click="close">
+                <div class="component-dialog-close-button" @click="close" v-if="canClose">
                   <i class="el-icon-close"></i>
                 </div>
               </div>
@@ -52,7 +52,11 @@ export default {
   props: {
     modelValue: Boolean,
     cancel: Function,
-    style: String
+    style: String,
+    canClose: {
+      type: Boolean,
+      default: true
+    }
   },
   emits: ["update:modelValue"],
   data: function () {
