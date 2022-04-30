@@ -259,7 +259,7 @@ export default {
           this.$message({ message: "用户数据已更新", type: "success" });
         } catch (error) {
           this.$message({
-            message: "用户资料更新失败，可能是用户名冲突或服务器暂时不可用",
+            message: error.toString(),
             type: "error"
           });
         }
@@ -288,8 +288,8 @@ export default {
       if (!value) return callback(new Error("请输入密码值，若不输入则不进行密码修改"));
       if (value.length < 12 || value.length > 36)
         return callback(new Error("密码长度不规范，必须长度在 12 位到 36 位之间"));
-      const reg = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[0-9A-Za-z]{12,}$/;
-      if (!reg.test(value)) return callback(new Error("您的密码必须包含：数字，大写和小写字母"));
+      // const reg = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[0-9A-Za-z]{12,}$/;
+      // if (!reg.test(value)) return callback(new Error("您的密码必须包含：数字，大写和小写字母"));
       callback();
     },
     validatePassword2(rule, value = "", callback) {

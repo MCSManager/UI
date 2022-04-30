@@ -33,7 +33,7 @@
           </div>
           <div class="row-mt">
             <el-input
-              type="text"
+              type="password"
               v-model="passWord"
               autocomplete="off"
               placeholder="请输入您要设置的新密码"
@@ -71,6 +71,11 @@ export default {
   mounted() {},
   methods: {
     async submit() {
+      await this.$confirm(`确定重设密码为：${this.passWord} 吗？`, "重置密码确认", {
+        confirmButtonText: "确定",
+        cancelButtonText: "取消",
+        type: "warning"
+      });
       try {
         await request({
           method: "PUT",
