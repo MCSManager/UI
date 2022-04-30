@@ -97,7 +97,7 @@ const INSTANCE_TYPE_DEF_CONFIG = {
     stopCommand: "stop"
   },
   [TYPE_MINECRAFT_GEYSER]: {
-    stopCommand: "stop"
+    stopCommand: "geyser stop"
   }
 };
 
