@@ -286,12 +286,12 @@
           <div>实例操作终端</div>
           <div>
             <el-tooltip class="item" effect="dark" content="新开全屏" placement="top">
-              <span class="terminal-right-botton">
+              <span class="terminal-right-botton" @click="toFullTerminal(2)">
                 <i class="el-icon-monitor"></i>
               </span>
             </el-tooltip>
             <el-tooltip class="item" effect="dark" content="立刻全屏" placement="top">
-              <span class="terminal-right-botton">
+              <span class="terminal-right-botton" @click="toFullTerminal(1)">
                 <i class="el-icon-full-screen"></i>
               </span>
             </el-tooltip>
@@ -311,6 +311,7 @@
               >
               </el-input>
             </div>
+            <div v-show="isFull" id="full-terminal-option">A</div>
           </div>
         </template>
       </Panel>
@@ -675,8 +676,19 @@ export default {
     // 初始化 Terminal 窗口
     initTerm() {
       // 创建窗口与输入事件传递
-      this.term = initTerminalWindow(document.getElementById("terminal-container"));
+      const terminalContainer = document.getElementById("terminal-container");
+      this.onChangeTerminalContainerHeight();
+      this.term = initTerminalWindow(terminalContainer);
       this.term.onData(this.sendInput);
+    },
+    // 浏览器改变大小或重置高度事件
+    onChangeTerminalContainerHeight() {
+      if (this.isFull) {
+        const terminalContainer = document.getElementById("terminal-container");
+        const height = document.body.clientHeight - 50;
+        terminalContainer.removeAttribute("style");
+        terminalContainer.setAttribute("style", `height: ${height}px; width:100%`);
+      }
     },
     // 开启实例（Ajax）
     async openInstance() {
@@ -938,6 +950,22 @@ export default {
     showTimeStr(time, now) {
       const date = new Date(now - time);
       return `${date.getHours()}:${(Array(2).join(0) + date.getMinutes()).slice(-2)}`;
+    },
+
+    toFullTerminal(type = 1) {
+      if (type === 1) {
+        this.isFull = true;
+        this.onChangeTerminalContainerHeight();
+        router.push({
+          path: `/terminal/${this.serviceUuid}/${this.instanceUuid}/`,
+          query: {
+            full: 1
+          }
+        });
+      }
+      if (type === 2) {
+        window.open(`#/terminal/${this.serviceUuid}/${this.instanceUuid}/?full=1`);
+      }
     }
   },
   // 装载事件
@@ -967,9 +995,15 @@ export default {
       console.error(error);
       // 忽略
     }
+
+    // 监听窗口变化事件
+    window.addEventListener("resize", this.onChangeTerminalContainerHeight);
   },
   // 卸载事件
   beforeUnmount() {
+    // 卸载监听浏览器窗口改变时间
+    window.removeEventListener("resize", this.onChangeTerminalContainerHeight);
+
     try {
       // 停止定时器
       this.stopInterval();
