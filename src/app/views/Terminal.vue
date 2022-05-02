@@ -282,9 +282,23 @@
     </el-col>
     <el-col :md="18">
       <Panel v-loading="!available" element-loading-text="连接中">
-        <template #title>实例操作终端</template>
+        <template #title>
+          <div>实例操作终端</div>
+          <div>
+            <el-tooltip class="item" effect="dark" content="新开全屏" placement="top">
+              <span class="terminal-right-botton">
+                <i class="el-icon-monitor"></i>
+              </span>
+            </el-tooltip>
+            <el-tooltip class="item" effect="dark" content="立刻全屏" placement="top">
+              <span class="terminal-right-botton">
+                <i class="el-icon-full-screen"></i>
+              </span>
+            </el-tooltip>
+          </div>
+        </template>
         <template #default>
-          <div class="terminal-wrapper">
+          <div :class="{ 'terminal-wrapper': true, 'full-terminal-wrapper': isFull }">
             <div id="terminal-container" style="height: 560px; width: 100%"></div>
             <div id="terminal-input-wrapper">
               <el-input
@@ -497,6 +511,7 @@ export default {
     return {
       serviceUuid: this.$route.params.serviceUuid,
       instanceUuid: this.$route.params.instanceUuid,
+      isFull: this.$route.query.full,
       term: null,
       terminalWidth: 0,
       terminalHeight: 0,
@@ -980,11 +995,33 @@ export default {
   background-color: rgb(30, 30, 30);
   padding: 4px;
   border-radius: 4px;
-  /* overflow: hidden; */
 }
 
 #terminal-input-wrapper input {
   width: 100%;
   font-size: 12px;
+}
+
+.full-terminal-wrapper {
+  background-color: rgb(30, 30, 30);
+  padding: 8px;
+  position: fixed;
+  left: 0px;
+  right: 0px;
+  bottom: 0px;
+  top: 0px;
+}
+
+.terminal-right-botton {
+  font-size: 14px;
+  padding: 0 6px;
+  margin: 0 2px;
+  cursor: pointer;
+  transition: all 0.5s;
+  border-radius: 4px;
+}
+
+.terminal-right-botton:hover {
+  background-color: rgb(219, 219, 219);
 }
 </style>

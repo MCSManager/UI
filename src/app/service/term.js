@@ -63,7 +63,6 @@ export function initTerminalWindow(elem, fontSize = 13) {
   term.loadAddon(fitAddon);
   term.open(elem);
 
-  // 设置终端宽度，报险起见设置两次
   term.fitAddon = fitAddon;
 
   term.writeln(

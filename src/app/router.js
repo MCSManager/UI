@@ -33,6 +33,7 @@ import ImageManager from "./views/ImageManager";
 import Extension from "./views/Extension";
 import Settings from "./views/Settings";
 import Terminal from "./views/Terminal";
+import FullTerminal from "./views/FullTerminal";
 import InstanceDetail from "./views/InstanceDetail";
 import NewInstance from "./views/NewInstance";
 import NewImage from "./views/NewImage";
@@ -128,6 +129,11 @@ const routes = [
     path: "/terminal/:serviceUuid/:instanceUuid",
     name: "实例控制台",
     component: Terminal
+  },
+  {
+    path: "/full_terminal/:serviceUuid/:instanceUuid",
+    name: "全屏实例控制台",
+    component: FullTerminal
   },
   {
     path: "/process_config_file/:serviceUuid/:instanceUuid/",
