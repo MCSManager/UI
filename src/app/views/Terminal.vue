@@ -298,6 +298,13 @@
           </div>
         </template>
         <template #default>
+          <div v-show="isFull" class="full-terminal-button-wrapper">
+            <div class="full-terminal-button" @click="openInstance">开启</div>
+            <div class="full-terminal-button" @click="stopInstance">关闭</div>
+            <div class="full-terminal-button" @click="restartInstance">重启</div>
+            <div class="full-terminal-button" @click="killInstance">终止</div>
+            <div class="full-terminal-button" @click="backTerminal">退出</div>
+          </div>
           <div :class="{ 'terminal-wrapper': true, 'full-terminal-wrapper': isFull }">
             <div id="terminal-container" style="height: 560px; width: 100%"></div>
             <div id="terminal-input-wrapper">
@@ -311,7 +318,6 @@
               >
               </el-input>
             </div>
-            <div v-show="isFull" id="full-terminal-option">A</div>
           </div>
         </template>
       </Panel>
@@ -689,6 +695,7 @@ export default {
         terminalContainer.removeAttribute("style");
         terminalContainer.setAttribute("style", `height: ${height}px; width:100%`);
       }
+      if (this.term && this.term.fitAddon) this.$nextTick(() => this.term.fitAddon.fit());
     },
     // 开启实例（Ajax）
     async openInstance() {
@@ -966,6 +973,25 @@ export default {
       if (type === 2) {
         window.open(`#/terminal/${this.serviceUuid}/${this.instanceUuid}/?full=1`);
       }
+    },
+
+    backTerminal() {
+      this.isFull = false;
+      this.onChangeTerminalContainerHeight();
+      router.push({
+        path: `/terminal/${this.serviceUuid}/${this.instanceUuid}/`,
+        query: {}
+      });
+    },
+
+    fireResizeEvent() {
+      if (document.createEventObject) {
+        window.fireEvent("onresize");
+      } else if (document.createEvent) {
+        let event = document.createEvent("HTMLEvents");
+        event.initEvent("resize", true, true);
+        window.dispatchEvent(event);
+      }
     }
   },
   // 装载事件
@@ -982,9 +1008,10 @@ export default {
         this.sendResize(size.cols, size.rows);
       });
       this.term.fitAddon.fit();
-      window.onresize = () => {
-        this.term.fitAddon.fit();
-      };
+
+      // window.onresize = () => {
+      //   this.term.fitAddon.fit();
+      // };
 
       // 与守护进程建立 Websocket 连接
       await this.setUpWebsocket();
@@ -1044,6 +1071,7 @@ export default {
   right: 0px;
   bottom: 0px;
   top: 0px;
+  z-index: 99;
 }
 
 .terminal-right-botton {
@@ -1057,5 +1085,29 @@ export default {
 
 .terminal-right-botton:hover {
   background-color: rgb(219, 219, 219);
+}
+
+.full-terminal-button-wrapper {
+  position: fixed;
+  right: 30px;
+  top: 12px;
+  z-index: 100;
+}
+
+.full-terminal-button {
+  display: inline-block;
+  margin: 6px;
+  padding: 8px 14px;
+  color: white;
+  background-color: rgb(54, 54, 54);
+  border-radius: 4px;
+  box-shadow: 0px 0px 12px rgba(25, 25, 25, 0.626);
+  border: 1px solid rgb(73, 73, 73);
+  transition: all 1s;
+  cursor: pointer;
+}
+
+.full-terminal-button:hover {
+  background-color: rgb(101, 101, 101);
 }
 </style>
