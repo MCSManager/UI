@@ -47,7 +47,7 @@ termColor.TERM_TEXT_UNDERLINE = "\x1B[4m"; // Underline §n
 termColor.TERM_TEXT_ITALIC = "\x1B[3m"; // Italic §o
 termColor.TERM_TEXT_B = "\x1B[1m";
 
-export function initTerminalWindow(elem, fontSize = 13) {
+export function initTerminalWindow(elem, fontSize = 12) {
   const term = new Terminal({
     rendererType: "canvas",
     convertEol: true,

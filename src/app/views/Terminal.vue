@@ -299,7 +299,7 @@
         </template>
         <template #default>
           <!-- 全屏模式下的 Logo 显示 -->
-          <div v-if="isFull" class="full-terminal-logo">
+          <div v-if="isFull" class="full-terminal-logo only-pc-display">
             <Logo></Logo>
           </div>
           <!-- 全屏模式下的操作按钮 -->
