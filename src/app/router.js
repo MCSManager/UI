@@ -131,11 +131,6 @@ const routes = [
     component: Terminal
   },
   {
-    path: "/full_terminal/:serviceUuid/:instanceUuid",
-    name: "全屏实例控制台",
-    component: FullTerminal
-  },
-  {
     path: "/process_config_file/:serviceUuid/:instanceUuid/",
     name: "实例配置文件",
     component: ProcessConfigFile

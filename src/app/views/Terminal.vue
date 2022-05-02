@@ -298,6 +298,11 @@
           </div>
         </template>
         <template #default>
+          <!-- 全屏模式下的 Logo 显示 -->
+          <div v-if="isFull" class="full-terminal-logo">
+            <Logo></Logo>
+          </div>
+          <!-- 全屏模式下的操作按钮 -->
           <div v-show="isFull" class="full-terminal-button-wrapper">
             <div class="full-terminal-button" @click="openInstance">开启</div>
             <div class="full-terminal-button" @click="stopInstance">关闭</div>
@@ -305,6 +310,7 @@
             <div class="full-terminal-button" @click="killInstance">终止</div>
             <div class="full-terminal-button" @click="backTerminal">退出</div>
           </div>
+          <!-- 全屏与非全屏的终端窗口 -->
           <div :class="{ 'terminal-wrapper': true, 'full-terminal-wrapper': isFull }">
             <div id="terminal-container" style="height: 560px; width: 100%"></div>
             <div id="terminal-input-wrapper">
@@ -489,6 +495,7 @@
 import * as echarts from "echarts";
 import Dialog from "../../components/Dialog";
 import Panel from "../../components/Panel";
+import Logo from "../../components/Logo.vue";
 import "../../assets/xterm/xterm.css";
 import LineInfo from "../../components/LineInfo";
 import LineButton from "../../components/LineButton";
@@ -568,7 +575,7 @@ export default {
     }
   },
   // eslint-disable-next-line vue/no-unused-components
-  components: { Panel, LineInfo, LineButton, Dialog },
+  components: { Panel, LineInfo, LineButton, Dialog, Logo },
   methods: {
     // 请求数据源(Ajax)
     async renderFromAjax() {
@@ -687,16 +694,7 @@ export default {
       this.term = initTerminalWindow(terminalContainer);
       this.term.onData(this.sendInput);
     },
-    // 浏览器改变大小或重置高度事件
-    onChangeTerminalContainerHeight() {
-      if (this.isFull) {
-        const terminalContainer = document.getElementById("terminal-container");
-        const height = document.body.clientHeight - 50;
-        terminalContainer.removeAttribute("style");
-        terminalContainer.setAttribute("style", `height: ${height}px; width:100%`);
-      }
-      if (this.term && this.term.fitAddon) this.$nextTick(() => this.term.fitAddon.fit());
-    },
+
     // 开启实例（Ajax）
     async openInstance() {
       // this.busy = true;
@@ -984,14 +982,18 @@ export default {
       });
     },
 
-    fireResizeEvent() {
-      if (document.createEventObject) {
-        window.fireEvent("onresize");
-      } else if (document.createEvent) {
-        let event = document.createEvent("HTMLEvents");
-        event.initEvent("resize", true, true);
-        window.dispatchEvent(event);
+    // 终端窗口大小自适应事件
+    onChangeTerminalContainerHeight() {
+      const terminalContainer = document.getElementById("terminal-container");
+      if (this.isFull) {
+        const height = document.body.clientHeight - 50;
+        terminalContainer.removeAttribute("style");
+        terminalContainer.setAttribute("style", `height: ${height}px; width:100%`);
+      } else {
+        terminalContainer.removeAttribute("style");
+        terminalContainer.setAttribute("style", `height: 550px; width:100%`);
       }
+      if (this.term && this.term.fitAddon) this.$nextTick(() => this.term.fitAddon.fit());
     }
   },
   // 装载事件
@@ -1103,11 +1105,20 @@ export default {
   border-radius: 4px;
   box-shadow: 0px 0px 12px rgba(25, 25, 25, 0.626);
   border: 1px solid rgb(73, 73, 73);
-  transition: all 1s;
+  transition: all 0.6s;
   cursor: pointer;
 }
 
 .full-terminal-button:hover {
   background-color: rgb(101, 101, 101);
+}
+.full-terminal-logo {
+  z-index: 100;
+  text-align: center;
+  position: fixed;
+  left: 0px;
+  right: 0px;
+  top: 0px;
+  line-height: 30px;
 }
 </style>
