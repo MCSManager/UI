@@ -129,7 +129,7 @@
                 v-model="userData.passWord"
                 autocomplete="off"
                 :readonly="readonly.b"
-                placeholder="长度必须 12 到 24 位，尽可能包含字母数字加符号组合方式"
+                placeholder="长度必须 9 到 24 位，尽可能包含字母数字加符号组合方式"
                 @focus="() => (readonly.b = false)"
               >
               </el-input>

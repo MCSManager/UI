@@ -109,11 +109,11 @@
           ></el-input>
           <div class="sub-title row-mt">
             <p class="sub-title-title">用户密码</p>
-            <p class="sub-title-info">必填，6到18个字符，不支持中文，只限于字母，数字和符号</p>
+            <p class="sub-title-info">必填，9到36个字符，不支持中文，只限于字母，数字和符号</p>
           </div>
           <el-input
             v-model="newUserInfo.password"
-            placeholder="请输入密码，6到18位"
+            placeholder="请输入密码"
             size="small"
             type="text"
           ></el-input>
