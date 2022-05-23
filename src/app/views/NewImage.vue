@@ -49,7 +49,7 @@
       </LineOption>
       <div class="row-mt">
         <el-row :gutter="10">
-          <el-col :span="6" :offset="0">
+          <el-col :md="6" :offset="0">
             <SelectBlock style="min-height: 120px" @click="selectType(1)">
               <template #title>创建 OpenJDK 8 环境镜像</template>
               <template #info
@@ -58,13 +58,13 @@
               >
             </SelectBlock>
           </el-col>
-          <el-col :span="6" :offset="0">
+          <el-col :md="6" :offset="0">
             <SelectBlock style="min-height: 120px" @click="selectType(2)">
               <template #title>创建 OpenJDK 16 环境镜像</template>
               <template #info>内置 Java 16 运行时环境，适用于 Minecraft 1.17 版本的服务端</template>
             </SelectBlock>
           </el-col>
-          <el-col :span="6" :offset="0">
+          <el-col :md="6" :offset="0">
             <SelectBlock style="min-height: 120px" @click="selectType(5)">
               <template #title>创建 OpenJDK 17 环境镜像</template>
               <template #info
@@ -72,7 +72,7 @@
               >
             </SelectBlock>
           </el-col>
-          <el-col :span="6" :offset="0">
+          <el-col :md="6" :offset="0">
             <SelectBlock style="min-height: 120px" @click="selectType(3)">
               <template #title>创建 Ubuntu 环境镜像</template>
               <template #info>适用于 MC 基岩版服务端运行环境或者其他 Linux 程序</template>
@@ -80,7 +80,7 @@
           </el-col>
         </el-row>
         <el-row :gutter="10" class="row-mt">
-          <el-col :span="6" :offset="0">
+          <el-col :md="6" :offset="0">
             <SelectBlock style="min-height: 120px" @click="selectType(4)">
               <template #title>使用 DockerFile 自定义创建</template>
               <template #info
