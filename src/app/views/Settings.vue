@@ -332,55 +332,58 @@
           </p>
         </div>
         <div>
-          <a href="https://mcsmanager.com/#app-download" target="_blank" rel="noopener noreferrer">
-            <el-button type="" size="medium">了解更多</el-button>
-          </a>
+          <ItemGroup>
+            <a
+              href="https://mcsmanager.com/#app-download"
+              target="_blank"
+              rel="noopener noreferrer"
+              style="display: inline-block"
+            >
+              <el-button type="" size="medium">了解更多</el-button>
+            </a>
+            <a
+              href="https://mcsmanager.com/agreement.html"
+              target="_blank"
+              rel="noopener noreferrer"
+              style="display: inline-block"
+            >
+              <el-button type="" size="medium">用户协议</el-button>
+            </a>
+          </ItemGroup>
         </div>
 
         <div class="contributors" v-if="sponsorList">
           <div class="sub-title">
-            <p class="sub-title-title">项目赞助者</p>
-            <p class="sub-title-info">没有以下名单的重点支持，就不会有 MCSManager 的长期维护。</p>
+            <p class="sub-title-title">开源项目赞助名单</p>
+            <p class="sub-title-info">
+              只含前 40 名赞助者，查看完整赞助名单或进行赞助支持请前往
+              <a href="https://mcsmanager.com/" target="_blank" rel="noopener noreferrer">
+                MCSManager 官方网站 </a
+              >。
+            </p>
             <p class="sub-title-info"></p>
           </div>
           <el-row :gutter="10">
-            <el-col :md="4" v-for="(item, index) in sponsorList" :key="index">
-              <a
-                :href="item.link || 'https://mcsmanager.com'"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <el-card
-                  shadow="hover"
-                  :body-style="{ padding: '16px' }"
-                  style="height: 70px; margin-bottom: 10px"
-                >
-                  <p style="margin: 0px; font-size: 13px">
-                    <b>{{ item.name }}</b>
-                  </p>
-                  <p style="margin: 0px; font-size: 12px; color: gray">
-                    {{ item.message ? item.message : "--" }}
-                  </p>
-                </el-card>
-              </a>
-            </el-col>
             <el-col :span="24">
-              <p class="color-gray text-center">
-                只含前 30 名赞助者，查看完整赞助名单或进行赞助支持请前往
-                <a href="https://mcsmanager.com/" target="_blank" rel="noopener noreferrer">
-                  MCSManager 官方网站
+              <div
+                v-for="(item, index) in sponsorList"
+                :key="index"
+                style="margin: 0px 8px 4px 0px; display: inline-block"
+              >
+                <a
+                  :href="item.link || 'https://mcsmanager.com'"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  style="text-decoration: underline"
+                >
+                  <span style="margin: 0px; font-size: 13px">
+                    {{ item.name }}
+                  </span>
                 </a>
-              </p>
+              </div>
             </el-col>
           </el-row>
         </div>
-
-        <!-- <div>
-          <p class="color-gray text-center">
-            版权所有
-            <a target="black" href="https://github.com/Suwings">Suwings</a>
-          </p>
-        </div> -->
       </template>
     </Panel>
   </div>
@@ -443,7 +446,7 @@ export default {
             }
           }
         }
-        this.sponsorList = arr.slice(0, 30);
+        this.sponsorList = arr.slice(0, 40);
       } else {
         this.sponsorList = null;
       }
@@ -475,5 +478,8 @@ export default {
 }
 .config-item {
   margin-top: 10px;
+}
+.contributors {
+  margin: 10px 0px;
 }
 </style>
