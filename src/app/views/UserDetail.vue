@@ -286,8 +286,8 @@ export default {
     },
     validatePassword(rule, value = "", callback) {
       if (!value) return callback(new Error("请输入密码值，若不输入则不进行密码修改"));
-      if (value.length < 12 || value.length > 36)
-        return callback(new Error("密码长度不规范，必须长度在 12 位到 36 位之间"));
+      if (value.length < 9 || value.length > 36)
+        return callback(new Error("密码长度不规范，必须长度在 9 位到 36 位之间"));
       // const reg = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[0-9A-Za-z]{12,}$/;
       // if (!reg.test(value)) return callback(new Error("您的密码必须包含：数字，大写和小写字母"));
       callback();
