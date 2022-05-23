@@ -92,9 +92,9 @@
       <div style="height: 36px; line-height: 36px">
         <ItemGroup :lr="true">
           <router-link to="/home">
-            <el-link :underline="false" class="only-pc-display header-a"
-              >欢迎您，{{ userInfo.userName }}</el-link
-            >
+            <el-link :underline="false" class="only-pc-display header-a">{{
+              userInfo.userName
+            }}</el-link>
           </router-link>
           <el-link @click="toPrivate" class="header-a">个人资料</el-link>
           <el-link @click="logout" class="header-a">退出</el-link>

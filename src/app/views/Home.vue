@@ -163,9 +163,15 @@
     style="font-size: 12px; color: #cdcdcd; text-align: center; margin-top: 40px"
   >
     <div>
-      <span>MCSManager is released under the AGPL-3.0 License</span>
-      <br />
-      <span>Copyright © 2022 Suwings</span>
+      <span
+        >Powered by
+        <a
+          style="color: #cdcdcd; text-decoration: underline"
+          target="black"
+          href="https://github.com/MCSManager"
+          >MCSManager</a
+        >, Released under the AGPL-3.0 License</span
+      >
     </div>
   </div>
 
