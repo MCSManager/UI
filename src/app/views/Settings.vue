@@ -49,7 +49,9 @@
             <div class="config-item">
               <div class="sub-title">
                 <p class="sub-title-title">面板访问端口</p>
-                <p class="sub-title-info">浏览器访问网页面板的端口，必须防火墙放行此端口。</p>
+                <p class="sub-title-info">
+                  浏览器访问网页面板的端口，必须防火墙放行此端口，重启面板生效。
+                </p>
               </div>
               <el-input placeholder="请必须填入数字" v-model="settings.httpPort"> </el-input>
             </div>
@@ -65,9 +67,12 @@
             <div class="config-item">
               <div class="sub-title">
                 <p class="sub-title-title">面板绑定IP</p>
-                <p class="sub-title-info">一般情况请保持默认值，一般适用于多个IP的场景。</p>
+                <p class="sub-title-info">
+                  一般情况请保持默认值，一般适用于多个IP，网卡绑定的场景。
+                </p>
               </div>
-              <el-input placeholder="默认 0.0.0.0 | 可不填" v-model="settings.httpIp"> </el-input>
+              <el-input placeholder="默认 0.0.0.0 | 默认情况无需填写" v-model="settings.httpIp">
+              </el-input>
             </div>
 
             <div class="config-item">
@@ -310,7 +315,7 @@
             <a
               target="black"
               href="https://github.com/MCSManager/MCSManager-Daemon/blob/master/LICENSE"
-              >GPL-3.0</a
+              >AGPL-3.0</a
             >
             开源软件协议发行
           </p>
@@ -323,23 +328,22 @@
         <div class="sub-title">
           <p class="sub-title-title">闭源商业许可证</p>
           <p class="sub-title-info">
-            若您想二次开发并且闭源使用于任何活动（包括但不限于商业，个人）。<br />
-            请参考:
-            <a href="https://mcsmanager.com/" target="_blank" rel="noopener noreferrer">
-              相关许可证
-            </a>
+            若您想二次开发并且闭源使用于任何活动（包括但不限于商业，个人）。
           </p>
-          <p class="sub-title-info"></p>
+        </div>
+        <div>
+          <a href="https://mcsmanager.com/#app-download" target="_blank" rel="noopener noreferrer">
+            <el-button type="" size="medium">了解更多</el-button>
+          </a>
         </div>
 
-        <div class="sub-title">
-          <p class="sub-title-title">项目赞助者</p>
-          <p class="sub-title-info">没有以下名单的重点支持，就不会有 MCSManager 的长期维护。</p>
-          <p class="sub-title-info"></p>
-        </div>
-
-        <div class="contributors">
-          <el-row :gutter="10" v-if="sponsorList">
+        <div class="contributors" v-if="sponsorList">
+          <div class="sub-title">
+            <p class="sub-title-title">项目赞助者</p>
+            <p class="sub-title-info">没有以下名单的重点支持，就不会有 MCSManager 的长期维护。</p>
+            <p class="sub-title-info"></p>
+          </div>
+          <el-row :gutter="10">
             <el-col :md="4" v-for="(item, index) in sponsorList" :key="index">
               <a
                 :href="item.link || 'https://mcsmanager.com'"
@@ -369,17 +373,14 @@
               </p>
             </el-col>
           </el-row>
-          <div v-else>
-            <p>暂无数据</p>
-          </div>
         </div>
 
-        <div>
+        <!-- <div>
           <p class="color-gray text-center">
             版权所有
             <a target="black" href="https://github.com/Suwings">Suwings</a>
           </p>
-        </div>
+        </div> -->
       </template>
     </Panel>
   </div>
