@@ -108,8 +108,13 @@
           <p class="sub-title-info">必须创建 /workspace 目录，此目录将自动挂载到实例的文件根目录</p>
         </div>
         <div class="row-mt">
-          <el-input type="textarea" :rows="14" placeholder="必填，请输入内容" v-model="dockerFile">
-          </el-input>
+          <el-input 
+            type="textarea" 
+            :rows="14" 
+            placeholder="必填，请输入内容" 
+            v-model="dockerFile"
+            style="word-break: break-all"
+          ></el-input>
         </div>
         <div class="sub-title row-mt">
           <p class="sub-title-title">创建后的镜像名与版本标识</p>
