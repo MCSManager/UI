@@ -877,9 +877,15 @@ export default {
           url: API_INSTANCE_UPDATE,
           params: { remote_uuid: this.serviceUuid, uuid: this.instanceUuid },
           data: {
-            pingConfig: this.pingConfigForm,
-            eventTask: this.eventConfigPanel,
-            terminalOption: this.terminalSettingPanel
+            pingConfig: this.pingConfigForm.is
+              ? this.pingConfigForm
+              : this.instanceInfo.config.pingConfig,
+            eventTask: this.eventConfigPanel
+              ? this.eventConfigPanel
+              : this.instanceInfo.config.eventTask,
+            terminalOption: this.terminalSettingPanel.visible
+              ? this.terminalSettingPanel
+              : this.instanceInfo.config.terminalOption
           }
         });
         this.$message({
