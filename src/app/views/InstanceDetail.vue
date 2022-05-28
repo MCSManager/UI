@@ -45,11 +45,11 @@
             <div class="sub-title bt">到期时间</div>
             <p v-text="instanceInfo.config.endTime ? instanceInfo.config.endTime : '无限制'"></p>
             <div class="sub-title bt">进程类型</div>
-            <p v-if="instanceInfo.config.processType === 'general'">普通进程启动方式</p>
-            <p v-if="instanceInfo.config.processType === 'docker'">容器化启动方式</p>
+            <p v-if="instanceInfo.config.processType === 'general'">普通程序启动方式</p>
+            <p v-if="instanceInfo.config.processType === 'docker'">虚拟化容器启动方式</p>
             <div v-if="instanceInfo.config.docker">
               <div class="sub-title bt">分配给其他用户</div>
-              <p class="color-green" v-if="instanceInfo.config.docker.image">
+              <p class="color-green" v-if="instanceInfo.config.processType === 'docker'">
                 可以，已启用容器隔离
               </p>
               <p class="color-red" v-else>不推荐，可能会危害主机</p>
@@ -224,10 +224,12 @@
                 >
                 </el-date-picker>
               </el-col>
-              <el-col :lg="8" class="row-mt">
+              <el-col :lg="24" class="row-mt">
                 <div class="sub-title">
-                  <div class="sub-title-title require-field">进程启动方式</div>
-                  <div class="sub-title-info">可选择 Docker，默认等</div>
+                  <div class="sub-title-title require-field">进程启动方式（推荐）</div>
+                  <div class="sub-title-info">
+                    通常默认即可，如果从事商业活动必须则使用虚拟化容器启动方式，否则主机将被入侵。
+                  </div>
                 </div>
                 <el-select v-model="instanceInfo.config.processType" style="width: 100%">
                   <el-option label="默认类型" value="general"></el-option>
