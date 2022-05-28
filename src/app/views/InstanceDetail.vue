@@ -258,6 +258,7 @@
                     @focus="loadImages"
                     style="width: 100%"
                     v-loading="imageListLoading"
+                    @change="selectImage"
                   >
                     <el-option v-for="item in dockerImages" :key="item" :label="item" :value="item">
                     </el-option>
@@ -359,19 +360,6 @@
               <el-row :gutter="20">
                 <el-col :md="8" class="row-mt">
                   <div class="sub-title">
-                    <div class="sub-title-title">最大内存（单位 MB）</div>
-                    <div class="sub-title-info">列如 1024，2048 等，请勿加单位</div>
-                  </div>
-
-                  <el-input
-                    v-model="instanceInfo.config.docker.memory"
-                    type="text"
-                    placeholder="选填，列如 1024"
-                  >
-                  </el-input>
-                </el-col>
-                <el-col :md="8" class="row-mt">
-                  <div class="sub-title">
                     <div class="sub-title-title">限制 CPU 使用率（百分比）</div>
                     <div class="sub-title-info">限制所有 CPU 总和使用率，会有少许偏差</div>
                   </div>
@@ -407,6 +395,19 @@
                     >
                     </el-input>
                   </el-tooltip>
+                </el-col>
+                <el-col :md="8" class="row-mt">
+                  <div class="sub-title">
+                    <div class="sub-title-title">最大内存（单位 MB）</div>
+                    <div class="sub-title-info">列如 1024，2048 等，请勿加单位</div>
+                  </div>
+
+                  <el-input
+                    v-model="instanceInfo.config.docker.memory"
+                    type="text"
+                    placeholder="选填，列如 1024"
+                  >
+                  </el-input>
                 </el-col>
               </el-row>
             </div>
@@ -530,6 +531,7 @@ export default {
     async loadImages() {
       this.imageListLoading = true;
       try {
+        this.dockerImages = ["--- 新建镜像 ---"];
         const images = await request({
           method: "GET",
           url: API_IMAGES,
@@ -537,7 +539,6 @@ export default {
             remote_uuid: this.serviceUuid
           }
         });
-        this.dockerImages = [];
         if (images) {
           for (const iterator of images) {
             const repoTags = (iterator?.RepoTags ?? [])[0];
@@ -553,6 +554,14 @@ export default {
         this.imageListLoading = false;
       }
       return this.images;
+    },
+
+    selectImage(item = "") {
+      if (typeof item === "string" && item.startsWith("---", 0)) {
+        this.$router.push({
+          path: `/image/${this.serviceUuid}`
+        });
+      }
     },
 
     async loadNetworkModes() {
