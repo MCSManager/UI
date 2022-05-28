@@ -282,13 +282,15 @@
                         多个以空格分割，冒号左边为宿主机暴露端口，右边为容器暴露端口，通常保持一致即可
                       </div>
                     </div>
-                    <el-input
-                      v-model="instanceInfo.config.docker.ports"
-                      type="text"
-                      placeholder="选填，示例 25565:25565/tcp 3380:3380/udp"
-                    >
-                    </el-input>
-                    <el-button @click="toEditDockerPort">编辑</el-button>
+                    <div class="flex">
+                      <el-input
+                        v-model="instanceInfo.config.docker.ports"
+                        type="text"
+                        placeholder="选填，示例 25565:25565/tcp 3380:3380/udp"
+                      >
+                      </el-input>
+                      <el-button type="primary" plain @click="toEditDockerPort">快速编辑</el-button>
+                    </div>
                   </el-col>
                 </el-row>
                 <el-row :gutter="20">
@@ -299,12 +301,17 @@
                         向容器内挂载除工作目录外的其他目录，多个以空格分割，冒号左边为宿主机路径，右边为容器路径
                       </div>
                     </div>
-                    <el-input
-                      v-model="instanceInfo.config.docker.extraVolumes"
-                      type="text"
-                      placeholder="示例 /backups/test1:/workspace/backups /var/logs/test1:/workspace/logs"
-                    >
-                    </el-input>
+                    <div class="flex">
+                      <el-input
+                        v-model="instanceInfo.config.docker.extraVolumes"
+                        type="text"
+                        placeholder="示例 /backups/test1:/workspace/backups /var/logs/test1:/workspace/logs"
+                      >
+                      </el-input>
+                      <el-button type="primary" plain @click="toEditDockerVolumes"
+                        >快速编辑</el-button
+                      >
+                    </div>
                   </el-col>
                 </el-row>
                 <el-row :gutter="20">
@@ -449,6 +456,13 @@
       :loadData="handleDockerPortLoadData"
       :columns="tableDict1"
     ></DockerVariableSetup>
+
+    <DockerVariableSetup
+      ref="dockerVariableSetup2"
+      @submit="handleSubmitDockerVolumes"
+      :loadData="handleDockerVolumesLoadData"
+      :columns="tableDict2"
+    ></DockerVariableSetup>
   </div>
 </template>
 
@@ -499,6 +513,18 @@ export default {
           prop: "port2",
           label: "对应的容器端口",
           width: "120px"
+        }
+      ],
+      tableDict2: [
+        {
+          prop: "path1",
+          label: "主机绝对路径",
+          width: "200px"
+        },
+        {
+          prop: "path2",
+          label: "挂载到容器路径",
+          width: "200px"
         }
       ],
 
@@ -637,9 +663,8 @@ export default {
       this.$refs.dockerVariableSetup.show();
     },
     handleDockerPortLoadData() {
-      console.log("loading");
       const result = [];
-      const lines = this.instanceInfo.config?.docker?.ports.split(" ");
+      const lines = this.instanceInfo.config?.docker?.ports?.split(" ");
       for (const iterator of lines) {
         const pad = iterator.split("/");
         const ports = pad[0];
@@ -655,11 +680,35 @@ export default {
       return result;
     },
     handleSubmitDockerPort(items) {
-      let text = "";
+      let v = [];
       for (const iterator of items) {
-        text += `${iterator.port1}:${iterator.port2}/${iterator.protocol} `;
+        v.push(`${iterator.port1}:${iterator.port2}/${iterator.protocol}`);
       }
-      this.instanceInfo.config.docker.ports = text;
+      this.instanceInfo.config.docker.ports = v.join(" ");
+    },
+
+    toEditDockerVolumes() {
+      this.$refs.dockerVariableSetup2.show();
+    },
+    handleDockerVolumesLoadData() {
+      const result = [];
+      const lines = this.instanceInfo.config?.docker?.extraVolumes?.split(" ");
+      for (const iterator of lines) {
+        const path1 = iterator.split(":")[0];
+        const path2 = iterator.split(":")[1];
+        result.push({
+          path1,
+          path2
+        });
+      }
+      return result;
+    },
+    handleSubmitDockerVolumes(items) {
+      let v = [];
+      for (const iterator of items) {
+        v.push(`${iterator.path1}:${iterator.path2}`);
+      }
+      this.instanceInfo.config.docker.extraVolumes = v.join(" ");
     }
   },
   async mounted() {
