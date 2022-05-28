@@ -233,7 +233,6 @@ export default {
     async toDir(name) {
       try {
         const p = path.normalize(path.join(this.currentDir, name));
-        console.log("EN：", p);
         await this.list(p);
       } catch (error) {
         this.$message({ message: "错误，无法查看此目录或文件", type: "error" });
