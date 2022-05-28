@@ -79,7 +79,7 @@
               <div class="sub-title">
                 <p class="sub-title-title">登录界面简单说明</p>
                 <p class="sub-title-info">
-                  用于显示在登录界面公开简要说明文字，可以用于管理员身份介绍，备案信息介绍
+                  用于显示在登录界面公开简要说明文字，可以用于管理员身份介绍，备案信息介绍。
                 </p>
               </div>
               <el-input
