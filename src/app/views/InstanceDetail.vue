@@ -27,30 +27,33 @@
           <el-col :lg="6">
             <div class="only-pc-display" style="margin: 0 0 10px 0">
               <div class="sub-title">
-                <div class="sub-title-title">使用须知</div>
-                <div class="sub-title-info">
-                  实例功能将涉及到远程命令执行，MCSManager
-                  会尽可能的保护您的宿主机安全，但是如果需要出售给陌生用户，则必须使用 Linux Docker
-                  的虚拟化隔离功能才可以完成安全风险控制。
-                </div>
+                当前界面所有设置只有管理员可以进行更改，应用实例拥有远程代码执行功能，请谨慎修改配置。
               </div>
             </div>
-            <div class="sub-title">远程/本地实例标识符</div>
+            <div class="sub-title bt">远程/本地实例标识符</div>
             <p v-text="instanceInfo.instanceUuid"></p>
-            <div class="sub-title">守护进程标识符</div>
+            <div class="sub-title bt">守护进程标识符</div>
             <p v-text="serviceUuid"></p>
-            <div class="sub-title">当前状态</div>
+            <div class="sub-title bt">当前状态</div>
             <p v-text="codeToText(instanceInfo.status)"></p>
-            <div class="sub-title">已启动次数</div>
+            <div class="sub-title bt">已启动次数</div>
             <p v-text="instanceInfo.started"></p>
-            <div class="sub-title">创建日期</div>
+            <div class="sub-title bt">创建日期</div>
             <p v-text="instanceInfo.config.createDatetime"></p>
-            <div class="sub-title">最后启动日期</div>
+            <div class="sub-title bt">最后启动日期</div>
             <p v-text="instanceInfo.config.lastDatetime"></p>
-            <div class="sub-title">到期时间</div>
+            <div class="sub-title bt">到期时间</div>
             <p v-text="instanceInfo.config.endTime ? instanceInfo.config.endTime : '无限制'"></p>
-            <div class="sub-title">进程类型</div>
-            <p v-text="instanceInfo.config.processType"></p>
+            <div class="sub-title bt">进程类型</div>
+            <p v-if="instanceInfo.config.processType === 'general'">普通进程启动方式</p>
+            <p v-if="instanceInfo.config.processType === 'docker'">容器化启动方式</p>
+            <div v-if="instanceInfo.config.docker">
+              <div class="sub-title bt">分配给其他用户</div>
+              <p class="color-green" v-if="instanceInfo.config.docker.image">
+                可以，已启用容器隔离
+              </p>
+              <p class="color-red" v-else>不推荐，可能会危害主机</p>
+            </div>
           </el-col>
           <el-col :lg="18">
             <el-row :gutter="20">
@@ -623,3 +626,10 @@ export default {
   }
 };
 </script>
+
+
+<style scoped>
+.bt {
+  font-weight: 800;
+}
+</style>
