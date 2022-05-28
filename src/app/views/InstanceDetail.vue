@@ -19,422 +19,435 @@
   可以前往 https://mcsmanager.com/ 阅读用户协议，申请闭源开发授权等。
 -->
 <template>
-  <Panel>
-    <template #title>实例详细信息设置</template>
-    <template #default>
-      <div v-loading="loading" element-loading-text="获取中">
-        <el-row :gutter="20">
-          <el-col :lg="6">
-            <div class="only-pc-display" style="margin: 0 0 10px 0">
-              <div class="sub-title">
-                当前界面所有设置只有管理员可以进行更改，应用实例拥有远程代码执行功能，请谨慎修改配置。
-              </div>
-            </div>
-            <div class="sub-title bt">远程/本地实例标识符</div>
-            <p v-text="instanceInfo.instanceUuid"></p>
-            <div class="sub-title bt">守护进程标识符</div>
-            <p v-text="serviceUuid"></p>
-            <div class="sub-title bt">当前状态</div>
-            <p v-text="codeToText(instanceInfo.status)"></p>
-            <div class="sub-title bt">已启动次数</div>
-            <p v-text="instanceInfo.started"></p>
-            <div class="sub-title bt">创建日期</div>
-            <p v-text="instanceInfo.config.createDatetime"></p>
-            <div class="sub-title bt">最后启动日期</div>
-            <p v-text="instanceInfo.config.lastDatetime"></p>
-            <div class="sub-title bt">到期时间</div>
-            <p v-text="instanceInfo.config.endTime ? instanceInfo.config.endTime : '无限制'"></p>
-            <div class="sub-title bt">进程类型</div>
-            <p v-if="instanceInfo.config.processType === 'general'">普通程序启动方式</p>
-            <p v-if="instanceInfo.config.processType === 'docker'">虚拟化容器启动方式</p>
-            <div v-if="instanceInfo.config.docker">
-              <div class="sub-title bt">分配给其他用户</div>
-              <p class="color-green" v-if="instanceInfo.config.processType === 'docker'">
-                可以，已启用容器隔离
-              </p>
-              <p class="color-red" v-else>不推荐，可能会危害主机</p>
-            </div>
-          </el-col>
-          <el-col :lg="18">
-            <el-row :gutter="20">
-              <el-col :md="24">
+  <div>
+    <Panel>
+      <template #title>实例详细信息设置</template>
+      <template #default>
+        <div v-loading="loading" element-loading-text="获取中">
+          <el-row :gutter="20">
+            <el-col :lg="6">
+              <div class="only-pc-display" style="margin: 0 0 10px 0">
                 <div class="sub-title">
-                  <div class="sub-title-title require-field">实例名称</div>
-                  <div class="sub-title-info">支持中文，尽可能保证唯一性</div>
-                </div>
-                <el-input v-model="instanceInfo.config.nickname" type="text"></el-input>
-              </el-col>
-              <el-col :md="24" class="row-mt">
-                <div class="sub-title">
-                  <div class="sub-title-title require-field">实例类型</div>
-                  <div class="sub-title-info">
-                    不同类型会导致功能不同，若无需求类型，可以选择较为抽象的通用类型，列如 Java
-                    通用版服务端
-                  </div>
-                </div>
-                <el-select
-                  @change="instanceTypeChange(instanceInfo.config.type)"
-                  v-model="instanceInfo.config.type"
-                  placeholder="请选择"
-                  style="width: 100%"
-                >
-                  <el-option
-                    v-for="(item, index) in typeList"
-                    :key="index"
-                    :label="item"
-                    :value="index"
-                  >
-                  </el-option>
-                </el-select>
-              </el-col>
-              <el-col :md="24" class="row-mt">
-                <div class="sub-title">
-                  <div class="sub-title-title require-field">启动命令</div>
-                  <div class="sub-title-info">
-                    <span>
-                      适用于任何程序命令，若程序路径或附加参数中含有空格可使用双引号作为边界，包含的文本将视作一段整体
-                    </span>
-                    <br />
-                    <span>
-                      通常情况下，建议使用命令助手生成启动命令，如果有额外需求可以自定义启动命令
-                    </span>
-                    <br />
-                    <span>
-                      列如 "C:\Program Files\Java\bin\java.exe" -Dfile.encoding=utf-8 -jar "my
-                      server.jar" -nogui
-                    </span>
-                  </div>
-                </div>
-                <div class="flex">
-                  <el-input v-model="instanceInfo.config.startCommand" type="text"></el-input>
-                  <el-button type="primary" plain @click="openCommandAssistCall(1)">
-                    命令生成
-                  </el-button>
-                </div>
-              </el-col>
-              <el-col :md="24" class="row-mt">
-                <div class="sub-title">
-                  <div class="sub-title-title require-field">工作目录</div>
-                  <div class="sub-title-info">实例运行的工作目录，可填绝对路径与相对路径</div>
-                </div>
-                <el-input
-                  v-model="instanceInfo.config.cwd"
-                  type="text"
-                  placeholder="列如: D:/MyServers/0001"
-                ></el-input>
-              </el-col>
-              <el-col :md="24" class="row-mt">
-                <div class="sub-title">
-                  <div class="sub-title-title">更新/安装程序文件命令</div>
-                  <div class="sub-title-info">
-                    当用户执行更新/安装操作时，将会执行此命令，${mcsm_workspace}
-                    代表工作目录，为空则不提供此功能
-                  </div>
-                </div>
-                <el-input
-                  v-model="instanceInfo.config.updateCommand"
-                  type="text"
-                  placeholder='列如: "D:/SteamCMD/steamcmd.exe" +login anonymous +force_install_dir "${mcsm_workspace}" "+app_update 380870 validate" +quit'
-                ></el-input>
-              </el-col>
-              <el-col :lg="8" class="row-mt">
-                <div class="sub-title">
-                  <div class="sub-title-title require-field">终端输入编码</div>
-                  <div class="sub-title-info">命令发送编码，重启实例生效</div>
-                </div>
-                <el-select
-                  v-model="instanceInfo.config.ie"
-                  filterable
-                  allow-create
-                  default-first-option
-                  placeholder="请选择终端输入编码"
-                  style="width: 100%"
-                >
-                  <el-option
-                    v-for="item in characters"
-                    :key="item.value"
-                    :label="item.label"
-                    :value="item.value"
-                  >
-                  </el-option>
-                </el-select>
-              </el-col>
-              <el-col :lg="8" class="row-mt">
-                <div class="sub-title">
-                  <div class="sub-title-title require-field">终端输出编码</div>
-                  <div class="sub-title-info">终端输出编码，重启实例生效</div>
-                </div>
-                <el-select
-                  v-model="instanceInfo.config.oe"
-                  filterable
-                  allow-create
-                  default-first-option
-                  placeholder="请选择终端输出编码"
-                  style="width: 100%"
-                >
-                  <el-option
-                    v-for="item in characters"
-                    :key="item.value"
-                    :label="item.label"
-                    :value="item.value"
-                  >
-                  </el-option>
-                </el-select>
-              </el-col>
-              <el-col :lg="8" class="row-mt">
-                <div class="sub-title">
-                  <div class="sub-title-title require-field">关闭实例命令</div>
-                  <div class="sub-title-info">^C 代表发送 Ctrl+C 组合键</div>
-                </div>
-                <el-input v-model="instanceInfo.config.stopCommand" type="text"></el-input>
-              </el-col>
-              <el-col :lg="8" class="row-mt">
-                <div class="sub-title">
-                  <div class="sub-title-title require-field">文件管理编码</div>
-                  <div class="sub-title-info">文件管理功能的解压缩，编辑等编码</div>
-                </div>
-                <el-select
-                  v-model="instanceInfo.config.fileCode"
-                  filterable
-                  allow-create
-                  default-first-option
-                  placeholder="请选择文件管理编码"
-                  style="width: 100%"
-                >
-                  <el-option
-                    v-for="item in characters"
-                    :key="item.value"
-                    :label="item.label"
-                    :value="item.value"
-                  >
-                  </el-option>
-                </el-select>
-              </el-col>
-
-              <el-col :lg="8" class="row-mt" :offset="0">
-                <div class="sub-title">
-                  <div class="sub-title-title">到期时间</div>
-                  <div class="sub-title-info">到期后无法启动</div>
-                </div>
-                <el-date-picker
-                  v-model="instanceInfo.config.endTime"
-                  type="date"
-                  placeholder="无限制"
-                  style="width: 100%"
-                >
-                </el-date-picker>
-              </el-col>
-              <el-col :lg="24" class="row-mt">
-                <div class="sub-title">
-                  <div class="sub-title-title require-field">进程启动方式（推荐）</div>
-                  <div class="sub-title-info">
-                    通常默认即可，如果从事商业活动必须则使用虚拟化容器启动方式，否则主机将被入侵。
-                  </div>
-                </div>
-                <el-select v-model="instanceInfo.config.processType" style="width: 100%">
-                  <el-option label="默认类型" value="general"></el-option>
-                  <el-option label="虚拟化容器（Linux Docker）" value="docker"></el-option>
-                </el-select>
-              </el-col>
-            </el-row>
-
-            <div
-              class="dokcer-config-view row-mt"
-              v-if="instanceInfo.config.processType === 'docker'"
-            >
-              <br />
-              <div class="sub-title">
-                <div class="sub-title-title"><b>虚拟化容器配置</b></div>
-                <div class="sub-title-info">
-                  一种基于 Docker
-                  的虚拟化方案，可以给每个实例装入一个一次性的盒子中运行，使用后销毁，确保主机安全。
+                  当前界面所有设置只有管理员可以进行更改，应用实例拥有远程代码执行功能，请谨慎修改配置。
                 </div>
               </div>
+              <div class="sub-title bt">远程/本地实例标识符</div>
+              <p v-text="instanceInfo.instanceUuid"></p>
+              <div class="sub-title bt">守护进程标识符</div>
+              <p v-text="serviceUuid"></p>
+              <div class="sub-title bt">当前状态</div>
+              <p v-text="codeToText(instanceInfo.status)"></p>
+              <div class="sub-title bt">已启动次数</div>
+              <p v-text="instanceInfo.started"></p>
+              <div class="sub-title bt">创建日期</div>
+              <p v-text="instanceInfo.config.createDatetime"></p>
+              <div class="sub-title bt">最后启动日期</div>
+              <p v-text="instanceInfo.config.lastDatetime"></p>
+              <div class="sub-title bt">到期时间</div>
+              <p v-text="instanceInfo.config.endTime ? instanceInfo.config.endTime : '无限制'"></p>
+              <div class="sub-title bt">进程类型</div>
+              <p v-if="instanceInfo.config.processType === 'general'">普通程序启动方式</p>
+              <p v-if="instanceInfo.config.processType === 'docker'">虚拟化容器启动方式</p>
+              <div v-if="instanceInfo.config.docker">
+                <div class="sub-title bt">分配给其他用户</div>
+                <p class="color-green" v-if="instanceInfo.config.processType === 'docker'">
+                  可以，已启用容器隔离
+                </p>
+                <p class="color-red" v-else>不推荐，可能会危害主机</p>
+              </div>
+            </el-col>
+            <el-col :lg="18">
               <el-row :gutter="20">
-                <el-col :md="8" class="row-mt" :offset="0">
+                <el-col :md="24">
                   <div class="sub-title">
-                    <div class="sub-title-title require-field">环境镜像</div>
-                    <div class="sub-title-info">指定实例镜像</div>
+                    <div class="sub-title-title require-field">实例名称</div>
+                    <div class="sub-title-info">支持中文，尽可能保证唯一性</div>
                   </div>
-                  <el-select
-                    filterable
-                    v-model="instanceInfo.config.docker.image"
-                    placeholder="请选择"
-                    @focus="loadImages"
-                    style="width: 100%"
-                    v-loading="imageListLoading"
-                    @change="selectImage"
-                  >
-                    <el-option v-for="item in dockerImages" :key="item" :label="item" :value="item">
-                    </el-option>
-                  </el-select>
+                  <el-input v-model="instanceInfo.config.nickname" type="text"></el-input>
                 </el-col>
-                <el-col :md="16" class="row-mt" :offset="0">
+                <el-col :md="24" class="row-mt">
                   <div class="sub-title">
-                    <div class="sub-title-title">开放端口</div>
+                    <div class="sub-title-title require-field">实例类型</div>
                     <div class="sub-title-info">
-                      多个以空格分割，冒号左边为宿主机暴露端口，右边为容器暴露端口，通常保持一致即可
+                      不同类型会导致功能不同，若无需求类型，可以选择较为抽象的通用类型，列如 Java
+                      通用版服务端
                     </div>
                   </div>
-                  <el-input
-                    v-model="instanceInfo.config.docker.ports"
-                    type="text"
-                    placeholder="选填，示例 25565:25565/tcp 3380:3380/udp"
-                  >
-                  </el-input>
-                </el-col>
-              </el-row>
-              <el-row :gutter="20">
-                <el-col class="row-mt" :offset="0">
-                  <div class="sub-title">
-                    <div class="sub-title-title">额外挂载路径</div>
-                    <div class="sub-title-info">
-                      向容器内挂载除工作目录外的其他目录，多个以空格分割，冒号左边为宿主机路径，右边为容器路径
-                    </div>
-                  </div>
-                  <el-input
-                    v-model="instanceInfo.config.docker.extraVolumes"
-                    type="text"
-                    placeholder="示例 /backups/test1:/workspace/backups /var/logs/test1:/workspace/logs"
-                  >
-                  </el-input>
-                </el-col>
-              </el-row>
-              <el-row :gutter="20">
-                <el-col :md="8" class="row-mt" :offset="0">
-                  <div class="sub-title">
-                    <div class="sub-title-title">容器名</div>
-                    <div class="sub-title-info">容器创建使用的名字，为空随机生成</div>
-                  </div>
-                  <el-tooltip
-                    class="box-item"
-                    effect="dark"
-                    content="选填，无特殊需求不建议填写此项"
-                    placement="bottom"
-                  >
-                    <el-input
-                      v-model="instanceInfo.config.docker.containerName"
-                      type="text"
-                      placeholder="选填，示例 lobby-1"
-                    >
-                    </el-input>
-                  </el-tooltip>
-                </el-col>
-                <el-col :md="8" class="row-mt" :offset="0">
-                  <div class="sub-title">
-                    <div class="sub-title-title require-field">网络模式</div>
-                    <div class="sub-title-info">选择容器接入的网络模式 如 bridge 网桥</div>
-                  </div>
                   <el-select
-                    filterable
-                    v-model="instanceInfo.config.docker.networkMode"
+                    @change="instanceTypeChange(instanceInfo.config.type)"
+                    v-model="instanceInfo.config.type"
                     placeholder="请选择"
-                    @focus="loadNetworkModes"
                     style="width: 100%"
-                    v-loading="networkModeListLoading"
                   >
                     <el-option
-                      v-for="item in networkModes"
-                      :key="item.Name"
-                      :label="item.Name"
-                      :value="item.Name"
+                      v-for="(item, index) in typeList"
+                      :key="index"
+                      :label="item"
+                      :value="index"
                     >
                     </el-option>
                   </el-select>
                 </el-col>
-                <el-col :md="8" class="row-mt" :offset="0">
+                <el-col :md="24" class="row-mt">
                   <div class="sub-title">
-                    <div class="sub-title-title">网络别名</div>
-                    <div class="sub-title-info">用于在自定义网络中容器互相访问，空格分隔</div>
+                    <div class="sub-title-title require-field">启动命令</div>
+                    <div class="sub-title-info">
+                      <span>
+                        适用于任何程序命令，若程序路径或附加参数中含有空格可使用双引号作为边界，包含的文本将视作一段整体
+                      </span>
+                      <br />
+                      <span>
+                        通常情况下，建议使用命令助手生成启动命令，如果有额外需求可以自定义启动命令
+                      </span>
+                      <br />
+                      <span>
+                        列如 "C:\Program Files\Java\bin\java.exe" -Dfile.encoding=utf-8 -jar "my
+                        server.jar" -nogui
+                      </span>
+                    </div>
                   </div>
-                  <el-tooltip
-                    class="box-item"
-                    effect="dark"
-                    content="选填，无特殊需求不建议填写此项"
-                    placement="bottom"
-                  >
-                    <el-input
-                      v-model="instanceInfo.config.docker.networkAliases"
-                      type="text"
-                      placeholder="选填，示例 login-server-1"
-                    >
-                    </el-input>
-                  </el-tooltip>
+                  <div class="flex">
+                    <el-input v-model="instanceInfo.config.startCommand" type="text"></el-input>
+                    <el-button type="primary" plain @click="openCommandAssistCall(1)">
+                      命令生成
+                    </el-button>
+                  </div>
                 </el-col>
-              </el-row>
-              <el-row :gutter="20">
-                <el-col :md="8" class="row-mt">
+                <el-col :md="24" class="row-mt">
                   <div class="sub-title">
-                    <div class="sub-title-title">限制 CPU 使用率（百分比）</div>
-                    <div class="sub-title-info">限制所有 CPU 总和使用率，会有少许偏差</div>
+                    <div class="sub-title-title require-field">工作目录</div>
+                    <div class="sub-title-info">实例运行的工作目录，可填绝对路径与相对路径</div>
                   </div>
-                  <el-tooltip
-                    class="box-item"
-                    effect="dark"
-                    content="填写 50 代表所有核心使用率和限制在 50%，若填写 200 则代表准许使用所有核心使用率总和为 200%"
-                    placement="bottom"
-                  >
-                    <el-input
-                      v-model="instanceInfo.config.docker.cpuUsage"
-                      type="text"
-                      placeholder="选填，0 到 无限大"
-                    >
-                    </el-input>
-                  </el-tooltip>
-                </el-col>
-                <el-col :md="8" class="row-mt">
-                  <div class="sub-title">
-                    <div class="sub-title-title">指定 CPU 计算核心</div>
-                    <div class="sub-title-info">限制容器在指定的 CPU 核心上运行</div>
-                  </div>
-                  <el-tooltip
-                    class="box-item"
-                    effect="dark"
-                    content="指定进程在某些核心上运行，合理分配可以更好的利用您的系统硬件资源，列如 0,1 代表在第1，2核心上运作，逗号隔开"
-                    placement="bottom"
-                  >
-                    <el-input
-                      v-model="instanceInfo.config.docker.cpusetCpus"
-                      type="text"
-                      placeholder="选填，列如 0,1,2,3"
-                    >
-                    </el-input>
-                  </el-tooltip>
-                </el-col>
-                <el-col :md="8" class="row-mt">
-                  <div class="sub-title">
-                    <div class="sub-title-title">最大内存（单位 MB）</div>
-                    <div class="sub-title-info">列如 1024，2048 等，请勿加单位</div>
-                  </div>
-
                   <el-input
-                    v-model="instanceInfo.config.docker.memory"
+                    v-model="instanceInfo.config.cwd"
                     type="text"
-                    placeholder="选填，列如 1024"
+                    placeholder="列如: D:/MyServers/0001"
+                  ></el-input>
+                </el-col>
+                <el-col :md="24" class="row-mt">
+                  <div class="sub-title">
+                    <div class="sub-title-title">更新/安装程序文件命令</div>
+                    <div class="sub-title-info">
+                      当用户执行更新/安装操作时，将会执行此命令，${mcsm_workspace}
+                      代表工作目录，为空则不提供此功能
+                    </div>
+                  </div>
+                  <el-input
+                    v-model="instanceInfo.config.updateCommand"
+                    type="text"
+                    placeholder='列如: "D:/SteamCMD/steamcmd.exe" +login anonymous +force_install_dir "${mcsm_workspace}" "+app_update 380870 validate" +quit'
+                  ></el-input>
+                </el-col>
+                <el-col :lg="8" class="row-mt">
+                  <div class="sub-title">
+                    <div class="sub-title-title require-field">终端输入编码</div>
+                    <div class="sub-title-info">命令发送编码，重启实例生效</div>
+                  </div>
+                  <el-select
+                    v-model="instanceInfo.config.ie"
+                    filterable
+                    allow-create
+                    default-first-option
+                    placeholder="请选择终端输入编码"
+                    style="width: 100%"
                   >
-                  </el-input>
+                    <el-option
+                      v-for="item in characters"
+                      :key="item.value"
+                      :label="item.label"
+                      :value="item.value"
+                    >
+                    </el-option>
+                  </el-select>
+                </el-col>
+                <el-col :lg="8" class="row-mt">
+                  <div class="sub-title">
+                    <div class="sub-title-title require-field">终端输出编码</div>
+                    <div class="sub-title-info">终端输出编码，重启实例生效</div>
+                  </div>
+                  <el-select
+                    v-model="instanceInfo.config.oe"
+                    filterable
+                    allow-create
+                    default-first-option
+                    placeholder="请选择终端输出编码"
+                    style="width: 100%"
+                  >
+                    <el-option
+                      v-for="item in characters"
+                      :key="item.value"
+                      :label="item.label"
+                      :value="item.value"
+                    >
+                    </el-option>
+                  </el-select>
+                </el-col>
+                <el-col :lg="8" class="row-mt">
+                  <div class="sub-title">
+                    <div class="sub-title-title require-field">关闭实例命令</div>
+                    <div class="sub-title-info">^C 代表发送 Ctrl+C 组合键</div>
+                  </div>
+                  <el-input v-model="instanceInfo.config.stopCommand" type="text"></el-input>
+                </el-col>
+                <el-col :lg="8" class="row-mt">
+                  <div class="sub-title">
+                    <div class="sub-title-title require-field">文件管理编码</div>
+                    <div class="sub-title-info">文件管理功能的解压缩，编辑等编码</div>
+                  </div>
+                  <el-select
+                    v-model="instanceInfo.config.fileCode"
+                    filterable
+                    allow-create
+                    default-first-option
+                    placeholder="请选择文件管理编码"
+                    style="width: 100%"
+                  >
+                    <el-option
+                      v-for="item in characters"
+                      :key="item.value"
+                      :label="item.label"
+                      :value="item.value"
+                    >
+                    </el-option>
+                  </el-select>
+                </el-col>
+
+                <el-col :lg="8" class="row-mt" :offset="0">
+                  <div class="sub-title">
+                    <div class="sub-title-title">到期时间</div>
+                    <div class="sub-title-info">到期后无法启动</div>
+                  </div>
+                  <el-date-picker
+                    v-model="instanceInfo.config.endTime"
+                    type="date"
+                    placeholder="无限制"
+                    style="width: 100%"
+                  >
+                  </el-date-picker>
+                </el-col>
+                <el-col :lg="24" class="row-mt">
+                  <div class="sub-title">
+                    <div class="sub-title-title require-field">进程启动方式（推荐）</div>
+                    <div class="sub-title-info">
+                      通常默认即可，如果从事商业活动必须则使用虚拟化容器启动方式，否则主机将被入侵。
+                    </div>
+                  </div>
+                  <el-select v-model="instanceInfo.config.processType" style="width: 100%">
+                    <el-option label="默认类型" value="general"></el-option>
+                    <el-option label="虚拟化容器（Linux Docker）" value="docker"></el-option>
+                  </el-select>
                 </el-col>
               </el-row>
-            </div>
-          </el-col>
-        </el-row>
 
-        <el-row :gutter="20" class="row-mt">
-          <el-col :md="24" style="text-align: right">
-            <ItemGroup>
-              <el-button size="small" @click="toConsole">控制台</el-button>
-              <el-button size="small" @click="toFileManager">文件管理</el-button>
-              <el-button size="small" @click="back">返回</el-button>
-              <el-button type="success" size="small" @click="saveConfig">保存配置</el-button>
-            </ItemGroup>
-          </el-col>
-        </el-row>
-      </div>
-    </template>
-  </Panel>
+              <div
+                class="dokcer-config-view row-mt"
+                v-if="instanceInfo.config.processType === 'docker'"
+              >
+                <br />
+                <div class="sub-title">
+                  <div class="sub-title-title"><b>虚拟化容器配置</b></div>
+                  <div class="sub-title-info">
+                    一种基于 Docker
+                    的虚拟化方案，可以给每个实例装入一个一次性的盒子中运行，使用后销毁，确保主机安全。
+                  </div>
+                </div>
+                <el-row :gutter="20">
+                  <el-col :md="8" class="row-mt" :offset="0">
+                    <div class="sub-title">
+                      <div class="sub-title-title require-field">环境镜像</div>
+                      <div class="sub-title-info">指定实例镜像</div>
+                    </div>
+                    <el-select
+                      filterable
+                      v-model="instanceInfo.config.docker.image"
+                      placeholder="请选择"
+                      @focus="loadImages"
+                      style="width: 100%"
+                      v-loading="imageListLoading"
+                      @change="selectImage"
+                    >
+                      <el-option
+                        v-for="item in dockerImages"
+                        :key="item"
+                        :label="item"
+                        :value="item"
+                      >
+                      </el-option>
+                    </el-select>
+                  </el-col>
+                  <el-col :md="16" class="row-mt" :offset="0">
+                    <div class="sub-title">
+                      <div class="sub-title-title">开放端口</div>
+                      <div class="sub-title-info">
+                        多个以空格分割，冒号左边为宿主机暴露端口，右边为容器暴露端口，通常保持一致即可
+                      </div>
+                    </div>
+                    <el-input
+                      v-model="instanceInfo.config.docker.ports"
+                      type="text"
+                      placeholder="选填，示例 25565:25565/tcp 3380:3380/udp"
+                    >
+                    </el-input>
+                    <el-button @click="toEditDockerPort">编辑</el-button>
+                  </el-col>
+                </el-row>
+                <el-row :gutter="20">
+                  <el-col class="row-mt" :offset="0">
+                    <div class="sub-title">
+                      <div class="sub-title-title">额外挂载路径</div>
+                      <div class="sub-title-info">
+                        向容器内挂载除工作目录外的其他目录，多个以空格分割，冒号左边为宿主机路径，右边为容器路径
+                      </div>
+                    </div>
+                    <el-input
+                      v-model="instanceInfo.config.docker.extraVolumes"
+                      type="text"
+                      placeholder="示例 /backups/test1:/workspace/backups /var/logs/test1:/workspace/logs"
+                    >
+                    </el-input>
+                  </el-col>
+                </el-row>
+                <el-row :gutter="20">
+                  <el-col :md="8" class="row-mt" :offset="0">
+                    <div class="sub-title">
+                      <div class="sub-title-title">容器名</div>
+                      <div class="sub-title-info">容器创建使用的名字，为空随机生成</div>
+                    </div>
+                    <el-tooltip
+                      class="box-item"
+                      effect="dark"
+                      content="选填，无特殊需求不建议填写此项"
+                      placement="bottom"
+                    >
+                      <el-input
+                        v-model="instanceInfo.config.docker.containerName"
+                        type="text"
+                        placeholder="选填，示例 lobby-1"
+                      >
+                      </el-input>
+                    </el-tooltip>
+                  </el-col>
+                  <el-col :md="8" class="row-mt" :offset="0">
+                    <div class="sub-title">
+                      <div class="sub-title-title require-field">网络模式</div>
+                      <div class="sub-title-info">选择容器接入的网络模式 如 bridge 网桥</div>
+                    </div>
+                    <el-select
+                      filterable
+                      v-model="instanceInfo.config.docker.networkMode"
+                      placeholder="请选择"
+                      @focus="loadNetworkModes"
+                      style="width: 100%"
+                      v-loading="networkModeListLoading"
+                    >
+                      <el-option
+                        v-for="item in networkModes"
+                        :key="item.Name"
+                        :label="item.Name"
+                        :value="item.Name"
+                      >
+                      </el-option>
+                    </el-select>
+                  </el-col>
+                  <el-col :md="8" class="row-mt" :offset="0">
+                    <div class="sub-title">
+                      <div class="sub-title-title">网络别名</div>
+                      <div class="sub-title-info">用于在自定义网络中容器互相访问，空格分隔</div>
+                    </div>
+                    <el-tooltip
+                      class="box-item"
+                      effect="dark"
+                      content="选填，无特殊需求不建议填写此项"
+                      placement="bottom"
+                    >
+                      <el-input
+                        v-model="instanceInfo.config.docker.networkAliases"
+                        type="text"
+                        placeholder="选填，示例 login-server-1"
+                      >
+                      </el-input>
+                    </el-tooltip>
+                  </el-col>
+                </el-row>
+                <el-row :gutter="20">
+                  <el-col :md="8" class="row-mt">
+                    <div class="sub-title">
+                      <div class="sub-title-title">限制 CPU 使用率（百分比）</div>
+                      <div class="sub-title-info">限制所有 CPU 总和使用率，会有少许偏差</div>
+                    </div>
+                    <el-tooltip
+                      class="box-item"
+                      effect="dark"
+                      content="填写 50 代表所有核心使用率和限制在 50%，若填写 200 则代表准许使用所有核心使用率总和为 200%"
+                      placement="bottom"
+                    >
+                      <el-input
+                        v-model="instanceInfo.config.docker.cpuUsage"
+                        type="text"
+                        placeholder="选填，0 到 无限大"
+                      >
+                      </el-input>
+                    </el-tooltip>
+                  </el-col>
+                  <el-col :md="8" class="row-mt">
+                    <div class="sub-title">
+                      <div class="sub-title-title">指定 CPU 计算核心</div>
+                      <div class="sub-title-info">限制容器在指定的 CPU 核心上运行</div>
+                    </div>
+                    <el-tooltip
+                      class="box-item"
+                      effect="dark"
+                      content="指定进程在某些核心上运行，合理分配可以更好的利用您的系统硬件资源，列如 0,1 代表在第1，2核心上运作，逗号隔开"
+                      placement="bottom"
+                    >
+                      <el-input
+                        v-model="instanceInfo.config.docker.cpusetCpus"
+                        type="text"
+                        placeholder="选填，列如 0,1,2,3"
+                      >
+                      </el-input>
+                    </el-tooltip>
+                  </el-col>
+                  <el-col :md="8" class="row-mt">
+                    <div class="sub-title">
+                      <div class="sub-title-title">最大内存（单位 MB）</div>
+                      <div class="sub-title-info">列如 1024，2048 等，请勿加单位</div>
+                    </div>
 
-  <!-- 命令助手 -->
-  <CommandAssist v-model="commandAssistPanel" :result="commandAssistCallback"></CommandAssist>
+                    <el-input
+                      v-model="instanceInfo.config.docker.memory"
+                      type="text"
+                      placeholder="选填，列如 1024"
+                    >
+                    </el-input>
+                  </el-col>
+                </el-row>
+              </div>
+            </el-col>
+          </el-row>
+
+          <el-row :gutter="20" class="row-mt">
+            <el-col :md="24" style="text-align: right">
+              <ItemGroup>
+                <el-button size="small" @click="toConsole">控制台</el-button>
+                <el-button size="small" @click="toFileManager">文件管理</el-button>
+                <el-button size="small" @click="back">返回</el-button>
+                <el-button type="success" size="small" @click="saveConfig">保存配置</el-button>
+              </ItemGroup>
+            </el-col>
+          </el-row>
+        </div>
+      </template>
+    </Panel>
+
+    <!-- 命令助手 -->
+    <CommandAssist v-model="commandAssistPanel" :result="commandAssistCallback"></CommandAssist>
+
+    <DockerVariableSetup
+      ref="dockerVariableSetup"
+      @submit="handleSubmitDockerPort"
+    ></DockerVariableSetup>
+  </div>
 </template>
 
 <script>
@@ -444,11 +457,12 @@ import Panel from "../../components/Panel";
 import router from "../router";
 import { request } from "../service/protocol";
 import CommandAssist from "../../components/CommandAssist";
+import DockerVariableSetup from "../../components/DockerVariableSetup";
 import { INSTANCE_TYPE_DEF_CONFIG } from "../service/instance_type";
 // import qs from "qs";
 
 export default {
-  components: { Panel, CommandAssist },
+  components: { Panel, CommandAssist, DockerVariableSetup },
   data() {
     return {
       serviceUuid: this.$route.params.serviceUuid,
@@ -466,6 +480,27 @@ export default {
       commandAssistPanel: false,
 
       dockerImages: [],
+
+      // Docker 端口配置表字段
+      tableDict: [
+        {
+          prop: "protocol",
+          label: "通信协议",
+          width: "120px"
+        },
+        {
+          prop: "port1",
+          label: "对应的主机端口",
+          width: "120px"
+        },
+        {
+          prop: "port2",
+          label: "对应的容器端口",
+          width: "120px"
+        }
+      ],
+
+      // 可选的字符编码
       characters: [
         { label: "UTF-8（通用）", value: "UTF-8" },
         { label: "GBK（中文）", value: "GBK" },
@@ -595,6 +630,20 @@ export default {
     },
     commandAssistCallback(cmd) {
       this.instanceInfo.config.startCommand = cmd;
+    },
+    toEditDockerPort() {
+      this.$refs.dockerVariableSetup.show(
+        this.instanceInfo.config?.docker?.ports,
+        "port",
+        this.tableDict
+      );
+    },
+    handleSubmitDockerPort(items) {
+      let text = "";
+      for (const iterator of items) {
+        text += `${iterator.port1}:${iterator.port2}/${iterator.protocol} `;
+      }
+      this.instanceInfo.config.docker.ports = text;
     }
   },
   async mounted() {
