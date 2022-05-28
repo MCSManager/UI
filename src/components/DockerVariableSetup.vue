@@ -23,7 +23,7 @@
   <Dialog v-model="visible" :cancel="close">
     <template #title>配置对话框</template>
     <template #default>
-      <div v-if="text && items" class="components-warpper">
+      <div v-if="items" class="components-warpper">
         <el-table :data="items" style="width: 100%" size="small">
           <el-table-column v-for="(item, index) in columns" :key="index" v-bind="item">
             <template #default="scope">
@@ -32,9 +32,7 @@
           </el-table-column>
           <el-table-column label="操作">
             <template #default="scope">
-              <el-button text size="small" @click="deleteTableItem(scope.row, index)"
-                >删除</el-button
-              >
+              <el-button text size="small" @click="deleteTableItem(scope.$index)">删除</el-button>
             </template>
           </el-table-column>
         </el-table>
@@ -53,58 +51,31 @@
 import Dialog from "./Dialog";
 export default {
   components: { Dialog },
-  props: {},
+  props: {
+    loadData: Function,
+    columns: Array
+  },
   data: function () {
     return {
       visible: false,
-      text: "",
-      items: [],
-      columns: [],
-      type: ""
+      items: []
     };
   },
   methods: {
-    dataTypeParse(text = "", type = "port") {
-      const result = [];
-      this.type = type;
-      if (type === "port") {
-        const lines = text.split(" ");
-        for (const iterator of lines) {
-          const pad = iterator.split("/");
-          const ports = pad[0];
-          const protocol = pad[1];
-          const port1 = ports.split(":")[0];
-          const port2 = ports.split(":")[1];
-          result.push({
-            port1,
-            port2,
-            protocol
-          });
-        }
-      }
-      return result;
-    },
-    show(text = "", type = "port", columns = []) {
+    show() {
+      console.log(1);
+      this.items = this.loadData();
       this.visible = true;
-      this.text = text;
-      this.columns = columns;
-      this.items = this.dataTypeParse(text, type);
     },
     close() {
       this.visible = false;
-      this.text = "";
       this.items = [];
-      this.columns = [];
-      this.type = "";
     },
     sumbit() {
       this.$emit("submit", this.items);
       this.close();
     },
-    deleteTableItem(item, index) {
-      // this.items.forEach((v,i) => {
-      //   if(i===index)
-      // });
+    deleteTableItem(index) {
       this.items.splice(index, 1);
     },
     createTableData() {

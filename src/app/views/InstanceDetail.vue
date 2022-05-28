@@ -446,6 +446,8 @@
     <DockerVariableSetup
       ref="dockerVariableSetup"
       @submit="handleSubmitDockerPort"
+      :loadData="handleDockerPortLoadData"
+      :columns="tableDict1"
     ></DockerVariableSetup>
   </div>
 </template>
@@ -482,7 +484,7 @@ export default {
       dockerImages: [],
 
       // Docker 端口配置表字段
-      tableDict: [
+      tableDict1: [
         {
           prop: "protocol",
           label: "通信协议",
@@ -632,11 +634,25 @@ export default {
       this.instanceInfo.config.startCommand = cmd;
     },
     toEditDockerPort() {
-      this.$refs.dockerVariableSetup.show(
-        this.instanceInfo.config?.docker?.ports,
-        "port",
-        this.tableDict
-      );
+      this.$refs.dockerVariableSetup.show();
+    },
+    handleDockerPortLoadData() {
+      console.log("loading");
+      const result = [];
+      const lines = this.instanceInfo.config?.docker?.ports.split(" ");
+      for (const iterator of lines) {
+        const pad = iterator.split("/");
+        const ports = pad[0];
+        const protocol = pad[1];
+        const port1 = ports.split(":")[0];
+        const port2 = ports.split(":")[1];
+        result.push({
+          port1,
+          port2,
+          protocol
+        });
+      }
+      return result;
     },
     handleSubmitDockerPort(items) {
       let text = "";
