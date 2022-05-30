@@ -28,8 +28,8 @@
         <div class="sub-title">
           <div class="sub-title-title require-field">重置最高级别账号密码</div>
           <div class="sub-title-info">
-            为确保面板安全，第一次登录必须重设密码，密码必须由大写字母，小写字母和数字组成，长度为
-            12 到 36 位
+            为确保面板安全，第一次登录必须重设密码，密码必须由大写字母，小写字母和数字组成，长度为 9
+            到 36 位
           </div>
           <div class="row-mt">
             <el-input
@@ -87,6 +87,7 @@ export default {
         });
         this.$message({ message: "已设置密码，欢迎使用", type: "success" });
         this.$emit("update:visible", false);
+        location.reload();
       } catch (error) {
         this.$message({
           message: error,
