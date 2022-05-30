@@ -93,7 +93,7 @@
                     <div class="sub-title-title require-field">启动命令</div>
                     <div class="sub-title-info">
                       <span>
-                        适用于任何程序命令，若程序路径或附加参数中含有空格可使用双引号作为边界，包含的文本将视作一段整体
+                        适用于任何程序命令，若程序路径或附加参数中含有空格可使用引号作为边界，包含的文本将视作一段整体
                       </span>
                       <br />
                       <span>
@@ -229,7 +229,7 @@
                   <div class="sub-title">
                     <div class="sub-title-title require-field">进程启动方式（推荐）</div>
                     <div class="sub-title-info">
-                      通常默认即可，如果从事商业活动必须则使用虚拟化容器启动方式，否则主机将被入侵。
+                      通常默认即可，如果从事商业活动则应当使用虚拟化容器启动方式，否则主机将可能被入侵。
                     </div>
                   </div>
                   <el-select v-model="instanceInfo.config.processType" style="width: 100%">
