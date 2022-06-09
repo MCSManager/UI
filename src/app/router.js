@@ -96,13 +96,14 @@ const routes = [
   },
   {
     path: "/container",
-    name: "镜像与容器",
+    name: "环境镜像",
     component: Container
   },
   {
     path: "/image/:serviceUuid",
     name: "镜像管理",
-    component: ImageManager
+    component: ImageManager,
+    meta: { activeMenu: "/container" }
   },
   {
     path: "/trigger",
@@ -122,52 +123,62 @@ const routes = [
   {
     path: "/new_image/:serviceUuid",
     name: "创建镜像",
-    component: NewImage
+    component: NewImage,
+    meta: { activeMenu: "/container" }
   },
   {
     path: "/terminal/:serviceUuid/:instanceUuid",
     name: "实例控制台",
-    component: Terminal
+    component: Terminal,
+    meta: { activeMenu: "/instances" }
   },
   {
     path: "/process_config_file/:serviceUuid/:instanceUuid/",
     name: "实例配置文件",
-    component: ProcessConfigFile
+    component: ProcessConfigFile,
+    meta: { activeMenu: "/instances" }
   },
   {
     path: "/process_config/:serviceUuid/:instanceUuid/",
     name: "实例特定配置",
-    component: ProcessConfig
+    component: ProcessConfig,
+    meta: { activeMenu: "/instances" }
   },
   {
     path: "/file/:serviceUuid/:instanceUuid",
     name: "实例文件管理",
-    component: FileManager
+    component: FileManager,
+    meta: { activeMenu: "/instances" }
   },
   {
     path: "/file_editor/:serviceUuid/:instanceUuid/",
     name: "实例文件编辑",
-    component: FileManagerEditor
+    component: FileManagerEditor,
+    meta: { activeMenu: "/instances" }
   },
   {
     path: "/instance_detail/:serviceUuid/:instanceUuid",
     name: "实例配置详情",
-    component: InstanceDetail
+    component: InstanceDetail,
+    meta: { activeMenu: "/instances" }
   },
   {
     path: "/user_resources/:userUuid",
     name: "用户资源",
-    component: UserResources
+    component: UserResources,
+    meta: { activeMenu: "/users" }
   },
   {
     path: "/schedule/:serviceUuid/:instanceUuid",
     name: "计划任务",
-    component: Schedule
+    component: Schedule,
+    meta: { activeMenu: "/instances" }
   },
   {
     path: "/new_instace/:serviceUuid",
     name: "新增实例",
-    component: NewInstance
+    component: NewInstance,
+    meta: { activeMenu: "/instances" }
   },
   {
     path: "/login",

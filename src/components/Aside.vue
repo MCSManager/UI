@@ -29,7 +29,7 @@
     text-color="#fff"
     active-text-color="#ffd04b"
     style="height: 100%; padding: 0px 8px"
-    :default-active="$route.path"
+    :default-active="$route.meta.activeMenu || $route.path"
   >
     <el-scrollbar>
       <Logo></Logo>
