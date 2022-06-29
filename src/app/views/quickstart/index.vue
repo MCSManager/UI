@@ -20,12 +20,16 @@
 -->
 
 <template>
-  <div>A</div>
+  <div class="container">
+    <QuickStartButton>AAAAA</QuickStartButton>
+  </div>
 </template>
 
 <script>
+import QuickStartButton from "../../../components/QuickStartButton.vue";
+
 export default {
-  components: {},
+  components: { QuickStartButton },
   data: function () {
     return {};
   },
@@ -35,3 +39,9 @@ export default {
   async mounted() {}
 };
 </script>
+
+<style scoped>
+.container {
+  display: flex;
+}
+</style>
