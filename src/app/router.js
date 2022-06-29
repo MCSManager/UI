@@ -47,6 +47,7 @@ import ProcessConfig from "./views/ProcessConfig";
 import ProcessConfigFile from "./views/ProcessConfigFile";
 import Schedule from "./views/Schedule";
 import Update from "./views/Update";
+import Quickstart from "./views/quickstart";
 
 const routes = [
   {
@@ -184,6 +185,11 @@ const routes = [
     path: "/login",
     name: "登录",
     component: Login
+  },
+  {
+    path: "/quickstart",
+    name: "快速开始",
+    component: Quickstart
   },
   {
     path: "/update",

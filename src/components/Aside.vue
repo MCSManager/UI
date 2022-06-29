@@ -35,6 +35,10 @@
       <Logo></Logo>
       <el-menu-item-group>
         <template #title>基础功能</template>
+        <el-menu-item key="/quickstart" index="/quickstart">
+          <i class="el-icon-coin"></i>
+          <template #title>快速开始</template>
+        </el-menu-item>
         <el-menu-item key="/overview" index="/overview">
           <i class="el-icon-pie-chart"></i>
           <template #title>数据监控</template>
