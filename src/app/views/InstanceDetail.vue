@@ -501,8 +501,8 @@ export default {
       tableDict1: [
         {
           prop: "protocol",
-          label: "通信协议",
-          width: "120px"
+          label: "通信协议(tcp/udp)",
+          width: "140px"
         },
         {
           prop: "port1",
@@ -742,7 +742,6 @@ export default {
   }
 };
 </script>
-
 
 <style scoped>
 .bt {

@@ -80,11 +80,15 @@ export default {
     },
     createTableData() {
       const lastItem = this.items[this.items.length - 1];
-      const newData = JSON.parse(JSON.stringify(lastItem));
-      for (const key in newData) {
-        newData[key] = "";
+      if (lastItem) {
+        const newData = JSON.parse(JSON.stringify(lastItem));
+        for (const key in newData) {
+          newData[key] = "";
+        }
+        this.items.push(newData);
+      } else {
+        this.items.push({});
       }
-      this.items.push(newData);
     }
   }
 };
