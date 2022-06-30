@@ -20,7 +20,7 @@
 -->
 
 <template>
-  <div>
+  <div class="container">
     <Panel style="max-width: 1200px">
       <template #title>{{ title }}</template>
       <template #default>
@@ -70,9 +70,9 @@
           </div>
 
           <el-row :gutter="10" justify="center" class="col-md-responsive">
-            <el-col :md="8" :offset="0">
+            <el-col :md="8" :offset="0" v-if="form.type != TYPE_MINECRAFT_BEDROCK">
               <SelectBlock @click="selectTypeB(1)" style="min-height: 120px">
-                <template #title>上传单个服务端软件 (推荐)</template>
+                <template #title>上传单个服务端软件（推荐）</template>
                 <template #info>
                   适用于第一次创建服务器，只需上传一个程序文件即可直接创建服务器并生成地图存档等
                 </template>
@@ -89,7 +89,7 @@
             </el-col>
             <el-col :md="8" :offset="0">
               <SelectBlock @click="selectTypeB(3)" style="min-height: 120px">
-                <template #title>无需文件/导入已存在文件</template>
+                <template #title>无需文件或选择已存在文件</template>
                 <template #info>
                   不需要任何文件或者服务端文件已存在远程主机上，只需要手动设置启动命令以及文件目录即可完成
                 </template>
@@ -324,6 +324,7 @@ export default {
       typeB: -1,
       commandAssistPanel: false,
       serviceUuid: this.$route.params.serviceUuid,
+      TYPE_MINECRAFT_BEDROCK,
       form: {
         nickname: "",
         startCommand: "",
@@ -497,3 +498,13 @@ export default {
   async mounted() {}
 };
 </script>
+
+<style scoped>
+.container {
+  /* display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 90vh;
+  height: calc(100% - 80px) !important; */
+}
+</style>
