@@ -301,9 +301,9 @@
         </template>
         <template #default>
           <!-- 全屏模式下的 Logo 显示 -->
-          <div v-if="isFull" class="full-terminal-logo only-pc-display">
+          <!-- <div v-if="isFull" class="full-terminal-logo only-pc-display">
             <Logo></Logo>
-          </div>
+          </div> -->
           <!-- 全屏模式下的操作按钮 -->
           <div v-show="isFull" class="full-terminal-button-wrapper">
             <div class="full-terminal-button" @click="openInstance">开启</div>
@@ -455,7 +455,9 @@
   </Dialog>
 
   <Dialog v-model="unavailableTerminal" style="z-index: 9999">
-    <template #title>无法与守护进程建立连接</template>
+    <template #title>
+      <span>无法与守护进程建立连接</span>
+    </template>
     <template #default>
       <div class="sub-title">
         <p class="sub-title-title">

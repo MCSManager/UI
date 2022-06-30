@@ -26,11 +26,11 @@
         <transition name="el-zoom-in-center">
           <Panel v-show="modelValue" style="margin-bottom: 0px">
             <template #title>
-              <div class="flex flex-space-between flex-align-items-center" style="width: 100%">
-                <slot name="title"></slot>
-                <div class="component-dialog-close-button" @click="close" v-if="canClose">
-                  <i class="el-icon-close"></i>
-                </div>
+              <slot name="title"></slot>
+            </template>
+            <template #rtitle>
+              <div class="component-dialog-close-button" @click="close" v-if="canClose">
+                <i class="el-icon-close"></i>
               </div>
             </template>
             <template #default>

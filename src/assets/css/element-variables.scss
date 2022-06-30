@@ -113,3 +113,7 @@ $item-group-margin: 5px;
   color: var(--el-menu-active-color);
   background-color: #ffffff1c;
 }
+
+.el-menu-item [class^=el-icon-]{
+  vertical-align: text-top;
+}
