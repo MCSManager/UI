@@ -26,8 +26,8 @@
       <template #default>
         <div v-show="page == 0" class="panel-context row-mt">
           <div class="sub-title">
-            <p class="sub-title-title">选择相应的实例类型</p>
-            <p class="sub-title-info">建议修改成非默认端口以确保基本的安全性。</p>
+            <p class="sub-title-title">请选择您要创建的应用类型</p>
+            <p class="sub-title-info"></p>
           </div>
           <el-row :gutter="10" justify="left" class="col-md-responsive row-mt">
             <el-col :md="6" :offset="0">
@@ -47,12 +47,12 @@
             <el-col :md="6" :offset="0">
               <SelectBlock @click="selectTypeA(3)" style="min-height: 120px">
                 <template #title>其他游戏服务端</template>
-                <template #info> 适用于类似于大部分游戏私服程序运行</template>
+                <template #info> 适用于类似于大部分游戏私服程序运行，不保证能够完全兼容</template>
               </SelectBlock>
             </el-col>
             <el-col :md="6" :offset="0">
               <SelectBlock @click="selectTypeA(3)" style="min-height: 120px">
-                <template #title>终端应用程序</template>
+                <template #title>通用控制台应用程序</template>
                 <template #info>
                   适用于类似于 bash，cmd.exe，app.exe，start.sh 和其他任何可用命令启动的程序
                 </template>
@@ -303,17 +303,16 @@
 <script>
 import path from "path";
 import axios from "axios";
-import Panel from "../../components/Panel";
-import CommandAssist from "../../components/CommandAssist";
-
-import SelectBlock from "../../components/SelectBlock";
-import { API_INSTANCE, API_INSTANCE_UPLOAD } from "../service/common";
+import Panel from "@/components/Panel";
+import CommandAssist from "@/components/CommandAssist";
+import SelectBlock from "@/components/SelectBlock";
+import { API_INSTANCE, API_INSTANCE_UPLOAD } from "@/app/service/common";
 import {
   TYPE_MINECRAFT_JAVA,
   TYPE_MINECRAFT_BEDROCK,
   TYPE_UNIVERSAL
-} from "../service/instance_type";
-import { parseforwardAddress, request } from "../service/protocol";
+} from "@/app/service/instance_type";
+import { parseforwardAddress, request } from "@/app/service/protocol";
 
 export default {
   components: { Panel, SelectBlock, CommandAssist },
