@@ -159,3 +159,40 @@
   justify-content: space-between;
   align-items: center;
 }
+
+.title-tip:before {
+  content: "-";
+  margin-right: 6px;
+  border-radius: 2px;
+  color: #909399;
+  background-color: #909399;
+}
+.title-tip-danger:before {
+  content: "-";
+  margin-right: 6px;
+  border-radius: 2px;
+  color: #f56c6c;
+  background-color: #f56c6c;
+}
+.title-tip-success:before {
+  content: "-";
+  margin-right: 6px;
+  border-radius: 2px;
+  color: #67c23a;
+  background-color: #67c23a;
+}
+
+.title-tip-warning:before {
+  content: "-";
+  margin-right: 6px;
+  border-radius: 2px;
+  color: #e6a23c;
+  background-color: #e6a23c;
+}
+.title-tip-primary:before {
+  content: "-";
+  margin-right: 6px;
+  border-radius: 2px;
+  color: #409eff;
+  background-color: #409eff;
+}

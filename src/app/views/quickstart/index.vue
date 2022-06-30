@@ -20,18 +20,64 @@
 -->
 
 <template>
-  <div class="container">
-    <QuickStartButton>AAAAA</QuickStartButton>
+  <div class="quick-container">
+    <div>
+      <h1 class="title-tip title-tip-primary">您希望使用 MCSManager 面板做什么？</h1>
+      <p>欢迎您访问“快速开始”，我们将尽可能的降低使用门槛并帮助您使用面板！</p>
+    </div>
+    <el-row :gutter="10" justify="left" class="col-md-responsive">
+      <el-col :md="6" :offset="0" v-for="(item, index) in quickItems" :key="index">
+        <SelectBlock style="height: 120px; background-color: white">
+          <template #title>{{ item.title }}</template>
+          <template #info>{{ item.subTitle }}</template>
+        </SelectBlock>
+      </el-col>
+    </el-row>
+
+    <div>
+      <!-- <p class="sub-title">
+        更多资料参考：<a
+          href="https://docs.mcsmanager.com/"
+          target="_blank"
+          rel="noopener noreferrer"
+          >https://docs.mcsmanager.com/</a
+        >
+      </p> -->
+    </div>
+    <!-- <QuickStartButton>创建 Minecraft 服务器</QuickStartButton>
+    <QuickStartButton>在面板中管理我的控制台程序</QuickStartButton> -->
   </div>
 </template>
 
 <script>
-import QuickStartButton from "../../../components/QuickStartButton.vue";
-
+import SelectBlock from "@/components/SelectBlock";
 export default {
-  components: { QuickStartButton },
+  components: { SelectBlock },
   data: function () {
-    return {};
+    return {
+      quickItems: [
+        {
+          title: "创建一个的 Minecraft 服务器",
+          subTitle: "帮助您快速部署 Java/基岩版 Minecraft 服务器",
+          value: 1
+        },
+        {
+          title: "创建一个其他游戏服务器",
+          subTitle: "尝试帮助您创建其他游戏服务器，不保证完全兼容",
+          value: 1
+        },
+        {
+          title: "在面板中管理我的控制台程序",
+          subTitle: "让您的控制台程序，比如 Nginx.exe，frp.exe 和 cmd.exe 在网页上进行管理",
+          value: 1
+        },
+        {
+          title: "我需要出租一个 Minecraft 服务器给客户",
+          subTitle: "帮助您快速出租一个服务器给您的客户实现盈利",
+          value: 1
+        }
+      ]
+    };
   },
   methods: {
     async init() {}
@@ -40,8 +86,4 @@ export default {
 };
 </script>
 
-<style scoped>
-.container {
-  display: flex;
-}
-</style>
+<style scoped></style>

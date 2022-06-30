@@ -283,7 +283,9 @@
     <el-col :md="18">
       <Panel v-loading="!available" element-loading-text="连接中">
         <template #title>
-          <div>实例控制台</div>
+          <span>实例控制台</span>
+        </template>
+        <template #rtitle>
           <div>
             <el-tooltip class="item" effect="dark" content="新开全屏" placement="top">
               <span class="terminal-right-botton" @click="toFullTerminal(2)">

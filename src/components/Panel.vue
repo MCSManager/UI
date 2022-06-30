@@ -21,9 +21,13 @@
 
 <template>
   <el-card class="box-card-shadow" :body-style="bodyStyle || 'padding:12px;'" :style="style">
-    <div class="box-card-title" v-if="$slots.title">
+    <div v-bind:class="{ [tipType]: tip, 'box-card-title': true }" v-if="$slots.title">
       <slot name="title"></slot>
     </div>
+    <div class="box-card-rtitle" v-if="$slots.rtitle">
+      <slot name="rtitle"></slot>
+    </div>
+
     <div class="box-card-content">
       <slot></slot>
     </div>
@@ -34,7 +38,15 @@
 export default {
   props: {
     style: String,
-    bodyStyle: String
+    bodyStyle: String,
+    tip: {
+      type: Boolean,
+      default: true
+    },
+    tipType: {
+      type: String,
+      default: "title-tip-primary"
+    }
   },
   data: function () {
     return {};
@@ -48,9 +60,14 @@ export default {
   font-weight: 800;
   margin-bottom: 12px;
   font-size: 14px;
-  display: flex;
+  /* display: flex;
   justify-content: space-between;
-  align-items: center;
+  align-items: center; */
+  display: inline-block;
+}
+
+.box-card-rtitle {
+  float: right;
 }
 
 .box-card-content {
