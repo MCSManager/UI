@@ -52,16 +52,12 @@
           <i class="el-icon-circle-plus-outline"></i>
           <template #title>快速开始</template>
         </el-menu-item>
-        <!-- <el-menu-item key="/home" index="/home">
-          <i class="el-icon-pie-chart"></i>
-          <template #title>个人简报</template>
-        </el-menu-item> -->
       </el-menu-item-group>
       <el-menu-item-group>
         <template #title>高级功能</template>
         <el-menu-item key="/services" index="/services">
           <i class="el-icon-connection"></i>
-          <template #title>多节点</template>
+          <template #title>节点管理</template>
         </el-menu-item>
         <el-menu-item key="/container" index="/container">
           <i class="el-icon-cpu"></i>
