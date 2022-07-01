@@ -30,13 +30,13 @@
             <p class="sub-title-info"></p>
           </div>
           <el-row :gutter="10" justify="left" class="col-md-responsive row-mt">
-            <el-col :md="6" :offset="0">
+            <el-col :md="6" :offset="0" v-show="!quickStartType || quickStartType == 1">
               <SelectBlock @click="selectTypeA(1)" style="min-height: 120px">
                 <template #title>Java 版 Minecraft 游戏服务端</template>
                 <template #info> 适用于类似于 Spigot，Bungeecord 等 Jar 格式文件的服务端 </template>
               </SelectBlock>
             </el-col>
-            <el-col :md="6" :offset="0">
+            <el-col :md="6" :offset="0" v-show="!quickStartType || quickStartType == 1">
               <SelectBlock @click="selectTypeA(2)" style="min-height: 120px">
                 <template #title>基岩版 Minecraft 游戏服务端</template>
                 <template #info>
@@ -44,13 +44,13 @@
                 </template>
               </SelectBlock>
             </el-col>
-            <el-col :md="6" :offset="0">
+            <el-col :md="6" :offset="0" v-show="!quickStartType || quickStartType == 2">
               <SelectBlock @click="selectTypeA(3)" style="min-height: 120px">
                 <template #title>其他游戏服务端</template>
                 <template #info> 适用于类似于大部分游戏私服程序运行，不保证能够完全兼容</template>
               </SelectBlock>
             </el-col>
-            <el-col :md="6" :offset="0">
+            <el-col :md="6" :offset="0" v-show="!quickStartType || quickStartType == 3">
               <SelectBlock @click="selectTypeA(3)" style="min-height: 120px">
                 <template #title>通用控制台应用程序</template>
                 <template #info>
@@ -63,7 +63,7 @@
 
         <div v-show="page == 1" class="panel-context row-mt">
           <div class="sub-title">
-            <p class="sub-title-title">关于创建方式</p>
+            <p class="sub-title-title">选择创建方式</p>
             <p class="sub-title-info">
               如果您只想通过服务端软件开启服务器则选择第一项，其他选项均适用于不同的场景需求
             </p>
@@ -320,6 +320,7 @@ export default {
     return {
       title: "新建实例引导程序",
       page: 0,
+      quickStartType: 0,
       typeA: -1,
       typeB: -1,
       commandAssistPanel: false,
@@ -495,7 +496,10 @@ export default {
       this.form.startCommand = cmd;
     }
   },
-  async mounted() {}
+  async mounted() {
+    this.quickStartType = this.$route.query.type;
+    console.log(this.$route);
+  }
 };
 </script>
 

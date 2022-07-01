@@ -21,40 +21,64 @@
 
 <template>
   <div class="quick-container">
-    <div>
-      <h1 class="title-tip title-tip-primary">您希望使用 MCSManager 面板做什么？</h1>
-      <p>欢迎您访问“快速开始”，我们将尽可能的降低使用门槛并帮助您使用面板！</p>
-    </div>
-    <el-row :gutter="10" justify="left" class="col-md-responsive">
-      <el-col :md="6" :offset="0" v-for="(item, index) in quickItems" :key="index">
-        <SelectBlock style="height: 120px; background-color: white">
-          <template #title>{{ item.title }}</template>
-          <template #info>{{ item.subTitle }}</template>
-        </SelectBlock>
-      </el-col>
-    </el-row>
+    <Panel style="max-width: 1200px">
+      <template #title>{{ title }}</template>
+      <template #default>
+        <div v-show="step == 0">
+          <p>欢迎您访问“快速开始”，我们将尽可能的降低使用门槛并帮助您使用面板！</p>
+          <el-row :gutter="10" justify="left" class="">
+            <el-col
+              :md="6"
+              :offset="0"
+              v-for="(item, index) in quickItems"
+              :key="index"
+              @click="selectQuickStartType(item.value)"
+            >
+              <ItemGroup>
+                <SelectBlock style="height: 120px; background-color: white">
+                  <template #title>{{ item.title }}</template>
+                  <template #info>{{ item.subTitle }}</template>
+                </SelectBlock>
+              </ItemGroup>
+            </el-col>
+          </el-row>
+        </div>
 
-    <div>
-      <!-- <p class="sub-title">
-        更多资料参考：<a
-          href="https://docs.mcsmanager.com/"
-          target="_blank"
-          rel="noopener noreferrer"
-          >https://docs.mcsmanager.com/</a
-        >
-      </p> -->
-    </div>
-    <!-- <QuickStartButton>创建 Minecraft 服务器</QuickStartButton>
-    <QuickStartButton>在面板中管理我的控制台程序</QuickStartButton> -->
+        <div v-if="step == 1">
+          <el-row :gutter="10" justify="left">
+            <el-col
+              :md="6"
+              :offset="0"
+              v-for="(item, index) in remoteObjects"
+              :key="index"
+              @click="selectHost(item.uuid)"
+            >
+              <ItemGroup>
+                <SelectBlock style="height: 120px; background-color: white">
+                  <template #title>{{ item.ip }}:{{ item.port }}</template>
+                </SelectBlock>
+              </ItemGroup>
+            </el-col>
+          </el-row>
+        </div>
+      </template>
+    </Panel>
   </div>
 </template>
 
 <script>
 import SelectBlock from "@/components/SelectBlock";
+import { request } from "@/app/service/protocol";
+import { API_SERVICE } from "../../service/common";
+import Panel from "@/components/Panel";
 export default {
-  components: { SelectBlock },
+  components: { SelectBlock, Panel },
   data: function () {
     return {
+      title: "您希望使用 MCSManager 面板做什么？",
+      remoteObjects: [],
+      quickStartType: 0,
+      step: 0,
       quickItems: [
         {
           title: "创建一个的 Minecraft 服务器",
@@ -64,25 +88,45 @@ export default {
         {
           title: "创建一个其他游戏服务器",
           subTitle: "尝试帮助您创建其他游戏服务器，不保证完全兼容",
-          value: 1
+          value: 2
         },
         {
           title: "在面板中管理我的控制台程序",
           subTitle: "让您的控制台程序，比如 Nginx.exe，frp.exe 和 cmd.exe 在网页上进行管理",
-          value: 1
+          value: 3
         },
         {
           title: "我需要出租一个 Minecraft 服务器给客户",
           subTitle: "帮助您快速出租一个服务器给您的客户实现盈利",
-          value: 1
+          value: 4
         }
       ]
     };
   },
-  methods: {
-    async init() {}
+  async mounted() {
+    await this.initRemoteHost();
   },
-  async mounted() {}
+  methods: {
+    async initRemoteHost() {
+      this.remoteObjects = await request({
+        method: "GET",
+        url: API_SERVICE
+      });
+    },
+    selectQuickStartType(v) {
+      this.quickStartType = v;
+      this.title = "请选择您期望部署到哪台主机？";
+      this.step = 1;
+    },
+    selectHost(uuid) {
+      this.$router.push({
+        path: `/new_instace/${uuid}`,
+        query: {
+          type: this.quickStartType
+        }
+      });
+    }
+  }
 };
 </script>
 
