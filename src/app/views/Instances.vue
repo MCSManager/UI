@@ -153,7 +153,7 @@
           instanceStatusGray: item.status !== 3,
           CradInstance: true
         }"
-        tipType=""
+        :tipType="0"
       >
         <template #title>
           <span style="font-size: 13px" class="only-line-text">
