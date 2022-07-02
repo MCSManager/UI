@@ -10,6 +10,52 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <meta name="description" content="MCSManager Panel" />
   <link rel="icon" href="favicon.ico" />
+  <style>
+    #_app-loading {
+      background-color: rgb(228, 228, 228);
+      position: fixed;
+      left: 0px;
+      right: 0px;
+      bottom: 0px;
+      top: 0px;
+      z-index: 9999;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    #_app-loading-text {
+      text-align: center;
+    }
+
+    ._nb-spinner {
+      width: 32px;
+      height: 32px;
+      margin: 0 auto;
+      background: transparent;
+      border-top: 4px solid #009688;
+      border-right: 4px solid transparent;
+      border-radius: 50%;
+      animation: 1s _spin linear infinite;
+    }
+
+    @keyframes _spin {
+      from {
+        -webkit-transform: rotate(0deg);
+        transform: rotate(0deg);
+      }
+
+      to {
+        -webkit-transform: rotate(360deg);
+        transform: rotate(360deg);
+      }
+    }
+  </style>
+  <script>
+    window.addEventListener("load", function () {
+      document.getElementById("_app-loading").setAttribute("style","display: none;")
+    })
+  </script>
   <title>控制面板 | MCSManager</title>
 </head>
 
@@ -21,9 +67,14 @@
       <p>It is recommended to use <a href="https://www.google.cn/chrome/">Chrome</a> modern browser.</p>
     </div>
   </noscript>
-  <div id="app" class="app"></div>
+  <div id="_app-loading" data-component-type="loading">
+    <div id="_app-loading-text">
+      <div class="_nb-spinner"></div>
+      <div style="margin: 12px;">Loading</div>
+    </div>
+  </div>
+  <div id="app" class="app" data-component-type="vue-root"></div>
 </body>
-
 
 <!-- Editor dependency library -->
 <script src="/static/editor/ace.js" type="text/javascript" charset="utf-8"></script>
