@@ -121,20 +121,10 @@ export default {
       });
     },
     toQuickStart() {
-      this.$router.push({
-        path: "/quickstart",
-        query: {
-          from_install: 1
-        }
-      });
+      window.location.href = "/#/quickstart?from_install=1";
     },
     toOverview() {
-      this.$router.push({
-        path: "/Overview",
-        query: {
-          from_install: 1
-        }
-      });
+      window.location.href = "/#/overview?from_install=1";
     }
   }
 };
