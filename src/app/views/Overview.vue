@@ -205,15 +205,11 @@
       </el-row>
     </template>
   </Panel>
-
-  <UserInit v-model:visible="initUserVisible"></UserInit>
 </template>
 
 <script>
 import * as echarts from "echarts";
 import Panel from "../../components/Panel";
-import UserInit from "../../components/UserInit";
-// import LineLabel from "../../components/LineLabel";
 import { request } from "../service/protocol";
 import { API_OVERVIEW } from "../service/common";
 import {
@@ -223,7 +219,7 @@ import {
 } from "../service/chart_option";
 import ValueCard from "../../components/ValueCard";
 export default {
-  components: { Panel, ValueCard, UserInit },
+  components: { Panel, ValueCard },
   data() {
     return {
       loading: true,
@@ -495,13 +491,6 @@ export default {
     this.loading = false;
     this.manualLink = window.onlineMCSManagerNotice ? window.onlineMCSManagerNotice() : null;
     this.startInterval();
-
-    setTimeout(() => {
-      const { isInit, permission } = this.$store.state.userInfo;
-      if (isInit === false && permission === 10) {
-        this.initUserVisible = true;
-      }
-    }, 1000);
   },
   beforeUnmount() {
     this.stopInterval();

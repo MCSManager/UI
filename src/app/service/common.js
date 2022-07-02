@@ -47,7 +47,7 @@ export const API_USER_TOKEN = `${API_URL}/api/auth/token`;
 export const API_USER_LOGOUT = `${API_URL}/api/auth/logout`;
 export const API_USER_DELETE = `${API_URL}/api/auth/delete`;
 export const API_USER_UPDATE = `${API_URL}/api/auth/update`;
-export const API_PANEL_STATUS = `${API_URL}/api/auth/status`;
+
 export const API_USER_API = `${API_URL}/api/auth/api`;
 
 export const API_OVERVIEW = `${API_URL}/api/overview`;
@@ -76,6 +76,9 @@ export const API_IMAGES = `${API_URL}/api/environment/image`;
 export const API_CONTAINERS = `${API_URL}/api/environment/containers`;
 export const API_NETWORK_MODES = `${API_URL}/api/environment/networkModes`;
 export const API_PROGRESS = `${API_URL}/api/environment/progress`;
+
+export const API_PANEL_STATUS = `${API_URL}/api/auth/status`;
+export const API_PANEL_INSTALL = `${API_URL}/api/auth/install`;
 
 export function sleep(t) {
   return new Promise((s) => {

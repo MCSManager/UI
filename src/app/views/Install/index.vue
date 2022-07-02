@@ -79,6 +79,8 @@
 <script>
 import SelectBlock from "@/components/SelectBlock";
 import Panel from "@/components/Panel";
+import { request } from "../../service/protocol";
+import { API_PANEL_INSTALL } from "../../service/common";
 export default {
   components: { Panel, SelectBlock },
   data: function () {
@@ -99,10 +101,23 @@ export default {
     next() {
       this.step++;
     },
-    createUser() {
-      this.$refs["form"].validate((valid) => {
+    async createUser() {
+      this.$refs["form"].validate(async (valid) => {
         if (!valid) return;
-        this.next();
+        try {
+          await request({
+            method: "POST",
+            url: API_PANEL_INSTALL,
+            data: {
+              username: this.initUser.userName,
+              password: this.initUser.passWord
+            }
+          });
+          this.next();
+          this.$message({ message: "管理员已创建", type: "success" });
+        } catch (err) {
+          this.$message({ message: err, type: "error" });
+        }
       });
     },
     toQuickStart() {
