@@ -33,6 +33,9 @@ const stateModel = {
     instances: [],
     apiKey: ""
   },
+  panelStatus: {
+
+  },
   gameProfile: null,
   onlineNotice: null
 };
@@ -56,6 +59,9 @@ const store = createStore({
     },
     setApiKey(state, v) {
       state.userInfo.apiKey = v;
+    },
+    setPanelStatus(state, v) {
+      state.panelStatus = v;
     }
   }
 });

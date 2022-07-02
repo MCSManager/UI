@@ -55,8 +55,10 @@
 <script>
 import Aside from "../components/Aside";
 import Header from "../components/Header";
-import { setupUserInfo } from "./service/protocol.js";
+import { getPanelStatus, request, setupUserInfo } from "./service/protocol.js";
 import router from "./router";
+import { API_PANEL_STATUS } from "./service/common";
+import store from "./store";
 
 export default {
   name: "App",
@@ -79,9 +81,25 @@ export default {
   methods: {
     toAside() {
       this.drawer = !this.drawer;
+    },
+    async getPanelStatus() {
+      const statusInfo = await request({
+        method: "GET",
+        url: API_PANEL_STATUS
+      });
+      if (statusInfo?.isInstall === false) {
+        return router.push({ path: "/install" });
+      } else {
+        store.commit("setPanelStatus", statusInfo);
+      }
     }
   },
   async beforeCreate() {
+    // 获取当前面板状态信息
+    const statusInfo = await getPanelStatus();
+    if (statusInfo?.isInstall === false) {
+      return router.push({ path: "/install" });
+    }
     // 第一次刷新后，尝试获取一次用户数据
     // 如果失败，则导航至 / 视图进一步决定跳转路由
     try {

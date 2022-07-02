@@ -47,6 +47,7 @@ export const API_USER_TOKEN = `${API_URL}/api/auth/token`;
 export const API_USER_LOGOUT = `${API_URL}/api/auth/logout`;
 export const API_USER_DELETE = `${API_URL}/api/auth/delete`;
 export const API_USER_UPDATE = `${API_URL}/api/auth/update`;
+export const API_PANEL_STATUS = `${API_URL}/api/auth/status`;
 export const API_USER_API = `${API_URL}/api/auth/api`;
 
 export const API_OVERVIEW = `${API_URL}/api/overview`;

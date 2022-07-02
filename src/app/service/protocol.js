@@ -21,7 +21,7 @@
 
 import axios from "axios";
 import store from "../store";
-import { API_USER, API_USER_TOKEN } from "./common";
+import { API_PANEL_STATUS, API_USER, API_USER_TOKEN } from "./common";
 
 // 每个请求必须携带 X-Requested-With: XMLHttpRequest 头
 axios.defaults.headers.common["X-Requested-With"] = "XMLHttpRequest";
@@ -97,6 +97,15 @@ export async function requestUserInfo(advanced = null) {
 
 export async function setupUserInfo() {
   await requestUserInfo();
+}
+
+export async function getPanelStatus() {
+  const statusInfo = await request({
+    method: "GET",
+    url: API_PANEL_STATUS
+  });
+  store.commit("setPanelStatus", statusInfo);
+  return statusInfo
 }
 
 export function parseforwardAddress(addr = "", require = "http") {
