@@ -226,8 +226,10 @@ WORKDIR /workspace
       }
       if (type === 3) {
         this.dockerFile = `FROM ubuntu:18.04
+ENV TZ=Asia/Shanghai
 RUN mkdir -p /workspace
-RUN apt -y update && apt -y install openssl
+RUN apt -y update && apt -y install openssl && DEBIAN_FRONTEND="noninteractive" apt -y install tzdata
+RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 WORKDIR /workspace
 `;
         this.name = "mcsm-ubuntu";
