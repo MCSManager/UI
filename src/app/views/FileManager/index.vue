@@ -20,153 +20,157 @@
 -->
 
 <template>
-  <Panel>
-    <template #title>文件管理</template>
-    <template #default>
-      <el-row :gutter="20">
-        <el-col :xs="24" :md="6" :offset="0">
-          <ItemGroup>
-            <el-button size="small" @click="back">
-              <i class="el-icon-pie-chart"></i> 回到控制台
-            </el-button>
-            <el-button size="small" @click="refresh">
-              <i class="el-icon-refresh"></i> 刷新
-            </el-button>
-          </ItemGroup>
-        </el-col>
-        <el-col :xs="24" :md="18" :offset="0" class="text-align-right">
-          <ItemGroup>
-            <el-button size="small" @click="toUpDir">
-              <i class="el-icon-pie-chart"></i> 上层目录
-            </el-button>
-            <el-button size="small" @click="mkdir">
-              <i class="el-icon-folder-add"></i> 新建目录
-            </el-button>
-            <el-button size="small" @click="compress(1)">
-              <i class="el-icon-box"></i> 压缩
-            </el-button>
-            <el-button size="small" @click="compress(2)">
-              <i class="el-icon-files"></i> 解压
-            </el-button>
-            <el-button size="small" @click="rename">
-              <i class="el-icon-document"></i> 重命名
-            </el-button>
-            <el-button size="small" @click="move">
-              <i class="el-icon-scissors"></i> 剪切
-            </el-button>
-            <el-button size="small" @click="copy">
-              <i class="el-icon-document-copy"></i> 复制
-            </el-button>
-            <el-button size="small" @click="paste">
-              <i class="el-icon-tickets"></i> 粘贴
-            </el-button>
-            <el-button size="small" type="success" @click="upload">
-              <i class="el-icon-plus"></i> 上传文件
-            </el-button>
-            <el-button size="small" type="danger" @click="deleteFiles">
-              <i class="el-icon-document-delete"></i> 删除
-            </el-button>
-          </ItemGroup>
-        </el-col>
-      </el-row>
+  <div>
+    <Panel>
+      <template #title>文件管理</template>
+      <template #default>
+        <el-row :gutter="20">
+          <el-col :xs="24" :md="6" :offset="0">
+            <ItemGroup>
+              <el-button size="small" @click="back">
+                <i class="el-icon-pie-chart"></i> 回到控制台
+              </el-button>
+              <el-button size="small" @click="refresh">
+                <i class="el-icon-refresh"></i> 刷新
+              </el-button>
+            </ItemGroup>
+          </el-col>
+          <el-col :xs="24" :md="18" :offset="0" class="text-align-right">
+            <ItemGroup>
+              <el-button size="small" @click="toUpDir">
+                <i class="el-icon-pie-chart"></i> 上层目录
+              </el-button>
+              <el-button size="small" @click="mkdir">
+                <i class="el-icon-folder-add"></i> 新建目录
+              </el-button>
+              <el-button size="small" @click="compress(1)">
+                <i class="el-icon-box"></i> 压缩
+              </el-button>
+              <el-button size="small" @click="compress(2)">
+                <i class="el-icon-files"></i> 解压
+              </el-button>
+              <el-button size="small" @click="rename">
+                <i class="el-icon-document"></i> 重命名
+              </el-button>
+              <el-button size="small" @click="move">
+                <i class="el-icon-scissors"></i> 剪切
+              </el-button>
+              <el-button size="small" @click="copy">
+                <i class="el-icon-document-copy"></i> 复制
+              </el-button>
+              <el-button size="small" @click="paste">
+                <i class="el-icon-tickets"></i> 粘贴
+              </el-button>
+              <el-button size="small" type="success" @click="upload">
+                <i class="el-icon-plus"></i> 上传文件
+              </el-button>
+              <el-button size="small" type="danger" @click="deleteFiles">
+                <i class="el-icon-document-delete"></i> 删除
+              </el-button>
+            </ItemGroup>
+          </el-col>
+        </el-row>
 
-      <div class="row-mt page-pagination">
-        <el-pagination
-          small
-          background
-          layout="prev, pager, next"
-          v-model:currentPage="pageParam.page"
-          :page-size="pageParam.pageSize"
-          :total="pageParam.total"
-          @current-change="currentChange"
-        />
-      </div>
+        <div class="row-mt page-pagination">
+          <el-pagination
+            small
+            background
+            layout="prev, pager, next"
+            v-model:currentPage="pageParam.page"
+            :page-size="pageParam.pageSize"
+            :total="pageParam.total"
+            @current-change="currentChange"
+          />
+        </div>
 
-      <div class="row-mt" v-show="percentComplete > 0">
-        <el-progress
-          :text-inside="true"
-          :stroke-width="14"
-          :percentage="percentComplete"
-        ></el-progress>
-      </div>
+        <div class="row-mt" v-show="percentComplete > 0">
+          <el-progress
+            :text-inside="true"
+            :stroke-width="14"
+            :percentage="percentComplete"
+          ></el-progress>
+        </div>
 
-      <p>
-        <el-tag type="success" size="small">当前目录</el-tag>
-        &nbsp;
-        <el-tag type="info" size="small"> {{ currentDir }}</el-tag>
-      </p>
+        <p>
+          <el-tag type="success" size="small">当前目录</el-tag>
+          &nbsp;
+          <el-tag type="info" size="small"> {{ currentDir }}</el-tag>
+        </p>
 
-      <el-table
-        :data="files"
-        stripe
-        style="width: 100%"
-        size="mini"
-        ref="multipleTable"
-        @selection-change="selectionChange"
-      >
-        <el-table-column type="selection" width="55"> </el-table-column>
-        <el-table-column prop="name" label="文件命令" min-width="240">
-          <template #default="scope">
-            <div
-              v-if="scope.row.type == 0"
-              class="filemanager-item-dir"
-              @click="toDir(scope.row.name)"
-            >
-              <i class="el-icon-folder"></i>
-              <span>{{ scope.row.name }}</span>
-            </div>
-            <div v-if="scope.row.type == 1" class="filemanager-item-file">
-              <i class="el-icon-document"></i>
-              <span>{{ scope.row.name }}</span>
-            </div>
-          </template>
-        </el-table-column>
-        <el-table-column
-          prop="typeText"
-          label="文件类型"
-          width="120"
-          class="only-pc-display"
-        ></el-table-column>
-        <el-table-column label="文件大小" width="140">
-          <template #default="scope">
-            <span v-if="scope.row.size > 1024 * 1024"
-              >{{ Number(Number(scope.row.size) / 1024 / 1024).toFixed(0) }} MB</span
-            >
-            <span v-else-if="scope.row.size > 1024"
-              >{{ Number(Number(scope.row.size) / 1024).toFixed(0) }} KB</span
-            >
-            <span v-else-if="scope.row.size > 0"
-              >{{ Number(Number(scope.row.size)).toFixed(0) }} B</span
-            >
-          </template>
-        </el-table-column>
-        <el-table-column prop="timeText" label="最后修改" width="160"></el-table-column>
-        <el-table-column label="操作" style="text-align: center" width="180">
-          <template #default="scope">
-            <el-button
-              size="mini"
-              :disabled="scope.row.type != 1"
-              @click="toEditFilePage(scope.row)"
-            >
-              编辑
-            </el-button>
-            <el-button size="mini" :disabled="scope.row.type != 1" @click="download(scope.row)">
-              下载
-            </el-button>
-          </template>
-        </el-table-column>
-      </el-table>
-    </template>
-  </Panel>
+        <el-table
+          :data="files"
+          stripe
+          style="width: 100%"
+          size="mini"
+          ref="multipleTable"
+          @selection-change="selectionChange"
+        >
+          <el-table-column type="selection" width="55"> </el-table-column>
+          <el-table-column prop="name" label="文件命令" min-width="240">
+            <template #default="scope">
+              <div
+                v-if="scope.row.type == 0"
+                class="filemanager-item-dir"
+                @click="toDir(scope.row.name)"
+              >
+                <i class="el-icon-folder"></i>
+                <span>{{ scope.row.name }}</span>
+              </div>
+              <div v-if="scope.row.type == 1" class="filemanager-item-file">
+                <i class="el-icon-document"></i>
+                <span>{{ scope.row.name }}</span>
+              </div>
+            </template>
+          </el-table-column>
+          <el-table-column
+            prop="typeText"
+            label="文件类型"
+            width="120"
+            class="only-pc-display"
+          ></el-table-column>
+          <el-table-column label="文件大小" width="140">
+            <template #default="scope">
+              <span v-if="scope.row.size > 1024 * 1024"
+                >{{ Number(Number(scope.row.size) / 1024 / 1024).toFixed(0) }} MB</span
+              >
+              <span v-else-if="scope.row.size > 1024"
+                >{{ Number(Number(scope.row.size) / 1024).toFixed(0) }} KB</span
+              >
+              <span v-else-if="scope.row.size > 0"
+                >{{ Number(Number(scope.row.size)).toFixed(0) }} B</span
+              >
+            </template>
+          </el-table-column>
+          <el-table-column prop="timeText" label="最后修改" width="160"></el-table-column>
+          <el-table-column label="操作" style="text-align: center" width="180">
+            <template #default="scope">
+              <el-button
+                size="mini"
+                :disabled="scope.row.type != 1"
+                @click="toEditFilePage(scope.row)"
+              >
+                编辑
+              </el-button>
+              <el-button size="mini" :disabled="scope.row.type != 1" @click="download(scope.row)">
+                下载
+              </el-button>
+            </template>
+          </el-table-column>
+        </el-table>
+      </template>
+    </Panel>
 
-  <!-- 隐藏的文件上传按钮 -->
-  <form ref="fileForm" action="" method="post">
-    <input type="file" ref="fileButtonHidden" @change="selectedFile" hidden="hidden" />
-  </form>
+    <!-- 隐藏的文件上传按钮 -->
+    <form ref="fileForm" action="" method="post">
+      <input type="file" ref="fileButtonHidden" @change="selectedFile" hidden="hidden" />
+    </form>
+
+    <SelecctUnzipCode v-model:visible="visibleUnzipCode"></SelecctUnzipCode>
+  </div>
 </template>
 
 <script>
-import Panel from "../../components/Panel";
+import Panel from "@/components/Panel";
 import axios from "axios";
 import {
   API_FILE_COMPRESS,
@@ -177,12 +181,13 @@ import {
   API_FILE_MOVE,
   API_FILE_UPLOAD,
   API_FILE_URL
-} from "../service/common";
+} from "@/app/service/common";
 import path from "path";
-import { parseforwardAddress, request } from "../service/protocol";
+import { parseforwardAddress, request } from "@/app/service/protocol";
+import SelecctUnzipCode from "./selecctUnzipCode";
 
 export default {
-  components: { Panel },
+  components: { Panel, SelecctUnzipCode },
   data() {
     return {
       serviceUuid: this.$route.params.serviceUuid,
@@ -208,7 +213,9 @@ export default {
         tmpFileNames: null,
         tmpOperationMode: -1,
         tmpDir: null
-      }
+      },
+
+      visibleUnzipCode: false
     };
   },
   async mounted() {
@@ -525,6 +532,8 @@ export default {
             cancelButtonText: "取消"
           });
           if (!text.value) throw new Error("请输入一个有效值");
+          this.visibleUnzipCode = true;
+          if (this.visibleUnzipCode) return;
           const dirName = text.value;
           await request({
             method: "POST",
