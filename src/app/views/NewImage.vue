@@ -225,13 +225,13 @@ WORKDIR /workspace
         this.version = "16";
       }
       if (type === 3) {
-        this.dockerFile = `FROM ubuntu:latest
+        this.dockerFile = `FROM ubuntu:18.04
 RUN mkdir -p /workspace
-RUN apt update
+RUN apt -y update && apt -y install openssl
 WORKDIR /workspace
 `;
         this.name = "mcsm-ubuntu";
-        this.version = "latest";
+        this.version = "18.04";
       }
       if (type === 5) {
         this.dockerFile = `FROM openjdk:17
