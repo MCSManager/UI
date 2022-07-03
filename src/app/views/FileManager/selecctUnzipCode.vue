@@ -21,10 +21,11 @@
 
 <template>
   <Dialog v-model="v" :cancel="close">
-    <template #title>选择解压文件编码</template>
+    <template #title>选择解压/解压文件编码</template>
     <template #default>
       <div class="components-warpper">
-        <el-select v-model="selected" class="m-2" placeholder="请选择一个解压编码" size="large">
+        <p>当您解压/压缩文件时发现文件名存在乱码现象，可以尝试修改此选项解决。</p>
+        <el-select v-model="selected" class="m-2" placeholder="请选择编码" size="">
           <el-option
             v-for="item in options"
             :key="item.value"
@@ -61,7 +62,7 @@ export default {
       options: [
         { label: "简体中文（GBK）", value: "gbk" },
         { label: "繁体中文（BIG5）", value: "big5" },
-        { label: "UTF8", value: "UTF8" }
+        { label: "面板/Linux（UTF8）", value: "utf-8" }
       ],
       selected: "",
       func: null

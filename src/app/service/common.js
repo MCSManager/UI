@@ -36,6 +36,7 @@ export const API_FILE_MKDIR = `${API_URL}/api/files/mkdir`;
 export const API_FILE_COPY = `${API_URL}/api/files/copy`;
 export const API_FILE_MOVE = `${API_URL}/api/files/move`;
 export const API_FILE_COMPRESS = `${API_URL}/api/files/compress`;
+export const API_FILE_STATUS = `${API_URL}/api/files/status`;
 
 export const API_USER = `${API_URL}/api/auth/`;
 export const API_SEARCH = `${API_URL}/api/auth/search`;

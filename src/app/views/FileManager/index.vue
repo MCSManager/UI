@@ -72,15 +72,26 @@
         </el-row>
 
         <div class="row-mt page-pagination">
-          <el-pagination
-            small
-            background
-            layout="prev, pager, next"
-            v-model:currentPage="pageParam.page"
-            :page-size="pageParam.pageSize"
-            :total="pageParam.total"
-            @current-change="currentChange"
-          />
+          <div>
+            <div v-if="statusInfo.instanceFileTask">
+              <span>
+                <i class="el-icon-loading"></i>
+              </span>
+              <span> 有 {{ statusInfo.instanceFileTask }} 个文件解压/压缩任务正在进行中...</span>
+            </div>
+          </div>
+
+          <div>
+            <el-pagination
+              small
+              background
+              layout="prev, pager, next"
+              v-model:currentPage="pageParam.page"
+              :page-size="pageParam.pageSize"
+              :total="pageParam.total"
+              @current-change="currentChange"
+            />
+          </div>
         </div>
 
         <div class="row-mt" v-show="percentComplete > 0">
@@ -185,6 +196,7 @@ import {
 import path from "path";
 import { parseforwardAddress, request } from "@/app/service/protocol";
 import SelecctUnzipCode from "./selecctUnzipCode";
+import { API_FILE_STATUS } from "../../service/common";
 
 export default {
   components: { Panel, SelecctUnzipCode },
@@ -215,7 +227,8 @@ export default {
         tmpDir: null
       },
 
-      visibleUnzipCode: false
+      statusInfo: {},
+      statusRequestTask: null
     };
   },
   async mounted() {
@@ -223,8 +236,16 @@ export default {
       this.currentDir = this.paramPath;
     }
     await this.render();
+
+    // 开始文件管理状态查询定时器
+    this.requestFileManagerStatus();
+    this.statusRequestTask = setInterval(() => {
+      this.requestFileManagerStatus();
+    }, 3000);
   },
-  unmounted() {},
+  beforeUnmount() {
+    clearInterval(this.statusRequestTask);
+  },
   methods: {
     back() {
       this.$router.push({ path: `/terminal/${this.serviceUuid}/${this.instanceUuid}/` });
@@ -479,7 +500,10 @@ export default {
             targets
           }
         });
-        this.$message({ message: "文件已删除", type: "success" });
+        this.$message({
+          message: "文件删除任务开始，如果文件数量过多，则需要一定时间",
+          type: "success"
+        });
         this.render();
       } catch (error) {
         this.$message({ message: `错误:${error}`, type: "error" });
@@ -516,12 +540,14 @@ export default {
             data: {
               type: 1,
               source: path.join(cwd, `${zipName}.zip`),
-              targets
+              targets,
+              code: "utf-8" // 解压文件功能模块暂时不支持其他编码
             }
           });
           this.$notify({
             title: "压缩任务已经开始",
-            message: "异步压缩需要一段时间，可以利用刷新文件列表查看 zip 大小来判断是否压缩完毕"
+            message:
+              "异步压缩需要一段时间，可以利用刷新文件列表查看 zip 大小来判断是否压缩完毕，压缩编码为 UTF8"
           });
         } else {
           if (fileNames.length !== 1)
@@ -532,7 +558,6 @@ export default {
             cancelButtonText: "取消"
           });
           if (!text.value) throw new Error("请输入一个有效值");
-          this.visibleUnzipCode = true;
           const selected = await this.$refs.selecctUnzipCode.prompt();
           if (!selected) return;
           const dirName = text.value;
@@ -618,6 +643,18 @@ export default {
       const addr = parseforwardAddress(cfg.addr, "http");
       const password = cfg.password;
       window.open(`${addr}/download/${password}/${fileName}`);
+    },
+
+    async requestFileManagerStatus() {
+      const status = await request({
+        method: "GET",
+        url: API_FILE_STATUS,
+        params: {
+          remote_uuid: this.serviceUuid,
+          uuid: this.instanceUuid
+        }
+      });
+      this.statusInfo = status;
     }
   }
 };
@@ -668,6 +705,8 @@ export default {
 }
 .page-pagination {
   display: flex;
-  justify-content: right;
+  justify-content: space-between;
+  align-items: center;
+  color: #409eff;
 }
 </style>
