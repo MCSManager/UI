@@ -165,7 +165,7 @@
       <input type="file" ref="fileButtonHidden" @change="selectedFile" hidden="hidden" />
     </form>
 
-    <SelecctUnzipCode v-model:visible="visibleUnzipCode"></SelecctUnzipCode>
+    <SelecctUnzipCode ref="selecctUnzipCode"></SelecctUnzipCode>
   </div>
 </template>
 
@@ -533,7 +533,8 @@ export default {
           });
           if (!text.value) throw new Error("请输入一个有效值");
           this.visibleUnzipCode = true;
-          if (this.visibleUnzipCode) return;
+          const selected = await this.$refs.selecctUnzipCode.prompt();
+          if (!selected) return;
           const dirName = text.value;
           await request({
             method: "POST",
@@ -545,7 +546,8 @@ export default {
             data: {
               type: 2,
               source: path.join(cwd, fileNames[0]),
-              targets: path.join(cwd, dirName)
+              targets: path.join(cwd, dirName),
+              code: selected
             }
           });
           this.$notify({

@@ -43,6 +43,10 @@
 
 <script>
 import Dialog from "@/components/Dialog";
+import { EventEmitter } from "events";
+
+const event = new EventEmitter();
+
 export default {
   components: { Dialog },
   props: {
@@ -59,7 +63,8 @@ export default {
         { label: "繁体中文（BIG5）", value: "big5" },
         { label: "UTF8", value: "UTF8" }
       ],
-      selected: ""
+      selected: "",
+      func: null
     };
   },
   watch: {
@@ -68,6 +73,12 @@ export default {
     }
   },
   methods: {
+    prompt() {
+      this.show();
+      return new Promise((ok) => {
+        event.on("submit", (v) => ok(v));
+      });
+    },
     show() {
       this.v = true;
       this.$emit("update:visible", true);
@@ -77,6 +88,8 @@ export default {
       this.$emit("update:visible", false);
     },
     sumbit() {
+      event.emit("submit", this.selected);
+      this.$emit("submit", this.selected);
       this.close();
     }
   }
