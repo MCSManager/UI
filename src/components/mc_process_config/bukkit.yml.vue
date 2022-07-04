@@ -104,10 +104,10 @@ export default {
         },
         "ticks-per": {
           "animal-spawns":
-            "每 Tick 尝试生成一次动物，值为400表示服务器将尝试在每 400 Ticks 尝试生成一次动物，值小于 0 将重置为 Minecraft 的默认值",
+            "每 Tick 尝试生成一次动物，值为 400 表示服务器将尝试在每 400 Ticks 尝试生成一次动物，值小于 0 将重置为 Minecraft 的默认值",
           "monster-spawns": "每 Tick 尝试生成一次怪物，同上",
           autosave:
-            "自动保存，值 6000 表示服务器将尝试每5分钟自动保存一次世界。注: 过小可能会导致服务器卡顿",
+            "自动保存，值 6000 表示服务器将尝试每 5 分钟自动保存一次世界。注: 过小可能会导致服务器卡顿",
           "water-spawns": "",
           "water-ambient-spawns": "",
           "ambient-spawns": ""
