@@ -83,7 +83,7 @@
                 </p>
               </div>
               <el-input
-                placeholder="请输入文案，例如：京 ICP 备 00000001 号"
+                placeholder="请输入文案，例如：京ICP备00000001号"
                 v-model="settings.loginInfo"
               >
               </el-input>
