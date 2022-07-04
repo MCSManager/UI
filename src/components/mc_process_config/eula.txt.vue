@@ -84,7 +84,7 @@ export default {
     return {
       config: null,
       description: {
-        eula: "是否同意Minecraft EULA协议，如果您要启动 Minecraft 服务器，则此选项是必须开启"
+        eula: "是否同意 Minecraft EULA协议，如果您要启动 Minecraft 服务器，则此选项是必须开启"
       }
     };
   }

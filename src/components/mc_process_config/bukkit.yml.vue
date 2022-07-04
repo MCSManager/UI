@@ -85,9 +85,9 @@ export default {
           "permissions-file": "自定义权限文件的名字",
           "update-folder":
             "插件更新文件夹，放进新版本插件的文件夹名字，这个文件夹会在服务器重新启动时自动更新插件",
-          "plugin-profiling": "允许使用命令/timings。用于测量插件为事件所花费的时间",
+          "plugin-profiling": "允许使用命令 /timings。用于测量插件为事件所花费的时间",
           "connection-throttle": "客户端在最近一次连接尝试后，在允许再次连接之前的间隔",
-          "query-plugins": "在MCSM内置控制台查询时，服务器是否返回插件列表",
+          "query-plugins": "在 MCSM 内置控制台查询时，服务器是否返回插件列表",
           "deprecated-verbose": "当插件注册已弃用事件时，服务器是否显示警告",
           "shutdown-message": "服务器关闭后游戏客户端提示的信息",
           "minimum-api": ""
@@ -100,14 +100,14 @@ export default {
           ambient: "可以按世界生成的周围生物（又名蝙蝠）的数量"
         },
         "chunk-gc": {
-          "period-in-ticks": "每个大区块垃圾回收之间的Tick"
+          "period-in-ticks": "每个大区块垃圾回收之间的 Tick"
         },
         "ticks-per": {
           "animal-spawns":
-            "每Tick尝试生成一次动物，值为400表示服务器将尝试在每400Tick尝试生成一次动物，值小于0将重置为Minecraft的默认值",
-          "monster-spawns": "每Tick尝试生成一次怪物，同上",
+            "每 Tick 尝试生成一次动物，值为 400 表示服务器将尝试在每 400 Ticks 尝试生成一次动物，值小于 0 将重置为 Minecraft 的默认值",
+          "monster-spawns": "每 Tick 尝试生成一次怪物，同上",
           autosave:
-            "自动保存，值6000表示服务器将尝试每5分钟自动保存一次世界。注: 过小可能会导致服务器卡顿",
+            "自动保存，值 6000 表示服务器将尝试每 5 分钟自动保存一次世界。注: 过小可能会导致服务器卡顿",
           "water-spawns": "",
           "water-ambient-spawns": "",
           "ambient-spawns": ""

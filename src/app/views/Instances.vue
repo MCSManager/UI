@@ -248,7 +248,7 @@
             v-show="!notAnyInstance && currentRemoteUuid && showTableList"
           >
             <el-table-column type="selection" width="55"> </el-table-column>
-            <el-table-column prop="nickname" label="实例昵称" min-width="240">
+            <el-table-column prop="nickname" label="实例名称" min-width="240">
               <template #default="scope">
                 <div
                   @click="toInstance(scope.row.serviceUuid, scope.row.instanceUuid)"
@@ -442,7 +442,7 @@ export default {
     // 获取守护进程具体实例列表
     async remoteSelectHandle() {
       try {
-        if (!this.currentRemoteUuid) throw new Error("还未选择远程守护进程");
+        if (!this.currentRemoteUuid) throw new Error("未选择远程守护进程");
         this.startedInstance = 0;
         this.instances = [];
         this.loading = true;
@@ -528,7 +528,7 @@ export default {
       router.push({ path: `/terminal/${serviceUuid}/${instanceUuid}/` });
     },
     async unlinkInstance(uuid, deleteFile = false) {
-      await this.$confirm("确定要进行移除/删除嘛？", "最终确认", {
+      await this.$confirm("确定要进行移除/删除吗？", "最终确认", {
         confirmButtonText: "确定",
         cancelButtonText: "取消",
         type: "warning"
@@ -550,7 +550,7 @@ export default {
     async batDelete(type) {
       if (type === 1) {
         await this.$confirm(
-          "确定要进行批量移除嘛？此操作不会删除实例实际文件，只会删除实例",
+          "确定要进行批量移除吗？此操作不会删除实例实际文件，只会删除实例",
           "最终确认",
           {
             confirmButtonText: "确定",

@@ -32,7 +32,7 @@
         <div class="sub-title">
           <div class="sub-title">关于配置文件</div>
           <div class="sub-title-info">
-            此文件是 Paper 服务端软件专用配置文件，有近400行的服务器具体参数配置，Paper
+            此文件是 Paper 服务端软件专用配置文件，有近 400 行的服务器具体参数配置，Paper
             每个版本的各个参数都可能有细节变化从而导致翻译工作及其困难，部分参数可能不会有中文翻译。
           </div>
         </div>
@@ -88,13 +88,13 @@ export default {
           "save-empty-scoreboard-teams": "是否保留空的计分板团队数据",
           "enable-player-collisions": "是否启用玩家碰撞",
           "player-auto-save-rate": "设置玩家应该被保存的频率",
-          "max-player-auto-save-per-tick": "在一tick中最多应该保存多少个玩家数据",
+          "max-player-auto-save-per-tick": "在每 Tick 中最多应该保存多少个玩家数据",
           "track-plugin-scoreboards": "服务器是否应该跟踪只有虚拟目标的插件计分板",
           "region-file-cache-size": "设置区域文件缓存的最大大小",
           "incoming-packet-spam-threshold": "设置服务器将传入数据包视为垃圾邮件并忽略它们的阈值。",
           "suggest-player-names-when-null-tab-completions":
             "Instructs the server to return a list of players when tab-completing if the plugin has no tab completions of its own.",
-          "bungee-online-mode": "设置为和server.properties一样即可",
+          "bungee-online-mode": "设置为和 server.properties 一样即可",
           "max-joins-per-tick":
             "最大连接数，设置允许同时加入服务器的最大玩家数量。如果超过这个数，他们将被推迟加入。",
           "load-permissions-yml-before-plugins":
@@ -107,7 +107,7 @@ export default {
           "use-versioned-world": "",
           "unsupported-settings": {
             "allow-permanent-block-break-exploits": "是否可以使用原版漏洞破坏不可破坏的方块",
-            "allow-piston-duplication": "是否允许刷方块，例如复制TNT、刷地毯和铁轨",
+            "allow-piston-duplication": "是否允许刷方块，例如复制 TNT、刷地毯和铁轨",
             "allow-headless-pistons": "是否允许无头活塞，通常用于破坏基岩等方块",
             "allow-permanent-block-break-exploits-readme": "",
             "allow-piston-duplication-readme": "",
@@ -145,13 +145,13 @@ export default {
               "Velocity 代理和此服务器共享的密钥。这需要与你代理的 forwarding-secret 设置相匹配。"
           },
           "item-validation": {
-            "display-name": "物品显示名称长度的限制（覆盖Spigot.yml）",
-            "loc-name": "loc-name长度的限制（覆盖Spigot.yml）",
-            "lore-line": "物品Lore长度的限制（覆盖Spigot.yml）",
+            "display-name": "物品显示名称长度的限制（覆盖 Spigot.yml）",
+            "loc-name": "loc-name 长度的限制（覆盖 Spigot.yml）",
+            "lore-line": "物品 Lore 长度的限制（覆盖 Spigot.yml）",
             book: {
-              title: "书名长度限制（覆盖Spigot.yml）",
-              author: "作者名字长度限制（覆盖Spigot.yml）",
-              page: "单个书页长度限制（覆盖Spigot.yml）"
+              title: "书名长度限制（覆盖 Spigot.yml）",
+              author: "作者名字长度限制（覆盖 Spigot.yml）",
+              page: "单个书页长度限制（覆盖 Spigot.yml）"
             },
             console: {
               "enable-brigadier-highlighting":
@@ -169,7 +169,7 @@ export default {
           verbose:
             "Instructs Timings to provide more specific information in its reports. For example, specific entity types causing lag rather than just “entities”",
           "server-name-privacy": "Instructs Timings to hide server name information in reports.",
-          url: "指定 Timings 报告应上传到的Timings Viewer服务器的 URL",
+          url: "指定 Timings 报告应上传到的 Timings Viewer 服务器的 URL",
           "hidden-config-entries": "要隐藏在 Timings 报告中的配置条目",
           "history-interval": "Timings 报告中各个点之间的间隔（以秒为单位）",
           "history-length": "为单个报告保留的数据最大量",
@@ -190,7 +190,7 @@ export default {
             "armor-stands-tick":
               "Disable to prevent armor stands from ticking. Can improve performance with many armor stands",
             "disable-teleportation-suffocation-check": "在传送玩家之前禁用服务器检测目的地是否安全",
-            "remove-corrupt-tile-entities": "服务器是否自动删除损坏且无法修复的tile实体",
+            "remove-corrupt-tile-entities": "服务器是否自动删除损坏且无法修复的 Tile 实体",
             "experience-merge-max-value": "设置服务器经验球最大值，防止它们全部合并为 1 个",
             "falling-block-height-nerf":
               "The height at which falling blocks will be removed from the server",
@@ -198,7 +198,7 @@ export default {
               "The height at which Primed TNT entities will be removed from the server",
             "phantoms-do-not-spawn-on-creative-players": "玩家在创造模式下禁止产生幻翼",
             "phantoms-only-attack-insomniacs": "防止幻翼攻击睡着的玩家",
-            "max-auto-save-chunks-per-tick": "每tick中系统自动保存的最大区块数",
+            "max-auto-save-chunks-per-tick": "每 Tick 中系统自动保存的最大区块数",
             "per-player-mob-spawns": "生物限制（在 bukkit.yml 中）是计算每个玩家还是整个服务器",
             "delay-chunk-unloads-by": "Delays chunk unloads by the specified time",
             "disable-thunder": "禁用雷暴",
@@ -208,19 +208,19 @@ export default {
             "entities-target-with-follow-range":
               "Sets whether the server should use follow range when targeting entities",
             "non-player-arrow-despawn-rate":
-              "从非玩家实体（发射器）射出的箭消失的速率，以tick为单位",
-            "creative-arrow-despawn-rate": "玩家在创造模式下射出的箭消失的速率，以tick为单位",
+              "从非玩家实体（发射器）射出的箭消失的速率，以 Tick 为单位",
+            "creative-arrow-despawn-rate": "玩家在创造模式下射出的箭消失的速率，以 Tick 为单位",
             "zombies-target-turtle-eggs": "设置僵尸和僵尸猪灵是否以海龟蛋为目标",
             "zombie-villager-infection-chance":
-              "设置村民转换为僵尸村民的变化，根据游戏难度设置。默认为-1.0，设置为0始终让村民在被僵尸杀死时死亡；设置为100则始终将村民转换为僵尸村民",
+              "设置村民转换为僵尸村民的变化，根据游戏难度设置。默认为 -1.0，设置为0始终让村民在被僵尸杀死时死亡；设置为 100 则始终将村民转换为僵尸村民",
             "all-chunks-are-slime-chunks":
               "是否允许服务器将所有区块视为史莱姆区块（可能并不会增加生成史莱姆的几率）",
             "mob-spawner-tick-rate": "刷怪笼应该多久计算一次可用的生成区域并将新实体生成到该区域中",
             "seed-based-feature-search":
               "Whether the server should check if a chunk’s biome (determined by world seed) can support the desired feature before loading it during feature searches.",
-            "prevent-tnt-from-moving-in-water": "是否防止点燃的TNT在水中移动",
+            "prevent-tnt-from-moving-in-water": "是否防止点燃的 TNT 在水中移动",
             "iron-golems-can-spawn-in-air": "设置铁傀儡是否可以在空中生成",
-            "skeleton-horse-thunder-spawn-chance": "设置4个骷髅骑士在雷暴中生成的几率",
+            "skeleton-horse-thunder-spawn-chance": "设置 4 个骷髅骑士在雷暴中生成的几率",
             "disable-ice-and-snow": "禁用冰和雪的形成",
             "water-over-lava-flow-speed": "设置水在岩浆上流动的速度",
             "use-faster-eigencraft-redstone": "提升红石性能",
@@ -238,7 +238,7 @@ export default {
             "keep-spawn-loaded": "保持出生点区块加载",
             "armor-stands-do-collision-entity-lookups":
               "Instructs armor stand entities to do entity collision checks",
-            "grass-spread-tick-rate": "艹每tick的生长速度",
+            "grass-spread-tick-rate": "草这种植物每 Tick 的生长速度",
             "should-remove-dragon":
               "Sets whether or not to remove the dragon if it exists without a portal.",
             "use-vanilla-world-scoreboard-name-coloring": "使用原版世界记分板名称着色",
@@ -247,7 +247,7 @@ export default {
             "prevent-moving-into-unloaded-chunks": "服务器是否阻止玩家进入未加载的区块",
             "baby-zombie-movement-modifier": "修改幼年僵尸移动的速度",
             "count-all-mobs-for-spawning": "刷怪笼和其他生物是否计入全局生物限制",
-            "optimize-explosions": "优化TNT/苦力怕等爆炸",
+            "optimize-explosions": "优化 TNT/苦力怕等爆炸",
             "duplicate-uuid-resolver":
               "指定服务器用于解析具有重复 UUID 的实体的方法（saferegen：为实体重新生成一个UUID；delete：删除实体；silent：什么都不做，不打印日志；warn：什么都不做，打印日志）",
             "duplicate-uuid-saferegen-delete-range":
@@ -266,27 +266,27 @@ export default {
               "Whether commands executed by sign click should show failure messages to players",
             "fix-items-merging-through-walls":
               "是否禁止物品穿过墙壁合并（启用后可能会导致性能下降）",
-            "fix-climbing-bypassing-cramming-rule": "设置攀爬是否应绕过Cramming限制",
+            "fix-climbing-bypassing-cramming-rule": "设置攀爬是否应绕过 Cramming 限制",
             "only-players-collide":
               "Only calculate collisions if a player is one of the two entities colliding",
             "allow-vehicle-collisions": "允许车辆碰撞",
             "portal-search-vanilla-dimension-scaling":
               "Whether to apply vanilla dimension scaling to portal-search-radius",
             "seed-based-feature-search-loads-chunks":
-              "基于种子的特征搜索加载区块（禁用后会提高性能，但会影响/locate指令）",
+              "基于种子的特征搜索加载区块（禁用后会提高性能，但会影响 /locate 指令）",
             "max-leash-distance": "配置拴绳的最大距离，如果超过这个距离则断开",
             "fix-wither-targeting-bug": "修复凋零目标错误（MC-29274）",
             "allow-player-cramming-damage":
-              "允许玩家在游戏规则设置中的更多的实体发生碰撞时受到的来自maxEntityCramming的伤害",
+              "允许玩家在游戏规则设置中的更多的实体发生碰撞时受到的来自 maxEntityCramming 的伤害",
             "update-pathfinding-on-block-update":
-              "控制在世界中更新区块时是否更新怪物的寻路balabala（禁用此选项可以显着提高服务器性能）",
+              "控制在世界中更新区块时是否更新怪物的寻路 balabala（禁用此选项可以显着提高服务器性能）",
             "map-item-frame-cursor-limit": "每个地图在展示框的光标限制（就是绿色那个箭头），",
             "ender-dragons-death-always-places-dragon-egg": "末影龙死亡是否掉落龙蛋",
             "allow-using-signs-inside-spawn-protection": "允许玩家在出生点保护区内使用告示牌",
             "bed-search-radius": "",
             "allow-leashing-undead-horse": "",
             "baby-zombie-movement-speed":
-              "修改小僵尸移动的速度（0.5表示比基本速度快50%，-0.4会慢40%）",
+              "修改小僵尸移动的速度（0.5 表示比基本速度快 50%，-0.4 会慢 40%）",
             "door-breaking-difficulty": {
               zombie: "列出僵尸能够破门的难度列表",
               vindicator: "列出卫道士能够破门的难度列表"
@@ -298,14 +298,14 @@ export default {
                 "设置骷髅是否可以捡起物品。如果设置为 false，那么僵尸捡起物品的概率取决于世界的难度"
             },
             "spawn-limits": {
-              monsters: "每个世界可以生成的怪物数量（如果为-1，则使用bukkit.yml中的设置，下同）",
+              monsters: "每个世界可以生成的怪物数量（如果为 -1，则使用 bukkit.yml 中的设置，下同）",
               animals: "每个世界可以生成的动物数量",
               "water-animals": "每个世界可以生成的水生动物的数量",
-              "water-ambient": "每个世界可以生成的water-ambient数量",
+              "water-ambient": "每个世界可以生成的 water-ambient 数量",
               ambient: "每个世界可以生成的ambient数量"
             },
             "entity-per-chunk-save-limit": {
-              experience_orb: "限制每个区块保存/加载的 经验球 数量（-1则禁用此限制，下同）",
+              experience_orb: "限制每个区块保存/加载的 经验球 数量（-1 则禁用此限制，下同）",
               snowball: "限制每个区块保存/加载的 雪球 数量",
               ender_pearl: "限制每个区块保存/加载的 末影珍珠 数量",
               fireball: "限制每个区块保存/加载的 火焰弹 数量",
@@ -348,8 +348,8 @@ export default {
               "disable-pillager-patrols": "禁用掠夺者巡逻和相关的AI",
               "disable-relative-projectile-velocity": "",
               "disable-unloaded-chunk-enderpearl-exploit": "防止末影珍珠在未加载的区块中存放投掷器",
-              "disable-chest-cat-detection": "箱子上面有🐱时是否可以打开",
-              "nerf-pigmen-from-nether-portals": "是否把通过下界传送门到主世界的猪人移除其AI",
+              "disable-chest-cat-detection": "箱子上面有猫时是否可以打开",
+              "nerf-pigmen-from-nether-portals": "是否把通过下界传送门到主世界的猪人移除其 AI",
               "disable-player-crits": "是否禁用玩家暴击",
               "shield-blocking-delay":
                 "Instructs the server to ignore shooter velocity when calculating the velocity of a fired arrow",
@@ -385,8 +385,8 @@ export default {
                 "Controls the distance in blocks from air or water that hidden-blocks are hidden by the anti-xray engine",
               "lava-obscures": "是否混淆接触岩浆的方块",
               "max-block-height":
-                "设置反Xray尝试隐藏矿石的最大高度（只允许16的倍数，若输入其他值则向下舍入为16的倍数）",
-              "use-permission": "是否允许有paper.antixray.bypass权限的玩家 绕过反Xray",
+                "设置反Xray尝试隐藏矿石的最大高度（只允许16的倍数，若输入其他值则向下舍入为 16 的倍数）",
+              "use-permission": "是否允许有 paper.antixray.bypass 权限的玩家 绕过反 Xray",
               "chunk-edge-mode": "",
               "replacement-blocks": "在引擎模式 2 中应该被隐藏方块替换的方块列表",
               "hidden-blocks": "在引擎模式 1 中要隐藏的方块列表"
@@ -436,8 +436,8 @@ export default {
               flash: "玩家看到闪电在天空中的距离"
             },
             "wandering-trader": {
-              "spawn-minute-length": "流浪商人刷新分钟的长度（以tick为单位）",
-              "spawn-day-length": "流浪商人生成之间的时间间隔（以tick为单位）",
+              "spawn-minute-length": "流浪商人刷新分钟的长度（以 Tick 为单位）",
+              "spawn-day-length": "流浪商人生成之间的时间间隔（以 Tick 为单位）",
               "spawn-chance-failure-increment":
                 "How much the spawn chance will be increased on every failed wandering trader spawn.",
               "spawn-chance-min": "生成流浪商人的最小机会",

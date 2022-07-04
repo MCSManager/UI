@@ -31,7 +31,7 @@
         </div>
         <div class="panel-bottom">
           <a href="https://mcsmanager.com/" target="_blank" rel="noopener noreferrer"
-            >Official: https://mcsmanager.com/</a
+            >官方网站: https://mcsmanager.com/</a
           >
         </div>
       </Panel>

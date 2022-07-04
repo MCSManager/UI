@@ -69,7 +69,7 @@
                   <div class="sub-title">
                     <div class="sub-title-title require-field">实例类型</div>
                     <div class="sub-title-info">
-                      不同类型会导致功能不同，若无需求类型，可以选择较为抽象的通用类型，列如 Java
+                      不同类型会导致功能不同，若无需求类型，可以选择较为抽象的通用类型，例如 Java
                       通用版服务端
                     </div>
                   </div>
@@ -101,7 +101,7 @@
                       </span>
                       <br />
                       <span>
-                        列如 "C:\Program Files\Java\bin\java.exe" -Dfile.encoding=utf-8 -jar "my
+                        例如 "C:\Program Files\Java\bin\java.exe" -Dfile.encoding=utf-8 -jar "my
                         server.jar" -nogui
                       </span>
                     </div>
@@ -112,7 +112,7 @@
                       :rows="3"
                       type="textarea"
                       resize="none"
-                      placeholder='列如 "C:\Program Files\Java\bin\java.exe" -Dfile.encoding=utf-8 -jar "myserver.jar" -nogui'
+                      placeholder='例如 "C:\Program Files\Java\bin\java.exe" -Dfile.encoding=utf-8 -jar "myserver.jar" -nogui'
                     ></el-input>
                     <el-button type="primary" plain @click="openCommandAssistCall(1)">
                       命令生成
@@ -127,7 +127,7 @@
                   <el-input
                     v-model="instanceInfo.config.cwd"
                     type="text"
-                    placeholder="列如: D:/MyServers/0001"
+                    placeholder="例如: D:/MyServers/0001"
                   ></el-input>
                 </el-col>
                 <el-col :md="24" class="row-mt">
@@ -141,7 +141,7 @@
                   <el-input
                     v-model="instanceInfo.config.updateCommand"
                     type="text"
-                    placeholder='列如: "D:/SteamCMD/steamcmd.exe" +login anonymous +force_install_dir "${mcsm_workspace}" "+app_update 380870 validate" +quit'
+                    placeholder='例如: "D:/SteamCMD/steamcmd.exe" +login anonymous +force_install_dir "${mcsm_workspace}" "+app_update 380870 validate" +quit'
                   ></el-input>
                 </el-col>
                 <el-col :lg="8" class="row-mt">
@@ -410,13 +410,13 @@
                     <el-tooltip
                       class="box-item"
                       effect="dark"
-                      content="指定进程在某些核心上运行，合理分配可以更好的利用您的系统硬件资源，列如 0,1 代表在第1，2核心上运作，逗号隔开"
+                      content="指定进程在某些核心上运行，合理分配可以更好的利用您的系统硬件资源，例如 0,1 代表在第1，2核心上运作，逗号隔开"
                       placement="bottom"
                     >
                       <el-input
                         v-model="instanceInfo.config.docker.cpusetCpus"
                         type="text"
-                        placeholder="选填，列如 0,1,2,3"
+                        placeholder="选填，例如 0,1,2,3"
                       >
                       </el-input>
                     </el-tooltip>
@@ -424,13 +424,13 @@
                   <el-col :md="8" class="row-mt">
                     <div class="sub-title">
                       <div class="sub-title-title">最大内存（单位 MB）</div>
-                      <div class="sub-title-info">列如 1024，2048 等，请勿加单位</div>
+                      <div class="sub-title-info">例如 1024，2048 等，请勿加单位</div>
                     </div>
 
                     <el-input
                       v-model="instanceInfo.config.docker.memory"
                       type="text"
-                      placeholder="选填，列如 1024"
+                      placeholder="选填，例如 1024"
                     >
                     </el-input>
                   </el-col>
@@ -657,7 +657,7 @@ export default {
         });
       } catch (error) {
         this.$message({
-          message: "无法获得远程主机网络列表，建议检查docker配置",
+          message: "无法获得远程主机网络列表，建议检查 Docker 配置",
           type: "error"
         });
       } finally {

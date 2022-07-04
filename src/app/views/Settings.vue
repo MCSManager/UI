@@ -66,9 +66,9 @@
             </div> -->
             <div class="config-item">
               <div class="sub-title">
-                <p class="sub-title-title">面板绑定IP</p>
+                <p class="sub-title-title">面板绑定 IP</p>
                 <p class="sub-title-info">
-                  一般情况请保持默认值，一般适用于多个IP，网卡绑定的场景。
+                  一般情况请保持默认值，一般适用于多个 IP，网卡绑定的场景。
                 </p>
               </div>
               <el-input placeholder="默认 0.0.0.0 | 默认情况无需填写" v-model="settings.httpIp">
@@ -83,7 +83,7 @@
                 </p>
               </div>
               <el-input
-                placeholder="请输入文案，列如：京ICP备00000001号"
+                placeholder="请输入文案，例如：京ICP备00000001号"
                 v-model="settings.loginInfo"
               >
               </el-input>
@@ -141,9 +141,9 @@
             </div>
             <div class="config-item">
               <div class="sub-title">
-                <p class="sub-title-title">同IP登录次数限制</p>
+                <p class="sub-title-title">同 IP 登录次数限制</p>
                 <p class="sub-title-info">
-                  此功能将保护您的面板不被单个主机暴力破解密码，每个IP只有10次密码错误次数。
+                  此功能将保护您的面板不被单个主机暴力破解密码，每个 IP 只有 10 次密码错误次数。
                 </p>
               </div>
               <el-select v-model="settings.loginCheckIp" placeholder="请选择">
@@ -153,9 +153,9 @@
             </div>
             <!-- <div class="config-item">
               <div class="sub-title">
-                <p class="sub-title-title">使用 gzip 静态文件压缩</p>
+                <p class="sub-title-title">使用 Gzip 静态文件压缩</p>
                 <p class="sub-title-info">
-                  如果你使用反向代理或某 HTTP 服务自带的gzip，请关闭它，否则可以使用默认值。
+                  如果你使用反向代理或某 HTTP 服务自带的 Gzip，请关闭它，否则可以使用默认值。
                 </p>
               </div>
               <el-select v-model="settings.gzip" placeholder="请选择">
@@ -167,7 +167,7 @@
               <div class="sub-title">
                 <p class="sub-title-title">解压缩最大并发任务</p>
                 <p class="sub-title-info">
-                  对于机械硬盘请略调小此值，对于高性能硬盘和CPU可以适当提高。
+                  对于机械硬盘请略调小此值，对于高性能硬盘和 CPU 可以适当提高。
                 </p>
               </div>
               <el-select v-model="settings.maxCompress" placeholder="请选择">
@@ -239,13 +239,13 @@
               <!-- <div class="sub-title">
                 <p class="sub-title">常见概念</p>
               </div>
-              <a class="alink" href="https://cn.bing.com/">
+              <a class="alink" href="https://cn.bing.com/search?q=%E5%B9%B6%E5%8F%91">
                 <p>什么是并发？</p>
               </a>
-              <a class="alink" href="https://cn.bing.com/">
-                <p>什么是 gzip 压缩？</p>
+              <a class="alink" href="https://cn.bing.com/search?q=Gzip+%E5%8E%8B%E7%BC%A9">
+                <p>什么是 Gzip 压缩？</p>
               </a>
-              <a class="alink" href="https://cn.bing.com/">
+              <a class="alink" href="https://github.com/MCSManager/MCSManager/issues">
                 <p>反馈问题</p>
               </a> -->
             </div>

@@ -33,7 +33,7 @@
         <div class="sub-title">关于配置文件</div>
         <div class="sub-title-info">
           此配置文件为 Bukkit
-          类或其他衍生类服务端常见的配置文件，包含了绝大部分的服务端设置，列如服务器端口，最大人数，玩家视距和正版验证等。
+          类或其他衍生类服务端常见的配置文件，包含了绝大部分的服务端设置，例如服务器端口，最大人数，玩家视距和正版验证等。
         </div>
       </div>
     </template>
@@ -66,7 +66,7 @@ export default {
         "generator-settings": "用于自定义超平坦世界的生成，不生成超平坦世界请留空",
         "allow-nether": "是否允许下界（包括地狱）",
         "level-name": "世界（地图）名称 不要使用中文",
-        "enable-query": "是否允许使用GameSpy4协议的服务器监听器",
+        "enable-query": "是否允许使用 GameSpy4 协议的服务器监听器",
         "allow-flight": "是否允许玩家飞行（在任何游戏模式下）",
         "server-port": "服务器端口（若服务器有更高级的设置，此选项可能会失效）",
         "level-type": "地图的生成类型",
@@ -84,30 +84,30 @@ export default {
         "online-mode": "在线（正版）验证",
         pvp: "是否允许玩家互相攻击",
         difficulty: "游戏难度",
-        "player-idle-timeout": "允许的挂机时间，单位为分钟 超过限制后自动T出服务器",
+        "player-idle-timeout": "允许的挂机时间，单位为分钟 超过限制后自动踢出服务器",
         gamemode: "游戏模式 0=生存 1=创造 2=冒险 3=旁观",
         "max-players": "服务器最大玩家数限制",
         "spawn-monsters": "生成攻击型生物（怪物）",
         "view-distance": "服务器发送给客户端的数据量，决定玩家能设置的视野",
         "generate-structures": "生成世界时生成结构（如村庄）禁止后地牢和地下要塞仍然生成",
-        motd: "服务器信息展示 若使用ColorMotd等插件可留空该选项",
-        "op-permission-level": "OP权限等级 ",
+        motd: "服务器信息展示 若使用 ColorMotd 等插件可留空该选项",
+        "op-permission-level": "OP 权限等级 ",
         "announce-player-achievements": "玩家获得成就时，是否在服务器聊天栏显示（是否允许其装X）",
         "network-compression-threshold": "网络压缩阈值",
-        "resource-pack-sha1": "资源包的SHA-1值，必须为小写十六进制，不是必填选项",
+        "resource-pack-sha1": "资源包的 SHA-1 值，必须为小写十六进制，不是必填选项",
         "enable-command-block": "启用命令方块",
         "resource-pack": "统一资源标识符 (URI) 指向一个资源包。玩家可选择是否使用",
         "max-world-size": "最大世界大小",
         "function-permission-level": "设定函数的默认权限等级",
-        "max-tick-time": "设置每个tick花费的最大毫秒数",
+        "max-tick-time": "设置每个 Tick 花费的最大毫秒数",
         "prevent-proxy-connections": "是否允许玩家使用网络代理进入服务器",
-        "rcon.port": "设置RCON远程访问的端口号",
-        "rcon.password": "设置RCON远程访问的密码（参见enable-rcon）",
+        "rcon.port": "设置 RCON 远程访问的端口号",
+        "rcon.password": "设置 RCON 远程访问的密码（参见 enable-rcon）",
         "query.port": "设置监听服务器的端口号（参见 enable-rcon）",
-        "use-native-transport": "是否使用针对Linux平台的数据包收发优化 [ 仅Linux ]",
+        "use-native-transport": "是否使用针对 Linux 平台的数据包收发优化 [ 仅 Linux ]",
         debug: "调试模式",
-        "broadcast-rcon-to-ops": "向OP广播RCON信息",
-        "broadcast-console-to-ops": "向OP广播服务器控制台信息",
+        "broadcast-rcon-to-ops": "向 OP 广播 RCON 信息",
+        "broadcast-console-to-ops": "向 OP 广播服务器控制台信息",
         "enforce-whitelist": "在服务器上强制使用白名单",
         "spawn-protection":
           "通过将该值进行 2x+1 的运算来决定出生点的保护半径，设置为0将只保护出生点下方那一个方块。"

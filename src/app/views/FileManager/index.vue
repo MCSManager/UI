@@ -352,7 +352,9 @@ export default {
         if (this.multipleSelection.length !== 1) throw new Error("必须选择一个文件进行重命名操作");
         const file = this.multipleSelection[0];
         let { value } = await this.$prompt("新的名字", "重命名", {
-          inputValue: file.name
+          inputValue: file.name,
+          confirmButtonText: "确定",
+          cancelButtonText: "取消"
         });
         if (!value) throw new Error("请输入一个有效值");
         const oldFilePath = path.join(this.currentDir, file.name);
@@ -547,7 +549,7 @@ export default {
           this.$notify({
             title: "压缩任务已经开始",
             message:
-              "异步压缩需要一段时间，可以利用刷新文件列表查看 zip 大小来判断是否压缩完毕，压缩编码为 UTF8"
+              "异步压缩需要一段时间，可以利用刷新文件列表查看 ZIP 大小来判断是否压缩完毕，压缩编码为 UTF-8"
           });
         } else {
           if (fileNames.length !== 1)
@@ -576,7 +578,7 @@ export default {
             }
           });
           this.$notify({
-            title: "解压任务已经开始",
+            title: "解压任务已开始",
             message: "异步解压需要一段时间，可以利用刷新文件列表查看目录内容来判断是否压缩完毕"
           });
         }

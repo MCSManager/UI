@@ -82,7 +82,7 @@ export default {
         listeners: [
           {
             query_port: "UDP查询端口",
-            motd: "当仅有一个默认服务器时，服务器将会显示给玩家的Motd。当ping_passthrough被开启时，此项无效",
+            motd: "当仅有一个默认服务器时，服务器将会显示给玩家的 Motd。当 ping_passthrough 被开启时，此项无效",
             tab_list: "连接到服务器的玩家的 TAB 列表所显示的内容格式",
             query_enabled: "是否开启 UDP 查询",
             proxy_protocol: "是否开启对 HAProxy 的支持",
@@ -92,7 +92,7 @@ export default {
             bind_local_address: "是否显示 BungeeCord 正在监听的 IP 地址",
             host: "监听的 IP 地址和端口",
             max_players:
-              "玩家客户端将会显示的最大玩家数，默认值为1。此项只作为装饰，并未真实的最大玩家数设置",
+              "玩家客户端将会显示的最大玩家数，默认值为 1。此项只作为装饰，并未真实的最大玩家数设置",
             tab_size: "显示在 TAB 列表上的最大玩家数量",
             force_default_server: "每次玩家进入服务器时，是否强制将玩家传送到默认服务器中"
           }

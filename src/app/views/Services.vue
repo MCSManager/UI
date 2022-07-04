@@ -43,7 +43,7 @@
         远程守护进程（在任何物理主机上）必须确保全部在线且互相网络畅通，面板连接需公开放行守护进程端口与配置密钥。
         <br />
         网页需要能直接连接远程守护进程（上传，下载与控制台），避免使用除 localhost
-        外的局域网段任何IP，必须使用外网IP或域名进行连接。
+        外的局域网段任何 IP，必须使用外网 IP 或域名进行连接。
         <br />
         面板端对应的守护进程版本：{{ specifiedDaemonVersion }}
       </p>
@@ -117,7 +117,7 @@
               <i class="el-icon-circle-check"></i> 在线
             </span>
             <span class="color-red" v-if="!scope.row.available">
-              <el-tooltip effect="dark" content="无法连接到指定ip或者密钥错误" placement="top">
+              <el-tooltip effect="dark" content="无法连接到指定 IP 或者密钥错误" placement="top">
                 <span><i class="el-icon-warning-outline"></i> 离线</span>
               </el-tooltip>
             </span>
@@ -149,20 +149,20 @@
           size="small"
         ></el-input>
         <div class="sub-title row-mt">
-          <div class="sub-title-title">守护进程所在主机的IP地址</div>
+          <div class="sub-title-title">守护进程所在主机的 IP 地址</div>
           <div class="sub-title-info">
             <b>必须使用外网地址</b>或 localhost 地址，否则将导致远程实例无法连接
           </div>
         </div>
         <el-input
           v-model="newServiceInfo.ip"
-          placeholder="必填，列如 mcsmanager.com，43.123.211.12"
+          placeholder="必填，例如 mcsmanager.com，43.123.211.12"
           size="small"
         ></el-input>
         <div class="sub-title row-mt">守护进程端口</div>
         <el-input
           v-model="newServiceInfo.port"
-          placeholder="必填，列如 24444"
+          placeholder="必填，例如 24444"
           size="small"
         ></el-input>
         <div class="sub-title row-mt">
@@ -175,7 +175,7 @@
         </div>
         <el-input
           v-model="newServiceInfo.apiKey"
-          placeholder="必填，列如 6ff0fa1ef9a943f3c6f2fe0e4564a2fa383d35c4b78ccb5"
+          placeholder="必填，例如 6ff0fa1ef9a943f3c6f2fe0e4564a2fa383d35c4b78ccb5"
           size="small"
         ></el-input>
         <div class="row-mt">
@@ -193,17 +193,17 @@
     <template #default>
       <div class="sub-title">
         <div class="sub-title-title">
-          检测到您的连接IP为 :{{ newServiceInfo.ip }}，似乎是一个内网地址？
+          检测到您的连接 IP 为 :{{ newServiceInfo.ip }}，似乎是一个内网地址？
         </div>
         <div class="sub-title-info">
           面板与守护进程端均要能够让用户访问，以此行为设计即可实现流量分流减轻中心面板端的压力。
         </div>
       </div>
       <div class="sub-title">
-        <div class="sub-title-title">为什么必须使用外网IP连接远程节点</div>
+        <div class="sub-title-title">为什么必须使用外网 IP 连接远程节点</div>
         <div class="sub-title-info">
           为了减轻中心控制端（Web 面板端）的流量压力，我们必须将流量分流到各自的远程主机，<br />
-          这样就必须保证每个远程主机均要能够使用外网访问，所以您也必须使用外网IP地址来访问这个主机的实例
+          这样就必须保证每个远程主机均要能够使用外网访问，所以您也必须使用外网 IP 地址来访问这个主机的实例
         </div>
       </div>
       <div class="sub-title">分布式服务数据传输工作原理</div>
@@ -211,7 +211,7 @@
         <img :src="require('../../assets/connect.png')" alt="" srcset="" style="height: 230px" />
       </div>
       <div class="sub-title row-mt">
-        <div class="sub-title-title">请问您是否依然要坚持使用内网IP连接？</div>
+        <div class="sub-title-title">请问您是否依然要坚持使用内网 IP 连接？</div>
         <div class="sub-title-info">如果强制使用，则实例的部分功能不可用。</div>
       </div>
       <div class="row-mt">

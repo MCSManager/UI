@@ -118,9 +118,9 @@ export function connectRemoteService(
   socket.on("forward/instance", (packet) => {
     const data = packet.data;
     if (data === true) {
-      console.log("Websocket 成功请求转发（或取消）实例IO流");
+      console.log("Websocket 成功请求转发（或取消）实例 IO 流");
     } else {
-      console.log("Websocket 请求转发（或取消）实例IO流失败，错误：", data);
+      console.log("Websocket 请求转发（或取消）实例 IO 流失败，错误：", data);
     }
   });
 

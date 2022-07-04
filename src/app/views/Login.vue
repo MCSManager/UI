@@ -102,7 +102,7 @@
                 <div>
                   <span class="color-gray"
                     >Powered by
-                    <a target="black" href="https://github.com/Suwings">MCSManager</a></span
+                    <a target="black" href="https://github.com/MCSManager">MCSManager</a></span
                   >
                 </div>
               </div>
