@@ -45,7 +45,7 @@
           <div class="sub-title">关于配置文件</div>
           <div class="sub-title-info">
             此文件为 Spigot
-            服务端专用的配置文件，可以进一步的设置服务端的一些高级参数，比如实体AI范围，玩家限制，视距限制和区块限制等
+            服务端专用的配置文件，可以进一步的设置服务端的一些高级参数，比如实体 AI 范围，玩家限制，视距限制和区块限制等
           </div>
         </div>
       </template>
@@ -104,7 +104,7 @@ export default {
           "user-cache-size": "用户缓存大小",
           "netty-threads": "Netty 通信线程数",
           "player-shuffle":
-            "每隔多少 ticks（20ticks/1s）刷新玩家在数据遍历中的顺序，可以有效调整玩家在内存中顺序，在PVP服务器上有些帮助，低于100会导致性能问题",
+            "每隔多少 ticks（20ticks/1s）刷新玩家在数据遍历中的顺序，可以有效调整玩家在内存中顺序，在 PvP 服务器上有些帮助，低于100会导致性能问题",
           bungeecord: "是否开启集群模式（还需要更多辅助软件与配置结合使用）",
           attribute: {
             maxHealth: {
@@ -140,7 +140,7 @@ export default {
           "silent-commandblock-console": "屏蔽命令方块的控制台输出",
           log: "是否开启日志输出",
           "tab-complete":
-            "控制是否允许玩家按下 TAB 键来自动完成命令。-1 为关闭，0为立即，1为第一个字母，以此类推",
+            "控制是否允许玩家按下 TAB 键来自动完成命令。-1 为关闭，0 为立即，1 为第一个字母，以此类推",
           "send-namespaced": "是否发送命令命令空间",
           "replace-commands":
             "禁用 Bukkit 对所列命令的实现，并启用它们的原始行为，支持多项且使用英文逗号分隔",
@@ -150,15 +150,15 @@ export default {
           default: {
             verbose:
               "是否在服务器启动时在控制台/日志中显示每个世界的详细报告和配置。可以全局禁用/启用，也可以按世界禁用/启用",
-            "item-despawn-rate": "控制在地面上的项目实体删除之前所需的 ticks（20ticks/1s）",
+            "item-despawn-rate": "控制在地面上的项目实体删除之前所需的 Tick(s)（20 Ticks = 1s）",
             "enable-zombie-pigmen-portal-spawns": "是否启用僵尸猪人入口生成",
             "view-distance":
-              "控制所有玩家最远视距，最低为1，最高为15，调整到8左右可以显著提升服务器性能",
-            "hanging-tick-frequency": "每 tick 的更新频率",
+              "控制所有玩家最远视距，最低为 1，最高为 15，调整到 8 左右可以显著提升服务器性能",
+            "hanging-tick-frequency": "每 Tick 的更新频率",
             "mob-spawn-range": "怪物生成范围",
             "hopper-amount":
-              "控制漏斗在漏斗 tick 周期中接收/发出的最大物品数量。最好与每个漏斗转移和检查的更高 tick 结合使用以将动作合二为一",
-            "max-tnt-per-tick": "每 tick 刷新时最大更新的 TNT 数量",
+              "控制漏斗在漏斗 Tick 周期中接收/发出的最大物品数量。最好与每个漏斗转移和检查的更高 Tick 结合使用以将动作合二为一",
+            "max-tnt-per-tick": "每 Tick 刷新时最大更新的 TNT 数量",
             "wither-spawn-sound-radius": "生成凋灵的声音范围",
             "arrow-despawn-rate": "箭消失距离",
             "trident-despawn-rate": "三叉戟消失距离",
@@ -178,7 +178,7 @@ export default {
             "seed-mansion": "生成宅邸的种子码",
             "seed-fossil": "生成化石的种子码",
             "seed-portal": "生成传送门的种子码",
-            "nerf-spawner-mobs": "启用后，由怪物生成的新怪物将不会有任何AI",
+            "nerf-spawner-mobs": "启用后，由怪物生成的新怪物将不会有任何 AI",
             "dragon-death-sound-radius": "末地龙死亡声音范围",
             "zombie-aggressive-towards-villager": "是否准许生成僵尸村民",
             "end-portal-sound-radius": "下界传送门声音范围",
@@ -195,9 +195,9 @@ export default {
             },
             "ticks-per": {
               "hopper-transfer":
-                "漏斗推/拉/接收物品与漏斗推/拉更多物品之间的时间，在服务器每个 tick 中更新 8 个行为",
+                "漏斗推/拉/接收物品与漏斗推/拉更多物品之间的时间，在服务器每个 Tick 中更新 8 个行为",
               "hopper-check":
-                '自上次尝试后，漏斗尝试推/拉物品。例如，值8表示空料斗每隔8个刻度查找上方的物料实体、上方的库存等。值0或1反映香草行为。当HOPPER-ALT-TICKING设置为"是"时，此选项被禁用'
+                '自上次尝试后，漏斗尝试推/拉物品。例如，值8表示空料斗每隔 8 个刻度查找上方的物料实体、上方的库存等。值 0 或 1 反映原版行为。当 HOPPER-ALT-TICKING 设置为"是"时，此选项被禁用'
             },
             growth: {
               "cactus-modifier": "仙人掌生长速度",
@@ -237,8 +237,8 @@ export default {
               min: "鱿鱼最小生成范围"
             },
             "max-tick-time": {
-              tile: "分配给tile的最大 tick 时间",
-              entity: "分配给实体的最大 tick 时间"
+              tile: "分配给 Tile 的最大 Tick 时间",
+              entity: "分配给实体的最大 Tick 时间"
             }
           }
         }

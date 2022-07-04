@@ -77,7 +77,7 @@
             <template #default>{{ userInfo.uuid }}</template>
           </LineLabel>
           <LineLabel space="small">
-            <template #title>用户昵称</template>
+            <template #title>用户名</template>
             <template #default>{{ userInfo.userName }}</template>
           </LineLabel>
           <LineLabel space="small">
@@ -107,7 +107,7 @@
         size="mini"
         v-loading="info.loading"
       >
-        <el-table-column prop="nickname" label="实例昵称" min-width="240"></el-table-column>
+        <el-table-column prop="nickname" label="实例名称" min-width="240"></el-table-column>
         <el-table-column label="运行状态">
           <template #default="scope">
             <div class="color-gray" v-if="scope.row.status == 0">
@@ -189,7 +189,7 @@
         </div>
         <div class="sub-title row-mt">
           <p class="sub-title-title">输入/输出编码</p>
-          <p class="sub-title-info">当控制台出现乱码时可以尝试调整，列如: GBK，UTF-8 等</p>
+          <p class="sub-title-info">当控制台出现乱码时可以尝试调整，例如: GBK，UTF-8 等</p>
         </div>
         <div class="flex">
           <ItemGroup :lr="true">

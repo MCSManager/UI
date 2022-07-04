@@ -148,7 +148,7 @@
           <el-col :md="6">
             <el-input
               size="small"
-              placeholder="不可为空，请写0代表每隔0时"
+              placeholder="不可为空，请写 0 代表每隔 0 时"
               v-model="newTask.cycle[2]"
               style="width: 100%"
             >
@@ -158,7 +158,7 @@
           <el-col :md="6">
             <el-input
               size="small"
-              placeholder="不可为空，请写0代表每隔0分"
+              placeholder="不可为空，请写 0 代表每隔 0 分"
               v-model="newTask.cycle[1]"
               style="width: 100%"
             >
@@ -168,7 +168,7 @@
           <el-col :md="6">
             <el-input
               size="small"
-              placeholder="不可为空，请写0代表每隔0秒"
+              placeholder="不可为空，请写 0 代表每隔 0 秒"
               v-model="newTask.cycle[0]"
               style="width: 100%"
             >

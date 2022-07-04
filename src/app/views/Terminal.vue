@@ -30,7 +30,7 @@
           </div>
           <div v-else>
             <LineInfo>
-              <i class="el-icon-edit"></i> 昵称: {{ instanceInfo.config.nickname }}
+              <i class="el-icon-edit"></i> 名称: {{ instanceInfo.config.nickname }}
             </LineInfo>
             <LineInfo>
               <i class="el-icon-tickets"></i> 类型: {{ typeToText(instanceInfo.config.type) }}
@@ -362,7 +362,7 @@
       >
         <template #title>面板端在线人数</template>
         <template #default>
-          <p>每10分钟统计间隔，总10小时的在线人数趋势</p>
+          <p>每 10 分钟统计间隔，总计 10 小时的在线人数趋势</p>
           <div class="echart-wrapper">
             <div id="echart-wrapper-players" style="width: 100%; height: 200px"></div>
           </div>
@@ -383,10 +383,10 @@
       <div class="sub-title">
         <p class="sub-title-title">服务端访问地址</p>
         <p class="sub-title-info">
-          必填，支持域名与IP地址，不填写则不会查询服务端信息，人数，版本等。
+          必填，支持域名与 IP 地址，不填写则不会查询服务端信息，人数，版本等。
         </p>
       </div>
-      <el-input v-model="pingConfigForm.ip" placeholder="列如：localhost" size="small"></el-input>
+      <el-input v-model="pingConfigForm.ip" placeholder="例如：localhost" size="small"></el-input>
       <div class="sub-title row-mt">
         <p class="sub-title-title">服务端访问端口</p>
         <p class="sub-title-info">必填，仅可输入数字端口号</p>

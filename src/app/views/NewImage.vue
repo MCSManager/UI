@@ -36,7 +36,7 @@
         <template #default>
           <div class="sub-title">什么是环境镜像？</div>
           <div class="sub-title-info">
-            由于 Minecraft 或其他程序需要特定的运行环境，比如 Java/Python/.Net 等等，
+            由于 Minecraft 或其他程序需要特定的运行环境，比如 Java/Python/.NET 等等，
             不同版本在同一台机器上安装管理十分复杂，使用不同的环境镜像可以很方便的管理不同版本不同类型的服务环境。
           </div>
           <div class="sub-title row-mt">什么是 Docker？为什么需要它？</div>

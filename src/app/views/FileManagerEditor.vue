@@ -86,7 +86,9 @@ export default {
     const extName = path.extname(this.target);
     if (extName === ".js") this.editor.session.setMode("ace/mode/javascript");
     if (extName === ".json") this.editor.session.setMode("ace/mode/json");
+    if (extName === ".json5") this.editor.session.setMode("ace/mode/json5");
     if (extName === ".yml" || extName === ".yaml") this.editor.session.setMode("ace/mode/yaml");
+    if (extName === ".xml" || extName === ".xaml") this.editor.session.setMode("ace/mode/xml");
     if (extName === ".ini") this.editor.session.setMode("ace/mode/ini");
     if (extName === ".java") this.editor.session.setMode("ace/mode/java");
     if (extName === ".css") this.editor.session.setMode("ace/mode/css");
@@ -97,6 +99,7 @@ export default {
     if (extName === ".bat") this.editor.session.setMode("ace/mode/batchfile");
     if (extName === ".sh") this.editor.session.setMode("ace/mode/sh");
     if (extName === ".c" || extName === ".cpp") this.editor.session.setMode("ace/mode/c_cpp");
+    if (extName === ".toml") this.editor.session.setMode("ace/mode/toml");
     this.editor.setValue(this.edit.text);
   },
   methods: {
