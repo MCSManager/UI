@@ -202,7 +202,7 @@ export default {
     },
     selectType(type) {
       if (type === 1) {
-        this.dockerFile = `FROM openjdk:8
+        this.dockerFile = `FROM openjdk:8-jre
 RUN mkdir -p /workspace
 RUN apt update && apt install -y locales
 RUN echo "zh_CN.UTF-8 UTF-8">/etc/locale.gen && locale-gen
