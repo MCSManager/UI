@@ -446,7 +446,10 @@ export default {
 
     // 新建目录
     async mkdir() {
-      const { value } = await this.$prompt("新建目录名");
+      const { value } = await this.$prompt("新建目录名", undefined, {
+        confirmButtonText: "确定",
+        cancelButtonText: "取消"
+      });
       try {
         if (!value) throw new Error("请输入一个有效值");
         const p = path.normalize(path.join(this.currentDir, value));
