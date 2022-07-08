@@ -31,7 +31,8 @@ import {
   TYPE_MINECRAFT_FORGE,
   TYPE_MINECRAFT_FABRIC,
   TYPE_MINECRAFT_SPONGE,
-  TYPE_MINECRAFT_MOHIST
+  TYPE_MINECRAFT_MOHIST,
+  TYPE_MINECRAFT_MCDR
 } from "./instance_type";
 
 export function getInstanceConfigByType(type) {
@@ -207,5 +208,25 @@ export const INSTANCE_CONFIGS = [
     author: "Lazy",
     github: "https://github.com/LazyCreeper",
     category: [TYPE_MINECRAFT_JAVA, TYPE_MINECRAFT_GEYSER]
+  },
+  {
+    fileName: "[MCDR] config.yml",
+    type: "yml",
+    info: "MCDReforged 服务端控制工具配置文件",
+    path: "config.yml",
+    redirect: "mcdr/config.yml",
+    author: "Huaji_MUR233",
+    github: "https://github.com/HuajiMUR233",
+    category: [TYPE_MINECRAFT_JAVA, TYPE_MINECRAFT_MCDR]
+  },
+  {
+    fileName: "[MCDR] permission.yml",
+    type: "yml",
+    info: "MCDReforged 服务端控制工具权限配置文件",
+    path: "permission.yml",
+    redirect: "mcdr/permission.yml",
+    author: "Huaji_MUR233",
+    github: "https://github.com/HuajiMUR233",
+    category: [TYPE_MINECRAFT_JAVA, TYPE_MINECRAFT_MCDR]
   }
 ];
