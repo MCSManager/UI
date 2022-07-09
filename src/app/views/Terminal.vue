@@ -576,6 +576,15 @@ export default {
     },
     isTopPermission() {
       return this.$store.state.userInfo.permission >= 10;
+    },
+    isPty() {
+      return this.instanceInfo.config.pty || this.instanceInfo.config.processType === "docker";
+    },
+    ptyCol() {
+      return this.instanceInfo.config.ptyWindowCol ?? 80;
+    },
+    ptyRow() {
+      return this.instanceInfo.config.ptyWindowRow ?? 40;
     }
   },
   // eslint-disable-next-line vue/no-unused-components
@@ -651,6 +660,7 @@ export default {
       // 监听实例详细信息
       this.socket.on("stream/detail", (packet) => {
         this.instanceInfo = packet.data;
+        console.log("instanceInfo", this.instanceInfo);
         this.initChart();
       });
       // 断开事件
@@ -800,15 +810,15 @@ export default {
     },
     // 使用Websocket发送输入
     sendInput(input) {
-      // 非 Docker 类型拒绝终端直接输入，不需要提示。
-      if (this.instanceInfo.config.processType !== "docker") return;
-      if (!this.socket || !this.available)
-        return this.$message({ message: "无法输入到终端，数据流通道不可用", type: "error" });
-      if (!this.isStarted)
-        return this.$message({ message: "无法输入到终端，服务器未开启", type: "error" });
-      this.socket.emit("stream/write", {
-        data: { input }
-      });
+      console.log(input);
+      // 当终端处于 PTY 或其他类型时，支持完全数据模式
+      if (this.isPty) {
+        if (!this.socket || !this.available || !this.isStarted)
+          return console.log("!this.socket || !this.available || !this.isStarted");
+        this.socket.emit("stream/write", {
+          data: { input }
+        });
+      }
     },
     // 使用Websocket发送命令
     sendCommand(command, method) {
