@@ -444,6 +444,27 @@
         <div class="row-mt">
           <el-switch v-model="terminalSettingPanel.haveColor"></el-switch>
         </div>
+
+        <p class="sub-title-title">伪终端</p>
+        <p class="sub-title-info">
+          通过伪终端转发程序来获得终端完全交互能力。<br />包括使用 Tab，Ctrl
+          功能键等，但需要额外安装依赖库，默认情况下依赖库已经安装。
+        </p>
+        <div class="row-mt">
+          <el-switch v-model="terminalSettingPanel.isPty"></el-switch>
+        </div>
+
+        <div>
+          <p class="sub-title-title">伪终端窗口大小</p>
+          <div class="row-mt">
+            <el-input v-model="input1" size="mini" style="width: 40px">
+              <template #prepend>行</template>
+            </el-input>
+            <el-input v-model="input1" size="mini" style="width: 40px">
+              <template #prepend>列</template>
+            </el-input>
+          </div>
+        </div>
       </div>
       <div class="row-mt">
         <ItemGroup>
@@ -527,6 +548,7 @@ import { getPlayersOption } from "../service/chart_option";
 export default {
   data: function () {
     return {
+      input1: "",
       serviceUuid: this.$route.params.serviceUuid,
       instanceUuid: this.$route.params.instanceUuid,
       isFull: this.$route.query.full,
@@ -560,7 +582,8 @@ export default {
 
       terminalSettingPanel: {
         visible: false,
-        haveColor: true
+        haveColor: true,
+        isPty: false
       },
 
       unavailableTerminal: false,
