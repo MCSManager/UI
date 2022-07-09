@@ -69,6 +69,9 @@
             <el-button type="primary" @click="installLib">安装依赖库</el-button>
             <el-button @click="next">跳过</el-button>
           </ItemGroup>
+          <p class="color-gray" style="font-size: 12px">
+            <small>如果此安装失败或者跳过，面板依然可以正常使用，只是缺少仿真控制台能力。 </small>
+          </p>
         </div>
       </Panel>
     </div>
