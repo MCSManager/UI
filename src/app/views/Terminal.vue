@@ -455,7 +455,7 @@
           </p>
         </div>
         <div class="row-mt">
-          <el-switch v-model="terminalSettingPanel.isPty"></el-switch>
+          <el-switch v-model="terminalSettingPanel.pty"></el-switch>
         </div>
       </div>
 
@@ -464,10 +464,18 @@
           <p class="sub-title-title">伪终端窗口大小</p>
           <div class="row-mt">
             <span>行：</span>
-            <el-input v-model="input1" size="mini" style="width: 80px" type="number"></el-input>
+            <el-input
+              v-model="terminalSettingPanel.ptyWindowCol"
+              size="mini"
+              style="width: 80px"
+            ></el-input>
             &nbsp;
             <span>列：</span>
-            <el-input v-model="input1" size="mini" style="width: 80px" type="number"></el-input>
+            <el-input
+              v-model="terminalSettingPanel.ptyWindowRow"
+              size="mini"
+              style="width: 80px"
+            ></el-input>
           </div>
         </div>
       </div>
@@ -607,13 +615,16 @@ export default {
       return this.$store.state.userInfo.permission >= 10;
     },
     isPty() {
-      return this.instanceInfo.config.pty || this.instanceInfo.config.processType === "docker";
+      return (
+        this.instanceInfo.config.terminalOption.pty ||
+        this.instanceInfo.config.processType === "docker"
+      );
     },
     ptyCol() {
-      return this.instanceInfo.config.ptyWindowCol ?? 80;
+      return this.instanceInfo.config.terminalOption.ptyWindowCol ?? 80;
     },
     ptyRow() {
-      return this.instanceInfo.config.ptyWindowRow ?? 40;
+      return this.instanceInfo.config.terminalOption.ptyWindowRow ?? 40;
     }
   },
   // eslint-disable-next-line vue/no-unused-components
@@ -891,8 +902,8 @@ export default {
       this.eventConfigPanel.visible = true;
     },
     toTerminalSettingPanel() {
+      this.terminalSettingPanel = { ...this.instanceInfo.config.terminalOption };
       this.terminalSettingPanel.visible = true;
-      this.terminalSettingPanel.haveColor = this.instanceInfo.config.terminalOption.haveColor;
     },
     async syncLog() {
       try {
