@@ -441,30 +441,37 @@
         <p class="sub-title-info">
           网页自动给输出内容增加颜色渲染，渲染的颜色不一定完全正确。<br />如果颜色渲染功能与软件自带的颜色功能冲突，可以关闭此功能。
         </p>
-        <div class="row-mt">
-          <el-switch v-model="terminalSettingPanel.haveColor"></el-switch>
-        </div>
-        <div class="row-mt">
+      </div>
+      <div class="row-mt">
+        <el-switch v-model="terminalSettingPanel.haveColor"></el-switch>
+      </div>
+
+      <div class="row-mt">
+        <div class="sub-title">
           <p class="sub-title-title">伪终端</p>
           <p class="sub-title-info">
             通过伪终端转发程序来获得终端完全交互能力。<br />包括使用 Tab，Ctrl
             功能键等，但需要额外安装依赖库，默认情况下依赖库已经安装。
           </p>
-
+        </div>
+        <div class="row-mt">
           <el-switch v-model="terminalSettingPanel.isPty"></el-switch>
         </div>
+      </div>
 
-        <div>
+      <div class="row-mt">
+        <div class="sub-title">
+          <p class="sub-title-title">伪终端窗口大小</p>
           <div class="row-mt">
-            <p class="sub-title-title">伪终端窗口大小</p>
             <span>行：</span>
-            <el-input v-model="input1" size="mini" style="width: 80px"></el-input>
+            <el-input v-model="input1" size="mini" style="width: 80px" type="number"></el-input>
             &nbsp;
             <span>列：</span>
-            <el-input v-model="input1" size="mini" style="width: 80px"></el-input>
+            <el-input v-model="input1" size="mini" style="width: 80px" type="number"></el-input>
           </div>
         </div>
       </div>
+
       <div class="row-mt">
         <ItemGroup>
           <el-button type="success" size="small" @click="instanceConfigUpdate">保存</el-button>
