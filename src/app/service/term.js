@@ -47,24 +47,24 @@ termColor.TERM_TEXT_UNDERLINE = "\x1B[4m"; // Underline §n
 termColor.TERM_TEXT_ITALIC = "\x1B[3m"; // Italic §o
 termColor.TERM_TEXT_B = "\x1B[1m";
 
-export function initTerminalWindow(elem, fontSize = 12) {
+export function initTerminalWindow(elem, { fontSize }) {
   const term = new Terminal({
     rendererType: "canvas",
     convertEol: true,
     disableStdin: false,
     cursorStyle: "underline",
     cursorBlink: true,
-    fontSize: fontSize,
+    fontSize,
     theme: {
       background: "#1e1e1e"
     }
   });
+
   const fitAddon = new FitAddon();
   term.loadAddon(fitAddon);
-  term.open(elem);
-
   term.fitAddon = fitAddon;
 
+  term.open(elem);
   term.writeln(
     `${termColor.TERM_TEXT_GOLD}MCSManager Terminal ${termColor.TERM_TEXT_DARK_AQUA}[Powered by Term.js]`
   );

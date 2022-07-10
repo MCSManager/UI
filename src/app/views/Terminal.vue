@@ -709,6 +709,7 @@ export default {
         this.instanceInfo = packet.data;
         console.log("instanceInfo", this.instanceInfo);
         this.initChart();
+        this.resizePtyTerminalWindow();
       });
       // 断开事件
       this.socket.on("disconnect", () => {
@@ -752,8 +753,20 @@ export default {
       // 创建窗口与输入事件传递
       const terminalContainer = document.getElementById("terminal-container");
       this.onChangeTerminalContainerHeight();
-      this.term = initTerminalWindow(terminalContainer);
+
+      this.term = initTerminalWindow(terminalContainer, {
+        fontSize: 12
+      });
       this.term.onData(this.sendInput);
+    },
+
+    resizePtyTerminalWindow() {
+      if (this.instanceInfo.config?.terminalOption?.pty) {
+        this.term.resize(
+          this.instanceInfo.config?.terminalOption?.ptyWindowCol,
+          this.instanceInfo.config?.terminalOption?.ptyWindowRow
+        );
+      }
     },
 
     // 开启实例（Ajax）
@@ -1059,7 +1072,8 @@ export default {
         terminalContainer.removeAttribute("style");
         terminalContainer.setAttribute("style", `height: 550px; width:100%`);
       }
-      if (this.term && this.term.fitAddon) this.$nextTick(() => this.term.fitAddon.fit());
+      if (this.term && this.term.fitAddon && !this.isPty)
+        this.$nextTick(() => this.term.fitAddon.fit());
     }
   },
   // 装载事件
@@ -1075,11 +1089,6 @@ export default {
         this.terminalWidth = size.cols;
         this.sendResize(size.cols, size.rows);
       });
-      this.term.fitAddon.fit();
-
-      // window.onresize = () => {
-      //   this.term.fitAddon.fit();
-      // };
 
       // 与守护进程建立 Websocket 连接
       await this.setUpWebsocket();
