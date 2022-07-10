@@ -314,18 +314,18 @@
           </div>
           <!-- 全屏与非全屏的终端窗口 -->
           <div :class="{ 'terminal-wrapper': true, 'full-terminal-wrapper': isFull }">
-            <div id="terminal-container" style="height: 560px; width: 100%"></div>
-            <div id="terminal-input-wrapper">
-              <el-input
-                placeholder="此处可输入命令，按回车键执行"
-                prefix-icon="el-icon-arrow-right"
-                size="mini"
-                v-model="command"
-                ref="terminalCommandInput"
-                @keyup.enter="sendCommand(command)"
-              >
-              </el-input>
-            </div>
+            <div id="terminal-container"></div>
+          </div>
+          <div id="terminal-input-wrapper">
+            <el-input
+              placeholder="此处可输入命令，按回车键执行"
+              prefix-icon="el-icon-arrow-right"
+              size="mini"
+              v-model="command"
+              ref="terminalCommandInput"
+              @keyup.enter="sendCommand(command)"
+            >
+            </el-input>
           </div>
         </template>
       </Panel>
@@ -1068,12 +1068,9 @@ export default {
         const height = document.body.clientHeight - 50;
         terminalContainer.removeAttribute("style");
         terminalContainer.setAttribute("style", `height: ${height}px; width:100%`);
-      } else {
-        terminalContainer.removeAttribute("style");
-        terminalContainer.setAttribute("style", `height: 550px; width:100%`);
       }
-      if (this.term && this.term.fitAddon && !this.isPty)
-        this.$nextTick(() => this.term.fitAddon.fit());
+      // if (this.term && this.term.fitAddon && !this.isPty)
+      //   this.$nextTick(() => this.term.fitAddon.fit());
     }
   },
   // 装载事件
@@ -1133,6 +1130,10 @@ export default {
   background-color: rgb(30, 30, 30);
   padding: 4px;
   border-radius: 4px;
+}
+
+#terminal-input-wrapper {
+  margin-top: 12px;
 }
 
 #terminal-input-wrapper input {
@@ -1195,5 +1196,12 @@ export default {
   right: 0px;
   top: 0px;
   line-height: 30px;
+}
+
+#terminal-container {
+  height: 580px;
+  width: 100%;
+  overflow-x: scroll !important;
+  overflow-y: hidden;
 }
 </style>

@@ -20,7 +20,7 @@
 */
 
 import { Terminal } from "xterm";
-import { FitAddon } from "xterm-addon-fit";
+// import { FitAddon } from "xterm-addon-fit";
 
 export const termColor = {};
 termColor.TERM_RESET = "\x1B[0m";
@@ -60,9 +60,9 @@ export function initTerminalWindow(elem, { fontSize }) {
     }
   });
 
-  const fitAddon = new FitAddon();
-  term.loadAddon(fitAddon);
-  term.fitAddon = fitAddon;
+  // const fitAddon = new FitAddon();
+  // term.loadAddon(fitAddon);
+  // term.fitAddon = fitAddon;
 
   term.open(elem);
   term.writeln(
