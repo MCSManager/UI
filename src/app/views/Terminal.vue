@@ -623,8 +623,8 @@ export default {
     },
     isPty() {
       return (
-        this.instanceInfo.config.terminalOption.pty ||
-        this.instanceInfo.config.processType === "docker"
+        this.instanceInfo?.config?.terminalOption?.pty ||
+        this.instanceInfo?.config?.processType === "docker"
       );
     },
     ptyCol() {
@@ -752,11 +752,12 @@ export default {
     initTerm() {
       // 创建窗口与输入事件传递
       const terminalContainer = document.getElementById("terminal-container");
-      this.onChangeTerminalContainerHeight();
+
       this.term = initTerminalWindow(terminalContainer, {
         fontSize: 12
       });
       this.term.onData(this.sendInput);
+      this.onChangeTerminalContainerHeight();
     },
 
     // PTY 模式下的基于后端配置设定的固定高宽大小
@@ -1068,9 +1069,17 @@ export default {
         const height = document.body.clientHeight - 50;
         terminalContainer.removeAttribute("style");
         terminalContainer.setAttribute("style", `height: ${height}px; width:100%`);
+      } else {
+        terminalContainer.removeAttribute("style");
+        terminalContainer.setAttribute("style", `height: 580px; width:100%`);
       }
-      // if (this.term && this.term.fitAddon && !this.isPty)
-      //   this.$nextTick(() => this.term.fitAddon.fit());
+      if (this.term && this.term.fitAddon) {
+        if (this.isPty) {
+          this.resizePtyTerminalWindow();
+        } else {
+          this.$nextTick(() => this.term.fitAddon.fit());
+        }
+      }
     }
   },
   // 装载事件
