@@ -434,7 +434,7 @@
   </Dialog>
 
   <Dialog v-model="terminalSettingPanel.visible">
-    <template #title>网页终端设置</template>
+    <template #title>终端设置</template>
     <template #default>
       <div class="sub-title">
         <p class="sub-title-title">颜色渲染</p>
@@ -448,10 +448,12 @@
 
       <div class="row-mt">
         <div class="sub-title">
-          <p class="sub-title-title">伪终端</p>
+          <p class="sub-title-title">伪终端（Beta）</p>
           <p class="sub-title-info">
             通过伪终端转发程序来获得终端完全交互能力。<br />包括使用 Tab，Ctrl
-            功能键等，但需要额外安装依赖库，默认情况下依赖库已经安装。
+            功能键等，但需要额外安装依赖库，默认情况下已经安装。
+            <br />
+            如果使用有问题，建议关闭。
           </p>
         </div>
         <div class="row-mt">
@@ -462,21 +464,26 @@
       <div class="row-mt">
         <div class="sub-title">
           <p class="sub-title-title">伪终端窗口大小</p>
-          <div class="row-mt">
-            <span>行：</span>
-            <el-input
-              v-model="terminalSettingPanel.ptyWindowCol"
-              size="mini"
-              style="width: 80px"
-            ></el-input>
-            &nbsp;
-            <span>列：</span>
-            <el-input
-              v-model="terminalSettingPanel.ptyWindowRow"
-              size="mini"
-              style="width: 80px"
-            ></el-input>
-          </div>
+          <p class="sub-title-info">
+            在伪终端开启时生效，用于设置伪终端高度和宽度，更改生效需要重启实例。
+            <br />
+            如果使用有问题，建议关闭。
+          </p>
+        </div>
+        <div class="row-mt">
+          <span>列：</span>
+          <el-input
+            v-model="terminalSettingPanel.ptyWindowCol"
+            size="mini"
+            style="width: 80px"
+          ></el-input>
+          &nbsp;
+          <span>行：</span>
+          <el-input
+            v-model="terminalSettingPanel.ptyWindowRow"
+            size="mini"
+            style="width: 80px"
+          ></el-input>
         </div>
       </div>
 
@@ -850,7 +857,6 @@ export default {
     },
     // 使用Websocket发送输入
     sendInput(input) {
-      console.log(input);
       // 当终端处于 PTY 或其他类型时，支持完全数据模式
       if (this.isPty) {
         if (!this.socket || !this.available || !this.isStarted)
