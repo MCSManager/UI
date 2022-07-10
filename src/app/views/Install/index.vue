@@ -122,8 +122,6 @@ export default {
     },
     async createUser() {
       this.next();
-      let a = false;
-      if (a) return;
       this.$refs["form"].validate(async (valid) => {
         if (!valid) return;
         try {

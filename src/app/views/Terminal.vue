@@ -708,8 +708,8 @@ export default {
       this.socket.on("stream/detail", (packet) => {
         this.instanceInfo = packet.data;
         console.log("instanceInfo", this.instanceInfo);
-        this.initChart();
         this.resizePtyTerminalWindow();
+        this.initChart();
       });
       // 断开事件
       this.socket.on("disconnect", () => {
@@ -753,13 +753,13 @@ export default {
       // 创建窗口与输入事件传递
       const terminalContainer = document.getElementById("terminal-container");
       this.onChangeTerminalContainerHeight();
-
       this.term = initTerminalWindow(terminalContainer, {
         fontSize: 12
       });
       this.term.onData(this.sendInput);
     },
 
+    // PTY 模式下的基于后端配置设定的固定高宽大小
     resizePtyTerminalWindow() {
       if (this.instanceInfo.config?.terminalOption?.pty) {
         this.term.resize(
