@@ -21,6 +21,7 @@
 
 export const TYPE_UNIVERSAL = "universal"; // 通用输入输出程序
 export const TYPE_WEB_SHELL = "universal/web_shell"; // WebShell 程序
+export const TYPE_MINECRAFT_MCDR = "universal/mcdr";
 
 export const TYPE_MINECRAFT_JAVA = "minecraft/java";
 export const TYPE_MINECRAFT_BUKKIT = "minecraft/java/bukkit";
@@ -32,7 +33,6 @@ export const TYPE_MINECRAFT_BUNGEECORD = "minecraft/java/bungeecord";
 export const TYPE_MINECRAFT_GEYSER = "minecraft/java/geyser";
 export const TYPE_MINECRAFT_SPONGE = "minecraft/java/sponge";
 export const TYPE_MINECRAFT_MOHIST = "minecraft/java/mohist";
-
 export const TYPE_MINECRAFT_BEDROCK = "minecraft/bedrock";
 export const TYPE_MINECRAFT_BDS = "minecraft/bedrock/bds";
 export const TYPE_MINECRAFT_NUKKIT = "minecraft/bedrock/nukkit";
