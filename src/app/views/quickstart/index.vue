@@ -96,8 +96,8 @@ export default {
           value: 3
         },
         {
-          title: "我需要出租一个 Minecraft 服务器给客户",
-          subTitle: "帮助您快速出租一个服务器给您的客户实现盈利",
+          title: "获得更多信息",
+          subTitle: "我们将打开官方文档以帮助您获取更多有用信息",
           value: 4
         }
       ]
@@ -114,6 +114,9 @@ export default {
       });
     },
     selectQuickStartType(v) {
+      if (v === 4) {
+        return window.open("https://docs.mcsmanager.com/");
+      }
       this.quickStartType = v;
       this.title = "请选择您期望部署到哪台主机？";
       this.step = 1;
