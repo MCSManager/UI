@@ -590,7 +590,7 @@ export default {
           });
         }
       } catch (error) {
-        this.$message({ message: `${error}`, type: "error" });
+        this.$message({ message: error.message || error, type: "error" });
       }
     },
 

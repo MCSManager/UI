@@ -297,12 +297,15 @@
 
     <!-- 隐藏的文件上传按钮 -->
     <input type="file" ref="fileButtonHidden" @change="selectedFile" hidden="hidden" />
+
+    <selecct-unzip-code ref="selecctUnzipCode"></selecct-unzip-code>
   </div>
 </template>
 
 <script>
 import path from "path";
 import axios from "axios";
+import SelecctUnzipCode from "@/app/views/FileManager/selecctUnzipCode";
 import Panel from "@/components/Panel";
 import CommandAssist from "@/components/CommandAssist";
 import SelectBlock from "@/components/SelectBlock";
@@ -315,7 +318,7 @@ import {
 import { parseforwardAddress, request } from "@/app/service/protocol";
 
 export default {
-  components: { Panel, SelectBlock, CommandAssist },
+  components: { Panel, SelectBlock, CommandAssist, SelecctUnzipCode },
   data: function () {
     return {
       title: "新建实例引导程序",
@@ -351,7 +354,8 @@ export default {
         addr: "",
         password: ""
       },
-      percentComplete: 0
+      percentComplete: 0,
+      zipCode: "gbk"
     };
   },
   methods: {
@@ -360,6 +364,7 @@ export default {
       if (!this.form.nickname || (!this.assist.commandtemplate && !this.form.startCommand)) {
         return this.$message({ message: "请先完善基本参数再进行上传文件操作", type: "error" });
       }
+      this.zipCode = await this.$refs.selecctUnzipCode.prompt();
       await this.$confirm("上传文件时将同时创建实例，此操作不可逆，是否继续？", "最终确认", {
         confirmButtonText: "确定",
         cancelButtonText: "取消",
@@ -405,7 +410,8 @@ export default {
         await axios.post(fullAddress, formData, {
           params: {
             // 根据后缀自动解压文件
-            unzip: extName === ".zip" ? 1 : null
+            unzip: extName === ".zip" ? 1 : null,
+            code: this.zipCode
           },
           headers: { "Content-Type": "multipart/form-data" },
           onUploadProgress: (progressEvent) => {
