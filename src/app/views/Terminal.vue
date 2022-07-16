@@ -316,7 +316,7 @@
           <div :class="{ 'terminal-wrapper': true, 'full-terminal-wrapper': isFull }">
             <div id="terminal-container"></div>
           </div>
-          <div id="terminal-input-wrapper">
+          <div :class="{ 'terminal-input-wrapper': true, 'full-terminal-input-wrapper': isFull }">
             <el-input
               placeholder="此处可输入命令，按回车键执行"
               prefix-icon="el-icon-arrow-right"
@@ -1143,13 +1143,23 @@ export default {
   border-radius: 4px;
 }
 
-#terminal-input-wrapper {
+.terminal-input-wrapper {
   margin-top: 12px;
 }
 
-#terminal-input-wrapper input {
+.terminal-input-wrapper input {
   width: 100%;
   font-size: 12px;
+}
+
+.full-terminal-input-wrapper {
+  position: fixed;
+  bottom: 0px;
+  z-index: 99;
+  text-align: center;
+  left: 0px;
+  right: 0px;
+  margin: 6px 10px;
 }
 
 .full-terminal-wrapper {
