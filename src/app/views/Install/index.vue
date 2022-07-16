@@ -57,7 +57,7 @@
       </Panel>
     </div>
 
-    <div class="panel-wrapper" v-if="step == 2">
+    <!-- <div class="panel-wrapper" v-if="step == 2">
       <Panel class="panel" body-style="padding:40px;" v-loading="isLoading">
         <h1 class="title">我们需要一些时间安装依赖程序</h1>
         <p>
@@ -74,9 +74,9 @@
           </p>
         </div>
       </Panel>
-    </div>
+    </div> -->
 
-    <div class="panel-wrapper" v-if="step == 3">
+    <div class="panel-wrapper" v-if="step == 2">
       <Panel class="panel" body-style="padding:40px;" v-loading="isLoading">
         <h1 class="title">完成！</h1>
         <p>最后，您是第一次使用此软件吗？</p>
