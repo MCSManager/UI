@@ -436,17 +436,7 @@
   <Dialog v-model="terminalSettingPanel.visible">
     <template #title>终端设置</template>
     <template #default>
-      <div class="sub-title">
-        <p class="sub-title-title">颜色渲染</p>
-        <p class="sub-title-info">
-          网页自动给输出内容增加颜色渲染，渲染的颜色不一定完全正确。<br />如果颜色渲染功能与软件自带的颜色功能冲突，可以关闭此功能。
-        </p>
-      </div>
-      <div class="row-mt">
-        <el-switch v-model="terminalSettingPanel.haveColor"></el-switch>
-      </div>
-
-      <div class="row-mt">
+      <div>
         <div class="sub-title">
           <p class="sub-title-title">仿真终端（Beta）</p>
           <p class="sub-title-info">
@@ -487,6 +477,16 @@
             style="width: 80px"
           ></el-input>
         </div>
+      </div>
+
+      <div class="sub-title row-mt">
+        <p class="sub-title-title">颜色渲染</p>
+        <p class="sub-title-info">
+          网页自动给输出内容增加颜色渲染，渲染的颜色不一定完全正确。<br />如果颜色渲染功能与软件自带的颜色功能冲突，可以关闭此功能。
+        </p>
+      </div>
+      <div class="row-mt">
+        <el-switch v-model="terminalSettingPanel.haveColor"></el-switch>
       </div>
 
       <div class="row-mt">
