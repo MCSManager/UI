@@ -24,25 +24,25 @@
     <template #title>用户信息</template>
     <template #default>
       <el-row :gutter="20">
-        <el-col :span="6" :offset="0">
+        <el-col :md="6" :offset="0">
           <div class="overview-info-warpper">
             <p class="overview-info-title">UUID</p>
             <p class="overview-info-value" v-text="userInfo.uuid"></p>
           </div>
         </el-col>
-        <el-col :span="6" :offset="0">
+        <el-col :md="6" :offset="0">
           <div class="overview-info-warpper">
             <p class="overview-info-title">名称</p>
             <p class="overview-info-value" v-text="userInfo.userName"></p>
           </div>
         </el-col>
-        <el-col :span="6" :offset="0">
+        <el-col :md="6" :offset="0">
           <div class="overview-info-warpper">
             <p class="overview-info-title">注册时间</p>
             <p class="overview-info-value" v-text="userInfo.registerTime"></p>
           </div>
         </el-col>
-        <el-col :span="6" :offset="0">
+        <el-col :md="6" :offset="0">
           <div class="overview-info-warpper">
             <p class="overview-info-title">拥有实例</p>
             <p class="overview-info-value" v-text="userInfo.instances.length"></p>
@@ -91,7 +91,7 @@
       </div>
       <div class="row-mt">
         <el-table :data="userInfo.instances" stripe style="width: 100%" size="small">
-          <el-table-column label="所属守护进程">
+          <el-table-column label="所属守护进程" width="140">
             <template #default="{ row }"> {{ row.hostIp }}（{{ row.remarks }}） </template>
           </el-table-column>
           <el-table-column prop="nickname" label="实例名称" width="240"></el-table-column>

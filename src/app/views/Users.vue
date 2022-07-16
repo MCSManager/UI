@@ -39,7 +39,7 @@
                   @focus="() => (readonly = false)"
                 ></el-input>
                 <el-button size="small" type="primary" @click="refresh">
-                  <i class="el-icon-refresh"></i> 刷新/搜索
+                  <i class="el-icon-refresh"></i> 搜索
                 </el-button>
               </el-col>
               <el-col :md="12" :offset="0" class="text-align-right col-md-responsive">

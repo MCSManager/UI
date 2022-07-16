@@ -128,6 +128,18 @@
             </div> -->
             <div class="config-item">
               <div class="sub-title">
+                <p class="sub-title-title">准许普通用户使用文件管理功能</p>
+                <p class="sub-title-info">
+                  文件管理是一个较为消耗资源且不易控制的功能，如果您的普通用户没有文件管理的任何需求，可以禁止用户使用文件管理。
+                </p>
+              </div>
+              <el-select v-model="settings.canFileManager" placeholder="请选择">
+                <el-option label="准许" :value="true"></el-option>
+                <el-option label="禁止" :value="false"></el-option>
+              </el-select>
+            </div>
+            <div class="config-item">
+              <div class="sub-title">
                 <p class="sub-title-title">跨域请求 API 接口</p>
                 <p class="sub-title-info">
                   HTTP 响应将会加入 access-control-allow-origin:

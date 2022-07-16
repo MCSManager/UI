@@ -48,8 +48,8 @@
               size="small"
               style="width: 160px"
             ></el-input>
-            <el-button size="small" @click="refresh">
-              <i class="el-icon-refresh"></i> 刷新
+            <el-button size="small" @click="refresh" type="primary">
+              <i class="el-icon-refresh"></i> 搜索
             </el-button>
           </ItemGroup>
         </el-col>

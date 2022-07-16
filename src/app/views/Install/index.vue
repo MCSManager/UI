@@ -59,6 +59,25 @@
 
     <div class="panel-wrapper" v-if="step == 2">
       <Panel class="panel" body-style="padding:40px;" v-loading="isLoading">
+        <h1 class="title">我们需要一些时间安装依赖程序</h1>
+        <p>
+          我们将下载约5MB左右的二进制程序辅助 MCSManager
+          的运行，为您提供最真实的终端交互功能，这是一个可选功能。
+        </p>
+        <div style="margin-top: 48px">
+          <ItemGroup>
+            <el-button type="primary" @click="installLib">安装依赖库</el-button>
+            <el-button @click="next">跳过</el-button>
+          </ItemGroup>
+          <p class="color-gray" style="font-size: 12px">
+            <small>如果此安装失败或者跳过，面板依然可以正常使用，只是缺少仿真控制台能力。 </small>
+          </p>
+        </div>
+      </Panel>
+    </div>
+
+    <div class="panel-wrapper" v-if="step == 3">
+      <Panel class="panel" body-style="padding:40px;" v-loading="isLoading">
         <h1 class="title">完成！</h1>
         <p>最后，您是第一次使用此软件吗？</p>
         <ItemGroup>
@@ -102,6 +121,7 @@ export default {
       this.step++;
     },
     async createUser() {
+      this.next();
       this.$refs["form"].validate(async (valid) => {
         if (!valid) return;
         try {
@@ -125,11 +145,14 @@ export default {
     },
     toOverview() {
       window.location.href = "/#/overview?from_install=1";
+    },
+    installLib() {
+      console.log("install....");
+      this.next();
     }
   }
 };
 </script>
-
 
 <style scoped>
 .bg {

@@ -24,8 +24,14 @@
     <template #title>选择解压/解压文件编码</template>
     <template #default>
       <div class="components-warpper">
-        <p>当您解压/压缩文件时发现文件名存在乱码现象，可以尝试修改此选项解决。</p>
-        <el-select v-model="selected" class="m-2" placeholder="请选择编码" size="">
+        <p>在解压/压缩文件时发现文件名存在乱码现象时，可以修改此选项解决。</p>
+
+        <p>
+          如果压缩包来源是中国大陆，一般可选 GBK；
+          <br />
+          如果是来自台湾，香港地区，可以选择 BIG5，如果来自其他地区可以选择 UTF-8。
+        </p>
+        <el-select v-model="selected" class="m-2" placeholder="请选择编码" size="small">
           <el-option
             v-for="item in options"
             :key="item.value"
@@ -89,6 +95,9 @@ export default {
       this.$emit("update:visible", false);
     },
     sumbit() {
+      if (!this.selected) {
+        return this.$message({ message: "请选择一个编码", type: "info" });
+      }
       event.emit("submit", this.selected);
       this.$emit("submit", this.selected);
       this.close();
@@ -100,6 +109,5 @@ export default {
 <style scoped>
 .btn-area {
   margin-top: 8px;
-  margin-left: 2px;
 }
 </style>

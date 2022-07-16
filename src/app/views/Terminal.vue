@@ -314,18 +314,18 @@
           </div>
           <!-- 全屏与非全屏的终端窗口 -->
           <div :class="{ 'terminal-wrapper': true, 'full-terminal-wrapper': isFull }">
-            <div id="terminal-container" style="height: 560px; width: 100%"></div>
-            <div id="terminal-input-wrapper">
-              <el-input
-                placeholder="此处可输入命令，按回车键执行"
-                prefix-icon="el-icon-arrow-right"
-                size="mini"
-                v-model="command"
-                ref="terminalCommandInput"
-                @keyup.enter="sendCommand(command)"
-              >
-              </el-input>
-            </div>
+            <div id="terminal-container"></div>
+          </div>
+          <div id="terminal-input-wrapper">
+            <el-input
+              placeholder="此处可输入命令，按回车键执行"
+              prefix-icon="el-icon-arrow-right"
+              size="mini"
+              v-model="command"
+              ref="terminalCommandInput"
+              @keyup.enter="sendCommand(command)"
+            >
+            </el-input>
           </div>
         </template>
       </Panel>
@@ -434,17 +434,61 @@
   </Dialog>
 
   <Dialog v-model="terminalSettingPanel.visible">
-    <template #title>网页终端设置</template>
+    <template #title>终端设置</template>
     <template #default>
       <div class="sub-title">
         <p class="sub-title-title">颜色渲染</p>
         <p class="sub-title-info">
           网页自动给输出内容增加颜色渲染，渲染的颜色不一定完全正确。<br />如果颜色渲染功能与软件自带的颜色功能冲突，可以关闭此功能。
         </p>
+      </div>
+      <div class="row-mt">
+        <el-switch v-model="terminalSettingPanel.haveColor"></el-switch>
+      </div>
+
+      <div class="row-mt">
+        <div class="sub-title">
+          <p class="sub-title-title">伪终端（Beta）</p>
+          <p class="sub-title-info">
+            通过伪终端转发程序来获得终端完全交互能力。<br />包括使用 Tab，Ctrl
+            功能键等，但需要额外安装依赖库，默认情况下已经安装。
+            <br />
+            如果使用有问题，建议关闭。
+          </p>
+        </div>
         <div class="row-mt">
-          <el-switch v-model="terminalSettingPanel.haveColor"></el-switch>
+          <el-switch v-model="terminalSettingPanel.pty"></el-switch>
         </div>
       </div>
+
+      <div class="row-mt">
+        <div class="sub-title">
+          <p class="sub-title-title">伪终端窗口大小</p>
+          <p class="sub-title-info">
+            在伪终端开启时生效，用于设置伪终端高度和宽度，更改生效需要重启实例。
+            <br />
+            如果使用有问题，建议关闭。
+          </p>
+        </div>
+        <div class="row-mt">
+          <span>列：</span>
+          <el-input
+            v-model="terminalSettingPanel.ptyWindowCol"
+            :disabled="instanceInfo.status !== 0 || !terminalSettingPanel.pty"
+            size="mini"
+            style="width: 80px"
+          ></el-input>
+          &nbsp;
+          <span>行：</span>
+          <el-input
+            :disabled="instanceInfo.status !== 0 || !terminalSettingPanel.pty"
+            v-model="terminalSettingPanel.ptyWindowRow"
+            size="mini"
+            style="width: 80px"
+          ></el-input>
+        </div>
+      </div>
+
       <div class="row-mt">
         <ItemGroup>
           <el-button type="success" size="small" @click="instanceConfigUpdate">保存</el-button>
@@ -527,6 +571,7 @@ import { getPlayersOption } from "../service/chart_option";
 export default {
   data: function () {
     return {
+      input1: "",
       serviceUuid: this.$route.params.serviceUuid,
       instanceUuid: this.$route.params.instanceUuid,
       isFull: this.$route.query.full,
@@ -560,7 +605,8 @@ export default {
 
       terminalSettingPanel: {
         visible: false,
-        haveColor: true
+        haveColor: true,
+        isPty: false
       },
 
       unavailableTerminal: false,
@@ -576,6 +622,18 @@ export default {
     },
     isTopPermission() {
       return this.$store.state.userInfo.permission >= 10;
+    },
+    isPty() {
+      return (
+        this.instanceInfo?.config?.terminalOption?.pty ||
+        this.instanceInfo?.config?.processType === "docker"
+      );
+    },
+    ptyCol() {
+      return this.instanceInfo.config.terminalOption.ptyWindowCol ?? 80;
+    },
+    ptyRow() {
+      return this.instanceInfo.config.terminalOption.ptyWindowRow ?? 40;
     }
   },
   // eslint-disable-next-line vue/no-unused-components
@@ -651,6 +709,8 @@ export default {
       // 监听实例详细信息
       this.socket.on("stream/detail", (packet) => {
         this.instanceInfo = packet.data;
+        console.log("instanceInfo", this.instanceInfo);
+        this.resizePtyTerminalWindow();
         this.initChart();
       });
       // 断开事件
@@ -694,9 +754,22 @@ export default {
     initTerm() {
       // 创建窗口与输入事件传递
       const terminalContainer = document.getElementById("terminal-container");
-      this.onChangeTerminalContainerHeight();
-      this.term = initTerminalWindow(terminalContainer);
+
+      this.term = initTerminalWindow(terminalContainer, {
+        fontSize: 12
+      });
       this.term.onData(this.sendInput);
+      this.onChangeTerminalContainerHeight();
+    },
+
+    // PTY 模式下的基于后端配置设定的固定高宽大小
+    resizePtyTerminalWindow() {
+      if (this.instanceInfo.config?.terminalOption?.pty) {
+        this.term.resize(
+          this.instanceInfo.config?.terminalOption?.ptyWindowCol,
+          this.instanceInfo.config?.terminalOption?.ptyWindowRow
+        );
+      }
     },
 
     // 开启实例（Ajax）
@@ -800,15 +873,14 @@ export default {
     },
     // 使用Websocket发送输入
     sendInput(input) {
-      // 非 Docker 类型拒绝终端直接输入，不需要提示。
-      if (this.instanceInfo.config.processType !== "docker") return;
-      if (!this.socket || !this.available)
-        return this.$message({ message: "无法输入到终端，数据流通道不可用", type: "error" });
-      if (!this.isStarted)
-        return this.$message({ message: "无法输入到终端，服务器未开启", type: "error" });
-      this.socket.emit("stream/write", {
-        data: { input }
-      });
+      // 当终端处于 PTY 或其他类型时，支持完全数据模式
+      if (this.isPty) {
+        if (!this.socket || !this.available || !this.isStarted)
+          return console.log("!this.socket || !this.available || !this.isStarted");
+        this.socket.emit("stream/write", {
+          data: { input }
+        });
+      }
     },
     // 使用Websocket发送命令
     sendCommand(command, method) {
@@ -852,8 +924,8 @@ export default {
       this.eventConfigPanel.visible = true;
     },
     toTerminalSettingPanel() {
+      this.terminalSettingPanel = { ...this.instanceInfo.config.terminalOption };
       this.terminalSettingPanel.visible = true;
-      this.terminalSettingPanel.haveColor = this.instanceInfo.config.terminalOption.haveColor;
     },
     async syncLog() {
       try {
@@ -1001,9 +1073,15 @@ export default {
         terminalContainer.setAttribute("style", `height: ${height}px; width:100%`);
       } else {
         terminalContainer.removeAttribute("style");
-        terminalContainer.setAttribute("style", `height: 550px; width:100%`);
+        terminalContainer.setAttribute("style", `height: 580px; width:100%`);
       }
-      if (this.term && this.term.fitAddon) this.$nextTick(() => this.term.fitAddon.fit());
+      if (this.term && this.term.fitAddon) {
+        if (this.isPty) {
+          this.resizePtyTerminalWindow();
+        } else {
+          this.$nextTick(() => this.term.fitAddon.fit());
+        }
+      }
     }
   },
   // 装载事件
@@ -1019,11 +1097,6 @@ export default {
         this.terminalWidth = size.cols;
         this.sendResize(size.cols, size.rows);
       });
-      this.term.fitAddon.fit();
-
-      // window.onresize = () => {
-      //   this.term.fitAddon.fit();
-      // };
 
       // 与守护进程建立 Websocket 连接
       await this.setUpWebsocket();
@@ -1068,6 +1141,10 @@ export default {
   background-color: rgb(30, 30, 30);
   padding: 4px;
   border-radius: 4px;
+}
+
+#terminal-input-wrapper {
+  margin-top: 12px;
 }
 
 #terminal-input-wrapper input {
@@ -1130,5 +1207,12 @@ export default {
   right: 0px;
   top: 0px;
   line-height: 30px;
+}
+
+#terminal-container {
+  height: 580px;
+  width: 100%;
+  overflow-x: scroll !important;
+  overflow-y: hidden;
 }
 </style>

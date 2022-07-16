@@ -280,22 +280,26 @@ export default {
     // 目录 List 功能
     async list(cwd = ".") {
       this.$route.query.path = cwd;
-      const data = await request({
-        method: "GET",
-        url: API_FILE_LIST,
-        params: {
-          remote_uuid: this.serviceUuid,
-          uuid: this.instanceUuid,
-          target: cwd,
-          page: parseInt(this.pageParam.page) - 1,
-          page_size: this.pageParam.pageSize
-        }
-      });
-      const { items, total, page } = data;
-      this.currentDir = path.normalize(cwd);
-      this.tableFilter(items);
-      this.pageParam.total = total;
-      this.pageParam.page = page + 1;
+      try {
+        const data = await request({
+          method: "GET",
+          url: API_FILE_LIST,
+          params: {
+            remote_uuid: this.serviceUuid,
+            uuid: this.instanceUuid,
+            target: cwd,
+            page: parseInt(this.pageParam.page) - 1,
+            page_size: this.pageParam.pageSize
+          }
+        });
+        const { items, total, page } = data;
+        this.currentDir = path.normalize(cwd);
+        this.tableFilter(items);
+        this.pageParam.total = total;
+        this.pageParam.page = page + 1;
+      } catch (error) {
+        this.$message({ message: error, type: "error" });
+      }
     },
 
     // 表格数据处理

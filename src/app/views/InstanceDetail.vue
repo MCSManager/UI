@@ -97,13 +97,19 @@
                       </span>
                       <br />
                       <span>
-                        通常情况下，建议使用命令助手生成启动命令，如果有额外需求可以自定义启动命令
+                        如果您输入命令无反应，或者终端排版错乱，可以开启 控制台-终端设置-伪终端
+                        进行尝试。
                       </span>
                       <br />
                       <span>
-                        例如 "C:\Program Files\Java\bin\java.exe" -Dfile.encoding=utf-8 -jar "my
-                        server.jar" -nogui
+                        通常情况下，建议使用命令助手生成启动命令，如果有额外需求可以自定义启动命令。
                       </span>
+                      <br />
+                      <span>
+                        列如 "C:\Program Files\Java\bin\java.exe" -Dfile.encoding=utf-8
+                        -Djline.terminal=jline.UnsupportedTerminal -jar "my server.jar" -nogui
+                      </span>
+                      <br />
                     </div>
                   </div>
                   <div class="flex">
