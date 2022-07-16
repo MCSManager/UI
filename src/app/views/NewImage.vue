@@ -203,13 +203,15 @@ export default {
     selectType(type) {
       if (type === 1) {
         this.dockerFile = `FROM openjdk:8-jre
-RUN mkdir -p /workspace
+# 如果服务器在中国，可以取消下面的注释（删去下面一行最前面的井号空格：# ）以切换到 国内源 达到加速构建过程
+# RUN sed -i -E 's/http:\\/\\/(deb|security).debian.org/http:\\/\\/mirrors.tuna.tsinghua.edu.cn/g' /etc/apt/sources.list
 RUN apt update && apt install -y locales
 RUN echo "zh_CN.UTF-8 UTF-8">/etc/locale.gen && locale-gen
 ENV LANG=zh_CN.UTF-8
 ENV LANGUAGE=zh_CN.UTF-8
 ENV LC_ALL=zh_CN.UTF-8
 ENV TZ=Asia/Shanghai
+RUN mkdir -p /workspace
 WORKDIR /workspace
 `;
         this.name = "mcsm-openjdk";
@@ -227,7 +229,9 @@ WORKDIR /workspace
       if (type === 3) {
         this.dockerFile = `FROM ubuntu:18.04
 ENV TZ=Asia/Shanghai
-RUN apt update && apt -y install openssl libcurl4 && DEBIAN_FRONTEND="noninteractive" apt -y install tzdata
+# 如果服务器在中国，可以取消下面的注释（删去下面一行最前面的井号空格：# ）以切换到 国内源 达到加速构建过程
+# RUN sed -i -E 's/http:\\/\\/(archive|security).ubuntu.com/http:\\/\\/mirrors.tuna.tsinghua.edu.cn/g' /etc/apt/sources.list
+RUN apt update && apt -y install libcurl4 && DEBIAN_FRONTEND="noninteractive" apt -y install tzdata
 RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 RUN mkdir -p /workspace
 WORKDIR /workspace
