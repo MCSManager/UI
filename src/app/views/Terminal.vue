@@ -448,9 +448,9 @@
 
       <div class="row-mt">
         <div class="sub-title">
-          <p class="sub-title-title">伪终端（Beta）</p>
+          <p class="sub-title-title">仿真终端（Beta）</p>
           <p class="sub-title-info">
-            通过伪终端转发程序来获得终端完全交互能力。<br />包括使用 Tab，Ctrl
+            通过仿真终端转发程序来获得终端完全交互能力。<br />包括使用 Tab，Ctrl
             功能键等，但需要额外安装依赖库，默认情况下已经安装。
             <br />
             如果使用有问题，建议关闭。
@@ -463,9 +463,9 @@
 
       <div class="row-mt">
         <div class="sub-title">
-          <p class="sub-title-title">伪终端窗口大小</p>
+          <p class="sub-title-title">仿真终端窗口大小</p>
           <p class="sub-title-info">
-            在伪终端开启时生效，用于设置伪终端高度和宽度，更改生效需要重启实例。
+            在仿真终端开启时生效，用于设置仿真终端高度和宽度，更改生效需要重启实例。
             <br />
             如果使用有问题，建议关闭。
           </p>
