@@ -66,18 +66,15 @@ export function initTerminalWindow(elem, { fontSize }) {
 
   term.open(elem);
   term.writeln(
-    `${termColor.TERM_TEXT_GOLD}MCSManager Terminal ${termColor.TERM_TEXT_DARK_AQUA}[Powered by Term.js]`
+    `${termColor.TERM_TEXT_GREEN}[TERM] ${termColor.TERM_TEXT_GRAY}Welcome to instance terminal.${termColor.TERM_TEXT_DARK_AQUA}`
   );
   term.writeln(
-    `${termColor.TERM_TEXT_GOLD}Copyright Suwings All rights reserved${termColor.TERM_RESET}\r\n`
+    `${termColor.TERM_TEXT_GREEN}[TERM] ${termColor.TERM_TEXT_GRAY}Powered by MCSManager.${termColor.TERM_RESET}\r\n`
   );
   term.info = (msg) => {
-    term.writeln(`\r\n[MCSManager] [INFO] ${msg}`);
+    term.writeln(`\r\n${termColor.TERM_TEXT_GREEN}[TERM] ${msg}${termColor.TERM_RESET}`);
   };
-  // term.prompt = () => {
-  //   term.write(`${termColor.TERM_RESET}\r\n$ `);
-  // };
-  //term.prompt();
+
   return term;
 }
 
