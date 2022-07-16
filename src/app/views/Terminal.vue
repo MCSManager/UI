@@ -474,12 +474,14 @@
           <span>列：</span>
           <el-input
             v-model="terminalSettingPanel.ptyWindowCol"
+            :disabled="instanceInfo.status !== 0 || !terminalSettingPanel.pty"
             size="mini"
             style="width: 80px"
           ></el-input>
           &nbsp;
           <span>行：</span>
           <el-input
+            :disabled="instanceInfo.status !== 0 || !terminalSettingPanel.pty"
             v-model="terminalSettingPanel.ptyWindowRow"
             size="mini"
             style="width: 80px"
