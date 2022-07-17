@@ -178,7 +178,7 @@
                   style="width: 100%"
                   size="small"
                   @click="toTerminalSettingPanel"
-                  >终端设置
+                  >实例设置
                 </el-button>
               </el-col>
 
@@ -229,7 +229,7 @@
                   style="width: 100%"
                   size="small"
                   @click="toInstanceDetail"
-                  >实例设置
+                  >高级实例设置
                 </el-button>
               </el-col>
             </el-row>
@@ -877,7 +877,8 @@ export default {
         ...this.instanceInfo.config.terminalOption,
         crlf: this.instanceInfo.config.crlf,
         oe: this.instanceInfo.config.oe,
-        ie: this.instanceInfo.config.ie
+        ie: this.instanceInfo.config.ie,
+        stopCommand: this.instanceInfo.config.stopCommand
       };
       this.terminalSettingPanel.visible = true;
     },

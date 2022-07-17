@@ -21,7 +21,7 @@
 
 <template>
   <Dialog v-model="v">
-    <template #title>终端设置</template>
+    <template #title>实例设置</template>
     <template #default>
       <div>
         <div class="sub-title">
@@ -111,6 +111,18 @@
             >
             </el-option>
           </el-select>
+        </div>
+      </div>
+
+      <div>
+        <div class="sub-title row-mt">
+          <p class="sub-title-title">关闭实例命令</p>
+          <p class="sub-title-info">
+            当点击“关闭实例”按钮时，会立刻执行此命令，^C 代表 Ctrl+C 信号。
+          </p>
+        </div>
+        <div class="row-mt">
+          <el-input v-model="options.stopCommand" size="small"></el-input>
         </div>
       </div>
 
@@ -215,7 +227,8 @@ export default {
             eventTask: {},
             crlf: this.options.crlf,
             ie: this.options.ie,
-            oe: this.options.oe
+            oe: this.options.oe,
+            stopCommand: this.options.stopCommand
           }
         });
         this.options = {};
