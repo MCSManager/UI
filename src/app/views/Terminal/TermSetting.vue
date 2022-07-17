@@ -20,7 +20,7 @@
 -->
 
 <template>
-  <Dialog v-model="v">
+  <Dialog v-model="v" :cancel="close">
     <template #title>实例设置</template>
     <template #default>
       <el-row :gutter="20">
@@ -210,7 +210,6 @@ export default {
 
   methods: {
     init() {
-      console.log(this.config);
       this.options = this.config;
     },
     show() {
