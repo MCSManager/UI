@@ -71,7 +71,8 @@ export default {
         { label: "面板/Linux（UTF8）", value: "utf-8" }
       ],
       selected: "",
-      func: null
+      func: null,
+      reject: null
     };
   },
   watch: {
@@ -82,7 +83,8 @@ export default {
   methods: {
     prompt() {
       this.show();
-      return new Promise((ok) => {
+      return new Promise((ok, reject) => {
+        this.reject = reject;
         event.on("submit", (v) => ok(v));
       });
     },
@@ -92,6 +94,8 @@ export default {
     },
     close() {
       this.v = false;
+      if (this.reject) this.reject(new Error("已取消"));
+      this.reject = null;
       this.$emit("update:visible", false);
     },
     sumbit() {
