@@ -873,7 +873,12 @@ export default {
       this.eventConfigPanel.visible = true;
     },
     toTerminalSettingPanel() {
-      this.terminalSettingPanel = { ...this.instanceInfo.config.terminalOption };
+      this.terminalSettingPanel = {
+        ...this.instanceInfo.config.terminalOption,
+        crlf: this.instanceInfo.config.crlf,
+        oe: this.instanceInfo.config.oe,
+        ie: this.instanceInfo.config.ie
+      };
       this.terminalSettingPanel.visible = true;
     },
     async syncLog() {
@@ -902,12 +907,8 @@ export default {
           url: API_INSTANCE_UPDATE,
           params: { remote_uuid: this.serviceUuid, uuid: this.instanceUuid },
           data: {
-            pingConfig: this.pingConfigForm.is
-              ? this.pingConfigForm
-              : this.instanceInfo.config.pingConfig,
-            eventTask: this.eventConfigPanel
-              ? this.eventConfigPanel
-              : this.instanceInfo.config.eventTask,
+            pingConfig: this.pingConfigForm.is ? this.pingConfigForm : {},
+            eventTask: this.eventConfigPanel.visible ? this.eventConfigPanel : {},
             terminalOption: {}
           }
         });

@@ -76,7 +76,7 @@ export default {
 }
 
 .box-card-shadow {
-  border-radius: 4px;
+  border-radius: 0px;
 }
 
 .left-tip {

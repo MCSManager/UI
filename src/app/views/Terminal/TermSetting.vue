@@ -52,7 +52,7 @@
           <el-input
             v-model="options.ptyWindowCol"
             :disabled="!options.pty"
-            size="mini"
+            size="small"
             style="width: 80px"
           ></el-input>
           &nbsp;
@@ -60,20 +60,87 @@
           <el-input
             :disabled="!options.pty"
             v-model="options.ptyWindowRow"
-            size="mini"
+            size="small"
             style="width: 80px"
           ></el-input>
         </div>
       </div>
 
-      <div class="sub-title row-mt">
-        <p class="sub-title-title">颜色渲染</p>
-        <p class="sub-title-info">
-          网页自动给输出内容增加颜色渲染，渲染的颜色不一定完全正确。<br />如果颜色渲染功能与软件自带的颜色功能冲突，可以关闭此功能。
-        </p>
-      </div>
       <div class="row-mt">
-        <el-switch v-model="options.haveColor"></el-switch>
+        <div class="sub-title">
+          <p class="sub-title-title">输入输出编码</p>
+          <p class="sub-title-info">
+            在仿真终端开启时生效，用于设置仿真终端高度和宽度，更改生效需要重启实例。
+            <br />
+            如果使用有问题，建议关闭。
+          </p>
+        </div>
+        <div class="row-mt" style="display: flex">
+          <el-select
+            v-model="options.oe"
+            filterable
+            allow-create
+            size="small"
+            default-first-option
+            placeholder="终端输出编码"
+            style="width: 220px"
+          >
+            <el-option
+              v-for="item in TERMINAL_CODE"
+              :key="item.value"
+              :label="item.label"
+              :value="item.value"
+            >
+            </el-option>
+          </el-select>
+
+          <el-select
+            v-model="options.ie"
+            filterable
+            size="small"
+            allow-create
+            default-first-option
+            placeholder="命令输入编码"
+            style="width: 220px; margin-left: 12px"
+          >
+            <el-option
+              v-for="item in TERMINAL_CODE"
+              :key="item.value"
+              :label="item.label"
+              :value="item.value"
+            >
+            </el-option>
+          </el-select>
+        </div>
+      </div>
+
+      <div>
+        <div class="sub-title row-mt">
+          <p class="sub-title-title">命令执行回车符</p>
+          <p class="sub-title-info">
+            如果您输入命令按回车没有反应，可以尝试调整此选项。
+            <br />
+            Windows 平台下一般是“回车换行符”，Linux/MacOS 平台下一般是“换行符”。
+          </p>
+        </div>
+        <div class="row-mt">
+          <el-select v-model="options.crlf" placeholder="请选择" size="small" style="width: 220px">
+            <el-option label="换行符（\n）" :value="1"></el-option>
+            <el-option label="回车换行符（\r\n）" :value="2"></el-option>
+          </el-select>
+        </div>
+      </div>
+
+      <div>
+        <div class="sub-title row-mt">
+          <p class="sub-title-title">网页颜色渲染</p>
+          <p class="sub-title-info">
+            网页自动给输出内容增加颜色渲染，渲染的颜色不一定完全正确。<br />如果颜色渲染功能与软件自带的颜色功能冲突，可以关闭此功能。
+          </p>
+        </div>
+        <div class="row-mt">
+          <el-switch v-model="options.haveColor"></el-switch>
+        </div>
       </div>
 
       <div class="row-mt">
@@ -90,6 +157,7 @@
 import Dialog from "@/components/Dialog";
 import { request } from "@/app//service/protocol";
 import { API_INSTANCE_UPDATE } from "@/app/service/common";
+import { TERMINAL_CODE } from "../../service/common";
 export default {
   components: { Dialog },
   props: {
@@ -109,6 +177,7 @@ export default {
   },
   data() {
     return {
+      TERMINAL_CODE,
       v: false,
       options: {}
     };
@@ -143,7 +212,10 @@ export default {
               ...this.options
             },
             pingConfig: {},
-            eventTask: {}
+            eventTask: {},
+            crlf: this.options.crlf,
+            ie: this.options.ie,
+            oe: this.options.oe
           }
         });
         this.options = {};

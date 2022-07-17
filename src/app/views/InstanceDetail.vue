@@ -479,7 +479,7 @@
 </template>
 
 <script>
-import { API_IMAGES, API_INSTANCE, API_NETWORK_MODES } from "../service/common";
+import { API_IMAGES, API_INSTANCE, API_NETWORK_MODES, TERMINAL_CODE } from "../service/common";
 import { processTypeList, statusCodeToText } from "../service/instance_tools";
 import Panel from "../../components/Panel";
 import router from "../router";
@@ -541,17 +541,7 @@ export default {
       ],
 
       // 可选的字符编码
-      characters: [
-        { label: "UTF-8（通用）", value: "UTF-8" },
-        { label: "GBK（中文）", value: "GBK" },
-        { label: "BIG5（繁中）", value: "BIG5" },
-        { label: "Shift_JIS（日文）", value: "Shift_JIS" },
-        { label: "KS_C_5601（韩文）", value: "KS_C_5601" },
-        { label: "GB2312（中文）", value: "GB2312" },
-        { label: "GB18030（中文）", value: "GB18030" },
-        { label: "Big5-HKSCS（繁中）", value: "Big5-HKSCS" },
-        { label: "UTF-16", value: "UTF-16" }
-      ]
+      characters: TERMINAL_CODE
     };
   },
   methods: {
