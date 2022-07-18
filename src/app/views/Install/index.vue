@@ -24,15 +24,17 @@
     <div class="bg"></div>
     <div class="panel-wrapper" v-if="step == 0">
       <Panel class="panel tc" body-style="padding:40px;">
-        <h1 class="title">欢迎使用，MCSManager 管理面板</h1>
-        <p>我们支持 Minecraft，其他部分游戏服务端以及通用控制台程序的交互和管理。</p>
+        <h1 class="title">欢迎使用 MCSManager 管理面板</h1>
+        <p>开源，分布式，开箱即用，支持 Minecraft 游戏服务端和所有控制台程序的管理面板</p>
         <div style="margin-top: 48px">
-          <el-button type="primary" @click="next">现在安装</el-button>
+          <el-button type="primary" @click="next" v-loading="isLoading">开始使用</el-button>
         </div>
         <div class="panel-bottom">
-          <a href="https://mcsmanager.com/" target="_blank" rel="noopener noreferrer"
-            >官方网站: https://mcsmanager.com/</a
-          >
+          <a href="https://mcsmanager.com/" target="_blank" rel="noopener noreferrer">
+            Reference: https://mcsmanager.com/
+          </a>
+          <br />
+          <span>Released under the AGPL-3.0 License.</span>
         </div>
       </Panel>
     </div>
@@ -50,7 +52,9 @@
               <el-input v-model="initUser.passWord" />
             </el-form-item>
             <el-form-item label="">
-              <el-button type="primary" @click="createUser">创建账号</el-button>
+              <el-button type="primary" @click="createUser" v-loading="isLoading">
+                创建账号
+              </el-button>
             </el-form-item>
           </el-form>
         </div>
@@ -118,7 +122,11 @@ export default {
   },
   methods: {
     next() {
-      this.step++;
+      this.isLoading = true;
+      setTimeout(() => {
+        this.isLoading = false;
+        this.step++;
+      }, 2000);
     },
     async createUser() {
       this.$refs["form"].validate(async (valid) => {
