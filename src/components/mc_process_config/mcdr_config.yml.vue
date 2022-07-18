@@ -87,7 +87,7 @@ export default {
           password: "rcon 密码"
         },
         check_update: "更新检测",
-        advanced_console: "高级控制台，在 MCSM 中使用需关闭此功能",
+        advanced_console: "高级控制台",
         disable_console_thread: "禁用控制台线程",
         disable_console_color: "禁用控制台颜色",
         custom_handlers: "自定义服务端处理器列表",
