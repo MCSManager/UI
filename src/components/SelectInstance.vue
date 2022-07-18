@@ -61,7 +61,7 @@
     </div>
     <div class="row-mt">
       <el-table :data="instances" stripe style="width: 100%" size="mini">
-        <el-table-column prop="nickname" label="示例名称" min-width="240"></el-table-column>
+        <el-table-column prop="nickname" label=实例名称" min-width="240"></el-table-column>
         <el-table-column label="操作" style="text-align: right" width="180">
           <template #default="scope">
             <el-button size="small" @click="callback(scope.row)"> 选择 </el-button>
