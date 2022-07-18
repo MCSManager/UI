@@ -46,19 +46,16 @@
 
         <div v-if="step == 1">
           <el-row :gutter="10" justify="left">
-            <el-col
-              :md="6"
-              :offset="0"
-              v-for="(item, index) in remoteObjects"
-              :key="index"
-              @click="selectHost(item.uuid)"
-            >
-              <ItemGroup v-if="item.available">
-                <SelectBlock style="height: 120px; background-color: white">
-                  <template #title>{{ item.ip }}:{{ item.port }}</template>
-                </SelectBlock>
-              </ItemGroup>
-            </el-col>
+            <template v-for="(item, index) in remoteObjects" :key="index">
+              <el-col :md="6" :offset="0" @click="selectHost(item.uuid)" v-if="item.available">
+                <ItemGroup>
+                  <SelectBlock style="height: 120px; background-color: white">
+                    <template #title>{{ item.ip }}:{{ item.port }}</template>
+                    <template #info>{{ item.remarks }}</template>
+                  </SelectBlock>
+                </ItemGroup>
+              </el-col>
+            </template>
           </el-row>
         </div>
       </template>
