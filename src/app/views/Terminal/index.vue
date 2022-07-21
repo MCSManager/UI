@@ -178,7 +178,7 @@
                   style="width: 100%"
                   size="small"
                   @click="toTerminalSettingPanel"
-                  >实例设置
+                  >终端设置
                 </el-button>
               </el-col>
 
