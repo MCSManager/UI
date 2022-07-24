@@ -171,9 +171,9 @@
       <el-row :gutter="20">
         <el-col :md="12" :offset="0">
           <Panel v-loading="loading">
-            <template #title>{{ $t('overview.runningDaemon') }}</template>
+            <template #title>{{ $t('overview.runningInstances') }}</template>
             <template #default>
-              <p>{{ $t('overview.runningDaemoInfo') }}</p>
+              <p>{{ $t('overview.runningInstancesInfo') }}</p>
               <div class="echart-wrapper">
                 <div id="echart-wrapper-main4" style="width: 100%; height: 200px"></div>
               </div>

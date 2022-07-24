@@ -45,8 +45,8 @@ export default {
         panelCpuUsage: "面板端 CPU 使用率",
         panelCpuUsageInfo: "每 10 秒统计间隔，总计 10 分钟的 CPU 历史使用率",
 
-        runningDaemon: "分布式实例运行量",
-        runningDaemoInfo: "每 1 分钟统计间隔，总计 1 小时的实例状态历史",
+        runningInstances: "分布式实例运行量",
+        runningInstancesInfo: "每 1 分钟统计间隔，总计 1 小时的实例状态历史",
 
         panelMemoryUsage: "面板端内存使用率",
         panelMemoryUsageInfo: "每 10 秒统计间隔，总计 10 分钟的内存历史使用率",
