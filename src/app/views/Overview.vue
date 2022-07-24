@@ -23,7 +23,8 @@
   <el-row :gutter="20">
     <el-col :span="24">
       <Panel v-loading="loading">
-        <template #title>{{ $t("overview.title1") }}</template>
+        <!-- 多语言HTML处示例代码，基础玩法 -->
+        <template #title>{{ $t("overview.systemInfoTable") }}</template>
         <template #default>
           <el-row :gutter="20">
             <el-col :xs="12" :md="6" v-for="(item, index) in computerInfoA" :key="index">
@@ -44,8 +45,9 @@
       <div>
         <el-row :gutter="20">
           <el-col :md="6" :xs="12" :offset="0">
+            <!-- 多语言HTML处示例代码，绑定属性内部的话，需要在属性名前加冒号。里面的双引号变单引号 -->
             <ValueCard
-              title="守护进程状态"
+              :title="$t('overview.daemonStatus')"
               sub-title="已正确连接数 / 已配置总数"
               :value="`${valueCard.availableDaemon}/${valueCard.totalDaemon}`"
               style="height: 260px"
@@ -324,7 +326,8 @@ export default {
       // const uptime = Number(system.uptime / 60 / 60).toFixed(0);
       this.computerInfoA = [
         {
-          name: "系统类型",
+          // 在Javascript代码中的用法，记得加this，单双引号灵活使用
+          name: this.$t("overview.systemType"),
           value: `${system.type} ${system.platform}`
         },
         {

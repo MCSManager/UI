@@ -2,6 +2,8 @@ export default {
     test: "你好",
 
     overview: {
-        title1: "面板端详细数据"
+        systemInfoTable: "系统信息表",
+        daemonStatus: "守护进程状态",
+        systemType: "系统类型"
     }
 }
