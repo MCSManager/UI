@@ -1,5 +1,5 @@
 export default {
-    test: "你好",
+    test: "你好1",
 
     overview: {
         systemInfoTable: "系统信息表",
