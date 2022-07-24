@@ -53,6 +53,17 @@
         </el-breadcrumb> -->
       </el-col>
       <el-col :span="12" style="text-align: right; line-height: 28px">
+        <span class="locale-changer">
+          <select v-model="$i18n.locale">
+            <option
+              v-for="locale in $i18n.availableLocales"
+              :key="`locale-${locale}`"
+              :value="locale"
+            >
+              {{ locale }}
+            </option>
+          </select>
+        </span>
         <el-dropdown style="margin: 0px 10px">
           <span class="el-dropdown-link">
             {{ userInfo.userName }}

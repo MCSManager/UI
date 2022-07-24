@@ -23,7 +23,7 @@
   <el-row :gutter="20">
     <el-col :span="24">
       <Panel v-loading="loading">
-        <template #title>面板端详细数据</template>
+        <template #title>{{ $t("overview.title1") }}</template>
         <template #default>
           <el-row :gutter="20">
             <el-col :xs="12" :md="6" v-for="(item, index) in computerInfoA" :key="index">
@@ -128,7 +128,11 @@
                   <i class="el-icon-circle-check"></i> 在线
                 </span>
                 <span class="color-red" v-if="!scope.row.status">
-                  <el-tooltip effect="dark" content="无法连接到指定 IP 或者密钥错误" placement="top">
+                  <el-tooltip
+                    effect="dark"
+                    content="无法连接到指定 IP 或者密钥错误"
+                    placement="top"
+                  >
                     <span><i class="el-icon-warning-outline"></i> 离线</span>
                   </el-tooltip>
                 </span>
