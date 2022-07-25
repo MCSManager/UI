@@ -2,6 +2,10 @@ export default {
     general: {
         search: "搜索",
         setting: "设置",
+        manage: "管理",
+        edit: "编辑",
+        confirm: "确定",
+        cancel: "取消",
     },
     overview: {
         systemInfoTable: "系统信息表",
@@ -58,7 +62,6 @@ export default {
         docs: "帮助文档",
         "Q&A": "常见问题",
     },
-
     home: {
         totalInstance: "实例总计",
         running: "正在运行",
@@ -82,6 +85,7 @@ export default {
     instances: {
         instancesList: "应用实例列表",
         selectDaemon: "请选择远程守护进程地址",
+        selectOne: "请至少选择一项",
         instanceName: "实例名称",
         showCardList: "简单视图",
         showTableList: "批量操作视图",
@@ -127,7 +131,6 @@ export default {
             lastDatetime: "最后启动",
             operate: "操作"
         },
-
         dialog: {
             instanceParameterEdit: "实例参数编辑",
             commandClose: "关闭命令",
@@ -136,10 +139,16 @@ export default {
             inputOrOutputCodeInfo: "当控制台出现乱码时可以尝试调整，例如: GBK，UTF-8 等",
             update: "更新",
             close: "关闭",
-        }
-
+        },
     },
     notify: {
+        connectDaemonErrorr: "访问远程守护进程异常",
+        confirmDelTitle: "最终确认",
+        confirmDelContent: "确定要进行移除/删除吗？",
+        confirmBatchDelContent: "确定要进行批量移除吗？此操作不会删除实例实际文件，只会删除实例",
+        confirmBatchDelFileConten: "确定要进行批量移除吗？此操作不会删除实例实际文件，只会删除实例",
+        delSuccess: "删除成功",
+        Success: "数据刷新可能存在一定延时",
         dateLoadError: "数据加载出错",
-    }
+    },
 }

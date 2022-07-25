@@ -292,13 +292,13 @@
                   size="mini"
                   @click="editInstance(scope.row.serviceUuid, scope.row.instanceUuid)"
                 >
-                  设置
+                  {{ $t('general.setting') }}
                 </el-button>
                 <el-button
                   size="mini"
                   @click="toInstance(scope.row.serviceUuid, scope.row.instanceUuid)"
                 >
-                  管理
+                  {{ $t('general.manage') }}
                 </el-button>
               </template>
             </el-table-column>
@@ -489,7 +489,7 @@ export default {
         }
       } catch (error) {
         this.$notify({
-          title: "访问远程守护进程异常",
+          title: this.$t("instances.notify.connectDaemonErrorr"),
           message: error.toString(),
           type: "error"
         });
@@ -512,23 +512,23 @@ export default {
       this.multipleSelection = v;
     },
     editInstance(serviceUuid, instanceUuid) {
-      console.log("编辑实例:", serviceUuid, instanceUuid);
+      console.log("Edit Instances:", serviceUuid, instanceUuid);
       router.push({ path: `/instance_detail/${serviceUuid}/${instanceUuid}/` });
     },
     toNewInstance() {
       if (!this.currentRemoteUuid) {
-        return this.$message({ type: "info", message: "请先在左侧下拉框中选择守护进程" });
+        return this.$message({ type: "info", message: this.$t("instances.selectRemoteTitle") });
       }
       router.push({ path: `/new_instace/${this.currentRemoteUuid}` });
     },
     toInstance(serviceUuid, instanceUuid) {
-      console.log("访问实例:", serviceUuid, instanceUuid);
+      console.log("View Instance:", serviceUuid, instanceUuid);
       router.push({ path: `/terminal/${serviceUuid}/${instanceUuid}/` });
     },
     async unlinkInstance(uuid, deleteFile = false) {
-      await this.$confirm("确定要进行移除/删除吗？", "最终确认", {
-        confirmButtonText: "确定",
-        cancelButtonText: "取消",
+      await this.$confirm(this.$t("instances.notify.confirmDelContent"), (this.$t("instances.notify.confirmDelTitle")), {
+        confirmButtonText: this.$t("general.confirm"),
+        cancelButtonText: this.$t("general.cancel"),
         type: "warning"
       });
       await axios.request({
@@ -540,26 +540,26 @@ export default {
         data: { uuids: [uuid], deleteFile }
       });
       this.$notify({
-        title: "删除成功",
-        message: "数据刷新可能存在一定延时"
+        title: this.$t("instances.notify.delSuccess"),
+        message: this.$t("instances.notify.Success")
       });
     },
     // 批量删除
     async batDelete(type) {
       if (type === 1) {
         await this.$confirm(
-          "确定要进行批量移除吗？此操作不会删除实例实际文件，只会删除实例",
-          "最终确认",
+          this.$t("instances.notify.confirmBatchDelContent"),
+          this.$t("instances.notify.confirmDelTitle"),
           {
-            confirmButtonText: "确定",
-            cancelButtonText: "取消",
+            confirmButtonText: this.$t("general.confirm"),
+            cancelButtonText: this.$t("general.cancel"),
             type: "warning"
           }
         );
       } else {
-        await this.$confirm("确定要进行批量删除吗？此操作将会一并删除文件", "最终确认", {
-          confirmButtonText: "确定",
-          cancelButtonText: "取消",
+        await this.$confirm(this.$t("instances.notify.confirmBatchDelFileContent"), this.$t("notify.confirmDelTitle"), {
+          confirmButtonText: this.$t("general.confirm"),
+          cancelButtonText: this.$t("general.cancel"),
           type: "warning"
         });
       }
@@ -569,7 +569,7 @@ export default {
         uuids.push(iterator.instanceUuid);
       }
       if (uuids.length === 0) {
-        return this.$message({ type: "error", message: "请至少选择一项" });
+        return this.$message({ type: "error", message: this.$t("instances.selectOne") });
       }
       await axios.request({
         method: "DELETE",
