@@ -1,4 +1,8 @@
 export default {
+    general: {
+        search: "搜索",
+        setting: "设置"
+    },
     overview: {
         systemInfoTable: "系统信息表",
         daemonStatus: "守护进程状态",
@@ -53,5 +57,52 @@ export default {
 
         docs: "帮助文档",
         "Q&A": "常见问题",
+    },
+    instances: {
+        instancesList: "应用实例列表",
+        selectDaemon: "请选择远程守护进程地址",
+        instanceName: "实例名称",
+        showCardList: "简单视图",
+        showTableList: "批量操作视图",
+        newInstance: "新建实例",
+        start: "开启",
+        stop: "关闭",
+        kill: "终止",
+        remove: "移除",
+        delete: "删除",
+        selectRemoteError: "错误：未选择任何远程守护进程",
+        selectRemoteTitle: "请在左上方的下拉框中选择远程守护进程",
+        selectRemoteInfo: "默认可选择 localhost 守护进程，守护进程可以部署在任意主机上，帮助您快速管理多个主机并且分布式部署。",
+        notAnyInstanceTitle: "无数据，请点击右上方绿色的“新建实例”按钮创建实例。",
+        notAnyInstanceInfo: "应用实例可以是 Minecraft服务器，也可以是其他任何应用程序，点击创建后将部署在指定的远程守护进程中。",
+        lastDatetime: "启动时间",
+        endTime: "到期时间",
+        otherInfo: "其他信息",
+        detailsInfo: "详细信息",
+        playerCount: "人数",
+        mcVersion: "版本",
+
+        status: {
+            title: "状态",
+            runStatus: "运行状态",
+            die: "未运行",
+            running: "运行中",
+            stopping: "停止中",
+            starting: "启动中",
+            busy: "忙碌",
+        },
+
+        card: {
+            editConfig: "编辑配置",
+            controlPanel: "控制面板",
+            remove: "移除实例",
+            delete: "删除实例",
+        },
+
+        table: {
+            instancesList: "实例列表",
+            instanceType: "实例类型",
+            operate: "操作"
+        }
     }
 }

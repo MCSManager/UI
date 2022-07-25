@@ -21,7 +21,7 @@
 
 <template>
   <Panel>
-    <template #title>应用实例列表</template>
+    <template #title>{{ $t("instances.instancesList") }}</template>
     <template #default>
       <el-row :gutter="20" justify="space-between" class="row-mb">
         <el-col :md="12" :offset="0">
@@ -30,7 +30,7 @@
               style="width: 320px"
               v-model="currentRemoteUuid"
               filterable
-              placeholder="请选择远程守护进程地址"
+              :placeholder="$t('instances.selectDaemon')"
               size="small"
               @change="remoteSelectHandle"
             >
@@ -44,12 +44,12 @@
             </el-select>
             <el-input
               v-model="query.instanceName"
-              placeholder="实例名称"
+              :placeholder="$t('instances.selectDaemon')"
               size="small"
               style="width: 160px"
             ></el-input>
             <el-button size="small" @click="refresh" type="primary">
-              <i class="el-icon-refresh"></i> 搜索
+              <i class="el-icon-refresh"></i> {{ $t("general.search") }}
             </el-button>
           </ItemGroup>
         </el-col>
@@ -61,7 +61,7 @@
               plain
               @click="changeView(1)"
               v-show="showTableList"
-              >简单视图</el-button
+              >{{ $t("instances.showCardList") }}</el-button
             >
             <el-button
               type="primary"
@@ -69,25 +69,25 @@
               plain
               @click="changeView(2)"
               v-show="!showTableList"
-              >批量操作视图</el-button
+              >{{ $t("instances.showTableList") }}</el-button
             >
             <el-button size="small" type="success" @click="toNewInstance">
-              <i class="el-icon-plus"></i> 新建实例
+              <i class="el-icon-plus"></i> {{ $t("instances.showTableList") }}
             </el-button>
             <el-button size="small" @click="batOpen" v-if="showTableList">
-              <i class="el-icon-video-play"></i> 开启
+              <i class="el-icon-video-play"></i> {{ $t("instances.start") }}
             </el-button>
             <el-button size="small" @click="batStop" v-if="showTableList">
-              <i class="el-icon-video-pause"></i> 关闭
+              <i class="el-icon-video-pause"></i> {{ $t("instances.stop") }}
             </el-button>
             <el-button size="small" @click="batKill" v-if="showTableList">
-              <i class="el-icon-video-pause"></i> 终止
+              <i class="el-icon-video-pause"></i> {{ $t("instances.kill") }}
             </el-button>
             <el-button size="small" type="danger" plain @click="batDelete(1)" v-if="showTableList">
-              <i class="el-icon-delete"></i> 移除
+              <i class="el-icon-delete"></i> {{ $t("instances.remove") }}
             </el-button>
             <el-button size="small" type="danger" @click="batDelete(2)" v-if="showTableList">
-              <i class="el-icon-delete"></i> 删除
+              <i class="el-icon-delete"></i> {{ $t("instances.delete") }}
             </el-button>
           </ItemGroup>
         </el-col>
@@ -97,7 +97,7 @@
         <div class="instance-table-warpper">
           <div>
             <div class="color-red" v-if="!currentRemoteUuid">
-              &nbsp;错误：未选择任何远程守护进程
+              &nbsp;{{ $t("instances.selectRemoteError") }}
             </div>
           </div>
           <div>
@@ -118,10 +118,9 @@
           <div class="notAnyInstanceTip">
             <i class="el-icon-guide" style="font-size: 190px"></i>
             <div class="sub-title">
-              <div class="sub-title-title">请在左上方的下拉框中选择远程守护进程</div>
+              <div class="sub-title-title">{{ $t("instances.selectRemoteTitle") }}</div>
               <div class="sub-title-info">
-                默认可选择 localhost
-                守护进程，守护进程可以部署在任意主机上，帮助您快速管理多个主机并且分布式部署。
+                {{ $t("instances.selectRemoteInfo") }}
               </div>
             </div>
           </div>
@@ -132,10 +131,9 @@
           <div class="notAnyInstanceTip">
             <i class="el-icon-truck" style="font-size: 190px"></i>
             <div class="sub-title">
-              <div class="sub-title-title">无数据，请点击右上方绿色的“新建实例”按钮创建实例。</div>
+              <div class="sub-title-title">{{ $t("instances.notAnyInstanceTitle") }}</div>
               <div class="sub-title-info">
-                应用实例可以是 Minecraft
-                服务器，也可以是其他任何应用程序，点击创建后将部署在指定的远程守护进程中。
+                {{ $t("instances.notAnyInstanceInfo") }}
               </div>
             </div>
           </div>
@@ -176,16 +174,16 @@
                   <el-dropdown-item>重启实例</el-dropdown-item>
                   <el-dropdown-item>终止实例</el-dropdown-item> -->
                   <el-dropdown-item @click="editInstance(item.serviceUuid, item.instanceUuid)"
-                    >编辑配置</el-dropdown-item
+                    >{{ $t("instances.card.editConfig") }}</el-dropdown-item
                   >
                   <el-dropdown-item @click="toInstance(item.serviceUuid, item.instanceUuid)"
-                    >控制面板</el-dropdown-item
+                    >{{ $t("instances.card.controlPanel") }}</el-dropdown-item
                   >
                   <el-dropdown-item @click="unlinkInstance(item.instanceUuid)"
-                    >移除实例</el-dropdown-item
+                    >{{ $t("instances.card.remove") }}</el-dropdown-item
                   >
                   <el-dropdown-item @click="unlinkInstance(item.instanceUuid, true)"
-                    >删除实例</el-dropdown-item
+                    >{{ $t("instances.card.delete") }}</el-dropdown-item
                   >
                 </el-dropdown-menu>
               </template>
@@ -198,29 +196,29 @@
             @click="toInstance(item.serviceUuid, item.instanceUuid)"
           >
             <div>
-              状态：
-              <span class="color-gray" v-if="item.status == 0">未运行</span>
-              <span class="color-green" v-else-if="item.status == 3">运行中</span>
-              <span class="color-yellow" v-else-if="item.status == 1">停止中</span>
-              <span class="color-yellow" v-else-if="item.status == 2">启动中</span>
-              <span class="color-red" v-else-if="item.status == -1">忙碌</span>
-              <span class="color-red" v-else>忙碌</span>
+              {{ $t("instances.status.title") }}：
+              <span class="color-gray" v-if="item.status == 0">{{ $t("instances.status.die") }}</span>
+              <span class="color-green" v-else-if="item.status == 3">{{ $t("instances.status.running") }}</span>
+              <span class="color-yellow" v-else-if="item.status == 1">{{ $t("instances.status.stopping") }}</span>
+              <span class="color-yellow" v-else-if="item.status == 2">{{ $t("instances.status.starting") }}</span>
+              <span class="color-red" v-else-if="item.status == -1">{{ $t("instances.status.busy") }}</span>
+              <span class="color-red" v-else>{{ $t("instances.status.busy") }}</span>
             </div>
             <div>
-              <span>启动时间：</span>
+              <span>{{ $t("instances.lastDatetime") }}：</span>
               <span>{{ item.config.lastDatetime }}</span>
             </div>
             <div>
-              <span>到期时间：</span>
+              <span>{{ $t("instances.endTime") }}：</span>
               <span>{{ item.config.endTime }}</span>
             </div>
             <div>
-              <span>其他信息：</span>
+              <span>{{ $t("instances.otherInfo") }}：</span>
               <span>
                 <span v-if="item.info && item.info.currentPlayers >= 0">
-                  人数 {{ item.info.currentPlayers }}/{{ item.info.maxPlayers }}
+                  {{ $t("instances.playerCount") }} {{ item.info.currentPlayers }}/{{ item.info.maxPlayers }}
                 </span>
-                <span v-else-if="item.info && item.version"> &nbsp;版本 {{ item.version }} </span>
+                <span v-else-if="item.info && item.version"> &nbsp;{{ $t("instances.mcVersion") }} {{ item.version }} </span>
                 <span v-else></span>
               </span>
             </div>
@@ -231,11 +229,11 @@
     </el-col>
   </el-row>
 
-  <!-- 卡片显示风格 -->
+  <!-- 表格显示风格 -->
   <el-row :gutter="20" class="row-mb" v-show="showTableList">
     <el-col :span="24" :offset="0">
       <Panel>
-        <template #title>实例列表</template>
+        <template #title>{{ $t("instances.table.instancesList") }}</template>
         <template #default>
           <!-- 表格显示 -->
           <el-table
@@ -248,7 +246,7 @@
             v-show="!notAnyInstance && currentRemoteUuid && showTableList"
           >
             <el-table-column type="selection" width="55"> </el-table-column>
-            <el-table-column prop="nickname" label="实例名称" min-width="240">
+            <el-table-column prop="nickname" :label="$t('instances.instanceName')" min-width="240">
               <template #default="scope">
                 <div
                   @click="toInstance(scope.row.serviceUuid, scope.row.instanceUuid)"
@@ -258,37 +256,37 @@
                 </div>
               </template>
             </el-table-column>
-            <el-table-column prop="currentPlayers" label="详细信息" width="240">
+            <el-table-column prop="currentPlayers" :label="$t('instances.detailsInfo')" width="240">
               <template #default="scope">
                 <div>
                   <span v-if="scope.row.info && scope.row.info.currentPlayers >= 0">
-                    人数: {{ scope.row.info.currentPlayers }}/{{ scope.row.info.maxPlayers }}
+                    {{ $t("instances.playerCount") }}: {{ scope.row.info.currentPlayers }}/{{ scope.row.info.maxPlayers }}
                   </span>
                   <span v-if="scope.row.info && scope.row.version">
-                    &nbsp;版本: {{ scope.row.version }}
+                    &nbsp;{{ $t("instances.mcVersion") }}: {{ scope.row.version }}
                   </span>
                 </div>
               </template>
             </el-table-column>
-            <el-table-column prop="status" label="运行状态" width="120">
+            <el-table-column prop="status" :label="$t('instances.status.runStatus')" width="120">
               <template #default="scope">
                 <div class="color-gray" v-if="scope.row.status == 0">
                   <i class="el-icon-video-pause"></i>
-                  <span> 未运行</span>
+                  <span> {{ $t("instances.status.die") }}</span>
                 </div>
                 <div class="color-green" v-else-if="scope.row.status == 3">
                   <i class="el-icon-video-play"></i>
-                  <span> 运行中</span>
+                  <span> {{ $t("instances.status.running") }}</span>
                 </div>
-                <span class="color-yellow" v-else-if="scope.row.status == 1">停止中</span>
-                <span class="color-yellow" v-else-if="scope.row.status == 2">启动中</span>
+                <span class="color-yellow" v-else-if="scope.row.status == 1">{{ $t("instances.status.stopping") }}</span>
+                <span class="color-yellow" v-else-if="scope.row.status == 2">{{ $t("instances.status.starting") }}</span>
 
-                <span class="color-red" v-else-if="scope.row.status == -1">忙碌</span>
-                <span class="color-red" v-else>忙碌</span>
+                <span class="color-red" v-else-if="scope.row.status == -1">{{ $t("instances.status.budy") }}</span>
+                <span class="color-red" v-else>{{ $t("instances.status.budy") }}</span>
               </template>
             </el-table-column>
-            <el-table-column prop="type" label="实例类型" width="140"></el-table-column>
-            <el-table-column label="操作" style="text-align: center" width="180">
+            <el-table-column prop="type" :label="$t('instances.table.instanceType')" width="140"></el-table-column>
+            <el-table-column :label="$t('instances.table.operate')" style="text-align: center" width="180">
               <template #default="scope">
                 <el-button
                   size="mini"
