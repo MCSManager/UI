@@ -1,7 +1,7 @@
 export default {
     general: {
         search: "搜索",
-        setting: "设置"
+        setting: "设置",
     },
     overview: {
         systemInfoTable: "系统信息表",
@@ -59,12 +59,12 @@ export default {
         "Q&A": "常见问题",
     },
 
-
     home: {
         totalInstance: "实例总计",
         running: "正在运行",
         outOfRunning: "未运行",
         maintaining: "维护中",
+        maintainingInfo: "因主机忙碌/维护而暂时不可使用的实例数",
         personalInfo: "个人信息",
         userName: "用户名",
         registerTime: "注册时间",
@@ -74,6 +74,9 @@ export default {
         stopping: "停止中",
         starting: "启动中",
         unknownStatus: "未知状态",
+        updateSuccess: "更新成功",
+        admin: "管理用户",
+        user: "普通用户",
 
     },
     instances: {
@@ -120,8 +123,23 @@ export default {
         table: {
             instancesList: "实例列表",
             instanceType: "实例类型",
+            byteStreamCode: "字节流编码",
+            lastDatetime: "最后启动",
             operate: "操作"
+        },
+
+        dialog: {
+            instanceParameterEdit: "实例参数编辑",
+            commandClose: "关闭命令",
+            commandCloseInfo: "执行“关闭”命令时所执行的实际命令",
+            inputOrOutputCode: "输入/输出编码",
+            inputOrOutputCodeInfo: "当控制台出现乱码时可以尝试调整，例如: GBK，UTF-8 等",
+            update: "更新",
+            close: "关闭",
         }
 
+    },
+    notify: {
+        dateLoadError: "数据加载出错",
     }
 }

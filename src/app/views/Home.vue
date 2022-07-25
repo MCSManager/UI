@@ -57,7 +57,7 @@
         <el-col :xs="12" :md="6" :offset="0">
           <ValueCard
             :title="$t('home.maintaining')"
-            sub-title="因主机忙碌/维护而暂时不可使用的实例数"
+            :sub-title="$t('home.maintaininginfo')"
             :value="this.info.unknown"
             style="height: 260px"
             font-class="el-icon-s-opportunity"
@@ -90,7 +90,7 @@
           </LineLabel>
           <LineLabel space="small">
             <template #title>{{ $t("home.permission") }}</template>
-            <template #default>{{ userInfo.permission >= 10 ? "管理用户" : "普通用户" }}</template>
+            <template #default>{{ userInfo.permission >= 10 ? $t('home.admin') : $t('home.user')}}</template>
           </LineLabel>
         </template>
       </Panel>
@@ -98,7 +98,7 @@
   </el-row>
 
   <Panel>
-    <template #title>{{ $t("home.possessedInstanceList") }}</template>
+    <template #title>{{ $t("instances.instanceName") }}</template>
     <template #default>
       <el-table
         :data="userInfo.instances"
@@ -107,8 +107,8 @@
         size="mini"
         v-loading="info.loading"
       >
-        <el-table-column prop="nickname" label="实例名称" min-width="240"></el-table-column>
-        <el-table-column label="运行状态">
+        <el-table-column prop="nickname" label="$t('instances.instanceName')" min-width="240"></el-table-column>
+        <el-table-column :label="$t('instances.runStatus')">
           <template #default="scope">
             <div class="color-gray" v-if="scope.row.status == 0">
               <i class="el-icon-video-pause"></i>
@@ -126,30 +126,30 @@
           </template>
         </el-table-column>
 
-        <el-table-column label="字节流编码">
+        <el-table-column label=: $t(“instances.table.byteStreamCode”)> 
           <template #default="scope"> {{ scope.row.ie }}/{{ scope.row.oe }} </template>
         </el-table-column>
-        <el-table-column prop="lastDatetime" label="最后启动"></el-table-column>
-        <el-table-column label="到期时间">
+        <el-table-column prop="lastDatetime" label := "$t(instances.table.lastDatetime)"></el-table-column>
+        <el-table-column label := "$t(intances.endTime)">
           <template #default="scope">
             {{ String(scope.row.endTime || "").split("T")[0] }}
           </template>
         </el-table-column>
-        <el-table-column label="操作" style="text-align: center" width="180">
+        <el-table-column label :="$t(intances.table.operate)" style="text-align: center" width="180">
           <template #default="scope">
             <el-button
               size="small"
               @click="toEditInstance(scope.row)"
               :disabled="scope.row.status == -1"
             >
-              编辑
+              {{ $t("general.edit") }}
             </el-button>
             <el-button
               size="small"
               @click="toInstance(scope.row.serviceUuid, scope.row.instanceUuid)"
               :disabled="scope.row.status == -1"
             >
-              管理
+              {{ $t("general.manage")}}
             </el-button>
           </template>
         </el-table-column>
@@ -177,19 +177,19 @@
 
   <!-- 实例详情编辑框 -->
   <Dialog v-model="editInstance.is">
-    <template #title>实例参数编辑</template>
+    <template #title>{{$t("instance.Dialog.instanceParameterEdit")}}</template>
     <template #default>
       <div>
         <div class="sub-title">
-          <p class="sub-title-title">关闭命令</p>
-          <p class="sub-title-info">执行“关闭”命令时所执行的实际命令</p>
+          <p class="sub-title-title">{{$t("intances.dialog.commandClose")}}</p>
+          <p class="sub-title-info"></p>{{$t("instance.dialog.commandCloseIndo")}}
         </div>
         <div class="flex">
           <el-input v-model="editInstance.instance.stopCommand" size="small"></el-input>
         </div>
         <div class="sub-title row-mt">
-          <p class="sub-title-title">输入/输出编码</p>
-          <p class="sub-title-info">当控制台出现乱码时可以尝试调整，例如: GBK，UTF-8 等</p>
+          <p class="sub-title-title">{{$t("intances.dialog.inputOrOutputCode")}}</p>
+          <p class="sub-title-info">{{$t("intances.dialog.inputOrOutputCodeInfo")}}</p>
         </div>
         <div class="flex">
           <ItemGroup :lr="true">
@@ -198,8 +198,8 @@
           </ItemGroup>
         </div>
         <div class="row-mt">
-          <el-button type="success" size="small" @click="saveInstance">更新</el-button>
-          <el-button @click="editInstance.is = !editInstance.is" size="small">关闭</el-button>
+          <el-button type="success" size="small" @click="saveInstance">{{$t("intances.dialog.update")}}</el-button>
+          <el-button @click="editInstance.is = !editInstance.is" size="small">{{$t("intances.dialog.close")}}</el-button>
         </div>
       </div>
     </template>
@@ -243,7 +243,7 @@ export default {
         await this.loadInfoPanel();
       } catch (error) {
         this.$notify({
-          title: "数据加载出错",
+          title: this.$t("notify.dateLoadError"),
           message: error.toString(),
           type: "error"
         });
@@ -265,7 +265,7 @@ export default {
       return statusCodeToText(code);
     },
     toInstance(serviceUuid, instanceUuid) {
-      console.log("访问实例:", serviceUuid, instanceUuid);
+      console.log("accessIntance:", serviceUuid, instanceUuid);
       this.$router.push({ path: `/terminal/${serviceUuid}/${instanceUuid}/` });
     },
     toEditInstance(row) {
@@ -284,9 +284,9 @@ export default {
           },
           data: row
         });
-        this.$message({ type: "success", message: "更新成功" });
+        this.$message({ type: "success", message: this.$t('home.updateSuccess') });
       } catch (error) {
-        this.$message({ type: "error", message: `失败:${error.message}` });
+        this.$message({ type: "error", message: `error:${error.message}` });
       }
       this.editInstance.is = false;
       await this.render();
