@@ -27,7 +27,7 @@
         <el-col :xs="12" :md="6" :offset="0">
           <ValueCard
             :title="$t('home.totalInstance')"
-            sub-title="管理员所分配给您的所有实例总数"
+            :sub-title="$t('home.totalInstanceCount')"
             :value="this.info.total"
             style="height: 260px"
             font-class="el-icon-s-data"
@@ -37,7 +37,7 @@
         <el-col :xs="12" :md="6" :offset="0">
           <ValueCard
             :title="$t('home.running')"
-            sub-title="实例正在运行中的数量"
+            :sub-title="$t('home.runCount')"
             :value="this.info.running"
             style="height: 260px"
             font-class="el-icon-s-promotion"
@@ -47,7 +47,7 @@
         <el-col :xs="12" :md="6" :offset="0">
           <ValueCard
             :title="$t('home.outOfRunning')"
-            sub-title="实例未处于运行中的数量"
+            :sub-title="$t('home.outOfRunningCount')"
             :value="this.info.stopped"
             style="height: 260px"
             font-class="el-icon-s-flag"
