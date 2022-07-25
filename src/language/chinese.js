@@ -53,5 +53,25 @@ export default {
 
         docs: "帮助文档",
         "Q&A": "常见问题",
+    },
+
+    //$t('home.')
+    //      {{$t("home.")}}
+
+    home: {
+        totalInstance: "实例总计",
+        running: "正在运行",
+        outOfRunning: "未运行",
+        maintaining: "维护中",
+        personalInfo: "个人信息",
+        userName: "用户名",
+        registerTime: "注册时间",
+        loginTime: "最后登录",
+        permission: "权限",
+        possessedInstanceList: "拥有的实例列表",
+        stopping: "停止中",
+        starting: "启动中",
+        unknownStatus: "未知状态",
+
     }
 }

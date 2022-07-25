@@ -26,7 +26,7 @@
       <el-row :gutter="20">
         <el-col :xs="12" :md="6" :offset="0">
           <ValueCard
-            title="实例总计"
+            :title="$t('home.totalInstance')"
             sub-title="管理员所分配给您的所有实例总数"
             :value="this.info.total"
             style="height: 260px"
@@ -36,7 +36,7 @@
         </el-col>
         <el-col :xs="12" :md="6" :offset="0">
           <ValueCard
-            title="正在运行"
+            :title="$t('home.running')"
             sub-title="实例正在运行中的数量"
             :value="this.info.running"
             style="height: 260px"
@@ -46,7 +46,7 @@
         </el-col>
         <el-col :xs="12" :md="6" :offset="0">
           <ValueCard
-            title="未运行"
+            :title="$t('home.outOfRunning')"
             sub-title="实例未处于运行中的数量"
             :value="this.info.stopped"
             style="height: 260px"
@@ -56,7 +56,7 @@
         </el-col>
         <el-col :xs="12" :md="6" :offset="0">
           <ValueCard
-            title="维护中"
+            :title="$t('home.maintaining')"
             sub-title="因主机忙碌/维护而暂时不可使用的实例数"
             :value="this.info.unknown"
             style="height: 260px"
@@ -70,26 +70,26 @@
     <!-- 右侧用户信息栏 -->
     <el-col :md="8" :offset="0">
       <Panel style="height: 260px">
-        <template #title>个人信息</template>
+        <template #title>{{ $t("home.personalInfo") }}</template>
         <template #default>
           <LineLabel space="small">
             <template #title>UID</template>
             <template #default>{{ userInfo.uuid }}</template>
           </LineLabel>
           <LineLabel space="small">
-            <template #title>用户名</template>
+            <template #title>{{ $t("home.username") }}</template>
             <template #default>{{ userInfo.userName }}</template>
           </LineLabel>
           <LineLabel space="small">
-            <template #title>注册时间</template>
+            <template #title>{{ $t("home.registerTime") }}</template>
             <template #default>{{ userInfo.registerTime }}</template>
           </LineLabel>
           <LineLabel space="small">
-            <template #title>最后登录</template>
+            <template #title>{{ $t("home.loginTime") }}</template>
             <template #default>{{ userInfo.loginTime }}</template>
           </LineLabel>
           <LineLabel space="small">
-            <template #title>权限</template>
+            <template #title>{{ $t("home.permission") }}</template>
             <template #default>{{ userInfo.permission >= 10 ? "管理用户" : "普通用户" }}</template>
           </LineLabel>
         </template>
@@ -98,7 +98,7 @@
   </el-row>
 
   <Panel>
-    <template #title>拥有的实例列表</template>
+    <template #title>{{ $t("home.possessedInstanceList") }}</template>
     <template #default>
       <el-table
         :data="userInfo.instances"
@@ -112,16 +112,16 @@
           <template #default="scope">
             <div class="color-gray" v-if="scope.row.status == 0">
               <i class="el-icon-video-pause"></i>
-              <span> 未运行</span>
+              <span>{{ $t("home.outOfRunning") }}</span>
             </div>
             <div class="color-green" v-else-if="scope.row.status == 3">
               <i class="el-icon-video-play"></i>
-              <span> 运行中</span>
+              <span> {{$t("home.running")}}</span>
             </div>
-            <span class="color-yellow" v-else-if="scope.row.status == 1">停止中</span>
-            <span class="color-yellow" v-else-if="scope.row.status == 2">启动中</span>
-            <span class="color-red" v-else-if="scope.row.status == -1">维护中</span>
-            <span class="color-red" v-else>未知状态</span>
+            <span class="color-yellow" v-else-if="scope.row.status == 1">{{$t("home.stopping")}}</span>
+            <span class="color-yellow" v-else-if="scope.row.status == 2">{{$t("home.starting")}}</span>
+            <span class="color-red" v-else-if="scope.row.status == -1">{{$t("home.maintaining")}}</span>
+            <span class="color-red" v-else>{{$t("home.unknownStatus")}}</span>
             <!-- {{ statusToText(scope.row.status) }} -->
           </template>
         </el-table-column>
