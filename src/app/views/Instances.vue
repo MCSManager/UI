@@ -489,7 +489,7 @@ export default {
         }
       } catch (error) {
         this.$notify({
-          title: this.$t("instances.notify.connectDaemonErrorr"),
+          title: this.$t("notify.connectDaemonErrorr"),
           message: error.toString(),
           type: "error"
         });
@@ -526,7 +526,7 @@ export default {
       router.push({ path: `/terminal/${serviceUuid}/${instanceUuid}/` });
     },
     async unlinkInstance(uuid, deleteFile = false) {
-      await this.$confirm(this.$t("instances.notify.confirmDelContent"), (this.$t("instances.notify.confirmDelTitle")), {
+      await this.$confirm(this.$t("notify.confirmDelContent"), (this.$t("notify.confirmDelTitle")), {
         confirmButtonText: this.$t("general.confirm"),
         cancelButtonText: this.$t("general.cancel"),
         type: "warning"
@@ -540,16 +540,16 @@ export default {
         data: { uuids: [uuid], deleteFile }
       });
       this.$notify({
-        title: this.$t("instances.notify.delSuccess"),
-        message: this.$t("instances.notify.Success")
+        title: this.$t("notify.delSuccess"),
+        message: this.$t("notify.Success")
       });
     },
     // 批量删除
     async batDelete(type) {
       if (type === 1) {
         await this.$confirm(
-          this.$t("instances.notify.confirmBatchDelContent"),
-          this.$t("instances.notify.confirmDelTitle"),
+          this.$t("notify.confirmBatchDelContent"),
+          this.$t("notify.confirmDelTitle"),
           {
             confirmButtonText: this.$t("general.confirm"),
             cancelButtonText: this.$t("general.cancel"),
@@ -557,7 +557,7 @@ export default {
           }
         );
       } else {
-        await this.$confirm(this.$t("instances.notify.confirmBatchDelFileContent"), this.$t("notify.confirmDelTitle"), {
+        await this.$confirm(this.$t("notify.confirmBatchDelFileContent"), this.$t("notify.confirmDelTitle"), {
           confirmButtonText: this.$t("general.confirm"),
           cancelButtonText: this.$t("general.cancel"),
           type: "warning"
@@ -580,47 +580,47 @@ export default {
         data: { uuids, deleteFile: type === 1 ? false : true }
       });
       this.$notify({
-        title: "批量删除成功",
-        message: "可能会存在一定延迟，文件删除需要一定的时间"
+        title: this.$t("notify.batchDelSuccess"),
+        message: this.$t("notify.mayBeDelay")
       });
     },
     async batKill() {
       if (this.multipleSelection.length == 0)
-        return ElMessage.error("无法执行，请至少选择一个实例");
+        return ElMessage.error(this.$t("notify.selectInsError"));
       await axios.request({
         method: "POST",
         url: `${API_URL}/api/instance/multi_kill/`,
         data: this.multipleSelection
       });
       this.$notify({
-        title: "终止命令已发出",
-        message: "已成功向各个远程主机发布命令，具体操作可能略有延时，请稍等一段时间后查看结果"
+        title: this.$t("notify.killCmdSend"),
+        message: this.$t("notify.cmdSendInfo")
       });
     },
     async batOpen() {
       if (this.multipleSelection.length == 0)
-        return ElMessage.error("无法执行，请至少选择一个实例");
+        return ElMessage.error(this.$t("notify.selectInsError"));
       await axios.request({
         method: "POST",
         url: `${API_URL}/api/instance/multi_open/`,
         data: this.multipleSelection
       });
       this.$notify({
-        title: "开启命令已发出",
-        message: "已成功向各个远程主机发布命令，具体操作可能略有延时，请稍等一段时间后查看结果"
+        title: this.$t("notify.startCmdSend"),
+        message: this.$t("notify.cmdSendInfo")
       });
     },
     async batStop() {
       if (this.multipleSelection.length == 0)
-        return ElMessage.error("无法执行，请至少选择一个实例");
+        return ElMessage.error(this.$t("notify.selectInsError"));
       await axios.request({
         method: "POST",
         url: `${API_URL}/api/instance/multi_stop/`,
         data: this.multipleSelection
       });
       this.$notify({
-        title: "关闭命令已发出",
-        message: "已成功向各个远程主机发布命令，具体操作可能略有延时，请稍等一段时间后查看结果"
+        title: this.$t("notify.stopCmdSend"),
+        message: this.$t("notify.cmdSendInfo")
       });
     },
     changeView(type = 1) {
