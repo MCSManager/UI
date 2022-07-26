@@ -60,7 +60,7 @@
           <template #title>节点管理</template>
         </el-menu-item>
         <el-menu-item key="/container" index="/container">
-          <i class="el-icon-cpu"></i>
+          <i class="el-icon-takeaway-box"></i>
           <template #title>环境镜像</template>
         </el-menu-item>
         <!-- <el-menu-item key="/update" index="/update">
