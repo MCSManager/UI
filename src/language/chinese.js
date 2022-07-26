@@ -10,7 +10,7 @@ export default {
         add: "新增",
         confirm: "确定",
         cancel: "取消",
-        pleaseSelect: "请选择",
+        pleaseSelect: "请选择"
     },
     overview: {
         systemInfoTable: "系统信息表",
@@ -38,7 +38,8 @@ export default {
         systemLoadPercentage: "面板所在主机 CPU，RAM 百分比",
 
         daemonOverview: "分布式服务总览",
-        daemonOverviewInfo: "确保所有守护进程均在线，离线状态将导致此守护进程以及相关功能不可用，可能会影响使用体验与数据。<br>面板端 {panelVersion} 必须对应守护进程 {specifiedDaemonVersion} 版本",
+        daemonOverviewInfo:
+            "确保所有守护进程均在线，离线状态将导致此守护进程以及相关功能不可用，可能会影响使用体验与数据。<br>面板端 {panelVersion} 必须对应守护进程 {specifiedDaemonVersion} 版本",
         addr: "地址",
         remarks: "备注",
         port: "端口",
@@ -65,7 +66,7 @@ export default {
         panelMemoryUsageInfo: "每 10 秒统计间隔，总计 10 分钟的内存历史使用率",
 
         docs: "帮助文档",
-        "Q&A": "常见问题",
+        "Q&A": "常见问题"
     },
     instances: {
         instancesList: "应用实例列表",
@@ -82,9 +83,11 @@ export default {
         delete: "删除",
         selectRemoteError: "未选择任何远程守护进程",
         selectRemoteTitle: "请在左上方的下拉框中选择远程守护进程",
-        selectRemoteInfo: "默认可选择 localhost 守护进程，守护进程可以部署在任意主机上，帮助您快速管理多个主机并且分布式部署。",
+        selectRemoteInfo:
+            "默认可选择 localhost 守护进程，守护进程可以部署在任意主机上，帮助您快速管理多个主机并且分布式部署。",
         notAnyInstanceTitle: "无数据，请点击右上方绿色的“新建实例”按钮创建实例。",
-        notAnyInstanceInfo: "应用实例可以是 Minecraft服务器，也可以是其他任何应用程序，点击创建后将部署在指定的远程守护进程中。",
+        notAnyInstanceInfo:
+            "应用实例可以是 Minecraft服务器，也可以是其他任何应用程序，点击创建后将部署在指定的远程守护进程中。",
         lastDatetime: "启动时间",
         endTime: "到期时间",
         otherInfo: "其他信息",
@@ -99,14 +102,14 @@ export default {
             running: "运行中",
             stopping: "停止中",
             starting: "启动中",
-            busy: "忙碌",
+            busy: "忙碌"
         },
 
         card: {
             editConfig: "编辑配置",
             controlPanel: "控制面板",
             remove: "移除实例",
-            delete: "删除实例",
+            delete: "删除实例"
         },
 
         table: {
@@ -114,7 +117,7 @@ export default {
             instanceType: "实例类型",
             byteStreamCode: "字节流编码",
             lastDatetime: "最后启动",
-            operate: "操作",
+            operate: "操作"
         },
         dialog: {
             instanceParameterEdit: "实例参数编辑",
@@ -123,8 +126,8 @@ export default {
             inputOrOutputCode: "输入/输出编码",
             inputOrOutputCodeInfo: "当控制台出现乱码时可以尝试调整，例如: GBK，UTF-8 等",
             update: "更新",
-            close: "关闭",
-        },
+            close: "关闭"
+        }
     },
     users: {
         userList: "用户列表",
@@ -141,18 +144,19 @@ export default {
             permissionInfo: "普通权限适用于商业用户，最高权限适用于管理人员",
             normal: "普通权限",
             admin: "最高权限",
-            ban: "禁封",
+            ban: "禁封"
         },
 
         newUserDialog: {
             inputSth: "请输入内容...",
             userPasswd: "用户密码",
             userPasswdInfo: "必填，9 到 36 个字符，不支持中文，只限于字母，数字和符号",
-            inputPasswd: "请输入密码",
+            inputPasswd: "请输入密码"
         },
-        
+
         ps: "注意事项",
-        psInfo: "若您从事出租商业活动，请务必保证应用实例运行在 Linux 的 Docker 虚拟容器中，否则将有安全隐患。",
+        psInfo:
+            "若您从事出租商业活动，请务必保证应用实例运行在 Linux 的 Docker 虚拟容器中，否则将有安全隐患。",
         infoReference: "具体信息参考",
 
         editUser: "编辑用户",
@@ -161,7 +165,7 @@ export default {
         originalSet: "原值",
         updateData: "更新数据",
         SaveData: "保存数据",
-        selectAUser: "请至少选择一个用户",
+        selectAUser: "请至少选择一个用户"
     },
     home: {
         totalInstance: "实例总计",
@@ -183,7 +187,29 @@ export default {
         unknownStatus: "未知状态",
         updateSuccess: "更新成功",
         admin: "管理用户",
-        user: "普通用户",
+        user: "普通用户"
+    },
+    quickStart: {
+        title: "您希望使用 MCSManager 面板做什么？",
+        quickItems: [
+            {
+                title: "创建一个的 Minecraft 服务器",
+                subTitle: "帮助您快速部署 Java/基岩版 Minecraft 服务器"
+            },
+            {
+                title: "创建一个其他游戏服务器",
+                subTitle: "尝试帮助您创建其他游戏服务器，不保证完全兼容"
+            },
+            {
+                title: "在面板中管理我的控制台程序",
+                subTitle: "让您的控制台程序，比如 Nginx.exe，frp.exe 和 cmd.exe 在网页上进行管理"
+            },
+            {
+                title: "获得更多信息",
+                subTitle: "我们将打开官方文档以帮助您获取更多有用信息"
+            }
+        ],
+        whichServer: "请选择您期望部署到哪台主机？",
     },
     notify: {
         connectDaemonErrorr: "访问远程守护进程异常",
@@ -202,6 +228,6 @@ export default {
         stopCmdSend: "关闭命令已发出",
         killCmdSend: "终止命令已发出",
         dateLoadError: "数据加载出错",
-        cmdSendInfo: "已成功向各个远程主机发布命令，具体操作可能略有延时，请稍等一段时间后查看结果",
-    },
-}
+        cmdSendInfo: "已成功向各个远程主机发布命令，具体操作可能略有延时，请稍等一段时间后查看结果"
+    }
+};

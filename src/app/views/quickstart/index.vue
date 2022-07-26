@@ -72,29 +72,29 @@ export default {
   components: { SelectBlock, Panel },
   data: function () {
     return {
-      title: "您希望使用 MCSManager 面板做什么？",
+      title: this.$t("quickStart.title"),
       remoteObjects: [],
       quickStartType: 0,
       step: 0,
       quickItems: [
         {
-          title: "创建一个的 Minecraft 服务器",
-          subTitle: "帮助您快速部署 Java/基岩版 Minecraft 服务器",
+          title: this.$t("quickStart.quickItems[0].title"),
+          subTitle: this.$t("quickStart.quickItems[0].subTitle"),
           value: 1
         },
         {
-          title: "创建一个其他游戏服务器",
-          subTitle: "尝试帮助您创建其他游戏服务器，不保证完全兼容",
+          title: this.$t("quickStart.quickItems[1].title"),
+          subTitle: this.$t("quickStart.quickItems[1].subTitle"),
           value: 2
         },
         {
-          title: "在面板中管理我的控制台程序",
-          subTitle: "让您的控制台程序，比如 Nginx.exe，frp.exe 和 cmd.exe 在网页上进行管理",
+          title: this.$t("quickStart.quickItems[2].title"),
+          subTitle: this.$t("quickStart.quickItems[2].subTitle"),
           value: 3
         },
         {
-          title: "获得更多信息",
-          subTitle: "我们将打开官方文档以帮助您获取更多有用信息",
+          title: this.$t("quickStart.quickItems[3].title"),
+          subTitle: this.$t("quickStart.quickItems[3].subTitle"),
           value: 4
         }
       ]
@@ -115,7 +115,7 @@ export default {
         return window.open("https://docs.mcsmanager.com/");
       }
       this.quickStartType = v;
-      this.title = "请选择您期望部署到哪台主机？";
+      this.title = this.$t("quickStart.whichServer");
       this.step = 1;
     },
     selectHost(uuid) {
