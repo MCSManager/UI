@@ -72,7 +72,7 @@
               >{{ $t("instances.showTableList") }}</el-button
             >
             <el-button size="small" type="success" @click="toNewInstance">
-              <i class="el-icon-plus"></i> {{ $t("instances.showTableList") }}
+              <i class="el-icon-plus"></i> {{ $t("instances.newInstance") }}
             </el-button>
             <el-button size="small" @click="batOpen" v-if="showTableList">
               <i class="el-icon-video-play"></i> {{ $t("instances.start") }}
@@ -97,7 +97,7 @@
         <div class="instance-table-warpper">
           <div>
             <div class="color-red" v-if="!currentRemoteUuid">
-              &nbsp;{{ $t("instances.selectRemoteError") }}
+              &nbsp;Error: {{ $t("instances.selectRemoteError") }}
             </div>
           </div>
           <div>
@@ -173,18 +173,18 @@
                   <el-dropdown-item>关闭实例</el-dropdown-item>
                   <el-dropdown-item>重启实例</el-dropdown-item>
                   <el-dropdown-item>终止实例</el-dropdown-item> -->
-                  <el-dropdown-item @click="editInstance(item.serviceUuid, item.instanceUuid)"
-                    >{{ $t("instances.card.editConfig") }}</el-dropdown-item
-                  >
-                  <el-dropdown-item @click="toInstance(item.serviceUuid, item.instanceUuid)"
-                    >{{ $t("instances.card.controlPanel") }}</el-dropdown-item
-                  >
-                  <el-dropdown-item @click="unlinkInstance(item.instanceUuid)"
-                    >{{ $t("instances.card.remove") }}</el-dropdown-item
-                  >
-                  <el-dropdown-item @click="unlinkInstance(item.instanceUuid, true)"
-                    >{{ $t("instances.card.delete") }}</el-dropdown-item
-                  >
+                  <el-dropdown-item @click="editInstance(item.serviceUuid, item.instanceUuid)">{{
+                    $t("instances.card.editConfig")
+                  }}</el-dropdown-item>
+                  <el-dropdown-item @click="toInstance(item.serviceUuid, item.instanceUuid)">{{
+                    $t("instances.card.controlPanel")
+                  }}</el-dropdown-item>
+                  <el-dropdown-item @click="unlinkInstance(item.instanceUuid)">{{
+                    $t("instances.card.remove")
+                  }}</el-dropdown-item>
+                  <el-dropdown-item @click="unlinkInstance(item.instanceUuid, true)">{{
+                    $t("instances.card.delete")
+                  }}</el-dropdown-item>
                 </el-dropdown-menu>
               </template>
             </el-dropdown>
@@ -197,11 +197,21 @@
           >
             <div>
               {{ $t("instances.status.title") }}：
-              <span class="color-gray" v-if="item.status == 0">{{ $t("instances.status.die") }}</span>
-              <span class="color-green" v-else-if="item.status == 3">{{ $t("instances.status.running") }}</span>
-              <span class="color-yellow" v-else-if="item.status == 1">{{ $t("instances.status.stopping") }}</span>
-              <span class="color-yellow" v-else-if="item.status == 2">{{ $t("instances.status.starting") }}</span>
-              <span class="color-red" v-else-if="item.status == -1">{{ $t("instances.status.busy") }}</span>
+              <span class="color-gray" v-if="item.status == 0">{{
+                $t("instances.status.die")
+              }}</span>
+              <span class="color-green" v-else-if="item.status == 3">{{
+                $t("instances.status.running")
+              }}</span>
+              <span class="color-yellow" v-else-if="item.status == 1">{{
+                $t("instances.status.stopping")
+              }}</span>
+              <span class="color-yellow" v-else-if="item.status == 2">{{
+                $t("instances.status.starting")
+              }}</span>
+              <span class="color-red" v-else-if="item.status == -1">{{
+                $t("instances.status.busy")
+              }}</span>
               <span class="color-red" v-else>{{ $t("instances.status.busy") }}</span>
             </div>
             <div>
@@ -216,9 +226,13 @@
               <span>{{ $t("instances.otherInfo") }}：</span>
               <span>
                 <span v-if="item.info && item.info.currentPlayers >= 0">
-                  {{ $t("instances.playerCount") }} {{ item.info.currentPlayers }}/{{ item.info.maxPlayers }}
+                  {{ $t("instances.playerCount") }} {{ item.info.currentPlayers }}/{{
+                    item.info.maxPlayers
+                  }}
                 </span>
-                <span v-else-if="item.info && item.version"> &nbsp;{{ $t("instances.mcVersion") }} {{ item.version }} </span>
+                <span v-else-if="item.info && item.version">
+                  &nbsp;{{ $t("instances.mcVersion") }} {{ item.version }}
+                </span>
                 <span v-else></span>
               </span>
             </div>
@@ -260,7 +274,9 @@
               <template #default="scope">
                 <div>
                   <span v-if="scope.row.info && scope.row.info.currentPlayers >= 0">
-                    {{ $t("instances.playerCount") }}: {{ scope.row.info.currentPlayers }}/{{ scope.row.info.maxPlayers }}
+                    {{ $t("instances.playerCount") }}: {{ scope.row.info.currentPlayers }}/{{
+                      scope.row.info.maxPlayers
+                    }}
                   </span>
                   <span v-if="scope.row.info && scope.row.version">
                     &nbsp;{{ $t("instances.mcVersion") }}: {{ scope.row.version }}
@@ -278,27 +294,37 @@
                   <i class="el-icon-video-play"></i>
                   <span> {{ $t("instances.status.running") }}</span>
                 </div>
-                <span class="color-yellow" v-else-if="scope.row.status == 1">{{ $t("instances.status.stopping") }}</span>
-                <span class="color-yellow" v-else-if="scope.row.status == 2">{{ $t("instances.status.starting") }}</span>
+                <span class="color-yellow" v-else-if="scope.row.status == 1">{{
+                  $t("instances.status.stopping")
+                }}</span>
+                <span class="color-yellow" v-else-if="scope.row.status == 2">{{
+                  $t("instances.status.starting")
+                }}</span>
 
-                <span class="color-red" v-else-if="scope.row.status == -1">{{ $t("instances.status.budy") }}</span>
+                <span class="color-red" v-else-if="scope.row.status == -1">{{
+                  $t("instances.status.budy")
+                }}</span>
                 <span class="color-red" v-else>{{ $t("instances.status.budy") }}</span>
               </template>
             </el-table-column>
-            <el-table-column prop="type" :label="$t('instances.table.instanceType')" width="140"></el-table-column>
-            <el-table-column :label="$t('instances.table.operate')" style="text-align: center" width="180">
+            <el-table-column
+              prop="type"
+              :label="$t('instances.table.instanceType')"
+              width="140"
+            ></el-table-column>
+            <el-table-column :label="$t('general.operate')" style="text-align: center" width="180">
               <template #default="scope">
                 <el-button
                   size="mini"
                   @click="editInstance(scope.row.serviceUuid, scope.row.instanceUuid)"
                 >
-                  {{ $t('general.setting') }}
+                  {{ $t("general.setting") }}
                 </el-button>
                 <el-button
                   size="mini"
                   @click="toInstance(scope.row.serviceUuid, scope.row.instanceUuid)"
                 >
-                  {{ $t('general.manage') }}
+                  {{ $t("general.manage") }}
                 </el-button>
               </template>
             </el-table-column>
@@ -410,7 +436,7 @@ export default {
         } else {
           this.remoteList.push({
             value: service.uuid,
-            label: `${ip} ${remarks} (离线)`,
+            label: `${ip} ${remarks} ( ` + this.$t("overview.offline") + " )",
             available: false
           });
           this.unavailableService.push(service);
@@ -440,7 +466,7 @@ export default {
     // 获取守护进程具体实例列表
     async remoteSelectHandle() {
       try {
-        if (!this.currentRemoteUuid) throw new Error("未选择远程守护进程");
+        if (!this.currentRemoteUuid) throw new Error(this.$t("instances.selectRemoteError"));
         this.startedInstance = 0;
         this.instances = [];
         this.loading = true;
@@ -526,7 +552,7 @@ export default {
       router.push({ path: `/terminal/${serviceUuid}/${instanceUuid}/` });
     },
     async unlinkInstance(uuid, deleteFile = false) {
-      await this.$confirm(this.$t("notify.confirmDelContent"), (this.$t("notify.confirmDelTitle")), {
+      await this.$confirm(this.$t("notify.confirmDelContent"), this.$t("notify.confirmDelTitle"), {
         confirmButtonText: this.$t("general.confirm"),
         cancelButtonText: this.$t("general.cancel"),
         type: "warning"
@@ -557,11 +583,15 @@ export default {
           }
         );
       } else {
-        await this.$confirm(this.$t("notify.confirmBatchDelFileContent"), this.$t("notify.confirmDelTitle"), {
-          confirmButtonText: this.$t("general.confirm"),
-          cancelButtonText: this.$t("general.cancel"),
-          type: "warning"
-        });
+        await this.$confirm(
+          this.$t("notify.confirmBatchDelFileContent"),
+          this.$t("notify.confirmDelTitle"),
+          {
+            confirmButtonText: this.$t("general.confirm"),
+            cancelButtonText: this.$t("general.cancel"),
+            type: "warning"
+          }
+        );
       }
 
       const uuids = [];

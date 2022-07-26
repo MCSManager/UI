@@ -136,7 +136,7 @@
                     :content="$t('overview.errorConnect')"
                     placement="top"
                   >
-                    <span><i class="el-icon-warning-outline"></i> {{ $t('overview.outline') }}</span>
+                    <span><i class="el-icon-warning-outline"></i> {{ $t('overview.offline') }}</span>
                   </el-tooltip>
                 </span>
               </template>
