@@ -1,11 +1,16 @@
 export default {
     general: {
         search: "搜索",
+        searchName: "根据名称搜索",
+        operate: "操作",
         setting: "设置",
         manage: "管理",
         edit: "编辑",
+        allocation: "分配资源",
+        add: "新增",
         confirm: "确定",
         cancel: "取消",
+        pleaseSelect: "请选择",
     },
     overview: {
         systemInfoTable: "系统信息表",
@@ -45,7 +50,7 @@ export default {
         connectStatus: "连接状态",
         online: "在线",
         errorConnect: "无法连接到指定 IP 或者密钥错误",
-        outline: "离线",
+        offline: "离线",
 
         panelApiRequestCount: "面板端接口请求量",
         panelApiRequestInfo: "每 1 分钟统计间隔，总计 1 小时的请求历史",
@@ -75,7 +80,7 @@ export default {
         kill: "终止",
         remove: "移除",
         delete: "删除",
-        selectRemoteError: "错误：未选择任何远程守护进程",
+        selectRemoteError: "未选择任何远程守护进程",
         selectRemoteTitle: "请在左上方的下拉框中选择远程守护进程",
         selectRemoteInfo: "默认可选择 localhost 守护进程，守护进程可以部署在任意主机上，帮助您快速管理多个主机并且分布式部署。",
         notAnyInstanceTitle: "无数据，请点击右上方绿色的“新建实例”按钮创建实例。",
@@ -109,7 +114,7 @@ export default {
             instanceType: "实例类型",
             byteStreamCode: "字节流编码",
             lastDatetime: "最后启动",
-            operate: "操作"
+            operate: "操作",
         },
         dialog: {
             instanceParameterEdit: "实例参数编辑",
@@ -120,6 +125,43 @@ export default {
             update: "更新",
             close: "关闭",
         },
+    },
+    users: {
+        userList: "用户列表",
+        newUser: "新建用户",
+        delUser: "删除用户",
+        userName: "用户名",
+        userNameInfo: "必填，6 到 12 个字符，支持中文，英文和字符",
+        regTime: "注册时间",
+        lastTime: "最后登录",
+
+        permit: {
+            permission: "权限",
+            permissionLevel: "权限等级",
+            permissionInfo: "普通权限适用于商业用户，最高权限适用于管理人员",
+            normal: "普通权限",
+            admin: "最高权限",
+            ban: "禁封",
+        },
+
+        newUserDialog: {
+            inputSth: "请输入内容...",
+            userPasswd: "用户密码",
+            userPasswdInfo: "必填，9 到 36 个字符，不支持中文，只限于字母，数字和符号",
+            inputPasswd: "请输入密码",
+        },
+        
+        ps: "注意事项",
+        psInfo: "若您从事出租商业活动，请务必保证应用实例运行在 Linux 的 Docker 虚拟容器中，否则将有安全隐患。",
+        infoReference: "具体信息参考",
+
+        editUser: "编辑用户",
+        resetPasswd: "重置密码",
+        resetPasswdInfo: "不填写则不更变原有值",
+        originalSet: "原值",
+        updateData: "更新数据",
+        SaveData: "保存数据",
+        selectAUser: "请至少选择一个用户",
     },
     home: {
         totalInstance: "实例总计",
@@ -142,7 +184,6 @@ export default {
         updateSuccess: "更新成功",
         admin: "管理用户",
         user: "普通用户",
-
     },
     notify: {
         connectDaemonErrorr: "访问远程守护进程异常",
@@ -150,6 +191,8 @@ export default {
         confirmDelContent: "确定要进行移除/删除吗？",
         confirmBatchDelContent: "确定要进行批量移除吗？此操作不会删除实例实际文件，只会删除实例",
         confirmBatchDelFileConten: "确定要进行批量移除吗？此操作不会删除实例实际文件，只会删除实例",
+        editSuccess: "修改成功",
+        createSuccess: "创建成功",
         delSuccess: "删除成功",
         batchDelSuccess: "批量删除成功",
         Success: "数据刷新可能存在一定延时",
