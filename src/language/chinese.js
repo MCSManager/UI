@@ -10,7 +10,12 @@ export default {
         add: "新增",
         confirm: "确定",
         cancel: "取消",
-        pleaseSelect: "请选择"
+        delete: "删除",
+        pleaseSelect: "请选择",
+        refresh: "刷新",
+        refreshFinish: "已刷新",
+        required: "必填",
+        warn: "警告"
     },
     overview: {
         systemInfoTable: "系统信息表",
@@ -167,6 +172,58 @@ export default {
         SaveData: "保存数据",
         selectAUser: "请至少选择一个用户"
     },
+    services: {
+        remoteDaemonManage: "远程守护进程管理",
+        addDaemon: "新增远程守护进程",
+        learnHowItWork: "了解工作原理",
+        Daemons: "已配置的守护进程",
+        remoteInfo:
+            "远程守护进程（在任何物理主机上）必须确保全部在线且互相网络畅通，面板连接需公开放行守护进程端口与配置密钥。<br />网页需要能直接连接远程守护进程（上传，下载与控制台），避免使用除 localhost 外的局域网段任何 IP，必须使用外网 IP 或域名进行连接。<br />面板端对应的守护进程版本：{ specifiedDaemonVersion }",
+        platform: "平台",
+        instanceStatus: "实例状态",
+        version: "版本",
+        update: "更新",
+        connect: "连接",
+        changeKey: "修改密钥",
+
+        remarks: "备注信息",
+        remarksInfo: "选填，支持中文，用于填写相关备注信息",
+        remoteIP: "守护进程所在主机的 IP 地址",
+        remoteIPSub: "<b>必须使用外网地址</b>或 localhost 地址，否则将导致远程实例无法连接",
+        remoteIPInfo: "必填，例如 mcsmanager.com，43.123.211.12",
+        daemonPort: "守护进程端口",
+        daemonPortInfo: "必填，例如 24444",
+        verifyKey: "验证密钥",
+        keySub: "在守护进程启动时控制台上会输出显示，务必确保密钥安全",
+        getKey: "如何获取密钥？",
+        keyInfo: "必填，例如 6ff0fa1ef9a943f3c6f2fe0e4564a2fa383d35c4b78ccb5",
+
+        addNewWarn: {
+            title: "新增远程主机警告",
+            ip: "检测到您的连接 IP 为 : { newServiceInfo.ip }，似乎是一个内网地址？",
+            outerNet: "面板与守护进程端均要能够让用户访问，以此行为设计即可实现流量分流减轻中心面板端的压力。",
+            whyOuterNet: "为什么必须使用外网 IP 连接远程节点",
+            because: "为了减轻中心控制端（Web 面板端）的流量压力，我们必须将流量分流到各自的远程主机，<br />这样就必须保证每个远程主机均要能够使用外网访问，所以您也必须使用外网 IP 地址来访问这个主机的实例",
+            workingPrinciple: "分布式服务数据传输工作原理",
+            KeepIntranet: "请问您是否依然要坚持使用内网 IP 连接？",
+            ifTrueThen: "如果强制使用，则实例的部分功能不可用。",
+            yeah: "强制执行",
+            cancel: "取消执行"
+        },
+
+        principlePanel: {
+            title: "分布式服务工作原理",
+            desc: "为了减轻中心控制端（Web 面板端）的流量压力与计算压力，我们采用 “数据走直连，指令走转发” 的设计概念。<br />这样的设计会暴露各个守护进程，但您守护进程主机上的服务本应就会暴露，再加上可控的权限识别，无需担忧各个主机安全问题。",
+            principleImage: "分布式服务工作原理图",
+            onlyOne: "如果您只有一个主机，则可以无视此工作原理，按正常使用方式即可。",
+        },
+
+        delDaemonWarn: "此操作将永久删除该守护进程，是否继续？",
+        inputNewRemark: "请输入新的备注内容",
+        updateRemarkSuccess: "更新备注信息成功",
+        inputNewKey: "请输入新密钥，设置后将自动尝试连接",
+        key: "密钥",
+    },
     home: {
         totalInstance: "实例总计",
         totalInstanceCount: "管理员所分配给您的所有实例总数",
@@ -209,7 +266,7 @@ export default {
                 subTitle: "我们将打开官方文档以帮助您获取更多有用信息"
             }
         ],
-        whichServer: "请选择您期望部署到哪台主机？",
+        whichServer: "请选择您期望部署到哪台主机？"
     },
     install: {
         welcome: "欢迎使用 MCSManager 管理面板",
@@ -223,7 +280,7 @@ export default {
         ohhhInfo: "最后，您是第一次使用此软件吗？",
         firstTime: "首次使用",
         oldUSer: "老用户",
-        adminOK: "管理员已创建",
+        adminOK: "管理员已创建"
     },
     notify: {
         connectDaemonErrorr: "访问远程守护进程异常",
