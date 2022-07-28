@@ -224,6 +224,22 @@ export default {
         inputNewKey: "请输入新密钥，设置后将自动尝试连接",
         key: "密钥",
     },
+    container: {
+        remoteList: "远程守护进程列表",
+        status: "状态",
+        imagesManage: "环境镜像管理",
+        relevantInfo: "相关资料",
+        links: [
+            {
+                title: "检查本地环境",
+                info: "学习如何在系统上知晓您当前的一些常用运行时环境",
+            },
+            {
+                title: "安装 Docker 软件",
+                info: "学习如何在常见 Linux 发行版系统上安装 Docker 软件",
+            }
+        ]
+    },
     home: {
         totalInstance: "实例总计",
         totalInstanceCount: "管理员所分配给您的所有实例总数",

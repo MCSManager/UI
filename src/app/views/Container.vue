@@ -21,24 +21,24 @@
 
 <template>
   <Panel>
-    <template #title>远程守护进程列表</template>
+    <template #title>{{ $t("container.remoteList") }}</template>
     <template #default>
       <el-table :data="services" stripe style="width: 100%" size="small">
-        <el-table-column prop="ip" label="地址"></el-table-column>
-        <el-table-column prop="port" label="端口"></el-table-column>
-        <el-table-column label="状态">
+        <el-table-column prop="ip" :label="$t('overview.addr')"></el-table-column>
+        <el-table-column prop="port" :label="$t('overview.port')"></el-table-column>
+        <el-table-column :label="$t('container.status')">
           <template #default="scope">
-            <span>{{ scope.row.available ? "在线" : "离线" }}</span>
+            <span>{{ scope.row.available ? this.$t("overview.online") : this.$t("overview.offline") }}</span>
           </template>
         </el-table-column>
-        <el-table-column prop="remarks" label="备注"></el-table-column>
-        <el-table-column label="操作" style="text-align: center" width="140px">
+        <el-table-column prop="remarks" :label="$t('overview.remarks')"></el-table-column>
+        <el-table-column :label="$t('general.operate')" style="text-align: center" width="140px">
           <template #default="scope">
             <el-button
               size="mini"
               @click="toImagesPanel(scope.row)"
               :disabled="!scope.row.available"
-              >环境镜像管理</el-button
+              >{{ $t("container.imagesManage") }}</el-button
             >
             <!-- <el-button size="mini" @click="deleteImage(scope.row)" :disabled="!scope.row.available">主机本地环境</el-button> -->
           </template>
@@ -48,22 +48,22 @@
   </Panel>
 
   <Panel>
-    <template #title>相关资料</template>
+    <template #title>{{ $t("container.relevantInfo") }}</template>
     <template #default>
       <el-row :gutter="10">
         <el-col :md="6" :offset="0">
           <ItemGroup>
             <SelectBlock style="min-height: 100px" @click="selectLink(1)">
-              <template #title>检查本地环境</template>
-              <template #info>学习如何在系统上知晓您当前的一些常用运行时环境</template>
+              <template #title>{{ $t("container.links[0].title") }}</template>
+              <template #info>{{ $t("container.links[0].info") }}</template>
             </SelectBlock>
           </ItemGroup>
         </el-col>
         <el-col :md="6" :offset="0">
           <ItemGroup>
             <SelectBlock style="min-height: 100px" @click="selectLink(2)">
-              <template #title>安装 Docker 软件</template>
-              <template #info>学习如何在常见 Linux 发行版系统上安装 Docker 软件</template>
+              <template #title>{{ $t("container.links[1].title") }}</template>
+              <template #info>{{ $t("container.links[1].title") }}</template>
             </SelectBlock>
           </ItemGroup>
         </el-col>
