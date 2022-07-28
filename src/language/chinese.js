@@ -19,6 +19,26 @@ export default {
         allow: "准许",
         forbid: "禁止",
         enable: "启用",
+        closed: "关闭",
+    },
+    login: {
+        title: "身份验证",
+        titleInfo: "使用服务器的 MCSManager 账号登录到面板",
+        account: "账号",
+        passWord: "密码",
+        forgotPassword: "忘记密码",
+        forgotPasswordInfo: "如果您是管理员且第一次登录，默认账号密码为：root，123456。如果您是普通用户，请要求您的服务商帮助您重置密码。如果您是管理员，请删除 mcsmanager/web/data/Users 文件夹重启面板端以重新加载用户。",
+        login: "登录",
+        logging: "登录中",
+        isNull: "账号或密码不能为空值",
+        errorUOrP: "账号或密码错误，请检查后重试",
+        logBackIn: "重新登录",
+        loginSuccess: "登录成功",
+
+        notify: {
+            title: "网页无法正确运作",
+            message: "无法获取身份数据，网页所有功能将全部不可用，请立刻刷新网页或重新登录",
+        },
     },
     overview: {
         systemInfoTable: "系统信息表",

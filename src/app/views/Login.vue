@@ -41,8 +41,8 @@
     <Panel id="login-panel" body-style="padding:44px;" v-loading="loading">
       <template #default>
         <form action="/login" method="post">
-          <div style="font-size: 24px; font-weight: 600">身份验证</div>
-          <p>使用服务器的 MCSManager 账号登录到面板</p>
+          <div style="font-size: 24px; font-weight: 600">{{ $t("login.title") }}</div>
+          <p>{{ $t("login.titleInfo") }}</p>
           <form action="/" method="post">
             <div style="margin-top: 22px">
               <div>
@@ -50,7 +50,7 @@
                   type="text"
                   name="mcsm_username"
                   v-model="form.username"
-                  placeholder="账号"
+                  :placeholder="$t('login.account')"
                   autocomplete="on"
                   :disabled="close"
                   @keyup.enter="submit"
@@ -65,7 +65,7 @@
                   type="password"
                   name="mcsm_password"
                   v-model="form.password"
-                  placeholder="密码"
+                  :placeholder="$t('login.passWord')"
                   autocomplete="on"
                   :disabled="close"
                   @keyup.enter="submit"
@@ -79,7 +79,7 @@
                 <transition name="fade">
                   <div v-if="cause" id="login-cause">{{ cause }}</div>
                   <div v-else class="login-info-wrapper fgp" @click="forgotPassword">
-                    <a href="javascript:void(0)" rel="noopener noreferrer"> 忘记密码 </a>
+                    <a href="javascript:void(0)" rel="noopener noreferrer"> {{ $t("login.forgotPassword") }} </a>
                   </div>
                 </transition>
                 <el-button
@@ -153,7 +153,7 @@ export default {
       },
       close: false,
       closeWindow: false,
-      loginText: "登录",
+      loginText: this.$t("login.login"),
       loading: false,
       cause: "",
       loginInfo: ""
@@ -168,11 +168,11 @@ export default {
     async login() {
       try {
         if (!this.form.username || !this.form.username) {
-          throw new Error("账号或密码不能为空值");
+          throw new Error("");
         }
         this.loading = true;
-        this.cause = "";
-        this.loginText = "登录中";
+        this.cause = this.$t("login.isNull");
+        this.loginText = this.$t("login.logging");
         await sleep(600);
         const res = await request({
           method: "POST",
@@ -195,9 +195,9 @@ export default {
     async failed(error) {
       this.cause = error.message;
       if (this.cause == "null") {
-        this.cause = "账号或密码错误，请检查后重试";
+        this.cause = this.$t("login.errorUOrP");
       }
-      this.loginText = "重新登录";
+      this.loginText = this.$t("login.logBackIn");
       this.close = true;
       await sleep(400);
       this.close = false;
@@ -206,13 +206,13 @@ export default {
     async success() {
       this.close = true;
       this.closeWindow = true;
-      this.loginText = "登录成功";
+      this.loginText = this.$t("login.loginSuccess");
       try {
         await setupUserInfo();
       } catch (error) {
         this.$notify({
-          title: "网页无法正确运作",
-          message: "无法获取身份数据，网页所有功能将全部不可用，请立刻刷新网页或重新登录",
+          title: this.$t("login.notify.title"),
+          message: this.$t("login.notify.message"),
           type: "error",
           duration: 0
         });
@@ -231,11 +231,11 @@ export default {
     },
     forgotPassword() {
       this.$confirm(
-        `如果您是管理员且第一次登录，默认账号密码为：root，123456。如果您是普通用户，请要求您的服务商帮助您重置密码。如果您是管理员，请删除 mcsmanager/web/data/Users 文件夹重启面板端以重新加载用户。`,
-        "忘记密码",
+        this.$t("login.forgotPasswordInfo"),
+        this.$t("login.forgotPassword"),
         {
-          confirmButtonText: "好的",
-          cancelButtonText: "关闭"
+          confirmButtonText: this.$t("general.confirm"),
+          cancelButtonText: this.$t("general.closed")
         }
       );
     }
