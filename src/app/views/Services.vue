@@ -187,7 +187,7 @@
     <template #default>
       <div class="sub-title">
         <div class="sub-title-title">
-          <span v-html="$t('services.addNewWarn.ip', newServiceInfo.ip )">
+          <span v-html="$t('services.addNewWarn.ip', { newServiceInfo: newServiceInfo.ip } )">
           </span>
         </div>
         <div class="sub-title-info">
