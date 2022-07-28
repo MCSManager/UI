@@ -15,7 +15,10 @@ export default {
         refresh: "刷新",
         refreshFinish: "已刷新",
         required: "必填",
-        warn: "警告"
+        warn: "警告",
+        allow: "准许",
+        forbid: "禁止",
+        enable: "启用",
     },
     overview: {
         systemInfoTable: "系统信息表",
@@ -239,6 +242,50 @@ export default {
                 info: "学习如何在常见 Linux 发行版系统上安装 Docker 软件",
             }
         ]
+    },
+    settings: {
+        setOperate: "配置操作",
+        updateSet: "更新配置",
+        updateSetInfo: "部分配置可能需要重启面板才能生效",
+
+        basicSetting: "基础设置",
+        accessPort: "面板访问端口",
+        accessPortInfo: "浏览器访问网页面板的端口，必须防火墙放行此端口，重启面板生效。",
+        inputNum: "请必须填入数字",
+
+        bindIP: "面板绑定 IP",
+        bindIPInfo: "一般情况请保持默认值，一般适用于多个 IP，网卡绑定的场景。",
+        inputIP: "默认 0.0.0.0  I  默认情况无需填写",
+
+        loginPage: "登录界面简单说明",
+        loginPageInfo: "用于显示在登录界面公开简要说明文字，可以用于管理员身份介绍，备案信息介绍。",
+        inputCopy: "请输入文案，例如：京ICP备00000001号",
+
+        referenceLink: "相关参考链接",
+        referenceLinksInfo: "面板的大部分设置十分重要，在一般情况下，绝大部分参数都无需更改，如果某个参数您并不知晓代表什么，那么建议您不要对其进行修改。",
+
+        limitAndSecurity: "限制与安全",
+        canFileManager: "准许普通用户使用文件管理功能",
+        canFileManagerInfo: "文件管理是一个较为消耗资源且不易控制的功能，如果您的普通用户没有文件管理的任何需求，可以禁止用户使用文件管理。",
+
+        crossAPI: "跨域请求 API 接口",
+        crossAPIInfo: "HTTP 响应将会加入 access-control-allow-origin: *，可能会降低安全性，但是会提高开发扩展性。",
+        loginCheckIp: "同 IP 登录次数限制",
+        loginCheckIpInfo: "此功能将保护您的面板不被单个主机暴力破解密码，每个 IP 只有 10 次密码错误次数。",
+        attention: "注意事项",
+        attentionInfo: "这些配置设置需要一部分专业知识，您可以根据您的硬件设备来大概猜测哪些值适合您。<br />一般情况下，默认值可以满足个人日常的使用场景，如果规模一旦更大，对硬件的要求更高，为了不过分损失用户体验，一个合适的阈值是十分重要的。",
+
+        about: "关于",
+        aboutTitle: "软件根据<a target='black' href='https://github.com/MCSManager/MCSManager-Daemon/blob/master/LICENSE'>AGPL-3.0</a>开源软件协议发行",
+        aboutTitleInfo: "此协议准许每个人都可以复制和分发代码副本，并且可以对使用者收取服务费用。<br />若对代码任何修改，则必须无偿提供软件的完整源代码下载。",
+        closedSource: "闭源商业许可证",
+        closedSourceInfo: "若您想二次开发并且闭源使用于任何活动（包括但不限于商业，个人）。",
+        learnMore: "了解更多",
+        userAgreement: "用户协议",
+        sponsorList: "开源项目赞助名单",
+        sponsorListInfo: "只含前 40 名赞助者，查看完整赞助名单或进行赞助支持请前往",
+
+        settingUpdate: "已更新，部分选项生效可能需要重启面板",
     },
     home: {
         totalInstance: "实例总计",
