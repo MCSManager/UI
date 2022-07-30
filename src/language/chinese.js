@@ -157,6 +157,88 @@ export default {
             close: "关闭"
         }
     },
+    newInstances: {
+        selectType: "请选择您要创建的应用类型",
+        types: [
+            {
+                name: "Java 版 Minecraft 游戏服务端",
+                desc: "适用于类似于 Spigot，Bungeecord 等 Jar 格式文件的服务端",
+            },
+            {
+                name: "基岩版 Minecraft 游戏服务端",
+                desc: "适用于 Bedrock Dedicated Server 等二进制执行文件或其他格式的服务端软件",
+            },
+            {
+                name: "其他游戏服务端",
+                desc: "适用于类似于大部分游戏私服程序运行，不保证能够完全兼容",
+            },
+            {
+                name: "通用控制台应用程序",
+                desc: "适用于类似于 bash，cmd.exe，app.exe，start.sh 和其他任何可用命令启动的程序",
+            },
+        ],
+        selectCreateType: "选择创建方式",
+        selectCreateTypeInfo: "如果您只想通过服务端软件开启服务器则选择第一项，其他选项均适用于不同的场景需求",
+        createTypes: [
+            {
+                name: "上传单个服务端软件（推荐）",
+                desc: "适用于第一次创建服务器，只需上传一个程序文件即可直接创建服务器并生成地图存档等",
+            },
+            {
+                name: "上传服务端压缩包",
+                desc: "适用于服务端整合包，以及现有的服务器存档，打包上传后自动解压并运行，只支持 zip 格式",
+            },
+            {
+                name: "无需文件或选择已存在文件",
+                desc: "不需要任何文件或者服务端文件已存在远程主机上，只需要手动设置启动命令以及文件目录即可完成",
+            },
+        ],
+        back: "回退",
+        instanceNameInfo: "支持中文，尽可能保证唯一性",
+        instanceNameInfo2: "实例名，尽可能确保唯一性",
+        commandTemplate: "启动命令模板",
+        commandTemplateText: "其中 {{ProgramName}} 代表您接下来上传的文件名，一般情况下无需进行修改",
+        cmdInfo: "如 java -jar server.jar",
+        cmdAssist: "命令助手",
+        fileDir: "服务端文件目录",
+        fileDirInfo: "选填，默认自动创建与管理，如需填写请写完整绝对路径，如: C:/Servers/MyServer",
+        autoCreate: "默认自动创建与管理",
+        uploadFile: "上传服务端软件",
+        uploadFileInfo: "服务端软件指 JAR/EXE 格式或其他可执行程序（如 Spigot.jar，Paper.jar 等）",
+        afterUpload: "上传文件后实例将自动创建",
+
+        launchCmd: "启动命令",
+        launchCmdInfo: "因为无法识别压缩包中的服务端文件名，请您自行填写启动命令",
+        launchCmdInfo2: "请您自行填写启动命令",
+        autoCreate2: "选填，默认自动管理",
+        uploadZip: "上传服务端压缩包",
+        uploadZipInfo: "仅支持 ZIP 格式，上传后压缩包会自动解压到 “文件目录”",
+        uploadZipButton: "上传压缩包",
+        upFileInfo: "上传文件后实例将自动创建并解压文件，可能需要一段时间才能完成解压任务",
+
+        selectFromExist: "从已存在的文件选择服务端",
+        selectFromExistInfo: "文件必须已经存在远程主机（非面板机器）",
+        cmd2: "如 java -jar server.jar，cmd.exe 等等",
+        afterFlieName: "填写好服务端软件文件名后，再前往文件管理上传服务端软件即可开启实例。",
+
+        createInstant: "创建实例",
+        createSuccess: "创建成功",
+        nowYouCan: "您现在可以对实例进行具体的设置和编辑",
+
+        toEdit: "前往编辑实例具体参数",
+        toEditInfo: "推荐立即前往编辑界面设置相关参数，比如 Docker 启动方式，编码设置，工作环境等",
+
+        newInstanceGuide: "新建实例引导程序",
+        pleaseFinish: "请先完善基本参数再进行上传文件操作",
+        uploadAndCreate: "上传文件时将同时创建实例，此操作不可逆，是否继续？",
+
+        uploadFinish: "上传完毕",
+        createFinish: "创建完毕",
+        instantWillBeCreate: "实例将创建，是否继续？",
+        parameterNotFinish: "参数不完整，请填写",
+        createFailed: "创建失败，原因:",
+        uploadAndSet: "上传文件/设置参数",
+    },
     users: {
         userList: "用户列表",
         newUser: "新建用户",
