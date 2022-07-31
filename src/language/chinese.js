@@ -19,7 +19,7 @@ export default {
         allow: "准许",
         forbid: "禁止",
         enable: "启用",
-        closed: "关闭",
+        closed: "关闭"
     },
     login: {
         title: "身份验证",
@@ -27,7 +27,8 @@ export default {
         account: "账号",
         passWord: "密码",
         forgotPassword: "忘记密码",
-        forgotPasswordInfo: "如果您是管理员且第一次登录，默认账号密码为：root，123456。如果您是普通用户，请要求您的服务商帮助您重置密码。如果您是管理员，请删除 mcsmanager/web/data/Users 文件夹重启面板端以重新加载用户。",
+        forgotPasswordInfo:
+            "如果您是管理员且第一次登录，默认账号密码为：root，123456。如果您是普通用户，请要求您的服务商帮助您重置密码。如果您是管理员，请删除 mcsmanager/web/data/Users 文件夹重启面板端以重新加载用户。",
         login: "登录",
         logging: "登录中",
         isNull: "账号或密码不能为空值",
@@ -37,8 +38,8 @@ export default {
 
         notify: {
             title: "网页无法正确运作",
-            message: "无法获取身份数据，网页所有功能将全部不可用，请立刻刷新网页或重新登录",
-        },
+            message: "无法获取身份数据，网页所有功能将全部不可用，请立刻刷新网页或重新登录"
+        }
     },
     overview: {
         systemInfoTable: "系统信息表",
@@ -162,36 +163,37 @@ export default {
         types: [
             {
                 name: "Java 版 Minecraft 游戏服务端",
-                desc: "适用于类似于 Spigot，Bungeecord 等 Jar 格式文件的服务端",
+                desc: "适用于类似于 Spigot，Bungeecord 等 Jar 格式文件的服务端"
             },
             {
                 name: "基岩版 Minecraft 游戏服务端",
-                desc: "适用于 Bedrock Dedicated Server 等二进制执行文件或其他格式的服务端软件",
+                desc: "适用于 Bedrock Dedicated Server 等二进制执行文件或其他格式的服务端软件"
             },
             {
                 name: "其他游戏服务端",
-                desc: "适用于类似于大部分游戏私服程序运行，不保证能够完全兼容",
+                desc: "适用于类似于大部分游戏私服程序运行，不保证能够完全兼容"
             },
             {
                 name: "通用控制台应用程序",
-                desc: "适用于类似于 bash，cmd.exe，app.exe，start.sh 和其他任何可用命令启动的程序",
-            },
+                desc: "适用于类似于 bash，cmd.exe，app.exe，start.sh 和其他任何可用命令启动的程序"
+            }
         ],
         selectCreateType: "选择创建方式",
-        selectCreateTypeInfo: "如果您只想通过服务端软件开启服务器则选择第一项，其他选项均适用于不同的场景需求",
+        selectCreateTypeInfo:
+            "如果您只想通过服务端软件开启服务器则选择第一项，其他选项均适用于不同的场景需求",
         createTypes: [
             {
                 name: "上传单个服务端软件（推荐）",
-                desc: "适用于第一次创建服务器，只需上传一个程序文件即可直接创建服务器并生成地图存档等",
+                desc: "适用于第一次创建服务器，只需上传一个程序文件即可直接创建服务器并生成地图存档等"
             },
             {
                 name: "上传服务端压缩包",
-                desc: "适用于服务端整合包，以及现有的服务器存档，打包上传后自动解压并运行，只支持 zip 格式",
+                desc: "适用于服务端整合包，以及现有的服务器存档，打包上传后自动解压并运行，只支持 zip 格式"
             },
             {
                 name: "无需文件或选择已存在文件",
-                desc: "不需要任何文件或者服务端文件已存在远程主机上，只需要手动设置启动命令以及文件目录即可完成",
-            },
+                desc: "不需要任何文件或者服务端文件已存在远程主机上，只需要手动设置启动命令以及文件目录即可完成"
+            }
         ],
         back: "回退",
         instanceNameInfo: "支持中文，尽可能保证唯一性",
@@ -237,7 +239,127 @@ export default {
         instantWillBeCreate: "实例将创建，是否继续？",
         parameterNotFinish: "参数不完整，请填写",
         createFailed: "创建失败，原因:",
-        uploadAndSet: "上传文件/设置参数",
+        uploadAndSet: "上传文件/设置参数"
+    },
+    instancesDetail: {
+        title: "实例详细信息设置",
+        titleInfo:
+            "当前界面所有设置只有管理员可以进行更改，应用实例拥有远程代码执行功能，请谨慎修改配置。",
+        uid: "远程/本地实例标识符",
+        gid: "守护进程标识符",
+        status: "当前状态",
+        started: "已启动次数",
+        createDateTime: "创建日期",
+        lastDateTime: "最后启动日期",
+        endTime: "到期时间",
+        unlimited: "无限制",
+        processType: {
+            title: "进程类型",
+            general: "普通程序启动方式",
+            docker: "虚拟化容器启动方式"
+        },
+        distribute: {
+            title: "分配给其他用户",
+            ok: "可以，已启用容器隔离",
+            no: "不推荐，可能会危害主机"
+        },
+        instanceType: "实例类型",
+        instanceTypeInfo:
+            "不同类型会导致功能不同，若无需求类型，可以选择较为抽象的通用类型，例如 Java 通用版服务端",
+        launchCmdText:
+            "适用于任何程序命令，若程序路径或附加参数中含有空格可使用引号作为边界，包含的文本将视作一段整体。整条命令不可有换行。<br />如果您输入命令无反应，或者终端排版错乱，可以开启 控制台-终端设置-伪终端进行尝试。<br />不同类型会导致功能不同，若无需求类型，可以选择较为抽象的通用类型，例如 Java 通用版服务端<br />通常情况下，建议使用命令助手生成启动命令，如果有额外需求可以自定义启动命令。<br />&#21015;&#22914;&#32;&#34;&#67;&#58;&#92;&#80;&#114;&#111;&#103;&#114;&#97;&#109;&#32;&#70;&#105;&#108;&#101;&#115;&#92;&#74;&#97;&#118;&#97;&#92;&#98;&#105;&#110;&#92;&#106;&#97;&#118;&#97;&#46;&#101;&#120;&#101;&#34;&#32;&#45;&#68;&#102;&#105;&#108;&#101;&#46;&#101;&#110;&#99;&#111;&#100;&#105;&#110;&#103;&#61;&#117;&#116;&#102;&#45;&#56;&#32;&#45;&#68;&#106;&#108;&#105;&#110;&#101;&#46;&#116;&#101;&#114;&#109;&#105;&#110;&#97;&#108;&#61;&#106;&#108;&#105;&#110;&#101;&#46;&#85;&#110;&#115;&#117;&#112;&#112;&#111;&#114;&#116;&#101;&#100;&#84;&#101;&#114;&#109;&#105;&#110;&#97;&#108;&#32;&#45;&#106;&#97;&#114;&#32;&#34;&#109;&#121;&#32;&#115;&#101;&#114;&#118;&#101;&#114;&#46;&#106;&#97;&#114;&#34;&#32;&#45;&#110;&#111;&#103;&#117;&#105;",
+        cwd: "工作目录",
+        cwdInfo: "实例运行的工作目录，可填绝对路径与相对路径",
+        cwdExample: "例如: D:/MyServers/0001",
+        updateCmd: "更新/安装程序文件命令",
+        updateCmdInfo:
+            "当用户执行更新/安装操作时，将会执行此命令，${mcsm_workspace} 代表工作目录，为空则不提供此功能",
+        updateCmdExample:
+            '例如: "D:/SteamCMD/steamcmd.exe" +login anonymous +force_install_dir "${mcsm_workspace}" "+app_update 380870 validate" +quit',
+        ie: "终端输入编码",
+        ieInfo: "命令发送编码，重启实例生效",
+        oe: "终端输出编码",
+        oeInfo: "终端输出编码，重启实例生效",
+        stopCmd: "关闭实例命令",
+        stopCmdInfo: "^C 代表发送 Ctrl+C 组合键",
+        fileCode: "文件管理编码",
+        fileCodeInfo: "文件管理功能的解压缩，编辑等编码",
+        endTimeInfo: "到期后无法启动",
+        launchType: "进程启动方式（推荐）",
+        launchTypeInfo:
+            "通常默认即可，如果从事商业活动则应当使用虚拟化容器启动方式，否则主机将可能被入侵。",
+        defaultType: "默认类型",
+        docker: "虚拟化容器（Linux Docker）",
+
+        dockerConfig: "虚拟化容器配置",
+        dockerConfigInfo:
+            "一种基于 Docker 的虚拟化方案，可以给每个实例装入一个一次性的盒子中运行，使用后销毁，确保主机安全。",
+        dockerImage: "环境镜像",
+        dockerImageInfo: "指定实例镜像",
+        openPort: "开放端口",
+        openPortInfo: "多个以空格分割，冒号左边为宿主机暴露端口，右边为容器暴露端口，通常保持一致即可",
+        portExample: "选填，示例 25565:25565/tcp 3380:3380/udp",
+        quickEdit: "快速编辑",
+        extraVolumes: "额外挂载路径",
+        extraVolumesInfo:
+            "向容器内挂载除工作目录外的其他目录，多个以空格分割，冒号左边为宿主机路径，右边为容器路径",
+        extraVolumesExample: "示例 /backups/test1:/workspace/backups /var/logs/test1:/workspace/logs",
+        containerName: "容器名",
+        containerNameInfo: "容器创建使用的名字，为空随机生成",
+        containerNameTooltip: "选填，无特殊需求不建议填写此项",
+        containerNameExample: "选填，示例 lobby-1",
+        netMode: "网络模式",
+        netModeInfo: "选择容器接入的网络模式 如 bridge 网桥",
+        netAliases: "网络别名",
+        netAliasesInfo: "用于在自定义网络中容器互相访问，空格分隔",
+        netAliasesTooltip: "选填，无特殊需求不建议填写此项",
+        netAliasesExample: "选填，示例 login-server-1",
+        limitCpu: "限制 CPU 使用率（百分比）",
+        limitCpuInfo: "限制所有 CPU 总和使用率，会有少许偏差",
+        limitCpuTooltip:
+            "填写 50 代表所有核心使用率和限制在 50%，若填写 200 则代表准许使用所有核心使用率总和为 200%",
+        limitCpuExample: "选填，0 到 无限大",
+        cpuSetCpus: "指定 CPU 计算核心",
+        cpuSetCpusInfo: "限制容器在指定的 CPU 核心上运行",
+        cpuSetCpusTooltip:
+            "指定进程在某些核心上运行，合理分配可以更好的利用您的系统硬件资源，例如 0,1 代表在第1，2核心上运作，逗号隔开",
+        cpuSetCpusExample: "选填，例如 0,1,2,3",
+        maxMem: "最大内存（单位 MB）",
+        maxMemInfo: "例如 1024，2048 等，请勿加单位",
+        maxMemExample: "选填，例如 1024",
+        newImage: "--- 新建镜像 ---",
+
+        console: "控制台",
+        fileManager: "文件管理",
+        back: "返回",
+        saveSet: "保存配置",
+
+        dockerTableDict: [
+            {
+                label: "通信协议(tcp/udp)"
+            },
+            {
+                label: "对应的主机端口"
+            },
+            {
+                label: "对应的容器端口"
+            },
+            {
+                label: "主机绝对路径"
+            },
+            {
+                label: "挂载到容器路径"
+            }
+        ],
+
+        startError: "启动命令中不可包含换行，这并非脚本文件，不可执行多条命令，请检查",
+        cantGetImageList: "无法获得远程主机镜像列表，建议前往“服务环境”界面创建镜像",
+        cantGetNetModeList: "无法获得远程主机网络列表，建议检查 Docker 配置",
+
+    },
+    instanceTypeList: {
+        控制台通用程序: "控制台通用程序",
+        "Steam 服务端通用": "Steam 服务端通用"
     },
     users: {
         userList: "用户列表",
@@ -306,9 +428,11 @@ export default {
         addNewWarn: {
             title: "新增远程主机警告",
             ip: "检测到您的连接 IP 为 : { newServiceInfo }，似乎是一个内网地址？",
-            outerNet: "面板与守护进程端均要能够让用户访问，以此行为设计即可实现流量分流减轻中心面板端的压力。",
+            outerNet:
+                "面板与守护进程端均要能够让用户访问，以此行为设计即可实现流量分流减轻中心面板端的压力。",
             whyOuterNet: "为什么必须使用外网 IP 连接远程节点",
-            because: "为了减轻中心控制端（Web 面板端）的流量压力，我们必须将流量分流到各自的远程主机，<br />这样就必须保证每个远程主机均要能够使用外网访问，所以您也必须使用外网 IP 地址来访问这个主机的实例",
+            because:
+                "为了减轻中心控制端（Web 面板端）的流量压力，我们必须将流量分流到各自的远程主机，<br />这样就必须保证每个远程主机均要能够使用外网访问，所以您也必须使用外网 IP 地址来访问这个主机的实例",
             workingPrinciple: "分布式服务数据传输工作原理",
             KeepIntranet: "请问您是否依然要坚持使用内网 IP 连接？",
             ifTrueThen: "如果强制使用，则实例的部分功能不可用。",
@@ -320,14 +444,14 @@ export default {
             title: "分布式服务工作原理",
             desc: "为了减轻中心控制端（Web 面板端）的流量压力与计算压力，我们采用 “数据走直连，指令走转发” 的设计概念。<br />这样的设计会暴露各个守护进程，但您守护进程主机上的服务本应就会暴露，再加上可控的权限识别，无需担忧各个主机安全问题。",
             principleImage: "分布式服务工作原理图",
-            onlyOne: "如果您只有一个主机，则可以无视此工作原理，按正常使用方式即可。",
+            onlyOne: "如果您只有一个主机，则可以无视此工作原理，按正常使用方式即可。"
         },
 
         delDaemonWarn: "此操作将永久删除该守护进程，是否继续？",
         inputNewRemark: "请输入新的备注内容",
         updateRemarkSuccess: "更新备注信息成功",
         inputNewKey: "请输入新密钥，设置后将自动尝试连接",
-        key: "密钥",
+        key: "密钥"
     },
     container: {
         remoteList: "远程守护进程列表",
@@ -337,11 +461,11 @@ export default {
         links: [
             {
                 title: "检查本地环境",
-                info: "学习如何在系统上知晓您当前的一些常用运行时环境",
+                info: "学习如何在系统上知晓您当前的一些常用运行时环境"
             },
             {
                 title: "安装 Docker 软件",
-                info: "学习如何在常见 Linux 发行版系统上安装 Docker 软件",
+                info: "学习如何在常见 Linux 发行版系统上安装 Docker 软件"
             }
         ]
     },
@@ -364,22 +488,29 @@ export default {
         inputCopy: "请输入文案，例如：京ICP备00000001号",
 
         referenceLink: "相关参考链接",
-        referenceLinksInfo: "面板的大部分设置十分重要，在一般情况下，绝大部分参数都无需更改，如果某个参数您并不知晓代表什么，那么建议您不要对其进行修改。",
+        referenceLinksInfo:
+            "面板的大部分设置十分重要，在一般情况下，绝大部分参数都无需更改，如果某个参数您并不知晓代表什么，那么建议您不要对其进行修改。",
 
         limitAndSecurity: "限制与安全",
         canFileManager: "准许普通用户使用文件管理功能",
-        canFileManagerInfo: "文件管理是一个较为消耗资源且不易控制的功能，如果您的普通用户没有文件管理的任何需求，可以禁止用户使用文件管理。",
+        canFileManagerInfo:
+            "文件管理是一个较为消耗资源且不易控制的功能，如果您的普通用户没有文件管理的任何需求，可以禁止用户使用文件管理。",
 
         crossAPI: "跨域请求 API 接口",
-        crossAPIInfo: "HTTP 响应将会加入 access-control-allow-origin: *，可能会降低安全性，但是会提高开发扩展性。",
+        crossAPIInfo:
+            "HTTP 响应将会加入 access-control-allow-origin: *，可能会降低安全性，但是会提高开发扩展性。",
         loginCheckIp: "同 IP 登录次数限制",
-        loginCheckIpInfo: "此功能将保护您的面板不被单个主机暴力破解密码，每个 IP 只有 10 次密码错误次数。",
+        loginCheckIpInfo:
+            "此功能将保护您的面板不被单个主机暴力破解密码，每个 IP 只有 10 次密码错误次数。",
         attention: "注意事项",
-        attentionInfo: "这些配置设置需要一部分专业知识，您可以根据您的硬件设备来大概猜测哪些值适合您。<br />一般情况下，默认值可以满足个人日常的使用场景，如果规模一旦更大，对硬件的要求更高，为了不过分损失用户体验，一个合适的阈值是十分重要的。",
+        attentionInfo:
+            "这些配置设置需要一部分专业知识，您可以根据您的硬件设备来大概猜测哪些值适合您。<br />一般情况下，默认值可以满足个人日常的使用场景，如果规模一旦更大，对硬件的要求更高，为了不过分损失用户体验，一个合适的阈值是十分重要的。",
 
         about: "关于",
-        aboutTitle: "软件根据<a target='black' href='https://github.com/MCSManager/MCSManager-Daemon/blob/master/LICENSE'>AGPL-3.0</a>开源软件协议发行",
-        aboutTitleInfo: "此协议准许每个人都可以复制和分发代码副本，并且可以对使用者收取服务费用。<br />若对代码任何修改，则必须无偿提供软件的完整源代码下载。",
+        aboutTitle:
+            "软件根据<a target='black' href='https://github.com/MCSManager/MCSManager-Daemon/blob/master/LICENSE'>AGPL-3.0</a>开源软件协议发行",
+        aboutTitleInfo:
+            "此协议准许每个人都可以复制和分发代码副本，并且可以对使用者收取服务费用。<br />若对代码任何修改，则必须无偿提供软件的完整源代码下载。",
         closedSource: "闭源商业许可证",
         closedSourceInfo: "若您想二次开发并且闭源使用于任何活动（包括但不限于商业，个人）。",
         learnMore: "了解更多",
@@ -387,7 +518,7 @@ export default {
         sponsorList: "开源项目赞助名单",
         sponsorListInfo: "只含前 40 名赞助者，查看完整赞助名单或进行赞助支持请前往",
 
-        settingUpdate: "已更新，部分选项生效可能需要重启面板",
+        settingUpdate: "已更新，部分选项生效可能需要重启面板"
     },
     home: {
         totalInstance: "实例总计",
@@ -454,6 +585,7 @@ export default {
         confirmBatchDelContent: "确定要进行批量移除吗？此操作不会删除实例实际文件，只会删除实例",
         confirmBatchDelFileConten: "确定要进行批量移除吗？此操作不会删除实例实际文件，只会删除实例",
         editSuccess: "修改成功",
+        saveSuccess: "保存成功",
         createSuccess: "创建成功",
         delSuccess: "删除成功",
         batchDelSuccess: "批量删除成功",
