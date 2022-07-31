@@ -358,8 +358,21 @@ export default {
 
     },
     instanceTypeList: {
-        控制台通用程序: "控制台通用程序",
-        "Steam 服务端通用": "Steam 服务端通用"
+        "控制台通用程序": "控制台通用程序",
+        "Steam 服务端通用": "Steam 服务端通用",
+        "MC Java 版通用": "MC Java 版通用",
+        "MC 基岩版通用": "MC 基岩版通用",
+        "MC Spigot": "MC Spigot",
+        "MC Paper": "MC Paper",
+        "MC BungeeCord": "MC BungeeCord",
+        "MC Bedrock": "MC Bedrock",
+        "MC Sponge": "MC Sponge",
+        "MC Forge": "MC Forge",
+        "MC Fabric": "MC Fabric",
+        "MC Bukkit": "MC Bukkit",
+        "MC Geyser": "MC Geyser",
+        "MC MCDR": "MC MCDR",
+        "Web Shell": "Web Shell",
     },
     users: {
         userList: "用户列表",
