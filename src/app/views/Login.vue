@@ -79,7 +79,9 @@
                 <transition name="fade">
                   <div v-if="cause" id="login-cause">{{ cause }}</div>
                   <div v-else class="login-info-wrapper fgp" @click="forgotPassword">
-                    <a href="javascript:void(0)" rel="noopener noreferrer"> {{ $t("login.forgotPassword") }} </a>
+                    <a href="javascript:void(0)" rel="noopener noreferrer">
+                      {{ $t("login.forgotPassword") }}
+                    </a>
                   </div>
                 </transition>
                 <el-button
@@ -168,10 +170,10 @@ export default {
     async login() {
       try {
         if (!this.form.username || !this.form.username) {
-          throw new Error("");
+          this.cause = this.$t("login.isNull");
+          return;
         }
         this.loading = true;
-        this.cause = this.$t("login.isNull");
         this.loginText = this.$t("login.logging");
         await sleep(600);
         const res = await request({
@@ -230,14 +232,10 @@ export default {
       this.loginInfo = res?.loginInfo ?? "";
     },
     forgotPassword() {
-      this.$confirm(
-        this.$t("login.forgotPasswordInfo"),
-        this.$t("login.forgotPassword"),
-        {
-          confirmButtonText: this.$t("general.confirm"),
-          cancelButtonText: this.$t("general.closed")
-        }
-      );
+      this.$confirm(this.$t("login.forgotPasswordInfo"), this.$t("login.forgotPassword"), {
+        confirmButtonText: this.$t("general.confirm"),
+        cancelButtonText: this.$t("general.closed")
+      });
     }
   },
   async mounted() {
