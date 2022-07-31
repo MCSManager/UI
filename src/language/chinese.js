@@ -412,6 +412,22 @@ export default {
         SaveData: "保存数据",
         selectAUser: "请至少选择一个用户"
     },
+    userResources: {
+        userInfo: "用户信息",
+        name: "名称",
+        regTime: "注册时间",
+        length: "拥有实例",
+        resourceManage: "用户资源管理",
+        userExcel: "用户资源表",
+        userExcelInfo: "当前子用户可管理的所有实例，若实例状态显示“忙碌”代表此实例不存在或远程主机已经离线。",
+        rentRisk: "出租安全风险",
+        rentRiskInfo: '为确保您宿主机安全，您必须将任何运行的程序包含在 Docker 虚拟化容器中运行，否则您的用户将有可能入侵破坏宿主机。<br />建议您前往<a class="color-blue" href="https://docs.mcsmanager.com/" target="_blank" rel="noopener noreferrer">官方文档</a>了解更多',
+        addInstance: "分配实例",
+        saveData: "保存数据",
+        daemon: "所属守护进程",
+        addInstanceForUser: "为用户新增实例资源",
+        addInstanceInfo: "利用远程主机地址与模糊查询来为此用户增加应用实例",
+    },
     services: {
         remoteDaemonManage: "远程守护进程管理",
         addDaemon: "新增远程守护进程",

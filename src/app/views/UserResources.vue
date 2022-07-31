@@ -21,7 +21,7 @@
 
 <template>
   <Panel>
-    <template #title>用户信息</template>
+    <template #title>{{ $t('userResources.userInfo') }}</template>
     <template #default>
       <el-row :gutter="20">
         <el-col :md="6" :offset="0">
@@ -32,19 +32,19 @@
         </el-col>
         <el-col :md="6" :offset="0">
           <div class="overview-info-warpper">
-            <p class="overview-info-title">名称</p>
+            <p class="overview-info-title">{{ $t('userResources.name') }}</p>
             <p class="overview-info-value" v-text="userInfo.userName"></p>
           </div>
         </el-col>
         <el-col :md="6" :offset="0">
           <div class="overview-info-warpper">
-            <p class="overview-info-title">注册时间</p>
+            <p class="overview-info-title">{{ $t('userResources.regTime') }}</p>
             <p class="overview-info-value" v-text="userInfo.registerTime"></p>
           </div>
         </el-col>
         <el-col :md="6" :offset="0">
           <div class="overview-info-warpper">
-            <p class="overview-info-title">拥有实例</p>
+            <p class="overview-info-title">{{ $t('userResources.length') }}</p>
             <p class="overview-info-value" v-text="userInfo.instances.length"></p>
           </div>
         </el-col>
@@ -52,62 +52,53 @@
     </template>
   </Panel>
   <Panel v-loading="loading">
-    <template #title>用户资源管理</template>
+    <template #title>{{ $t('userResources.resourceManage') }}</template>
     <template #default>
       <div class="sub-title row-mt">
-        <p class="sub-title-title">用户资源表</p>
+        <p class="sub-title-title">{{ $t('userResources.userExcel') }}</p>
         <p class="sub-title-info">
-          当前子用户可管理的所有实例，若实例状态显示“忙碌”代表此实例不存在或远程主机已经离线。
+          {{ $t('userResources.userExcelInfo') }}
         </p>
       </div>
 
       <div>
-        <p class="sub-title-title">出租安全风险</p>
+        <p class="sub-title-title">{{ $t('userResources.rentRisk') }}</p>
         <p class="sub-title-info">
-          为确保您宿主机安全，您必须将任何运行的程序包含在 Docker
-          虚拟化容器中运行，否则您的用户将有可能入侵破坏宿主机。
-          <br />
-          建议您前往<a
-            class="color-blue"
-            href="https://docs.mcsmanager.com/"
-            target="_blank"
-            rel="noopener noreferrer"
-            >官方文档</a
-          >了解更多
+          <span v-html="$t('userResources.rentRiskInfo')"></span>
         </p>
       </div>
       <div class="row-mt">
         <ItemGroup>
           <el-button size="small" type="success" @click="openAddInstancePanel">
-            <i class="el-icon-plus"></i> 分配实例
+            <i class="el-icon-plus"></i> {{ $t('userResources.addInstance') }}
           </el-button>
           <el-button size="small" type="primary" @click="save">
-            <i class="el-icon-document-checked"></i> 保存数据
+            <i class="el-icon-document-checked"></i> {{ $t('userResources.saveData') }}
           </el-button>
           <el-button size="small" @click="refresh">
-            <i class="el-icon-refresh"></i> 刷新
+            <i class="el-icon-refresh"></i> {{ $t('general.refresh') }}
           </el-button>
         </ItemGroup>
       </div>
       <div class="row-mt">
         <el-table :data="userInfo.instances" stripe style="width: 100%" size="small">
-          <el-table-column label="所属守护进程" width="140">
+          <el-table-column :label="$t('userResources.daemon')" width="140">
             <template #default="{ row }"> {{ row.hostIp }}（{{ row.remarks }}） </template>
           </el-table-column>
-          <el-table-column prop="nickname" label="实例名称" width="240"></el-table-column>
-          <el-table-column label="到期时间">
+          <el-table-column prop="nickname" :label="$t('instances.instanceName')" width="240"></el-table-column>
+          <el-table-column :label="$t('instances.endTime')">
             <template #default="scope">
               {{ String(scope.row.endTime || "").split("T")[0] }}
             </template>
           </el-table-column>
-          <el-table-column prop="status" label="状态">
+          <el-table-column prop="status" :label="$t('instances.status.title')">
             <template #default="scope">
               {{ statusToText(scope.row.status) }}
             </template>
           </el-table-column>
-          <el-table-column label="操作" style="text-align: center">
+          <el-table-column :label="$t('general.operate')" style="text-align: center">
             <template #default="scope">
-              <el-button size="mini" @click="deleteInstance(scope.row)">删除</el-button>
+              <el-button size="mini" @click="deleteInstance(scope.row)">{{ $t('general.delete') }}</el-button>
             </template>
           </el-table-column>
         </el-table>
@@ -117,11 +108,11 @@
 
   <!-- 新增实例框 -->
   <Dialog v-model="isAddInstanceForUser">
-    <template #title>为用户新增实例资源</template>
+    <template #title>{{ $t("userResources.addInstanceForUser") }}</template>
     <template #default>
       <div class="sub-title">
-        <p class="sub-title-title">分配资源</p>
-        <p class="sub-title-info">利用远程主机地址与模糊查询来为此用户增加应用实例</p>
+        <p class="sub-title-title">{{ $t("general.allocation") }}</p>
+        <p class="sub-title-info">{{ $t("userResources.addInstanceInfo") }}</p>
       </div>
       <SelectInstance :callback="selectedInstance"></SelectInstance>
     </template>
@@ -187,11 +178,11 @@ export default {
             config: this.userInfo
           }
         });
-        this.$message({ type: "success", message: "更新成功" });
+        this.$message({ type: "success", message: this.$t("home.updateSuccess") });
       } catch (error) {
         this.$message({
           type: "error",
-          message: `错误: ${error.message}`
+          message: `Error: ${error.message}`
         });
       }
     },
@@ -210,7 +201,7 @@ export default {
     },
     async refresh() {
       await this.render();
-      this.$message({ type: "info", message: "已刷新" });
+      this.$message({ type: "info", message: this.$t("general.refreshFinish") });
     }
   },
   async mounted() {
