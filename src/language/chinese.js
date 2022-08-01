@@ -19,7 +19,7 @@ export default {
         allow: "准许",
         forbid: "禁止",
         enable: "启用",
-        closed: "关闭"
+        closed: "关闭",
     },
     login: {
         title: "身份验证",
@@ -529,6 +529,32 @@ export default {
                 info: "学习如何在常见 Linux 发行版系统上安装 Docker 软件"
             }
         ]
+    },
+    imageManager: {
+        remoteImageManage: "远程主机镜像管理",
+        newImage: "新建镜像",
+        needTime: "新建镜像可能需要一定时间。",
+        remoteImageList: "远程主机镜像列表",
+        remoteImageListInfo: "镜像构建与容器运行依赖于 Docker 软件，物理主机上所有守护进程将共享所有镜像。",
+        storage: "占用空间",
+        details: "详情",
+
+        remoteContainerList: "远程主机容器列表",
+        remoteContainerListInfo: "容器列表代表所有正在独立镜像环境运行的应用实例，此处列表不仅仅包括面板所启动的容器。",
+        useImage: "使用镜像",
+        status: "状态",
+        situation: "情况",
+
+        infoDetail: "信息详情",
+        aboutDetail: "关于详情信息",
+        aboutDetailInfo: "Docker 镜像与容器等详细信息建议由技术人员阅读，此处提供完整的 JSON 格式信息内容。",
+
+        dataLoadError: "数据加载失败",
+        tip: "提示",
+        foreverDeleteImage: "此操作将永久删除该镜像, 是否继续?",
+        sendDelCmd: "删除指令已发出",
+        waitForDel: "请耐心等待，使用刷新功能加载列表，稍后此镜像预计将会被删除",
+        delImageFailed: "删除镜像失败",
     },
     settings: {
         setOperate: "配置操作",
