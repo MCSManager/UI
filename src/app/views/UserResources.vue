@@ -82,21 +82,21 @@
       </div>
       <div class="row-mt">
         <el-table :data="userInfo.instances" stripe style="width: 100%" size="small">
-          <el-table-column :label="$t('userResources.daemon')" width="140">
+          <el-table-column :label="$t('userResources.daemon')" width="280">
             <template #default="{ row }"> {{ row.hostIp }}（{{ row.remarks }}） </template>
           </el-table-column>
-          <el-table-column prop="nickname" :label="$t('instances.instanceName')" width="240"></el-table-column>
-          <el-table-column :label="$t('instances.endTime')">
+          <el-table-column prop="nickname" :label="$t('instances.instanceName')" width="280"></el-table-column>
+          <el-table-column :label="$t('instances.endTime')" width="140">
             <template #default="scope">
               {{ String(scope.row.endTime || "").split("T")[0] }}
             </template>
           </el-table-column>
-          <el-table-column prop="status" :label="$t('instances.status.title')">
+          <el-table-column prop="status" :label="$t('instances.status.title')" width="140">
             <template #default="scope">
               {{ statusToText(scope.row.status) }}
             </template>
           </el-table-column>
-          <el-table-column :label="$t('general.operate')" style="text-align: center">
+          <el-table-column :label="$t('general.operate')" style="text-align: center" >
             <template #default="scope">
               <el-button size="mini" @click="deleteInstance(scope.row)">{{ $t('general.delete') }}</el-button>
             </template>
