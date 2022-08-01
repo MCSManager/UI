@@ -23,20 +23,20 @@
   <el-row :gutter="20">
     <el-col :span="24">
       <Panel>
-        <template #title>基本信息</template>
+        <template #title>{{ $t("userDetail.basicInfo") }}</template>
         <template #default>
           <el-row :gutter="20">
             <el-col :md="12" :offset="0">
               <LineLabel class="only-pc-display">
-                <template #title>唯一标识符</template>
+                <template #title>{{ $t("userDetail.uuid") }}</template>
                 <template #default>{{ userInfo.uuid }}</template>
               </LineLabel>
               <LineLabel>
-                <template #title>用户名</template>
+                <template #title>{{ $t("users.userName") }}</template>
                 <template #default>{{ userInfo.userName }}</template>
               </LineLabel>
               <LineLabel>
-                <template #title>账号状态</template>
+                <template #title>{{ $t("userDetail.status") }}</template>
                 <template #default>
                   <span style="color: green">{{ moreUserInfo.safe }}</span>
                 </template>
@@ -44,15 +44,15 @@
             </el-col>
             <el-col :md="12" :offset="0">
               <LineLabel>
-                <template #title>注册时间</template>
+                <template #title>{{ $t("users.regTime") }}</template>
                 <template #default>{{ userInfo.registerTime }}</template>
               </LineLabel>
               <LineLabel>
-                <template #title>登录时间</template>
+                <template #title>{{ $t("userDetail.loginTime") }}</template>
                 <template #default>{{ userInfo.loginTime }}</template>
               </LineLabel>
               <LineLabel class="only-pc-display">
-                <template #title>接口</template>
+                <template #title>{{ $t("userDetail.api") }}</template>
                 <template #default>
                   {{ moreUserInfo.api }}
                 </template>
@@ -66,24 +66,24 @@
   <el-row :gutter="20">
     <el-col :md="8" :offset="0">
       <Panel style="height: 300px">
-        <template #title>注意事项</template>
+        <template #title>{{ $t("userDetail.attention") }}</template>
         <template #default>
           <div class="sub-title">
-            <p class="sub-title">关于用户名</p>
+            <p class="sub-title">{{ $t("userDetail.aboutName") }}</p>
             <p class="sub-title-info">
-              用户名仅可唯一存在，修改时面板会检查是否存在冲突，如果发现冲突则无法进行修改用户名，用户名请勿包含特殊字符或旧版本系统不兼容的文字。
+              {{ $t("userDetail.aboutNameInfo") }}
             </p>
           </div>
           <div class="sub-title">
-            <p class="sub-title">关于密码</p>
+            <p class="sub-title">{{ $t("userDetail.aboutPasswd") }}</p>
             <p class="sub-title-info">
-              账号密码请尽可能复杂化。请放心，面板管理员无法直接解读您的自定义密码，您的密码即使与其他网站密码有相似之处也不必过于担忧安全问题。
+              {{ $t("userDetail.aboutPasswd") }}
             </p>
           </div>
           <div class="sub-title">
-            <p class="sub-title">关于 API 密钥</p>
+            <p class="sub-title">{{ $t("userDetail.aboutApiKey") }}</p>
             <p class="sub-title-info">
-              适用于开发者使用的 API 密钥与账号密码登录拥有同等权限，重要程度与密码相同，请勿泄露。
+              {{ $t("userDetail.aboutApiKeyInfo") }}
             </p>
           </div>
         </template>
@@ -113,7 +113,7 @@
         </template>
       </Panel> -->
       <Panel style="height: 300px">
-        <template #title>更新密码</template>
+        <template #title>{{ $t("userDetail.updatePasswd") }}</template>
         <template #default>
           <el-form
             :model="userData"
@@ -122,25 +122,25 @@
             size="small"
             ref="ruleFormRef"
           >
-            <el-form-item label="新密码" prop="passWord" required>
+            <el-form-item :label="$t('userDetail.newPasswd')" prop="passWord" required>
               <el-input
                 size="small"
                 type="password"
                 v-model="userData.passWord"
                 autocomplete="off"
                 :readonly="readonly.b"
-                placeholder="长度必须 9 到 24 位，尽可能包含字母数字加符号组合方式"
+                :placeholder="$t('userDetail.newPasswdInfo')"
                 @focus="() => (readonly.b = false)"
               >
               </el-input>
             </el-form-item>
 
-            <el-form-item label="确认新密码" prop="passWord2" required>
+            <el-form-item :label="$t('userDetail.confirmNewPasswd')" prop="passWord2" required>
               <el-input
                 size="small"
                 type="password"
                 v-model="userData.passWord2"
-                placeholder="保持原值"
+                :placeholder="$t('userDetail.keepOrigin')"
                 :readonly="readonly.c"
                 @focus="() => (readonly.c = false)"
                 autocomplete="off"
@@ -150,7 +150,7 @@
             <div style="text-align: right">
               <el-form-item>
                 <el-button size="small" type="danger" plain class="row-mt" @click="update(2)">
-                  更新密码
+                  {{ $t("userDetail.updatePasswd") }}
                 </el-button>
               </el-form-item>
             </div>
@@ -161,12 +161,12 @@
 
     <el-col :md="8" :offset="0">
       <Panel style="height: 300px">
-        <template #title>API 接口密钥</template>
+        <template #title>{{ $t("userDetail.apiKey") }}</template>
         <template #default>
           <div class="sub-title row-mt">
-            <p class="sub-title-title">什么是 API 密钥？</p>
+            <p class="sub-title-title">{{ $t("userDetail.whatIsApiKey") }}</p>
             <p class="sub-title-info">
-              专供给开发者使用的同等权限密钥，可以为您的第三方程序提供充足的功能与可靠的稳定性。
+              {{ $t("userDetail.apiKeyIs") }}
             </p>
           </div>
           <div
@@ -179,15 +179,15 @@
               font-size: 13px;
             "
           >
-            <span>{{ userInfo.apiKey ? userInfo.apiKey : "未启用" }}</span>
+            <span>{{ userInfo.apiKey ? userInfo.apiKey : $t("userDetail.disable") }}</span>
           </div>
           <div style="text-align: right">
             <ItemGroup>
               <el-button size="small" class="row-mt" @click="changeApi(true)"
-                >生成 API 密钥</el-button
+                >{{ $t("userDetail.createApiKey") }}</el-button
               >
               <el-button size="small" class="row-mt" @click="changeApi(false)"
-                >关闭 API 接口</el-button
+                >{{ $t("userDetail.disableApiKey") }}</el-button
               >
             </ItemGroup>
           </div>
@@ -219,7 +219,7 @@ export default {
       },
       moreUserInfo: {
         api: API_URL,
-        safe: "账号正常"
+        safe: this.$t("userDetail.accountOk")
       },
       api: {
         enable: false,
@@ -242,9 +242,9 @@ export default {
     async update() {
       await this.$refs.ruleFormRef.validate(async (valid) => {
         if (!valid) return;
-        await this.$confirm("确定要更改此信息吗？", "警告", {
-          confirmButtonText: "确定",
-          cancelButtonText: "取消",
+        await this.$confirm(this.$t("userDetail.changeThisInfo"), this.$t("general.warn"), {
+          confirmButtonText: this.$t("general.confirm"),
+          cancelButtonText: this.$t("general.cancel"),
           type: "warning"
         });
         const passWord = this.userData.passWord;
@@ -256,7 +256,7 @@ export default {
               passWord
             }
           });
-          this.$message({ message: "用户数据已更新", type: "success" });
+          this.$message({ message: this.$t("userDetail.userDataUpdate"), type: "success" });
         } catch (error) {
           this.$message({
             message: error.toString(),
@@ -276,24 +276,24 @@ export default {
           }
         });
         this.$store.commit("setApiKey", key);
-        this.$message({ message: "API 操作更改成功", type: "success" });
+        this.$message({ message: this.$t("userDetail.apiKeyChangeSuccess"), type: "success" });
       } catch (error) {
         this.$message({
-          message: `更改失败:${error}`,
+          message: `Error: ${error}`,
           type: "error"
         });
       }
     },
     validatePassword(rule, value = "", callback) {
-      if (!value) return callback(new Error("请输入密码值，若不输入则不进行密码修改"));
+      if (!value) return callback(new Error(this.$t("userDetail.inputPasswd")));
       if (value.length < 9 || value.length > 36)
-        return callback(new Error("密码长度不规范，必须长度在 9 位到 36 位之间"));
+        return callback(new Error(this.$t("userDetail.notStandard")));
       // const reg = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[0-9A-Za-z]{12,}$/;
       // if (!reg.test(value)) return callback(new Error("您的密码必须包含：数字，大写和小写字母"));
       callback();
     },
     validatePassword2(rule, value = "", callback) {
-      if (value !== this.passWord) return callback(new Error("两次密码不一致"));
+      if (value !== this.passWord) return callback(new Error(this.$t("userDetail.notSame")));
 
       callback();
     }
