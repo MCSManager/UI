@@ -785,5 +785,12 @@ export default {
         user: "用户中心",
         advanced: "高级功能",
         node: "节点管理",
+    },
+    businessWarning: {
+        title: "商业出租风险警告",
+        youMayWillBeHack: "您可能会被入侵！",
+        warningInfo: '如果您在 <el-tag type="info" size="mini">Windows/Linux</el-tag> 下将实例分配给<b>陌生人</b> ，那么您的主机将随时可以被其他人通过上传恶意程序入侵主机。',
+        hotToProtect: "如何保护我的主机？",
+        protectInfo: '您的系统必须是<el-tag type="info" size="mini">Linux</el-tag>系统，并且安装了 Docker 软件，在实例设置界面右下角有<el-tag type="info" size="mini">进程启动方式</el-tag>选择框，请选择虚拟化容器方案，即可确保您的主机安全。<br /><b>虚拟化容器将可以让您的实例在一个虚拟的沙盒环境中运行</b>，您的子用户不管上传任何恶意程序，都将无法危害到其他人。',
     }
 }
