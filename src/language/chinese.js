@@ -779,5 +779,11 @@ export default {
         quickStart: "快速开始",
         update: "版本控制",
         install: "安装",
+    },
+    aside: {
+        basic: "基础功能",
+        user: "用户中心",
+        advanced: "高级功能",
+        node: "节点管理",
     }
 }
