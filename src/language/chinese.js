@@ -556,6 +556,58 @@ export default {
         waitForDel: "请耐心等待，使用刷新功能加载列表，稍后此镜像预计将会被删除",
         delImageFailed: "删除镜像失败",
     },
+    newImage: {
+        createImage: "创建镜像",
+        toImageList: "回到镜像列表",
+        buildProgress: "构建进度",
+        need10min: "新建镜像可能需要十几分钟，请耐心等待",
+        whatIsImage: "什么是环境镜像？",
+        whatIsImageInfo: "由于 Minecraft 或其他程序需要特定的运行环境，比如 Java/Python/.NET 等等，不同版本在同一台机器上安装管理十分复杂，使用不同的环境镜像可以很方便的管理不同版本不同类型的服务环境。",
+        whatIsDocker: "什么是 Docker？为什么需要它？",
+        whatIsDockerInfo: "Docker 是一款轻量级虚拟化软件，能够利用环境镜像来创建容器（就像一个盒子）包裹你的实际应用程序，让你的应用程序在一个虚拟的沙箱环境中运行，不论应用程序做任何恶意操作，都不会影响到宿主机的任何文件。",
+        images: [
+            {
+                title: "创建 OpenJDK 8 环境镜像",
+                info: "适用于需要 Java 8 的服务端软件，属于经典的 Java 运行时版本，适用于 Minecraft 1.17 以下的所有版本",
+            },
+            {
+                title: "创建 OpenJDK 16 环境镜像",
+                info: "内置 Java 16 运行时环境，适用于 Minecraft 1.17 版本的服务端",
+            },
+            {
+                title: "创建 OpenJDK 17 环境镜像",
+                info: "内置 Java 17 运行时环境，适用于 Minecraft 1.18 版本以上的服务端",
+            },
+            {
+                title: "创建 Ubuntu 环境镜像",
+                info: "适用于 MC 基岩版服务端运行环境或者其他 Linux 程序",
+            },
+            {
+                title: "使用 DockerFile 自定义创建",
+                info: "使用 DockerFile 自定义创建任何环境镜像，此操作建议技术人员进行",
+            },
+        ],
+        aboutDockerFile: "关于 DockerFile 文件",
+        referenceDoc: "官方参考文档：https://docs.docker.com/engine/reference/builder/",
+        attention: "必须创建 /workspace 目录，此目录将自动挂载到实例的文件根目录",
+
+        requireInput: "必填，请输入内容",
+        afterCreate: "创建后的镜像名与版本标识",
+        imageName: "[必填] 镜像名，如 openjdk",
+        imageVer: "[必填] 镜像版本，如 1.0 1.1 latest",
+        toSelectImage: "回到镜像选择",
+        noData: "暂无数据",
+        getProcess: "已获取最新构建进度",
+        building: "正在构建...",
+        buildError: "构建错误...",
+        buildOk: "构建完毕",
+
+        pleaseFinish: "请完成必填项目",
+        buildTip: "此构建过程可能需要几分钟时间，请确保网络畅通，是否继续？",
+        createTaskStart: "创建镜像任务已经开始",
+        pleaseWait: "请耐心等待",
+        createTaskError: "创建时失败",
+    },
     settings: {
         setOperate: "配置操作",
         updateSet: "更新配置",

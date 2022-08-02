@@ -21,29 +21,30 @@
 
 <template>
   <Panel v-show="step == 1">
-    <template #title>创建镜像</template>
+    <template #title>{{ $t("newImage.createImage") }}</template>
     <template #default>
       <div class="flex flex-space-between flex-align-items-center">
         <div>
           <ItemGroup>
-            <el-button type="" size="small" @click="back">回到镜像列表</el-button>
-            <el-button type="" size="small" @click="toProgress">构建进度</el-button>
+            <el-button type="" size="small" @click="back">{{
+              $t("newImage.toImageList")
+            }}</el-button>
+            <el-button type="" size="small" @click="toProgress">{{
+              $t("newImage.buildProgress")
+            }}</el-button>
           </ItemGroup>
         </div>
-        <span class="color-gray">新建镜像可能需要十几分钟，请耐心等待&nbsp;&nbsp;</span>
+        <span class="color-gray">{{ $t("newImage.need10min") }}&nbsp;&nbsp;</span>
       </div>
       <LineOption class="row-mt" :custom="true">
         <template #default>
-          <div class="sub-title">什么是环境镜像？</div>
+          <div class="sub-title">{{ $t("newImage.whatIsImage") }}</div>
           <div class="sub-title-info">
-            由于 Minecraft 或其他程序需要特定的运行环境，比如 Java/Python/.NET 等等，
-            不同版本在同一台机器上安装管理十分复杂，使用不同的环境镜像可以很方便的管理不同版本不同类型的服务环境。
+            {{ $t("newImage.whatIsImageInfo") }}
           </div>
-          <div class="sub-title row-mt">什么是 Docker？为什么需要它？</div>
+          <div class="sub-title row-mt">{{ $t("newImage.whatIsDocker") }}</div>
           <div class="sub-title-info">
-            Docker
-            是一款轻量级虚拟化软件，能够利用环境镜像来创建容器（就像一个盒子）包裹你的实际应用程序，
-            让你的应用程序在一个虚拟的沙箱环境中运行，不论应用程序做任何恶意操作，都不会影响到宿主机的任何文件。
+            {{ $t("newImage.whatIsDockerInfo") }}
           </div>
         </template>
       </LineOption>
@@ -51,41 +52,36 @@
         <el-row :gutter="10">
           <el-col :md="6" :offset="0">
             <SelectBlock style="min-height: 120px" @click="selectType(1)">
-              <template #title>创建 OpenJDK 8 环境镜像</template>
-              <template #info
-                >适用于需要 Java 8 的服务端软件，属于经典的 Java 运行时版本，适用于 Minecraft 1.17
-                以下的所有版本</template
-              >
+              <template #title>{{ $t("newImage.images[0].title") }}</template>
+              <template #info>
+                {{ $t("newImage.images[0].info") }}
+              </template>
             </SelectBlock>
           </el-col>
           <el-col :md="6" :offset="0">
             <SelectBlock style="min-height: 120px" @click="selectType(2)">
-              <template #title>创建 OpenJDK 16 环境镜像</template>
-              <template #info>内置 Java 16 运行时环境，适用于 Minecraft 1.17 版本的服务端</template>
+              <template #title>{{ $t("newImage.images[1].title") }}</template>
+              <template #info>{{ $t("newImage.images[1].info") }}</template>
             </SelectBlock>
           </el-col>
           <el-col :md="6" :offset="0">
             <SelectBlock style="min-height: 120px" @click="selectType(5)">
-              <template #title>创建 OpenJDK 17 环境镜像</template>
-              <template #info
-                >内置 Java 17 运行时环境，适用于 Minecraft 1.18 版本以上的服务端</template
-              >
+              <template #title>{{ $t("newImage.images[2].title") }}</template>
+              <template #info>{{ $t("newImage.images[2].info") }}</template>
             </SelectBlock>
           </el-col>
           <el-col :md="6" :offset="0">
             <SelectBlock style="min-height: 120px" @click="selectType(3)">
-              <template #title>创建 Ubuntu 环境镜像</template>
-              <template #info>适用于 MC 基岩版服务端运行环境或者其他 Linux 程序</template>
+              <template #title>{{ $t("newImage.images[3].title") }}</template>
+              <template #info>{{ $t("newImage.images[3].info") }}</template>
             </SelectBlock>
           </el-col>
         </el-row>
         <el-row :gutter="10" class="row-mt">
           <el-col :md="6" :offset="0">
             <SelectBlock style="min-height: 120px" @click="selectType(4)">
-              <template #title>使用 DockerFile 自定义创建</template>
-              <template #info
-                >使用 DockerFile 自定义创建任何环境镜像，此操作建议技术人员进行</template
-              >
+              <template #title>{{ $t("newImage.images[4].title") }}</template>
+              <template #info>{{ $t("newImage.images[4].info") }}</template>
             </SelectBlock>
           </el-col>
         </el-row>
@@ -98,61 +94,69 @@
     <template #default>
       <div class="row-mt">
         <div class="sub-title">
-          <p class="sub-title-title">关于 DockerFile 文件</p>
+          <p class="sub-title-title">{{ $t("newImage.aboutDockerFile") }}</p>
           <p class="sub-title-info">
-            官方参考文档：https://docs.docker.com/engine/reference/builder/
+            {{ $t("newImage.referenceDoc") }}
           </p>
         </div>
         <div class="sub-title">
-          <p class="sub-title-title">注意事项</p>
-          <p class="sub-title-info">必须创建 /workspace 目录，此目录将自动挂载到实例的文件根目录</p>
+          <p class="sub-title-title">{{ $t("settings.attention") }}</p>
+          <p class="sub-title-info">{{ $t("newImage.attention") }}</p>
         </div>
         <div class="row-mt">
-          <el-input 
-            type="textarea" 
-            :rows="14" 
-            placeholder="必填，请输入内容" 
+          <el-input
+            type="textarea"
+            :rows="14"
+            :placeholder="$t('newImage.requireInput')"
             v-model="dockerFile"
             style="word-break: break-all"
           ></el-input>
         </div>
         <div class="sub-title row-mt">
-          <p class="sub-title-title">创建后的镜像名与版本标识</p>
+          <p class="sub-title-title">{{ $t("newImage.afterCreate") }}</p>
         </div>
         <div class="flex row-mt">
           <el-input
             v-model="name"
             size="small"
             style="width: 240px"
-            placeholder="[必填] 镜像名，如 openjdk"
+            :placeholder="$t('newImage.imageName')"
           ></el-input>
           &nbsp;&nbsp;
           <el-input
             v-model="version"
             size="small"
             style="width: 240px"
-            placeholder="[必填] 镜像版本，如 1.0 1.1 latest"
+            :placeholder="$t('newImage.imageVer')"
           ></el-input>
         </div>
       </div>
       <div class="row-mt">
-        <el-button type="success" @click="createViaDockerFile" size="small">确定</el-button>
-        <el-button type="" size="small" @click="forward(1)">回到镜像选择</el-button>
+        <el-button type="success" @click="createViaDockerFile" size="small">{{
+          $t("general.confirm")
+        }}</el-button>
+        <el-button type="" size="small" @click="forward(1)">{{
+          $t("newImage.toSelectImage")
+        }}</el-button>
       </div>
     </template>
   </Panel>
 
   <Panel v-show="step == 3">
-    <template #title>构建进度</template>
+    <template #title>{{ $t("newImage.buildProgress") }}</template>
     <template #default>
       <div class="flex flex-space-between flex-align-items-center">
         <div>
           <ItemGroup>
-            <el-button type="" size="small" @click="toProgress">刷新</el-button>
-            <el-button type="" size="small" @click="forward(1)">回到镜像选择</el-button>
+            <el-button type="" size="small" @click="toProgress">{{
+              $t("general.refresh")
+            }}</el-button>
+            <el-button type="" size="small" @click="forward(1)">{{
+              $t("newImage.toSelectImage")
+            }}</el-button>
           </ItemGroup>
         </div>
-        <span class="color-gray">新建镜像可能需要十几分钟，请耐心等待&nbsp;&nbsp;</span>
+        <span class="color-gray">{{ $t("newImage.need10min") }}&nbsp;&nbsp;</span>
       </div>
       <div class="row-mt">
         <el-row :gutter="10" v-if="progress">
@@ -169,7 +173,7 @@
           </el-col>
         </el-row>
         <div v-if="!progress" class="text-center">
-          <p>暂无数据</p>
+          <p>{{ $t("newImage.noData") }}</p>
         </div>
       </div>
     </template>
@@ -203,7 +207,6 @@ export default {
     selectType(type) {
       if (type === 1) {
         this.dockerFile = `FROM openjdk:8-jre
-# 如果服务器在中国，可以取消下面的注释（删去下面一行最前面的井号空格：# ）以切换到 国内源 达到加速构建过程
 # RUN sed -i -E 's/http:\\/\\/(deb|security).debian.org/http:\\/\\/mirrors.tuna.tsinghua.edu.cn/g' /etc/apt/sources.list
 RUN apt update && apt install -y locales
 RUN echo "zh_CN.UTF-8 UTF-8">/etc/locale.gen && locale-gen
@@ -229,7 +232,7 @@ WORKDIR /workspace
       if (type === 3) {
         this.dockerFile = `FROM ubuntu:18.04
 ENV TZ=Asia/Shanghai
-# 如果服务器在中国，可以取消下面的注释（删去下面一行最前面的井号空格：# ）以切换到 国内源 达到加速构建过程
+# 
 # RUN sed -i -E 's/http:\\/\\/(archive|security).ubuntu.com/http:\\/\\/mirrors.tuna.tsinghua.edu.cn/g' /etc/apt/sources.list
 RUN apt update && apt -y install libcurl4 && DEBIAN_FRONTEND="noninteractive" apt -y install tzdata
 RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
@@ -259,7 +262,7 @@ WORKDIR /workspace
     async toProgress() {
       this.step = 3;
       await this.getProgress();
-      this.$message({ type: "info", message: "已获取最新构建进度" });
+      this.$message({ type: "info", message: this.$t("newImage.getProcess") });
     },
     async getProgress() {
       const progress = await request({
@@ -271,9 +274,9 @@ WORKDIR /workspace
       });
       const list = [];
       for (const k in progress) {
-        if (progress[k] == 1) progress[k] = "正在构建...";
-        if (progress[k] == -1) progress[k] = "构建错误...";
-        if (progress[k] == 2) progress[k] = "构建完毕";
+        if (progress[k] == 1) progress[k] = this.$t("newImage.building");
+        if (progress[k] == -1) progress[k] = this.$t("newImage.buildError");
+        if (progress[k] == 2) progress[k] = this.$t("newImage.buildOk");
         list.push({
           name: k,
           status: progress[k]
@@ -283,12 +286,12 @@ WORKDIR /workspace
     },
     async createViaDockerFile() {
       if (!this.name || !this.version || !this.dockerFile) {
-        return this.$message({ type: "error", message: "请完成必填项目" });
+        return this.$message({ type: "error", message:  this.$t("newImage.pleaseFinish") });
       }
       // eslint-disable-next-line no-unreachable
-      await this.$confirm("此构建过程可能需要几分钟时间，请确保网络畅通，是否继续？", "提示", {
-        confirmButtonText: "确定",
-        cancelButtonText: "取消",
+      await this.$confirm(this.$t("newImage.buildTip"), this.$t("imageManager.tip"), {
+        confirmButtonText: this.$t("general.confirm"),
+        cancelButtonText: this.$t("general.cancel"),
         type: "warning"
       });
       try {
@@ -305,12 +308,12 @@ WORKDIR /workspace
           }
         });
         this.$notify({
-          title: "创建镜像任务已经开始",
-          message: "请耐心等待"
+          title: this.$t("newImage.createTaskStart"),
+          message: this.$t("newImage.pleaseWait")
         });
       } catch (error) {
         this.$notify({
-          title: "创建时失败",
+          title: this.$t("newImage.createTaskError"),
           message: error.toString(),
           type: "error"
         });
