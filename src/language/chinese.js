@@ -21,6 +21,9 @@ export default {
         enable: "启用",
         closed: "关闭",
     },
+    root: {
+        title: "处理中...",
+    },
     login: {
         title: "身份验证",
         titleInfo: "使用服务器的 MCSManager 账号登录到面板",
