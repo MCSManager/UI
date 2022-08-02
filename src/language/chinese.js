@@ -433,6 +433,7 @@ export default {
         daemon: "所属守护进程",
         addInstanceForUser: "为用户新增实例资源",
         addInstanceInfo: "利用远程主机地址与模糊查询来为此用户增加应用实例",
+        select: "选择",
     },
     userDetail: {
         basicInfo: "基本信息",
