@@ -53,153 +53,153 @@ import Install from "./views/Install";
 const routes = [
   {
     path: "/",
-    name: "加载中",
+    name: "loading",
     component: Root
   },
   {
     path: "/overview",
-    name: "数据监控",
+    name: "overview",
     component: Overview
   },
   {
     path: "/home",
-    name: "信息总览",
+    name: "home",
     component: Home
   },
   {
     path: "/instances",
-    name: "应用实例",
+    name: "instances",
     component: Instances
   },
   {
     path: "/services",
-    name: "守护进程管理",
+    name: "services",
     component: Services
   },
   {
     path: "/private",
-    name: "个人信息",
+    name: "private",
     component: UserDetail
   },
   {
     path: "/users",
-    name: "用户管理",
+    name: "users",
     component: Users
   },
   {
     path: "/analysis",
-    name: "面板数据分析",
+    name: "analysis",
     component: Analysis
   },
   {
     path: "/news",
-    name: "更新与通知",
+    name: "news",
     component: News
   },
   {
     path: "/container",
-    name: "环境镜像",
+    name: "container",
     component: Container
   },
   {
     path: "/image/:serviceUuid",
-    name: "镜像管理",
+    name: "imageManager",
     component: ImageManager,
     meta: { activeMenu: "/container" }
   },
   {
     path: "/trigger",
-    name: "面板触发器",
+    name: "trigger",
     component: Trigger
   },
   {
     path: "/extension",
-    name: "面板扩展",
+    name: "extension",
     component: Extension
   },
   {
     path: "/settings",
-    name: "面板设置",
+    name: "settings",
     component: Settings
   },
   {
     path: "/new_image/:serviceUuid",
-    name: "创建镜像",
+    name: "newImage",
     component: NewImage,
     meta: { activeMenu: "/container" }
   },
   {
     path: "/terminal/:serviceUuid/:instanceUuid",
-    name: "实例控制台",
+    name: "terminal",
     component: Terminal,
     meta: { activeMenu: "/instances" }
   },
   {
     path: "/process_config_file/:serviceUuid/:instanceUuid/",
-    name: "实例配置文件",
+    name: "processConfigFile",
     component: ProcessConfigFile,
     meta: { activeMenu: "/instances" }
   },
   {
     path: "/process_config/:serviceUuid/:instanceUuid/",
-    name: "实例特定配置",
+    name: "processConfig",
     component: ProcessConfig,
     meta: { activeMenu: "/instances" }
   },
   {
     path: "/file/:serviceUuid/:instanceUuid",
-    name: "实例文件管理",
+    name: "fileManager",
     component: FileManager,
     meta: { activeMenu: "/instances" }
   },
   {
     path: "/file_editor/:serviceUuid/:instanceUuid/",
-    name: "实例文件编辑",
+    name: "fileManagerEditor",
     component: FileManagerEditor,
     meta: { activeMenu: "/instances" }
   },
   {
     path: "/instance_detail/:serviceUuid/:instanceUuid",
-    name: "实例配置详情",
+    name: "instanceDetail",
     component: InstanceDetail,
     meta: { activeMenu: "/instances" }
   },
   {
     path: "/user_resources/:userUuid",
-    name: "用户资源",
+    name: "userResources",
     component: UserResources,
     meta: { activeMenu: "/users" }
   },
   {
     path: "/schedule/:serviceUuid/:instanceUuid",
-    name: "计划任务",
+    name: "schedule",
     component: Schedule,
     meta: { activeMenu: "/instances" }
   },
   {
     path: "/new_instace/:serviceUuid",
-    name: "新增实例",
+    name: "newInstance",
     component: NewInstance,
     meta: { activeMenu: "/instances" }
   },
   {
     path: "/login",
-    name: "登录",
+    name: "login",
     component: Login
   },
   {
     path: "/quickstart",
-    name: "快速开始",
+    name: "quickStart",
     component: Quickstart
   },
   {
     path: "/update",
-    name: "版本控制",
+    name: "update",
     component: Update
   },
   {
     path: "/install",
-    name: "安装",
+    name: "install",
     component: Install
   },
 ];
