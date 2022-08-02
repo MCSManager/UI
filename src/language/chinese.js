@@ -20,6 +20,9 @@ export default {
         forbid: "禁止",
         enable: "启用",
         closed: "关闭",
+        noSelect: "未选择",
+        yes: "是",
+        no: "否",
     },
     root: {
         title: "处理中...",
