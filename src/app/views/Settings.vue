@@ -454,19 +454,8 @@ export default {
         this.sponsorList = null;
       }
     },
-    async changeForwardType(v) {
-      await this.$confirm(
-        "您确定要更改分布式流量转发类型吗？更改后某些配置可能需要重新调整，您随时可以调整回来。",
-        "最终确认",
-        {
-          confirmButtonText: "确定",
-          cancelButtonText: "取消",
-          type: "warning"
-        }
-      );
-      this.settings.forwardType = v;
-      this.$message({ message: "点击最上方保存按钮即可更改", type: "info" });
-    }
+    //async changeForwardType(v) {
+    //}
   },
   async mounted() {
     await this.render();
