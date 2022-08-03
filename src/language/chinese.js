@@ -548,6 +548,18 @@ export default {
     fileManager: { 
 
     },
+    selectUnzipCode: {
+        title: "选择解压/解压文件编码",
+        info: "在解压/压缩文件时发现文件名存在乱码现象时，可以修改此选项解决。",
+        CN: "如果压缩包来源是中国大陆，一般可选 GBK；",
+        HKorTW: "如果是来自台湾，香港地区，可以选择 BIG5，如果来自其他地区可以选择 UTF-8。",
+        selectCode: "请选择编码",
+        selectOneCode: "请选择一个编码",
+        cancel: "已取消",
+        gbk: "简体中文（GBK）",
+        big5: "繁体中文（BIG5）",
+        utf8: "面板/Linux（UTF8）",
+    },
     users: {
         userList: "用户列表",
         newUser: "新建用户",
