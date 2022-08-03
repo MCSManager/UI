@@ -24,44 +24,58 @@
     <el-row :gutter="20">
       <el-col :md="6">
         <Panel>
-          <template #title>基本信息</template>
+          <template #title>{{ $t("userDetail.basicInfo") }}</template>
           <template #default>
             <div v-if="!available">
               <el-skeleton :rows="3" animated />
             </div>
             <div v-else>
               <LineInfo>
-                <i class="el-icon-edit"></i> 名称: {{ instanceInfo.config.nickname }}
+                <i class="el-icon-edit"></i> {{ $t("terminal.name") }}:
+                {{ instanceInfo.config.nickname }}
               </LineInfo>
               <LineInfo>
-                <i class="el-icon-tickets"></i> 类型: {{ typeToText(instanceInfo.config.type) }}
+                <i class="el-icon-tickets"></i> {{ $t("terminal.type") }}:
+                {{ typeToText(instanceInfo.config.type) }}
               </LineInfo>
               <LineInfo
-                ><i class="el-icon-finished"></i> 状态:
-                <span v-if="instanceInfo.status === -1" class="color-red">维护中</span>
-                <span v-else-if="instanceInfo.status === 0" class="color-gray">未运行</span>
-                <span v-else-if="instanceInfo.status === 1" class="color-yellow">停止中</span>
-                <span v-else-if="instanceInfo.status === 2" class="color-yellow">启动中</span>
-                <span v-else-if="instanceInfo.status === 3" class="color-green">正在运行</span>
-                <span v-else class="color-red">未知</span>
+                ><i class="el-icon-finished"></i> {{ $t("imageManager.status") }}:
+                <span v-if="instanceInfo.status === -1" class="color-red">{{
+                  $t("home.maintaining")
+                }}</span>
+                <span v-else-if="instanceInfo.status === 0" class="color-gray">{{
+                  $t("home.outOfRunning")
+                }}</span>
+                <span v-else-if="instanceInfo.status === 1" class="color-yellow">{{
+                  $t("home.stopping")
+                }}</span>
+                <span v-else-if="instanceInfo.status === 2" class="color-yellow">{{
+                  $t("home.starting")
+                }}</span>
+                <span v-else-if="instanceInfo.status === 3" class="color-green">{{
+                  $t("home.running")
+                }}</span>
+                <span v-else class="color-red">{{ $t("terminal.unknown") }}</span>
               </LineInfo>
               <LineInfo v-if="instanceInfo.info && instanceInfo.info.currentPlayers != -1">
-                <i class="el-icon-user"></i> 玩家数: {{ instanceInfo.info.currentPlayers }} /
+                <i class="el-icon-user"></i> {{ $t("terminal.currentPlayers") }}:
+                {{ instanceInfo.info.currentPlayers }} /
                 {{ instanceInfo.info.maxPlayers }}
               </LineInfo>
               <LineInfo v-if="instanceInfo.info && instanceInfo.info.version">
-                <i class="el-icon-user"></i> 版本: {{ instanceInfo.info.version }}
+                <i class="el-icon-user"></i> {{ $t("services.version") }}:
+                {{ instanceInfo.info.version }}
               </LineInfo>
             </div>
           </template>
         </Panel>
         <Panel>
-          <template #title>实例控制组</template>
+          <template #title>{{ $t("terminal.controlGroup") }}</template>
           <template #default>
             <div v-loading="busy">
               <el-row type="flex" justify="space-between" :gutter="10">
                 <el-col :lg="24" v-show="instanceInfo.status === 0">
-                  <el-popconfirm title="确定执行此操作？" @confirm="openInstance">
+                  <el-popconfirm :title="$t('terminal.confirmOperate')" @confirm="openInstance">
                     <template #reference>
                       <el-button
                         icon="el-icon-video-play"
@@ -70,26 +84,26 @@
                         size="small"
                         plain
                       >
-                        开启实例
+                        {{ $t("terminal.start") }}
                       </el-button>
                     </template>
                   </el-popconfirm>
                 </el-col>
                 <el-col :lg="24" v-show="instanceInfo.status === 3">
-                  <el-popconfirm title="确定执行此操作？" @confirm="stopInstance">
+                  <el-popconfirm :title="$t('terminal.confirmOperate')" @confirm="stopInstance">
                     <template #reference>
                       <el-button
                         icon="el-icon-video-pause"
                         style="width: 100%"
                         size="small"
                         class="row-mt"
-                        >关闭实例
+                        >{{ $t("terminal.stop") }}
                       </el-button>
                     </template>
                   </el-popconfirm>
                 </el-col>
                 <el-col :lg="24" v-show="instanceInfo.status === 3">
-                  <el-popconfirm title="确定执行此操作？" @confirm="restartInstance">
+                  <el-popconfirm :title="$t('terminal.confirmOperate')" @confirm="restartInstance">
                     <template #reference>
                       <el-button
                         icon="el-icon-refresh-right"
@@ -97,13 +111,13 @@
                         size="small"
                         class="row-mt"
                       >
-                        重启实例
+                        {{ $t("terminal.restart") }}
                       </el-button>
                     </template>
                   </el-popconfirm>
                 </el-col>
                 <el-col :lg="24" v-show="instanceInfo.status > 0">
-                  <el-popconfirm title="确定执行此操作？" @confirm="killInstance">
+                  <el-popconfirm :title="$t('terminal.confirmOperate')" @confirm="killInstance">
                     <template #reference>
                       <el-button
                         icon="el-icon-switch-button"
@@ -112,13 +126,16 @@
                         style="width: 100%"
                         size="small"
                         class="row-mt"
-                        >强制终止实例
+                        >{{ $t("terminal.kill") }}
                       </el-button>
                     </template>
                   </el-popconfirm>
                 </el-col>
                 <el-col :lg="24" v-show="instanceInfo.status === -1">
-                  <el-popconfirm title="确定执行此操作？" @confirm="stopAsynchronousTask">
+                  <el-popconfirm
+                    :title="$t('terminal.confirmOperate')"
+                    @confirm="stopAsynchronousTask"
+                  >
                     <template #reference>
                       <el-button
                         icon="el-icon-switch-button"
@@ -127,7 +144,7 @@
                         style="width: 100%"
                         size="small"
                         class="row-mt"
-                        >终止正在运行的任务
+                        >{{ $t("terminal.killTask") }}
                       </el-button>
                     </template>
                   </el-popconfirm>
@@ -136,7 +153,7 @@
                   :lg="24"
                   v-show="instanceInfo.config.updateCommand && instanceInfo.status === 0"
                 >
-                  <el-popconfirm title="确定执行此操作？" @confirm="updateInstace">
+                  <el-popconfirm :title="$t('terminal.confirmOperate')" @confirm="updateInstace">
                     <template #reference>
                       <el-button
                         icon="el-icon-files"
@@ -144,7 +161,7 @@
                         style="width: 100%"
                         size="small"
                         class="row-mt"
-                        >更新/安装实例
+                        >{{ $t("terminal.updateInstance") }}
                       </el-button>
                     </template>
                   </el-popconfirm>
@@ -154,7 +171,7 @@
           </template>
         </Panel>
         <Panel>
-          <template #title>实例功能组</template>
+          <template #title>{{ $t("terminal.functionGroup") }}</template>
           <template #default>
             <el-row :gutter="10">
               <!-- <el-col :span="12" :offset="0">
@@ -168,7 +185,7 @@
                   style="width: 100%"
                   size="small"
                   @click="toProcessConfig"
-                  >特定配置
+                  >{{ $t("terminal.processConfig") }}
                 </el-button>
               </el-col>
               <el-col :lg="12" :offset="0" class="row-mb">
@@ -178,7 +195,7 @@
                   style="width: 100%"
                   size="small"
                   @click="toTerminalSettingPanel"
-                  >终端设置
+                  >{{ $t("terminal.termSet") }}
                 </el-button>
               </el-col>
 
@@ -189,7 +206,7 @@
                   style="width: 100%"
                   size="small"
                   @click="toSchedule"
-                  >计划任务
+                  >{{ $t("router.schedule") }}
                 </el-button>
               </el-col>
               <el-col :lg="12" :offset="0" class="row-mb">
@@ -199,7 +216,7 @@
                   style="width: 100%"
                   size="small"
                   @click="toPingPanel"
-                  >状态查询
+                  >{{ $t("terminal.statusQuery") }}
                 </el-button>
               </el-col>
               <el-col :lg="12" :offset="0" class="row-mb">
@@ -209,7 +226,7 @@
                   style="width: 100%"
                   size="small"
                   @click="toEventPanel"
-                  >事件任务
+                  >{{ $t("terminal.eventTask") }}
                 </el-button>
               </el-col>
               <el-col :lg="12" :offset="0" class="row-mb">
@@ -219,7 +236,7 @@
                   style="width: 100%"
                   size="small"
                   @click="toFileManager"
-                  >文件管理
+                  >{{ $t("instancesDetail.fileManager") }}
                 </el-button>
               </el-col>
               <el-col :lg="24" :offset="0" v-if="isTopPermission">
@@ -229,14 +246,14 @@
                   style="width: 100%"
                   size="small"
                   @click="toInstanceDetail"
-                  >高级实例设置
+                  >{{ $t("terminal.instanceDetail") }}
                 </el-button>
               </el-col>
             </el-row>
           </template>
         </Panel>
         <Panel>
-          <template #title>详细信息</template>
+          <template #title>{{ $t("instances.detailsInfo") }}</template>
           <template #default>
             <div v-if="!available">
               <el-skeleton :rows="5" animated />
@@ -257,24 +274,25 @@
                 </div>
               </LineInfo>
               <LineInfo>
-                <i class="el-icon-date"></i> 到期时间:
+                <i class="el-icon-date"></i> {{ $t("instances.endTime") }}:
                 {{
                   instanceInfo.config.endTime
                     ? new Date(instanceInfo.config.endTime).toLocaleDateString()
-                    : "无限制"
+                    : $t("instancesDetail.unlimited")
                 }}
               </LineInfo>
               <LineInfo>
-                <i class="el-icon-date"></i> 创建日期:
+                <i class="el-icon-date"></i> {{ $t("instancesDetail.createDateTime") }}:
                 {{ instanceInfo.config.createDatetime }}
               </LineInfo>
               <LineInfo>
-                <i class="el-icon-date"></i> 最后启动:
+                <i class="el-icon-date"></i> {{ $t("terminal.lastDatetime") }}:
                 {{ instanceInfo.config.lastDatetime }}
               </LineInfo>
               <!-- <LineInfo><i class="el-icon-document"></i> 标签: {{ instanceInfo.tag }}</LineInfo> -->
               <LineInfo
-                ><i class="el-icon-document"></i> 输入编码: {{ instanceInfo.config.ie }} 输出编码:
+                ><i class="el-icon-document"></i> {{ $t("terminal.ie") }}:
+                {{ instanceInfo.config.ie }} {{ $t("terminal.oe") }}:
                 {{ instanceInfo.config.oe }}
               </LineInfo>
             </div>
@@ -282,18 +300,28 @@
         </Panel>
       </el-col>
       <el-col :md="18">
-        <Panel v-loading="!available" element-loading-text="连接中">
+        <Panel v-loading="!available">
           <template #title>
-            <span>实例控制台</span>
+            <span>{{ $t("router.terminal") }}</span>
           </template>
           <template #rtitle>
             <div>
-              <el-tooltip class="item" effect="dark" content="新开全屏" placement="top">
+              <el-tooltip
+                class="item"
+                effect="dark"
+                :content="$t('terminal.newFullScreen')"
+                placement="top"
+              >
                 <span class="terminal-right-botton" @click="toFullTerminal(2)">
                   <i class="el-icon-monitor"></i>
                 </span>
               </el-tooltip>
-              <el-tooltip class="item" effect="dark" content="立刻全屏" placement="top">
+              <el-tooltip
+                class="item"
+                effect="dark"
+                :content="$t('terminal.fullScreen')"
+                placement="top"
+              >
                 <span class="terminal-right-botton" @click="toFullTerminal(1)">
                   <i class="el-icon-full-screen"></i>
                 </span>
@@ -307,11 +335,21 @@
           </div> -->
             <!-- 全屏模式下的操作按钮 -->
             <div v-show="isFull" class="full-terminal-button-wrapper">
-              <div class="full-terminal-button" @click="openInstance">开启</div>
-              <div class="full-terminal-button" @click="stopInstance">关闭</div>
-              <div class="full-terminal-button" @click="restartInstance">重启</div>
-              <div class="full-terminal-button" @click="killInstance">终止</div>
-              <div class="full-terminal-button" @click="backTerminal">退出</div>
+              <div class="full-terminal-button" @click="openInstance">
+                {{ $t("instances.start") }}
+              </div>
+              <div class="full-terminal-button" @click="stopInstance">
+                {{ $t("instances.stop") }}
+              </div>
+              <div class="full-terminal-button" @click="restartInstance">
+                {{ $t("terminal.restart2") }}
+              </div>
+              <div class="full-terminal-button" @click="killInstance">
+                {{ $t("instances.kill") }}
+              </div>
+              <div class="full-terminal-button" @click="backTerminal">
+                {{ $t("terminal.exit") }}
+              </div>
             </div>
             <!-- 全屏与非全屏的终端窗口 -->
             <div :class="{ 'terminal-wrapper': true, 'full-terminal-wrapper': isFull }">
@@ -319,7 +357,7 @@
             </div>
             <div :class="{ 'terminal-input-wrapper': true, 'full-terminal-input-wrapper': isFull }">
               <el-input
-                placeholder="此处可输入命令，按回车键执行"
+                :placeholder="$t('terminal.inputCmd')"
                 prefix-icon="el-icon-arrow-right"
                 size="mini"
                 v-model="command"
@@ -331,7 +369,7 @@
           </template>
         </Panel>
         <Panel>
-          <template #title>命令历史</template>
+          <template #title>{{ $t("terminal.cmdHistory") }}</template>
           <template #default>
             <div v-if="commandhistory.length > 0">
               <ItemGroup>
@@ -349,7 +387,7 @@
               </ItemGroup>
             </div>
             <div v-else>
-              <p class="color-gray">暂无任何命令历史</p>
+              <p class="color-gray">{{ $t("terminal.noCmdHistory") }}</p>
             </div>
           </template>
         </Panel>
@@ -361,9 +399,9 @@
             instanceInfo.info.playersChart.length
           "
         >
-          <template #title>面板端在线人数</template>
+          <template #title>{{ $t("terminal.panelOnline") }}</template>
           <template #default>
-            <p>每 10 分钟统计间隔，总计 10 小时的在线人数趋势</p>
+            <p>{{ $t("terminal.panelOnlineInfo") }}</p>
             <div class="echart-wrapper">
               <div id="echart-wrapper-players" style="width: 100%; height: 200px"></div>
             </div>
@@ -373,44 +411,54 @@
     </el-row>
 
     <Dialog v-model="pingConfigForm.is">
-      <template #title>实例状态查询协议配置</template>
+      <template #title>{{ $t("terminal.pingConfig.title") }}</template>
       <template #default>
         <div class="sub-title">
-          <p class="sub-title-title">更好的监控服务端状态</p>
+          <p class="sub-title-title">{{ $t("terminal.pingConfig.title2") }}</p>
           <p class="sub-title-info">
-            此功能将根据管理员设置的实例类型自动选择相应协议，获取服务端进程的具体信息和参数（如：游戏人数，版本等）
+            {{ $t("terminal.pingConfig.title2Info") }}
           </p>
         </div>
         <div class="sub-title">
-          <p class="sub-title-title">服务端访问地址</p>
+          <p class="sub-title-title">{{ $t("terminal.pingConfig.addr") }}</p>
           <p class="sub-title-info">
-            必填，支持域名与 IP 地址，不填写则不会查询服务端信息，人数，版本等。
+            {{ $t("terminal.pingConfig.") }}
           </p>
         </div>
-        <el-input v-model="pingConfigForm.ip" placeholder="例如：localhost" size="small"></el-input>
+        <el-input
+          v-model="pingConfigForm.ip"
+          :placeholder="$t('terminal.pingConfig.addrExample')"
+          size="small"
+        ></el-input>
         <div class="sub-title row-mt">
-          <p class="sub-title-title">服务端访问端口</p>
-          <p class="sub-title-info">必填，仅可输入数字端口号</p>
+          <p class="sub-title-title">{{ $t("terminal.pingConfig.port") }}</p>
+          <p class="sub-title-info">{{ $t("terminal.pingConfig.inputPort") }}</p>
         </div>
-        <el-input v-model="pingConfigForm.port" placeholder="如 25565" size="small"></el-input>
+        <el-input
+          v-model="pingConfigForm.port"
+          :placeholder="$t('terminal.pingConfig.portExample')"
+          size="small"
+        ></el-input>
         <div class="row-mt">
           <ItemGroup>
-            <el-button type="success" size="small" @click="instanceConfigUpdate"
-              >更新数据</el-button
-            >
-            <el-button @click="pingConfigForm.is = !pingConfigForm.is" size="small">取消</el-button>
+            <el-button type="success" size="small" @click="instanceConfigUpdate">{{
+              $t("users.updateData")
+            }}</el-button>
+            <el-button @click="pingConfigForm.is = !pingConfigForm.is" size="small">{{
+              $t("general.cancel")
+            }}</el-button>
           </ItemGroup>
         </div>
       </template>
     </Dialog>
 
     <Dialog v-model="eventConfigPanel.visible">
-      <template #title>事件触发型任务</template>
+      <template #title>{{ $t("terminal.eventConfigPanel.title") }}</template>
       <template #default>
         <div class="sub-title">
-          <p class="sub-title-title">自动重启</p>
+          <p class="sub-title-title">{{ $t("terminal.eventConfigPanel.autoRestart") }}</p>
           <p class="sub-title-info">
-            若实例状态在未经面板操作的情况下变为非运行状态将立刻发起启动实例操作。<br />可用于崩溃后自动重启功能。
+            <span v-html="$t('terminal.eventConfigPanel.autoRestartInfo')"></span>
           </p>
           <div class="row-mt">
             <el-switch v-model="eventConfigPanel.autoRestart"></el-switch>
@@ -418,9 +466,9 @@
         </div>
 
         <div class="sub-title">
-          <p class="sub-title-title">自动启动</p>
+          <p class="sub-title-title">{{ $t("terminal.eventConfigPanel.autoStart") }}</p>
           <p class="sub-title-info">
-            只要守护进程（远程节点）运行，就自动发起一次启动实例操作。<br />如果将守护进程开机自启则可用于开机自启实例。
+            <span v-html="$t('terminal.eventConfigPanel.autoStartInfo')"></span>
           </p>
           <div class="row-mt">
             <el-switch v-model="eventConfigPanel.autoStart"></el-switch>
@@ -429,8 +477,12 @@
 
         <div class="row-mt">
           <ItemGroup>
-            <el-button type="success" size="small" @click="instanceConfigUpdate">保存</el-button>
-            <el-button size="small" @click="eventConfigPanel.visible = false">取消</el-button>
+            <el-button type="success" size="small" @click="instanceConfigUpdate">{{
+              $t("general.save")
+            }}</el-button>
+            <el-button size="small" @click="eventConfigPanel.visible = false">{{
+              $t("general.cancel")
+            }}</el-button>
           </ItemGroup>
         </div>
       </template>
@@ -438,17 +490,19 @@
 
     <Dialog v-model="unavailableTerminal" style="z-index: 9999">
       <template #title>
-        <span>无法与守护进程建立连接</span>
+        {{ $t("terminal.unavailableTerminal.title") }}
       </template>
       <template #default>
         <div class="sub-title">
           <p class="sub-title-title">
             {{
-              unavailableIp ? `浏览器无法连接到 ${unavailableIp}` : "浏览器无法与守护进程建立连接"
+              unavailableIp
+                ? $t("terminal.unavailableTerminal.browserCannotConnect")` ${unavailableIp}`
+                : $t("terminal.unavailableTerminal.browserCannotConnect2")
             }}
           </p>
           <p class="sub-title-info">
-            <span>可能是您未开放守护进程的端口导致，或是使用了内网地址的缘故</span>
+            {{ $t("terminal.unavailableTerminal.maybe") }}
           </p>
           <div>
             <img
@@ -458,21 +512,9 @@
               style="width: 460px"
             />
           </div>
-          <div class="sub-title">可能的解决方案</div>
+          <div class="sub-title">{{ $t("terminal.unavailableTerminal.solution") }}</div>
           <ol style="padding-left: 20px">
-            <li>确保守护进程的地址是公网地址，且守护进程端口已经开放。</li>
-            <li>
-              若有反向代理，FRP，HTTPS 等，请采用 wss:// 协议连接，
-              <br />
-              并且守护进程端地址也需要 HTTPS，WSS 支持。
-            </li>
-            <li>
-              前往
-              <a href="https://docs.mcsmanager.com" target="_blank" rel="noopener noreferrer"
-                >https://docs.mcsmanager.com</a
-              >
-              了解更多
-            </li>
+            <span v-html="$t('terminal.unavailableTerminal.solutions')"></span>
           </ol>
         </div>
       </template>
@@ -599,7 +641,7 @@ export default {
         this.instanceInfo = result;
         // console.log("实例信息:", this.instanceInfo);
       } catch (err) {
-        console.log("错误", err);
+        console.log("Error", err);
       }
     },
     // 请求数据源（Websocket）
@@ -619,7 +661,7 @@ export default {
         });
       } catch (error) {
         ElNotification({
-          title: "无法与终端建立连接",
+          title: this.$t("terminal.cantConnectTerm"),
           message: error,
           dangerouslyUseHTMLString: true,
           type: "error",
@@ -834,9 +876,9 @@ export default {
     // 使用Websocket发送命令
     sendCommand(command, method) {
       if (!this.socket || !this.available)
-        return this.$message({ message: "无法执行命令，数据流通道不可用", type: "error" });
+        return this.$message({ message: this.$t("terminal.cantSendCmdBecauseData"), type: "error" });
       if (!this.isStarted)
-        return this.$message({ message: "无法执行命令，服务器未开启", type: "error" });
+        return this.$message({ message: this.$t("terminal.cantSendCmdBecauseNotRun"), type: "error" });
       if (method !== 1) this.pushHistoryCommand(command);
       this.socket.emit("stream/input", {
         data: { command }
@@ -915,7 +957,7 @@ export default {
         });
         this.$message({
           type: "success",
-          message: "实例配置已更新，部分配置可能需要重启实例生效"
+          message: this.$t("termSet.setUpdate")
         });
         this.pingConfigForm.is = false;
         this.eventConfigPanel.visible = false;
