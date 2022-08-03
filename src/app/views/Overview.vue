@@ -99,8 +99,8 @@
           </p>
           <el-table :data="servicesStatus" style="width: 100%" size="small">
             <el-table-column prop="ip" :label="$t('overview.addr')" width="180"> </el-table-column>
-            <el-table-column prop="remarks" label="$t('overview.remarks')" width="240"> </el-table-column>
-            <el-table-column prop="port" label="$t('overview.port')" width="180"> </el-table-column>
+            <el-table-column prop="remarks" :label="$t('overview.remarks')" width="240"> </el-table-column>
+            <el-table-column prop="port" :label="$t('overview.port')" width="180"> </el-table-column>
             <el-table-column prop="cpu" label="CPU"> </el-table-column>
             <el-table-column prop="mem" :label="$t('overview.mem')"> </el-table-column>
             <el-table-column prop="instance" :label="$t('overview.instance')"> </el-table-column>
