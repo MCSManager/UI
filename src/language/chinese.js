@@ -955,11 +955,11 @@ export default {
         adminOK: "管理员已创建"
     },
     notify: {
-        connectDaemonErrorr: "访问远程守护进程异常",
+        connectDaemonError: "访问远程守护进程异常",
         confirmDelTitle: "最终确认",
         confirmDelContent: "确定要进行移除/删除吗？",
         confirmBatchDelContent: "确定要进行批量移除吗？此操作不会删除实例实际文件，只会删除实例",
-        confirmBatchDelFileConten: "确定要进行批量移除吗？此操作不会删除实例实际文件，只会删除实例",
+        confirmBatchDelFileContent: "确定要进行批量移除吗？此操作不会删除实例实际文件，只会删除实例",
         editSuccess: "修改成功",
         saveSuccess: "保存成功",
         createSuccess: "创建成功",

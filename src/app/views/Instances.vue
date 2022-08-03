@@ -515,7 +515,7 @@ export default {
         }
       } catch (error) {
         this.$notify({
-          title: this.$t("notify.connectDaemonErrorr"),
+          title: this.$t("notify.connectDaemonError"),
           message: error.toString(),
           type: "error"
         });
