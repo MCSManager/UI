@@ -98,11 +98,11 @@
           <p v-html="$t('overview.daemonOverviewInfo',{ panelVersion,specifiedDaemonVersion} )">
           </p>
           <el-table :data="servicesStatus" style="width: 100%" size="small">
-            <el-table-column prop="ip" label="地址" width="180"> </el-table-column>
-            <el-table-column prop="remarks" label="备注" width="240"> </el-table-column>
-            <el-table-column prop="port" label="端口" width="180"> </el-table-column>
+            <el-table-column prop="ip" :label="$t('overview.addr')" width="180"> </el-table-column>
+            <el-table-column prop="remarks" label="$t('overview.remarks')" width="240"> </el-table-column>
+            <el-table-column prop="port" label="$t('overview.port')" width="180"> </el-table-column>
             <el-table-column prop="cpu" label="CPU"> </el-table-column>
-            <el-table-column prop="mem" label="内存"> </el-table-column>
+            <el-table-column prop="mem" label="$t('overview.mem')"> </el-table-column>
             <el-table-column prop="instance" :label="$t('overview.instance')"> </el-table-column>
             <el-table-column prop="started" :label="$t('overview.runningInstance')"> </el-table-column>
             <el-table-column prop="version" :label="$t('overview.daemonVersion')">
