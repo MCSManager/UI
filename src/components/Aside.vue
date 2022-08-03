@@ -42,7 +42,7 @@
         </el-menu-item>
         <el-menu-item key="/instances" index="/instances">
           <i class="el-icon-coin"></i>
-          <template #title>{{ $t("router.overview") }}</template>
+          <template #title>{{ $t("router.instances") }}</template>
         </el-menu-item>
         <el-menu-item key="/users" index="/users">
           <i class="el-icon-user"></i>
