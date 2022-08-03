@@ -1010,6 +1010,7 @@ export default {
         user: "用户中心",
         advanced: "高级功能",
         node: "节点管理",
+        more: "更多",
     },
     businessWarning: {
         title: "商业出租风险警告",

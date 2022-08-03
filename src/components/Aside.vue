@@ -76,10 +76,10 @@
         </el-menu-item>
       </el-menu-item-group> -->
       <el-menu-item-group>
-        <template #title>更多</template>
+        <template #title>{{ $t("aside.more") }}</template>
         <el-menu-item key="/settings" index="/settings">
           <i class="el-icon-setting"></i>
-          <template #title>设置</template>
+          <template #title>{{ $t("router.settings") }}</template>
         </el-menu-item>
       </el-menu-item-group>
 
