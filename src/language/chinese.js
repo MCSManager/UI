@@ -590,6 +590,14 @@ export default {
         UnzipTaskStartInfo: "异步解压需要一段时间，可以利用刷新文件列表查看目录内容来判断是否解压完毕",
         uploadOk: "上传完毕",
     },
+    fileManagerEditor: {
+        title: "编辑文件",
+        updateFile: "更新文件",
+        backToFileManager: "回到文件列表",
+        backViaHistory: "回到简单编辑视图",
+        editError: "编辑文件错误",
+        updateTextSuccess: "更新文本成功",
+    },
     selectUnzipCode: {
         title: "选择解压/解压文件编码",
         info: "在解压/压缩文件时发现文件名存在乱码现象时，可以修改此选项解决。",
