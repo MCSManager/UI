@@ -11,6 +11,7 @@ export default {
         confirm: "确定",
         cancel: "取消",
         delete: "删除",
+        deleteFinish: "已删除",
         pleaseSelect: "请选择",
         refresh: "刷新",
         refreshFinish: "已刷新",
@@ -454,6 +455,17 @@ export default {
         cantSendCmdBecauseData: "无法执行命令，数据流通道不可用",
         cantSendCmdBecauseNotRun: "无法执行命令，服务器未开启",
     },
+    processConfig: {
+        title: "配置列表组",
+        aboutConfig: "关于配置文件列表",
+        aboutConfigInfo: "配置文件适配工作由开发团队与开源社区开发者共同开发，相关作者已在具体项目中显示“模块作者”。如果出现多个同名的配置文件，在配置文件最前方已经标上适用于哪个服务端，请手动选择服务端/或衍生类服务端类型。",
+        noConfigFile: "暂无任何配置文件",
+        noConfigFileInfo: "经过特定实例类型({type})并配合文件扫描未检测出有任何符合条件的配置文件，请进行进程配置初始化或更改实例类型来进行调整",
+        sameFile: "存在同名文件",
+        author: "模块作者",
+        unknownCompatible: "面板无法得知此配置文件是否兼容，请您自行根据类型进入相应配置文件界面。",
+        browse: "浏览",
+    },
     termSet: {
         title: "终端设置",
         pty: "仿真终端（Beta）",
@@ -475,7 +487,7 @@ export default {
         ioCodeInfo: "如果控制台中的内容出现乱码，您可以尝试修改此编码解决问题。",
         setUpdate: "实例配置已更新，部分配置可能需要重启实例生效",
     },
-    fileManager: {
+    fileManager: { 
 
     },
     users: {
