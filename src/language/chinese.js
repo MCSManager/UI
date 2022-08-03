@@ -23,6 +23,7 @@ export default {
         noSelect: "未选择",
         yes: "是",
         no: "否",
+        save: "保存",
     },
     root: {
         title: "处理中...",
@@ -384,6 +385,33 @@ export default {
         "MC Geyser": "MC Geyser",
         "MC MCDR": "MC MCDR",
         "Web Shell": "Web Shell",
+    },
+    terminal: {
+
+    },
+    termSet: {
+        title: "终端设置",
+        pty: "仿真终端（Beta）",
+        ptyInfo: "通过仿真终端转发程序来获得终端完全交互能力。<br />包括使用 Tab，Ctrl 功能键等，但需要额外安装依赖库，默认情况下已经安装。",
+        ifHaveProblems: "如果使用有问题，建议关闭。",
+        ptySize: "仿真终端窗口大小",
+        ptySizeInfo: "在仿真终端开启时生效，用于设置仿真终端高度和宽度，更改生效需要重启实例。",
+        col: "列：",
+        line: "行：",
+        WebColor: "网页颜色渲染",
+        WebColorInfo: "网页自动给输出内容增加颜色渲染，渲染的颜色不一定完全正确。<br />如果颜色渲染功能与软件自带的颜色功能冲突，可以关闭此功能。",
+        stopCmdInfo: "当点击“关闭实例”按钮时，会立刻执行此命令，^C 代表 Ctrl+C 信号。",
+        crlf: "命令执行回车符",
+        crlfInfo: "如果您输入命令按回车没有反应，可以尝试调整此选项。",
+        crlfInfo2: "Windows 平台下一般是“回车换行符”，Linux/MacOS 平台下一般是“换行符”。",
+        newline: "换行符（\\n）",
+        EnterNewline: "回车换行符（\\r\\n）",
+        ioCode: "输入输出编码",
+        ioCodeInfo: "如果控制台中的内容出现乱码，您可以尝试修改此编码解决问题。",
+        setUpdate: "实例配置已更新，部分配置可能需要重启实例生效",
+    },
+    fileManager: {
+
     },
     users: {
         userList: "用户列表",

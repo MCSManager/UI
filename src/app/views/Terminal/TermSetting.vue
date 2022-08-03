@@ -21,18 +21,17 @@
 
 <template>
   <Dialog v-model="v" :cancel="close">
-    <template #title>实例设置</template>
+    <template #title>{{ $t("termSet.title") }}</template>
     <template #default>
       <el-row :gutter="20">
         <el-col :md="12" :offset="0">
           <div>
             <div class="sub-title">
-              <p class="sub-title-title">仿真终端（Beta）</p>
+              <p class="sub-title-title">{{ $t("termSet.pty") }}</p>
               <p class="sub-title-info">
-                通过仿真终端转发程序来获得终端完全交互能力。<br />包括使用 Tab，Ctrl
-                功能键等，但需要额外安装依赖库，默认情况下已经安装。
+                <span v-html="$t('termSet.ptyInfo')"></span>
                 <br />
-                如果使用有问题，建议关闭。
+                {{ $t("termSet.ifHaveProblems") }}
               </p>
             </div>
             <div class="row-mt">
@@ -42,15 +41,15 @@
 
           <div class="row-mt">
             <div class="sub-title">
-              <p class="sub-title-title">仿真终端窗口大小</p>
+              <p class="sub-title-title">{{ $t("termSet.ptySize") }}</p>
               <p class="sub-title-info">
-                在仿真终端开启时生效，用于设置仿真终端高度和宽度，更改生效需要重启实例。
+                {{ $t("termSet.ptySizeInfo") }}
                 <br />
-                如果使用有问题，建议关闭。
+                {{ $t("termSet.ifHaveProblems") }}
               </p>
             </div>
             <div class="row-mt">
-              <span>列：</span>
+              <span>{{ $t("termSet.col") }}</span>
               <el-input
                 v-model="options.ptyWindowCol"
                 :disabled="!options.pty"
@@ -58,7 +57,7 @@
                 style="width: 80px"
               ></el-input>
               &nbsp;
-              <span>行：</span>
+              <span>{{ $t("termSet.line") }}</span>
               <el-input
                 :disabled="!options.pty"
                 v-model="options.ptyWindowRow"
@@ -70,9 +69,9 @@
 
           <div>
             <div class="sub-title row-mt">
-              <p class="sub-title-title">网页颜色渲染</p>
+              <p class="sub-title-title">{{ $t("termSet.WebColor") }}</p>
               <p class="sub-title-info">
-                网页自动给输出内容增加颜色渲染，渲染的颜色不一定完全正确。<br />如果颜色渲染功能与软件自带的颜色功能冲突，可以关闭此功能。
+                <span v-html="$t('termSet.WebColorInfo')"></span>
               </p>
             </div>
             <div class="row-mt">
@@ -83,9 +82,9 @@
         <el-col :md="12" :offset="0">
           <div>
             <div class="sub-title row-mt">
-              <p class="sub-title-title">关闭实例命令</p>
+              <p class="sub-title-title">{{ $t("instancesDetail.stopCmd") }}</p>
               <p class="sub-title-info">
-                当点击“关闭实例”按钮时，会立刻执行此命令，^C 代表 Ctrl+C 信号。
+                {{ $t("termSet.stopCmdInfo") }}
               </p>
             </div>
             <div class="row-mt">
@@ -95,30 +94,30 @@
 
           <div>
             <div class="sub-title row-mt">
-              <p class="sub-title-title">命令执行回车符</p>
+              <p class="sub-title-title">{{ $t("termSet.crlf") }}</p>
               <p class="sub-title-info">
-                如果您输入命令按回车没有反应，可以尝试调整此选项。
+                {{ $t("termSet.crlfInfo") }}
                 <br />
-                Windows 平台下一般是“回车换行符”，Linux/MacOS 平台下一般是“换行符”。
+                {{ $t("termSet.crlfInfo2") }}
               </p>
             </div>
             <div class="row-mt">
               <el-select
                 v-model="options.crlf"
-                placeholder="请选择"
+                :placeholder="$t('general.pleaseSelect')"
                 size="small"
                 style="width: 220px"
               >
-                <el-option label="换行符（\n）" :value="1"></el-option>
-                <el-option label="回车换行符（\r\n）" :value="2"></el-option>
+                <el-option :label="$t('termSet.newline')" :value="1"></el-option>
+                <el-option :label="$t('termSet.EnterNewline')" :value="2"></el-option>
               </el-select>
             </div>
           </div>
           <div class="row-mt">
             <div class="sub-title">
-              <p class="sub-title-title">输入输出编码</p>
+              <p class="sub-title-title">{{ $t("termSet.ioCode") }}</p>
               <p class="sub-title-info">
-                如果控制台中的内容出现乱码，您可以尝试修改此编码解决问题。
+                {{ $t("termSet.ioCodeInfo") }}
               </p>
             </div>
             <div class="row-mt" style="display: flex">
@@ -128,7 +127,7 @@
                 allow-create
                 size="small"
                 default-first-option
-                placeholder="终端输出编码"
+                :placeholder="$t('instancesDetail.oe')"
                 style="width: 220px"
               >
                 <el-option
@@ -146,7 +145,7 @@
                 size="small"
                 allow-create
                 default-first-option
-                placeholder="命令输入编码"
+                :placeholder="$t('instancesDetail.ie')"
                 style="width: 220px; margin-left: 12px"
               >
                 <el-option
@@ -164,8 +163,8 @@
 
       <div class="row-mt">
         <ItemGroup>
-          <el-button type="success" size="small" @click="submit">保存</el-button>
-          <el-button size="small" @click="close">取消</el-button>
+          <el-button type="success" size="small" @click="submit">{{ $t("general.save") }}</el-button>
+          <el-button size="small" @click="close">{{ $t("general.cancel") }}</el-button>
         </ItemGroup>
       </div>
     </template>
@@ -241,7 +240,7 @@ export default {
         this.close();
         this.$message({
           type: "success",
-          message: "实例配置已更新，部分配置可能需要重启实例生效"
+          message: this.$t("termSet.setUpdate")
         });
       } catch (error) {
         this.$message({
