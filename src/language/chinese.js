@@ -466,6 +466,14 @@ export default {
         unknownCompatible: "面板无法得知此配置文件是否兼容，请您自行根据类型进入相应配置文件界面。",
         browse: "浏览",
     },
+    processConfigFile: {
+        title: "配置文件",
+        reload: "重新加载",
+        back: "回到配置文件列表",
+        editOriginal: "编辑源文件视图",
+        noFile: "文件不存在或权限不正确，无法查看此文件的具体配置，您也许可以尝试到 “文件管理”功能在线编辑此文件，或尝试重启实例刷新此文件。",
+        updateFailed: "更新失败"
+    },
     termSet: {
         title: "终端设置",
         pty: "仿真终端（Beta）",
