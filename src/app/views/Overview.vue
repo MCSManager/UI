@@ -102,7 +102,7 @@
             <el-table-column prop="remarks" label="$t('overview.remarks')" width="240"> </el-table-column>
             <el-table-column prop="port" label="$t('overview.port')" width="180"> </el-table-column>
             <el-table-column prop="cpu" label="CPU"> </el-table-column>
-            <el-table-column prop="mem" label="$t('overview.mem')"> </el-table-column>
+            <el-table-column prop="mem" :label="$t('overview.mem')"> </el-table-column>
             <el-table-column prop="instance" :label="$t('overview.instance')"> </el-table-column>
             <el-table-column prop="started" :label="$t('overview.runningInstance')"> </el-table-column>
             <el-table-column prop="version" :label="$t('overview.daemonVersion')">
