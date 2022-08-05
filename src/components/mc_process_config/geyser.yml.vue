@@ -1,23 +1,6 @@
 <!--
-  Copyright (C) 2022 Suwings <Suwings@outlook.com>
-  
-  This program is free software: you can redistribute it and/or modify
-  it under the terms of the GNU Affero General Public License as published by
-  the Free Software Foundation, either version 3 of the License, or
-  (at your option) any later version.
-  
-  According to the AGPL, it is forbidden to delete all copyright notices, 
-  and if you modify the source code, you must open source the
-  modified source code.
-  
-  版权所有 (C) 2022 Suwings <Suwings@outlook.com>
-  该程序是免费软件，您可以重新分发和/或修改据 GNU Affero 通用公共许可证的条款，
-  由自由软件基金会，许可证的第 3 版，或（由您选择）任何更高版本。
-  
-  根据 AGPL 与用户协议，您必须保留所有版权声明，如果修改源代码则必须开源修改后的源代码。
-  可以前往 https://mcsmanager.com/ 阅读用户协议，申请闭源开发授权等。
+  Copyright (C) 2022 MCSManager <mcsmanager-dev@outlook.com>
 -->
-
 
 <template>
   <LineOption :custom="true">
@@ -76,18 +59,21 @@ export default {
           motd1: "第一行 MOTD；如果“passthrough-motd”设置为 true 则忽略此项",
           motd2: "第二行 MOTD",
           "server-name": "服务器名称，在暂停菜单和设置菜单中都可见",
-          "compression-level": "压缩网络流量的量。值越大，CPU 使用率越高，但使用的带宽越小。小于 -1 或大于 9 时没有用。设置为 -1 时禁用。",
-          "enable-proxy-protocol": "是否为客户端启用代理协议。除非使用 UDP 反代，否则不需要此功能",
+          "compression-level":
+            "压缩网络流量的量。值越大，CPU 使用率越高，但使用的带宽越小。小于 -1 或大于 9 时没有用。设置为 -1 时禁用。",
+          "enable-proxy-protocol": "是否为客户端启用代理协议。除非使用 UDP 反代，否则不需要此功能"
         },
         remote: {
           address: "需要连接的 Java 服务器的 IP",
           port: "需要连接的 Java 服务器的端口",
           "auth-type": "验证方式（online、offline、floodgate）",
-          "allow-password-authentication": "允许通过 Geyser 使用基于密码的验证方法。仅在正版验证模式下有用。",
+          "allow-password-authentication":
+            "允许通过 Geyser 使用基于密码的验证方法。仅在正版验证模式下有用。",
           "use-proxy-protocol": "连接到服务器时是否启用代理协议。如果你不知道这是什么，不要更改！",
-          "forward-hostname": "转发BE客户端用于连接到 Java 服务器的主机名,这是为代理而设计的",
+          "forward-hostname": "转发BE客户端用于连接到 Java 服务器的主机名,这是为代理而设计的"
         },
-		"extended-world-height": "允许将世界高度从 0-255 扩展到 -64-319，这将导致 1.17.0-1.17.2 的玩家无法连接。需要重启以应用。",
+        "extended-world-height":
+          "允许将世界高度从 0-255 扩展到 -64-319，这将导致 1.17.0-1.17.2 的玩家无法连接。需要重启以应用。",
         "floodgate-key-file": "Floodgate 生成的公钥（不使用 Floodgate 时请忽略此项）",
         "command-suggestions": "是否启用命令提示",
         "passthrough-motd": "是否使用 Java 服务器的 MOTD",
@@ -96,7 +82,7 @@ export default {
         "legacy-ping-passthrough":
           "是否开启LEGACY ping passthrough，除非你的 MOTD 或玩家数量显示不正确，否则无需启用此功能",
         "ping-passthrough-interval": "ping 远程 Java 服务器的频率，以秒为单位。",
-		"forward-player-ping": "是否将玩家 ping 转发到服务器。启用后玩家将拥有更精确的 ping",
+        "forward-player-ping": "是否将玩家 ping 转发到服务器。启用后玩家将拥有更精确的 ping",
         "max-players": "最大玩家限制",
         "debug-mode": "调试模式",
         "general-thread-pool": "线程池大小",
@@ -107,10 +93,11 @@ export default {
         "default-locale": "默认语言",
         "cache-chunks": "是否启用区块缓存（建议在生产环境中禁用，因为会吃掉大量的内存）",
         "show-coordinates": "是否向玩家显示坐标",
-		"emote-offhand-workaround": "如果设置了，当一个基岩版玩家发送任何表情时，将交换副手和主手，就像 Java 版本的 F 一样",
+        "emote-offhand-workaround":
+          "如果设置了，当一个基岩版玩家发送任何表情时，将交换副手和主手，就像 Java 版本的 F 一样",
         "cache-images":
           "设置图像缓存的天数（有助于节省从网络下载它们的时间。设置为 0 即可禁用；默认值：0）",
-		"allow-custom-skulls": "允许显示自定义头颅。使其处于启用状态可能会导致较差设备的性能下降。",
+        "allow-custom-skulls": "允许显示自定义头颅。使其处于启用状态可能会导致较差设备的性能下降。",
         "add-non-bedrock-items": "是否将动力矿车作为游戏中的一个单独项目添加",
         "above-bedrock-nether-building": "是否允许在地狱建造和显示高于 Y127 的方块",
         "force-resource-packs": "强制客户端加载所有资源包（如果有）",

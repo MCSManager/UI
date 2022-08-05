@@ -888,7 +888,7 @@ export default {
 
         about: "about",
         aboutTitle:
-            "The software is released under the <a target='black' href='https://github.com/MCSManager/MCSManager-Daemon/blob/master/LICENSE'>AGPL-3.0</a> open source software license",
+            "The software is released under the <a target='black' href='https://github.com/MCSManager/MCSManager-Daemon/blob/master/LICENSE'>Apache-2.0</a> open source software license",
         aboutTitleInfo:
             "This agreement permits everyone to reproduce and distribute copies of the code, and may charge the user for the service.<br />Any modification to the code must be provided free of charge for the full source code download of the software.",
         closedSource: "Closed Source Commercial License",

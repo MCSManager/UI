@@ -19,7 +19,7 @@
             Reference: https://mcsmanager.com/
           </a>
           <br />
-          <span>Released under the AGPL-3.0 License.</span>
+          <span>Released under the Apache-2.0 License.</span>
         </div>
       </Panel>
     </div>

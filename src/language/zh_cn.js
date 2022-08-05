@@ -893,7 +893,7 @@ export default {
 
         about: "关于",
         aboutTitle:
-            "软件根据<a target='black' href='https://github.com/MCSManager/MCSManager-Daemon/blob/master/LICENSE'>AGPL-3.0</a>开源软件协议发行",
+            "软件根据<a target='black' href='https://github.com/MCSManager/MCSManager-Daemon/blob/master/LICENSE'>Apache-2.0</a>开源软件协议发行",
         aboutTitleInfo:
             "此协议准许每个人都可以复制和分发代码副本，并且可以对使用者收取服务费用。<br />若对代码任何修改，则必须无偿提供软件的完整源代码下载。",
         closedSource: "闭源商业许可证",

@@ -1,22 +1,5 @@
 <!--
-  Copyright (C) 2022 Suwings <Suwings@outlook.com>
-
-  This program is free software: you can redistribute it and/or modify
-  it under the terms of the GNU Affero General Public License as published by
-  the Free Software Foundation, either version 3 of the License, or
-  (at your option) any later version.
-
-  According to the AGPL, it is forbidden to delete all copyright notices,
-  and if you modify the source code, you must open source the
-  modified source code.
-
-  版权所有 (C) 2022 Suwings <Suwings@outlook.com>
-
-  该程序是免费软件，您可以重新分发和/或修改据 GNU Affero 通用公共许可证的条款，
-  由自由软件基金会，许可证的第 3 版，或（由您选择）任何更高版本。
-
-  根据 AGPL 与用户协议，您必须保留所有版权声明，如果修改源代码则必须开源修改后的源代码。
-  可以前往 https://mcsmanager.com/ 阅读用户协议，申请闭源开发授权等。
+Copyright (C) 2022 MCSManager <mcsmanager-dev@outlook.com>
 -->
 <template>
   <div>
@@ -70,14 +53,18 @@
               <el-row :gutter="20">
                 <el-col :md="24">
                   <div class="sub-title">
-                    <div class="sub-title-title require-field">{{ $t("instances.instanceName") }}</div>
+                    <div class="sub-title-title require-field">
+                      {{ $t("instances.instanceName") }}
+                    </div>
                     <div class="sub-title-info">{{ $t("newInstances.instanceNameInfo") }}</div>
                   </div>
                   <el-input v-model="instanceInfo.config.nickname" type="text"></el-input>
                 </el-col>
                 <el-col :md="24" class="row-mt">
                   <div class="sub-title">
-                    <div class="sub-title-title require-field">{{ $t("instancesDetail.instanceType") }}</div>
+                    <div class="sub-title-title require-field">
+                      {{ $t("instancesDetail.instanceType") }}
+                    </div>
                     <div class="sub-title-info">
                       {{ $t("instancesDetail.instanceTypeInfo") }}
                     </div>
@@ -91,7 +78,7 @@
                     <el-option
                       v-for="(item, index) in typeList"
                       :key="index"
-                      :label="$t('instanceTypeList.'+item)"
+                      :label="$t('instanceTypeList.' + item)"
                       :value="index"
                     >
                     </el-option>
@@ -99,10 +86,11 @@
                 </el-col>
                 <el-col :md="24" class="row-mt">
                   <div class="sub-title">
-                    <div class="sub-title-title require-field">{{ $t("newInstances.launchCmd") }}</div>
+                    <div class="sub-title-title require-field">
+                      {{ $t("newInstances.launchCmd") }}
+                    </div>
                     <div class="sub-title-info">
-                      <span v-html="$t('instancesDetail.launchCmdText')">
-                      </span>
+                      <span v-html="$t('instancesDetail.launchCmdText')"> </span>
                       <br />
                     </div>
                   </div>
@@ -250,13 +238,18 @@
                 </el-col>
                 <el-col :lg="24" class="row-mt">
                   <div class="sub-title">
-                    <div class="sub-title-title require-field">{{ $t("instancesDetail.launchTypeInfo") }}</div>
+                    <div class="sub-title-title require-field">
+                      {{ $t("instancesDetail.launchTypeInfo") }}
+                    </div>
                     <div class="sub-title-info">
                       {{ $t("instancesDetail.launchType") }}
                     </div>
                   </div>
                   <el-select v-model="instanceInfo.config.processType" style="width: 100%">
-                    <el-option :label="$t('instancesDetail.defaultType')" value="general"></el-option>
+                    <el-option
+                      :label="$t('instancesDetail.defaultType')"
+                      value="general"
+                    ></el-option>
                     <el-option :label="$t('instancesDetail.docker')" value="docker"></el-option>
                   </el-select>
                 </el-col>
@@ -268,9 +261,11 @@
               >
                 <br />
                 <div class="sub-title">
-                  <div class="sub-title-title"><b>
-                    {{ $t("instancesDetail.dockerConfig") }}
-                  </b></div>
+                  <div class="sub-title-title">
+                    <b>
+                      {{ $t("instancesDetail.dockerConfig") }}
+                    </b>
+                  </div>
                   <div class="sub-title-info">
                     {{ $t("instancesDetail.dockerConfigInfo") }}
                   </div>
@@ -319,7 +314,9 @@
                         :placeholder="$t('instancesDetail.portExample')"
                       >
                       </el-input>
-                      <el-button type="primary" plain @click="toEditDockerPort">{{ $t("instancesDetail.quickEdit") }}</el-button>
+                      <el-button type="primary" plain @click="toEditDockerPort">{{
+                        $t("instancesDetail.quickEdit")
+                      }}</el-button>
                     </div>
                   </el-col>
                 </el-row>
@@ -340,9 +337,9 @@
                         :placeholder="$t('instancesDetail.extraVolumesExample')"
                       >
                       </el-input>
-                      <el-button type="primary" plain @click="toEditDockerVolumes"
-                        >{{ $t("instancesDetail.quickEdit") }}</el-button
-                      >
+                      <el-button type="primary" plain @click="toEditDockerVolumes">{{
+                        $t("instancesDetail.quickEdit")
+                      }}</el-button>
                     </div>
                   </el-col>
                 </el-row>
@@ -476,10 +473,16 @@
           <el-row :gutter="20" class="row-mt">
             <el-col :md="24" style="text-align: right">
               <ItemGroup>
-                <el-button size="small" @click="toConsole">{{ $t("instancesDetail.console") }}</el-button>
-                <el-button size="small" @click="toFileManager">{{ $t("instancesDetail.fileManager") }}</el-button>
+                <el-button size="small" @click="toConsole">{{
+                  $t("instancesDetail.console")
+                }}</el-button>
+                <el-button size="small" @click="toFileManager">{{
+                  $t("instancesDetail.fileManager")
+                }}</el-button>
                 <el-button size="small" @click="back">{{ $t("instancesDetail.back") }}</el-button>
-                <el-button type="success" size="small" @click="saveConfig">{{ $t("instancesDetail.saveSet") }}</el-button>
+                <el-button type="success" size="small" @click="saveConfig">{{
+                  $t("instancesDetail.saveSet")
+                }}</el-button>
               </ItemGroup>
             </el-col>
           </el-row>
@@ -541,29 +544,29 @@ export default {
       tableDict1: [
         {
           prop: "protocol",
-          label: this.$t('instancesDetail.dockerTableDict[0].label'),
+          label: this.$t("instancesDetail.dockerTableDict[0].label"),
           width: "140px"
         },
         {
           prop: "port1",
-          label: this.$t('instancesDetail.dockerTableDict[1].label'),
+          label: this.$t("instancesDetail.dockerTableDict[1].label"),
           width: "120px"
         },
         {
           prop: "port2",
-          label: this.$t('instancesDetail.dockerTableDict[2].label'),
+          label: this.$t("instancesDetail.dockerTableDict[2].label"),
           width: "120px"
         }
       ],
       tableDict2: [
         {
           prop: "path1",
-          label: this.$t('instancesDetail.dockerTableDict[3].label'),
+          label: this.$t("instancesDetail.dockerTableDict[3].label"),
           width: "200px"
         },
         {
           prop: "path2",
-          label: this.$t('instancesDetail.dockerTableDict[4].label'),
+          label: this.$t("instancesDetail.dockerTableDict[4].label"),
           width: "200px"
         }
       ],
@@ -591,7 +594,7 @@ export default {
     async saveConfig() {
       if (this.instanceInfo?.config?.startCommand.includes("\n")) {
         return this.$message({
-          message: this.$t('instancesDetail.startError'),
+          message: this.$t("instancesDetail.startError"),
           type: "error"
         });
       }
@@ -625,7 +628,7 @@ export default {
           params: { remote_uuid: this.serviceUuid, uuid: this.instanceUuid },
           data: postData
         });
-        this.$message({ message: this.$t('notify.saveSuccess'), type: "success" });
+        this.$message({ message: this.$t("notify.saveSuccess"), type: "success" });
       } catch (err) {
         this.$message({ message: err.message, type: "error" });
       }

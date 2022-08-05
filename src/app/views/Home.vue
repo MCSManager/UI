@@ -172,7 +172,7 @@
           target="black"
           href="https://github.com/MCSManager"
           >MCSManager</a
-        >, Released under the AGPL-3.0 License</span
+        >, Released under the Apache-2.0 License</span
       >
     </div>
   </div>
