@@ -21,27 +21,27 @@
 
 <template>
   <Panel v-if="configs">
-    <template #title>配置列表组</template>
+    <template #title>{{ $t("processConfig.title") }}</template>
     <template #default>
       <el-row :gutter="20">
         <el-col :span="24" :offset="0">
           <ItemGroup class="row-mb">
-            <el-button type="primary" size="small" @click="rf">刷新</el-button>
-            <el-button size="small" @click="back">回到控制台</el-button>
+            <el-button type="primary" size="small" @click="rf">{{ $t("general.refresh") }}</el-button>
+            <el-button size="small" @click="back">{{ $t("schedule.backToConsole") }}</el-button>
           </ItemGroup>
           <div class="sub-title">
-            <div class="sub-title">关于配置文件列表</div>
+            <div class="sub-title">{{ $t("processConfig.aboutConfig") }}</div>
             <div class="sub-title-info">
-              配置文件适配工作由开发团队与开源社区开发者共同开发，相关作者已在具体项目中显示“模块作者”。如果出现多个同名的配置文件，在配置文件最前方已经标上适用于哪个服务端，请手动选择服务端/或衍生类服务端类型。
+              {{ $t("processConfig.aboutConfigInfo") }}
             </div>
           </div>
         </el-col>
       </el-row>
       <div v-if="isNotConfig">
         <el-alert
-          title="暂无任何配置文件"
+          :title="$t('processConfig.noConfigFile')"
           type="info"
-          :description="`经过特定实例类型(${type})并配合文件扫描未检测出有任何符合条件的配置文件，请进行进程配置初始化或更改实例类型来进行调整`"
+          :description="$t('processConfig.noConfigFileInfo', {type})"
           show-icon
         >
         </el-alert>
@@ -50,17 +50,17 @@
         <BlockButton v-if="item.check" style="padding: 8px 0px">
           <template #title
             >{{ item.fileName }}
-            <el-tag size="mini" type="warning" v-if="item.conflict">存在同名文件</el-tag>
+            <el-tag size="mini" type="warning" v-if="item.conflict">{{ $t("processConfig.sameFile") }}</el-tag>
           </template>
           <template #default>
             <div>
-              模块作者：<a class="alink" target="_black" :href="item.github">{{ item.author }}</a>
+              {{ $t("processConfig.author") }}：<a class="alink" target="_black" :href="item.github">{{ item.author }}</a>
             </div>
             <div class="row-mt">
               <span>{{ item.info }}</span>
               <br />
               <span class="color-red" v-if="item.conflict"
-                >面板无法得知此配置文件是否兼容，请您自行根据类型进入相应配置文件界面。</span
+                >{{ $t("processConfig.unknownCompatible") }}</span
               >
             </div>
           </template>
@@ -69,7 +69,7 @@
               type="text"
               icon="el-icon-right"
               @click="toProcessConfig(item.redirect, item.path, item.type)"
-              >浏览</el-button
+              >{{ $t("processConfig.browse") }}</el-button
             >
           </template>
         </BlockButton>
@@ -110,7 +110,7 @@ export default {
     },
     async rf() {
       await this.render();
-      this.$message({ message: "已刷新", type: "info" });
+      this.$message({ message: this.$t("general.refreshFinish"), type: "info" });
     },
     back() {
       this.$router.push({ path: `/terminal/${this.serviceUuid}/${this.instanceUuid}/` });

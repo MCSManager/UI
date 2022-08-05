@@ -24,10 +24,10 @@
     <div class="bg"></div>
     <div class="panel-wrapper" v-if="step == 0">
       <Panel class="panel tc" body-style="padding:40px;">
-        <h1 class="title">欢迎使用 MCSManager 管理面板</h1>
-        <p>开源，分布式，开箱即用，支持 Minecraft 游戏服务端和所有控制台程序的管理面板</p>
+        <h1 class="title">{{ $t("install.welcome") }}</h1>
+        <p>{{ $t("install.desc") }}</p>
         <div style="margin-top: 48px">
-          <el-button type="primary" @click="next" v-loading="isLoading">开始使用</el-button>
+          <el-button type="primary" @click="next" v-loading="isLoading">{{ $t("install.start") }}</el-button>
         </div>
         <div class="panel-bottom">
           <a href="https://mcsmanager.com/" target="_blank" rel="noopener noreferrer">
@@ -41,19 +41,19 @@
 
     <div class="panel-wrapper" v-if="step == 1">
       <Panel class="panel" body-style="padding:40px;">
-        <h1 class="title">创建一个访问面板的管理员账号</h1>
-        <p>用户名支持任何语言，请务必保证您的密码安全。</p>
+        <h1 class="title">{{ $t("install.createAdminAccount") }}</h1>
+        <p>{{ $t("install.createAdminAccountInfo") }}</p>
         <div>
           <el-form ref="form" :model="initUser" :rules="rules" label-width="66px">
-            <el-form-item label="用户名" prop="userName">
+            <el-form-item :label="$t('users.userName')" prop="userName">
               <el-input v-model="initUser.userName" />
             </el-form-item>
-            <el-form-item label="密码" prop="passWord">
+            <el-form-item :label="$t('install.passWord')" prop="passWord">
               <el-input v-model="initUser.passWord" />
             </el-form-item>
             <el-form-item label="">
               <el-button type="primary" @click="createUser" v-loading="isLoading">
-                创建账号
+                {{ $t("install.createAccount") }}
               </el-button>
             </el-form-item>
           </el-form>
@@ -82,16 +82,16 @@
 
     <div class="panel-wrapper" v-if="step == 2">
       <Panel class="panel" body-style="padding:40px;" v-loading="isLoading">
-        <h1 class="title">完成！</h1>
-        <p>最后，您是第一次使用此软件吗？</p>
+        <h1 class="title">{{ $t("install.ohhh") }}</h1>
+        <p>{{ $t("install.ohhhInfo") }}</p>
         <ItemGroup>
           <SelectBlock @click="toQuickStart">
-            <template #title>首次使用</template>
+            <template #title>{{ $t("install.firstTime") }}</template>
           </SelectBlock>
         </ItemGroup>
         <ItemGroup>
           <SelectBlock @click="toOverview">
-            <template #title>老用户</template>
+            <template #title>{{ $t("install.oldUSer") }}</template>
           </SelectBlock>
         </ItemGroup>
       </Panel>
@@ -115,8 +115,8 @@ export default {
         passWord: ""
       },
       rules: {
-        userName: { required: true, message: "请输入内容", trigger: "blur" },
-        passWord: { required: true, message: "请输入内容", trigger: "blur" }
+        userName: { required: true, message: this.$t("users.newUserDialog.inputSth"), trigger: "blur" },
+        passWord: { required: true, message: this.$t("users.newUserDialog.inputSth"), trigger: "blur" }
       }
     };
   },
@@ -141,7 +141,7 @@ export default {
             }
           });
           this.next();
-          this.$message({ message: "管理员已创建", type: "success" });
+          this.$message({ message: this.$t("install.adminOK"), type: "success" });
         } catch (err) {
           this.$message({ message: err, type: "error" });
         }

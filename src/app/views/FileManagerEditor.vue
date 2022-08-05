@@ -21,19 +21,19 @@
 
 <template>
   <Panel>
-    <template #title>编辑文件 {{ target }}</template>
+    <template #title>{{ $t("fileManagerEditor.title") }} {{ target }}</template>
     <template #default>
       <div class="instance-table-warpper">
         <div>
           <ItemGroup>
             <el-button size="small" type="success" @click="saveFile">
-              <i class="el-icon-refresh"></i> 更新文件
+              <i class="el-icon-refresh"></i> {{ $t("fileManagerEditor.updateFile") }}
             </el-button>
             <el-button size="small" @click="refresh">
-              <i class="el-icon-refresh"></i> 刷新
+              <i class="el-icon-refresh"></i> {{ $t("general.refresh") }}
             </el-button>
             <el-button size="small" @click="back" v-if="!backType">
-              <i class="el-icon-pie-chart"></i> 回到文件列表
+              <i class="el-icon-pie-chart"></i> {{ $t("fileManagerEditor.backToFileManager") }}
             </el-button>
             <!-- <el-button size="small" @click="backTerminal" plain v-if="backType == 1">
               回到控制台
@@ -42,7 +42,7 @@
         </div>
         <div>
           <el-button size="small" @click="backViaHistory" type="primary" plain v-if="backType == 1">
-            回到简单编辑视图
+            {{ $t("fileManagerEditor.backViaHistory") }}
           </el-button>
         </div>
       </div>
@@ -51,7 +51,7 @@
         <div id="editor" style="height: 70vh" class="editor-code-font"></div>
       </div>
       <div v-show="error" style="padding: 16px 0px">
-        <el-alert title="编辑文件错误" type="error" :description="error" show-icon></el-alert>
+        <el-alert :title="$t('fileManagerEditor.editError')" type="error" :description="error" show-icon></el-alert>
       </div>
     </template>
   </Panel>
@@ -105,7 +105,7 @@ export default {
   methods: {
     async refresh() {
       await this.render();
-      this.$message({ message: "已刷新", type: "success" });
+      this.$message({ message: this.$t("general.refreshFinish"), type: "success" });
     },
     async backTerminal() {
       this.$router.push({
@@ -161,7 +161,7 @@ export default {
           target: this.target
         }
       });
-      this.$message({ message: "更新文本成功", type: "success" });
+      this.$message({ message: this.$t("fileManagerEditor.updateTextSuccess"), type: "success" });
     }
   }
 };

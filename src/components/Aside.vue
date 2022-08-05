@@ -34,34 +34,34 @@
     <el-scrollbar>
       <Logo></Logo>
       <el-menu-item-group>
-        <template #title>基础功能</template>
+        <template #title>{{ $t("aside.basic") }}</template>
 
         <el-menu-item key="/overview" index="/overview">
           <i class="el-icon-pie-chart"></i>
-          <template #title>数据监控</template>
+          <template #title>{{ $t("router.overview") }}</template>
         </el-menu-item>
         <el-menu-item key="/instances" index="/instances">
           <i class="el-icon-coin"></i>
-          <template #title>应用实例</template>
+          <template #title>{{ $t("router.instances") }}</template>
         </el-menu-item>
         <el-menu-item key="/users" index="/users">
           <i class="el-icon-user"></i>
-          <template #title>用户中心</template>
+          <template #title>{{ $t("aside.user") }}</template>
         </el-menu-item>
         <el-menu-item key="/quickstart" index="/quickstart">
           <i class="el-icon-circle-plus-outline"></i>
-          <template #title>快速开始</template>
+          <template #title>{{ $t("router.quickStart") }}</template>
         </el-menu-item>
       </el-menu-item-group>
       <el-menu-item-group>
-        <template #title>高级功能</template>
+        <template #title>{{ $t("aside.advanced") }}</template>
         <el-menu-item key="/services" index="/services">
           <i class="el-icon-connection"></i>
-          <template #title>节点管理</template>
+          <template #title>{{ $t("aside.node") }}</template>
         </el-menu-item>
         <el-menu-item key="/container" index="/container">
-          <i class="el-icon-cpu"></i>
-          <template #title>环境镜像</template>
+          <i class="el-icon-takeaway-box"></i>
+          <template #title>{{ $t("router.container") }}</template>
         </el-menu-item>
         <!-- <el-menu-item key="/update" index="/update">
           <i class="el-icon-guide"></i>
@@ -76,10 +76,10 @@
         </el-menu-item>
       </el-menu-item-group> -->
       <el-menu-item-group>
-        <template #title>更多</template>
+        <template #title>{{ $t("aside.more") }}</template>
         <el-menu-item key="/settings" index="/settings">
           <i class="el-icon-setting"></i>
-          <template #title>设置</template>
+          <template #title>{{ $t("router.settings") }}</template>
         </el-menu-item>
       </el-menu-item-group>
 

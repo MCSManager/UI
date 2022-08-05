@@ -53,10 +53,10 @@
                 v-model="optionValue[optionKey]"
                 size="small"
                 style="width: 100%"
-                placeholder="未选择"
+                :placeholder="$t('general.noSelect')"
               >
-                <el-option label="是" :value="true"></el-option>
-                <el-option label="否" :value="false"></el-option>
+                <el-option :label="$t('general.yes')" :value="true"></el-option>
+                <el-option :label="$t('general.no')" :value="false"></el-option>
               </el-select>
               <el-button
                 v-if="type == 1"

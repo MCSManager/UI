@@ -21,21 +21,20 @@
 
 <template>
   <Panel>
-    <template #title>配置文件</template>
+    <template #title>{{ $t("processConfigFile.title") }}</template>
     <template #default>
       <div
         v-if="!failure"
         v-loading="loading"
         style="min-height: 600px"
-        element-loading-text="加载中"
       >
         <el-row :gutter="20">
           <el-col :span="12" :offset="0">
             <div class="row-mb">
               <ItemGroup>
-                <el-button type="success" size="small" @click="save">保存配置</el-button>
-                <el-button type="danger" size="small" @click="rf">重新加载</el-button>
-                <el-button size="small" @click="back">回到配置文件列表</el-button>
+                <el-button type="success" size="small" @click="save">{{ $t("instancesDetail.saveSet") }}</el-button>
+                <el-button type="danger" size="small" @click="rf">{{ $t("processConfigFile.reload") }}</el-button>
+                <el-button size="small" @click="back">{{ $t("processConfigFile.back") }}</el-button>
               </ItemGroup>
             </div>
           </el-col>
@@ -43,7 +42,7 @@
             <div class="row-mb" style="text">
               <ItemGroup>
                 <el-button type="primary" plain size="small" @click="toEdit">
-                  编辑源文件视图
+                  {{ $t("processConfigFile.editOriginal") }}
                 </el-button>
               </ItemGroup>
             </div>
@@ -57,11 +56,10 @@
         <div class="text-center row-mb">
           <h3>
             <p>
-              文件不存在或权限不正确，无法查看此文件的具体配置，您也许可以尝试到 “文件管理”
-              功能在线编辑此文件，或尝试重启实例刷新此文件。
+              {{ $t("processConfigFile.noFile") }}
             </p>
           </h3>
-          <el-button class="row-mt" size="small" @click="back">回到配置文件列表</el-button>
+          <el-button class="row-mt" size="small" @click="back">{{ $t("processConfigFile.back") }}</el-button>
         </div>
       </div>
     </template>
@@ -124,7 +122,7 @@ export default {
       this.loading = false;
     },
     toEdit() {
-      console.log(`跳转编辑:${this.configPath}`);
+      console.log(`Go to Edit:${this.configPath}`);
       this.$router.push({
         path: `/file_editor/${this.serviceUuid}/${this.instanceUuid}/`,
         query: {
@@ -162,9 +160,9 @@ export default {
           },
           data: config
         });
-        this.$message({ message: "更新成功", type: "success" });
+        this.$message({ message: this.$t("home.updateSuccess"), type: "success" });
       } catch (err) {
-        this.$message({ message: "更新失败", type: "success" });
+        this.$message({ message: this.$t("processConfigFile.updateFailed"), type: "success" });
       }
     },
     async render() {

@@ -22,50 +22,50 @@
 <template>
   <div>
     <Panel>
-      <template #title>文件管理</template>
+      <template #title>{{ $t("fileManager.title") }}</template>
       <template #default>
         <el-row :gutter="20">
           <el-col :xs="24" :md="6" :offset="0">
             <ItemGroup>
               <el-button size="small" @click="back">
-                <i class="el-icon-pie-chart"></i> 回到控制台
+                <i class="el-icon-pie-chart"></i> {{ $t("schedule.backToConsole") }}
               </el-button>
               <el-button size="small" @click="refresh">
-                <i class="el-icon-refresh"></i> 刷新
+                <i class="el-icon-refresh"></i> {{ $t("general.refresh") }}
               </el-button>
             </ItemGroup>
           </el-col>
           <el-col :xs="24" :md="18" :offset="0" class="text-align-right">
             <ItemGroup>
               <el-button size="small" @click="toUpDir">
-                <i class="el-icon-pie-chart"></i> 上层目录
+                <i class="el-icon-pie-chart"></i> {{ $t("fileManager.upperDir") }}
               </el-button>
               <el-button size="small" @click="mkdir">
-                <i class="el-icon-folder-add"></i> 新建目录
+                <i class="el-icon-folder-add"></i> {{ $t("fileManager.mkdir") }}
               </el-button>
               <el-button size="small" @click="compress(1)">
-                <i class="el-icon-box"></i> 压缩
+                <i class="el-icon-box"></i> {{ $t("fileManager.zip") }}
               </el-button>
               <el-button size="small" @click="compress(2)">
-                <i class="el-icon-files"></i> 解压
+                <i class="el-icon-files"></i> {{ $t("fileManager.unzip") }}
               </el-button>
               <el-button size="small" @click="rename">
-                <i class="el-icon-document"></i> 重命名
+                <i class="el-icon-document"></i> {{ $t("fileManager.rename") }}
               </el-button>
               <el-button size="small" @click="move">
-                <i class="el-icon-scissors"></i> 剪切
+                <i class="el-icon-scissors"></i> {{ $t("fileManager.cut") }}
               </el-button>
               <el-button size="small" @click="copy">
-                <i class="el-icon-document-copy"></i> 复制
+                <i class="el-icon-document-copy"></i> {{ $t("fileManager.copy") }}
               </el-button>
               <el-button size="small" @click="paste">
-                <i class="el-icon-tickets"></i> 粘贴
+                <i class="el-icon-tickets"></i> {{ $t("fileManager.paste") }}
               </el-button>
               <el-button size="small" type="success" @click="upload">
-                <i class="el-icon-plus"></i> 上传文件
+                <i class="el-icon-plus"></i> {{ $t("fileManager.uploadFile") }}
               </el-button>
               <el-button size="small" type="danger" @click="deleteFiles">
-                <i class="el-icon-document-delete"></i> 删除
+                <i class="el-icon-document-delete"></i> {{ $t("general.delete") }}
               </el-button>
             </ItemGroup>
           </el-col>
@@ -77,7 +77,7 @@
               <span>
                 <i class="el-icon-loading"></i>
               </span>
-              <span> 有 {{ statusInfo.instanceFileTask }} 个文件解压/压缩任务正在进行中...</span>
+              <span> {{ $t("fileManager.unzipInfo", {tasks: statusInfo.instanceFileTask}) }}</span>
             </div>
           </div>
 
@@ -103,7 +103,7 @@
         </div>
 
         <p>
-          <el-tag type="success" size="small">当前目录</el-tag>
+          <el-tag type="success" size="small">{{ $t("fileManager.dir") }}</el-tag>
           &nbsp;
           <el-tag type="info" size="small"> {{ currentDir }}</el-tag>
         </p>
@@ -117,7 +117,7 @@
           @selection-change="selectionChange"
         >
           <el-table-column type="selection" width="55"> </el-table-column>
-          <el-table-column prop="name" label="文件命令" min-width="240">
+          <el-table-column prop="name" :label="$t('fileManager.name')" min-width="240">
             <template #default="scope">
               <div
                 v-if="scope.row.type == 0"
@@ -135,11 +135,11 @@
           </el-table-column>
           <el-table-column
             prop="typeText"
-            label="文件类型"
+            :label="$t('fileManager.fileType')"
             width="120"
             class="only-pc-display"
           ></el-table-column>
-          <el-table-column label="文件大小" width="140">
+          <el-table-column :label="$t('fileManager.fileSize')" width="140">
             <template #default="scope">
               <span v-if="scope.row.size > 1024 * 1024"
                 >{{ Number(Number(scope.row.size) / 1024 / 1024).toFixed(0) }} MB</span
@@ -152,18 +152,18 @@
               >
             </template>
           </el-table-column>
-          <el-table-column prop="timeText" label="最后修改" width="160"></el-table-column>
-          <el-table-column label="操作" style="text-align: center" width="180">
+          <el-table-column prop="timeText" :label="$t('fileManager.lastEdit')" width="160"></el-table-column>
+          <el-table-column :label="$t('general.operate')" style="text-align: center" width="180">
             <template #default="scope">
               <el-button
                 size="mini"
                 :disabled="scope.row.type != 1"
                 @click="toEditFilePage(scope.row)"
               >
-                编辑
+                {{ $t("general.edit") }}
               </el-button>
               <el-button size="mini" :disabled="scope.row.type != 1" @click="download(scope.row)">
-                下载
+                {{ $t("fileManager.download") }}
               </el-button>
             </template>
           </el-table-column>
@@ -252,7 +252,7 @@ export default {
     },
     async refresh() {
       await this.render();
-      this.$message({ message: "已刷新", type: "success" });
+      this.$message({ message: this.$t("general.refreshFinish"), type: "success" });
     },
     async render() {
       await this.list(this.currentDir);
@@ -263,7 +263,7 @@ export default {
         const p = path.normalize(path.join(this.currentDir, name));
         await this.list(p);
       } catch (error) {
-        this.$message({ message: "错误，无法查看此目录或文件", type: "error" });
+        this.$message({ message: this.$t("fileManager.noSee"), type: "error" });
       }
     },
     // 返回上层目录
@@ -307,7 +307,7 @@ export default {
       this.files = [];
 
       for (const iterator of filesData) {
-        const typeText = iterator.type == 1 ? "文件" : "目录";
+        const typeText = iterator.type == 1 ? this.$t("fileManager.file") : this.$t("fileManager.directory");
         const timeText =
           new Date(iterator.time).toLocaleDateString() +
           " " +
@@ -353,14 +353,14 @@ export default {
     // 重命名文件
     async rename() {
       try {
-        if (this.multipleSelection.length !== 1) throw new Error("必须选择一个文件进行重命名操作");
+        if (this.multipleSelection.length !== 1) throw new Error(this.$t("fileManager.selectFileToRename"));
         const file = this.multipleSelection[0];
-        let { value } = await this.$prompt("新的名字", "重命名", {
+        let { value } = await this.$prompt(this.$t("fileManager.newName"), this.$t("fileManager.rename"), {
           inputValue: file.name,
-          confirmButtonText: "确定",
-          cancelButtonText: "取消"
+          confirmButtonText: this.$t("general.confirm"),
+          cancelButtonText: this.$t("general.cancel")
         });
-        if (!value) throw new Error("请输入一个有效值");
+        if (!value) throw new Error(this.$t("fileManager.inputValidValues"));
         const oldFilePath = path.join(this.currentDir, file.name);
         const newFilePath = path.join(this.currentDir, value);
         await request({
@@ -374,11 +374,11 @@ export default {
             targets: [[oldFilePath, newFilePath]]
           }
         });
-        this.$message({ message: "操作成功", type: "success" });
+        this.$message({ message: this.$t("fileManager.setSuccess"), type: "success" });
         this.render();
       } catch (error) {
         if (error && error.message)
-          this.$message({ message: `错误:${error.message}`, type: "error" });
+          this.$message({ message: `Error: ${error.message}`, type: "error" });
       }
     },
 
@@ -387,21 +387,21 @@ export default {
       this.tmpFile.tmpFileNames = this.multipleFileToNames(this.multipleSelection);
       this.tmpFile.tmpDir = this.currentDir;
       this.tmpFile.tmpOperationMode = 1;
-      this.$message({ message: "文件已选择，使用粘贴即可复制到其他目录", type: "info" });
+      this.$message({ message: this.$t("fileManager.fileCopied"), type: "info" });
     },
     // 移动文件
     async move() {
       this.tmpFile.tmpFileNames = this.multipleFileToNames(this.multipleSelection);
       this.tmpFile.tmpDir = this.currentDir;
       this.tmpFile.tmpOperationMode = 2;
-      this.$message({ message: "文件已选择，使用粘贴即可移动到其他目录", type: "info" });
+      this.$message({ message: this.$t("fileManager.fileMoved"), type: "info" });
     },
 
     // 粘贴文件（根据模式发送不同的指令）
     async paste() {
       try {
         if (this.tmpFile.tmpOperationMode === -1) {
-          throw new Error("未复制或剪切任何文件，无法粘贴");
+          throw new Error(this.$t("fileManager.cantCopy"));
         }
         const targets = [];
         this.tmpFile.tmpFileNames.forEach((v) => {
@@ -437,10 +437,10 @@ export default {
             }
           });
         }
-        this.$message({ message: "操作成功", type: "success" });
+        this.$message({ message: this.$t("fileManager.setSuccess"), type: "success" });
         this.render();
       } catch (error) {
-        this.$message({ message: `错误:${error.message}`, type: "error" });
+        this.$message({ message: `Error :${error.message}`, type: "error" });
       } finally {
         this.tmpFile.tmpOperationMode = -1;
         this.tmpFile.tmpFileNames = null;
@@ -450,12 +450,12 @@ export default {
 
     // 新建目录
     async mkdir() {
-      const { value } = await this.$prompt("新建目录名", undefined, {
-        confirmButtonText: "确定",
-        cancelButtonText: "取消"
+      const { value } = await this.$prompt(this.$t("fileManager.newDirName"), undefined, {
+        confirmButtonText: this.$t("general.confirm"),
+        cancelButtonText: this.$t("general.cancel")
       });
       try {
-        if (!value) throw new Error("请输入一个有效值");
+        if (!value) throw new Error(this.$t("fileManager.inputValidValues"));
         const p = path.normalize(path.join(this.currentDir, value));
         await request({
           method: "POST",
@@ -468,7 +468,7 @@ export default {
             target: p
           }
         });
-        this.$message({ message: "创建成功", type: "success" });
+        this.$message({ message: this.$t("notify.createSuccess"), type: "success" });
         this.render();
       } catch (err) {
         this.$message({ message: err, type: "error" });
@@ -488,16 +488,16 @@ export default {
 
     // 删除文件
     async deleteFiles() {
-      await this.$confirm("确定要删除选中的文件吗？", "警告", {
-        confirmButtonText: "确定",
-        cancelButtonText: "取消",
+      await this.$confirm(this.$t("fileManager.confirmDelFile"), this.$t("general.warn"), {
+        confirmButtonText: this.$t("general.confirm"),
+        cancelButtonText: this.$t("general.cancel"),
         type: "warning"
       });
       try {
         const fileNames = this.multipleFileToNames(this.multipleSelection);
         const targets = this.fileNamesToPaths(fileNames);
         if (fileNames.length === 0)
-          return this.$message({ message: "请至少选择一个文件", type: "error" });
+          return this.$message({ message: this.$t("fileManager.selectAFile"), type: "error" });
         await request({
           method: "DELETE",
           url: API_FILE_URL,
@@ -510,12 +510,12 @@ export default {
           }
         });
         this.$message({
-          message: "文件删除任务开始，如果文件数量过多，则需要一定时间",
+          message: this.$t("fileManager.delFileStart"),
           type: "success"
         });
         this.render();
       } catch (error) {
-        this.$message({ message: `错误:${error}`, type: "error" });
+        this.$message({ message: `Error: ${error}`, type: "error" });
         this.render();
       }
     },
@@ -526,15 +526,15 @@ export default {
       try {
         const fileNames = this.multipleFileToNames(this.multipleSelection);
         if (fileNames.length === 0)
-          return this.$message({ message: "请至少选择一个文件", type: "error" });
+          return this.$message({ message: this.$t("fileManager.selectAFile"), type: "error" });
         const targets = this.fileNamesToPaths(fileNames);
         if (type === 1) {
           //压缩
-          const text = await this.$prompt("新的压缩包文件名", "文件名", {
-            confirmButtonText: "确定",
-            cancelButtonText: "取消"
+          const text = await this.$prompt(this.$t("fileManager.newZipName"), this.$t("fileManager.fileName"), {
+            confirmButtonText: this.$t("general.confirm"),
+            cancelButtonText: this.$t("general.cancel"),
           });
-          if (!text.value) throw new Error("请输入一个有效值");
+          if (!text.value) throw new Error(this.$t("fileManager.inputValidValues"));
           const zipName = text.value;
           for (const k in fileNames) {
             fileNames[k] = path.join(cwd, fileNames[k]);
@@ -554,19 +554,18 @@ export default {
             }
           });
           this.$notify({
-            title: "压缩任务已经开始",
-            message:
-              "异步压缩需要一段时间，可以利用刷新文件列表查看 ZIP 大小来判断是否压缩完毕，压缩编码为 UTF-8"
+            title: this.$t("fileManager.zipTaskStart"),
+            message: this.$t("fileManager.zipTaskStartInfo")
           });
         } else {
           if (fileNames.length !== 1)
-            return this.$message({ message: "解压只能同时进行一个压缩文件", type: "error" });
+            return this.$message({ message: this.$t("fileManager.onlyUnzipOne"), type: "error" });
           //解压
-          const text = await this.$prompt("请输入新的解压文件夹名称", "文件名", {
-            confirmButtonText: "确定",
-            cancelButtonText: "取消"
+          const text = await this.$prompt(this.$t("fileManager.inputUnzipDirName"), this.$t("fileManager.fileName"), {
+            confirmButtonText: this.$t("general.confirm"),
+            cancelButtonText: this.$t("general.cancel"),
           });
-          if (!text.value) throw new Error("请输入一个有效值");
+          if (!text.value) throw new Error(this.$t("fileManager.inputValidValues"));
           const selected = await this.$refs.selecctUnzipCode.prompt();
           if (!selected) return;
           const dirName = text.value;
@@ -585,8 +584,8 @@ export default {
             }
           });
           this.$notify({
-            title: "解压任务已开始",
-            message: "异步解压需要一段时间，可以利用刷新文件列表查看目录内容来判断是否压缩完毕"
+            title: this.$t("fileManager.UnzipTaskStart"),
+            message: this.$t("fileManager.UnzipTaskStartInfo")
           });
         }
       } catch (error) {
@@ -603,7 +602,7 @@ export default {
         formData.append("source", "MCSManager/FileManager");
         formData.append("time", new Date().toUTCString());
         const fullAddress = `${this.uploadConfig.addr}/upload/${this.uploadConfig.password}`;
-        console.log("上传文件:", fullAddress);
+        console.log("Upload File", fullAddress);
         // 上传文件
         await axios.post(fullAddress, formData, {
           headers: {
@@ -613,12 +612,12 @@ export default {
             this.percentComplete = Math.round((progressEvent.loaded * 100) / progressEvent.total);
           }
         });
-        this.$message({ message: `上传完毕`, type: "success" });
+        this.$message({ message: this.$t("fileManager.uploadOk"), type: "success" });
         await this.refresh();
         this.$refs.fileForm.reset();
         this.percentComplete = -1;
       } catch (error) {
-        this.$message({ message: `错误:${error}`, type: "error" });
+        this.$message({ message: `Error: ${error}`, type: "error" });
       }
     },
 

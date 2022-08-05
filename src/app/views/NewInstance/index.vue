@@ -26,35 +26,39 @@
       <template #default>
         <div v-show="page == 0" class="panel-context row-mt">
           <div class="sub-title">
-            <p class="sub-title-title">请选择您要创建的应用类型</p>
+            <p class="sub-title-title">{{ $t("newInstances.selectType") }}</p>
             <p class="sub-title-info"></p>
           </div>
           <el-row :gutter="10" justify="left" class="col-md-responsive row-mt">
             <el-col :md="6" :offset="0" v-show="!quickStartType || quickStartType == 1">
               <SelectBlock @click="selectTypeA(1)" style="min-height: 120px">
-                <template #title>Java 版 Minecraft 游戏服务端</template>
-                <template #info> 适用于类似于 Spigot，Bungeecord 等 Jar 格式文件的服务端 </template>
+                <template #title>{{ $t("newInstances.types[0].name") }}</template>
+                <template #info>
+                  {{ $t("newInstances.types[0].desc") }}
+                </template>
               </SelectBlock>
             </el-col>
             <el-col :md="6" :offset="0" v-show="!quickStartType || quickStartType == 1">
               <SelectBlock @click="selectTypeA(2)" style="min-height: 120px">
-                <template #title>基岩版 Minecraft 游戏服务端</template>
+                <template #title>{{ $t("newInstances.types[1].name") }}</template>
                 <template #info>
-                  适用于 Bedrock Dedicated Server 等二进制执行文件或其他格式的服务端软件
+                  {{ $t("newInstances.types[1].desc") }}
                 </template>
               </SelectBlock>
             </el-col>
             <el-col :md="6" :offset="0" v-show="!quickStartType || quickStartType == 2">
               <SelectBlock @click="selectTypeA(3)" style="min-height: 120px">
-                <template #title>其他游戏服务端</template>
-                <template #info> 适用于类似于大部分游戏私服程序运行，不保证能够完全兼容</template>
+                <template #title>{{ $t("newInstances.types[2].name") }}</template>
+                <template #info>
+                  {{ $t("newInstances.types[2].desc") }}
+                </template>
               </SelectBlock>
             </el-col>
             <el-col :md="6" :offset="0" v-show="!quickStartType || quickStartType == 3">
               <SelectBlock @click="selectTypeA(3)" style="min-height: 120px">
-                <template #title>通用控制台应用程序</template>
+                <template #title>{{ $t("newInstances.types[3].name") }}</template>
                 <template #info>
-                  适用于类似于 bash，cmd.exe，app.exe，start.sh 和其他任何可用命令启动的程序
+                  {{ $t("newInstances.types[3].desc") }}
                 </template>
               </SelectBlock>
             </el-col>
@@ -63,41 +67,40 @@
 
         <div v-show="page == 1" class="panel-context row-mt">
           <div class="sub-title">
-            <p class="sub-title-title">选择创建方式</p>
+            <p class="sub-title-title">{{ $t("newInstances.selectCreateType") }}</p>
             <p class="sub-title-info">
-              如果您只想通过服务端软件开启服务器则选择第一项，其他选项均适用于不同的场景需求
+              {{ $t("newInstances.selectCreateTypeInfo") }}
             </p>
           </div>
 
           <el-row :gutter="10" justify="center" class="col-md-responsive">
             <el-col :md="8" :offset="0" v-if="form.type != TYPE_MINECRAFT_BEDROCK">
               <SelectBlock @click="selectTypeB(1)" style="min-height: 120px">
-                <template #title>上传单个服务端软件（推荐）</template>
+                <template #title>{{ $t("newInstances.createTypes[0].name") }}</template>
                 <template #info>
-                  适用于第一次创建服务器，只需上传一个程序文件即可直接创建服务器并生成地图存档等
+                  {{ $t("newInstances.createTypes[0].desc") }}
                 </template>
               </SelectBlock>
             </el-col>
             <el-col :md="8" :offset="0">
               <SelectBlock @click="selectTypeB(2)" style="min-height: 120px">
-                <template #title>上传服务端压缩包</template>
+                <template #title>{{ $t("newInstances.createTypes[1].name") }}</template>
                 <template #info>
-                  适用于服务端整合包，以及现有的服务器存档，打包上传后自动解压并运行，只支持 zip
-                  格式
+                  {{ $t("newInstances.createTypes[1].desc") }}
                 </template>
               </SelectBlock>
             </el-col>
             <el-col :md="8" :offset="0">
               <SelectBlock @click="selectTypeB(3)" style="min-height: 120px">
-                <template #title>无需文件或选择已存在文件</template>
+                <template #title>{{ $t("newInstances.createTypes[2].name") }}</template>
                 <template #info>
-                  不需要任何文件或者服务端文件已存在远程主机上，只需要手动设置启动命令以及文件目录即可完成
+                  {{ $t("newInstances.createTypes[2].desc") }}
                 </template>
               </SelectBlock>
             </el-col>
           </el-row>
           <div class="row-mt" style="text-align: center">
-            <el-button @click="up" size="small">回退</el-button>
+            <el-button @click="up" size="small">{{ $t("newInstances.back") }}</el-button>
           </div>
         </div>
 
@@ -105,11 +108,11 @@
         <div v-show="page == 2 && typeB == 1" class="panel-context row-mt">
           <div class="">
             <div class="sub-title">
-              <p class="sub-title-title">实例名称</p>
-              <p class="sub-title-info">支持中文，尽可能保证唯一性</p>
+              <p class="sub-title-title">{{ $t("instances.instanceName") }}</p>
+              <p class="sub-title-info">{{ $t("newInstances.instanceNameInfo") }}</p>
             </div>
             <el-input
-              placeholder="实例名，尽可能确保唯一性"
+              :placeholder="$t('newInstances.instanceNameInfo2')"
               v-model="form.nickname"
               :disabled="assist.creating"
             >
@@ -117,30 +120,29 @@
           </div>
           <div class="row-mt">
             <div class="sub-title">
-              <p class="sub-title-title">启动命令模板</p>
+              <p class="sub-title-title">{{ $t("newInstances.commandTemplate") }}</p>
               <p
                 class="sub-title-info"
-                v-text="'其中 {{ProgramName}} 代表您接下来上传的文件名，一般情况下无需进行修改'"
-              ></p>
+              >{{ $t("newInstances.commandTemplateText") }}</p>
             </div>
             <div class="flex">
               <el-input
                 v-model="assist.commandtemplate"
-                placeholder="如 java -jar server.jar"
+                :placeholder="$t('newInstances.cmdInfo')"
                 :disabled="assist.creating"
               ></el-input>
-              <el-button @click="openCommandAssistCall(1)">命令助手</el-button>
+              <el-button @click="openCommandAssistCall(1)">{{ $t("newInstances.cmdAssist") }}</el-button>
             </div>
           </div>
           <div class="row-mt">
             <div class="sub-title">
-              <p class="sub-title-title">服务端文件目录</p>
+              <p class="sub-title-title">{{ $t("newInstances.fileDir") }}</p>
               <p class="sub-title-info">
-                选填，默认自动创建与管理，如需填写请写完整绝对路径，如: C:/Servers/MyServer
+                {{ $t("newInstances.fileDirInfo") }}
               </p>
             </div>
             <el-input
-              placeholder="默认自动创建与管理"
+              :placeholder="$t('newInstances.autoCreate')"
               v-model="form.cwd"
               :disabled="assist.creating"
             >
@@ -148,19 +150,19 @@
           </div>
           <div class="row-mt">
             <div class="sub-title">
-              <p class="sub-title-title">上传服务端软件</p>
+              <p class="sub-title-title">{{ $t("newInstances.uploadFile") }}</p>
               <p class="sub-title-info">
-                服务端软件指 JAR/EXE 格式或其他可执行程序（如 Spigot.jar，Paper.jar 等）
+                {{ $t("newInstances.uploadFileInfo") }}
               </p>
             </div>
-            <el-button @click="uploadFile(1)" :disabled="assist.creating">上传服务端软件</el-button>
+            <el-button @click="uploadFile(1)" :disabled="assist.creating">{{ $t("newInstances.uploadFile") }}</el-button>
             <div v-if="percentComplete > 0">
               <el-progress :percentage="percentComplete"></el-progress>
             </div>
-            <p>上传文件后实例将自动创建</p>
+            <p>{{ $t("newInstances.afterUpload") }}</p>
           </div>
           <div class="row-mt" style="text-align: center">
-            <el-button @click="up" size="small" :disabled="assist.creating">回退</el-button>
+            <el-button @click="up" size="small" :disabled="assist.creating">{{ $t("newInstances.back") }}</el-button>
             <!-- <el-button @click="down" size="small">下一步</el-button> -->
           </div>
         </div>
@@ -169,11 +171,11 @@
         <div v-show="page == 2 && typeB == 2" class="panel-context row-mt">
           <div class="row-mt">
             <div class="sub-title">
-              <p class="sub-title-title">实例名称</p>
-              <p class="sub-title-info">支持中文，尽可能保证唯一性</p>
+              <p class="sub-title-title">{{ $t("instances.instanceName") }}</p>
+              <p class="sub-title-info">{{ $t("newInstances.instanceNameInfo") }}</p>
             </div>
             <el-input
-              placeholder="实例名，尽可能确保唯一性"
+              :placeholder="$t('newInstances.instanceNameInfo2')"
               v-model="form.nickname"
               :disabled="assist.creating"
             >
@@ -181,27 +183,27 @@
           </div>
           <div class="row-mt">
             <div class="sub-title">
-              <p class="sub-title-title">启动命令</p>
-              <p class="sub-title-info">因为无法识别压缩包中的服务端文件名，请您自行填写启动命令</p>
+              <p class="sub-title-title">{{ $t("newInstances.launchCmd") }}</p>
+              <p class="sub-title-info">{{ $t("newInstances.launchCmdInfo") }}</p>
             </div>
             <div class="flex">
               <el-input
                 v-model="form.startCommand"
-                placeholder="如 java -jar server.jar"
+                :placeholder="$t('newInstances.cmdInfo')"
                 :disabled="assist.creating"
               ></el-input>
-              <el-button @click="openCommandAssistCall(2)">命令助手</el-button>
+              <el-button @click="openCommandAssistCall(2)">{{ $t("newInstances.cmdAssist") }}</el-button>
             </div>
           </div>
           <div class="row-mt">
             <div class="sub-title">
-              <p class="sub-title-title">服务端文件目录</p>
+              <p class="sub-title-title">{{ $t("newInstances.fileDir") }}</p>
               <p class="sub-title-info">
-                选填，默认自动创建与管理，如需填写请写完整绝对路径，如: C:/Servers/MyServer
+                {{ $t("newInstances.fileDirInfo") }}
               </p>
             </div>
             <el-input
-              placeholder="选填，默认自动管理"
+              :placeholder="$t('newInstances.autoCreate2')"
               v-model="form.cwd"
               :disabled="assist.creating"
             >
@@ -209,17 +211,17 @@
           </div>
           <div class="row-mt">
             <div class="sub-title">
-              <p class="sub-title-title">上传服务端压缩包</p>
-              <p class="sub-title-info">仅支持 ZIP 格式，上传后压缩包会自动解压到 “文件目录”</p>
+              <p class="sub-title-title">{{ $t("newInstances.uploadZip") }}</p>
+              <p class="sub-title-info">{{ $t("newInstances.uploadZipInfo") }}</p>
             </div>
-            <el-button @click="uploadFile(2)" :disabled="assist.creating">上传压缩包</el-button>
+            <el-button @click="uploadFile(2)" :disabled="assist.creating">{{ $t("newInstances.uploadZipButton") }}</el-button>
             <div v-if="percentComplete > 0">
               <el-progress :percentage="percentComplete"></el-progress>
             </div>
-            <p>上传文件后实例将自动创建并解压文件，可能需要一段时间才能完成解压任务</p>
+            <p>{{ $t("newInstances.upFileInfo") }}</p>
           </div>
           <div class="row-mt" style="text-align: center">
-            <el-button @click="up" size="small" :disabled="assist.creating">回退</el-button>
+            <el-button @click="up" size="small" :disabled="assist.creating">{{ $t("newInstances.back") }}</el-button>
             <!-- <el-button @click="createInstance" size="small">创建实例</el-button> -->
           </div>
         </div>
@@ -228,57 +230,57 @@
         <div v-show="page == 2 && typeB == 3" class="panel-context row-mt">
           <div>
             <div class="sub-title">
-              <p class="sub-title-title">从已存在的文件选择服务端</p>
-              <p class="sub-title-info">文件必须已经存在远程主机（非面板机器）</p>
+              <p class="sub-title-title">{{ $t("newInstances.selectFromExist") }}</p>
+              <p class="sub-title-info">{{ $t("newInstances.selectFromExistInfo") }}</p>
             </div>
-            <el-input placeholder="实例名，尽可能确保唯一性" v-model="form.nickname"> </el-input>
+            <el-input :placeholder="$t('newInstances.instanceNameInfo2')" v-model="form.nickname"> </el-input>
           </div>
           <div class="row-mt">
             <div class="sub-title">
-              <p class="sub-title-title">启动命令</p>
-              <p class="sub-title-info">请您自行填写启动命令</p>
+              <p class="sub-title-title">{{ $t("newInstances.launchCmd") }}</p>
+              <p class="sub-title-info">{{ $t("newInstances.launchCmdInfo2") }}</p>
             </div>
             <div class="flex">
               <el-input
                 v-model="form.startCommand"
-                placeholder="如 java -jar server.jar，cmd.exe 等等"
+                :placeholder="$t('newInstances.cmd2')"
               ></el-input>
-              <el-button @click="openCommandAssistCall(2)">命令助手</el-button>
+              <el-button @click="openCommandAssistCall(2)">{{ $t("newInstances.cmdAssist") }}</el-button>
             </div>
           </div>
           <div class="row-mt">
             <div class="sub-title">
-              <p class="sub-title-title">服务端文件目录</p>
+              <p class="sub-title-title">{{ $t("newInstances.fileDir") }}</p>
               <p class="sub-title-info">
-                选填，默认自动创建与管理，如需填写请写完整绝对路径，如: C:/Servers/MyServer
+                {{ $t("newInstances.fileDirInfo") }}
               </p>
             </div>
             <el-input
-              placeholder="选填，默认自动创建与管理，如需填写请写完整绝对路径，如: C:/Servers/MyServer"
+              :placeholder="$t('newInstances.fileDirInfo')"
               v-model="form.cwd"
             >
             </el-input>
           </div>
-          <p>填写好服务端软件文件名后，再前往文件管理上传服务端软件即可开启实例。</p>
+          <p>{{ $t("newInstances.afterFlieName") }}</p>
           <div class="row-mt" style="text-align: center">
             <ItemGroup>
-              <el-button @click="up" size="small">回退</el-button>
-              <el-button @click="createInstance" size="small">创建实例</el-button></ItemGroup
+              <el-button @click="up" size="small">{{ $t("newInstances.back") }}</el-button>
+              <el-button @click="createInstance" size="small">{{ $t("newInstances.createInstant") }}</el-button></ItemGroup
             >
           </div>
         </div>
 
         <div v-show="page == 3" class="panel-context row-mt">
           <div class="sub-title">
-            <p class="sub-title-title">创建完毕</p>
-            <p class="sub-title-info">您现在可以对实例进行具体的设置和编辑</p>
+            <p class="sub-title-title">{{ $t("newInstances.createFinish") }}</p>
+            <p class="sub-title-info">{{ $t("newInstances.nowYouCan") }}</p>
           </div>
           <el-row :gutter="10" justify="center" class="col-md-responsive">
             <el-col :md="8" :offset="0">
               <SelectBlock @click="toEdit" style="min-height: 120px">
-                <template #title>前往编辑实例具体参数</template>
+                <template #title>{{ $t("newInstances.toEdit") }}</template>
                 <template #info>
-                  推荐立即前往编辑界面设置相关参数，比如 Docker 启动方式，编码设置，工作环境等
+                  {{ $t("newInstances.toEditInfo") }}
                 </template>
               </SelectBlock>
             </el-col>
@@ -321,7 +323,7 @@ export default {
   components: { Panel, SelectBlock, CommandAssist, SelecctUnzipCode },
   data: function () {
     return {
-      title: "新建实例引导程序",
+      title: this.$t("newInstances.newInstanceGuide"),
       page: 0,
       quickStartType: 0,
       typeA: -1,
@@ -362,12 +364,12 @@ export default {
     // 创建实例并上传文件
     async uploadFile(type) {
       if (!this.form.nickname || (!this.assist.commandtemplate && !this.form.startCommand)) {
-        return this.$message({ message: "请先完善基本参数再进行上传文件操作", type: "error" });
+        return this.$message({ message: this.$t("newInstances.pleaseFinish"), type: "error" });
       }
       this.zipCode = await this.$refs.selecctUnzipCode.prompt();
-      await this.$confirm("上传文件时将同时创建实例，此操作不可逆，是否继续？", "最终确认", {
-        confirmButtonText: "确定",
-        cancelButtonText: "取消",
+      await this.$confirm(this.$t("newInstances.uploadAndCreate"),this.$t("notify.confirmDelTitle"), {
+        confirmButtonText: this.$t("general.confirm"),
+        cancelButtonText: this.$t("general.cancel"),
         type: "warning"
       });
       this.assist.uploadFileType = type;
@@ -403,7 +405,7 @@ export default {
         const formData = new FormData();
         formData.append("file", file);
         const fullAddress = `${this.uploadConfig.addr}/upload/${this.uploadConfig.password}`;
-        console.log("新建实例 - 文件上传:", fullAddress, "\n", file);
+        console.log("NewInstance - FileUpload:", fullAddress, "\n", file);
         // 上传文件
         const fileName = file.name;
         const extName = path.extname(fileName);
@@ -418,22 +420,22 @@ export default {
             this.percentComplete = Math.round((progressEvent.loaded * 100) / progressEvent.total);
           }
         });
-        this.$message({ message: `上传完毕`, type: "success" });
+        this.$message({ message: this.$t("newInstances.uploadFinish"), type: "success" });
         this.down();
-        this.title = "创建完毕";
+        this.title = this.$t("newInstances.createFinish");
       } catch (error) {
-        this.$message({ message: `错误:${error.message}`, type: "error" });
+        this.$message({ message: `Error: ${error.message}`, type: "error" });
       }
     },
     // 非上传文件式的创建实例
     async createInstance() {
-      await this.$confirm("实例将创建，是否继续？", "最终确认", {
-        confirmButtonText: "确定",
-        cancelButtonText: "取消",
+      await this.$confirm(this.$t("newInstances.instantWillBeCreate"), this.$t("notify.confirmDelTitle"), {
+        confirmButtonText: this.$t("general.confirm"),
+        cancelButtonText: this.$t("general.cancel"),
         type: "warning"
       });
       if (this.form.nickname === "" || this.form.startCommand === "") {
-        return this.$message({ message: "参数不完整，请填写", type: "error" });
+        return this.$message({ message: this.$t("newInstances.parameterNotFinish"), type: "error" });
       }
       try {
         if (!this.form.cwd) this.form.cwd = ".";
@@ -443,15 +445,15 @@ export default {
           params: { remote_uuid: this.serviceUuid },
           data: this.form
         });
-        this.$message({ message: "创建成功", type: "success" });
+        this.$message({ message: this.$t("newInstances.createSuccess"), type: "success" });
         this.newInstanceUuid = data.instanceUuid;
         this.down();
       } catch (err) {
         this.$message({
           type: "error",
-          message: `创建失败，原因: ${err.message}`
+          message:  this.$t("newInstances.createFailed")+`${err.message}`
         });
-        console.error("创建失败，原因:", err);
+        console.error(this.$t("newInstances.createFailed"), err);
       }
     },
     selectTypeA(v) {
@@ -470,12 +472,12 @@ export default {
         this.assist.commandtemplate = "{{ProgramName}}";
         this.form.stopCommand = "^c";
       }
-      this.title = "选择创建方式";
+      this.title = this.$t("newInstances.selectCreateType");
       this.typeA = v;
       this.down();
     },
     selectTypeB(v) {
-      this.title = "上传文件/设置参数";
+      this.title = this.$t("newInstances.uploadAndSet");
       this.typeB = v;
       this.down();
     },
@@ -483,7 +485,7 @@ export default {
       this.$router.push({ path: `/instance_detail/${this.serviceUuid}/${this.newInstanceUuid}/` });
     },
     up() {
-      this.title = "新建实例引导程序";
+      this.title = this.$t("newInstances.newInstanceGuide");
       if (this.page > 0) this.page -= 1;
     },
     down() {

@@ -22,9 +22,8 @@
 // 此文件为程序入口文件
 
 import { createApp } from "vue";
+import { createI18n } from 'vue-i18n'
 import elementPlus from "element-plus";
-import zhCn from "element-plus/es/locale/lang/zh-cn";
-import * as elementIcons from "@element-plus/icons";
 
 import "element-plus/dist/index.css";
 import "element-plus/theme-chalk/display.css";
@@ -37,19 +36,32 @@ import "../assets/css/action.css";
 import App from "./App.vue";
 import "./service/protocol";
 
+import cn from "../language/chinese"
+import en from "../language/english"
+
+const i18n = createI18n({
+  locale: 'cn',
+  fallbackLocale: 'cn',
+  messages: {
+    cn,
+    en
+  },
+})
+
+
 const app = createApp(App);
 
 // Vuex https://next.vuex.vuejs.org/zh/
 import store from "./store";
 app.use(store);
+app.use(i18n)
 
 // Vue-Router
 import router from "./router";
 app.use(router);
 
 // Install element-plus
-app.use(elementPlus, { locale: zhCn });
-app.use(elementIcons);
+app.use(elementPlus);
 
 // 全局组件
 import ItemGroup from "../components/ItemGroup";

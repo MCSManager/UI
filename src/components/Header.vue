@@ -38,7 +38,7 @@
           :to="{ path: item.path }"
           :key="index"
         >
-          <span class="only-pc-display">控制面板 / {{ item.title }}</span>
+          <span class="only-pc-display">{{ $t("router.panel") }}&nbsp;/&nbsp;{{ $t("router."+item.title) }}</span>
         </div>
         <!-- 电脑端显示全部内容 -->
         <!-- <el-breadcrumb separator="/" style="line-height: 28px" class="only-pc-display">
@@ -53,6 +53,17 @@
         </el-breadcrumb> -->
       </el-col>
       <el-col :span="12" style="text-align: right; line-height: 28px">
+        <span class="locale-changer">
+          <select v-model="$i18n.locale">
+            <option
+              v-for="locale in $i18n.availableLocales"
+              :key="`locale-${locale}`"
+              :value="locale"
+            >
+              {{ locale }}
+            </option>
+          </select>
+        </span>
         <el-dropdown style="margin: 0px 10px">
           <span class="el-dropdown-link">
             {{ userInfo.userName }}
@@ -60,8 +71,8 @@
           </span>
           <template #dropdown>
             <el-dropdown-menu>
-              <el-dropdown-item @click="toPrivate">个人资料</el-dropdown-item>
-              <el-dropdown-item @click="logout">退出</el-dropdown-item>
+              <el-dropdown-item @click="toPrivate">{{ $t("root.private") }}</el-dropdown-item>
+              <el-dropdown-item @click="logout">{{ $t("root.logout") }}</el-dropdown-item>
             </el-dropdown-menu>
           </template>
         </el-dropdown>
@@ -96,8 +107,8 @@
               userInfo.userName
             }}</el-link>
           </router-link>
-          <el-link @click="toPrivate" class="header-a">个人资料</el-link>
-          <el-link @click="logout" class="header-a">退出</el-link>
+          <el-link @click="toPrivate" class="header-a">{{ $t("root.private") }}</el-link>
+          <el-link @click="logout" class="header-a">{{ $t("root.logout") }}</el-link>
         </ItemGroup>
       </div>
     </div>
@@ -142,13 +153,13 @@ export default {
         });
         window.location.href = "/";
         this.$notify({
-          title: "退出成功",
-          message: "欢迎下次使用",
+          title: this.$t("root.logoutSuccess"),
+          message: this.$t("root.logoutSuccessInfo"),
           type: "success"
         });
       } catch (error) {
         this.$notify({
-          title: "退出失败",
+          title: this.$t("root.logoutError"),
           message: error.message,
           type: "error",
           duration: 0

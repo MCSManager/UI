@@ -21,110 +21,109 @@
 
 <template>
   <Dialog v-model="visible" :cancel="close">
-    <template #title>命令助手</template>
+    <template #title>{{ $t("newInstances.cmdAssist") }}</template>
     <template #default>
       <div style="max-width: 700px">
         <el-tabs v-model="activeName">
-          <el-tab-pane label="MC Java 版" name="java">
+          <el-tab-pane :label="$t('cmdAssist.java')" name="java">
             <el-row :gutter="10">
               <el-col :md="24" :offset="0">
                 <div class="sub-title">
-                  <p class="sub-title-title">Java 路径或环境变量</p>
+                  <p class="sub-title-title">{{ $t("cmdAssist.javaPath") }}</p>
                   <p class="sub-title-info">
-                    若想指定具体的 Java 程序，可写绝对路径，如 C:\Program
-                    Files\Java\jdk-16.0.1\bin\java.exe
+                    {{ $t("cmdAssist.javaPathInfo") }}
                   </p>
                 </div>
                 <el-input
                   size="small"
-                  placeholder="选填，默认使用 java 环境变量"
+                  :placeholder="$t('cmdAssist.javaPathInput')"
                   v-model="command.javaPath"
                 ></el-input>
               </el-col>
               <el-col :md="24" :offset="0">
                 <div class="sub-title row-mt">
-                  <p class="sub-title-title">服务端软件文件名</p>
+                  <p class="sub-title-title">{{ $t("cmdAssist.programName") }}</p>
                   <p class="sub-title-info">
-                    即您文件目录下存在的服务端软件名字，必须真实存在，如 Paper.jar，Server.jar
+                    {{ $t("cmdAssist.programNameInfo") }}
                   </p>
                 </div>
                 <el-input
                   size="small"
-                  placeholder="必填，一般是 jar 格式文件"
+                  :placeholder="$t('cmdAssist.inputProgramName')"
                   v-model="command.programName"
                 ></el-input>
               </el-col>
               <el-col :md="12" :offset="0">
                 <div class="sub-title row-mt">
-                  <p class="sub-title-title">最大内存</p>
-                  <p class="sub-title-info">Java 程序 -Xmx 参数，必须填写单位，如：1024M，2G 等</p>
+                  <p class="sub-title-title">{{ $t("cmdAssist.xmx") }}</p>
+                  <p class="sub-title-info">{{ $t("cmdAssist.xmxInfo") }}</p>
                 </div>
                 <el-input
                   size="small"
-                  placeholder="选填，不填写则由 Java 自动管理"
+                  :placeholder="$t('cmdAssist.inputXmx')"
                   v-model="command.maxMemory"
                 ></el-input>
               </el-col>
               <el-col :md="12" :offset="0">
                 <div class="sub-title row-mt">
-                  <p class="sub-title-title">最小内存</p>
-                  <p class="sub-title-info">Java 程序 -Xms 参数，必须填写单位，如：1024M，2G 等</p>
+                  <p class="sub-title-title">{{ $t("cmdAssist.xms") }}</p>
+                  <p class="sub-title-info">{{ $t("cmdAssist.xmsInfo") }}</p>
                 </div>
                 <el-input
                   size="small"
-                  placeholder="选填，不填写则由 Java 自动管理"
+                  :placeholder="$t('cmdAssist.inputXmx')"
                   v-model="command.minMemory"
                 ></el-input>
               </el-col>
               <el-col :md="12" :offset="0">
                 <div class="sub-title row-mt">
-                  <p class="sub-title-title">附加参数</p>
-                  <p class="sub-title-info">Java 程序 -jar 之前的附加参数，如 -server 等</p>
+                  <p class="sub-title-title">{{ $t("cmdAssist.additional") }}</p>
+                  <p class="sub-title-info">{{ $t("cmdAssist.additionalInfo") }}</p>
                 </div>
                 <el-input
                   size="small"
-                  placeholder="选填，默认为空"
+                  :placeholder="$t('cmdAssist.inputAdditional')"
                   v-model="command.additional"
                 ></el-input>
               </el-col>
               <el-col :md="12" :offset="0">
                 <div class="sub-title row-mt">
-                  <p class="sub-title-title">后缀参数</p>
-                  <p class="sub-title-info">Java 程序 -jar 文件名 之后的附加参数，如 -nogui 等</p>
+                  <p class="sub-title-title">{{ $t("cmdAssist.suffix") }}</p>
+                  <p class="sub-title-info">{{ $t("cmdAssist.suffixInfo") }}</p>
                 </div>
                 <el-input
                   size="small"
-                  placeholder="选填，默认为空"
+                  :placeholder="$t('cmdAssist.inputAdditional')"
                   v-model="command.suffix"
                 ></el-input>
               </el-col>
               <el-col :md="24">
                 <div class="row-mt">
-                  <el-button size="small" @click="generate">生成命令</el-button>
+                  <el-button size="small" @click="generate">{{ $t("cmdAssist.generate") }}</el-button>
                 </div>
               </el-col>
             </el-row>
           </el-tab-pane>
 
-          <el-tab-pane label="MC 基岩版" name="bds">
+          <el-tab-pane :label="$t('cmdAssist.bds')" name="bds">
             <el-row>
               <el-col :md="24" :offset="0">
                 <div class="sub-title row-mt">
-                  <p class="sub-title-title">基岩版二进制执行文件名</p>
+                  <p class="sub-title-title">{{ $t("cmdAssist.binaryFileName") }}</p>
                   <p class="sub-title-info">
-                    如 bedrock_server.exe (Windows) 或 bedrock_server (Linux)
+                    {{ $t("cmdAssist.inputBinaryFileName") }}
                   </p>
                 </div>
-                <el-input size="small" placeholder="必填" v-model="command.programName"></el-input>
+                <el-input size="small" :placeholder="$t('general.required')" v-model="command.programName"></el-input>
               </el-col>
               <el-col :md="24">
                 <div class="row-mt">
                   <ItemGroup>
                     <el-button size="small" @click="generate2(1)">
-                      生成适用于 Windows 的命令
+                      {{ $t("cmdAssist.summonWin") }}
                     </el-button>
                     <el-button size="small" @click="generate2(2)">
-                      生成适用于 Linux 的命令
+                      {{ $t("cmdAssist.summonLinux") }}
                     </el-button>
                   </ItemGroup>
                 </div>
@@ -132,34 +131,33 @@
             </el-row>
           </el-tab-pane>
 
-          <el-tab-pane label="通用控制台程序" name="program">
+          <el-tab-pane :label="$t('cmdAssist.program')" name="program">
             <el-row>
               <el-col :md="24" :offset="0">
                 <div class="sub-title row-mt">
-                  <p class="sub-title-title">可执行程序文件名</p>
+                  <p class="sub-title-title">{{ $t("cmdAssist.programName2") }}</p>
                   <p class="sub-title-info">
-                    程序必须已经存在实例文件目录或环境变量中，如 cmd.exe，bash，program.exe 等
+                    {{ $t("cmdAssist.programName2Info") }}
                   </p>
                 </div>
-                <el-input size="small" placeholder="必填" v-model="command.programName"></el-input>
+                <el-input size="small" :placeholder="$t('general.required')" v-model="command.programName"></el-input>
               </el-col>
               <el-col :md="24" :offset="0">
                 <div class="sub-title row-mt">
-                  <p class="sub-title-title">附加参数</p>
+                  <p class="sub-title-title">{{ $t("cmdAssist.additional") }}</p>
                   <p class="sub-title-info">
-                    此选项无具体参考，不同程序类型有不同参数，常见的格式如 -o -c --option
-                    等，以空格分隔
+                    {{ $t("cmdAssist.additionalInfo2") }}
                   </p>
                 </div>
                 <el-input
                   size="small"
-                  placeholder="选填，默认不传递任何附加参数"
+                  :placeholder="$t('cmdAssist.inputAdditional2')"
                   v-model="command.additional"
                 ></el-input>
               </el-col>
               <el-col :md="24">
                 <div class="row-mt">
-                  <el-button size="small" @click="generate3">生成命令</el-button>
+                  <el-button size="small" @click="generate3">{{ $t("cmdAssist.generate") }}</el-button>
                 </div>
               </el-col>
             </el-row>
@@ -217,7 +215,7 @@ export default {
     },
     generate() {
       if (!this.command.programName)
-        return this.$message({ type: "error", message: "必填字段未填写内容" });
+        return this.$message({ type: "error", message: this.$t("cmdAssist.noContent") });
       const xmx = this.command.maxMemory ? `-Xmx${this.command.maxMemory}` : null;
       const xms = this.command.minMemory ? `-Xms${this.command.minMemory}` : null;
       const cmdArray = [`${this.command.javaPath ? `"${this.command.javaPath}"` : "java"}`];
@@ -238,7 +236,7 @@ export default {
     },
     generate2(type) {
       if (!this.command.programName)
-        return this.$message({ type: "error", message: "必填字段未填写内容" });
+        return this.$message({ type: "error", message: this.$t("cmdAssist.noContent") });
       let cmd = "";
       if (type === 1) {
         cmd = `${this.command.programName}`;
@@ -246,7 +244,7 @@ export default {
         cmd = `LD_LIBRARY_PATH=. ${this.command.programName}`;
         return this.$message({
           type: "error",
-          message: "因为 Linux 系统环境复杂多变，我们无法生成一个正确的启动命令，请手动编写启动命令"
+          message: this.$t("cmdAssist.noLinuxBds")
         });
       }
       this.result(cmd);
@@ -254,7 +252,7 @@ export default {
     },
     generate3() {
       if (!this.command.programName)
-        return this.$message({ type: "error", message: "必填字段未填写内容" });
+        return this.$message({ type: "error", message: this.$t("cmdAssist.noContent") });
       if (this.command.programName.includes(" ")) {
         this.command.programName = `"${this.command.programName}"`;
       }
