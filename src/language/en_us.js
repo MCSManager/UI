@@ -169,7 +169,12 @@ export default {
             inputOrOutputCodeInfo: "When the console appears garbled, you can try to adjust, for example: GBK, UTF-8, etc.",
             update: "Update",
             close: "close"
-        }
+        },
+        open: "Instance started",
+        exit: "The instance has exited",
+        failed: "Operation failed",
+        UnableToConnect: "Unable to establish connection with terminal",
+        UnableToConnectInfo: "Authentication failed, please refresh the page and try again"
     },
     newInstances: {
         selectType: "Please select the type of application you want to create",
