@@ -1,22 +1,5 @@
 <!--
-  Copyright (C) 2022 Suwings <Suwings@outlook.com>
-
-  This program is free software: you can redistribute it and/or modify
-  it under the terms of the GNU Affero General Public License as published by
-  the Free Software Foundation, either version 3 of the License, or
-  (at your option) any later version.
-  
-  According to the AGPL, it is forbidden to delete all copyright notices, 
-  and if you modify the source code, you must open source the
-  modified source code.
-
-  版权所有 (C) 2022 Suwings <Suwings@outlook.com>
-
-  该程序是免费软件，您可以重新分发和/或修改据 GNU Affero 通用公共许可证的条款，
-  由自由软件基金会，许可证的第 3 版，或（由您选择）任何更高版本。
-
-  根据 AGPL 与用户协议，您必须保留所有版权声明，如果修改源代码则必须开源修改后的源代码。
-  可以前往 https://mcsmanager.com/ 阅读用户协议，申请闭源开发授权等。
+  Copyright (C) 2022 MCSManager <mcsmanager-dev@outlook.com>
 -->
 
 <template>
@@ -77,7 +60,9 @@
               <span>
                 <i class="el-icon-loading"></i>
               </span>
-              <span> {{ $t("fileManager.unzipInfo", {tasks: statusInfo.instanceFileTask}) }}</span>
+              <span>
+                {{ $t("fileManager.unzipInfo", { tasks: statusInfo.instanceFileTask }) }}</span
+              >
             </div>
           </div>
 
@@ -152,7 +137,11 @@
               >
             </template>
           </el-table-column>
-          <el-table-column prop="timeText" :label="$t('fileManager.lastEdit')" width="160"></el-table-column>
+          <el-table-column
+            prop="timeText"
+            :label="$t('fileManager.lastEdit')"
+            width="160"
+          ></el-table-column>
           <el-table-column :label="$t('general.operate')" style="text-align: center" width="180">
             <template #default="scope">
               <el-button
@@ -307,7 +296,8 @@ export default {
       this.files = [];
 
       for (const iterator of filesData) {
-        const typeText = iterator.type == 1 ? this.$t("fileManager.file") : this.$t("fileManager.directory");
+        const typeText =
+          iterator.type == 1 ? this.$t("fileManager.file") : this.$t("fileManager.directory");
         const timeText =
           new Date(iterator.time).toLocaleDateString() +
           " " +
@@ -353,13 +343,18 @@ export default {
     // 重命名文件
     async rename() {
       try {
-        if (this.multipleSelection.length !== 1) throw new Error(this.$t("fileManager.selectFileToRename"));
+        if (this.multipleSelection.length !== 1)
+          throw new Error(this.$t("fileManager.selectFileToRename"));
         const file = this.multipleSelection[0];
-        let { value } = await this.$prompt(this.$t("fileManager.newName"), this.$t("fileManager.rename"), {
-          inputValue: file.name,
-          confirmButtonText: this.$t("general.confirm"),
-          cancelButtonText: this.$t("general.cancel")
-        });
+        let { value } = await this.$prompt(
+          this.$t("fileManager.newName"),
+          this.$t("fileManager.rename"),
+          {
+            inputValue: file.name,
+            confirmButtonText: this.$t("general.confirm"),
+            cancelButtonText: this.$t("general.cancel")
+          }
+        );
         if (!value) throw new Error(this.$t("fileManager.inputValidValues"));
         const oldFilePath = path.join(this.currentDir, file.name);
         const newFilePath = path.join(this.currentDir, value);
@@ -530,10 +525,14 @@ export default {
         const targets = this.fileNamesToPaths(fileNames);
         if (type === 1) {
           //压缩
-          const text = await this.$prompt(this.$t("fileManager.newZipName"), this.$t("fileManager.fileName"), {
-            confirmButtonText: this.$t("general.confirm"),
-            cancelButtonText: this.$t("general.cancel"),
-          });
+          const text = await this.$prompt(
+            this.$t("fileManager.newZipName"),
+            this.$t("fileManager.fileName"),
+            {
+              confirmButtonText: this.$t("general.confirm"),
+              cancelButtonText: this.$t("general.cancel")
+            }
+          );
           if (!text.value) throw new Error(this.$t("fileManager.inputValidValues"));
           const zipName = text.value;
           for (const k in fileNames) {
@@ -561,10 +560,14 @@ export default {
           if (fileNames.length !== 1)
             return this.$message({ message: this.$t("fileManager.onlyUnzipOne"), type: "error" });
           //解压
-          const text = await this.$prompt(this.$t("fileManager.inputUnzipDirName"), this.$t("fileManager.fileName"), {
-            confirmButtonText: this.$t("general.confirm"),
-            cancelButtonText: this.$t("general.cancel"),
-          });
+          const text = await this.$prompt(
+            this.$t("fileManager.inputUnzipDirName"),
+            this.$t("fileManager.fileName"),
+            {
+              confirmButtonText: this.$t("general.confirm"),
+              cancelButtonText: this.$t("general.cancel")
+            }
+          );
           if (!text.value) throw new Error(this.$t("fileManager.inputValidValues"));
           const selected = await this.$refs.selecctUnzipCode.prompt();
           if (!selected) return;

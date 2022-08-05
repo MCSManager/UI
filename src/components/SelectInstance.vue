@@ -1,22 +1,5 @@
 <!--
-  Copyright (C) 2022 Suwings <Suwings@outlook.com>
-
-  This program is free software: you can redistribute it and/or modify
-  it under the terms of the GNU Affero General Public License as published by
-  the Free Software Foundation, either version 3 of the License, or
-  (at your option) any later version.
-  
-  According to the AGPL, it is forbidden to delete all copyright notices, 
-  and if you modify the source code, you must open source the
-  modified source code.
-
-  版权所有 (C) 2022 Suwings <Suwings@outlook.com>
-
-  该程序是免费软件，您可以重新分发和/或修改据 GNU Affero 通用公共许可证的条款，
-  由自由软件基金会，许可证的第 3 版，或（由您选择）任何更高版本。
-
-  根据 AGPL 与用户协议，您必须保留所有版权声明，如果修改源代码则必须开源修改后的源代码。
-  可以前往 https://mcsmanager.com/ 阅读用户协议，申请闭源开发授权等。
+  Copyright (C) 2022 MCSManager <mcsmanager-dev@outlook.com>
 -->
 
 <template>
@@ -61,10 +44,16 @@
     </div>
     <div class="row-mt">
       <el-table :data="instances" stripe style="width: 100%" size="mini">
-        <el-table-column prop="nickname" :label="$t('instances.instanceName')" min-width="240"></el-table-column>
+        <el-table-column
+          prop="nickname"
+          :label="$t('instances.instanceName')"
+          min-width="240"
+        ></el-table-column>
         <el-table-column :label="$t('general.operate')" style="text-align: right" width="180">
           <template #default="scope">
-            <el-button size="small" @click="callback(scope.row)"> {{ $t("userResources.select") }} </el-button>
+            <el-button size="small" @click="callback(scope.row)">
+              {{ $t("userResources.select") }}
+            </el-button>
           </template>
         </el-table-column>
       </el-table>
@@ -114,7 +103,7 @@ export default {
             const ip = `${service.ip}:${service.port}`;
             this.serviceList.push({
               value: `${service.uuid} ${ip}`,
-              label: `${ip} ${remarks} (`+this.$t("overview.offline")+')'
+              label: `${ip} ${remarks} (` + this.$t("overview.offline") + ")"
             });
           }
         }

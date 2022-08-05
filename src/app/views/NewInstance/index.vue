@@ -1,22 +1,5 @@
 <!--
-  Copyright (C) 2022 Suwings <Suwings@outlook.com>
-
-  This program is free software: you can redistribute it and/or modify
-  it under the terms of the GNU Affero General Public License as published by
-  the Free Software Foundation, either version 3 of the License, or
-  (at your option) any later version.
-  
-  According to the AGPL, it is forbidden to delete all copyright notices, 
-  and if you modify the source code, you must open source the
-  modified source code.
-
-  版权所有 (C) 2022 Suwings <Suwings@outlook.com>
-
-  该程序是免费软件，您可以重新分发和/或修改据 GNU Affero 通用公共许可证的条款，
-  由自由软件基金会，许可证的第 3 版，或（由您选择）任何更高版本。
-
-  根据 AGPL 与用户协议，您必须保留所有版权声明，如果修改源代码则必须开源修改后的源代码。
-  可以前往 https://mcsmanager.com/ 阅读用户协议，申请闭源开发授权等。
+  Copyright (C) 2022 MCSManager <mcsmanager-dev@outlook.com>
 -->
 
 <template>
@@ -121,9 +104,7 @@
           <div class="row-mt">
             <div class="sub-title">
               <p class="sub-title-title">{{ $t("newInstances.commandTemplate") }}</p>
-              <p
-                class="sub-title-info"
-              >{{ $t("newInstances.commandTemplateText") }}</p>
+              <p class="sub-title-info">{{ $t("newInstances.commandTemplateText") }}</p>
             </div>
             <div class="flex">
               <el-input
@@ -131,7 +112,9 @@
                 :placeholder="$t('newInstances.cmdInfo')"
                 :disabled="assist.creating"
               ></el-input>
-              <el-button @click="openCommandAssistCall(1)">{{ $t("newInstances.cmdAssist") }}</el-button>
+              <el-button @click="openCommandAssistCall(1)">{{
+                $t("newInstances.cmdAssist")
+              }}</el-button>
             </div>
           </div>
           <div class="row-mt">
@@ -155,14 +138,18 @@
                 {{ $t("newInstances.uploadFileInfo") }}
               </p>
             </div>
-            <el-button @click="uploadFile(1)" :disabled="assist.creating">{{ $t("newInstances.uploadFile") }}</el-button>
+            <el-button @click="uploadFile(1)" :disabled="assist.creating">{{
+              $t("newInstances.uploadFile")
+            }}</el-button>
             <div v-if="percentComplete > 0">
               <el-progress :percentage="percentComplete"></el-progress>
             </div>
             <p>{{ $t("newInstances.afterUpload") }}</p>
           </div>
           <div class="row-mt" style="text-align: center">
-            <el-button @click="up" size="small" :disabled="assist.creating">{{ $t("newInstances.back") }}</el-button>
+            <el-button @click="up" size="small" :disabled="assist.creating">{{
+              $t("newInstances.back")
+            }}</el-button>
             <!-- <el-button @click="down" size="small">下一步</el-button> -->
           </div>
         </div>
@@ -192,7 +179,9 @@
                 :placeholder="$t('newInstances.cmdInfo')"
                 :disabled="assist.creating"
               ></el-input>
-              <el-button @click="openCommandAssistCall(2)">{{ $t("newInstances.cmdAssist") }}</el-button>
+              <el-button @click="openCommandAssistCall(2)">{{
+                $t("newInstances.cmdAssist")
+              }}</el-button>
             </div>
           </div>
           <div class="row-mt">
@@ -214,14 +203,18 @@
               <p class="sub-title-title">{{ $t("newInstances.uploadZip") }}</p>
               <p class="sub-title-info">{{ $t("newInstances.uploadZipInfo") }}</p>
             </div>
-            <el-button @click="uploadFile(2)" :disabled="assist.creating">{{ $t("newInstances.uploadZipButton") }}</el-button>
+            <el-button @click="uploadFile(2)" :disabled="assist.creating">{{
+              $t("newInstances.uploadZipButton")
+            }}</el-button>
             <div v-if="percentComplete > 0">
               <el-progress :percentage="percentComplete"></el-progress>
             </div>
             <p>{{ $t("newInstances.upFileInfo") }}</p>
           </div>
           <div class="row-mt" style="text-align: center">
-            <el-button @click="up" size="small" :disabled="assist.creating">{{ $t("newInstances.back") }}</el-button>
+            <el-button @click="up" size="small" :disabled="assist.creating">{{
+              $t("newInstances.back")
+            }}</el-button>
             <!-- <el-button @click="createInstance" size="small">创建实例</el-button> -->
           </div>
         </div>
@@ -233,7 +226,8 @@
               <p class="sub-title-title">{{ $t("newInstances.selectFromExist") }}</p>
               <p class="sub-title-info">{{ $t("newInstances.selectFromExistInfo") }}</p>
             </div>
-            <el-input :placeholder="$t('newInstances.instanceNameInfo2')" v-model="form.nickname"> </el-input>
+            <el-input :placeholder="$t('newInstances.instanceNameInfo2')" v-model="form.nickname">
+            </el-input>
           </div>
           <div class="row-mt">
             <div class="sub-title">
@@ -245,7 +239,9 @@
                 v-model="form.startCommand"
                 :placeholder="$t('newInstances.cmd2')"
               ></el-input>
-              <el-button @click="openCommandAssistCall(2)">{{ $t("newInstances.cmdAssist") }}</el-button>
+              <el-button @click="openCommandAssistCall(2)">{{
+                $t("newInstances.cmdAssist")
+              }}</el-button>
             </div>
           </div>
           <div class="row-mt">
@@ -255,17 +251,15 @@
                 {{ $t("newInstances.fileDirInfo") }}
               </p>
             </div>
-            <el-input
-              :placeholder="$t('newInstances.fileDirInfo')"
-              v-model="form.cwd"
-            >
-            </el-input>
+            <el-input :placeholder="$t('newInstances.fileDirInfo')" v-model="form.cwd"> </el-input>
           </div>
           <p>{{ $t("newInstances.afterFlieName") }}</p>
           <div class="row-mt" style="text-align: center">
             <ItemGroup>
               <el-button @click="up" size="small">{{ $t("newInstances.back") }}</el-button>
-              <el-button @click="createInstance" size="small">{{ $t("newInstances.createInstant") }}</el-button></ItemGroup
+              <el-button @click="createInstance" size="small">{{
+                $t("newInstances.createInstant")
+              }}</el-button></ItemGroup
             >
           </div>
         </div>
@@ -367,11 +361,15 @@ export default {
         return this.$message({ message: this.$t("newInstances.pleaseFinish"), type: "error" });
       }
       this.zipCode = await this.$refs.selecctUnzipCode.prompt();
-      await this.$confirm(this.$t("newInstances.uploadAndCreate"),this.$t("notify.confirmDelTitle"), {
-        confirmButtonText: this.$t("general.confirm"),
-        cancelButtonText: this.$t("general.cancel"),
-        type: "warning"
-      });
+      await this.$confirm(
+        this.$t("newInstances.uploadAndCreate"),
+        this.$t("notify.confirmDelTitle"),
+        {
+          confirmButtonText: this.$t("general.confirm"),
+          cancelButtonText: this.$t("general.cancel"),
+          type: "warning"
+        }
+      );
       this.assist.uploadFileType = type;
       this.$refs.fileButtonHidden.click();
     },
@@ -429,13 +427,20 @@ export default {
     },
     // 非上传文件式的创建实例
     async createInstance() {
-      await this.$confirm(this.$t("newInstances.instantWillBeCreate"), this.$t("notify.confirmDelTitle"), {
-        confirmButtonText: this.$t("general.confirm"),
-        cancelButtonText: this.$t("general.cancel"),
-        type: "warning"
-      });
+      await this.$confirm(
+        this.$t("newInstances.instantWillBeCreate"),
+        this.$t("notify.confirmDelTitle"),
+        {
+          confirmButtonText: this.$t("general.confirm"),
+          cancelButtonText: this.$t("general.cancel"),
+          type: "warning"
+        }
+      );
       if (this.form.nickname === "" || this.form.startCommand === "") {
-        return this.$message({ message: this.$t("newInstances.parameterNotFinish"), type: "error" });
+        return this.$message({
+          message: this.$t("newInstances.parameterNotFinish"),
+          type: "error"
+        });
       }
       try {
         if (!this.form.cwd) this.form.cwd = ".";
@@ -451,7 +456,7 @@ export default {
       } catch (err) {
         this.$message({
           type: "error",
-          message:  this.$t("newInstances.createFailed")+`${err.message}`
+          message: this.$t("newInstances.createFailed") + `${err.message}`
         });
         console.error(this.$t("newInstances.createFailed"), err);
       }

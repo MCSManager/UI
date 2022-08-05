@@ -1,22 +1,5 @@
 <!--
-  Copyright (C) 2022 Suwings <Suwings@outlook.com>
-
-  This program is free software: you can redistribute it and/or modify
-  it under the terms of the GNU Affero General Public License as published by
-  the Free Software Foundation, either version 3 of the License, or
-  (at your option) any later version.
-  
-  According to the AGPL, it is forbidden to delete all copyright notices, 
-  and if you modify the source code, you must open source the
-  modified source code.
-
-  版权所有 (C) 2022 Suwings <Suwings@outlook.com>
-
-  该程序是免费软件，您可以重新分发和/或修改据 GNU Affero 通用公共许可证的条款，
-  由自由软件基金会，许可证的第 3 版，或（由您选择）任何更高版本。
-
-  根据 AGPL 与用户协议，您必须保留所有版权声明，如果修改源代码则必须开源修改后的源代码。
-  可以前往 https://mcsmanager.com/ 阅读用户协议，申请闭源开发授权等。
+  Copyright (C) 2022 MCSManager <mcsmanager-dev@outlook.com>
 -->
 
 <template>
@@ -24,7 +7,9 @@
     <template #title>{{ $t("router.schedule") }}</template>
     <template #default>
       <ItemGroup>
-        <el-button type="success" size="small" @click="toCreate">{{ $t("schedule.addSchedule") }}</el-button>
+        <el-button type="success" size="small" @click="toCreate">{{
+          $t("schedule.addSchedule")
+        }}</el-button>
         <el-button size="small" @click="refresh">{{ $t("general.refresh") }}</el-button>
         <el-button size="small" @click="back">{{ $t("schedule.backToConsole") }}</el-button>
       </ItemGroup>
@@ -59,10 +44,16 @@
             <span v-if="scope.row.type === 3">{{ $t("schedule.specifyTask") }}</span>
           </template>
         </el-table-column>
-        <el-table-column prop="time" :label="$t('schedule.triggerTime')" width="190px"></el-table-column>
+        <el-table-column
+          prop="time"
+          :label="$t('schedule.triggerTime')"
+          width="190px"
+        ></el-table-column>
         <el-table-column :label="$t('general.operate')" style="text-align: center" width="120">
           <template #default="scope">
-            <el-button type="danger" size="mini" @click="deleteTask(scope.row)">{{ $t("general.delete") }}</el-button>
+            <el-button type="danger" size="mini" @click="deleteTask(scope.row)">{{
+              $t("general.delete")
+            }}</el-button>
           </template>
         </el-table-column>
       </el-table>
@@ -73,13 +64,22 @@
     <template #title>{{ $t("schedule.addSchedule") }}</template>
     <template #default>
       <div class="sub-title">{{ $t("schedule.taskName") }}</div>
-      <el-input v-model="newTask.name" :placeholder="$t('schedule.inputTaskName')" size="small"></el-input>
+      <el-input
+        v-model="newTask.name"
+        :placeholder="$t('schedule.inputTaskName')"
+        size="small"
+      ></el-input>
       <el-row :gutter="20">
         <el-col :span="24" :offset="0">
           <div class="sub-title row-mt">{{ $t("schedule.taskType") }}</div>
         </el-col>
         <el-col :md="12" :offset="0">
-          <el-select size="small" v-model="newTask.action" :placeholder="$t('general.pleaseSelect')" style="width: 100%">
+          <el-select
+            size="small"
+            v-model="newTask.action"
+            :placeholder="$t('general.pleaseSelect')"
+            style="width: 100%"
+          >
             <el-option :label="$t('schedule.sendCmd')" value="command"></el-option>
             <el-option :label="$t('schedule.start')" value="start"></el-option>
             <el-option :label="$t('schedule.stop')" value="stop"></el-option>
@@ -88,7 +88,12 @@
           </el-select>
         </el-col>
         <el-col :md="12" :offset="0">
-          <el-select size="small" v-model="newTask.type" :placeholder="$t('general.pleaseSelect')" style="width: 100%">
+          <el-select
+            size="small"
+            v-model="newTask.type"
+            :placeholder="$t('general.pleaseSelect')"
+            style="width: 100%"
+          >
             <el-option :label="$t('schedule.intervalsTask')" :value="1"></el-option>
             <el-option :label="$t('schedule.cycleTask')" :value="2"></el-option>
             <el-option :label="$t('schedule.specifyTask')" :value="3"></el-option>
@@ -194,8 +199,12 @@
       ></el-input>
       <div class="row-mt">
         <ItemGroup>
-          <el-button type="success" size="small" @click="createTask"> {{ $t("general.save") }} </el-button>
-          <el-button type="danger" size="small" @click="newTask.is = !newTask.is"> {{ $t("general.cancel") }} </el-button>
+          <el-button type="success" size="small" @click="createTask">
+            {{ $t("general.save") }}
+          </el-button>
+          <el-button type="danger" size="small" @click="newTask.is = !newTask.is">
+            {{ $t("general.cancel") }}
+          </el-button>
         </ItemGroup>
       </div>
     </template>
@@ -272,7 +281,14 @@ export default {
               m -= 60;
               h += 1;
             }
-            iterator.time = this.$t("schedule.every")+`${h}`+this.$t("schedule.hour")+`${m}`+this.$t("schedule.min")+`${s}`+this.$t("schedule.sec");
+            iterator.time =
+              this.$t("schedule.every") +
+              `${h}` +
+              this.$t("schedule.hour") +
+              `${m}` +
+              this.$t("schedule.min") +
+              `${s}` +
+              this.$t("schedule.sec");
           }
           if (iterator.type === 2) {
             const time = iterator.time;
@@ -282,7 +298,8 @@ export default {
             const m = timeArr[1];
             const s = timeArr[0];
             const w = timeArr[5];
-            iterator.time = this.$t("schedule.on")+`${w}`+this.$t("schedule.week")+`${h}:${m}:${s}`;
+            iterator.time =
+              this.$t("schedule.on") + `${w}` + this.$t("schedule.week") + `${h}:${m}:${s}`;
           }
           if (iterator.type === 3) {
             const time = iterator.time;
@@ -293,7 +310,12 @@ export default {
             const s = timeArr[0];
             const dd = timeArr[3];
             const mm = timeArr[4];
-            iterator.time = `${mm}`+this.$t("schedule.every")+`${dd}`+this.$t("schedule.every")+`${h}:${m}:${s}`;
+            iterator.time =
+              `${mm}` +
+              this.$t("schedule.every") +
+              `${dd}` +
+              this.$t("schedule.every") +
+              `${h}:${m}:${s}`;
           }
         }
         this.tasks = tasks;
