@@ -83,6 +83,11 @@ export default {
     if (statusInfo?.isInstall === false) {
       return router.push({ path: "/install" });
     }
+    if (statusInfo.language) {
+      this.$i18n.locale = statusInfo.language;
+    } else {
+      this.Language unicom$i18n.locale = "en_us";
+    }
     // 第一次刷新后，尝试获取一次用户数据
     // 如果失败，则导航至 / 视图进一步决定跳转路由
     try {
