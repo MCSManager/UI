@@ -169,7 +169,14 @@ export default {
             inputOrOutputCodeInfo: "当控制台出现乱码时可以尝试调整，例如: GBK，UTF-8 等",
             update: "更新",
             close: "关闭"
-        }
+        },
+
+
+        open: "实例已启动",
+        exit: "实例已退出",
+        failed: "操作失败",
+        UnableToConnect: "无法与终端建立连接",
+        UnableToConnectInfo: "身份验证失败，请刷新页面重试"
     },
     newInstances: {
         selectType: "请选择您要创建的应用类型",
@@ -918,7 +925,8 @@ export default {
         unknownStatus: "未知状态",
         updateSuccess: "更新成功",
         admin: "管理用户",
-        user: "普通用户"
+        user: "普通用户",
+
     },
     quickStart: {
         title: "您希望使用 MCSManager 面板做什么？",

@@ -2,7 +2,7 @@
 
 import { io } from "socket.io-client";
 import { ElNotification } from "element-plus";
-
+import i18n from "@/app/i18n"
 // import { API_URL } from "./common";
 
 export function connectRemoteService(
@@ -37,8 +37,8 @@ export function connectRemoteService(
       connectCallback();
     } else {
       ElNotification({
-        title: "无法与终端建立连接",
-        message: `<span style="font-size: 12px;">身份验证(stream/auth)失败，可能是守护进程导致，请刷新页面重试。</span>`,
+        title: i18n.global.t("instances.UnableToConnect"),
+        message: `<span style="font-size: 12px;">${i18n.global.t('instance.UnableToConnectInfo')}</span>`,
         dangerouslyUseHTMLString: true,
         type: "error",
         duration: 0
@@ -48,38 +48,38 @@ export function connectRemoteService(
 
   // eslint-disable-next-line no-unused-vars
   socket.on("instance/stdout", (packet) => {
-    //
+    // No thing need display
   });
 
+  // eslint-disable-next-line no-unused-vars
   socket.on("instance/stopped", (packet) => {
-    const data = packet.data;
+    // const data = packet.data;
+    console.log("i18n:", i18n)
     ElNotification({
-      title: "实例已关闭",
-      message: `<span style="font-size: 12px;">${data.instanceName}<br>${data.instanceUuid}</span>`,
+      title: i18n.global.t("instances.exit"),
       dangerouslyUseHTMLString: true,
       type: "success",
       duration: 3000
     });
   });
 
+  // eslint-disable-next-line no-unused-vars
   socket.on("instance/opened", (packet) => {
-    const data = packet.data;
+    // const data = packet.data;
 
     ElNotification({
-      title: "实例已启动",
-      message: `<span style="font-size: 12px;">${data.instanceName}<br>${data.instanceUuid}</span>`,
+      title: i18n.global.t("instances.open"),
       dangerouslyUseHTMLString: true,
       type: "success",
       duration: 3000
     });
   });
 
+  // eslint-disable-next-line no-unused-vars
   socket.on("instance/failure", (packet) => {
-    const data = packet.data;
-
+    // const data = packet.data;
     ElNotification({
-      title: "操作失败",
-      message: `<span style="font-size: 12px;">${data.instanceName}<br>${data.instanceUuid}<br>具体原因应该已在控制台显示</span>`,
+      title: i18n.global.t("instances.failed"),
       dangerouslyUseHTMLString: true,
       type: "error",
       duration: 5000
