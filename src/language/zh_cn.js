@@ -545,7 +545,7 @@ export default {
         month: "月",
         day: "日",
     },
-    fileManager: { 
+    fileManager: {
         title: "文件管理",
         upperDir: "上层目录",
         mkdir: "新建目录",
@@ -850,6 +850,8 @@ export default {
         updateSet: "更新配置",
         updateSetInfo: "部分配置可能需要重启面板才能生效",
 
+        languageSetting: "语言设置",
+        languageSettingInfo: "改变语言后，控制面板将会把所有节点，界面等全部同步为同一种语言。",
         basicSetting: "基础设置",
         accessPort: "面板访问端口",
         accessPortInfo: "浏览器访问网页面板的端口，必须防火墙放行此端口，重启面板生效。",
@@ -1044,7 +1046,7 @@ export default {
         inputBinaryFileName: "如 bedrock_server.exe (Windows) 或 bedrock_server (Linux)",
         summonWin: "生成适用于 Windows 的命令",
         summonLinux: "生成适用于 Linux 的命令",
-        
+
         program: "通用控制台程序",
         programName2: "可执行程序文件名",
         programName2Info: "程序必须已经存在实例文件目录或环境变量中，如 cmd.exe，bash，program.exe 等",
