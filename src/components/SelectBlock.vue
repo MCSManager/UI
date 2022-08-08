@@ -5,7 +5,7 @@
 <template>
   <div class="select-block" :style="style">
     <div>
-      <p class="color-black" style="font-size: 14px; font-weight: 600; letter-spacing: -0.4px">
+      <p class="color-black" style="font-size: 14px; font-weight: 400; letter-spacing: -0.4px">
         <slot name="title"></slot>
       </p>
       <p class="sub-title">

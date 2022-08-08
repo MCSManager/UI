@@ -5,6 +5,28 @@
 <template>
   <div class="contanier">
     <div class="bg"></div>
+
+    <div class="panel-wrapper" v-if="step == -1">
+      <Panel class="panel tc" body-style="padding:40px;">
+        <h1 class="title">
+          <i class="el-icon-guide"></i>
+          Language
+        </h1>
+        <div style="margin-top: 48px">
+          <ItemGroup>
+            <SelectBlock
+              v-loading="isLoading"
+              v-for="(item, index) in language"
+              :key="index"
+              @click="selectLanguage(item.value)"
+            >
+              <template #title> {{ item.label }}</template>
+            </SelectBlock>
+          </ItemGroup>
+        </div>
+      </Panel>
+    </div>
+
     <div class="panel-wrapper" v-if="step == 0">
       <Panel class="panel tc" body-style="padding:40px;">
         <h1 class="title">{{ $t("install.welcome") }}</h1>
@@ -46,25 +68,6 @@
       </Panel>
     </div>
 
-    <!-- <div class="panel-wrapper" v-if="step == 2">
-      <Panel class="panel" body-style="padding:40px;" v-loading="isLoading">
-        <h1 class="title">我们需要一些时间安装依赖程序</h1>
-        <p>
-          我们将下载约5MB左右的二进制程序辅助 MCSManager
-          的运行，为您提供最真实的终端交互功能，这是一个可选功能。
-        </p>
-        <div style="margin-top: 48px">
-          <ItemGroup>
-            <el-button type="primary" @click="installLib">安装依赖库</el-button>
-            <el-button @click="next">跳过</el-button>
-          </ItemGroup>
-          <p class="color-gray" style="font-size: 12px">
-            <small>如果此安装失败或者跳过，面板依然可以正常使用，只是缺少仿真控制台能力。 </small>
-          </p>
-        </div>
-      </Panel>
-    </div> -->
-
     <div class="panel-wrapper" v-if="step == 2">
       <Panel class="panel" body-style="padding:40px;" v-loading="isLoading">
         <h1 class="title">{{ $t("install.ohhh") }}</h1>
@@ -88,17 +91,27 @@
 import SelectBlock from "@/components/SelectBlock";
 import Panel from "@/components/Panel";
 import { request } from "../../service/protocol";
-import { API_PANEL_INSTALL } from "../../service/common";
+import { API_PANEL_INSTALL, API_SETTINGS } from "../../service/common";
 export default {
   components: { Panel, SelectBlock },
   data: function () {
     return {
       isLoading: false,
-      step: 0,
+      step: -1,
       initUser: {
         userName: "",
         passWord: ""
       },
+      language: [
+        {
+          label: "English",
+          value: "en_us"
+        },
+        {
+          label: "简体中文",
+          value: "zh_cn"
+        }
+      ],
       rules: {
         userName: {
           required: true,
@@ -149,6 +162,25 @@ export default {
     installLib() {
       console.log("install....");
       this.next();
+    },
+    async selectLanguage(lang) {
+      try {
+        this.isLoading = true;
+        await this.updateSettings({ language: lang });
+        this.$message({ message: this.$t("settings.settingUpdate"), type: "success" });
+        this.next();
+      } catch (error) {
+        this.$message({ message: error, type: "error" });
+      } finally {
+        this.isLoading = false;
+      }
+    },
+    async updateSettings(cfg) {
+      return await request({
+        method: "PUT",
+        url: API_SETTINGS,
+        data: cfg
+      });
     }
   }
 };
@@ -214,6 +246,7 @@ export default {
 }
 
 .title {
+  font-weight: 400;
   font-size: 24px;
   margin: 0px 0px 12px 0px;
 }
