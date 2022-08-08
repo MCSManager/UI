@@ -29,7 +29,9 @@ Copyright (C) 2022 MCSManager <mcsmanager-dev@outlook.com>
             <Header v-bind:breadcrumbsList="breadCrumbs" :aside="toAside" />
           </el-col>
         </el-row>
-        <router-view></router-view>
+        <div v-loading="loading" style="min-height:50px">
+          <router-view v-if="!loading"></router-view>
+        </div>
       </el-main>
     </el-container>
   </el-container>
@@ -48,6 +50,7 @@ export default {
   components: { Aside, Header },
   data: function () {
     return {
+      loading:true,
       breadCrumbs: [],
       mode: 1,
       drawer: false
@@ -78,24 +81,27 @@ export default {
     }
   },
   async beforeCreate() {
-    // 获取当前面板状态信息
-    const statusInfo = await getPanelStatus();
-    if (statusInfo?.isInstall === false) {
-      return router.push({ path: "/install" });
-    }
-    if (statusInfo.language) {
-      this.$i18n.locale = statusInfo.language;
-    } else {
-      this.$i18n.locale = "en_us";
-    }
-    // 第一次刷新后，尝试获取一次用户数据
-    // 如果失败，则导航至 / 视图进一步决定跳转路由
     try {
+      // 获取当前面板状态信息
+      const statusInfo = await getPanelStatus();
+      if (statusInfo?.isInstall === false) {
+        return router.push({ path: "/install" });
+      }
+      if (statusInfo.language) {
+        this.$i18n.locale = statusInfo.language;
+      } else {
+        this.$i18n.locale = "en_us";
+      }
+      // 第一次刷新后，尝试获取一次用户数据
+      // 如果失败，则导航至 / 视图进一步决定跳转路由
+    
       await setupUserInfo();
       const userInfo = this.$store.state.userInfo;
       if (!userInfo || !userInfo.uuid) throw new Error("userInfo.uuid is null");
     } catch (error) {
       router.push({ path: "/" });
+    }finally{
+      this.loading = false
     }
   },
   async mounted() {

@@ -33,6 +33,7 @@ export const API_USER_UPDATE = `${API_URL}/api/auth/update`;
 export const API_USER_API = `${API_URL}/api/auth/api`;
 
 export const API_OVERVIEW = `${API_URL}/api/overview`;
+export const API_UPDATE_SETTING_WHEN_INSTALL = `${API_URL}/api/overview/install`;
 
 export const API_INSTANCE = `${API_URL}/api/instance`;
 export const API_INSTANCE_UPLOAD = `${API_URL}/api/instance/upload`;
@@ -62,7 +63,6 @@ export const API_PROGRESS = `${API_URL}/api/environment/progress`;
 export const API_PANEL_STATUS = `${API_URL}/api/auth/status`;
 export const API_PANEL_INSTALL = `${API_URL}/api/auth/install`;
 
-
 export const TERMINAL_CODE = [
   { label: "UTF-8（通用）", value: "UTF-8" },
   { label: "GBK（中文）", value: "GBK" },
@@ -73,7 +73,7 @@ export const TERMINAL_CODE = [
   { label: "GB18030（中文）", value: "GB18030" },
   { label: "Big5-HKSCS（繁中）", value: "Big5-HKSCS" },
   { label: "UTF-16", value: "UTF-16" }
-]
+];
 
 export function sleep(t) {
   return new Promise((s) => {

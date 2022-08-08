@@ -10,12 +10,11 @@
       <Panel class="panel tc" body-style="padding:40px;">
         <h1 class="title">
           <i class="el-icon-guide"></i>
-          Language
+          Select Language
         </h1>
-        <div style="margin-top: 48px">
+        <div style="margin-top: 48px" v-loading="isLoading">
           <ItemGroup>
             <SelectBlock
-              v-loading="isLoading"
               v-for="(item, index) in language"
               :key="index"
               @click="selectLanguage(item.value)"
@@ -25,7 +24,7 @@
           </ItemGroup>
         </div>
       </Panel>
-    </div>
+    </div>  
 
     <div class="panel-wrapper" v-if="step == 0">
       <Panel class="panel tc" body-style="padding:40px;">
@@ -51,7 +50,7 @@
         <h1 class="title">{{ $t("install.createAdminAccount") }}</h1>
         <p>{{ $t("install.createAdminAccountInfo") }}</p>
         <div>
-          <el-form ref="form" :model="initUser" :rules="rules" label-width="66px">
+          <el-form ref="form" :model="initUser" :rules="rules" label-width="80px">
             <el-form-item :label="$t('users.userName')" prop="userName">
               <el-input v-model="initUser.userName" />
             </el-form-item>
@@ -91,7 +90,7 @@
 import SelectBlock from "@/components/SelectBlock";
 import Panel from "@/components/Panel";
 import { request } from "../../service/protocol";
-import { API_PANEL_INSTALL, API_SETTINGS } from "../../service/common";
+import { API_PANEL_INSTALL, API_UPDATE_SETTING_WHEN_INSTALL } from "../../service/common";
 export default {
   components: { Panel, SelectBlock },
   data: function () {
@@ -168,6 +167,7 @@ export default {
         this.isLoading = true;
         await this.updateSettings({ language: lang });
         this.$message({ message: this.$t("settings.settingUpdate"), type: "success" });
+        this.$i18n.locale = lang;
         this.next();
       } catch (error) {
         this.$message({ message: error, type: "error" });
@@ -178,7 +178,7 @@ export default {
     async updateSettings(cfg) {
       return await request({
         method: "PUT",
-        url: API_SETTINGS,
+        url: API_UPDATE_SETTING_WHEN_INSTALL,
         data: cfg
       });
     }
