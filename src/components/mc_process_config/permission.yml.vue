@@ -1,5 +1,6 @@
 <!--
   Copyright (C) 2022 MCSManager <mcsmanager-dev@outlook.com>
+  This page is for Chinese users only
 -->
 
 <template>

@@ -46,18 +46,7 @@
           <i class="el-icon-takeaway-box"></i>
           <template #title>{{ $t("router.container") }}</template>
         </el-menu-item>
-        <!-- <el-menu-item key="/update" index="/update">
-          <i class="el-icon-guide"></i>
-          <template #title>版本控制</template>
-        </el-menu-item> -->
       </el-menu-item-group>
-      <!-- <el-menu-item-group>
-        <template #title>扩展功能</template>
-        <el-menu-item key="/news" index="/news">
-          <i class="el-icon-news"></i>
-          <template #title>更新与通知</template>
-        </el-menu-item>
-      </el-menu-item-group> -->
       <el-menu-item-group>
         <template #title>{{ $t("aside.more") }}</template>
         <el-menu-item key="/settings" index="/settings">
@@ -65,21 +54,6 @@
           <template #title>{{ $t("router.settings") }}</template>
         </el-menu-item>
       </el-menu-item-group>
-
-      <!-- <el-menu-item-group> -->
-      <!-- <el-menu-item index="/extension">
-          <i class="el-icon-cpu"></i>
-          <template #title>程序接口</template>
-        </el-menu-item> -->
-      <!-- <el-menu-item index="/trigger">
-          <i class="el-icon-document"></i>
-          <template #title>触发器</template>
-        </el-menu-item> -->
-      <!-- <el-menu-item index="/analysis">
-          <i class="el-icon-document"></i>
-          <template #title>数据分析</template>
-        </el-menu-item> -->
-      <!-- </el-menu-item-group> -->
     </el-scrollbar>
   </el-menu>
 </template>
