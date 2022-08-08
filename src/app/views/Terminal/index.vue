@@ -157,20 +157,7 @@
           <template #title>{{ $t("terminal.functionGroup") }}</template>
           <template #default>
             <el-row :gutter="10">
-              <!-- <el-col :span="12" :offset="0">
-              <el-button style="width: 100%" size="small">自动重启 <span class="color-green">开启</span>
-              </el-button>
-            </el-col> -->
-              <el-col :lg="12" :offset="0" class="row-mb">
-                <el-button
-                  :disabled="!instanceInfo.config.type"
-                  icon="el-icon-s-operation"
-                  style="width: 100%"
-                  size="small"
-                  @click="toProcessConfig"
-                  >{{ $t("terminal.processConfig") }}
-                </el-button>
-              </el-col>
+             
               <el-col :lg="12" :offset="0" class="row-mb">
                 <el-button
                   :disabled="!available"
@@ -212,7 +199,7 @@
                   >{{ $t("terminal.eventTask") }}
                 </el-button>
               </el-col>
-              <el-col :lg="12" :offset="0" class="row-mb">
+              <el-col :lg="24" :offset="0" class="row-mb">
                 <el-button
                   :disabled="!available"
                   icon="el-icon-folder-opened"
@@ -220,6 +207,16 @@
                   size="small"
                   @click="toFileManager"
                   >{{ $t("instancesDetail.fileManager") }}
+                </el-button>
+              </el-col>
+               <el-col :lg="24" :offset="0" class="row-mb" v-iszh>
+                <el-button
+                  :disabled="!instanceInfo.config.type"
+                  icon="el-icon-s-operation"
+                  style="width: 100%"
+                  size="small"
+                  @click="toProcessConfig"
+                  >{{ $t("terminal.processConfig") }}
                 </el-button>
               </el-col>
               <el-col :lg="24" :offset="0" v-if="isTopPermission">
@@ -622,7 +619,6 @@ export default {
           params: { uuid: this.instanceUuid, remote_uuid: this.serviceUuid }
         });
         this.instanceInfo = result;
-        // console.log("实例信息:", this.instanceInfo);
       } catch (err) {
         console.log("Error", err);
       }
@@ -683,7 +679,6 @@ export default {
       // 监听实例详细信息
       this.socket.on("stream/detail", (packet) => {
         this.instanceInfo = packet.data;
-        console.log("instanceInfo", this.instanceInfo);
         this.resizePtyTerminalWindow();
         this.initChart();
       });

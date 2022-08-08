@@ -29,7 +29,6 @@ app.use(i18n)
 app.directive("iszh", {
     // eslint-disable-next-line no-unused-vars
     mounted(el, binding, vnode) {
-        console.log("ISZH:", i18n)
         const language = i18n.global.locale
         if (language != "zh_cn") el.style.display = 'none'
     }
