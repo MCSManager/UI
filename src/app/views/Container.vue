@@ -15,7 +15,7 @@
           </template>
         </el-table-column>
         <el-table-column prop="remarks" :label="$t('overview.remarks')"></el-table-column>
-        <el-table-column :label="$t('general.operate')" style="text-align: center" width="140px">
+        <el-table-column :label="$t('general.operate')" style="text-align: center" width="260px">
           <template #default="scope">
             <el-button
               size="mini"
@@ -30,7 +30,7 @@
     </template>
   </Panel>
 
-  <Panel>
+  <Panel v-iszh>
     <template #title>{{ $t("container.relevantInfo") }}</template>
     <template #default>
       <el-row :gutter="10">

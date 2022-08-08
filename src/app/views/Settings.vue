@@ -328,13 +328,6 @@
           </p>
         </div>
 
-        <div class="sub-title">
-          <p class="sub-title-title">{{ $t("settings.closedSource") }}</p>
-          <p class="sub-title-info">
-            {{ $t("settings.closedSourceInfo") }}
-          </p>
-        </div>
-
         <div class="contributors" v-if="sponsorList" v-iszh>
           <div class="sub-title">
             <p class="sub-title-title">{{ $t("settings.sponsorList") }}</p>
