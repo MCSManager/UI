@@ -334,28 +334,8 @@
             {{ $t("settings.closedSourceInfo") }}
           </p>
         </div>
-        <div>
-          <ItemGroup>
-            <a
-              href="https://mcsmanager.com/#app-download"
-              target="_blank"
-              rel="noopener noreferrer"
-              style="display: inline-block"
-            >
-              <el-button type="" size="medium">{{ $t("settings.learnMore") }}</el-button>
-            </a>
-            <a
-              href="https://mcsmanager.com/agreement.html"
-              target="_blank"
-              rel="noopener noreferrer"
-              style="display: inline-block"
-            >
-              <el-button type="" size="medium">{{ $t("settings.userAgreement") }}</el-button>
-            </a>
-          </ItemGroup>
-        </div>
 
-        <div class="contributors" v-if="sponsorList">
+        <div class="contributors" v-if="sponsorList" v-iszh>
           <div class="sub-title">
             <p class="sub-title-title">{{ $t("settings.sponsorList") }}</p>
             <p class="sub-title-info">
