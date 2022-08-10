@@ -378,10 +378,10 @@ export default {
 
     },
     instanceTypeList: {
-        "控制台通用程序": "控制台通用程序",
-        "Steam 服务端通用": "Steam 服务端通用",
-        "MC Java 版通用": "MC Java 版通用",
-        "MC 基岩版通用": "MC 基岩版通用",
+        "universal": "控制台通用程序",
+        "Steam": "Steam 服务端通用",
+        "MC Java": "MC Java 版通用",
+        "MC BDS": "MC 基岩版通用",
         "MC Spigot": "MC Spigot",
         "MC Paper": "MC Paper",
         "MC BungeeCord": "MC BungeeCord",
