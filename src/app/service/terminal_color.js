@@ -2,9 +2,9 @@
 
 import { termColor } from "./term";
 
-// 用于 Terminal 视图中终端组件的文字颜色渲染
+// Text color rendering for terminal components in Terminal view
 export function encodeConsoleColor(text) {
-  // 基本颜色
+  // base color
   // eslint-disable-next-line no-control-regex
   text = text.replace(/(\x1B[^m]*m)/gm, "$1;");
   text = text.replace(/ \[([A-Za-z0-9 _\-\\.]+)]/gim, " [§3$1§r]");
@@ -12,10 +12,10 @@ export function encodeConsoleColor(text) {
   text = text.replace(/([A-Za-z0-9 _\-\\.]+: )/gim, "§6$1§r");
   // eslint-disable-next-line no-control-regex
   text = text.replace(/(\x1B[^m]*m);/gm, "$1");
-  //   text = text.replace(/INFO/gm, term.TERM_TEXT_GREEN + "INFO" + term.TERM_NULL);
-  //   text = text.replace(/(\d{2,}:\d{2,}:\d{2,})/gm, term.TERM_TEXT_CYAN + "$1" + term.TERM_NULL);
+  // text = text.replace(/INFO/gm, term.TERM_TEXT_GREEN + "INFO" + term.TERM_NULL);
+  // text = text.replace(/(\d{2,}:\d{2,}:\d{2,})/gm, term.TERM_TEXT_CYAN + "$1" + term.TERM_NULL);
 
-  // Minecraft 原生颜色替代解析
+  // Minecraft native color substitution parsing
   text = text.replace(/§0/gim, termColor.TERM_TEXT_BLACK);
   text = text.replace(/§1/gim, termColor.TERM_TEXT_DARK_BLUE);
   text = text.replace(/§2/gim, termColor.TERM_TEXT_DARK_GREEN);
@@ -39,7 +39,7 @@ export function encodeConsoleColor(text) {
   text = text.replace(/§o/gim, termColor.TERM_TEXT_ITALIC);
   text = text.replace(/§r/gim, termColor.TERM_RESET);
 
-  // 基于&符号
+  // based on the ampersand
   text = text.replace(/&0/gim, termColor.TERM_TEXT_BLACK);
   text = text.replace(/&1/gim, termColor.TERM_TEXT_DARK_BLUE);
   text = text.replace(/&2/gim, termColor.TERM_TEXT_DARK_GREEN);
@@ -63,35 +63,35 @@ export function encodeConsoleColor(text) {
   text = text.replace(/&o/gim, termColor.TERM_TEXT_ITALIC);
   text = text.replace(/&r/gim, termColor.TERM_RESET);
 
-  // 特殊文本替换
+  // special text replacement
   const RegExpStringArr = [
-    //蓝色
+    //blue
     ["Loading libraries, please wait...", "\\d{1,3}%", "true", "false"],
-    //绿色
+    //green
     ["INFO", "EULA", "----", "\\(", "\\)", "\\{", "\\}", '\\"', "&lt;", "&gt;"],
-    //红色
+    //red
     ["Error", "Caused by"],
-    //黄色
+    //yellow
     ["WARN", "Server thread"]
   ];
   for (const k in RegExpStringArr) {
     for (const y in RegExpStringArr[k]) {
       const reg = new RegExp("(" + RegExpStringArr[k][y].replace(/ /gim, "&nbsp;") + ")", "igm");
       if (k === "0")
-        //蓝色
+        //blue
         text = text.replace(reg, termColor.TERM_TEXT_BLUE + "$1" + termColor.TERM_RESET);
       if (k === "1")
-        //绿色
+        //green
         text = text.replace(reg, termColor.TERM_TEXT_DARK_GREEN + "$1" + termColor.TERM_RESET);
       if (k === "2")
-        //红色
+        //red
         text = text.replace(reg, termColor.TERM_TEXT_RED + "$1" + termColor.TERM_RESET);
       if (k === "3")
-        //黄色
+        //yellow
         text = text.replace(reg, termColor.TERM_TEXT_GOLD + "$1" + termColor.TERM_RESET);
     }
   }
-  // 行结尾符号替换
+  // line ending symbol substitution
   text = text.replace(/\r\n/gm, termColor.TERM_RESET + "\r\n");
   return text;
 }

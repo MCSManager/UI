@@ -42,7 +42,7 @@
               <el-select v-model="settings.language" :placeholder="$t('general.pleaseSelect')">
                 <el-option label="English" value="en_us"></el-option>
                 <el-option label="简体中文" value="zh_cn"></el-option>
-                <!-- <el-option label="日本語" value="jp" disabled></el-option> -->
+                <!-- <el-option label="Japanese" value="jp" disabled></el-option> -->
               </el-select>
             </div>
 
@@ -173,7 +173,7 @@
               {{ $t("settings.sponsorListInfo") }}
               <a href="https://mcsmanager.com/" target="_blank" rel="noopener noreferrer">
                 MCSManager.com </a
-              >。
+              >.
             </p>
             <p class="sub-title-info"></p>
           </div>

@@ -202,7 +202,6 @@ export default {
     close() {
       this.$emit("update:visible", false);
     },
-    // 普通用户更新配置
     async submit() {
       try {
         await request({

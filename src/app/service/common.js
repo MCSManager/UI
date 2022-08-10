@@ -126,8 +126,8 @@ export function getDescriptionByTitle(description, title = "") {
   return _exec(arr, description);
 }
 
-// 适用于配置文件解析成 JSON 格式后再解析成网页可循环的二维表格式
-// 其具体原理是实现一个简单双向绑定，来对应每一个具体的配置项目
+// It is suitable for parsing the configuration file into JSON format and then parsing it into a two-dimensional table format that can be cycled by web pages
+// The specific principle is to implement a simple two-way binding to correspond to each specific configuration item
 export function jsonToMap(json, topTitle = "", map = {}) {
   for (const key in json) {
     let title = null;

@@ -67,22 +67,22 @@ a {
 
 $item-group-margin: 5px;
 
-.el-button + .el-button {
+.el-button+.el-button {
   margin-left: $item-group-margin;
 }
 
-.item-group-warpper {
+.item-group-wrapper {
   margin: 0px -5px;
 }
 
-.item-responsive-group > * {
+.item-responsive-group>* {
   margin-left: $item-group-margin;
   margin-right: $item-group-margin;
   margin-bottom: $item-group-margin;
   margin-top: $item-group-margin;
 }
 
-.item-responsive-group-only-lr > * {
+.item-responsive-group-only-lr>* {
   margin-left: $item-group-margin;
   margin-right: $item-group-margin;
 }
@@ -90,6 +90,7 @@ $item-group-margin: 5px;
 .el-drawer__body {
   padding: 0px;
 }
+
 .el-menu-item.is-active {
   color: var(--el-menu-active-color);
   background-color: #ffffff1c;

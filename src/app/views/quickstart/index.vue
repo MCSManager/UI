@@ -8,7 +8,6 @@
       <template #title>{{ title }}</template>
       <template #default>
         <div v-show="step == 0">
-          <!-- <span>欢迎您访问“快速开始”，我们将尽可能的降低使用门槛并帮助您使用面板！</span> -->
           <el-row :gutter="10" justify="left" class="">
             <el-col
               :md="6"

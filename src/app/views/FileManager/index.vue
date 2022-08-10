@@ -160,12 +160,12 @@
       </template>
     </Panel>
 
-    <!-- 隐藏的文件上传按钮 -->
+    <!-- Hidden file upload button -->
     <form ref="fileForm" action="" method="post">
       <input type="file" ref="fileButtonHidden" @change="selectedFile" hidden="hidden" />
     </form>
 
-    <SelecctUnzipCode ref="selecctUnzipCode"></SelecctUnzipCode>
+    <SelectUnzipCode ref="selectUnzipCode"></SelectUnzipCode>
   </div>
 </template>
 
@@ -184,11 +184,11 @@ import {
 } from "@/app/service/common";
 import path from "path";
 import { parseforwardAddress, request } from "@/app/service/protocol";
-import SelecctUnzipCode from "./selecctUnzipCode";
+import SelectUnzipCode from "./selectUnzipCode";
 import { API_FILE_STATUS } from "../../service/common";
 
 export default {
-  components: { Panel, SelecctUnzipCode },
+  components: { Panel, SelectUnzipCode },
   data() {
     return {
       serviceUuid: this.$route.params.serviceUuid,
@@ -209,7 +209,7 @@ export default {
 
       paramPath: this.$route.query.path,
 
-      // 移动，复制，粘贴文件所需数据
+      // Move, copy, paste the required data of the file
       tmpFile: {
         tmpFileNames: null,
         tmpOperationMode: -1,
@@ -226,7 +226,7 @@ export default {
     }
     await this.render();
 
-    // 开始文件管理状态查询定时器
+    // Start the file management status query timer
     this.requestFileManagerStatus();
     this.statusRequestTask = setInterval(() => {
       this.requestFileManagerStatus();
@@ -246,7 +246,7 @@ export default {
     async render() {
       await this.list(this.currentDir);
     },
-    // 进入某目录
+    // enter a directory
     async toDir(name) {
       try {
         const p = path.normalize(path.join(this.currentDir, name));
@@ -255,18 +255,18 @@ export default {
         this.$message({ message: this.$t("fileManager.noSee"), type: "error" });
       }
     },
-    // 返回上层目录
+    // return to the upper directory
     async toUpDir() {
       const p = path.normalize(path.join(this.currentDir, "../"));
       await this.list(p);
     },
 
-    // 目录下一页或上一页事件
+    // Directory next page or previous page event
     currentChange() {
       this.toDir(".");
     },
 
-    // 目录 List 功能
+    // Directory List function
     async list(cwd = ".") {
       this.$route.query.path = cwd;
       try {
@@ -291,7 +291,7 @@ export default {
       }
     },
 
-    // 表格数据处理
+    // table data processing
     tableFilter(filesData) {
       this.files = [];
 
@@ -312,12 +312,12 @@ export default {
       }
     },
 
-    // 表格多选函数
+    // table multi-select function
     selectionChange(v) {
       this.multipleSelection = v;
     },
 
-    // 表格文件数据转名字列表
+    // table file data to name list
     multipleFileToNames(arr = []) {
       const res = [];
       arr.forEach((v) => res.push(v.name));
@@ -340,7 +340,7 @@ export default {
       return res;
     },
 
-    // 重命名文件
+    // rename the file
     async rename() {
       try {
         if (this.multipleSelection.length !== 1)
@@ -377,14 +377,14 @@ export default {
       }
     },
 
-    // 复制文件
+    // copy the file
     async copy() {
       this.tmpFile.tmpFileNames = this.multipleFileToNames(this.multipleSelection);
       this.tmpFile.tmpDir = this.currentDir;
       this.tmpFile.tmpOperationMode = 1;
       this.$message({ message: this.$t("fileManager.fileCopied"), type: "info" });
     },
-    // 移动文件
+    // move the file
     async move() {
       this.tmpFile.tmpFileNames = this.multipleFileToNames(this.multipleSelection);
       this.tmpFile.tmpDir = this.currentDir;
@@ -392,7 +392,7 @@ export default {
       this.$message({ message: this.$t("fileManager.fileMoved"), type: "info" });
     },
 
-    // 粘贴文件（根据模式发送不同的指令）
+    // Paste the file (send different commands according to the mode)
     async paste() {
       try {
         if (this.tmpFile.tmpOperationMode === -1) {
@@ -443,7 +443,7 @@ export default {
       }
     },
 
-    // 新建目录
+    // create a new directory
     async mkdir() {
       const { value } = await this.$prompt(this.$t("fileManager.newDirName"), undefined, {
         confirmButtonText: this.$t("general.confirm"),
@@ -470,7 +470,7 @@ export default {
       }
     },
 
-    // 编辑文件
+    // edit the file
     async toEditFilePage(row) {
       const target = path.normalize(path.join(this.currentDir, row.name));
       this.$router.push({
@@ -481,7 +481,7 @@ export default {
       });
     },
 
-    // 删除文件
+    // Delete Files
     async deleteFiles() {
       await this.$confirm(this.$t("fileManager.confirmDelFile"), this.$t("general.warn"), {
         confirmButtonText: this.$t("general.confirm"),
@@ -515,7 +515,7 @@ export default {
       }
     },
 
-    // 压缩/解压文件
+    // compress/decompress the file
     async compress(type) {
       const cwd = this.currentDir;
       try {
@@ -524,7 +524,7 @@ export default {
           return this.$message({ message: this.$t("fileManager.selectAFile"), type: "error" });
         const targets = this.fileNamesToPaths(fileNames);
         if (type === 1) {
-          //压缩
+          //compression
           const text = await this.$prompt(
             this.$t("fileManager.newZipName"),
             this.$t("fileManager.fileName"),
@@ -549,7 +549,7 @@ export default {
               type: 1,
               source: path.join(cwd, `${zipName}.zip`),
               targets,
-              code: "utf-8" // 解压文件功能模块暂时不支持其他编码
+              code: "utf-8" // The decompression file function module does not support other encodings temporarily
             }
           });
           this.$notify({
@@ -559,7 +559,7 @@ export default {
         } else {
           if (fileNames.length !== 1)
             return this.$message({ message: this.$t("fileManager.onlyUnzipOne"), type: "error" });
-          //解压
+          // decompress
           const text = await this.$prompt(
             this.$t("fileManager.inputUnzipDirName"),
             this.$t("fileManager.fileName"),
@@ -569,7 +569,7 @@ export default {
             }
           );
           if (!text.value) throw new Error(this.$t("fileManager.inputValidValues"));
-          const selected = await this.$refs.selecctUnzipCode.prompt();
+          const selected = await this.$refs.selectUnzipCode.prompt();
           if (!selected) return;
           const dirName = text.value;
           await request({
@@ -596,7 +596,7 @@ export default {
       }
     },
 
-    // 文件已选择，开始上传
+    // file is selected, start uploading
     async selectedFile() {
       try {
         const file = this.$refs.fileButtonHidden.files[0];
@@ -606,7 +606,7 @@ export default {
         formData.append("time", new Date().toUTCString());
         const fullAddress = `${this.uploadConfig.addr}/upload/${this.uploadConfig.password}`;
         console.log("Upload File", fullAddress);
-        // 上传文件
+        // upload files
         await axios.post(fullAddress, formData, {
           headers: {
             "Content-Type": "multipart/form-data"
@@ -624,7 +624,7 @@ export default {
       }
     },
 
-    // 上传文件
+    // upload files
     async upload() {
       const result = await axios.get(API_FILE_UPLOAD, {
         params: {
@@ -639,7 +639,7 @@ export default {
       this.$refs.fileButtonHidden.click();
     },
 
-    //下载
+    //download
     async download(row) {
       const fileName = row.name;
       const filePath = path.normalize(path.join(this.currentDir, fileName));

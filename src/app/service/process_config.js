@@ -1,5 +1,8 @@
 // Copyright (C) 2022 MCSManager <mcsmanager-dev@outlook.com>
 
+// This file is only for Chinese users, Added Chinese explanation to the configuration file
+// 此文件仅用于中国用户，其作用是为配置文件新增中文解释
+
 import {
   TYPE_MINECRAFT_JAVA,
   TYPE_MINECRAFT_BDS,
@@ -39,9 +42,9 @@ export const INSTANCE_CONFIGS = [
     // 配置文件中文解释
     info: `Minecraft 服务端极其重要的配置文件，几乎绝大部分常用配置（端口，人数，视距等）均在此文件中进行编辑`,
     // 配置文件适配模块作者名
-    author: "Suwings",
+    author: "Unitwk",
     // 配置文件 Github 地址（只能放置 Github 地址）
-    github: "https://github.com/Suwings",
+    github: "https://github.com/Unitwk",
     // 在哪些服务端类型下此配置文件可见
     category: [
       TYPE_MINECRAFT_SPIGOT,
@@ -76,8 +79,8 @@ export const INSTANCE_CONFIGS = [
     redirect: "bukkit/spigot.yml",
     type: "yml",
     info: "Spigot 配置文件，能够进一步的控制服务器的行为和具体参数，一些更为高级的限制都在此配置文件中",
-    author: "Suwings",
-    github: "https://github.com/Suwings",
+    author: "Unitwk",
+    github: "https://github.com/Unitwk",
     category: [
       TYPE_MINECRAFT_SPIGOT,
       TYPE_MINECRAFT_PAPER,
@@ -91,8 +94,8 @@ export const INSTANCE_CONFIGS = [
   //   redirect: "bukkit/permissions.yml",
   //   type: "yml",
   //   info: "基本权限配置文件，一般情况无需多过改动",
-  //   author: "Suwings",
-  //   github: "https://github.com/Suwings",
+  //   author: "Unitwk",
+  //   github: "https://github.com/Unitwk",
   //   category: [TYPE_MINECRAFT_SPIGOT, TYPE_MINECRAFT_PAPER, TYPE_MINECRAFT_JAVA, TYPE_MINECRAFT_BUKKIT]
   // },
   // {
@@ -101,8 +104,8 @@ export const INSTANCE_CONFIGS = [
   //   redirect: "bukkit/commands.yml",
   //   type: "yml",
   //   info: "Bukkit 原始命令文件，一般情况无需改动",
-  //   author: "Suwings",
-  //   github: "https://github.com/Suwings",
+  //   author: "Unitwk",
+  //   github: "https://github.com/Unitwk",
   //   category: [TYPE_MINECRAFT_SPIGOT, TYPE_MINECRAFT_PAPER, TYPE_MINECRAFT_JAVA, TYPE_MINECRAFT_BUKKIT]
   // },
   {
@@ -126,8 +129,8 @@ export const INSTANCE_CONFIGS = [
   //   info: "服务器白名单",
   //   path: "whitelist.json",
   //   redirect: "bukkit/whitelist.json",
-  //   author: "Suwings",
-  //   github: "https://github.com/Suwings",
+  //   author: "Unitwk",
+  //   github: "https://github.com/Unitwk",
   //   category: [TYPE_MINECRAFT_SPIGOT, TYPE_MINECRAFT_PAPER, TYPE_MINECRAFT_JAVA, TYPE_MINECRAFT_BUKKIT]
   // },
   // {
@@ -136,8 +139,8 @@ export const INSTANCE_CONFIGS = [
   //   info: "服务器管理员列表",
   //   path: "ops.json",
   //   redirect: "bukkit/ops.json",
-  //   author: "Suwings",
-  //   github: "https://github.com/Suwings",
+  //   author: "Unitwk",
+  //   github: "https://github.com/Unitwk",
   //   category: [TYPE_MINECRAFT_SPIGOT, TYPE_MINECRAFT_PAPER, TYPE_MINECRAFT_JAVA, TYPE_MINECRAFT_BUKKIT]
   // },
   {
@@ -166,7 +169,7 @@ export const INSTANCE_CONFIGS = [
     redirect: "mohist/mohist.yml",
     type: "yml",
     info: "mohist.yml 服务端配置文件",
-    author: "Suwings",
+    author: "Unitwk",
     github: "https://github.com/LazyCreeper",
     category: [TYPE_MINECRAFT_JAVA, TYPE_MINECRAFT_MOHIST]
   },

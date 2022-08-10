@@ -87,7 +87,7 @@
           </div>
         </div>
 
-        <!-- 上传单个服务端软件创建新实例 -->
+        <!-- Upload a single server software to create a new instance -->
         <div v-show="page == 2 && typeB == 1" class="panel-context row-mt">
           <div class="">
             <div class="sub-title">
@@ -150,11 +150,11 @@
             <el-button @click="up" size="small" :disabled="assist.creating">{{
               $t("newInstances.back")
             }}</el-button>
-            <!-- <el-button @click="down" size="small">下一步</el-button> -->
+            <!-- <el-button @click="down" size="small">Next</el-button> -->
           </div>
         </div>
 
-        <!-- 上传服务端压缩包创建新实例 -->
+        <!-- Upload a server-side compressed package to create a new instance -->
         <div v-show="page == 2 && typeB == 2" class="panel-context row-mt">
           <div class="row-mt">
             <div class="sub-title">
@@ -215,11 +215,11 @@
             <el-button @click="up" size="small" :disabled="assist.creating">{{
               $t("newInstances.back")
             }}</el-button>
-            <!-- <el-button @click="createInstance" size="small">创建实例</el-button> -->
+            <!-- <el-button @click="createInstance" size="small">Create instance</el-button> -->
           </div>
         </div>
 
-        <!-- 从已存在的文件选择服务端 -->
+        <!-- Select server from existing file -->
         <div v-show="page == 2 && typeB == 3" class="panel-context row-mt">
           <div>
             <div class="sub-title">
@@ -283,7 +283,7 @@
       </template>
     </Panel>
 
-    <!-- 命令助手 -->
+    <!-- Command Assistant -->
     <CommandAssist
       v-model="commandAssistPanel"
       :result="commandAssistCallback"
@@ -291,17 +291,17 @@
     >
     </CommandAssist>
 
-    <!-- 隐藏的文件上传按钮 -->
+    <!-- Hidden file upload button -->
     <input type="file" ref="fileButtonHidden" @change="selectedFile" hidden="hidden" />
 
-    <selecct-unzip-code ref="selecctUnzipCode"></selecct-unzip-code>
+    <SelectUnzipCode ref="selectUnzipCode"></SelectUnzipCode>
   </div>
 </template>
 
 <script>
 import path from "path";
 import axios from "axios";
-import SelecctUnzipCode from "@/app/views/FileManager/selecctUnzipCode";
+import SelectUnzipCode from "@/app/views/FileManager/selectUnzipCode";
 import Panel from "@/components/Panel";
 import CommandAssist from "@/components/CommandAssist";
 import SelectBlock from "@/components/SelectBlock";
@@ -314,7 +314,7 @@ import {
 import { parseforwardAddress, request } from "@/app/service/protocol";
 
 export default {
-  components: { Panel, SelectBlock, CommandAssist, SelecctUnzipCode },
+  components: { Panel, SelectBlock, CommandAssist, SelectUnzipCode },
   data: function () {
     return {
       title: this.$t("newInstances.newInstanceGuide"),
@@ -355,12 +355,12 @@ export default {
     };
   },
   methods: {
-    // 创建实例并上传文件
+    // create instance and upload file
     async uploadFile(type) {
       if (!this.form.nickname || (!this.assist.commandtemplate && !this.form.startCommand)) {
         return this.$message({ message: this.$t("newInstances.pleaseFinish"), type: "error" });
       }
-      this.zipCode = await this.$refs.selecctUnzipCode.prompt();
+      this.zipCode = await this.$refs.selectUnzipCode.prompt();
       await this.$confirm(
         this.$t("newInstances.uploadAndCreate"),
         this.$t("notify.confirmDelTitle"),
@@ -373,17 +373,17 @@ export default {
       this.assist.uploadFileType = type;
       this.$refs.fileButtonHidden.click();
     },
-    // 文件已选择，开始上传
+    // file is selected, start uploading
     async selectedFile() {
       try {
         this.assist.creating = true;
         const file = this.$refs.fileButtonHidden.files[0];
-        // 命令模板替换
+        // command template substitution
         if (this.assist.uploadFileType === 1) {
           this.form.startCommand = this.assist.commandtemplate.replace("${ProgramName}", file.name);
         }
         if (!this.form.cwd) this.form.cwd = ".";
-        // 上传文件式创建实例 & 请求守护进程直连上传
+        // Create an instance by uploading a file & request the daemon to upload directly
         const cfg = await request({
           method: "POST",
           url: API_INSTANCE_UPLOAD,
@@ -396,17 +396,17 @@ export default {
         this.uploadConfig.addr = parseforwardAddress(cfg.addr, "http");
         this.uploadConfig.password = cfg.password;
         this.newInstanceUuid = cfg.instanceUuid;
-        // 上传文件参数准备
+        // prepare upload file parameters
         const formData = new FormData();
         formData.append("file", file);
         const fullAddress = `${this.uploadConfig.addr}/upload/${this.uploadConfig.password}`;
         console.log("NewInstance - FileUpload:", fullAddress, "\n", file);
-        // 上传文件
+        // upload files
         const fileName = file.name;
         const extName = path.extname(fileName);
         await axios.post(fullAddress, formData, {
           params: {
-            // 根据后缀自动解压文件
+            // Automatically decompress the file according to the suffix
             unzip: extName === ".zip" ? 1 : null,
             code: this.zipCode
           },
@@ -422,7 +422,7 @@ export default {
         this.$message({ message: `Error: ${error.message}`, type: "error" });
       }
     },
-    // 非上传文件式的创建实例
+    // Create instance without uploading file
     async createInstance() {
       await this.$confirm(
         this.$t("newInstances.instantWillBeCreate"),
@@ -512,13 +512,3 @@ export default {
   }
 };
 </script>
-
-<style scoped>
-.container {
-  /* display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 90vh;
-  height: calc(100% - 80px) !important; */
-}
-</style>

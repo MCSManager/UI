@@ -1,7 +1,7 @@
-<!-- eslint-disable vue/no-mutating-props -->
 <!--
   Copyright (C) 2022 MCSManager <mcsmanager-dev@outlook.com>
 -->
+<!-- eslint-disable vue/no-mutating-props -->
 
 <template>
   <div class="line-option-warpper">

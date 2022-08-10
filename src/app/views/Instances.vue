@@ -96,7 +96,7 @@
           </div>
         </div>
 
-        <!-- 未选择守护进程时显示 -->
+        <!-- Display when no daemon is selected -->
         <div v-show="!currentRemoteUuid">
           <div class="notAnyInstanceTip">
             <i class="el-icon-guide" style="font-size: 190px"></i>
@@ -109,7 +109,7 @@
           </div>
         </div>
 
-        <!-- 第一页且无任何数据时显示 -->
+        <!-- Display when the first page has no data -->
         <div v-show="notAnyInstance && page === 1">
           <div class="notAnyInstanceTip">
             <i class="el-icon-truck" style="font-size: 190px"></i>
@@ -125,7 +125,7 @@
     </template>
   </Panel>
 
-  <!-- 卡片显示风格 -->
+  <!-- Card display style -->
   <el-row :gutter="20" class="row-mb" v-show="!showTableList">
     <el-col :md="6" :offset="0" v-for="(item, index) in instances" :key="index">
       <Panel
@@ -175,7 +175,7 @@
             @click="toInstance(item.serviceUuid, item.instanceUuid)"
           >
             <div>
-              {{ $t("instances.status.title") }}：
+              {{ $t("instances.status.title") }}:
               <span class="color-gray" v-if="item.status == 0">{{
                 $t("instances.status.die")
               }}</span>
@@ -194,15 +194,15 @@
               <span class="color-red" v-else>{{ $t("instances.status.busy") }}</span>
             </div>
             <div>
-              <span>{{ $t("instances.lastDatetime") }}：</span>
+              <span>{{ $t("instances.lastDatetime") }}:</span>
               <span>{{ item.config.lastDatetime }}</span>
             </div>
             <div>
-              <span>{{ $t("instances.endTime") }}：</span>
+              <span>{{ $t("instances.endTime") }}:</span>
               <span>{{ item.config.endTime }}</span>
             </div>
             <div>
-              <span>{{ $t("instances.otherInfo") }}：</span>
+              <span>{{ $t("instances.otherInfo") }}:</span>
               <span>
                 <span v-if="item.info && item.info.currentPlayers >= 0">
                   {{ $t("instances.playerCount") }} {{ item.info.currentPlayers }}/{{
@@ -222,13 +222,13 @@
     </el-col>
   </el-row>
 
-  <!-- 表格显示风格 -->
+  <!-- Table display style -->
   <el-row :gutter="20" class="row-mb" v-show="showTableList">
     <el-col :span="24" :offset="0">
       <Panel>
         <template #title>{{ $t("instances.table.instancesList") }}</template>
         <template #default>
-          <!-- 表格显示 -->
+          <!-- table display -->
           <el-table
             :data="instances"
             stripe
@@ -370,13 +370,14 @@ export default {
       remoteList: [],
       currentRemoteUuid: null,
       instances: [],
-      multipleSelection: [], // 表格多选属性
+      multipleSelection: [], // table multiple selection properties
       startedInstance: 0,
       loading: true,
-      availableService: [], // 可用和不可用守护进程列表
+      // list of available and unavailable daemons
+      availableService: [],
       unavailableService: [],
 
-      notAnyInstance: false, // 无任何实例
+      notAnyInstance: false,
 
       page: 1,
       maxPage: 1,
@@ -385,18 +386,18 @@ export default {
         instanceName: ""
       },
 
-      // 批量处理模式
+      // batch mode
       showTableList: false
     };
   },
   async mounted() {
-    // 初始化数据读取
+    // Initialize data read
     this.showTableList = Number(localStorage.getItem("InstanceView")) === 2 ? true : false;
     await this.render();
   },
   beforeUnmount() {},
   methods: {
-    // 获取分布式服务列表（不包括具体实例列表）
+    // Get the list of distributed services (excluding the list of specific instances)
     async displayRemoteServiceList() {
       const data = await request({
         method: "GET",
@@ -422,7 +423,7 @@ export default {
         }
       }
 
-      // 如果存在上次的选择记录，那么直接跳转到上次记录
+      // if existsselect the next record, then jump directly to the previous record
       const lastSelected = localStorage.getItem("pageSelectedRemoteUuid");
       if (lastSelected) {
         this.remoteList.forEach((v) => {
@@ -434,7 +435,7 @@ export default {
       } else {
         this.remoteList.forEach((v) => {
           if (v.available) {
-            // 默认取第一个开启的实例
+            // By default, the first open instance is taken
             this.currentRemoteUuid = v.value;
             return;
           }
@@ -442,7 +443,7 @@ export default {
         this.remoteSelectHandle();
       }
     },
-    // 获取守护进程具体实例列表
+    // Get a list of specific instances of the daemon process
     async remoteSelectHandle() {
       try {
         if (!this.currentRemoteUuid) throw new Error(this.$t("instances.selectRemoteError"));
@@ -459,16 +460,16 @@ export default {
             instance_name: this.query.instanceName
           }
         });
-        // 页码调整
+        // page number adjustment
         this.page = result.page;
         this.maxPage = result.maxPage;
         const instances = result.data;
         instances.forEach((instance) => {
           const status = instance.status;
           const type = typeTextToReadableText(instance.config.type);
-          // 计算正在运行的实例
+          // Calculate the running instance
           if (instance.status != 0) this.startedInstance++;
-          // 压入所有实例
+          // push all instances
           this.instances.push({
             instanceUuid: instance.instanceUuid,
             serviceUuid: this.currentRemoteUuid,
@@ -483,10 +484,10 @@ export default {
         });
         console.log(this.instances);
         this.loading = false;
-        // 记录当前选择的守护进程，方便下次直接加载
+        // Record the currently selected daemon process, so that it can be loaded directly next time
         localStorage.setItem("pageSelectedRemoteUuid", this.currentRemoteUuid);
 
-        // 无任何实例时，显示快速创建界面
+        // When there is no instance, display the quick creation interface
         if (this.instances.length === 0) {
           this.notAnyInstance = true;
         } else {
@@ -500,7 +501,7 @@ export default {
         });
       }
     },
-    // 分页改变
+    // pagination change
     handleCurrentChange() {
       this.refresh();
     },
@@ -510,7 +511,7 @@ export default {
     async render() {
       await this.displayRemoteServiceList();
     },
-    // 表格多选函数
+    // table multi-select function
     selectionChange(v) {
       if (v.length == 0) this.canInterval = true;
       else this.canInterval = false;
@@ -549,7 +550,7 @@ export default {
         message: this.$t("notify.Success")
       });
     },
-    // 批量删除
+    // batch deletion
     async batDelete(type) {
       if (type === 1) {
         await this.$confirm(

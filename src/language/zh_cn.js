@@ -25,7 +25,12 @@ export default {
         yes: "是",
         no: "否",
         save: "保存",
+        error: "操作错误",
+        success: "操作成功",
+        config: "配置",
+        operation: "操作"
     },
+
     root: {
         title: "处理中...",
         private: "个人资料",

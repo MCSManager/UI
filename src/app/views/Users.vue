@@ -87,7 +87,7 @@
       </el-col>
     </el-row>
 
-    <!-- 新增用户弹框 -->
+    <!-- create user dialog -->
     <Dialog v-model="isNewUser">
       <template #title>{{ $t("users.newUser") }}</template>
       <template #default>
@@ -150,7 +150,7 @@
       </template>
     </Dialog>
 
-    <!-- 编辑用户弹框 -->
+    <!-- edit user dialog -->
     <Dialog v-model="isEditUser">
       <template #title>{{ $t("users.editUser") }}</template>
       <template #default>
@@ -225,9 +225,9 @@ export default {
       // isAssignLoading: true,
       editUserInfo: {},
       objects: [],
-      remoteObjects: [], // 以守护进程为主键的列表
-      instances: [], // 以实例为主键的列表
-      multipleSelection: [], // 表格多选属性
+      remoteObjects: [], // list with daemon as primary key
+      instances: [], // list with instance as primary key
+      multipleSelection: [], // table multiple selection properties
 
       readonly: true,
 
@@ -236,13 +236,13 @@ export default {
   },
   async mounted() {
     this.businessWarning = true;
-    // 请求并渲染所有用户
+    // request and render all users
     await this.render();
-    // 异步请求所有实例缓存结果
+    // Asynchronously request all instances to cache the result
     this.renderServices();
   },
   methods: {
-    // 用户数据渲染
+    // user data rendering
     async render() {
       const result = await request({
         method: "GET",
@@ -283,11 +283,11 @@ export default {
         }
       });
     },
-    // 页码点击事件
+    // page number click event
     handleCurrentChange() {
       this.refresh();
     },
-    // 表格多选函数
+    // table multi-select function
     selectionChange(v) {
       this.multipleSelection = v;
     },
@@ -312,7 +312,7 @@ export default {
       // this.isAssign = true;
       // this.isAssignLoading = true;
       // this.editUserInfo = {};
-      // // 请求选择的用户详细信息
+      // // Request selected user details
       // this.editUserInfo = await this.requestUserInfo(row.uuid);
       // this.isAssignLoading = false;
     },

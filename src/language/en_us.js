@@ -25,6 +25,8 @@ export default {
         yes: "Yes",
         no: "No",
         save: "Save",
+        config: "config",
+        operation: "operation"
     },
     root: {
         title: "Processing...",

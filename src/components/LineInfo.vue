@@ -3,7 +3,7 @@
 -->
 
 <template>
-  <div class="line-info-warpper">
+  <div class="line-info-wrapper">
     <div class="line-info" :class="{ 'line-info-button': isButton }">
       <slot></slot>
     </div>
@@ -23,7 +23,7 @@ export default {
 </script>
 
 <style scoped>
-.line-info-warpper {
+.line-info-wrapper {
   text-align: left;
   margin-bottom: 10px;
 }

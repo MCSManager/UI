@@ -11,8 +11,7 @@
   >
     <el-row>
       <el-col :span="12">
-        <!-- 手机端只显示扩展按钮 -->
-        <div class="only-phone-display header-left-buttion" @click="toAside">
+        <div class="only-phone-display header-left-button" @click="toAside">
           <i class="el-icon-s-operation"></i>
         </div>
         <div
@@ -25,30 +24,8 @@
             >{{ $t("router.panel") }}&nbsp;/&nbsp;{{ $t("router." + item.title) }}</span
           >
         </div>
-        <!-- 电脑端显示全部内容 -->
-        <!-- <el-breadcrumb separator="/" style="line-height: 28px" class="only-pc-display">
-          <el-breadcrumb-item :to="{ path: '/overview' }">控制面板</el-breadcrumb-item>
-          <el-breadcrumb-item
-            v-for="(item, index) in breadcrumbsList"
-            :to="{ path: item.path }"
-            :key="index"
-          >
-            {{ item.title }}
-          </el-breadcrumb-item>
-        </el-breadcrumb> -->
       </el-col>
       <el-col :span="12" style="text-align: right; line-height: 28px">
-        <!-- <span class="locale-changer">
-          <select v-model="$i18n.locale">
-            <option
-              v-for="locale in $i18n.availableLocales"
-              :key="`locale-${locale}`"
-              :value="locale"
-            >
-              {{ locale }}
-            </option>
-          </select>
-        </span> -->
         <el-dropdown style="margin: 0px 10px">
           <span class="el-dropdown-link">
             {{ userInfo.userName }}
@@ -61,12 +38,6 @@
             </el-dropdown-menu>
           </template>
         </el-dropdown>
-        <!-- <el-tooltip content="消息" class="only-pc-display">
-          <el-button size="mini" icon="el-icon-bell" circle></el-button>
-        </el-tooltip>
-        <el-tooltip content="使用文档" class="only-pc-display">
-          <el-button size="mini" icon="el-icon-help" circle></el-button>
-        </el-tooltip> -->
       </el-col>
     </el-row>
   </el-card>
@@ -166,7 +137,7 @@ export default {
   font-size: 12px;
 }
 
-.header-left-buttion {
+.header-left-button {
   line-height: 28px;
   font-size: 22px;
   cursor: pointer;

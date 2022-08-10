@@ -18,7 +18,6 @@
       <Logo></Logo>
       <el-menu-item-group>
         <template #title>{{ $t("aside.basic") }}</template>
-
         <el-menu-item key="/overview" index="/overview">
           <i class="el-icon-pie-chart"></i>
           <template #title>{{ $t("router.overview") }}</template>

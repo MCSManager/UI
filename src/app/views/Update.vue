@@ -4,35 +4,35 @@
 
 <template>
   <Panel>
-    <template #title>版本管理</template>
+    <template #title>Version Management</template>
     <template #default>
       <p></p>
     </template>
   </Panel>
   <Panel>
-    <template #title>分布式服务版本列表 </template>
+    <template #title>Distributed service version list </template>
     <template #default>
       <el-table :data="services" stripe style="width: 100%" size="small">
-        <el-table-column prop="ip" label="地址" width="140px"></el-table-column>
-        <el-table-column prop="port" label="端口" width="140px"></el-table-column>
-        <el-table-column label="状态" width="120px">
+        <el-table-column prop="ip" label="address" width="140px"></el-table-column>
+        <el-table-column prop="port" label="port" width="140px"></el-table-column>
+        <el-table-column label="status" width="120px">
           <template #default="scope">
-            <span>{{ scope.row.available ? "在线" : "离线" }}</span>
+            <span>{{ scope.row.available ? "online" : "offline" }}</span>
           </template>
         </el-table-column>
-        <el-table-column prop="remarks" label="备注" width="180px"></el-table-column>
-        <el-table-column label="软件版本">
+        <el-table-column prop="remarks" label="Remarks" width="180px"></el-table-column>
+        <el-table-column label="software version">
           <!-- eslint-disable-next-line vue/no-unused-vars -->
           <template #default="scope">
             <el-tag type="info" size="small" effect="plain"> 1.0.0 </el-tag>
           </template>
         </el-table-column>
-        <el-table-column label="操作" style="text-align: center" width="240px">
+        <el-table-column label="action" style="text-align: center" width="240px">
           <!-- eslint-disable-next-line vue/no-unused-vars -->
           <template #default="scope">
-            <el-button size="mini" type="warning" plain>更新版本</el-button>
-            <el-button size="mini" type="danger" plain>重启</el-button>
-            <el-button size="mini" type="danger" plain>重装</el-button>
+            <el-button size="mini" type="warning" plain>Updated version</el-button>
+            <el-button size="mini" type="danger" plain>Restart</el-button>
+            <el-button size="mini" type="danger" plain>Reload</el-button>
           </template>
         </el-table-column>
       </el-table>

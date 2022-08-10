@@ -3,7 +3,7 @@
 -->
 
 <template>
-  <div class="line-button-warpper">
+  <div class="line-button-wrapper">
     <div class="line-button">
       <slot></slot>
     </div>
@@ -20,7 +20,7 @@ export default {
 </script>
 
 <style scoped>
-/* .line-button-warpper { */
+/* .line-button-wrapper { */
 /* margin-bottom: 10px; */
 /* } */
 

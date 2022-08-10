@@ -2,7 +2,7 @@
   Copyright (C) 2022 MCSManager <mcsmanager-dev@outlook.com>
 -->
 
-<template>分析</template>
+<template>analyze (TODO)</template>
 
 <script>
 export default {

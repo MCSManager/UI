@@ -4,27 +4,33 @@
 
 <template>
   <Dialog v-model="visible" :cancel="close">
-    <template #title>配置对话框</template>
+    <template #title>{{ $t("general.config") }}</template>
     <template #default>
-      <div v-if="items" class="components-warpper">
+      <div v-if="items" class="components-wrapper">
         <el-table :data="items" style="width: 100%" size="small">
           <el-table-column v-for="(item, index) in columns" :key="index" v-bind="item">
             <template #default="scope">
               <el-input v-model="scope.row[item.prop]" type="text" size="small"></el-input>
             </template>
           </el-table-column>
-          <el-table-column label="操作">
+          <el-table-column :label="$t('general.operation')">
             <template #default="scope">
-              <el-button text size="small" @click="deleteTableItem(scope.$index)">删除</el-button>
+              <el-button text size="small" @click="deleteTableItem(scope.$index)">
+                {{ $t("general.delete") }}
+              </el-button>
             </template>
           </el-table-column>
         </el-table>
       </div>
       <div class="btn-area">
-        <el-button size="small" type="success" @click="createTableData">新增项目</el-button>
+        <el-button size="small" type="success" @click="createTableData">
+          {{ $t("general.add") }}
+        </el-button>
         <span>&nbsp;&nbsp;|&nbsp;&nbsp;</span>
-        <el-button size="small" type="primary" @click="sumbit">确定</el-button>
-        <el-button size="small" type="danger" @click="close">取消</el-button>
+        <el-button size="small" type="primary" @click="submit">
+          {{ $t("general.confirm") }}
+        </el-button>
+        <el-button size="small" type="danger" @click="close">{{ $t("general.cancel") }}</el-button>
       </div>
     </template>
   </Dialog>
@@ -54,7 +60,7 @@ export default {
       this.visible = false;
       this.items = [];
     },
-    sumbit() {
+    submit() {
       this.$emit("submit", this.items);
       this.close();
     },

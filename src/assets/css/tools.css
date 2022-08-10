@@ -1,6 +1,6 @@
 /* Copyright (C) 2022 MCSManager <mcsmanager-dev@outlook.com> */
 
-/* 工具类 */
+/* Tools */
 .row-mb {
   margin-bottom: 10px;
 }
@@ -30,7 +30,7 @@
   text-align: right;
 }
 
-/* 公共文字颜色 */
+/* public text color */
 
 .color-red {
   color: #f56c6c;
@@ -55,7 +55,9 @@
 .color-blue {
   color: #409eff;
 }
-/* Flex 左右布局 */
+
+/* Flex left and right layout */
+
 .flex {
   display: flex;
 }

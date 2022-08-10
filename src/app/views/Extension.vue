@@ -1,7 +1,7 @@
 <!--
   Copyright (C) 2022 MCSManager <mcsmanager-dev@outlook.com>
 -->
-<template>面板扩展</template>
+<template>extension (TODO)</template>
 
 <script>
 export default {

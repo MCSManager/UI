@@ -1,6 +1,6 @@
 /* Copyright (C) 2022 MCSManager <mcsmanager-dev@outlook.com> */
 
-/* Vue 组件默认的动画名 */
+/* Vue component default animation name */
 .fade-enter-active,
 .fade-leave-active {
   transition: opacity 0.4s ease;
@@ -11,7 +11,7 @@
   opacity: 0;
 }
 
-/* 更快的淡入淡出动画 */
+/* Faster fade animation */
 .fade2-enter-active,
 .fade2-leave-active {
   transition: opacity 0.3s ease;
@@ -22,7 +22,7 @@
   opacity: 0;
 }
 
-/* 更快的淡入淡出动画 */
+/* Faster fade animation */
 .fade3-enter-active,
 .fade3-leave-active {
   transition: opacity 0.3s ease;

@@ -54,7 +54,6 @@ export function connectRemoteService(
   // eslint-disable-next-line no-unused-vars
   socket.on("instance/stopped", (packet) => {
     // const data = packet.data;
-    console.log("i18n:", i18n)
     ElNotification({
       title: i18n.global.t("instances.exit"),
       dangerouslyUseHTMLString: true,

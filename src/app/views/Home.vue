@@ -4,7 +4,7 @@
 
 <template>
   <el-row :gutter="20">
-    <!-- 左侧用户数据栏 -->
+    <!-- User data column on the left -->
     <el-col :md="16" :offset="0">
       <el-row :gutter="20">
         <el-col :xs="12" :md="6" :offset="0">
@@ -50,7 +50,7 @@
       </el-row>
     </el-col>
 
-    <!-- 右侧用户信息栏 -->
+    <!-- User information bar on the right -->
     <el-col :md="8" :offset="0">
       <Panel style="height: 260px">
         <template #title>{{ $t("home.personalInfo") }}</template>
@@ -99,24 +99,6 @@
         ></el-table-column>
         <el-table-column :label="$t('instances.status.runStatus')">
           <template #default="scope">
-            <!-- <div class="color-gray" v-if="scope.row.status == 0">
-              <i class="el-icon-video-pause"></i>
-              <span>{{ $t("home.outOfRunning") }}</span>
-            </div>
-            <div class="color-green" v-else-if="scope.row.status == 3">
-              <i class="el-icon-video-play"></i>
-              <span> {{ $t("home.running") }}</span>
-            </div>
-            <span class="color-yellow" v-else-if="scope.row.status == 1">{{
-              $t("home.stopping")
-            }}</span>
-            <span class="color-yellow" v-else-if="scope.row.status == 2">{{
-              $t("home.starting")
-            }}</span>
-            <span class="color-red" v-else-if="scope.row.status == -1">{{
-              $t("home.maintaining")
-            }}</span>
-            <span class="color-red" v-else>{{ $t("home.unknownStatus") }}</span> -->
             {{ statusToText(scope.row.status) }}
           </template>
         </el-table-column>
@@ -159,7 +141,6 @@
     </template>
   </Panel>
 
-  <!-- 版权信息 -->
   <div
     class="flex flex-space-center flex-align-items-center"
     style="font-size: 12px; color: #cdcdcd; text-align: center; margin-top: 40px"
@@ -177,7 +158,7 @@
     </div>
   </div>
 
-  <!-- 实例详情编辑框 -->
+  <!-- Instance details dialog -->
   <Dialog v-model="editInstance.is">
     <template #title>{{ $t("instance.Dialog.instanceParameterEdit") }}</template>
     <template #default>

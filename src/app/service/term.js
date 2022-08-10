@@ -83,7 +83,7 @@ export function textToTermText(data) {
   text = text.replace(/§n/gim, termColor.TERM_TEXT_UNDERLINE);
   text = text.replace(/§o/gim, termColor.TERM_TEXT_ITALIC);
   text = text.replace(/§r/gim, termColor.TERM_RESET);
-  // 行结尾符号替换
+  // line ending symbol substitution
   text = text.replace(/\r\n/gm, termColor.TERM_RESET + "\r\n");
   return text;
 }

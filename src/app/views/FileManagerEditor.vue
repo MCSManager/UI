@@ -18,9 +18,6 @@
             <el-button size="small" @click="back" v-if="!backType">
               <i class="el-icon-pie-chart"></i> {{ $t("fileManagerEditor.backToFileManager") }}
             </el-button>
-            <!-- <el-button size="small" @click="backTerminal" plain v-if="backType == 1">
-              回到控制台
-            </el-button> -->
           </ItemGroup>
         </div>
         <div>
@@ -30,7 +27,6 @@
         </div>
       </div>
       <div v-show="!error" style="overflow: auto">
-        <!-- <textarea :value="value" id="mcode-editor" style="display:none"></textarea> -->
         <div id="editor" style="height: 70vh" class="editor-code-font"></div>
       </div>
       <div v-show="error" style="padding: 16px 0px">
@@ -59,7 +55,6 @@ export default {
       target: this.$route.query.target,
       backType: this.$route.query.backType,
       error: null,
-      // 文件编辑功能
       edit: {
         text: "",
         fileName: this.$route.query.target
@@ -111,7 +106,7 @@ export default {
     backViaHistory() {
       this.$router.go(-1);
     },
-    // 编辑文件
+
     async render() {
       try {
         const text = await request({
@@ -134,7 +129,6 @@ export default {
       }
     },
 
-    // 保存文件
     async saveFile() {
       this.edit.text = this.editor.getValue();
       await request({

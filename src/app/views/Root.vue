@@ -22,7 +22,7 @@ export default {
   methods: {},
   async mounted() {
     try {
-      // 为了适配无缝登录，这里必须还需要再请求一次数据
+      // In order to adapt to seamless login, data must be requested again here
       await setupUserInfo();
       const userInfo = this.$store.state.userInfo;
       if (!userInfo || !userInfo.uuid) throw new Error(`userInfo status error: ${userInfo}`);

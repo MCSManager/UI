@@ -74,15 +74,15 @@
     </el-col>
     <el-col :md="8" :offset="0">
       <!-- <Panel>
-        <template #title>用户名</template>
+        <template #title>Username</template>
         <template #default>
           <div class="sub-title row-mt">
-            <p class="sub-title-title require-field">更改用户名</p>
-            <p class="sub-title-info">支持中文和字母，长度为 2 到 18 个文字</p>
+            <p class="sub-title-title require-field">Change username</p>
+            <p class="sub-title-info">Support Chinese and alphabet, 2 to 18 characters in length</p>
           </div>
           <el-input
             size="small"
-            placeholder="保持原值"
+            placeholder="Keep the original value"
             v-model="userData.userName"
             :readonly="readonly.a"
             @focus="() => (readonly.a = false)"
@@ -90,7 +90,7 @@
           ></el-input>
           <div style="text-align: right">
             <el-button size="small" class="row-mt" @click="update(1)" type="danger" plain
-              >更新用户名</el-button
+              >Update Username</el-button
             >
           </div>
         </template>
@@ -272,7 +272,7 @@ export default {
       if (value.length < 9 || value.length > 36)
         return callback(new Error(this.$t("userDetail.notStandard")));
       // const reg = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[0-9A-Za-z]{12,}$/;
-      // if (!reg.test(value)) return callback(new Error("您的密码必须包含：数字，大写和小写字母"));
+      // if (!reg.test(value)) return callback(new Error("Your password must contain: numbers, uppercase and lowercase letters"));
       callback();
     },
     validatePassword2(rule, value = "", callback) {

@@ -95,7 +95,6 @@
     </template>
   </Panel>
 
-  <!-- 新增实例框 -->
   <Dialog v-model="isAddInstanceForUser">
     <template #title>{{ $t("userResources.addInstanceForUser") }}</template>
     <template #default>
@@ -175,7 +174,6 @@ export default {
         });
       }
     },
-    // 用户数据渲染
     async render() {
       const result = await request({
         method: "GET",

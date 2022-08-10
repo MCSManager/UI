@@ -166,7 +166,6 @@
 <script>
 import Dialog from "./Dialog";
 
-// 使用 v-model 指令实现双向数据传递
 export default {
   props: {
     modelValue: Boolean,

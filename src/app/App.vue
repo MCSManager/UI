@@ -3,7 +3,7 @@ Copyright (C) 2022 MCSManager <mcsmanager-dev@outlook.com>
 -->
 <template>
   <el-container>
-    <!-- 管理用户 手机屏幕菜单栏 -->
+    <!-- Manage users phone screen menu bar -->
     <el-drawer
       v-if="isTopPermission"
       size="240"
@@ -16,7 +16,7 @@ Copyright (C) 2022 MCSManager <mcsmanager-dev@outlook.com>
         <Aside />
       </el-aside>
     </el-drawer>
-    <!-- 管理用户 电脑屏幕菜单栏 -->
+    <!-- Manage users Computer screen menu bar -->
     <div v-if="isTopPermission" id="app-menu" class="only-pc-display">
       <el-aside width="240px" style="height: 100%">
         <Aside />
@@ -29,7 +29,7 @@ Copyright (C) 2022 MCSManager <mcsmanager-dev@outlook.com>
             <Header v-bind:breadcrumbsList="breadCrumbs" :aside="toAside" />
           </el-col>
         </el-row>
-        <div v-loading="loading" style="min-height:50px">
+        <div v-loading="loading" style="min-height: 50px">
           <router-view v-if="!loading"></router-view>
         </div>
       </el-main>
@@ -50,7 +50,7 @@ export default {
   components: { Aside, Header },
   data: function () {
     return {
-      loading:true,
+      loading: true,
       breadCrumbs: [],
       mode: 1,
       drawer: false
@@ -82,7 +82,7 @@ export default {
   },
   async beforeCreate() {
     try {
-      // 获取当前面板状态信息
+      // Get current panel status information
       const statusInfo = await getPanelStatus();
       if (statusInfo?.isInstall === false) {
         return router.push({ path: "/install" });
@@ -92,22 +92,22 @@ export default {
       } else {
         this.$i18n.locale = "en_us";
       }
-      // 第一次刷新后，尝试获取一次用户数据
-      // 如果失败，则导航至 / 视图进一步决定跳转路由
-    
+      // After the first refresh, try to get user data once
+      // If it fails, navigate to / view to further decide the jump route
+
       await setupUserInfo();
       const userInfo = this.$store.state.userInfo;
       if (!userInfo || !userInfo.uuid) throw new Error("userInfo.uuid is null");
     } catch (error) {
       router.push({ path: "/" });
-    }finally{
-      this.loading = false
+    } finally {
+      this.loading = false;
     }
   },
   async mounted() {
     router.beforeEach((to, from, next) => {
       console.log("Router:", from, "->", to);
-      // 设置在线信息全局状态
+      // Set the global status of online information
       this.$store.commit(
         "setOnlineNotice",
         window.onlineMCSManagerNotice ? window.onlineMCSManagerNotice() : null

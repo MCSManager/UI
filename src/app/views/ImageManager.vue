@@ -81,15 +81,6 @@
           </template>
         </el-table-column>
         <el-table-column prop="Image" :label="$t('imageManager.useImage')"></el-table-column>
-        <!-- <el-table-column prop="Ports" label="端口开放">
-          <template #default="scope">
-            <div v-if="scope.row.Ports">
-              <span v-for="(item,index) in scope.row.Ports" :key="index">
-                {{item.PublicPort}}:{{item.PrivatePort}}&nbsp;
-              </span>
-            </div>
-          </template>
-        </el-table-column> -->
         <el-table-column prop="State" :label="$t('imageManager.status')"></el-table-column>
         <el-table-column prop="Status" :label="$t('imageManager.situation')"></el-table-column>
         <el-table-column :label="$t('general.operate')" style="text-align: center" width="90px">

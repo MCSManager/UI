@@ -280,12 +280,12 @@ export default {
     };
   },
   methods: {
-    // 刷新按钮
+    // refresh button
     async refresh() {
       await this.render();
       this.$message({ type: "info", message: this.$t("general.refreshFinish"), duration: 400 });
     },
-    // 渲染数据方法
+    // render data method
     async render() {
       const result = await request({
         method: "GET",
@@ -293,7 +293,7 @@ export default {
       });
       result.remote.forEach((element) => {
         if (element.system) {
-          // 计算内存
+          // compute memory
           const free = Number(element.system.freemem / 1024 / 1024 / 1024).toFixed(1);
           const total = Number(element.system.totalmem / 1024 / 1024 / 1024).toFixed(1);
           const used = Number(total - free).toFixed(1);
@@ -301,11 +301,11 @@ export default {
         }
       });
       this.services = result.remote;
-      // 版本相关数据渲染
+      // Version related data rendering
       this.specifiedDaemonVersion = result.specifiedDaemonVersion;
       this.panelVersion = result.version;
     },
-    // 新增服务
+    // add service
     async toNewService(enforce = false) {
       const addr = this.newServiceInfo.ip;
       if (addr.indexOf("192.168") === 0 || addr.indexOf("10.") === 0) {
@@ -330,11 +330,11 @@ export default {
         this.$message({ type: "error", message: ERROR_TEXT });
       }
     },
-    // 打开新增服务面板
+    // Open the new service panel
     openNewServiceDialog() {
       this.isNewService = true;
     },
-    // 连接服务
+    // connect to the service
     async linkService(row, isNeedSave) {
       try {
         if (isNeedSave) await this.updateService(row);
@@ -349,7 +349,7 @@ export default {
         this.$message({ type: "error", message: error.message });
       }
     },
-    // 更新服务
+    // update service
     async updateService(row) {
       await axios.put(
         API_SERVICE_CURD,
@@ -359,7 +359,7 @@ export default {
         }
       );
     },
-    // 删除服务
+    // delete service
     async deleteService(uuid) {
       await this.$confirm(this.$t("services.delDaemonWarn"), this.$t("general.warn"), {
         confirmButtonText: this.$t("general.delete"),
@@ -374,7 +374,7 @@ export default {
         this.$message({ type: "error", message: ERROR_TEXT });
       }
     },
-    // 修改备注信息
+    // modify the remark information
     async updateRemarks(row) {
       const text = await this.$prompt(
         this.$t("services.inputNewRemark"),
@@ -392,7 +392,7 @@ export default {
         this.$message({ type: "error", message: error });
       }
     },
-    // 修改密钥信息
+    // modify key information
     async updateKey(row) {
       let text = await this.$prompt(this.$t("services.inputNewKey"), this.$t("services.key"), {
         confirmButtonText: this.$t("general.confirm"),
@@ -410,7 +410,7 @@ export default {
             params: { uuid: row.uuid }
           }
         );
-        // this.$message({ type: "success", message: "更新密钥成功" });
+        // this.$message({ type: "success", message: "Update key successfully" });
         await this.linkService(row, false);
       } catch (error) {
         this.$message({ type: "error", message: error });

@@ -100,7 +100,7 @@
           </el-select>
         </el-col>
       </el-row>
-      <!-- 指定时间型选择器 -->
+      <!-- Specify time selector -->
       <div v-if="newTask.type == 3" class="row-mt">
         <el-date-picker
           v-model="newTask.time"
@@ -110,7 +110,7 @@
         ></el-date-picker>
       </div>
 
-      <!-- 指定时间型日期选择器 -->
+      <!-- Specify time type date picker -->
       <el-row :gutter="20" class="row-mt" v-if="newTask.type == 2">
         <el-col :md="24" :offset="0">
           <div class="sub-title">{{ $t("schedule.triggerTime") }}</div>
@@ -144,7 +144,7 @@
         </el-col>
       </el-row>
 
-      <!-- 时间间隔周期型选择器 -->
+      <!-- Time interval period selector -->
       <div v-if="newTask.type == 1" class="row-mt">
         <div class="row-mb">
           <div class="sub-title-info">{{ $t("schedule.intervalsTaskInfo") }}</div>
@@ -373,7 +373,7 @@ export default {
       this.newTask.time = `${s} ${m} ${h} * * ${w.join(",")}`;
       await this.createRequest();
     },
-    //间隔时间性任务
+    // interval task
     async createTaskType1() {
       const arr = this.newTask.cycle;
       let ps = Number(arr[0]);

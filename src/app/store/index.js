@@ -2,7 +2,7 @@
 
 import { createStore } from "vuex";
 
-// Vuex 状态管理
+// Vuex 
 const stateModel = {
   token: "",
   userInfo: {

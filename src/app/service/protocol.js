@@ -5,19 +5,19 @@ import axios from "axios";
 import store from "../store";
 import { API_PANEL_STATUS, API_USER, API_USER_TOKEN } from "./common";
 
-// 每个请求必须携带 X-Requested-With: XMLHttpRequest 头
+// Each request must carry the X-Requested-With: XMLHttpRequest header
 axios.defaults.headers.common["X-Requested-With"] = "XMLHttpRequest";
 // axios.defaults.withCredentials = true;
 
-// axios 请求 token 必须携带
+// axios request token must carry
 axios.interceptors.request.use(async function (config) {
   let token = store.state.token;
   if (!token && !config.params?.__mcsm_init__) {
-    console.log("Token 未获取，正在尝试初始化...");
+    console.log("Token not obtained, trying to initialize...");
     try {
       await setupUserInfo();
     } catch (err) {
-      console.log("初始化 Token 错误:", err);
+      console.log("Error initializing Token:", err);
     }
   }
   if (!config.params) config.params = {};
@@ -26,20 +26,20 @@ axios.interceptors.request.use(async function (config) {
   return config;
 });
 
-// 服务响应异常
+// service response exception
 class ServiceResponseException extends Error {
   constructor(p) {
     super(p);
   }
 }
 
-// 针对面板端响应格式封装的 axios 通用请求器
+// Axios general requester encapsulated for panel-side response format
 export async function request(p) {
   try {
     const result = await axios.request(p);
-    if (result.status != 200) throw new Error("错误的响应代码");
+    if (result.status != 200) throw new Error("Incorrect response code");
     if (result.data && result.data.data != null) return result.data.data;
-    throw new Error("面板响应数据格式异常");
+    throw new Error("The panel response data format is abnormal");
   } catch (error) {
     const response = error.response;
     if (response && response.data && response.data.data != undefined) {
@@ -50,21 +50,21 @@ export async function request(p) {
   }
 }
 
-// 获取令牌一次
+// get the token once
 export async function requestToken() {
-  // 请求令牌
+  // request token
   const token = await request({
     method: "GET",
     url: API_USER_TOKEN
   });
-  if (!token) throw new Error("身份令牌为空");
-  // 对全局管理中设置令牌
+  if (!token) throw new Error("Identity token is empty");
+  // Set the token in the global management
   store.commit("setToken", token);
-  console.log("身份令牌:", store.state.token);
+  console.log("Identity token:", store.state.token);
   return token;
 }
 
-// 获取用户自身的资料，获取后会顺便同步到全局状态管理中
+// Get the user's own data, which will be synchronized to the global state management by the way
 export async function requestUserInfo(advanced = null) {
   const info = await request({
     method: "GET",
@@ -73,7 +73,7 @@ export async function requestUserInfo(advanced = null) {
   });
   store.commit("setUserInfo", info);
   store.commit("setToken", info.token);
-  console.log("用户身份信息：", store.state.userInfo);
+  console.log("User identity information:", store.state.userInfo);
   return info;
 }
 
@@ -91,8 +91,8 @@ export async function getPanelStatus() {
 }
 
 export function parseforwardAddress(addr = "", require = "http") {
-  // 保存其协议头
-  // ws://127.0.0.1:25565
+  // save its protocol header
+  //ws://127.0.0.1:25565
   let protocol = `${window.location.protocol}//`;
   const addrProtocolString = addr.toLocaleLowerCase();
   if (require === "http") {
@@ -112,21 +112,21 @@ export function parseforwardAddress(addr = "", require = "http") {
     else protocol = "ws://";
   }
 
-  // 删除潜在的多余头
+  // remove potentially redundant headers
   addr = deleteWebsocketHeader(deleteHttpHeader(addr));
 
-  // 端口与ip分开
+  // port and ip are separated
   let daemonPort = null;
   let onlyAddr = null;
   if (addr.split(":").length === 2) {
     onlyAddr = addr.split(":")[0];
     daemonPort = parseInt(addr.split(":")[1]);
-    if (isNaN(daemonPort)) throw new Error(`地址 ${addr} 解析失败，端口不正确`);
+    if (isNaN(daemonPort)) throw new Error(`The address ${addr} failed to resolve, the port is incorrect`);
   } else {
     onlyAddr = addr;
   }
 
-  // 根据分开的端口和ip重新组合地址
+  // Reassemble the address based on the separated port and ip
   const checkAddr = onlyAddr.toLocaleLowerCase();
   if (checkAddr.indexOf("localhost") === 0 || checkAddr.indexOf("127.0.0.") === 0) {
     addr = `${protocol}${window.location.hostname}${daemonPort ? `:${daemonPort}` : ""}`;
@@ -138,7 +138,7 @@ export function parseforwardAddress(addr = "", require = "http") {
 
 window.parseforwardAddress = parseforwardAddress;
 
-// Daemon 端的 ws 地址转换成 http 地址
+// The ws address on the Daemon side is converted into an http address
 export function daemonWsAddressToHttp(wsAddr = "") {
   if (wsAddr.toLocaleLowerCase().indexOf("ws://") === 0) {
     return `http://${wsAddr.slice(5)}`;
@@ -166,7 +166,7 @@ export function deleteHttpHeader(addr) {
   return addr;
 }
 
-// Daemon 端的 ws 地址转为本地 ws 地址
+// The ws address on the Daemon side is converted to the local ws address
 export function daemonWsAddressToWs(wsAddr = "") {
   if (
     wsAddr.toLocaleLowerCase().indexOf("ws://") !== 0 &&

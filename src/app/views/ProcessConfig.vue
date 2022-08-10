@@ -76,7 +76,6 @@ import BlockButton from "../../components/BlockButton";
 import { getInstanceConfigByType } from "../service/process_config";
 import { request } from "../service/protocol";
 import { API_PROCESS_CONFIG_LIST } from "../service/common";
-
 export default {
   components: { Panel, BlockButton },
   data: function () {
@@ -126,12 +125,12 @@ export default {
       });
       this.configs = [];
       this.isNotConfig = true;
-      // 通过实际文件名和特定类型的配置列表进行比较
+      // Compare by actual filename and type-specific configuration list
       realFiles.forEach((v) => {
         configFiles.forEach((z) => {
           if (z.path === v.file) {
             this.isNotConfig = false;
-            // 检查是否已存在同名配置文件，存在则显示冲突
+            // Check if a configuration file with the same name already exists, if it exists, display a conflict
             configFiles.forEach((p) => {
               if (p.path == z.path && p.check) z.conflict = true;
             });
