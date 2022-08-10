@@ -869,7 +869,7 @@ export default {
         loginPageInfo: "Used to display a brief description text on the login interface. It can be used for administrator identity introduction and filing information introduction.",
         inputCopy: "Please enter the copy, for example: Beijing ICP No. 00000001",
 
-        referenceLink: "Related Reference Link",
+        referenceLink: "Tips:",
         referenceLinksInfo:
             "Most settings of the panel are very important. Under normal circumstances, most parameters do not need to be changed. If you do not know what a parameter represents, it is recommended that you do not modify it.",
 

@@ -877,7 +877,7 @@ export default {
         loginPageInfo: "用于显示在登录界面公开简要说明文字，可以用于管理员身份介绍，备案信息介绍。",
         inputCopy: "请输入文案，例如：京ICP备00000001号",
 
-        referenceLink: "相关参考链接",
+        referenceLink: "注意事项",
         referenceLinksInfo:
             "面板的大部分设置十分重要，在一般情况下，绝大部分参数都无需更改，如果某个参数您并不知晓代表什么，那么建议您不要对其进行修改。",
 
