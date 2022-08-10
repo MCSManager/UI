@@ -4,7 +4,7 @@
 <!-- eslint-disable vue/no-mutating-props -->
 
 <template>
-  <div class="line-option-warpper">
+  <div class="line-option-wrapper">
     <el-card
       class=""
       shadow="hover"
@@ -91,7 +91,7 @@ export default {
 </script>
 
 <style scoped>
-.line-option-warpper {
+.line-option-wrapper {
   width: 100%;
   margin-bottom: 4px;
 }
