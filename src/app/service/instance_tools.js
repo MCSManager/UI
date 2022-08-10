@@ -1,18 +1,20 @@
 // Copyright (C) 2022 MCSManager <mcsmanager-dev@outlook.com>
 
 import { INSTANCE_TYPE_TRANSLATION } from "./instance_type";
+import i18n from "../i18n";
 
 /**
  * @param {number} statusCode
  * @return {string}
  */
 export function statusCodeToText(statusCode) {
+  const $t = i18n.global.t
   let statusText = "--";
-  if (statusCode == -1) statusText = "维护中";
-  if (statusCode == 0) statusText = "未运行";
-  if (statusCode == 1) statusText = "停止中";
-  if (statusCode == 2) statusText = "启动中";
-  if (statusCode == 3) statusText = "正在运行";
+  if (statusCode == -1) statusText = $t("home.maintaining");
+  if (statusCode == 0) statusText = $t("home.outOfRunning");
+  if (statusCode == 1) statusText = $t("home.stopping");
+  if (statusCode == 2) statusText = $t("home.starting");
+  if (statusCode == 3) statusText = $t("home.running");
   return statusText;
 }
 

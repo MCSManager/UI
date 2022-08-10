@@ -132,7 +132,7 @@
         :class="{
           instanceStatusGreen: item.status === 3,
           instanceStatusGray: item.status !== 3,
-          CradInstance: true
+          runningInstanceCard: true
         }"
         :tipType="0"
       >
@@ -152,10 +152,6 @@
               </span>
               <template #dropdown>
                 <el-dropdown-menu>
-                  <!-- <el-dropdown-item>开启实例</el-dropdown-item>
-                  <el-dropdown-item>关闭实例</el-dropdown-item>
-                  <el-dropdown-item>重启实例</el-dropdown-item>
-                  <el-dropdown-item>终止实例</el-dropdown-item> -->
                   <el-dropdown-item @click="editInstance(item.serviceUuid, item.instanceUuid)">{{
                     $t("instances.card.editConfig")
                   }}</el-dropdown-item>
@@ -267,7 +263,7 @@
                 </div>
               </template>
             </el-table-column>
-            <el-table-column prop="status" :label="$t('instances.status.runStatus')" width="120">
+            <el-table-column prop="status" :label="$t('instances.status.runStatus')" width="180">
               <template #default="scope">
                 <div class="color-gray" v-if="scope.row.status == 0">
                   <i class="el-icon-video-pause"></i>
@@ -293,9 +289,9 @@
             <el-table-column
               prop="type"
               :label="$t('instances.table.instanceType')"
-              width="140"
+              width="220"
             ></el-table-column>
-            <el-table-column :label="$t('general.operate')" style="text-align: center" width="180">
+            <el-table-column :label="$t('general.operate')" style="text-align: center" width="240">
               <template #default="scope">
                 <el-button
                   size="mini"
@@ -339,13 +335,13 @@
   border-left: 4px solid rgb(175, 175, 175);
 }
 
-.CradInstance {
+.runningInstanceCard {
   overflow: hidden;
   cursor: pointer;
   transition: all 1s;
   height: 146px;
 }
-.CradInstance:hover {
+.runningInstanceCard:hover {
   border-right: 1px solid #409eff;
   border-top: 1px solid #409eff;
   border-bottom: 1px solid #409eff;

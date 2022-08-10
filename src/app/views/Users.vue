@@ -70,7 +70,7 @@
               <el-table-column
                 :label="$t('general.operate')"
                 style="text-align: center"
-                width="180"
+                width="260"
               >
                 <template #default="scope">
                   <el-button size="mini" @click="toEditUserPanel(scope.row)">{{

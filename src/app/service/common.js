@@ -66,12 +66,12 @@ export const API_PANEL_INSTALL = `${API_URL}/api/auth/install`;
 export const TERMINAL_CODE = [
   { label: "UTF-8", value: "UTF-8" },
   { label: "GBK", value: "GBK" },
-  { label: "BIG5", value: "BIG5" },
-  { label: "Shift_JIS", value: "Shift_JIS" },
-  { label: "KS_C_5601", value: "KS_C_5601" },
   { label: "GB2312", value: "GB2312" },
   { label: "GB18030", value: "GB18030" },
+  { label: "BIG5", value: "BIG5" },
   { label: "Big5-HKSCS", value: "Big5-HKSCS" },
+  { label: "Shift_JIS", value: "Shift_JIS" },
+  { label: "KS_C_5601", value: "KS_C_5601" },
   { label: "UTF-16", value: "UTF-16" }
 ];
 

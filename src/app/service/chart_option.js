@@ -48,10 +48,6 @@ export function getStatusChartOption1() {
 
 export function getStatusChartOption2() {
   return {
-    // legend: {
-    //   left: "center",
-    //   data: ["运行数"]
-    // },
     grid: {
       show: false,
       borderWidth: 0,
@@ -64,7 +60,7 @@ export function getStatusChartOption2() {
     yAxis: { type: "value", show: true, minInterval: 1, max: 10 },
     series: [
       {
-        name: "运行数",
+        name: "Running",
         type: "line",
         areaStyle: {},
         smooth: true,

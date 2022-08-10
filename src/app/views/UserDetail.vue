@@ -60,7 +60,7 @@
           <div class="sub-title">
             <p class="sub-title">{{ $t("userDetail.aboutPasswd") }}</p>
             <p class="sub-title-info">
-              {{ $t("userDetail.aboutPasswd") }}
+              {{ $t("userDetail.aboutPasswdInfo") }}
             </p>
           </div>
           <div class="sub-title">

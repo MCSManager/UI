@@ -104,7 +104,7 @@
           <div class="row-mt">
             <div class="sub-title">
               <p class="sub-title-title">{{ $t("newInstances.commandTemplate") }}</p>
-              <p class="sub-title-info">{{ $t("newInstances.commandTemplateText") }}</p>
+              <p class="sub-title-info" v-html="$t('newInstances.commandTemplateText')"></p>
             </div>
             <div class="flex">
               <el-input
@@ -380,10 +380,7 @@ export default {
         const file = this.$refs.fileButtonHidden.files[0];
         // 命令模板替换
         if (this.assist.uploadFileType === 1) {
-          this.form.startCommand = this.assist.commandtemplate.replace(
-            "{{ProgramName}}",
-            file.name
-          );
+          this.form.startCommand = this.assist.commandtemplate.replace("${ProgramName}", file.name);
         }
         if (!this.form.cwd) this.form.cwd = ".";
         // 上传文件式创建实例 & 请求守护进程直连上传
@@ -464,17 +461,17 @@ export default {
     selectTypeA(v) {
       if (v === 1) {
         this.form.type = TYPE_MINECRAFT_JAVA;
-        this.assist.commandtemplate = "java -jar {{ProgramName}}";
+        this.assist.commandtemplate = "java -jar ${ProgramName}";
         this.form.stopCommand = "stop";
       }
       if (v === 2) {
         this.form.type = TYPE_MINECRAFT_BEDROCK;
-        this.assist.commandtemplate = "{{ProgramName}}";
+        this.assist.commandtemplate = "${ProgramName}";
         this.form.stopCommand = "stop";
       }
       if (v === 3) {
         this.form.type = TYPE_UNIVERSAL;
-        this.assist.commandtemplate = "{{ProgramName}}";
+        this.assist.commandtemplate = "${ProgramName}";
         this.form.stopCommand = "^c";
       }
       this.title = this.$t("newInstances.selectCreateType");
@@ -498,7 +495,7 @@ export default {
     },
     openCommandAssistCall(type) {
       if (type === 1) {
-        this.assist.defaultProgramName = "{{ProgramName}}";
+        this.assist.defaultProgramName = "${ProgramName}";
       } else {
         this.assist.defaultProgramName = "";
       }

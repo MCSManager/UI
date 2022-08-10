@@ -99,7 +99,7 @@
         ></el-table-column>
         <el-table-column :label="$t('instances.status.runStatus')">
           <template #default="scope">
-            <div class="color-gray" v-if="scope.row.status == 0">
+            <!-- <div class="color-gray" v-if="scope.row.status == 0">
               <i class="el-icon-video-pause"></i>
               <span>{{ $t("home.outOfRunning") }}</span>
             </div>
@@ -116,8 +116,8 @@
             <span class="color-red" v-else-if="scope.row.status == -1">{{
               $t("home.maintaining")
             }}</span>
-            <span class="color-red" v-else>{{ $t("home.unknownStatus") }}</span>
-            <!-- {{ statusToText(scope.row.status) }} -->
+            <span class="color-red" v-else>{{ $t("home.unknownStatus") }}</span> -->
+            {{ statusToText(scope.row.status) }}
           </template>
         </el-table-column>
 

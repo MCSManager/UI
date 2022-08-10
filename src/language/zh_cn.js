@@ -219,7 +219,7 @@ export default {
         instanceNameInfo: "支持中文，尽可能保证唯一性",
         instanceNameInfo2: "实例名，尽可能确保唯一性",
         commandTemplate: "启动命令模板",
-        commandTemplateText: "其中 {{ProgramName}} 代表您接下来上传的文件名，一般情况下无需进行修改",
+        commandTemplateText: "其中 &#36;&#123;&#80;&#114;&#111;&#103;&#114;&#97;&#109;&#78;&#97;&#109;&#101;&#125; 代表您接下来上传的文件名，一般情况下无需进行修改",
         cmdInfo: "如 java -jar server.jar",
         cmdAssist: "命令助手",
         fileDir: "服务端文件目录",
