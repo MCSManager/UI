@@ -8,25 +8,25 @@
     <template #default>
       <el-row :gutter="20">
         <el-col :md="6" :offset="0">
-          <div class="overview-info-warpper">
+          <div class="overview-info-wrapper">
             <p class="overview-info-title">UUID</p>
             <p class="overview-info-value" v-text="userInfo.uuid"></p>
           </div>
         </el-col>
         <el-col :md="6" :offset="0">
-          <div class="overview-info-warpper">
+          <div class="overview-info-wrapper">
             <p class="overview-info-title">{{ $t("userResources.name") }}</p>
             <p class="overview-info-value" v-text="userInfo.userName"></p>
           </div>
         </el-col>
         <el-col :md="6" :offset="0">
-          <div class="overview-info-warpper">
+          <div class="overview-info-wrapper">
             <p class="overview-info-title">{{ $t("userResources.regTime") }}</p>
             <p class="overview-info-value" v-text="userInfo.registerTime"></p>
           </div>
         </el-col>
         <el-col :md="6" :offset="0">
-          <div class="overview-info-warpper">
+          <div class="overview-info-wrapper">
             <p class="overview-info-title">{{ $t("userResources.length") }}</p>
             <p class="overview-info-value" v-text="userInfo.instances.length"></p>
           </div>

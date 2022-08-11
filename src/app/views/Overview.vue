@@ -10,7 +10,7 @@
         <template #default>
           <el-row :gutter="20">
             <el-col :xs="12" :md="6" v-for="(item, index) in computerInfoA" :key="index">
-              <div class="overview-info-warpper">
+              <div class="overview-info-wrapper">
                 <p class="overview-info-title">
                   <b v-text="item.name"></b>
                 </p>
