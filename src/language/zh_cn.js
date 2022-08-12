@@ -50,7 +50,7 @@ export default {
         login: "登录",
         logging: "登录中",
         isNull: "账号或密码不能为空值",
-        errorUOrP: "账号或密码错误，请检查后重试",
+        errorCause: "账号或密码错误，请检查后重试",
         logBackIn: "重新登录",
         loginSuccess: "登录成功",
 

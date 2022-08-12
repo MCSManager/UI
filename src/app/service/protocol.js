@@ -81,7 +81,7 @@ export async function setupUserInfo() {
   await requestUserInfo();
 }
 
-export async function getPanelStatus() {
+export async function requestPanelStatus() {
   const statusInfo = await request({
     method: "GET",
     url: API_PANEL_STATUS

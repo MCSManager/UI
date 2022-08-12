@@ -179,7 +179,7 @@ export default {
     async failed(error) {
       this.cause = error.message;
       if (this.cause == "null") {
-        this.cause = this.$t("login.errorUOrP");
+        this.cause = this.$t("login.errorCause");
       }
       this.loginText = this.$t("login.logBackIn");
       this.close = true;
@@ -222,7 +222,7 @@ export default {
   },
   async mounted() {
     console.log("Welcome use MCSManager.");
-    console.log("Copyright 2022 Suwings All rights reserved.");
+    console.log("Copyright 2022 MCSManager All rights reserved.");
     // Request login copyleft text
     this.requestLoginInfo();
   }

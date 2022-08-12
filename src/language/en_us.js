@@ -47,7 +47,7 @@ export default {
         login: "Login",
         logging: "logging...",
         isNull: "Username or password cannot be empty",
-        errorUOrP: "The username or password is incorrect, please check and try again",
+        errorCause: "The username or password is incorrect, please check and try again",
         logBackIn: "Login again",
         loginSuccess: "Login successful",
 

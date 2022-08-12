@@ -525,7 +525,7 @@ export default {
       if (!this.currentRemoteUuid) {
         return this.$message({ type: "info", message: this.$t("instances.selectRemoteTitle") });
       }
-      router.push({ path: `/new_instace/${this.currentRemoteUuid}` });
+      router.push({ path: `/new_instance/${this.currentRemoteUuid}` });
     },
     toInstance(serviceUuid, instanceUuid) {
       console.log("View Instance:", serviceUuid, instanceUuid);

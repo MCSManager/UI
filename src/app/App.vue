@@ -40,10 +40,8 @@ Copyright (C) 2022 MCSManager <mcsmanager-dev@outlook.com>
 <script>
 import Aside from "../components/Aside";
 import Header from "../components/Header";
-import { getPanelStatus, request, setupUserInfo } from "./service/protocol.js";
+import { requestPanelStatus, setupUserInfo } from "./service/protocol.js";
 import router from "./router";
-import { API_PANEL_STATUS } from "./service/common";
-import store from "./store";
 
 export default {
   name: "App",
@@ -61,57 +59,53 @@ export default {
       return this.$store.state.userInfo;
     },
     isTopPermission() {
-      return this.$store.state.userInfo.permission >= 10;
+      return this.$store.state.userInfo?.permission >= 10;
     }
   },
   methods: {
     toAside() {
       this.drawer = !this.drawer;
-    },
-    async getPanelStatus() {
-      const statusInfo = await request({
-        method: "GET",
-        url: API_PANEL_STATUS
-      });
-      if (statusInfo?.isInstall === false) {
-        return router.push({ path: "/install" });
-      } else {
-        store.commit("setPanelStatus", statusInfo);
-      }
     }
   },
-  async beforeCreate() {
+
+  async created() {
+    let needToRoot = false;
+    let needInstall = false;
+
     try {
-      // Get current panel status information
-      const statusInfo = await getPanelStatus();
-      if (statusInfo?.isInstall === false) {
-        return router.push({ path: "/install" });
-      }
-      if (statusInfo.language) {
-        this.$i18n.locale = statusInfo.language;
-      } else {
-        this.$i18n.locale = "en_us";
-      }
       // After the first refresh, try to get user data once
       // If it fails, navigate to / view to further decide the jump route
-
       await setupUserInfo();
       const userInfo = this.$store.state.userInfo;
       if (!userInfo || !userInfo.uuid) throw new Error("userInfo.uuid is null");
     } catch (error) {
-      router.push({ path: "/" });
-    } finally {
-      this.loading = false;
+      console.log(error);
+      needToRoot = true;
     }
+
+    try {
+      // Get current panel status information
+      const statusInfo = await requestPanelStatus();
+      if (statusInfo.language) {
+        console.log("SET_LANGUAGE:", statusInfo.language);
+        this.$i18n.locale = statusInfo.language;
+      } else {
+        this.$i18n.locale = "en_us";
+      }
+      // If not installed, must route to /install
+      if (statusInfo?.isInstall === false) needInstall = true;
+    } catch (error) {
+      alert(error + " Please refresh!");
+    }
+
+    this.loading = false;
+    if (needInstall) return router.push({ path: "/install" });
+    if (needToRoot) return router.push({ path: "/" });
   },
+
   async mounted() {
     router.beforeEach((to, from, next) => {
       console.log("Router:", from, "->", to);
-      // Set the global status of online information
-      this.$store.commit(
-        "setOnlineNotice",
-        window.onlineMCSManagerNotice ? window.onlineMCSManagerNotice() : null
-      );
       this.breadCrumbs = [
         {
           title: to.name,

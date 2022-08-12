@@ -158,7 +158,7 @@ const routes = [
     meta: { activeMenu: "/instances" }
   },
   {
-    path: "/new_instace/:serviceUuid",
+    path: "/new_instance/:serviceUuid",
     name: "newInstance",
     component: NewInstance,
     meta: { activeMenu: "/instances" }

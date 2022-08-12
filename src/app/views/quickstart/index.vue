@@ -8,7 +8,7 @@
       <template #title>{{ title }}</template>
       <template #default>
         <div v-show="step == 0">
-          <el-row :gutter="10" justify="left" class="">
+          <el-row :gutter="10" justify="center" class="">
             <el-col
               :md="6"
               :offset="0"
@@ -27,7 +27,7 @@
         </div>
 
         <div v-if="step == 1">
-          <el-row :gutter="10" justify="left">
+          <el-row :gutter="10" justify="center">
             <template v-for="(item, index) in remoteObjects" :key="index">
               <el-col :md="6" :offset="0" @click="selectHost(item.uuid)" v-if="item.available">
                 <ItemGroup>
@@ -73,12 +73,12 @@ export default {
           title: this.$t("quickStart.quickItems[2].title"),
           subTitle: this.$t("quickStart.quickItems[2].subTitle"),
           value: 3
-        },
-        {
-          title: this.$t("quickStart.quickItems[3].title"),
-          subTitle: this.$t("quickStart.quickItems[3].subTitle"),
-          value: 4
         }
+        // {
+        //   title: this.$t("quickStart.quickItems[3].title"),
+        //   subTitle: this.$t("quickStart.quickItems[3].subTitle"),
+        //   value: 4
+        // }
       ]
     };
   },
@@ -102,7 +102,7 @@ export default {
     },
     selectHost(uuid) {
       this.$router.push({
-        path: `/new_instace/${uuid}`,
+        path: `/new_instance/${uuid}`,
         query: {
           type: this.quickStartType
         }
