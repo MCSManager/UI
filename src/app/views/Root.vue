@@ -21,21 +21,25 @@ export default {
     return {};
   },
   methods: {
+    toPage() {
+      const userInfo = this.$store.state.userInfo;
+      if (userInfo.permission >= 10) {
+        router.push({ path: "/overview" });
+      } else {
+        router.push({ path: "/home" });
+      }
+    },
     async init() {
       try {
         // In order to adapt to seamless login, data must be requested again here
-        if (this.$store.state.userInfo?.permission && this.$store.state.userInfo?.uuid) return;
+        if (this.$store.state.userInfo?.permission && this.$store.state.userInfo?.uuid)
+          return this.toPage();
         await setupUserInfo();
         const userInfo = this.$store.state.userInfo;
         if (!userInfo || !userInfo.uuid) throw new Error(`userInfo status error: ${userInfo}`);
-        if (userInfo.permission >= 10) {
-          router.push({ path: "/overview" });
-        } else {
-          router.push({ path: "/home" });
-        }
-        return;
+        this.toPage();
       } catch (error) {
-        console.log("App.vue setupUserInfo() ERROR:");
+        console.log("Root.vue setupUserInfo() err:");
         console.log(error);
         router.push({ path: "/login" });
       }
