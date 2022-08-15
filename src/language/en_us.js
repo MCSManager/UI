@@ -856,6 +856,8 @@ export default {
         updateSet: "Update Configuration",
         updateSetInfo: "Some configurations may require restarting the panel to take effect",
 
+        languageSetting: "Language",
+        languageSettingInfo: "After changing the language, the panel will synchronize all nodes, interfaces, etc. to the same language.",
         basicSetting: "Basic Settings",
         accessPort: "Panel access port",
         accessPortInfo: "The port for the browser to access the web panel. This port must be released by the firewall. Restart the panel to take effect.",
