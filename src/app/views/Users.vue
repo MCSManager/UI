@@ -35,7 +35,7 @@
               </el-col>
             </el-row>
 
-            <div class="instance-table-warpper">
+            <div class="instance-table-wrapper">
               <div></div>
               <div>
                 <el-pagination

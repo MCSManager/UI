@@ -43,7 +43,7 @@ export default {
 
 <style scoped>
 .box-card-title {
-  font-weight: 800;
+  font-weight: 600;
   margin-bottom: 12px;
   font-size: 14px;
   display: inline-block;

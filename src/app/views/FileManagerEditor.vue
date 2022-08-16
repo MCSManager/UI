@@ -6,7 +6,7 @@
   <Panel>
     <template #title>{{ $t("fileManagerEditor.title") }} {{ target }}</template>
     <template #default>
-      <div class="instance-table-warpper">
+      <div class="instance-table-wrapper">
         <div>
           <ItemGroup>
             <el-button size="small" type="success" @click="saveFile">

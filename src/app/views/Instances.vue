@@ -77,7 +77,7 @@
       </el-row>
 
       <div>
-        <div class="instance-table-warpper">
+        <div class="instance-table-wrapper">
           <div>
             <div class="color-red" v-if="!currentRemoteUuid">
               &nbsp;Error: {{ $t("instances.selectRemoteError") }}
@@ -281,9 +281,9 @@
                 }}</span>
 
                 <span class="color-red" v-else-if="scope.row.status == -1">{{
-                  $t("instances.status.budy")
+                  $t("instances.status.busy")
                 }}</span>
-                <span class="color-red" v-else>{{ $t("instances.status.budy") }}</span>
+                <span class="color-red" v-else>{{ $t("instances.status.busy") }}</span>
               </template>
             </el-table-column>
             <el-table-column
