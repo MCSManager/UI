@@ -275,7 +275,8 @@ export default {
       if (data.chart) this.systemChartData = data.chart;
       const remoteCount = data.remoteCount;
       const remote = data.remote;
-      // 计算总实例与运行实例数
+      
+      // Count the total instances and running instances
       let totalInstance = 0;
       let runningInstance = 0;
       for (const iterator of remote) {
