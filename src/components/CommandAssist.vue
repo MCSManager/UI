@@ -183,7 +183,7 @@ export default {
         programName: "",
         maxMemory: "",
         minMemory: "",
-        additional: "-Dfile.encoding=UTF-8 -Duser.language=cn -Duser.country=ZH",
+        additional: "-Dfile.encoding=UTF-8 -Duser.language=zh -Duser.country=CN",
         suffix: "nogui"
       }
     };
