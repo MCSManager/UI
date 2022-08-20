@@ -254,11 +254,7 @@
               </LineInfo>
               <LineInfo>
                 <i class="el-icon-date"></i> {{ $t("instances.endTime") }}:
-                {{
-                  instanceInfo.config.endTime
-                    ? new Date(instanceInfo.config.endTime).toLocaleDateString()
-                    : $t("instancesDetail.unlimited")
-                }}
+                {{ instanceInfo.config.endTime || $t("instancesDetail.unlimited") }}
               </LineInfo>
               <LineInfo>
                 <i class="el-icon-date"></i> {{ $t("instancesDetail.createDateTime") }}:

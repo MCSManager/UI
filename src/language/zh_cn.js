@@ -488,8 +488,8 @@ export default {
     },
     termSet: {
         title: "终端设置",
-        pty: "仿真终端（Beta）",
-        ptyInfo: "通过仿真终端转发程序来获得终端完全交互能力。<br />包括使用 Tab，Ctrl 功能键等，但需要额外安装依赖库，默认情况下已经安装。",
+        pty: "仿真终端",
+        ptyInfo: "通过仿真终端转发程序来获得终端完全交互能力。<br />包括使用 Tab，Ctrl 功能键等。",
         ifHaveProblems: "如果使用有问题，建议关闭。",
         ptySize: "仿真终端窗口大小",
         ptySizeInfo: "在仿真终端开启时生效，用于设置仿真终端高度和宽度，更改生效需要重启实例。",
