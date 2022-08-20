@@ -482,7 +482,7 @@ export default {
     },
     termSet: {
         title: "Terminal Settings",
-        pty: "emulated terminal (Beta)",
+        pty: "emulated terminal",
         ptyInfo: "The terminal is fully interactive by emulating the terminal forwarding program. <br />Including the use of Tab, Ctrl function keys, etc., but additional dependent libraries need to be installed, which are already installed by default.",
         ifHaveProblems: "If there is a problem with the use, it is recommended to close it.",
         ptySize: "Size of the emulated terminal window",
