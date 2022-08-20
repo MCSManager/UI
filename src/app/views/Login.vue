@@ -194,12 +194,7 @@ export default {
       try {
         await setupUserInfo();
       } catch (error) {
-        this.$notify({
-          title: this.$t("login.notify.title"),
-          message: this.$t("login.notify.message"),
-          type: "error",
-          duration: 0
-        });
+        this.$alert(this.$t("login.notify.message"), this.$t("login.notify.title"));
       }
       // wait for the animation to finish
       await sleep(1500);

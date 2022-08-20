@@ -53,7 +53,7 @@ export default {
 
         notify: {
             title: "Page not working correctly",
-            message: "Unable to obtain identity data, all functions of the webpage will be unavailable, please refresh the webpage or login again immediately"
+            message: "Unable to obtain identity data, you may have been banned, or network problems, please try to refresh the page"
         }
     },
     overview: {
