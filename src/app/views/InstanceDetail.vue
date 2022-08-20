@@ -598,7 +598,7 @@ export default {
           type: "error"
         });
       }
-      
+
       try {
         const postData = JSON.parse(JSON.stringify(this.instanceInfo.config));
         if (this.instanceInfo.config.docker.ports)

@@ -378,10 +378,10 @@ export default {
 
     },
     instanceTypeList: {
-        "Console Generic Program": "Console Generic Program",
-        "Steam server common": "Steam server common",
-        "MC Java Edition Generic": "MC Java Edition Generic",
-        "MC Bedrock Edition Universal": "MC Bedrock Edition Universal",
+        "General console program": "General Console Program",
+        "Steam Game Server": "Steam Game Server",
+        "MC Java Edition": "MC Java Edition",
+        "MC Bedrock Edition": "MC Bedrock Edition",
         "MC Spigot": "MC Spigot",
         "MC Paper": "MC Paper",
         "MC BungeeCord": "MC BungeeCord",

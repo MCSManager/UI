@@ -19,8 +19,10 @@ export function statusCodeToText(statusCode) {
 }
 
 export function typeTextToReadableText(type) {
+  const $t = i18n.global.t
   const text = INSTANCE_TYPE_TRANSLATION[type];
-  if (text) return text;
+
+  if (text) return $t('instanceTypeList.' + text);
   else return type;
 }
 

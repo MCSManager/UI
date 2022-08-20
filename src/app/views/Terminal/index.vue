@@ -264,7 +264,6 @@
                 <i class="el-icon-date"></i> {{ $t("terminal.lastDatetime") }}:
                 {{ instanceInfo.config.lastDatetime }}
               </LineInfo>
-              <!-- <LineInfo><i class="el-icon-document"></i> 标签: {{ instanceInfo.tag }}</LineInfo> -->
               <LineInfo
                 ><i class="el-icon-document"></i> {{ $t("terminal.ie") }}:
                 {{ instanceInfo.config.ie }} {{ $t("terminal.oe") }}:

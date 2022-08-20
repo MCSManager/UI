@@ -383,10 +383,10 @@ export default {
 
     },
     instanceTypeList: {
-        "universal": "控制台通用程序",
-        "Steam": "Steam 服务端通用",
-        "MC Java": "MC Java 版通用",
-        "MC BDS": "MC 基岩版通用",
+        "General console program": "控制台程序（通用）",
+        "Steam Game Server": "Steam 游戏服务端",
+        "MC Java Edition": "Minecraft Java 版",
+        "MC Bedrock Edition": "Minecraft 基岩版",
         "MC Spigot": "MC Spigot",
         "MC Paper": "MC Paper",
         "MC BungeeCord": "MC BungeeCord",
