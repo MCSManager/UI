@@ -138,9 +138,24 @@
                 {{ $t("newInstances.uploadFileInfo") }}
               </p>
             </div>
-            <el-button @click="uploadFile(1)" :disabled="assist.creating">{{
+            <!-- <el-button @click="uploadFile(1)" :disabled="assist.creating">{{
               $t("newInstances.uploadFile")
-            }}</el-button>
+            }}</el-button> -->
+            <el-upload
+              :disabled="assist.creating"
+              action=""
+              ref="upload"
+              :before-upload="(file) => uploadFile(file, 1)"
+              :auto-upload="true"
+              :show-file-list="false"
+              :limit="1"
+              style="display: inline-block"
+            >
+              <el-button size="small" type="success" @click="upload">
+                <i class="el-icon-plus"></i> {{ $t("newInstances.uploadFile") }}
+              </el-button>
+            </el-upload>
+
             <div v-if="percentComplete > 0">
               <el-progress :percentage="percentComplete"></el-progress>
             </div>
@@ -203,9 +218,24 @@
               <p class="sub-title-title">{{ $t("newInstances.uploadZip") }}</p>
               <p class="sub-title-info">{{ $t("newInstances.uploadZipInfo") }}</p>
             </div>
-            <el-button @click="uploadFile(2)" :disabled="assist.creating">{{
+            <!-- <el-button @click="uploadFile(2)" :disabled="assist.creating">{{
               $t("newInstances.uploadZipButton")
-            }}</el-button>
+            }}</el-button> -->
+            <el-upload
+              :disabled="assist.creating"
+              action=""
+              ref="upload"
+              :before-upload="(file) => uploadFile(file, 2)"
+              :auto-upload="true"
+              :show-file-list="false"
+              :limit="1"
+              style="display: inline-block"
+            >
+              <el-button size="small" type="success" @click="upload">
+                <i class="el-icon-plus"></i> {{ $t("newInstances.uploadZipButton") }}
+              </el-button>
+            </el-upload>
+
             <div v-if="percentComplete > 0">
               <el-progress :percentage="percentComplete"></el-progress>
             </div>
@@ -356,11 +386,16 @@ export default {
   },
   methods: {
     // create instance and upload file
-    async uploadFile(type) {
+    async uploadFile(file, type) {
       if (!this.form.nickname || (!this.assist.commandtemplate && !this.form.startCommand)) {
         return this.$message({ message: this.$t("newInstances.pleaseFinish"), type: "error" });
       }
-      this.zipCode = await this.$refs.selectUnzipCode.prompt();
+
+      // Only zip need code select
+      if (type === 2) {
+        this.zipCode = await this.$refs.selectUnzipCode.prompt();
+      }
+
       await this.$confirm(
         this.$t("newInstances.uploadAndCreate"),
         this.$t("notify.confirmDelTitle"),
@@ -370,14 +405,15 @@ export default {
           type: "warning"
         }
       );
+
       this.assist.uploadFileType = type;
-      this.$refs.fileButtonHidden.click();
+      await this.selectedFile(file);
+      return new Promise((o, j) => j(false));
     },
     // file is selected, start uploading
-    async selectedFile() {
+    async selectedFile(file) {
       try {
         this.assist.creating = true;
-        const file = this.$refs.fileButtonHidden.files[0];
         // command template substitution
         if (this.assist.uploadFileType === 1) {
           this.form.startCommand = this.assist.commandtemplate.replace("${ProgramName}", file.name);
