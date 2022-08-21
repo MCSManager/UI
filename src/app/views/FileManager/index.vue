@@ -5,7 +5,11 @@
 <template>
   <div>
     <Panel>
-      <template #title>{{ $t("fileManager.title") }}</template>
+      <template #title>
+        <span id="fileManagerTop">
+          {{ $t("fileManager.title") }}
+        </span>
+      </template>
       <template #default>
         <el-row :gutter="20">
           <el-col :xs="24" :md="6" :offset="0">
@@ -171,6 +175,21 @@
             </template>
           </el-table-column>
         </el-table>
+
+        <div class="row-mt page-pagination">
+          <div>
+            <el-link type="primary" :underline="false" href="javascript:void(0);">-</el-link>
+          </div>
+          <el-pagination
+            small
+            background
+            layout="prev, pager, next"
+            v-model:currentPage="pageParam.page"
+            :page-size="pageParam.pageSize"
+            :total="pageParam.total"
+            @current-change="currentChange"
+          />
+        </div>
       </template>
     </Panel>
 

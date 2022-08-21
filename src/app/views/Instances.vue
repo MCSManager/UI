@@ -312,6 +312,29 @@
       </Panel>
     </el-col>
   </el-row>
+
+  <el-row :gutter="20">
+    <el-col :span="24" :offset="0">
+      <div class="instance-table-wrapper">
+        <div>
+          <div class="color-red" v-if="!currentRemoteUuid">
+            &nbsp;Error: {{ $t("instances.selectRemoteError") }}
+          </div>
+        </div>
+        <div>
+          <el-pagination
+            background
+            layout="prev, pager, next"
+            :total="maxPage"
+            v-model:currentPage="page"
+            :page-size="1"
+            @current-change="handleCurrentChange"
+            small
+          ></el-pagination>
+        </div>
+      </div>
+    </el-col>
+  </el-row>
 </template>
 
 <style scoped>
