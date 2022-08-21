@@ -56,9 +56,9 @@ export default {
     return {
       v: this.visible,
       options: [
+        { label: this.$t("selectUnzipCode.utf8"), value: "utf-8" },
         { label: this.$t("selectUnzipCode.gbk"), value: "gbk" },
-        { label: this.$t("selectUnzipCode.big5"), value: "big5" },
-        { label: this.$t("selectUnzipCode.utf8"), value: "utf-8" }
+        { label: this.$t("selectUnzipCode.big5"), value: "big5" }
       ],
       selected: "",
       func: null,
