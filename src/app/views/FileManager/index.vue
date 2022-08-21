@@ -174,11 +174,6 @@
       </template>
     </Panel>
 
-    <!-- Hidden file upload button -->
-    <form ref="fileForm" action="" method="post">
-      <input type="file" ref="fileButtonHidden" @change="selectedFile" hidden="hidden" />
-    </form>
-
     <SelectUnzipCode ref="selectUnzipCode"></SelectUnzipCode>
   </div>
 </template>

@@ -321,9 +321,6 @@
     >
     </CommandAssist>
 
-    <!-- Hidden file upload button -->
-    <input type="file" ref="fileButtonHidden" @change="selectedFile" hidden="hidden" />
-
     <SelectUnzipCode ref="selectUnzipCode"></SelectUnzipCode>
   </div>
 </template>
