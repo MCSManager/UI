@@ -44,9 +44,23 @@
               <el-button size="small" @click="paste">
                 <i class="el-icon-tickets"></i> {{ $t("fileManager.paste") }}
               </el-button>
-              <el-button size="small" type="success" @click="upload">
+              <!-- <el-button size="small" type="success" @click="upload">
                 <i class="el-icon-plus"></i> {{ $t("fileManager.uploadFile") }}
-              </el-button>
+              </el-button> -->
+              <el-upload
+                action=""
+                ref="upload"
+                :before-upload="handleUploadBefore"
+                :auto-upload="true"
+                :show-file-list="false"
+                :limit="1"
+                style="display: inline-block"
+              >
+                <el-button size="small" type="success" @click="upload">
+                  <i class="el-icon-plus"></i> {{ $t("fileManager.uploadFile") }}
+                </el-button>
+              </el-upload>
+
               <el-button size="small" type="danger" @click="deleteFiles">
                 <i class="el-icon-document-delete"></i> {{ $t("general.delete") }}
               </el-button>
@@ -597,9 +611,10 @@ export default {
     },
 
     // file is selected, start uploading
-    async selectedFile() {
+    async selectedFile(file) {
       try {
-        const file = this.$refs.fileButtonHidden.files[0];
+        // const file = this.$refs.fileButtonHidden.files[0];
+        console.log("selectedFile:", file);
         const formData = new FormData();
         formData.append("file", file);
         formData.append("source", "MCSManager/FileManager");
@@ -636,7 +651,7 @@ export default {
       const cfg = result.data.data;
       this.uploadConfig.addr = parseforwardAddress(cfg.addr, "http");
       this.uploadConfig.password = cfg.password;
-      this.$refs.fileButtonHidden.click();
+      // this.$refs.fileButtonHidden.click();
     },
 
     //download
@@ -666,6 +681,12 @@ export default {
         }
       });
       this.statusInfo = status;
+    },
+
+    async handleUploadBefore(v) {
+      await this.upload();
+      await this.selectedFile(v);
+      return new Promise((o, j) => j(false));
     }
   }
 };
