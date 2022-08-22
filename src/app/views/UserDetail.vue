@@ -48,7 +48,7 @@
   </el-row>
   <el-row :gutter="20">
     <el-col :md="8" :offset="0">
-      <Panel style="height: 300px">
+      <Panel style="height: 350px">
         <template #title>{{ $t("userDetail.attention") }}</template>
         <template #default>
           <div class="sub-title">
@@ -73,29 +73,7 @@
       </Panel>
     </el-col>
     <el-col :md="8" :offset="0">
-      <!-- <Panel>
-        <template #title>Username</template>
-        <template #default>
-          <div class="sub-title row-mt">
-            <p class="sub-title-title require-field">Change username</p>
-            <p class="sub-title-info">Support Chinese and alphabet, 2 to 18 characters in length</p>
-          </div>
-          <el-input
-            size="small"
-            placeholder="Keep the original value"
-            v-model="userData.userName"
-            :readonly="readonly.a"
-            @focus="() => (readonly.a = false)"
-            autocomplete="off"
-          ></el-input>
-          <div style="text-align: right">
-            <el-button size="small" class="row-mt" @click="update(1)" type="danger" plain
-              >Update Username</el-button
-            >
-          </div>
-        </template>
-      </Panel> -->
-      <Panel style="height: 300px">
+      <Panel style="height: 350px">
         <template #title>{{ $t("userDetail.updatePasswd") }}</template>
         <template #default>
           <el-form
@@ -143,7 +121,7 @@
     </el-col>
 
     <el-col :md="8" :offset="0">
-      <Panel style="height: 300px">
+      <Panel style="height: 350px">
         <template #title>{{ $t("userDetail.apiKey") }}</template>
         <template #default>
           <div class="sub-title row-mt">

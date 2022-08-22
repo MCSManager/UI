@@ -353,24 +353,24 @@ export default {
 
         console: "Console",
         fileManager: "File Manager",
-        back: "return",
+        back: "back",
         saveSet: "Save configuration",
 
         dockerTableDict: [
             {
-                label: "Communication protocol (tcp/udp)"
+                label: "Protocol (tcp/udp)"
             },
             {
-                label: "corresponding host port"
+                label: "Host port"
             },
             {
-                label: "corresponding container port"
+                label: "Container port"
             },
             {
-                label: "host absolute path"
+                label: "Host path"
             },
             {
-                label: "Mount to container path"
+                label: "Mount"
             }
         ],
 
@@ -457,7 +457,7 @@ export default {
             browserCannotConnect2: "The browser could not establish a connection with the remote node",
             maybe: "Maybe it's because you haven't opened the port of the remote node, or you're using an intranet address",
             solution: "Possible solutions",
-            solutions: '<li>Ensure that the address of the remote node is a public network address and the port of the remote node is open. </li> <li> If there is a reverse proxy, FRP, HTTPS, etc., please use the wss:// protocol connection, <br /> and the remote node address also needs HTTPS, WSS support. </li> <li> Learn more at <a href="https://docs.mcsmanager.com" target="_blank" rel="noopener noreferrer" >https://docs.mcsmanager.com</a > many</li>',
+            solutions: '<li>Ensure that the address of the remote node is a public network address and the port of the remote node is open. </li> <li> If there is a reverse proxy, FRP, HTTPS, etc., please use the wss:// protocol connection, <br /> and the remote node address also needs HTTPS, WSS support. </li> <li> Learn more at <a href="https://mcsmanager.com" target="_blank" rel="noopener noreferrer" >https://mcsmanager.com</a > many</li>',
         },
 
         cantConnectTerm: "Unable to establish a connection with the terminal",
@@ -779,12 +779,12 @@ export default {
         remoteImageManage: "Remote host image management",
         newImage: "New Image",
         needTime: "It may take some time to create a new image.",
-        remoteImageList: "Remote host image list",
+        remoteImageList: "Remote host images",
         remoteImageListInfo: "Image building and container operation depend on Docker software, and all remote nodes on the physical host will share all images.",
         storage: "occupied space",
         details: "Details",
 
-        remoteContainerList: "Remote host container list",
+        remoteContainerList: "Remote host containers",
         remoteContainerListInfo: "The container list represents all application instances that are running in a separate mirroring environment. The list here does not only include containers started by the panel.",
         useImage: "Use Image",
         status: "Status",
@@ -1002,7 +1002,7 @@ export default {
         extension: "Panel Extension",
         settings: "Settings",
         newImage: "Create Image",
-        terminal: "Instance Console",
+        terminal: "Console",
         processConfigFile: "Instance configuration file",
         processConfig: "Instance specific configuration",
         fileManager: "Instance file management",
