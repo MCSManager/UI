@@ -837,7 +837,7 @@ export default {
         attention: "The /workspace directory must be created, this directory will be automatically mounted to the instance's file root directory",
 
         requireInput: "Required, please enter content",
-        afterCreate: "Image name and version ID after creation",
+        afterCreate: "Image name and version",
         imageName: "[Required] Image name, such as openjdk",
         imageVer: "[Required] Image version, such as 1.0 1.1 latest",
         toSelectImage: "Back to image selection",

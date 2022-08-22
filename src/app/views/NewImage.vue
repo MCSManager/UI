@@ -167,9 +167,19 @@
 import Panel from "../../components/Panel";
 import LineOption from "../../components/LineOption";
 import SelectBlock from "../../components/SelectBlock";
-import axios from "axios";
-import { API_IMAGES, API_PROGRESS, API_SERVICE } from "../service/common";
+
+import { API_IMAGES, API_PROGRESS } from "../service/common";
 import { request } from "../service/protocol";
+import {
+  openjdk16,
+  openjdk16CN,
+  openjdk17,
+  openjdk17CN,
+  openjdk8,
+  openjdk8CN,
+  ubuntu18,
+  ubuntu18CN
+} from "../service/build_dockerfile";
 
 export default {
   components: { Panel, SelectBlock, LineOption },
@@ -183,57 +193,36 @@ export default {
       progress: null
     };
   },
+  computed: {
+    isEN() {
+      return this.$i18n.locale === "en_us";
+    },
+    isCN() {
+      return this.$i18n.locale === "zh_cn";
+    }
+  },
   methods: {
     forward(v) {
       this.step = v;
     },
     selectType(type) {
       if (type === 1) {
-        this.dockerFile = `FROM openjdk:8-jre
-# RUN sed -i -E 's/http:\\/\\/(deb|security).debian.org/http:\\/\\/mirrors.tuna.tsinghua.edu.cn/g' /etc/apt/sources.list
-RUN apt update && apt install -y locales
-RUN echo "zh_CN.UTF-8 UTF-8">/etc/locale.gen && locale-gen
-ENV LANG=zh_CN.UTF-8
-ENV LANGUAGE=zh_CN.UTF-8
-ENV LC_ALL=zh_CN.UTF-8
-ENV TZ=Asia/Shanghai
-RUN mkdir -p /workspace
-WORKDIR /workspace
-`;
+        this.dockerFile = this.isCN ? openjdk8CN : openjdk8;
         this.name = "mcsm-openjdk";
         this.version = "8";
       }
       if (type === 2) {
-        this.dockerFile = `FROM openjdk:16.0.2
-RUN mkdir -p /workspace
-ENV TZ=Asia/Shanghai
-WORKDIR /workspace
-`;
+        this.dockerFile = this.isCN ? openjdk16CN : openjdk16;
         this.name = "mcsm-openjdk";
         this.version = "16";
       }
       if (type === 3) {
-        this.dockerFile = `FROM ubuntu:18.04
-ENV TZ=Asia/Shanghai
-# 
-# RUN sed -i -E 's/http:\\/\\/(archive|security).ubuntu.com/http:\\/\\/mirrors.tuna.tsinghua.edu.cn/g' /etc/apt/sources.list
-RUN apt update && apt -y install libcurl4 && DEBIAN_FRONTEND="noninteractive" apt -y install tzdata
-RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
-RUN mkdir -p /workspace
-WORKDIR /workspace
-`;
+        this.dockerFile = this.dockerFile = this.isCN ? ubuntu18CN : ubuntu18;
         this.name = "mcsm-ubuntu";
         this.version = "18.04";
       }
       if (type === 5) {
-        this.dockerFile = `FROM openjdk:17
-RUN mkdir -p /workspace
-ENV LANG=zh_CN.UTF-8
-ENV LANGUAGE=zh_CN.UTF-8
-ENV LC_ALL=zh_CN.UTF-8
-ENV TZ=Asia/Shanghai
-WORKDIR /workspace
-`;
+        this.dockerFile = this.dockerFile = this.isCN ? openjdk17CN : openjdk17;
         this.name = "mcsm-openjdk";
         this.version = "17";
       }
@@ -306,13 +295,7 @@ WORKDIR /workspace
       }
     }
   },
-  async mounted() {
-    const result = await axios.get(API_SERVICE);
-    const responseObjects = result.data.data;
-    responseObjects.forEach((v) => {
-      this.services.push(v);
-    });
-  }
+  async mounted() {}
 };
 </script>
 
