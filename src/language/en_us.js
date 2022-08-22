@@ -33,26 +33,26 @@ export default {
 
     root: {
         title: "Processing...",
-        private: "Personal Data",
+        private: "Personal",
         logout: "Logout",
         logoutSuccess: "Logout successful",
         logoutSuccessInfo: "Welcome next time",
         logoutError: "Logout failed",
     },
     login: {
-        title: "Authentication",
+        title: "Login",
         titleInfo: "Log in to the panel using the server's MCSManager account",
         account: "Account",
         passWord: "password",
         forgotPassword: "Forgot Password",
         forgotPasswordInfo:
-            "If you are an administrator and log in for the first time, the default account password is: root, 123456. If you are an ordinary user, please ask your service provider to help you reset your password. If you are an administrator, please delete mcsmanager/web /data/Users folder to restart the panel to reload users.",
+            "If you are a regular user, please ask your service provider to reset your password. If you are an administrator, back up and delete the mcsmanager/web/data/Users folder to reinstall MCSManager.",
         login: "Login",
         logging: "Login",
         isNull: "Account or password cannot be null",
         errorCause: "The account or password is incorrect, please check and try again",
-        logBackIn: "login again",
-        loginSuccess: "Login successful",
+        logBackIn: "Try Again",
+        loginSuccess: "Successful",
 
         notify: {
             title: "The page doesn't work correctly",
@@ -405,8 +405,8 @@ export default {
         controlGroup: "Operation",
         confirmOperate: "Are you sure you want to perform this operation?",
         start: "Start instance",
-        stop: "Close the instance",
-        restart: "Restart the instance",
+        stop: "Close instance",
+        restart: "Restart instance",
         kill: "Force kill instance",
         killTask: "Terminate running task",
         updateInstance: "Update/Install Instance",
@@ -428,7 +428,7 @@ export default {
         inputCmd: "You can enter commands here, press Enter to execute",
         cmdHistory: "Command History",
         noCmdHistory: "No command history yet",
-        panelOnline: "Number of people online on the panel side",
+        panelOnline: "Online",
         panelOnlineInfo: "Trends of people online every 10 minutes for a total of 10 hours",
 
         pingConfig: {
@@ -620,11 +620,11 @@ export default {
     },
     users: {
         userList: "User List",
-        newUser: "New User",
+        newUser: "Create User",
         delUser: "Delete User",
         userName: "Username",
         userNameInfo: "Required, 6 to 12 characters, support Chinese, English and characters",
-        regTime: "Registration time",
+        regTime: "Register",
         lastTime: "Last login",
 
         permit: {
@@ -675,10 +675,10 @@ export default {
     },
     userDetail: {
         basicInfo: "Information",
-        uuid: "Unique Identifier",
+        uuid: "UUID",
         status: "Account Status",
-        loginTime: "Login time",
-        api: "Interface",
+        loginTime: "Login",
+        api: "API",
         attention: "Notes",
         aboutName: "About Username",
         aboutNameInfo: "User name can only exist uniquely. When modifying, the panel will check whether there is a conflict. If a conflict is found, the user name cannot be modified. The user name should not contain special characters or characters that are incompatible with the old version of the system.",
@@ -878,9 +878,9 @@ export default {
             "Most settings of the panel are very important. Under normal circumstances, most parameters do not need to be changed. If you do not know what a parameter represents, it is recommended that you do not modify it.",
 
         limitAndSecurity: "Limit and Security",
-        canFileManager: "Allow ordinary users to use the file management function",
+        canFileManager: "Allow general users to use the file management function",
         canFileManagerInfo:
-            "File management is a resource-consuming and difficult-to-control function. If your ordinary users do not have any requirements for file management, you can prohibit users from using file management.",
+            "File management is a resource-consuming and difficult-to-control function. If your general users do not have any requirements for file management, you can prohibit users from using file management.",
 
         crossAPI: "Cross-Origin Request API",
         crossAPIInfo:
@@ -908,17 +908,17 @@ export default {
     },
     home: {
         totalInstance: "Total instance",
-        totalInstanceCount: "The total number of instances assigned to you by the administrator",
+        totalInstanceCount: "The total number of instances",
         running: "running",
         runCount: "Number of instances running",
         outOfRunning: "Not running",
         outOfRunningCount: "Number of instances not running",
         maintaining: "Maintaining",
-        maintainingInfo: "Number of instances temporarily unavailable due to host busy/maintenance",
+        maintainingInfo: "Number of instances unavailable",
         personalInfo: "Personal Information",
         userName: "Username",
-        registerTime: "Register Time",
-        loginTime: "Last login",
+        registerTime: "Register",
+        loginTime: "Last Login",
         permission: "Permission",
         possessedInstanceList: "List of owned instances",
         stopping: "stopping",
@@ -926,7 +926,7 @@ export default {
         unknownStatus: "Unknown Status",
         updateSuccess: "Update Success",
         admin: "Manage users",
-        user: "Ordinary user",
+        user: "general user",
 
     },
     quickStart: {
@@ -1018,7 +1018,7 @@ export default {
     },
     aside: {
         basic: "Basic",
-        user: "User",
+        user: "Users",
         advanced: "Advanced",
         node: "Multi-Node",
         more: "More",
