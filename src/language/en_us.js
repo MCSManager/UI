@@ -218,10 +218,10 @@ export default {
             }
         ],
         back: "Back",
-        instanceNameInfo: "Support Chinese and ensure uniqueness as much as possible",
+        instanceNameInfo: "Instance nickname",
         instanceNameInfo2: "Instance name, as unique as possible",
         commandTemplate: "Startup Command Template",
-        commandTemplateText: "where&#36;&#123;&#80;&#114;&#111;&#103;&#114;&#97;&#109;&#78;&#97;&# 109;&#101;&#125; represents the name of the file you upload next, under normal circumstances there is no need to modify it",
+        commandTemplateText: "where $ProgramName represents the name of the file you upload next, under normal circumstances there is no need to modify it",
         cmdInfo: "eg java -jar server.jar",
         cmdAssist: "Command Assistant",
         fileDir: "Server file directory",
