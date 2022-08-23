@@ -344,6 +344,11 @@
         </Panel>
         <Panel>
           <template #title>{{ $t("terminal.cmdHistory") }}</template>
+          <template #rtitle>
+            <span class="terminal-right-botton" @click="deleteCommandHistory">
+              <i class="el-icon-delete"></i>
+            </span>
+          </template>
           <template #default>
             <div v-if="commandhistory.length > 0">
               <ItemGroup>
@@ -706,6 +711,10 @@ export default {
         this.commandhistory.pop();
       }
       localStorage.setItem("CommandHistory", JSON.stringify(this.commandhistory));
+    },
+    deleteCommandHistory() {
+      localStorage.setItem("CommandHistory", JSON.stringify([]));
+      this.commandhistory = [];
     },
     startInterval() {
       if (!this.renderTask) this.renderTask = setInterval(this.renderFromSocket, 1000);
@@ -1143,7 +1152,7 @@ export default {
 
 .terminal-right-botton {
   font-size: 14px;
-  padding: 0 6px;
+  padding: 2px 6px;
   margin: 0 2px;
   cursor: pointer;
   transition: all 0.5s;
