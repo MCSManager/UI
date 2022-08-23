@@ -418,8 +418,8 @@ export default {
         eventTask: "Event Task",
         instanceDetail: "Advanced settings",
         lastDatetime: "Last start",
-        ie: "input code",
-        oe: "Output encoding",
+        ie: "Input",
+        oe: "Output",
 
         newFullScreen: "Open new full screen",
         fullScreen: "Full screen",
