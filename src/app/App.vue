@@ -22,15 +22,18 @@ Copyright (C) 2022 MCSManager <mcsmanager-dev@outlook.com>
         <Aside />
       </el-aside>
     </div>
+
     <el-container>
       <el-main>
-        <el-row>
-          <el-col>
-            <Header v-bind:breadcrumbsList="breadCrumbs" :aside="toAside" />
-          </el-col>
-        </el-row>
-        <div v-loading="loading" style="min-height: 50px">
-          <router-view v-if="!loading"></router-view>
+        <div :class="{ 'max-width-limit': !isTopPermission }">
+          <el-row>
+            <el-col>
+              <Header v-bind:breadcrumbsList="breadCrumbs" :aside="toAside" />
+            </el-col>
+          </el-row>
+          <div v-loading="loading" style="min-height: 50px">
+            <router-view v-if="!loading"></router-view>
+          </div>
         </div>
       </el-main>
     </el-container>
@@ -118,3 +121,11 @@ export default {
   }
 };
 </script>
+
+<style scoped>
+.max-width-limit {
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+</style>
