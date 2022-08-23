@@ -32,7 +32,7 @@
               <SystemIndex></SystemIndex>
             </div> -->
 
-            <div class="config-item">
+            <div class="config-item" style="margin-top: 0px">
               <div class="sub-title">
                 <p class="sub-title-title">{{ $t("settings.languageSetting") }}</p>
                 <p class="sub-title-info">
@@ -98,7 +98,7 @@
       <template #default>
         <el-row :gutter="20">
           <el-col :md="12">
-            <div class="config-item">
+            <div class="config-item" style="margin-top: 0px">
               <div class="sub-title">
                 <p class="sub-title-title">{{ $t("settings.canFileManager") }}</p>
                 <p class="sub-title-info">

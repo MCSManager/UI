@@ -411,7 +411,7 @@ export default {
         killTask: "Terminate running task",
         updateInstance: "Update/Install Instance",
 
-        functionGroup: "Control",
+        functionGroup: "Function",
         processConfig: "specific configuration",
         termSet: "Term Settings",
         statusQuery: "Status Query",
@@ -674,7 +674,7 @@ export default {
         select: "Select",
     },
     userDetail: {
-        basicInfo: "Information",
+        basicInfo: "Basic",
         uuid: "UUID",
         status: "Account Status",
         loginTime: "Login",

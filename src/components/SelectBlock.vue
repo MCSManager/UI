@@ -5,7 +5,7 @@
 <template>
   <div class="select-block" :style="style">
     <div>
-      <p class="color-black" style="font-size: 14px; font-weight: 600; letter-spacing: -0.4px">
+      <p class="color-black block-title">
         <slot name="title"></slot>
       </p>
       <p class="sub-title">
@@ -28,6 +28,12 @@ export default {
 </script>
 
 <style scoped>
+.block-title {
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: -0.4px;
+  margin: 10px 0px !important;
+}
 .select-block {
   border: 1px solid #dcdfe6;
   cursor: pointer;

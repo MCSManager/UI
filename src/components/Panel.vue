@@ -41,6 +41,12 @@ export default {
 };
 </script>
 
+<style>
+.box-card-shadow p:first-child {
+  margin-top: 0px;
+}
+</style>
+
 <style scoped>
 .box-card-title {
   font-weight: 600;
