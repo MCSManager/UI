@@ -4,8 +4,7 @@ $--color-primary: #409eff;
 
 body,
 html {
-  font-family: "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei",
-    Arial, sans-serif;
+  font-family: Helvetica, Arial, sans-serif;
   margin: 0;
   height: 100%;
   background-color: #eef1f5;
@@ -67,7 +66,7 @@ a {
 
 $item-group-margin: 5px;
 
-.el-button+.el-button {
+.el-button + .el-button {
   margin-left: $item-group-margin;
 }
 
@@ -75,14 +74,14 @@ $item-group-margin: 5px;
   margin: 0px -5px;
 }
 
-.item-responsive-group>* {
+.item-responsive-group > * {
   margin-left: $item-group-margin;
   margin-right: $item-group-margin;
   margin-bottom: $item-group-margin;
   margin-top: $item-group-margin;
 }
 
-.item-responsive-group-only-lr>* {
+.item-responsive-group-only-lr > * {
   margin-left: $item-group-margin;
   margin-right: $item-group-margin;
 }
