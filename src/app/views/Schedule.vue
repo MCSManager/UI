@@ -28,7 +28,7 @@
             <span v-else>{{ $t("schedule.infinite") }}</span>
           </template>
         </el-table-column>
-        <el-table-column prop="action" :label="$t('schedule.action')" width="100px">
+        <el-table-column prop="action" :label="$t('schedule.action')" width="180px">
           <template #default="scope">
             <span v-if="scope.row.action === 'command'">{{ $t("schedule.sendCmd") }}</span>
             <span v-if="scope.row.action === 'stop'">{{ $t("schedule.stop") }}</span>
@@ -37,7 +37,7 @@
             <span v-if="scope.row.action === 'kill'">{{ $t("schedule.kill") }}</span>
           </template>
         </el-table-column>
-        <el-table-column :label="$t('terminal.type')" style="text-align: center" width="120">
+        <el-table-column :label="$t('terminal.type')" style="text-align: center" width="180">
           <template #default="scope">
             <span v-if="scope.row.type === 1">{{ $t("schedule.intervalsTask") }}</span>
             <span v-if="scope.row.type === 2">{{ $t("schedule.cycleTask") }}</span>
@@ -47,13 +47,13 @@
         <el-table-column
           prop="time"
           :label="$t('schedule.triggerTime')"
-          width="190px"
+          width="240px"
         ></el-table-column>
-        <el-table-column :label="$t('general.operate')" style="text-align: center" width="120">
+        <el-table-column :label="$t('general.operate')" style="text-align: center" width="100">
           <template #default="scope">
-            <el-button type="danger" size="mini" @click="deleteTask(scope.row)">{{
-              $t("general.delete")
-            }}</el-button>
+            <el-button type="danger" size="mini" @click="deleteTask(scope.row)">
+              {{ $t("general.delete") }}
+            </el-button>
           </template>
         </el-table-column>
       </el-table>
@@ -283,11 +283,11 @@ export default {
             }
             iterator.time =
               this.$t("schedule.every") +
-              `${h}` +
+              ` ${h}` +
               this.$t("schedule.hour") +
-              `${m}` +
+              ` ${m}` +
               this.$t("schedule.min") +
-              `${s}` +
+              ` ${s}` +
               this.$t("schedule.sec");
           }
           if (iterator.type === 2) {
@@ -299,7 +299,7 @@ export default {
             const s = timeArr[0];
             const w = timeArr[5];
             iterator.time =
-              this.$t("schedule.on") + `${w}` + this.$t("schedule.week") + `${h}:${m}:${s}`;
+              this.$t("schedule.on") + ` ${w} ` + this.$t("schedule.week") + ` ${h}:${m}:${s}`;
           }
           if (iterator.type === 3) {
             const time = iterator.time;
@@ -313,9 +313,9 @@ export default {
             iterator.time =
               `${mm}` +
               this.$t("schedule.every") +
-              `${dd}` +
+              ` ${dd}` +
               this.$t("schedule.every") +
-              `${h}:${m}:${s}`;
+              ` ${h}:${m}:${s}`;
           }
         }
         this.tasks = tasks;
@@ -339,7 +339,9 @@ export default {
           }
         });
         this.$message({ type: "success", message: this.$t("general.deleteFinish") });
-        await this.render();
+        setTimeout(() => {
+          this.render();
+        }, 500);
       } catch (error) {
         this.$message({ type: "error", message: error.toString() });
       }
