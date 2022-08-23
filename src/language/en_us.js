@@ -1002,7 +1002,7 @@ export default {
         extension: "Panel Extension",
         settings: "Settings",
         newImage: "Create Image",
-        terminal: "Console",
+        terminal: "Terminal",
         processConfigFile: "Instance configuration file",
         processConfig: "Instance specific configuration",
         fileManager: "Instance file management",
