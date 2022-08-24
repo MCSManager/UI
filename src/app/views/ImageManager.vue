@@ -40,16 +40,16 @@
         <el-table-column
           prop="RepoTags"
           :label="$t('userResources.name')"
-          width="120px"
+          width="200px"
         ></el-table-column>
 
-        <el-table-column :label="$t('imageManager.storage')" width="100px">
+        <el-table-column :label="$t('imageManager.storage')" width="140px">
           <template #default="scope">
             <span>{{ parseInt(scope.row.Size / 1024 / 1024) }}MB</span>
           </template>
         </el-table-column>
 
-        <el-table-column :label="$t('general.operate')" style="text-align: center" width="160px">
+        <el-table-column :label="$t('general.operate')" style="text-align: center" width="210px">
           <template #default="scope">
             <el-button size="mini" @click="toDetail(scope.row)">{{
               $t("imageManager.details")
@@ -83,11 +83,11 @@
         <el-table-column prop="Image" :label="$t('imageManager.useImage')"></el-table-column>
         <el-table-column prop="State" :label="$t('imageManager.status')"></el-table-column>
         <el-table-column prop="Status" :label="$t('imageManager.situation')"></el-table-column>
-        <el-table-column :label="$t('general.operate')" style="text-align: center" width="90px">
+        <el-table-column :label="$t('general.operate')" style="text-align: center" width="100px">
           <template #default="scope">
-            <el-button size="mini" @click="toDetail(scope.row)">{{
-              $t("imageManager.details")
-            }}</el-button>
+            <el-button size="mini" @click="toDetail(scope.row)">
+              {{ $t("imageManager.details") }}
+            </el-button>
           </template>
         </el-table-column>
       </el-table>

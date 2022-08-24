@@ -55,7 +55,9 @@
         </el-table-column>
         <el-table-column :label="$t('services.platform')" width="100">
           <template #default="scope">
-            <div v-if="scope.row.system">{{ scope.row.system.platform }}</div>
+            <div v-if="scope.row.system">
+              {{ scope.row.system.platform == "win32" ? "windows" : scope.row.system.platform }}
+            </div>
           </template>
         </el-table-column>
         <el-table-column label="CPU">
@@ -65,12 +67,12 @@
             </div>
           </template>
         </el-table-column>
-        <el-table-column :label="$t('overview.mem')" width="160">
+        <el-table-column :label="$t('overview.mem')">
           <template #default="scope">
             <div v-if="scope.row.system">{{ scope.row.system.memText }}</div>
           </template>
         </el-table-column>
-        <el-table-column :label="$t('services.instanceStatus')">
+        <el-table-column :label="$t('services.instanceStatus')" width="140">
           <template #default="scope">
             <div v-if="scope.row.instance">
               {{ scope.row.instance.running }}/{{ scope.row.instance.total }}
@@ -109,7 +111,7 @@
             </span>
           </template>
         </el-table-column>
-        <el-table-column :label="$t('general.operate')" style="text-align: center" width="260px">
+        <el-table-column :label="$t('general.operate')" style="text-align: center" width="280px">
           <template #default="scope">
             <el-button size="mini" @click="linkService(scope.row, true)">
               {{ scope.row.available ? $t("services.update") : $t("services.connect") }}
@@ -255,7 +257,6 @@ import Panel from "../../components/Panel";
 import Dialog from "../../components/Dialog";
 import axios from "axios";
 import { API_OVERVIEW, API_SERVICE_CURD, API_SERVICE_URL } from "../service/common";
-import { ERROR_TEXT, OK_TEXT } from "../service/text";
 import { request } from "../service/protocol";
 
 export default {
@@ -324,10 +325,10 @@ export default {
           data: this.newServiceInfo
         });
         this.isNewService = false;
-        this.$message({ type: "success", message: OK_TEXT });
+        this.$message({ type: "success", message: this.$t("general.success") });
         this.render();
       } catch (err) {
-        this.$message({ type: "error", message: ERROR_TEXT });
+        this.$message({ type: "error", message: this.$t("general.error") });
       }
     },
     // Open the new service panel
@@ -344,7 +345,7 @@ export default {
           params: { uuid: row.uuid }
         });
         setTimeout(this.refresh, 500);
-        this.$message({ type: "success", message: OK_TEXT });
+        this.$message({ type: "success", message: this.$t("general.success") });
       } catch (error) {
         this.$message({ type: "error", message: error.message });
       }
@@ -368,10 +369,10 @@ export default {
       });
       try {
         axios.delete(API_SERVICE_CURD, { params: { uuid } });
-        this.$message({ type: "success", message: OK_TEXT });
+        this.$message({ type: "success", message: this.$t("general.success") });
         this.render();
       } catch (err) {
-        this.$message({ type: "error", message: ERROR_TEXT });
+        this.$message({ type: "error", message: this.$t("general.error") });
       }
     },
     // modify the remark information

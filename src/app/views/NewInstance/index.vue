@@ -7,7 +7,7 @@
     <Panel style="max-width: 1200px">
       <template #title>{{ title }}</template>
       <template #default>
-        <div v-show="page == 0" class="panel-context row-mt">
+        <div v-show="page == 0" class="panel-context">
           <div class="sub-title">
             <p class="sub-title-title">{{ $t("newInstances.selectType") }}</p>
             <p class="sub-title-info"></p>

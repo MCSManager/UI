@@ -81,16 +81,17 @@
           ></p>
           <el-table :data="servicesStatus" style="width: 100%" size="small">
             <el-table-column prop="ip" :label="$t('overview.addr')" width="180"> </el-table-column>
-            <el-table-column prop="remarks" :label="$t('overview.remarks')" width="240">
-            </el-table-column>
+            <el-table-column prop="remarks" :label="$t('overview.remarks')"> </el-table-column>
             <el-table-column prop="port" :label="$t('overview.port')" width="180">
             </el-table-column>
             <el-table-column prop="cpu" label="CPU"> </el-table-column>
             <el-table-column prop="mem" :label="$t('overview.mem')"> </el-table-column>
-            <el-table-column prop="instance" :label="$t('overview.instance')"> </el-table-column>
-            <el-table-column prop="started" :label="$t('overview.runningInstance')">
+            <el-table-column prop="instance" :label="$t('overview.instance')" width="160">
             </el-table-column>
-            <el-table-column prop="version" :label="$t('overview.daemonVersion')">
+            <el-table-column prop="started" :label="$t('overview.runningInstance')" width="160">
+            </el-table-column
+            >0
+            <el-table-column prop="version" :label="$t('overview.daemonVersion')" width="160">
               <template #default="scope">
                 <span
                   class="color-green"
@@ -108,9 +109,9 @@
                     <span><i class="el-icon-warning-outline"></i> {{ scope.row.version }}</span>
                   </el-tooltip>
                 </span>
-              </template>
-            </el-table-column>
-            <el-table-column prop="status" :label="$t('overview.connectStatus')">
+              </template> </el-table-column
+            >0
+            <el-table-column prop="status" :label="$t('overview.connectStatus')" width="160">
               <template #default="scope">
                 <span class="color-green" v-if="scope.row.status">
                   <i class="el-icon-circle-check"></i> {{ $t("overview.online") }}
@@ -275,7 +276,7 @@ export default {
       if (data.chart) this.systemChartData = data.chart;
       const remoteCount = data.remoteCount;
       const remote = data.remote;
-      
+
       // Count the total instances and running instances
       let totalInstance = 0;
       let runningInstance = 0;

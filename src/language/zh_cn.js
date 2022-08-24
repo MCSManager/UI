@@ -46,7 +46,7 @@ export default {
         passWord: "密码",
         forgotPassword: "忘记密码",
         forgotPasswordInfo:
-            "如果您是管理员且第一次登录，默认账号密码为：root，123456。如果您是普通用户，请要求您的服务商帮助您重置密码。如果您是管理员，请删除 mcsmanager/web/data/Users 文件夹重启面板端以重新加载用户。",
+            "如果您是普通用户，请询问您的服务商帮助您重置密码。如果您是管理员，请备份并删除 mcsmanager/web/data/Users 文件夹来重新安装 MCSManager。",
         login: "登录",
         logging: "登录中",
         isNull: "账号或密码不能为空值",
@@ -60,8 +60,8 @@ export default {
         }
     },
     overview: {
-        systemInfoTable: "系统信息表",
-        daemonStatus: "守护进程状态",
+        systemInfoTable: "系统信息总览",
+        daemonStatus: "节点在线状态",
         daemonAvailable: "已正确连接数 / 已配置总数",
         instanceStatus: "实例运行状态",
         runningAndTotalInstance: "正在运行数 / 全部实例总数",
@@ -76,24 +76,24 @@ export default {
         memoryUsage: "内存使用数值",
         nodeVersion: "Node 版本",
         panelVersion: "面板版本",
-        specifiedDaemonVersion: "对应守护进程版本",
+        specifiedDaemonVersion: "对应远程节点版本",
         illegalAccess: "阻挡请求次数",
         banips: "封禁 IP 数",
         minBefore: "分前",
         secBefore: "秒前",
-        systemLoad: "系统负载",
+        systemLoad: "操作系统负载",
         systemLoadPercentage: "面板所在主机 CPU，RAM 百分比",
 
-        daemonOverview: "分布式服务总览",
+        daemonOverview: "远程节点总览",
         daemonOverviewInfo:
-            "确保所有守护进程均在线，离线状态将导致此守护进程以及相关功能不可用，可能会影响使用体验与数据。<br>面板端 {panelVersion} 必须对应守护进程 {specifiedDaemonVersion} 版本",
+            "确保所有远程节点均在线，离线状态将导致此远程节点以及相关功能不可用，可能会影响使用体验与数据。<br>面板端 {panelVersion} 必须对应远程节点 {specifiedDaemonVersion} 版本",
         addr: "地址",
         remarks: "备注",
         port: "端口",
         mem: "内存",
         instance: "已有实例",
         runningInstance: "运行实例",
-        daemonVersion: "守护进程版本",
+        daemonVersion: "远程节点版本",
         lowDaemonVersion: "与面板端要求版本不一致",
         connectStatus: "连接状态",
         online: "在线",
@@ -106,7 +106,7 @@ export default {
         panelCpuUsage: "面板端 CPU 使用率",
         panelCpuUsageInfo: "每 10 秒统计间隔，总计 10 分钟的 CPU 历史使用率",
 
-        runningInstances: "分布式实例运行量",
+        runningInstances: "应用实例运行量",
         runningInstancesInfo: "每 1 分钟统计间隔，总计 1 小时的实例状态历史",
 
         panelMemoryUsage: "面板端内存使用率",
@@ -117,7 +117,7 @@ export default {
     },
     instances: {
         instancesList: "应用实例列表",
-        selectDaemon: "请选择远程守护进程地址",
+        selectDaemon: "请选择远程节点地址",
         selectOne: "请至少选择一项",
         instanceName: "实例名称",
         showCardList: "简单视图",
@@ -128,13 +128,13 @@ export default {
         kill: "终止",
         remove: "移除",
         delete: "删除",
-        selectRemoteError: "未选择任何远程守护进程",
-        selectRemoteTitle: "请在左上方的下拉框中选择远程守护进程",
+        selectRemoteError: "未选择任何远程节点",
+        selectRemoteTitle: "请在左上方的下拉框中选择远程节点",
         selectRemoteInfo:
-            "默认可选择 localhost 守护进程，守护进程可以部署在任意主机上，帮助您快速管理多个主机并且分布式部署。",
+            "默认可选择 localhost 远程节点，远程节点可以部署在任意主机上，帮助您快速管理多个主机并且分布式部署。",
         notAnyInstanceTitle: "无数据，请点击右上方绿色的“新建实例”按钮创建实例。",
         notAnyInstanceInfo:
-            "应用实例可以是 Minecraft服务器，也可以是其他任何应用程序，点击创建后将部署在指定的远程守护进程中。",
+            "应用实例可以是 Minecraft服务器，也可以是其他任何应用程序，点击创建后将部署在指定的远程节点中。",
         lastDatetime: "启动时间",
         endTime: "到期时间",
         otherInfo: "其他信息",
@@ -271,7 +271,7 @@ export default {
         titleInfo:
             "当前界面所有设置只有管理员可以进行更改，应用实例拥有远程代码执行功能，请谨慎修改配置。",
         uid: "远程/本地实例标识符",
-        gid: "守护进程标识符",
+        gid: "远程节点标识符",
         status: "当前状态",
         started: "已启动次数",
         createDateTime: "创建日期",
@@ -292,7 +292,7 @@ export default {
         instanceTypeInfo:
             "不同类型会导致功能不同，若无需求类型，可以选择较为抽象的通用类型，例如 Java 通用版服务端",
         launchCmdText:
-            "适用于任何程序命令，若程序路径或附加参数中含有空格可使用引号作为边界，包含的文本将视作一段整体。整条命令不可有换行。<br />如果您输入命令无反应，或者终端排版错乱，可以开启 控制台-终端设置-伪终端进行尝试。<br />不同类型会导致功能不同，若无需求类型，可以选择较为抽象的通用类型，例如 Java 通用版服务端<br />通常情况下，建议使用命令助手生成启动命令，如果有额外需求可以自定义启动命令。<br />&#21015;&#22914;&#32;&#34;&#67;&#58;&#92;&#80;&#114;&#111;&#103;&#114;&#97;&#109;&#32;&#70;&#105;&#108;&#101;&#115;&#92;&#74;&#97;&#118;&#97;&#92;&#98;&#105;&#110;&#92;&#106;&#97;&#118;&#97;&#46;&#101;&#120;&#101;&#34;&#32;&#45;&#68;&#102;&#105;&#108;&#101;&#46;&#101;&#110;&#99;&#111;&#100;&#105;&#110;&#103;&#61;&#117;&#116;&#102;&#45;&#56;&#32;&#45;&#68;&#106;&#108;&#105;&#110;&#101;&#46;&#116;&#101;&#114;&#109;&#105;&#110;&#97;&#108;&#61;&#106;&#108;&#105;&#110;&#101;&#46;&#85;&#110;&#115;&#117;&#112;&#112;&#111;&#114;&#116;&#101;&#100;&#84;&#101;&#114;&#109;&#105;&#110;&#97;&#108;&#32;&#45;&#106;&#97;&#114;&#32;&#34;&#109;&#121;&#32;&#115;&#101;&#114;&#118;&#101;&#114;&#46;&#106;&#97;&#114;&#34;&#32;&#45;&#110;&#111;&#103;&#117;&#105;",
+            "适用于任何程序命令，若程序路径或附加参数中含有空格可使用引号作为边界，包含的文本将视作一段整体。整条命令不可有换行。<br />如果您输入命令无反应，或者终端排版错乱，可以开启 控制台-终端设置-伪终端进行尝试。<br />不同类型会导致功能不同，若无需求类型，可以选择较为抽象的通用类型，例如 Java 通用版服务端<br />通常情况下，建议使用命令助手生成启动命令，如果有额外需求可以自定义启动命令。<br />列如 \"C: \\Program Files\\Java\\bin\\java.exe\" -Dfile.encoding=utf-8 -Djline.terminal=jline.UnsupportedTerminal -jar \"my server.jar\" -nogui",
         cwd: "工作目录",
         cwdInfo: "实例运行的工作目录，可填绝对路径与相对路径",
         cwdExample: "例如: D:/MyServers/0001",
@@ -451,16 +451,16 @@ export default {
             autoRestart: "自动重启",
             autoRestartInfo: "若实例状态在未经面板操作的情况下变为非运行状态将立刻发起启动实例操作。<br />可用于崩溃后自动重启功能。",
             autoStart: "自动启动",
-            autoStartInfo: "只要守护进程（远程节点）运行，就自动发起一次启动实例操作。<br />如果将守护进程开机自启则可用于开机自启实例。",
+            autoStartInfo: "只要远程节点（远程节点）运行，就自动发起一次启动实例操作。<br />如果将远程节点开机自启则可用于开机自启实例。",
         },
 
         unavailableTerminal: {
-            title: "无法与守护进程建立连接",
+            title: "无法与远程节点建立连接",
             browserCannotConnect: "浏览器无法连接到",
-            browserCannotConnect2: "浏览器无法与守护进程建立连接",
-            maybe: "可能是您未开放守护进程的端口导致，或是使用了内网地址的缘故",
+            browserCannotConnect2: "浏览器无法与远程节点建立连接",
+            maybe: "可能是您未开放远程节点的端口导致，或是使用了内网地址的缘故",
             solution: "可能的解决方案",
-            solutions: '<li>确保守护进程的地址是公网地址，且守护进程端口已经开放。</li> <li> 若有反向代理，FRP，HTTPS 等，请采用 wss:// 协议连接， <br /> 并且守护进程端地址也需要 HTTPS，WSS 支持。 </li> <li> 前往 <a href="https://docs.mcsmanager.com" target="_blank" rel="noopener noreferrer" >https://docs.mcsmanager.com</a > 了解更多 </li>',
+            solutions: '<li>确保远程节点的地址是公网地址，且远程节点端口已经开放。</li> <li> 若有反向代理，FRP，HTTPS 等，请采用 wss:// 协议连接， <br /> 并且远程节点端地址也需要 HTTPS，WSS 支持。 </li> <li> 前往 <a href="https://docs.mcsmanager.com" target="_blank" rel="noopener noreferrer" >https://docs.mcsmanager.com</a > 了解更多 </li>',
         },
 
         cantConnectTerm: "无法与终端建立连接",
@@ -669,10 +669,10 @@ export default {
         userExcel: "用户资源表",
         userExcelInfo: "当前子用户可管理的所有实例，若实例状态显示“忙碌”代表此实例不存在或远程主机已经离线。",
         rentRisk: "出租安全风险",
-        rentRiskInfo: '为确保您宿主机安全，您必须将任何运行的程序包含在 Docker 虚拟化容器中运行，否则您的用户将有可能入侵破坏宿主机。<br />建议您前往<a class="color-blue" href="https://docs.mcsmanager.com/" target="_blank" rel="noopener noreferrer">官方文档</a>了解更多',
+        rentRiskInfo: '为确保您宿主机安全，您必须将任何运行的程序包含在 Docker 虚拟化容器中运行，否则您的用户将有可能入侵破坏宿主机。',
         addInstance: "分配实例",
         saveData: "保存数据",
-        daemon: "所属守护进程",
+        daemon: "所属远程节点",
         addInstanceForUser: "为用户新增实例资源",
         addInstanceInfo: "利用远程主机地址与模糊查询来为此用户增加应用实例",
         select: "选择",
@@ -710,12 +710,12 @@ export default {
         notSame: "两次密码不一致",
     },
     services: {
-        remoteDaemonManage: "远程守护进程管理",
-        addDaemon: "新增远程守护进程",
+        remoteDaemonManage: "新增节点",
+        addDaemon: "新增远程节点",
         learnHowItWork: "了解工作原理",
-        Daemons: "已配置的守护进程",
+        Daemons: "节点列表",
         remoteInfo:
-            "远程守护进程（在任何物理主机上）必须确保全部在线且互相网络畅通，面板连接需公开放行守护进程端口与配置密钥。<br />网页需要能直接连接远程守护进程（上传，下载与控制台），避免使用除 localhost 外的局域网段任何 IP，必须使用外网 IP 或域名进行连接。<br />面板端对应的守护进程版本：{ specifiedDaemonVersion }",
+            "远程节点（在任何物理主机上）必须确保全部在线且互相网络畅通，面板连接需公开放行远程节点端口与配置密钥。<br />网页需要能直接连接远程节点（上传，下载与控制台），避免使用除 localhost 外的局域网段任何 IP，必须使用外网 IP 或域名进行连接。<br />面板端对应的远程节点版本：{ specifiedDaemonVersion }",
         platform: "平台",
         instanceStatus: "实例状态",
         version: "版本",
@@ -725,13 +725,13 @@ export default {
 
         remarks: "备注信息",
         remarksInfo: "选填，支持中文，用于填写相关备注信息",
-        remoteIP: "守护进程所在主机的 IP 地址",
+        remoteIP: "远程节点所在主机的 IP 地址",
         remoteIPSub: "<b>必须使用外网地址</b>或 localhost 地址，否则将导致远程实例无法连接",
         remoteIPInfo: "必填，例如 mcsmanager.com，43.123.211.12",
-        daemonPort: "守护进程端口",
+        daemonPort: "远程节点端口",
         daemonPortInfo: "必填，例如 24444",
         verifyKey: "验证密钥",
-        keySub: "在守护进程启动时控制台上会输出显示，务必确保密钥安全",
+        keySub: "在远程节点启动时控制台上会输出显示，务必确保密钥安全",
         getKey: "如何获取密钥？",
         keyInfo: "必填，例如 6ff0fa1ef9a943f3c6f2fe0e4564a2fa383d35c4b78ccb5",
 
@@ -739,7 +739,7 @@ export default {
             title: "新增远程主机警告",
             ip: "检测到您的连接 IP 为 : { newServiceInfo }，似乎是一个内网地址？",
             outerNet:
-                "面板与守护进程端均要能够让用户访问，以此行为设计即可实现流量分流减轻中心面板端的压力。",
+                "面板与远程节点端均要能够让用户访问，以此行为设计即可实现流量分流减轻中心面板端的压力。",
             whyOuterNet: "为什么必须使用外网 IP 连接远程节点",
             because:
                 "为了减轻中心控制端（Web 面板端）的流量压力，我们必须将流量分流到各自的远程主机，<br />这样就必须保证每个远程主机均要能够使用外网访问，所以您也必须使用外网 IP 地址来访问这个主机的实例",
@@ -752,19 +752,19 @@ export default {
 
         principlePanel: {
             title: "分布式服务工作原理",
-            desc: "为了减轻中心控制端（Web 面板端）的流量压力与计算压力，我们采用 “数据走直连，指令走转发” 的设计概念。<br />这样的设计会暴露各个守护进程，但您守护进程主机上的服务本应就会暴露，再加上可控的权限识别，无需担忧各个主机安全问题。",
+            desc: "为了减轻中心控制端（Web 面板端）的流量压力与计算压力，我们采用 “数据走直连，指令走转发” 的设计概念。<br />这样的设计会暴露各个远程节点，但您远程节点主机上的服务本应就会暴露，再加上可控的权限识别，无需担忧各个主机安全问题。",
             principleImage: "分布式服务工作原理图",
             onlyOne: "如果您只有一个主机，则可以无视此工作原理，按正常使用方式即可。"
         },
 
-        delDaemonWarn: "此操作将永久删除该守护进程，是否继续？",
+        delDaemonWarn: "此操作将永久删除该远程节点，是否继续？",
         inputNewRemark: "请输入新的备注内容",
         updateRemarkSuccess: "更新备注信息成功",
         inputNewKey: "请输入新密钥，设置后将自动尝试连接",
         key: "密钥"
     },
     container: {
-        remoteList: "远程守护进程列表",
+        remoteList: "远程节点列表",
         status: "状态",
         imagesManage: "环境镜像管理",
         relevantInfo: "相关资料",
@@ -784,7 +784,7 @@ export default {
         newImage: "新建镜像",
         needTime: "新建镜像可能需要一定时间。",
         remoteImageList: "远程主机镜像列表",
-        remoteImageListInfo: "镜像构建与容器运行依赖于 Docker 软件，物理主机上所有守护进程将共享所有镜像。",
+        remoteImageListInfo: "镜像构建与容器运行依赖于 Docker 软件，物理主机上所有远程节点将共享所有镜像。",
         storage: "占用空间",
         details: "详情",
 
@@ -898,9 +898,9 @@ export default {
 
         about: "关于",
         aboutTitle:
-            "软件根据<a target='black' href='https://github.com/MCSManager/MCSManager-Daemon/blob/master/LICENSE'>Apache-2.0</a>开源软件协议发行",
+            "软件根据 <a target='black' href='https://github.com/MCSManager/MCSManager-Daemon/blob/master/LICENSE'>Apache-2.0</a> 开源软件协议发行<br />版权所有 MCSManager 开发团队",
         aboutTitleInfo:
-            "此协议准许每个人都可以复制和分发代码副本，并且可以对使用者收取服务费用。<br />若对代码任何修改，则必须无偿提供软件的完整源代码下载。",
+            "此协议准许每个人都可以复制和修改代码副本，并且可以对使用者收取服务费用。<br />",
         closedSource: "闭源商业许可证",
         closedSourceInfo: "若您想二次开发并且闭源使用于任何活动（包括但不限于商业，个人）。",
         learnMore: "了解更多",
@@ -970,7 +970,7 @@ export default {
         adminOK: "管理员已创建"
     },
     notify: {
-        connectDaemonError: "访问远程守护进程异常",
+        connectDaemonError: "访问远程节点异常",
         confirmDelTitle: "最终确认",
         confirmDelContent: "确定要进行移除/删除吗？",
         confirmBatchDelContent: "确定要进行批量移除吗？此操作不会删除实例实际文件，只会删除实例",
@@ -995,7 +995,7 @@ export default {
         overview: "数据监控",
         home: "信息总览",
         instances: "应用实例",
-        services: "守护进程管理",
+        services: "节点管理",
         private: "个人信息",
         users: "用户管理",
         analysis: "面板数据分析",
@@ -1022,7 +1022,7 @@ export default {
     },
     aside: {
         basic: "基础功能",
-        user: "用户中心",
+        user: "用户管理",
         advanced: "高级功能",
         node: "节点管理",
         more: "更多",

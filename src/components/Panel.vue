@@ -41,6 +41,12 @@ export default {
 };
 </script>
 
+<style>
+.box-card-shadow p:first-child {
+  margin-top: 0px;
+}
+</style>
+
 <style scoped>
 .box-card-title {
   font-weight: 600;
@@ -59,7 +65,7 @@ export default {
 }
 
 .box-card-shadow {
-  border-radius: 0px;
+  border-radius: 4px;
 }
 
 .left-tip {

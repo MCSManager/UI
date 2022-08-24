@@ -11,27 +11,31 @@
           <template #default>
             <el-row :gutter="20" class="row-mb">
               <el-col :md="12" :offset="0" class="col-md-responsive">
-                <el-input
-                  v-model="query.userName"
-                  type="text"
-                  :placeholder="$t('general.searchName')"
-                  size="small"
-                  style="width: 180px; margin-right: 10px"
-                  autocomplete="off"
-                  :readonly="readonly"
-                  @focus="() => (readonly = false)"
-                ></el-input>
-                <el-button size="small" type="primary" @click="refresh">
-                  <i class="el-icon-refresh"></i> {{ $t("general.search") }}
-                </el-button>
+                <ItemGroup>
+                  <el-input
+                    v-model="query.userName"
+                    type="text"
+                    :placeholder="$t('general.searchName')"
+                    size="small"
+                    style="width: 180px; margin-right: 10px"
+                    autocomplete="off"
+                    :readonly="readonly"
+                    @focus="() => (readonly = false)"
+                  ></el-input>
+                  <el-button size="small" type="primary" @click="refresh">
+                    <i class="el-icon-refresh"></i> {{ $t("general.search") }}
+                  </el-button>
+                </ItemGroup>
               </el-col>
               <el-col :md="12" :offset="0" class="text-align-right col-md-responsive">
-                <el-button size="small" type="success" @click="toNewUserPanel">
-                  <i class="el-icon-plus"></i> {{ $t("users.newUser") }}
-                </el-button>
-                <el-button size="small" type="danger" @click="deleteUser">
-                  <i class="el-icon-delete"></i> {{ $t("users.delUser") }}
-                </el-button>
+                <ItemGroup>
+                  <el-button size="small" type="success" @click="toNewUserPanel">
+                    <i class="el-icon-plus"></i> {{ $t("users.newUser") }}
+                  </el-button>
+                  <el-button size="small" type="danger" @click="deleteUser">
+                    <i class="el-icon-delete"></i> {{ $t("users.delUser") }}
+                  </el-button>
+                </ItemGroup>
               </el-col>
             </el-row>
 
