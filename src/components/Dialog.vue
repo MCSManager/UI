@@ -64,6 +64,7 @@ export default {
   overflow-y: auto;
 }
 .component-dialog-wrapper {
+  text-align: left;
   position: fixed;
   top: 0;
   bottom: 0;

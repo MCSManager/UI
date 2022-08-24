@@ -39,6 +39,10 @@ app.use(elementPlus);
 
 // global component
 import ItemGroup from "../components/ItemGroup";
+import FunctionGroup from "../components/FunctionGroup.vue";
+import FunctionGroupComponent from "../components/FunctionGroupComponent.vue";
 
 app.component("ItemGroup", ItemGroup);
+app.component("FunctionGroup", FunctionGroup);
+app.component("FunctionComponent", FunctionGroupComponent);
 app.mount("#app");

@@ -37,7 +37,21 @@
           </ItemGroup>
         </el-col>
         <el-col :md="12" :offset="0">
-          <ItemGroup style="text-align: right">
+          <FunctionGroup :items="functionGroups">
+            <FunctionComponent
+              component="button"
+              type="success"
+              size="small"
+              :plain="true"
+              @click="toNewInstance"
+            >
+              New My Instance
+            </FunctionComponent>
+            <FunctionComponent component="button" size="small" :plain="true" @click="toNewInstance">
+              Delete My Instance
+            </FunctionComponent>
+          </FunctionGroup>
+          <!-- <ItemGroup style="text-align: right">
             <el-button
               type="primary"
               size="small"
@@ -54,6 +68,7 @@
               v-show="!showTableList"
               >{{ $t("instances.showTableList") }}</el-button
             >
+            
             <el-button size="small" type="success" @click="toNewInstance">
               <i class="el-icon-plus"></i> {{ $t("instances.newInstance") }}
             </el-button>
@@ -72,7 +87,7 @@
             <el-button size="small" type="danger" @click="batDelete(2)" v-if="showTableList">
               <i class="el-icon-delete"></i> {{ $t("instances.delete") }}
             </el-button>
-          </ItemGroup>
+          </ItemGroup> -->
         </el-col>
       </el-row>
 
@@ -390,6 +405,18 @@ export default {
   components: { Panel, CircleCheckFilled, CircleCloseFilled },
   data() {
     return {
+      functionGroups: [
+        {
+          type: "button",
+          binds: {
+            type: "success"
+          },
+          events: {
+            click: this.toNewInstance
+          },
+          label: "New Instance"
+        }
+      ],
       remoteList: [],
       currentRemoteUuid: null,
       instances: [],
