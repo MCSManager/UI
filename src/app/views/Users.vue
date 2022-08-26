@@ -9,35 +9,39 @@
         <Panel>
           <template #title>{{ $t("users.userList") }}</template>
           <template #default>
-            <el-row :gutter="20" class="row-mb">
-              <el-col :md="12" :offset="0" class="col-md-responsive">
-                <ItemGroup>
+            <div class="row-mb">
+              <FunctionGroup :container="true">
+                <FunctionComponent>
                   <el-input
                     v-model="query.userName"
                     type="text"
                     :placeholder="$t('general.searchName')"
                     size="small"
-                    style="width: 180px; margin-right: 10px"
+                    style="width: 180px"
                     autocomplete="off"
                     :readonly="readonly"
                     @focus="() => (readonly = false)"
                   ></el-input>
+                </FunctionComponent>
+                <FunctionComponent>
                   <el-button size="small" type="primary" @click="refresh">
                     <i class="el-icon-refresh"></i> {{ $t("general.search") }}
                   </el-button>
-                </ItemGroup>
-              </el-col>
-              <el-col :md="12" :offset="0" class="text-align-right col-md-responsive">
-                <ItemGroup>
-                  <el-button size="small" type="success" @click="toNewUserPanel">
-                    <i class="el-icon-plus"></i> {{ $t("users.newUser") }}
-                  </el-button>
-                  <el-button size="small" type="danger" @click="deleteUser">
-                    <i class="el-icon-delete"></i> {{ $t("users.delUser") }}
-                  </el-button>
-                </ItemGroup>
-              </el-col>
-            </el-row>
+                </FunctionComponent>
+                <FunctionGroup align="right">
+                  <FunctionComponent>
+                    <el-button size="small" type="success" @click="toNewUserPanel">
+                      <i class="el-icon-plus"></i> {{ $t("users.newUser") }}
+                    </el-button>
+                  </FunctionComponent>
+                  <FunctionComponent>
+                    <el-button size="small" type="danger" @click="deleteUser">
+                      <i class="el-icon-delete"></i> {{ $t("users.delUser") }}
+                    </el-button>
+                  </FunctionComponent>
+                </FunctionGroup>
+              </FunctionGroup>
+            </div>
 
             <div class="instance-table-wrapper">
               <div></div>

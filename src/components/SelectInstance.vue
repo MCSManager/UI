@@ -5,31 +5,41 @@
 <template>
   <div v-loading="loading">
     <div style="display: block">
-      <el-select
-        v-model="selectedServiceUuid"
-        filterable
-        :placeholder="$t('instances.selectDaemon')"
-        size="small"
-        style="margin-right: 10px"
-        @change="remoteSelectHandle"
-      >
-        <el-option
-          v-for="item in serviceList"
-          :key="item.value"
-          :label="item.label"
-          :value="item.value"
-        >
-        </el-option>
-      </el-select>
-      <el-input
-        v-model="instanceNameKeyword"
-        :placeholder="$t('instances.instanceName')"
-        size="small"
-        style="width: 180px; margin-right: 10px"
-      ></el-input>
-      <el-button size="small" @click="remoteSelectHandle">
-        <i class="el-icon-search"></i> {{ $t("general.search") }}
-      </el-button>
+      <el-row :gutter="20">
+        <el-col :span="24" :offset="0">
+          <FunctionGroup :container="true">
+            <FunctionComponent>
+              <el-select
+                v-model="selectedServiceUuid"
+                filterable
+                :placeholder="$t('instances.selectDaemon')"
+                size="small"
+                @change="remoteSelectHandle"
+              >
+                <el-option
+                  v-for="item in serviceList"
+                  :key="item.value"
+                  :label="item.label"
+                  :value="item.value"
+                >
+                </el-option>
+              </el-select>
+            </FunctionComponent>
+            <FunctionComponent>
+              <el-input
+                v-model="instanceNameKeyword"
+                :placeholder="$t('instances.instanceName')"
+                size="small"
+              ></el-input>
+            </FunctionComponent>
+            <FunctionComponent>
+              <el-button size="small" @click="remoteSelectHandle">
+                <i class="el-icon-search"></i> {{ $t("general.search") }}
+              </el-button>
+            </FunctionComponent>
+          </FunctionGroup>
+        </el-col>
+      </el-row>
     </div>
     <div class="row-mt">
       <el-pagination

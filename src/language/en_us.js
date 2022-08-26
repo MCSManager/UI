@@ -28,7 +28,8 @@ export default {
         error: "Operation error",
         success: "Operation succeeded",
         config: "Configuration",
-        operation: "operation"
+        operation: "operation",
+        moreOperation: "More operation"
     },
 
     root: {
@@ -354,7 +355,7 @@ export default {
         console: "Console",
         fileManager: "File Manager",
         back: "back",
-        saveSet: "Save configuration",
+        saveSet: "Save",
 
         dockerTableDict: [
             {
@@ -478,7 +479,7 @@ export default {
     processConfigFile: {
         title: "Configuration File",
         reload: "Reload",
-        back: "Back to profile list",
+        back: "Back",
         editOriginal: "Edit Source View",
         noFile: "The file does not exist or the permissions are incorrect, and the specific configuration of this file cannot be viewed. You may try to edit the file online with the \"File Management\" function, or try restarting the instance to refresh the file.",
         updateFailed: "Update failed"
@@ -506,7 +507,7 @@ export default {
     },
     schedule: {
         addSchedule: "Add Scheduled Task",
-        backToConsole: "Back to console",
+        backToConsole: "Back",
         schedules: "Scheduled Task Schedule",
         taskName: "Name",
         payload: "Payload",
@@ -601,8 +602,8 @@ export default {
     },
     fileManagerEditor: {
         title: "Edit file", updateFile: "Update File",
-        backToFileManager: "Back to file list",
-        backViaHistory: "Back to simple edit view",
+        backToFileManager: "Back",
+        backViaHistory: "Back",
         editError: "Error editing file",
         updateTextSuccess: "Update text succeeded",
     },
@@ -653,7 +654,7 @@ export default {
         resetPasswdInfo: "If you don't fill in, the original value will not be changed",
         originalSet: "Original value",
         updateData: "Update data",
-        SaveData: "Save Data",
+        SaveData: "Save",
         selectAUser: "Please select at least one user"
     },
     userResources: {
@@ -666,8 +667,8 @@ export default {
         userExcelInfo: "All instances that the current sub-user can manage. If the instance status shows \"busy\", it means that the instance does not exist or the remote host is offline.",
         rentRisk: "Rental security risk",
         rentRiskInfo: 'To ensure the security of your host, you must include any running programs to run in a Docker virtualized container, otherwise your users will be at risk of hacking and destroying the host. ',
-        addInstance: "Assign instance",
-        saveData: "Save data",
+        addInstance: "Assign",
+        saveData: "Save",
         daemon: "belongs to the remote node",
         addInstanceForUser: "Add instance resource for user",
         addInstanceInfo: "Using remote host address and fuzzy query to add application instance for this user",
@@ -803,7 +804,7 @@ export default {
     },
     newImage: {
         createImage: "Create Image",
-        toImageList: "Back to image list",
+        toImageList: "Back",
         buildProgress: "Build Progress",
         need10min: "It may take more than ten minutes to create a new image, please be patient",
         whatIsImage: "What is an environment image?",
@@ -840,7 +841,7 @@ export default {
         afterCreate: "Image name and version",
         imageName: "[Required] Image name, such as openjdk",
         imageVer: "[Required] Image version, such as 1.0 1.1 latest",
-        toSelectImage: "Back to image selection",
+        toSelectImage: "Back",
         noData: "No data currently",
         getProcess: "Get the latest build progress",
         building: "Building...",

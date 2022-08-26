@@ -3,21 +3,23 @@
 -->
 
 <template>
-  <div class="function-group-component" v-if="!isPhone" style="display: inline-block">
-    <el-button v-if="component === 'button'" type="primary" size="small" v-bind="this.$props">
+  <div class="function-group-component no-phone-component" v-if="!isPhone">
+    <el-button v-if="component === 'button'" type="primary" size="small" v-bind="$props">
       <slot></slot>
     </el-button>
+    <template v-else>
+      <slot></slot>
+    </template>
   </div>
-  <div class="item" v-else style="display: block">
-    <el-button
-      v-if="component === 'button'"
-      size="small"
-      plain
-      v-bind="this.$props"
-      style="width: 100%; margin: 4px 0px"
-    >
+  <div class="is-phone-component" v-else>
+    <div v-if="component === 'button'" style="display: block; margin: 5px">
+      <el-button size="small" plain v-bind="$props" style="width: 100%">
+        <slot></slot>
+      </el-button>
+    </div>
+    <div class="function-group-component-phone" v-else>
       <slot></slot>
-    </el-button>
+    </div>
   </div>
 </template>
 
@@ -50,7 +52,6 @@ export default {
   },
   methods: {
     resizeHandler() {
-      console.log(this);
       if (window.innerWidth <= 900) {
         this.isPhone = true;
       } else {
@@ -62,31 +63,19 @@ export default {
 </script>
 
 <style>
+.function-group-component-phone {
+  margin: 5px;
+  overflow: hidden;
+}
+.function-group-component-phone > * {
+  display: block;
+  width: 100% !important;
+}
+
 .function-group-component {
   display: inline-block;
-  margin: 6px;
-}
-/* @media (min-width: 900px) {
-  .function-group-component {
-    display: block;
-    width: 100%;
-  }
-} */
-</style>
-
-<style scoped>
-.list-item {
-  display: block;
-  font-size: 14px;
-  margin: 4px 0px;
-  border: 1px solid #dcdfe4;
-  border-top: 1px solid #dcdfe4;
-  border-bottom: 1px solid #dcdfe4;
-  padding: 16px 4px;
-  cursor: pointer;
-}
-
-.list-item :hover {
-  background-color: #dcdfe4;
+  margin: 5px;
 }
 </style>
+
+<style scoped></style>

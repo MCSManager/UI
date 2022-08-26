@@ -7,87 +7,116 @@
     <template #title>{{ $t("instances.instancesList") }}</template>
     <template #default>
       <el-row :gutter="20" justify="space-between" class="row-mb">
-        <el-col :md="12" :offset="0">
-          <ItemGroup>
-            <el-select
-              style="width: 320px"
-              v-model="currentRemoteUuid"
-              filterable
-              :placeholder="$t('instances.selectDaemon')"
-              size="small"
-              @change="remoteSelectHandle"
-            >
-              <el-option
-                v-for="item in remoteList"
-                :key="item.value"
-                :label="item.label"
-                :value="item.value"
+        <el-col :md="24" :offset="0">
+          <FunctionGroup :container="true">
+            <FunctionComponent>
+              <el-select
+                style="width: 320px"
+                v-model="currentRemoteUuid"
+                filterable
+                :placeholder="$t('instances.selectDaemon')"
+                size="small"
+                @change="remoteSelectHandle"
               >
-              </el-option>
-            </el-select>
-            <el-input
-              v-model="query.instanceName"
-              :placeholder="$t('instances.selectDaemon')"
-              size="small"
-              style="width: 160px"
-            ></el-input>
-            <el-button size="small" @click="refresh" type="primary">
-              <i class="el-icon-refresh"></i> {{ $t("general.search") }}
-            </el-button>
-          </ItemGroup>
-        </el-col>
-        <el-col :md="12" :offset="0">
-          <FunctionGroup :items="functionGroups">
-            <FunctionComponent
-              component="button"
-              type="success"
-              size="small"
-              :plain="true"
-              @click="toNewInstance"
-            >
-              New My Instance
+                <el-option
+                  v-for="item in remoteList"
+                  :key="item.value"
+                  :label="item.label"
+                  :value="item.value"
+                >
+                </el-option>
+              </el-select>
             </FunctionComponent>
-            <FunctionComponent component="button" size="small" :plain="true" @click="toNewInstance">
-              Delete My Instance
+            <FunctionComponent>
+              <el-input
+                v-model="query.instanceName"
+                :placeholder="$t('instances.selectDaemon')"
+                size="small"
+                style="width: 160px"
+              ></el-input>
             </FunctionComponent>
+            <FunctionComponent>
+              <el-button size="small" @click="refresh" type="primary">
+                <i class="el-icon-refresh"></i> {{ $t("general.search") }}
+              </el-button>
+            </FunctionComponent>
+            <FunctionGroup align="right">
+              <FunctionComponent
+                component="button"
+                type="success"
+                size="small"
+                :plain="true"
+                v-if="showTableList"
+                @click="changeView(1)"
+              >
+                {{ $t("instances.showCardList") }}
+              </FunctionComponent>
+
+              <FunctionComponent
+                component="button"
+                size="small"
+                type="primary"
+                :plain="true"
+                v-if="!showTableList"
+                @click="changeView(2)"
+              >
+                {{ $t("instances.showTableList") }}
+              </FunctionComponent>
+
+              <FunctionComponent
+                component="button"
+                size="small"
+                type="success"
+                @click="toNewInstance"
+              >
+                <i class="el-icon-plus"></i> {{ $t("instances.newInstance") }}
+              </FunctionComponent>
+
+              <FunctionComponent
+                component="button"
+                size="small"
+                v-if="showTableList"
+                @click="batOpen"
+              >
+                <i class="el-icon-video-play"></i> {{ $t("instances.start") }}
+              </FunctionComponent>
+              <FunctionComponent
+                component="button"
+                size="small"
+                v-if="showTableList"
+                @click="batStop"
+              >
+                <i class="el-icon-video-pause"></i> {{ $t("instances.stop") }}
+              </FunctionComponent>
+              <FunctionComponent
+                component="button"
+                size="small"
+                v-if="showTableList"
+                @click="batKill"
+              >
+                <i class="el-icon-video-pause"></i> {{ $t("instances.kill") }}
+              </FunctionComponent>
+              <FunctionComponent
+                component="button"
+                size="small"
+                type="danger"
+                :plain="true"
+                v-if="showTableList"
+                @click="batDelete(1)"
+              >
+                <i class="el-icon-delete"></i> {{ $t("instances.remove") }}
+              </FunctionComponent>
+              <FunctionComponent
+                component="button"
+                size="small"
+                :plain="true"
+                v-if="showTableList"
+                @click="batDelete(2)"
+              >
+                <i class="el-icon-delete"></i> {{ $t("instances.delete") }}
+              </FunctionComponent>
+            </FunctionGroup>
           </FunctionGroup>
-          <!-- <ItemGroup style="text-align: right">
-            <el-button
-              type="primary"
-              size="small"
-              plain
-              @click="changeView(1)"
-              v-show="showTableList"
-              >{{ $t("instances.showCardList") }}</el-button
-            >
-            <el-button
-              type="primary"
-              size="small"
-              plain
-              @click="changeView(2)"
-              v-show="!showTableList"
-              >{{ $t("instances.showTableList") }}</el-button
-            >
-            
-            <el-button size="small" type="success" @click="toNewInstance">
-              <i class="el-icon-plus"></i> {{ $t("instances.newInstance") }}
-            </el-button>
-            <el-button size="small" @click="batOpen" v-if="showTableList">
-              <i class="el-icon-video-play"></i> {{ $t("instances.start") }}
-            </el-button>
-            <el-button size="small" @click="batStop" v-if="showTableList">
-              <i class="el-icon-video-pause"></i> {{ $t("instances.stop") }}
-            </el-button>
-            <el-button size="small" @click="batKill" v-if="showTableList">
-              <i class="el-icon-video-pause"></i> {{ $t("instances.kill") }}
-            </el-button>
-            <el-button size="small" type="danger" plain @click="batDelete(1)" v-if="showTableList">
-              <i class="el-icon-delete"></i> {{ $t("instances.remove") }}
-            </el-button>
-            <el-button size="small" type="danger" @click="batDelete(2)" v-if="showTableList">
-              <i class="el-icon-delete"></i> {{ $t("instances.delete") }}
-            </el-button>
-          </ItemGroup> -->
         </el-col>
       </el-row>
 
@@ -405,18 +434,6 @@ export default {
   components: { Panel, CircleCheckFilled, CircleCloseFilled },
   data() {
     return {
-      functionGroups: [
-        {
-          type: "button",
-          binds: {
-            type: "success"
-          },
-          events: {
-            click: this.toNewInstance
-          },
-          label: "New Instance"
-        }
-      ],
       remoteList: [],
       currentRemoteUuid: null,
       instances: [],

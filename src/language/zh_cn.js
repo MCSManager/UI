@@ -28,7 +28,8 @@ export default {
         error: "操作错误",
         success: "操作成功",
         config: "配置",
-        operation: "操作"
+        operation: "操作",
+        moreOperation: "更多操作"
     },
 
     root: {

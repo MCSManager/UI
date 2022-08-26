@@ -11,66 +11,89 @@
         </span>
       </template>
       <template #default>
-        <el-row :gutter="20">
-          <el-col :xs="24" :md="6" :offset="0">
-            <ItemGroup>
-              <el-button size="small" @click="back">
-                <i class="el-icon-pie-chart"></i> {{ $t("schedule.backToConsole") }}
-              </el-button>
-              <el-button size="small" @click="refresh">
-                <i class="el-icon-refresh"></i> {{ $t("general.refresh") }}
-              </el-button>
-            </ItemGroup>
-          </el-col>
-          <el-col :xs="24" :md="18" :offset="0" class="text-align-right">
-            <ItemGroup>
-              <el-button size="small" @click="toUpDir">
-                <i class="el-icon-pie-chart"></i> {{ $t("fileManager.upperDir") }}
-              </el-button>
-              <el-button size="small" @click="mkdir">
-                <i class="el-icon-folder-add"></i> {{ $t("fileManager.mkdir") }}
-              </el-button>
-              <el-button size="small" @click="compress(1)">
-                <i class="el-icon-box"></i> {{ $t("fileManager.zip") }}
-              </el-button>
-              <el-button size="small" @click="compress(2)">
-                <i class="el-icon-files"></i> {{ $t("fileManager.unzip") }}
-              </el-button>
-              <el-button size="small" @click="rename">
-                <i class="el-icon-document"></i> {{ $t("fileManager.rename") }}
-              </el-button>
-              <el-button size="small" @click="move">
-                <i class="el-icon-scissors"></i> {{ $t("fileManager.cut") }}
-              </el-button>
-              <el-button size="small" @click="copy">
-                <i class="el-icon-document-copy"></i> {{ $t("fileManager.copy") }}
-              </el-button>
-              <el-button size="small" @click="paste">
-                <i class="el-icon-tickets"></i> {{ $t("fileManager.paste") }}
-              </el-button>
-              <!-- <el-button size="small" type="success" @click="upload">
-                <i class="el-icon-plus"></i> {{ $t("fileManager.uploadFile") }}
-              </el-button> -->
-              <el-upload
-                action=""
-                ref="upload"
-                :before-upload="handleUploadBefore"
-                :auto-upload="true"
-                :show-file-list="false"
-                :limit="1"
-                style="display: inline-block"
-              >
-                <el-button size="small" type="success" @click="upload">
-                  <i class="el-icon-plus"></i> {{ $t("fileManager.uploadFile") }}
-                </el-button>
-              </el-upload>
+        <div>
+          <el-row :gutter="20">
+            <el-col :span="24" :offset="0">
+              <FunctionGroup :container="true">
+                <FunctionComponent>
+                  <el-button size="small" @click="back">
+                    <i class="el-icon-pie-chart"></i> {{ $t("schedule.backToConsole") }}
+                  </el-button>
+                </FunctionComponent>
 
-              <el-button size="small" type="danger" @click="deleteFiles">
-                <i class="el-icon-document-delete"></i> {{ $t("general.delete") }}
-              </el-button>
-            </ItemGroup>
-          </el-col>
-        </el-row>
+                <FunctionComponent>
+                  <el-button size="small" @click="refresh">
+                    <i class="el-icon-refresh"></i> {{ $t("general.refresh") }}
+                  </el-button>
+                </FunctionComponent>
+
+                <FunctionGroup align="right">
+                  <FunctionComponent>
+                    <el-button size="small" @click="toUpDir">
+                      <i class="el-icon-pie-chart"></i> {{ $t("fileManager.upperDir") }}
+                    </el-button>
+                  </FunctionComponent>
+                  <FunctionComponent>
+                    <el-button size="small" @click="mkdir">
+                      <i class="el-icon-folder-add"></i> {{ $t("fileManager.mkdir") }}
+                    </el-button>
+                  </FunctionComponent>
+                  <FunctionComponent>
+                    <el-button size="small" @click="compress(1)">
+                      <i class="el-icon-box"></i> {{ $t("fileManager.zip") }}
+                    </el-button>
+                  </FunctionComponent>
+                  <FunctionComponent>
+                    <el-button size="small" @click="compress(2)">
+                      <i class="el-icon-files"></i> {{ $t("fileManager.unzip") }}
+                    </el-button>
+                  </FunctionComponent>
+                  <FunctionComponent>
+                    <el-button size="small" @click="rename">
+                      <i class="el-icon-document"></i> {{ $t("fileManager.rename") }}
+                    </el-button>
+                  </FunctionComponent>
+                  <FunctionComponent>
+                    <el-button size="small" @click="move">
+                      <i class="el-icon-scissors"></i> {{ $t("fileManager.cut") }}
+                    </el-button>
+                  </FunctionComponent>
+                  <FunctionComponent>
+                    <el-button size="small" @click="copy">
+                      <i class="el-icon-document-copy"></i> {{ $t("fileManager.copy") }}
+                    </el-button>
+                  </FunctionComponent>
+                  <FunctionComponent>
+                    <el-button size="small" @click="paste">
+                      <i class="el-icon-tickets"></i> {{ $t("fileManager.paste") }}
+                    </el-button>
+                  </FunctionComponent>
+                  <FunctionComponent>
+                    <el-button size="small" type="danger" @click="deleteFiles">
+                      <i class="el-icon-document-delete"></i> {{ $t("general.delete") }}
+                    </el-button>
+                  </FunctionComponent>
+                </FunctionGroup>
+
+                <FunctionComponent>
+                  <el-upload
+                    action=""
+                    ref="fileForm"
+                    :before-upload="handleUploadBefore"
+                    :auto-upload="true"
+                    :show-file-list="false"
+                    :limit="1"
+                    style="display: inline-block"
+                  >
+                    <el-button size="small" type="success" @click="upload">
+                      <i class="el-icon-plus"></i> {{ $t("fileManager.uploadFile") }}
+                    </el-button>
+                  </el-upload>
+                </FunctionComponent>
+              </FunctionGroup></el-col
+            >
+          </el-row>
+        </div>
 
         <div class="row-mt page-pagination">
           <div>
@@ -646,7 +669,7 @@ export default {
         });
         this.$message({ message: this.$t("fileManager.uploadOk"), type: "success" });
         await this.refresh();
-        this.$refs.fileForm.reset();
+        // this.$refs.fileForm.reset();
         this.percentComplete = -1;
       } catch (error) {
         this.$message({ message: `Error: ${error}`, type: "error" });
