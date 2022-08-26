@@ -66,7 +66,7 @@ export default {
         daemonAvailable: "Number of correct connections / total number of configured",
         instanceStatus: "Instance running status",
         runningAndTotalInstance: "Number of Running / Total Instances",
-        userLogin: "User login times",
+        userLogin: "User login count",
         failedLogin: "Number of failed logins: Number of successful logins",
         systemType: "System Type",
         systemName: "System Version",
@@ -382,7 +382,7 @@ export default {
 
     },
     instanceTypeList: {
-        "General console program": "Console program (general)",
+        "General console program": "Console program (General)",
         "Steam Game Server": "Steam Game Server",
         "MC Java Edition": "Minecraft Java Edition",
         "MC Bedrock Edition": "Minecraft Bedrock Edition",
@@ -1027,7 +1027,7 @@ export default {
     },
     businessWarning: {
         title: "Commercial Rental Risk Warning",
-        youMayWillBeHack: "You may be hacked!",
+        youMayWillBeHack: "Safety tips!",
         warningInfo: 'If you assign an instance to <b>Stranger</b> under <el-tag type="info" size="mini">Windows/Linux</el-tag>, then your host will At any time, others can invade the host by uploading malicious programs. ',
         hotToProtect: "How do I protect my host?",
         protectInfo: 'Your system must be a <el-tag type="info" size="mini">Linux</el-tag> system with Docker software installed, there is <el-tag type in the lower right corner of the instance setting interface ="info" size="mini">Process startup method</el-tag> selection box, please select the virtualization container scheme to ensure the security of your host. <br /><b>The virtualized container will allow your instance to run in a virtual sandbox environment</b>, and your sub-users will not be able to harm others no matter what malicious programs they upload. ',
