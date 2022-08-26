@@ -30,7 +30,7 @@
             <FunctionComponent>
               <el-input
                 v-model="query.instanceName"
-                :placeholder="$t('instances.selectDaemon')"
+                :placeholder="$t('instances.searchInstanceName')"
                 size="small"
                 style="width: 160px"
               ></el-input>
@@ -392,6 +392,7 @@
 .notAnyInstanceTip {
   text-align: center;
   margin: 100px 0px;
+  color: #7f7f7f;
 }
 
 .instanceStatusGreen {

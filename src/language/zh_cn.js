@@ -119,6 +119,7 @@ export default {
     instances: {
         instancesList: "应用实例列表",
         selectDaemon: "请选择远程节点地址",
+        searchInstanceName: "使用名字搜索",
         selectOne: "请至少选择一项",
         instanceName: "实例名称",
         showCardList: "简单视图",

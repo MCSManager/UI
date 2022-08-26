@@ -239,10 +239,10 @@ Copyright (C) 2022 MCSManager <mcsmanager-dev@outlook.com>
                 <el-col :lg="24" class="row-mt">
                   <div class="sub-title">
                     <div class="sub-title-title require-field">
-                      {{ $t("instancesDetail.launchTypeInfo") }}
+                      {{ $t("instancesDetail.launchType") }}
                     </div>
                     <div class="sub-title-info">
-                      {{ $t("instancesDetail.launchType") }}
+                      {{ $t("instancesDetail.launchTypeInfo") }}
                     </div>
                   </div>
                   <el-select v-model="instanceInfo.config.processType" style="width: 100%">

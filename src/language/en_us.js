@@ -119,6 +119,7 @@ export default {
     instances: {
         instancesList: "Application instances",
         selectDaemon: "Please select the remote node address",
+        searchInstanceName: "Enter a name to search",
         selectOne: "Please select at least one item",
         instanceName: "Instance Name",
         showCardList: "Simple View",
@@ -294,16 +295,16 @@ export default {
         cwd: "Working Directory",
         cwdInfo: "The working directory of the instance running, absolute path and relative path can be filled",
         cwdExample: "Example: D:/MyServers/0001",
-        updateCmd: "Update/installer files command",
+        updateCmd: "Update/Install files command",
         updateCmdInfo:
             "This command will be executed when the user performs an update/install operation, ${mcsm_workspace} represents the working directory, which isEmpty does not provide this function",
         updateCmdExample:
             'Example: "D:/SteamCMD/steamcmd.exe" +login anonymous +force_install_dir "${mcsm_workspace}" "+app_update 380870 validate" +quit',
-        ie: "terminal input encoding",
+        ie: "Terminal input encoding",
         ieInfo: "The command sends the code and restarts the instance to take effect",
-        oe: "terminal output encoding",
+        oe: "Terminal output encoding",
         oeInfo: "The terminal outputs the encoding and restarts the instance to take effect",
-        stopCmd: "Close instance command",
+        stopCmd: "Close command",
         stopCmdInfo: "Execute this command when you click the stop button, ^C means send Ctrl+C key combination.",
         fileCode: "File management code",
         fileCodeInfo: "Code for decompression, edit",
@@ -314,13 +315,13 @@ export default {
         defaultType: "Default Type",
         docker: "Virtualizing Containers (Linux Docker)",
 
-        dockerConfig: "Virtualization container configuration",
+        dockerConfig: "Virtualization Container Config (Docker)",
         dockerConfigInfo:
             "A Docker-based virtualization solution that can run each instance in a one-off box and destroy it after use to ensure host security.",
         dockerImage: "Environment Image",
         dockerImageInfo: "Specify instance image",
         openPort: "Open Port",
-        openPortInfo: "Multiple are separated by spaces. The left side of the colon is the exposed port of the host machine, and the right side is the exposed port of the container, which is usually the same.",
+        openPortInfo: "Multiple are separated by spaces.",
         portExample: "Optional, example 25565:25565/tcp 3380:3380/udp",
         quickEdit: "Quick Edit",
         extraVolumes: "Additional mount paths",
@@ -338,7 +339,7 @@ export default {
         netAliasesTooltip: "Optional, it is not recommended to fill in this item without special needs",
         netAliasesExample: "optional, example login-server-1",
         limitCpu: "Limit CPU usage (percent)",
-        limitCpuInfo: "Limit the total usage of all CPUs, there will be a slight deviation",
+        limitCpuInfo: "Limit the total usage of all CPUs",
         limitCpuTooltip:
             "Filling in 50 means all core usage and capping at 50%, if filling in 200 means allowing the use of all cores with a total of 200% usage",
         limitCpuExample: "optional, 0 to infinity",
@@ -347,7 +348,7 @@ export default {
         cpuSetCpusTooltip:
             "Specify the process to run on some cores. Reasonable allocation can make better use of your system hardware resources. For example, 0,1 means run on the 1st and 2nd cores, separated by commas",
         cpuSetCpusExample: "Optional, such as 0,1,2,3",
-        maxMem: "Maximum memory (in MB)",
+        maxMem: "Maximum memory (MB)",
         maxMemInfo: "For example, 1024, 2048, etc., please do not add units",
         maxMemExample: "Optional, eg 1024",
         newImage: "--- New Image ---",
@@ -855,49 +856,49 @@ export default {
         createTaskError: "Failed to create",
     },
     settings: {
-        setOperate: "Configuration operation",
+        setOperate: "Operation",
         updateSet: "Update Configuration",
         updateSetInfo: "Some configurations may require restarting the panel to take effect",
 
-        languageSetting: "Language Setting",
+        languageSetting: "Language",
         languageSettingInfo: "After changing the language, the control panel will synchronize all nodes, interfaces, etc. to the same language.",
         basicSetting: "Basic Settings",
-        accessPort: "Panel access port",
+        accessPort: "Web Port",
         accessPortInfo: "The port for the browser to access the web panel. This port must be released by the firewall. Restart the panel to take effect.",
-        inputNum: "Please fill in a number",
+        inputNum: "Please write a number",
 
-        bindIP: "Panel bind IP",
+        bindIP: "Bind IP",
         bindIPInfo: "In general, please keep the default value. Generally, it is suitable for multiple IP and network card binding scenarios.",
-        inputIP: "Default 0.0.0.0 I don't need to fill in by default",
+        inputIP: "Default 0.0.0.0, I don't need to write by default",
 
-        loginPage: "A brief description of the login interface",
+        loginPage: "Login Page Info",
         loginPageInfo: "Used to display a brief description text on the login interface. It can be used for administrator identity introduction and filing information introduction.",
-        inputCopy: "Please enter the copy, for example: Beijing ICP No. 00000001",
+        inputCopy: "A line displayed on the login page",
 
         referenceLink: "Notes",
         referenceLinksInfo:
             "Most settings of the panel are very important. Under normal circumstances, most parameters do not need to be changed. If you do not know what a parameter represents, it is recommended that you do not modify it.",
 
-        limitAndSecurity: "Limit and Security",
-        canFileManager: "Allow general users to use the file management function",
+        limitAndSecurity: "Security",
+        canFileManager: "File management",
         canFileManagerInfo:
             "File management is a resource-consuming and difficult-to-control function. If your general users do not have any requirements for file management, you can prohibit users from using file management.",
 
         crossAPI: "Cross-Origin Request API",
         crossAPIInfo:
             "The HTTP response will add access-control-allow-origin: *, which may reduce security, but improve development scalability.",
-        loginCheckIp: "The limit of the number of logins with the same IP",
+        loginCheckIp: "Login IP limit",
         loginCheckIpInfo:
             "This feature will protect your panel from brute force password cracking by a single host with only 10 password errors per IP.",
         attention: "Notes",
         attentionInfo:
             "These configuration settings require some professional knowledge, and you can roughly guess which values ​​are suitable for you based on your hardware equipment. <br />In general, the default values ​​​​can meet the daily usage scenarios of individuals, if the scale is larger, the hardware The requirements are higher, in order not to lose the user experience excessively, a suitable threshold is very important.",
 
-        about: "about",
+        about: "About",
         aboutTitle:
-            "The software is based on <a target='black' href='https://github.com/MCSManager/MCSManager-Daemon/blob/master/LICENSE'>Apache-2.0</a> Open Source Software License Release<br />Copyright MCSManager Team ",
+            "<p>Copyright MCSManager Team</p> ",
         aboutTitleInfo:
-            "This agreement allows everyone to copy and modify copies of the code, and to charge the user for the service.<br />",
+            "https://github.com/mcsmanager | https://mcsmanager.com/ | mcsmanager-dev@outlook.com",
         closedSource: "Closed Source Commercial License",
         closedSourceInfo: "If you want to re-develop and use closed source for any activity (including but not limited to commercial, personal).",
         learnMore: "Learn more",
