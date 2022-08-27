@@ -86,7 +86,9 @@ export default {
       }
       // If not installed, must route to /install
       if (statusInfo?.isInstall === false) {
-        return router.push({ path: "/install" });
+        this.loading = false;
+        setTimeout(() => router.push({ path: "/install" }), 1200);
+        return;
       }
     } catch (error) {
       alert(`Err: ${error}, Please refresh!`);
