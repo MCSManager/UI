@@ -43,6 +43,7 @@ Copyright (C) 2022 MCSManager <mcsmanager-dev@outlook.com>
 <script>
 import Aside from "../components/Aside";
 import Header from "../components/Header";
+// eslint-disable-next-line no-unused-vars
 import { requestPanelStatus, setupUserInfo } from "./service/protocol.js";
 import router from "./router";
 
@@ -73,7 +74,6 @@ export default {
 
   async created() {
     let needToRoot = false;
-    let needInstall = false;
 
     try {
       // After the first refresh, try to get user data once
@@ -86,23 +86,7 @@ export default {
       needToRoot = true;
     }
 
-    try {
-      // Get current panel status information
-      const statusInfo = await requestPanelStatus();
-      if (statusInfo.language) {
-        console.log("SET_LANGUAGE:", statusInfo.language);
-        this.$i18n.locale = statusInfo.language;
-      } else {
-        this.$i18n.locale = "en_us";
-      }
-      // If not installed, must route to /install
-      if (statusInfo?.isInstall === false) needInstall = true;
-    } catch (error) {
-      alert(error + " Please refresh!");
-    }
-
     this.loading = false;
-    if (needInstall) return router.push({ path: "/install" });
     if (needToRoot) return router.push({ path: "/" });
   },
 

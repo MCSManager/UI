@@ -24,7 +24,7 @@
           </ItemGroup>
         </div>
       </Panel>
-    </div>  
+    </div>
 
     <div class="panel-wrapper" v-if="step == 0">
       <Panel class="panel tc" body-style="padding:40px;">
@@ -159,7 +159,6 @@ export default {
       window.location.href = "/#/overview?from_install=1";
     },
     installLib() {
-      console.log("install....");
       this.next();
     },
     async selectLanguage(lang) {
