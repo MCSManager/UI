@@ -954,17 +954,17 @@ export default {
         whichServer: "Please select which host do you wish to deploy to?"
     },
     install: {
-        welcome: "Welcome to the MCSManager Admin Panel",
-        desc: "Open source, distributed, out-of-the-box, admin panel for the Minecraft game server and all console programs",
-        start: "Start using",
-        createAdminAccount: "Create an administrator account to access the panel",
-        createAdminAccountInfo: "Username supports any language, please keep your password safe.",
+        welcome: "Welcome to use MCSManager Panel",
+        desc: "Distributed, out-of-the-box, supports docker, supports Minecraft and any console program management panel",
+        start: "Quickstart",
+        createAdminAccount: "Create Administrator account",
+        createAdminAccountInfo: "Username supports any language",
         passWord: "password",
         createAccount: "Create Account",
         ohhh: "Done!",
         ohhhInfo: "Finally, is this your first time using this software?",
         firstTime: "First use",
-        oldUSer: "Old User",
+        oldUSer: "Regular user",
         adminOK: "Administrator created"
     },
     notify: {
