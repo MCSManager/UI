@@ -76,13 +76,30 @@ export default {
     let needToRoot = false;
 
     try {
+      // Get current panel status information
+      const statusInfo = await requestPanelStatus();
+      if (statusInfo.language) {
+        console.log("SET_LANGUAGE:", statusInfo.language, statusInfo);
+        this.$i18n.locale = statusInfo.language;
+      } else {
+        this.$i18n.locale = "en_us";
+      }
+      // If not installed, must route to /install
+      if (statusInfo?.isInstall === false) {
+        return router.push({ path: "/install" });
+      }
+    } catch (error) {
+      alert(`Err: ${error}, Please refresh!`);
+    }
+
+    try {
       // After the first refresh, try to get user data once
       // If it fails, navigate to / view to further decide the jump route
       await setupUserInfo();
       const userInfo = this.$store.state.userInfo;
       if (!userInfo || !userInfo.uuid) throw new Error("userInfo.uuid is null");
     } catch (error) {
-      console.log(error);
+      console.log("App.vue redirected to root.vue");
       needToRoot = true;
     }
 

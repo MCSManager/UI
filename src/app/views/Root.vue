@@ -13,7 +13,7 @@
 <script>
 import Panel from "../../components/Panel";
 import router from "../router";
-import { requestPanelStatus, setupUserInfo } from "../service/protocol";
+import { setupUserInfo } from "../service/protocol";
 
 export default {
   components: { Panel },
@@ -30,21 +30,6 @@ export default {
       }
     },
     async init() {
-      try {
-        // Get current panel status information
-        const statusInfo = await requestPanelStatus();
-        if (statusInfo.language) {
-          console.log("SET_LANGUAGE:", statusInfo.language, statusInfo);
-          this.$i18n.locale = statusInfo.language;
-        } else {
-          this.$i18n.locale = "en_us";
-        }
-        // If not installed, must route to /install
-        if (statusInfo?.isInstall === false) return router.push({ path: "/install" });
-      } catch (error) {
-        alert(`Err: ${error}, Please refresh!`);
-      }
-
       try {
         // In order to adapt to seamless login, data must be requested again here
         if (this.$store.state.userInfo?.permission && this.$store.state.userInfo?.uuid)
