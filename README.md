@@ -16,8 +16,8 @@ Please go to the main project repository: [https://github.com/MCSManager/MCSMana
 ## Build the development environment
 
 ```bash
-git clone https://github.com/MCSManager/MCSManager-UI.git
-cd MCSManager-UI
+git clone https://github.com/MCSManager/UI.git
+cd UI
 npm install
 npm run serve
 # Visit http://localhost:8080/ to preview the interface
