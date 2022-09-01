@@ -8,7 +8,6 @@
 
 [Official Website](http://mcsmanager.com/) | [Team Homepage](https://github.com/MCSManager) | [Panel Project](https://github.com/MCSManager/MCSManager) | [UI Project](https://github.com/MCSManager/UI) | [Daemon project](https://github.com/MCSManager/Daemon)
 
-**Web UI project for MCSManager. **
 
 Please go to the main project repository: [https://github.com/MCSManager/MCSManager](https://github.com/MCSManager/MCSManager)
 
