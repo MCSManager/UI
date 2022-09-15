@@ -3,7 +3,7 @@
   "version": "2.0.0",
   "description": "ui for mcsmanager",
   "homepage": "https://mcsmanager.com/",
-  "author": "https://github.com/Suwings",
+  "author": "https://github.com/unitwk",
   "scripts": {
     "serve": "vue-cli-service serve",
     "start": "vue-cli-service serve",
