@@ -9,7 +9,7 @@
 [Official Website](http://mcsmanager.com/) | [Team Homepage](https://github.com/MCSManager) | [Panel Project](https://github.com/MCSManager/MCSManager) | [UI Project](https://github.com/MCSManager/UI) | [Daemon project](https://github.com/MCSManager/Daemon)
 
 
-Please go to the main project repository: [https://github.com/MCSManager/MCSManager](https://github.com/MCSManager/MCSManager)
+Please go to main project repository: [https://github.com/MCSManager/MCSManager](https://github.com/MCSManager/MCSManager)
 
 <br />
 
@@ -27,7 +27,7 @@ npm run serve
 
 <br />
 
-## Problem report
+## Bug Report
 
 Feedback on any problems found is welcome and must be fixed in time.
 
@@ -35,10 +35,3 @@ If you find a serious security vulnerability and it is inconvenient to publish i
 
 <br />
 
-## Contribute
-
-If you find any problems during use, you can submit an Issue or submit a Pull Request after fork modification.
-
-The code needs to keep the existing format, and no redundant code should be formatted. For details, please refer to [here](https://github.com/MCSManager/MCSManager/issues/544).
-
-<br />
