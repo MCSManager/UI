@@ -1,0 +1,1043 @@
+{
+  "general": {
+    "search": "Search",
+    "searchName": "Search by name",
+    "operate": "Operation",
+    "setting": "Settings",
+    "manage": "Management",
+    "edit": "Edit",
+    "allocation": "Allocate resources",
+    "add": "Add",
+    "confirm": "OK",
+    "cancel": "Cancel",
+    "delete": "Delete",
+    "deleteFinish": "Deleted",
+    "pleaseSelect": "Please select",
+    "refresh": "Refresh",
+    "refreshFinish": "Refreshed",
+    "required": "required",
+    "warn": "Warning",
+    "allow": "Enable",
+    "forbid": "Disable",
+    "enable": "Enable",
+    "closed": "closed",
+    "noSelect": "Not selected",
+    "yes": "Yes",
+    "no": "No",
+    "save": "Save",
+    "error": "Operation error",
+    "success": "Operation succeeded",
+    "config": "Configuration",
+    "operation": "operation",
+    "moreOperation": "More operation"
+  },
+
+  "root": {
+    "title": "Processing...",
+    "private": "Personal",
+    "logout": "Logout",
+    "logoutSuccess": "Logout successful",
+    "logoutSuccessInfo": "Welcome next time",
+    "logoutError": "Logout failed"
+  },
+  "login": {
+    "title": "Login",
+    "titleInfo": "Log in to the panel using the server's MCSManager account",
+    "account": "Account",
+    "passWord": "password",
+    "forgotPassword": "Forgot Password",
+    "forgotPasswordInfo": "If you are a regular user, please ask your service provider to reset your password. If you are an administrator, back up and delete the mcsmanager/web/data/Users folder to reinstall MCSManager.",
+    "login": "Login",
+    "logging": "Login",
+    "isNull": "Account or password cannot be null",
+    "errorCause": "The account or password is incorrect, please check and try again",
+    "logBackIn": "Try Again",
+    "loginSuccess": "Successful",
+
+    "notify": {
+      "title": "The page doesn't work correctly",
+      "message": "Unable to get identity data, maybe you have been banned, or there is a network problem, please try refreshing the page"
+    }
+  },
+  "overview": {
+    "systemInfoTable": "System Overview",
+    "daemonStatus": "Node online status",
+    "daemonAvailable": "Number of correct connections / total number of configured",
+    "instanceStatus": "Instance running status",
+    "runningAndTotalInstance": "Number of Running / Total Instances",
+    "userLogin": "User login count",
+    "failedLogin": "Number of failed logins: Number of successful logins",
+    "systemType": "System Type",
+    "systemName": "System Version",
+    "webPanelTime": "Panel Time",
+    "localTime": "Local Time",
+    "computerName": "Computer Name",
+    "systemUserName": "Process User",
+    "memoryUsage": "Memory Usage",
+    "nodeVersion": "Node Version",
+    "panelVersion": "Panel Version",
+    "specifiedDaemonVersion": "Required version of the daemon",
+    "illegalAccess": "Number of blocked requests",
+    "banips": "Number of banned IPs",
+    "minBefore": "MinBefore",
+    "secBefore": "Seconds ago",
+    "systemLoad": "OS Load",
+    "systemLoadPercentage": "CPU, RAM percentage of the host where the panel is located",
+
+    "daemonOverview": "Remote Node Overview",
+    "daemonOverviewInfo": "Ensure all remote nodes are online. Offline status will make this remote node and related functions unavailable, which may affect user experience and data. <br>The panel side {panelVersion} must correspond to the remote node {specifiedDaemonVersion} version",
+    "addr": "Address",
+    "remarks": "Remarks",
+    "port": "Port",
+    "mem": "Memory",
+    "instance": "Existing instance",
+    "runningInstance": "Running instance",
+    "daemonVersion": "Remote Node Version",
+    "lowDaemonVersion": "Inconsistent with the version required by the panel",
+    "connectStatus": "Connection",
+    "online": "Online",
+    "errorConnect": "Unable to connect to the specified IP or wrong key",
+    "offline": "Offline",
+
+    "panelApiRequestCount": "Panel-side interface requests",
+    "panelApiRequestInfo": "Every 1 minute statistics interval, a total of 1 hour request history",
+
+    "panelCpuUsage": "Panel-side CPU usage",
+    "panelCpuUsageInfo": "Statistical interval of every 10 seconds, a total of 10 minutes of historical CPU usage",
+
+    "runningInstances": "Instance running amount",
+    "runningInstancesInfo": "Statistical interval of every 1 minute, a total of 1 hour of instance status history",
+
+    "panelMemoryUsage": "Panel-side memory usage",
+    "panelMemoryUsageInfo": "Historical memory usage for a total of 10 minutes every 10 seconds interval",
+
+    "docs": "Help Documentation",
+    "Q&A": "Frequently Asked Questions"
+  },
+  "instances": {
+    "instancesList": "Application instances",
+    "selectDaemon": "Please select the remote node address",
+    "searchInstanceName": "Enter a name to search",
+    "selectOne": "Please select at least one item",
+    "instanceName": "Instance Name",
+    "showCardList": "Simple View",
+    "showTableList": "Batch operation view",
+    "newInstance": "New instance",
+    "start": "Open",
+    "stop": "close",
+    "kill": "terminate",
+    "remove": "Remove",
+    "delete": "Delete",
+    "selectRemoteError": "No remote nodes selected",
+    "selectRemoteTitle": "Please select a remote node in the drop-down box at the top left",
+    "selectRemoteInfo": "The localhost remote node can be selected by default, and the remote node can be deployed on any host, helping you to quickly manage multiple hosts and deploy them in a distributed manner.",
+    "notAnyInstanceTitle": "No data, please click the green \"New Instance\" button in the upper right to create an instance.",
+    "notAnyInstanceInfo": "The application instance can be a Minecraft server or any other application. After clicking Create, it will be deployed in the specified remote node.",
+    "lastDatetime": "Startup time",
+    "endTime": "Expiration Time",
+    "otherInfo": "Other Info",
+    "detailsInfo": "Details",
+    "playerCount": "Number of people",
+    "mcVersion": "Version",
+
+    "status": {
+      "title": "Status",
+      "runStatus": "Running Status",
+      "die": "Not running",
+      "running": "running",
+      "stopping": "stopping",
+      "starting": "Starting",
+      "busy": "busy"
+    },
+
+    "card": {
+      "editConfig": "Edit Configuration",
+      "controlPanel": "Control Panel",
+      "remove": "Remove instance",
+      "delete": "Delete instance"
+    },
+
+    "table": {
+      "instancesList": "Instance List",
+      "instanceType": "Instance Type",
+      "byteStreamCode": "Byte Stream Code",
+      "lastDatetime": "Last start",
+      "operate": "Operation"
+    },
+    "dialog": {
+      "instanceParameterEdit": "Instance parameter edit",
+      "commandClose": "Close command",
+      "commandCloseInfo": "The actual command that was executed when the \"close\" command was executed",
+      "inputOrOutputCode": "Input/Output Code",
+      "inputOrOutputCodeInfo": "When the console appears garbled, you can try to adjust, for example: GBK, UTF-8, etc.",
+      "update": "Update",
+      "close": "close"
+    },
+    "open": "Instance started",
+    "exit": "The instance has exited",
+    "failed": "Operation failed",
+    "UnableToConnect": "Unable to establish connection with terminal",
+    "UnableToConnectInfo": "Authentication failed, please refresh the page and try again"
+  },
+  "newInstances": {
+    "selectType": "Please select the type of application you want to create",
+    "types": [
+      {
+        "name": "Minecraft Java Edition game server",
+        "desc": "Suitable for servers in Jar format like Spigot, Bungeecord, etc."
+      },
+      {
+        "name": "Bedrock Edition Minecraft Game Server",
+        "desc": "Suitable for binary executable files such as Bedrock Dedicated Server or server software in other formats"
+      },
+      {
+        "name": "Other game server",
+        "desc": "Suitable for running private server programs similar to most games, not guaranteed to be fully compatible"
+      },
+      {
+        "name": "Generic Console Application",
+        "desc": "For programs like bash, cmd.exe, app.exe, start.sh and any other available command to start"
+      }
+    ],
+    "selectCreateType": "Select the creation method",
+    "selectCreateTypeInfo": "If you only want to start the server through the server software, select the first option, other options are suitable for different scenarios",
+    "createTypes": [
+      {
+        "name": "Upload a software (recommended)",
+        "desc": "Suitable for creating a server for the first time, just upload a program file to directly create a server and generate map archives, etc."
+      },
+      {
+        "name": "Upload zip file (only .zip file)",
+        "desc": "Applicable to server integration packages and existing server archives, it can be automatically decompressed and run after being packaged and uploaded, only zip format is supported"
+      },
+      {
+        "name": "Select existing file",
+        "desc": "No files are needed or the server files already exist on the remote host, you just need to manually set the startup command and file directory to complete"
+      }
+    ],
+    "back": "Back",
+    "instanceNameInfo": "Instance nickname",
+    "instanceNameInfo2": "Instance name, as unique as possible",
+    "commandTemplate": "Startup Command Template",
+    "commandTemplateText": "where $ProgramName represents the name of the file you upload next, under normal circumstances there is no need to modify it",
+    "cmdInfo": "eg java -jar server.jar",
+    "cmdAssist": "Command Assistant",
+    "fileDir": "Server file directory",
+    "fileDirInfo": "Optional, automatically created and managed by default, if you need to fill in, please write the complete absolute path, such as: C:/Servers/MyServer",
+    "autoCreate": "Automatically create and manage by default",
+    "uploadFile": "Upload server software",
+    "uploadFileInfo": "Server software refers to JAR/EXE format or other executable programs (such as Spigot.jar, Paper.jar, etc.)",
+    "afterUpload": "The instance will be created automatically after uploading the file",
+
+    "launchCmd": "Startup Command",
+    "launchCmdInfo": "Because the server file name in the compressed package cannot be recognized, please fill in the startup command by yourself",
+    "launchCmdInfo2": "Please fill in the launch command yourself",
+    "autoCreate2": "Optional, automatic management by default",
+    "uploadZip": "Upload server-side zip file",
+    "uploadZipInfo": "Only ZIP format is supported. After uploading, the compressed package will be automatically decompressed to the \"file directory\"",
+    "uploadZipButton": "Upload zip",
+    "upFileInfo": "The instance will automatically create and decompress the file after uploading the file. It may take a while to complete the decompression task",
+
+    "selectFromExist": "Select server from existing file",
+    "selectFromExistInfo": "The file must already exist on the remote host (non-panel machine)",
+    "cmd2": "such as java -jar server.jar, cmd.exe, etc.",
+    "afterFlieName": "After filling in the file name of the server software, go to the file management to upload the server software to start the instance.",
+
+    "createInstant": "Create instance",
+    "createSuccess": "Create success",
+    "nowYouCan": "You can now make specific settings and edits to the instance",
+
+    "toEdit": "Go to edit instance specific parameters",
+    "toEditInfo": "It is recommended to immediately go to the editing interface to set relevant parameters, such as Docker startup method, encoding settings, working environment, etc.",
+
+    "newInstanceGuide": "New Instance Guide",
+    "pleaseFinish": "Please complete the basic parameters before uploading files",
+    "uploadAndCreate": "When uploading a file, an instance will be created at the same time. This operation is irreversible. Do you want to continue?",
+
+    "uploadFinish": "Upload complete",
+    "createFinish": "Create finished",
+    "instantWillBeCreate": "The instance will be created, do you want to continue?",
+    "parameterNotFinish": "The parameter is incomplete, please fill in",
+    "createFailed": "Create failed, reason:",
+    "uploadAndSet": "Upload file/set parameters"
+  },
+  "instancesDetail": {
+    "title": "Instance Settings",
+    "titleInfo": "Only administrators can change all settings. The instance has remote code execution function. Please modify the configuration carefully.",
+    "uid": "Remote Instance ID",
+    "gid": "Remote Node ID",
+    "status": "Current Status",
+    "started": "Number of Starts",
+    "createDateTime": "Create Date",
+    "lastDateTime": "Last start date",
+    "endTime": "Expiration Time",
+    "unlimited": "unlimited",
+    "processType": {
+      "title": "Process Type",
+      "general": "General program startup mode",
+      "docker": "virtualized container startup method"
+    },
+    "distribute": {
+      "title": "Assign to other users",
+      "ok": "Yes, container isolation is enabled",
+      "no": "Not recommended, Must use Docker."
+    },
+    "instanceType": "Instance Type",
+    "instanceTypeInfo": "Different types will lead to different functions. If there is no requirement type, you can choose a more abstract general type, such as the Java Universal Edition server",
+    "launchCmdText": "Applies to any program command. If the program path or additional parameters contain spaces, use quotation marks as boundaries, and the contained text will be treated as a whole. The entire command must not have line breaks. <br />If you enter the command and nothing happens, or The terminal typesetting is messy, you can open the console-terminal settings-pseudo-terminal to try.<br />Different types will lead to different functions, if there is no required type, you can choose a more abstract general type, such as Java Universal Edition.<br />Example: \"C: \\Program Files\\Java\\bin\\java.exe\" -Dfile.encoding=utf-8 -Djline.terminal=jline.UnsupportedTerminal -jar \"my server.jar\" -nogui",
+    "cwd": "Working Directory",
+    "cwdInfo": "The working directory of the instance running, absolute path and relative path can be filled",
+    "cwdExample": "Example: D:/MyServers/0001",
+    "updateCmd": "Update/Install files command",
+    "updateCmdInfo": "This command will be executed when the user performs an update/install operation, ${mcsm_workspace} represents the working directory, which isEmpty does not provide this function",
+    "updateCmdExample": "Example: \"D:/SteamCMD/steamcmd.exe\" +login anonymous +force_install_dir \"${mcsm_workspace}\" \"+app_update 380870 validate\" +quit",
+    "ie": "Terminal input encoding",
+    "ieInfo": "The command sends the code and restarts the instance to take effect",
+    "oe": "Terminal output encoding",
+    "oeInfo": "The terminal outputs the encoding and restarts the instance to take effect",
+    "stopCmd": "Close command",
+    "stopCmdInfo": "Execute this command when you click the stop button, ^C means send Ctrl+C key combination.",
+    "fileCode": "File management code",
+    "fileCodeInfo": "Code for decompression, edit",
+    "endTimeInfo": "Unable to start after expiration",
+    "launchType": "Process startup method (recommended)",
+    "launchTypeInfo": "Usually the default is enough. If you are engaged in business activities, you should use the virtualized container startup method, otherwise the host may be compromised.",
+    "defaultType": "Default Type",
+    "docker": "Virtualizing Containers (Linux Docker)",
+
+    "dockerConfig": "Virtualization Container Config (Docker)",
+    "dockerConfigInfo": "A Docker-based virtualization solution that can run each instance in a one-off box and destroy it after use to ensure host security.",
+    "dockerImage": "Environment Image",
+    "dockerImageInfo": "Specify instance image",
+    "openPort": "Open Port",
+    "openPortInfo": "Multiple are separated by spaces.",
+    "portExample": "Optional, example 25565:25565/tcp 3380:3380/udp",
+    "quickEdit": "Quick Edit",
+    "extraVolumes": "Additional mount paths",
+    "extraVolumesInfo": "Mount other directories except the working directory into the container, and multiple directories are separated by spaces. The left side of the colon is the host path, and the right side is the container path",
+    "extraVolumesExample": "Example /backups/test1:/workspace/backups /var/logs/test1:/workspace/logs",
+    "containerName": "Container Name",
+    "containerNameInfo": "The name used for container creation, randomly generated if empty",
+    "containerNameTooltip": "Optional, it is not recommended to fill in this item without special requirements",
+    "containerNameExample": "optional, example lobby-1",
+    "netMode": "Network Mode",
+    "netModeInfo": "Select the network mode that the container is connected to, such as bridge",
+    "netAliases": "Net Aliases",
+    "netAliasesInfo": "Used for mutual access between containers in a custom network, separated by spaces",
+    "netAliasesTooltip": "Optional, it is not recommended to fill in this item without special needs",
+    "netAliasesExample": "optional, example login-server-1",
+    "limitCpu": "Limit CPU usage (percent)",
+    "limitCpuInfo": "Limit the total usage of all CPUs",
+    "limitCpuTooltip": "Filling in 50 means all core usage and capping at 50%, if filling in 200 means allowing the use of all cores with a total of 200% usage",
+    "limitCpuExample": "optional, 0 to infinity",
+    "cpuSetCpus": "Specify CPU computing core",
+    "cpuSetCpusInfo": "Restrict containers from running on specified CPU cores",
+    "cpuSetCpusTooltip": "Specify the process to run on some cores. Reasonable allocation can make better use of your system hardware resources. For example, 0,1 means run on the 1st and 2nd cores, separated by commas",
+    "cpuSetCpusExample": "Optional, such as 0,1,2,3",
+    "maxMem": "Maximum memory (MB)",
+    "maxMemInfo": "For example, 1024, 2048, etc., please do not add units",
+    "maxMemExample": "Optional, eg 1024",
+    "newImage": "--- New Image ---",
+
+    "console": "Console",
+    "fileManager": "File Manager",
+    "back": "back",
+    "saveSet": "Save",
+
+    "dockerTableDict": [
+      {
+        "label": "Protocol (tcp/udp)"
+      },
+      {
+        "label": "Host port"
+      },
+      {
+        "label": "Container port"
+      },
+      {
+        "label": "Host path"
+      },
+      {
+        "label": "Mount"
+      }
+    ],
+
+    "startError": "The start command cannot contain newlines, this is not a script file, and multiple commands cannot be executed, please check",
+    "cantGetImageList": "Unable to get the remote host image list, it is recommended to go to the \"Service Environment\" interface to create an image",
+    "cantGetNetModeList": "Unable to get the remote host network list, it is recommended to check the Docker configuration"
+  },
+  "instanceTypeList": {
+    "General console program": "Console program (General)",
+    "Steam Game Server": "Steam Game Server",
+    "MC Java Edition": "Minecraft Java Edition",
+    "MC Bedrock Edition": "Minecraft Bedrock Edition",
+    "MC Spigot": "MC Spigot",
+    "MC Paper": "MC Paper",
+    "MC BungeeCord": "MC BungeeCord",
+    "MC Bedrock": "MC Bedrock",
+    "MC Sponge": "MC Sponge",
+    "MC Forge": "MC Forge",
+    "MC Fabric": "MC Fabric",
+    "MC Bukkit": "MC Bukkit",
+    "MC Geyser": "MC Geyser",
+    "MC MCDR": "MC MCDR",
+    "Web Shell": "Web Shell"
+  },
+  "terminal": {
+    "name": "Name",
+    "type": "Type",
+    "unknown": "unknown",
+    "currentPlayers": "Number of players",
+
+    "controlGroup": "Operation",
+    "confirmOperate": "Are you sure you want to perform this operation?",
+    "start": "Start instance",
+    "stop": "Close instance",
+    "restart": "Restart instance",
+    "kill": "Force kill instance",
+    "killTask": "Terminate running task",
+    "updateInstance": "Update/Install Instance",
+
+    "functionGroup": "Function",
+    "processConfig": "specific configuration",
+    "termSet": "Term Settings",
+    "statusQuery": "Status Query",
+    "eventTask": "Event Task",
+    "instanceDetail": "Advanced settings",
+    "lastDatetime": "Last start",
+    "ie": "Input",
+    "oe": "Output",
+
+    "newFullScreen": "Open new full screen",
+    "fullScreen": "Full screen",
+    "restart2": "Restart",
+    "exit": "Exit",
+    "inputCmd": "You can enter commands here, press Enter to execute",
+    "cmdHistory": "Command History",
+    "noCmdHistory": "No command history yet",
+    "panelOnline": "Online",
+    "panelOnlineInfo": "Trends of people online every 10 minutes for a total of 10 hours",
+
+    "pingConfig": {
+      "title": "Instance Status Query Protocol Configuration",
+      "title2": "Better monitor server status",
+      "title2Info": "This function will automatically select the corresponding protocol according to the instance type set by the administrator, and obtain the specific information and parameters of the server process (such as the number of games, version, etc.)",
+      "addr": "Server access address",
+      "inputAddr": "Required, domain name and IP address are supported. If not filled, the server information, number of people, version, etc. will not be queried.",
+      "addrExample": "Example: localhost",
+      "port": "Server access port",
+      "inputPort": "Required, only numeric port numbers can be entered",
+      "portExample": "Example: 25565"
+    },
+
+    "eventConfigPanel": {
+      "title": "Event-triggered tasks",
+      "autoRestart": "Auto restart",
+      "autoRestartInfo": "If the instance state changes to non-running state without panel operation, it will start the instance operation immediately.<br />Can be used for automatic restart function after crash.",
+      "autoStart": "Auto Start",
+      "autoStartInfo": "As long as the remote node (remote node) is running, a start instance operation is automatically initiated. <br />If the remote node is powered on automatically, it can be used to start the instance when it is powered on. "
+    },
+
+    "unavailableTerminal": {
+      "title": "Unable to establish connection with remote node",
+      "browserCannotConnect": "The browser cannot connect to",
+      "browserCannotConnect2": "The browser could not establish a connection with the remote node",
+      "maybe": "Maybe it's because you haven't opened the port of the remote node, or you're using an intranet address",
+      "solution": "Possible solutions",
+      "solutions": "<li>Ensure that the address of the remote node is a public network address and the port of the remote node is open. </li> <li> If there is a reverse proxy, FRP, HTTPS, etc., please use the wss:// protocol connection, <br /> and the remote node address also needs HTTPS, WSS support. </li> <li> Learn more at <a href=\"https://mcsmanager.com\" target=\"_blank\" rel=\"noopener noreferrer\" >https://mcsmanager.com</a > many</li>"
+    },
+
+    "cantConnectTerm": "Unable to establish a connection with the terminal",
+    "cantSendCmdBecauseData": "Cannot execute command, data stream channel is unavailable",
+    "cantSendCmdBecauseNotRun": "Cannot execute command, server is not started"
+  },
+  "processConfig": {
+    "title": "Configuration List Group",
+    "aboutConfig": "About configuration file list",
+    "aboutConfigInfo": "The configuration file adaptation work is jointly developed by the development team and the open source community developers, and the relevant author has displayed \"module author\" in the specific project. If there are multiple configuration files with the same name, it has been marked as applicable at the front of the configuration file For which server, please manually select the server/or derived server type.",
+    "noConfigFile": "No configuration file yet",
+    "noConfigFileInfo": "After a specific instance type ({type}) and with the file scan, no qualified configuration files were detected. Please initialize the process configuration or change the instance type to adjust",
+    "sameFile": "A file with the same name exists",
+    "author": "Module author",
+    "unknownCompatible": "The panel cannot know whether this configuration file is compatible, please enter the corresponding configuration file interface according to the type.",
+    "browse": "Browse"
+  },
+  "processConfigFile": {
+    "title": "Configuration File",
+    "reload": "Reload",
+    "back": "Back",
+    "editOriginal": "Edit Source View",
+    "noFile": "The file does not exist or the permissions are incorrect, and the specific configuration of this file cannot be viewed. You may try to edit the file online with the \"File Management\" function, or try restarting the instance to refresh the file.",
+    "updateFailed": "Update failed"
+  },
+  "termSet": {
+    "title": "Terminal Settings",
+    "pty": "emulated terminal",
+    "ptyInfo": "The terminal is fully interactive by emulating the terminal forwarding program.<br />Including the use of Tab, Ctrl function keys, etc.",
+    "ifHaveProblems": "If there is a problem with the use, it is recommended to close it.",
+    "ptySize": "Size of the emulated terminal window",
+    "ptySizeInfo": "It takes effect when the emulated terminal is turned on. It is used to set the height and width of the emulated terminal. The instance needs to be restarted for changes to take effect.",
+    "col": "Column:",
+    "line": "Line:",
+    "WebColor": "Web color rendering",
+    "WebColorInfo": "The web page automatically adds color rendering to the output content, and the rendered color may not be completely correct.<br />If the color rendering function conflicts with the color function that comes with the software, you can turn off this function.",
+    "stopCmdInfo": "When the \"Close Instance\" button is clicked, this command will be executed immediately, ^C stands for Ctrl+C signal.",
+    "crlf": "Command executes carriage return",
+    "crlfInfo": "If you enter a command and press enter and nothing happens, try adjusting this option.",
+    "crlfInfo2": "It is usually \"carriage return and line feed\" under Windows platform, and \"line feed\" under Linux/MacOS platform.",
+    "newline": "\\n",
+    "EnterNewline": "\\r\\n",
+    "ioCode": "input and output code",
+    "ioCodeInfo": "If the content in the console is garbled, you can try to modify this code to solve the problem.",
+    "setUpdate": "The instance configuration has been updated, some configurations may need to restart the instance to take effect"
+  },
+  "schedule": {
+    "addSchedule": "Add Scheduled Task",
+    "backToConsole": "Back",
+    "schedules": "Scheduled Task Schedule",
+    "taskName": "Name",
+    "payload": "Payload",
+    "count": "Count",
+    "infinite": "Infinite",
+    "action": "Action",
+    "sendCmd": "Send Command",
+    "stop": "Stop the instance",
+    "start": "Start instance",
+    "restart": "Restart the instance",
+    "kill": "Terminate instance",
+    "intervalsTask": "Interval time task",
+    "cycleTask": "Cycle Timed Task",
+    "specifyTask": "Specify time task",
+    "triggerTime": "Trigger Time",
+    "inputTaskName": "Required and must be unique",
+    "taskType": "task action/type",
+    "selectDate": "Select date and time",
+    "specificTime": "Specific time point",
+    "mon": "Monday",
+    "tue": "Tuesday",
+    "wen": "Wednesday",
+    "thur": "Thursday",
+    "fri": "Friday",
+    "sat": "Saturday",
+    "sun": "Sunday",
+    "executions": "Number of executions",
+    "executionsNull": "Leave empty for an infinite number of times",
+
+    "intervalsTaskInfo": "It will be executed every certain time, the specific interval can be set carefully",
+    "representHour": "Cannot be null, please write 0 to represent every 0 hour",
+    "hour": "hour",
+    "representMin": "Cannot be empty, please write 0 to represent every 0 minutes",
+    "min": "minutes",
+    "representSec": "Not nullable, please write 0 for every 0 seconds",
+    "sec": "Seconds",
+    "executionsNum": "Number of executions, leave it blank",
+    "missionPayload": "Mission Payload",
+    "inputPayload": "such as command, file name or other parameters, etc.",
+    "dataError": "Data exception",
+    "createSuccess": "The scheduled task has been created successfully, refresh the task list to see the information",
+    "every": "every",
+    "on": "every",
+    "week": "week",
+    "month": "month",
+    "day": "Day"
+  },
+  "fileManager": {
+    "title": "File Management",
+    "upperDir": "Upper Directory",
+    "mkdir": "New directory",
+    "zip": "Zip ",
+    "unzip": "Unzip",
+    "rename": "Rename",
+    "cut": "Cut",
+    "copy": "Copy",
+    "paste": "Paste",
+    "uploadFile": "Upload file",
+
+    "unzipInfo": "There are {tasks} file unzip/zip tasks in progress...",
+    "dir": "current directory",
+
+    "name": "Name",
+    "fileType": "File Type",
+    "fileSize": "File size",
+    "lastEdit": "Last Modified",
+    "download": "Download",
+
+    "noSee": "Error, this directory or file cannot be viewed",
+    "file": "file",
+    "directory": "directory",
+    "selectFileToRename": "Must select a file to rename",
+    "newName": "new name",
+    "inputValidValues": "Please enter a valid value",
+    "setSuccess": "Operation succeeded",
+    "fileCopied": "The file has been selected and can be copied to another directory using paste",
+    "fileMoved": "The file has been selected and can be moved to another directory using paste",
+    "cantCopy": "No files were copied or cut and cannot be pasted",
+    "newDirName": "New directory name",
+    "confirmDelFile": "Are you sure you want to delete the selected file?",
+    "selectAFile": "Please select at least one file",
+    "delFileStart": "The file deletion task starts, if there are too many files, it will take a certain time",
+    "newZipName": "New zip file name",
+    "fileName": "File name",
+    "zipTaskStart": "The zip task has started",
+    "zipTaskStartInfo": "Asynchronous compression takes a while, you can use refresh file list to check the ZIP size to determine whether the compression is complete, the compression code is UTF-8",
+    "onlyUnzipOne": "Only one compressed file can be decompressed at the same time",
+    "inputUnzipDirName": "Please enter a new unzip folder name",
+    "UnzipTaskStart": "Unzip task started",
+    "UnzipTaskStartInfo": "Asynchronous decompression takes a while, you can use refresh file list to view the contents of the directory to determine whether the decompression is complete",
+    "uploadOk": "Upload complete"
+  },
+  "fileManagerEditor": {
+    "title": "Edit file",
+    "updateFile": "Update File",
+    "backToFileManager": "Back",
+    "backViaHistory": "Back",
+    "editError": "Error editing file",
+    "updateTextSuccess": "Update text succeeded"
+  },
+  "selectUnzipCode": {
+    "title": "Select decompression/decompression file encoding",
+    "info": "When the file name is garbled when decompressing/compressing the file, you can modify this option to solve it.",
+    "CN": "If the source of the compressed package is mainland China, GBK is generally optional;",
+    "HKorTW": "If you are from Taiwan or Hong Kong, you can choose BIG5, and if you are from other regions, you can choose UTF-8.",
+    "selectCode": "Please select a code",
+    "selectOneCode": "Please select a code",
+    "cancel": "Cancelled",
+    "gbk": "Simplified Chinese (GBK)",
+    "big5": "Traditional Chinese (BIG5)",
+    "utf8": "Panel/Linux (UTF8)"
+  },
+  "users": {
+    "userList": "User List",
+    "newUser": "Create User",
+    "delUser": "Delete User",
+    "userName": "Username",
+    "userNameInfo": "Required, 6 to 12 characters, support Chinese, English and characters",
+    "regTime": "Register",
+    "lastTime": "Last login",
+
+    "permit": {
+      "permission": "Permission",
+      "permissionLevel": "Permission Level",
+      "permissionInfo": "Normal permissions are for business users, and the highest permissions are for administrators",
+      "normal": "Normal permissions",
+      "admin": "Highest Privilege",
+      "ban": "banned"
+    },
+
+    "newUserDialog": {
+      "inputSth": "Please input content...",
+      "userPasswd": "User Password",
+      "userPasswdInfo": "Required, 9 to 36 characters, does not support Chinese, only limited to letters, numbers and symbols",
+      "inputPasswd": "Please enter a password"
+    },
+
+    "ps": "Notes",
+    "psInfo": "If you are engaged in rental business activities, please make sure that the application instance runs in the Linux Docker virtual container, otherwise there will be security risks.",
+    "infoReference": "Specific information reference",
+
+    "editUser": "Edit User",
+    "resetPasswd": "Reset Password",
+    "resetPasswdInfo": "If you don't fill in, the original value will not be changed",
+    "originalSet": "Original value",
+    "updateData": "Update data",
+    "SaveData": "Save",
+    "selectAUser": "Please select at least one user"
+  },
+  "userResources": {
+    "userInfo": "User Information",
+    "name": "Name",
+    "regTime": "Registration time",
+    "length": "has an instance",
+    "resourceManage": "User resource management",
+    "userExcel": "User resource table",
+    "userExcelInfo": "All instances that the current sub-user can manage. If the instance status shows \"busy\", it means that the instance does not exist or the remote host is offline.",
+    "rentRisk": "Rental security risk",
+    "rentRiskInfo": "To ensure the security of your host, you must include any running programs to run in a Docker virtualized container, otherwise your users will be at risk of hacking and destroying the host. ",
+    "addInstance": "Assign",
+    "saveData": "Save",
+    "daemon": "belongs to the remote node",
+    "addInstanceForUser": "Add instance resource for user",
+    "addInstanceInfo": "Using remote host address and fuzzy query to add application instance for this user",
+    "select": "Select"
+  },
+  "userDetail": {
+    "basicInfo": "Basic",
+    "uuid": "UUID",
+    "status": "Account Status",
+    "loginTime": "Login",
+    "api": "API",
+    "attention": "Notes",
+    "aboutName": "About Username",
+    "aboutNameInfo": "User name can only exist uniquely. When modifying, the panel will check whether there is a conflict. If a conflict is found, the user name cannot be modified. The user name should not contain special characters or characters that are incompatible with the old version of the system.",
+    "aboutPasswd": "About Password",
+    "aboutPasswdInfo": "Please make your account password as complicated as possible. Please rest assured that the panel administrator cannot directly interpret your custom password. Even if your password is similar to other website passwords, you don't need to worry too much about security issues.",
+    "aboutApiKey": "About API Key",
+    "aboutApiKeyInfo": "Applicable to developers, the API key and account password login have the same authority, and the level of importance is the same as the password, please do not disclose.",
+    "updatePasswd": "Update Password",
+    "newPasswd": "New Password",
+    "newPasswdInfo": "The length must be between 9 and 24 digits, including a combination of alphanumerics and symbols as much as possible",
+    "confirmNewPasswd": "Confirm new password",
+    "keepOrigin": "Keep the original value",
+    "apiKey": "API interface key",
+    "whatIsApiKey": "What is an API key?",
+    "apiKeyIs": "Equally authorized keys for developers, which can provide sufficient functions and reliable stability for your third-party programs.",
+    "disable": "Not enabled",
+    "createApiKey": "Generate API Key",
+    "disableApiKey": "Close API interface",
+    "accountOk": "Account OK",
+    "changeThisInfo": "Are you sure you want to change this information?",
+    "userDataUpdate": "User data has been updated",
+    "apiKeyChangeSuccess": "API operation changed successfully",
+    "inputPasswd": "Please enter the password value, if not, the password will not be modified",
+    "notStandard": "The length of the password is not standard, the length must be between 9 and 36 characters",
+    "notSame": "The two passwords do not match"
+  },
+  "services": {
+    "remoteDaemonManage": "Add Node",
+    "addDaemon": "Add a remote node",
+    "learnHowItWork": "Learn how it works",
+    "Daemons": "Node List",
+    "remoteInfo": "The remote nodes (on any physical host) must be online and connected to each other, and the panel connection must expose the remote node port and configuration key. <br />The web page needs to be able to directly connect to the remote node (upload, download and console), avoid using any IP in the LAN segment except localhost, you must use the external network IP or domain name to connect.<br />The corresponding remote node version on the panel side: { specifiedDaemonVersion }",
+    "platform": "Platform",
+    "instanceStatus": "Instance Status",
+    "version": "Version",
+    "update": "Update",
+    "connect": "Connect",
+    "changeKey": "Modify key",
+
+    "remarks": "Remarks",
+    "remarksInfo": "Optional, supports Chinese, used to fill in relevant remarks",
+    "remoteIP": "The IP address of the host where the remote node is located",
+    "remoteIPSub": "<b>You must use the external network address</b> or localhost address, otherwise the remote instance will not be able to connect",
+    "remoteIPInfo": "Required, e.g. mcsmanager.com, 43.123.211.12",
+    "daemonPort": "Remote Node Port",
+    "daemonPortInfo": "Required, eg 24444",
+    "verifyKey": "Verify Key",
+    "keySub": "The output will be displayed on the console when the remote node starts, make sure to keep the key safe",
+    "getKey": "How to get the key?",
+    "keyInfo": "Required, for example 6ff0fa1ef9a943f3c6f2fe0e4564a2fa383d35c4b78ccb5",
+
+    "addNewWarn": {
+      "title": "Add remote host warning",
+      "ip": "Detected that your connection IP is: { newServiceInfo }, it seems to be an intranet address?",
+      "outerNet": "Both the panel and the remote node end must be accessible to users, and this behavioral design can achieve traffic diversion and reduce the pressure on the central panel end.",
+      "whyOuterNet": "Why do you have to use an external IP to connect to a remote node",
+      "because": "In order to reduce the traffic pressure on the central control side (Web panel side), we must divert the traffic to their respective remote hosts, <br />In this way, it is necessary to ensure that each remote host can use the external network access, so you must also Use the external IP address to access the instance of this host",
+      "workingPrinciple": "The working principle of distributed service data transmission",
+      "KeepIntranet": "Do you still insist on using the intranet IP connection?",
+      "ifTrueThen": "If mandatory, part of the instance's functionality is unavailable.",
+      "yeah": "enforce",
+      "cancel": "Cancel execution"
+    },
+
+    "principlePanel": {
+      "title": "How Distributed Services Work",
+      "desc": "In order to reduce the traffic pressure and calculation pressure on the central control side (Web panel side), we use \"data go directly, The design concept of \"forwarding instructions\".< br /> This design will expose each remote node, but the services on your remote node host should be exposed.Coupled with controllable permission identification, there is no need to worry about the security issues of each host .",
+      "principleImage": "Working principle diagram of distributed service",
+      "onlyOne": "If you only have one host, you can ignore this and use it normally."
+    },
+
+    "delDaemonWarn": "This operation will permanently delete the remote node, do you want to continue?",
+    "inputNewRemark": "Please enter a new remark",
+    "updateRemarkSuccess": "Update Remark Information Successfully",
+    "inputNewKey": "Please enter a new key, after setting it will automatically try to connect",
+    "key": "Key"
+  },
+  "container": {
+    "remoteList": "Remote Node List",
+    "status": "Status",
+    "imagesManage": "Environment Image Management",
+    "relevantInfo": "Relevant Information",
+    "links": [
+      {
+        "title": "Check Local Environment",
+        "info": "Learn how to know some of your current common runtime environments on the system"
+      },
+      {
+        "title": "Installing the Docker software",
+        "info": "Learn how to install Docker software on popular Linux distributions"
+      }
+    ]
+  },
+  "imageManager": {
+    "remoteImageManage": "Remote host image management",
+    "newImage": "New Image",
+    "needTime": "It may take some time to create a new image.",
+    "remoteImageList": "Remote host images",
+    "remoteImageListInfo": "Image building and container operation depend on Docker software, and all remote nodes on the physical host will share all images.",
+    "storage": "occupied space",
+    "details": "Details",
+
+    "remoteContainerList": "Remote host containers",
+    "remoteContainerListInfo": "The container list represents all application instances that are running in a separate mirroring environment. The list here does not only include containers started by the panel.",
+    "useImage": "Use Image",
+    "status": "Status",
+    "situation": "Situation",
+
+    "infoDetail": "Information Details",
+    "aboutDetail": "About Details",
+    "aboutDetailInfo": "Details such as Docker images and containers are recommended to be read by technical personnel. The complete information content in JSON format is provided here.",
+
+    "dataLoadError": "Data load failed",
+    "tip": "tip",
+    "foreverDeleteImage": "This operation will permanently delete the image, do you want to continue?",
+    "sendDelCmd": "Delete command has been sent",
+    "waitForDel": "Please be patient, use the refresh function to load the list, this mirror is expected to be deleted later",
+    "delImageFailed": "Failed to delete image"
+  },
+  "newImage": {
+    "createImage": "Create Image",
+    "toImageList": "Back",
+    "buildProgress": "Build Progress",
+    "need10min": "It may take more than ten minutes to create a new image, please be patient",
+    "whatIsImage": "What is an environment image?",
+    "whatIsImageInfo": "Because Minecraft or other programs require a specific operating environment, such as Java/Python/.NET, etc., the installation and management of different versions on the same machine is very complicated. Using different environment images can easily manage different versions and types. service environment.",
+    "whatIsDocker": "What is Docker? Why do I need it?",
+    "whatIsDockerInfo": "Docker is a lightweight virtualization software that uses an environment image to create a container (like a box) to wrap your actual application, allowing your application to run in a virtual sandbox environment, regardless of Any malicious operations performed by the application will not affect any files on the host.",
+    "images": [
+      {
+        "title": "Create OpenJDK 8 environment image",
+        "info": "For server software that requires Java 8, it is a classic Java runtime version, suitable for all versions below Minecraft 1.17"
+      },
+      {
+        "title": "Create OpenJDK 16 environment image",
+        "info": "built-in Java 16 runtime environment, suitable for Minecraft 1.17 version server"
+      },
+      {
+        "title": "Create OpenJDK 17 environment image",
+        "info": "The built-in Java 17 runtime environment is suitable for the server side of Minecraft 1.18 and above"
+      },
+      {
+        "title": "Create Ubuntu environment image",
+        "info": "Suitable for MC Bedrock Edition server runtime environment or other Linux programs"
+      },
+      {
+        "title": "Custom Creation with DockerFile",
+        "info": "Use DockerFile to customize any environment image, this operation is recommended for technicians"
+      }
+    ],
+    "aboutDockerFile": "About DockerFile",
+    "referenceDoc": "Official reference documentation: https://docs.docker.com/engine/reference/builder/",
+    "attention": "The /workspace directory must be created, this directory will be automatically mounted to the instance's file root directory",
+
+    "requireInput": "Required, please enter content",
+    "afterCreate": "Image name and version",
+    "imageName": "[Required] Image name, such as openjdk",
+    "imageVer": "[Required] Image version, such as 1.0 1.1 latest",
+    "toSelectImage": "Back",
+    "noData": "No data currently",
+    "getProcess": "Get the latest build progress",
+    "building": "Building...",
+    "buildError": "Build Error...",
+    "buildOk": "Build complete",
+
+    "pleaseFinish": "Please complete the required items",
+    "buildTip": "This build process may take a few minutes, please make sure the network is clear, do you want to continue?",
+    "createTaskStart": "Create image task has started",
+    "pleaseWait": "Please be patient",
+    "createTaskError": "Failed to create"
+  },
+  "settings": {
+    "setOperate": "Operation",
+    "updateSet": "Update Configuration",
+    "updateSetInfo": "Some configurations may require restarting the panel to take effect",
+
+    "languageSetting": "Language",
+    "languageSettingInfo": "After changing the language, the control panel will synchronize all nodes, interfaces, etc. to the same language.",
+    "basicSetting": "Basic Settings",
+    "accessPort": "Web Port",
+    "accessPortInfo": "The port for the browser to access the web panel. This port must be released by the firewall. Restart the panel to take effect.",
+    "inputNum": "Please write a number",
+
+    "bindIP": "Bind IP",
+    "bindIPInfo": "In general, please keep the default value. Generally, it is suitable for multiple IP and network card binding scenarios.",
+    "inputIP": "Default 0.0.0.0, I don't need to write by default",
+
+    "loginPage": "Login Page Info",
+    "loginPageInfo": "Used to display a brief description text on the login interface. It can be used for administrator identity introduction and filing information introduction.",
+    "inputCopy": "A line displayed on the login page",
+
+    "referenceLink": "Notes",
+    "referenceLinksInfo": "Most settings of the panel are very important. Under normal circumstances, most parameters do not need to be changed. If you do not know what a parameter represents, it is recommended that you do not modify it.",
+
+    "limitAndSecurity": "Security",
+    "canFileManager": "File management",
+    "canFileManagerInfo": "File management is a resource-consuming and difficult-to-control function. If your general users do not have any requirements for file management, you can prohibit users from using file management.",
+
+    "crossAPI": "Cross-Origin Request API",
+    "crossAPIInfo": "The HTTP response will add access-control-allow-origin: *, which may reduce security, but improve development scalability.",
+    "loginCheckIp": "Login IP limit",
+    "loginCheckIpInfo": "This feature will protect your panel from brute force password cracking by a single host with only 10 password errors per IP.",
+    "attention": "Notes",
+    "attentionInfo": "These configuration settings require some professional knowledge, and you can roughly guess which values ​​are suitable for you based on your hardware equipment. <br />In general, the default values ​​​​can meet the daily usage scenarios of individuals, if the scale is larger, the hardware The requirements are higher, in order not to lose the user experience excessively, a suitable threshold is very important.",
+
+    "about": "About",
+    "aboutTitle": "<p>Copyright MCSManager Team</p> ",
+    "aboutTitleInfo": "https://github.com/mcsmanager | https://mcsmanager.com/ | mcsmanager-dev@outlook.com",
+    "closedSource": "Closed Source Commercial License",
+    "closedSourceInfo": "If you want to re-develop and use closed source for any activity (including but not limited to commercial, personal).",
+    "learnMore": "Learn more",
+    "userAgreement": "User Agreement",
+    "sponsorList": "Open source project sponsor list",
+    "sponsorListInfo": "Only the first 40 sponsors are included. For full sponsorship list or sponsorship support, please go to",
+
+    "settingUpdate": "Updated, some options may need to restart the panel to take effect"
+  },
+  "home": {
+    "totalInstance": "Total instance",
+    "totalInstanceCount": "The total number of instances",
+    "running": "running",
+    "runCount": "Number of instances running",
+    "outOfRunning": "Not running",
+    "outOfRunningCount": "Number of instances not running",
+    "maintaining": "Maintaining",
+    "maintainingInfo": "Number of instances unavailable",
+    "personalInfo": "Personal Information",
+    "userName": "Username",
+    "registerTime": "Register",
+    "loginTime": "Last Login",
+    "permission": "Permission",
+    "possessedInstanceList": "List of owned instances",
+    "stopping": "stopping",
+    "starting": "Starting",
+    "unknownStatus": "Unknown Status",
+    "updateSuccess": "Update Success",
+    "admin": "Manage users",
+    "user": "general user"
+  },
+  "quickStart": {
+    "title": "What do you want to do with the MCSManager panel?",
+    "quickItems": [
+      {
+        "title": "Create a Minecraft server",
+        "subTitle": "Helps you quickly deploy Java/Bedrock Edition Minecraft servers"
+      },
+      {
+        "title": "Create an additional game server",
+        "subTitle": "Attempts to help you create other game servers, full compatibility not guaranteed"
+      },
+      {
+        "title": "Manage my console programs",
+        "subTitle": "Let your console programs such as Nginx.exe, frp.exe and cmd.exe be managed on the web"
+      },
+      {
+        "title": "Get more info",
+        "subTitle": "We will open the official documentation to help you get more useful information"
+      }
+    ],
+    "whichServer": "Please select which host do you wish to deploy to?"
+  },
+  "install": {
+    "welcome": "Welcome to use MCSManager Panel",
+    "desc": "Distributed, out-of-the-box, supports docker, supports Minecraft and any console program management panel",
+    "start": "Quickstart",
+    "createAdminAccount": "Create Administrator account",
+    "createAdminAccountInfo": "Username supports any language",
+    "passWord": "password",
+    "createAccount": "Create Account",
+    "ohhh": "Done!",
+    "ohhhInfo": "Finally, is this your first time using this software?",
+    "firstTime": "First use",
+    "oldUSer": "Regular user",
+    "adminOK": "Administrator created"
+  },
+  "notify": {
+    "connectDaemonError": "Access to remote node exception",
+    "confirmDelTitle": "Final Confirmation",
+    "confirmDelContent": "Are you sure you want to remove/delete?",
+    "confirmBatchDelContent": "Are you sure you want to perform batch removal? This operation will not delete the actual file of the instance, only the instance",
+    "confirmBatchDelFileContent": "Are you sure you want to perform batch removal? This operation will not delete the actual file of the instance, only the instance",
+    "editSuccess": "Modified successfully",
+    "saveSuccess": "Save successfully",
+    "createSuccess": "Create success",
+    "delSuccess": "Delete successful",
+    "batchDelSuccess": "Batch deletion succeeded",
+    "Success": "Data refresh may have a certain delay",
+    "mayBeDelay": "There may be a certain delay, it will take some time for the file to be deleted",
+    "selectInsError": "Cannot execute, please select at least one instance",
+    "startCmdSend": "Start command sent",
+    "stopCmdSend": "Shutdown command sent",
+    "killCmdSend": "The kill command has been sent",
+    "dateLoadError": "Error loading data",
+    "cmdSendInfo": "The command has been successfully issued to each remote host, the specific operation may be slightly delayed, please wait for a while to check the result"
+  },
+  "router": {
+    "panel": "MCSManager",
+    "loading": "Loading",
+    "overview": "Overview",
+    "home": "Information overview",
+    "instances": "Instances",
+    "services": "Multi-Node",
+    "private": "Personal Information",
+    "users": "Users",
+    "analysis": "Panel data analysis",
+    "news": "Updates and notifications",
+    "container": "Environment",
+    "imageManager": "Image Management",
+    "trigger": "Panel trigger",
+    "extension": "Panel Extension",
+    "settings": "Settings",
+    "newImage": "Create Image",
+    "terminal": "Terminal",
+    "processConfigFile": "Instance configuration file",
+    "processConfig": "Instance specific configuration",
+    "fileManager": "Instance file management",
+    "fileManagerEditor": "Instance file editor",
+    "instanceDetail": "Instance Settings",
+    "userResources": "User Resources",
+    "schedule": "Scheduled Task",
+    "newInstance": "Add Instance",
+    "login": "Login",
+    "quickStart": "Quickstart",
+    "update": "Version Control",
+    "install": "install"
+  },
+  "aside": {
+    "basic": "Basic",
+    "user": "Users",
+    "advanced": "Advanced",
+    "node": "Multi-Node",
+    "more": "More"
+  },
+  "businessWarning": {
+    "title": "Commercial Rental Risk Warning",
+    "youMayWillBeHack": "Safety tips!",
+    "warningInfo": "If you assign an instance to <b>Stranger</b> under <el-tag type=\"info\" size=\"mini\">Windows/Linux</el-tag>, then your host will At any time, others can invade the host by uploading malicious programs. ",
+    "hotToProtect": "How do I protect my host?",
+    "protectInfo": "Your system must be a <el-tag type=\"info\" size=\"mini\">Linux</el-tag> system with Docker software installed, there is <el-tag type in the lower right corner of the instance setting interface =\"info\" size=\"mini\">Process startup method</el-tag> selection box, please select the virtualization container scheme to ensure the security of your host. <br /><b>The virtualized container will allow your instance to run in a virtual sandbox environment</b>, and your sub-users will not be able to harm others no matter what malicious programs they upload. "
+  },
+  "cmdAssist": {
+    "java": "MC Java Edition",
+    "javaPath": "Java path or environment variable",
+    "javaPathInfo": "If you want to specify a specific Java program, you can write an absolute path, such as C:\\ProgramFiles\\Java\\jdk-16.0.1\\bin\\java.exe",
+    "javaPathInput": "Optional, use java environment variables by default",
+    "programName": "Server software file name",
+    "programNameInfo": "That is, the name of the server software that exists in your file directory, it must actually exist, such as Paper.jar, Server.jar",
+    "inputProgramName": "Required, usually in jar format",
+    "xmx": "Maximum memory",
+    "xmxInfo": "Java program -Xmx parameter, the unit must be filled, such as: 1024M, 2G, etc.",
+    "inputXmx": "Optional, if not filled, it will be automatically managed by Java",
+    "xms": "minimum memory",
+    "xmsInfo": "Java program -Xms parameter, the unit must be filled, such as:1024M, 2G etc",
+    "additional": "Additional parameters",
+    "additionalInfo": "Additional parameters before the Java program -jar, such as -server, etc.",
+    "inputAdditional": "Optional, default is empty",
+    "suffix": "Suffix parameter",
+    "suffixInfo": "Additional parameters after the Java program -jar file name, such as -nogui, etc.",
+    "generate": "Generate command",
+
+    "bds": "MC Bedrock Edition",
+    "binaryFileName": "Bedrock Edition binary executable filename",
+    "inputBinaryFileName": "eg bedrock_server.exe (Windows) or bedrock_server (Linux)",
+    "summonWin": "Generate command for Windows",
+    "summonLinux": "generate command for Linux",
+
+    "program": "Generic console program",
+    "programName2": "executable program file name",
+    "programName2Info": "The program must already exist in the instance file directory or environment variable, such as cmd.exe, bash, program.exe, etc.",
+    "additionalInfo2": "There is no specific reference for this option. Different program types have different parameters. Common formats such as -o -c --option, etc., are separated by spaces",
+    "inputAdditional2": "Optional, no additional parameters are passed by default",
+    "noContent": "Required fields do not have content",
+    "noLinuxBds": "Because the Linux system environment is complex and changeable, we cannot generate a correct startup command, please write the startup command manually"
+  }
+}
