@@ -483,7 +483,7 @@
           <p class="sub-title-info">
             {{ $t("terminal.unavailableTerminal.maybe") }}
           </p>
-          <div>
+          <div style="text-align: center; margin: 20px">
             <img
               :src="require('@/assets/daemon_connection_error.png')"
               alt=""
