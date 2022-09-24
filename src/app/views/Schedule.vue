@@ -122,7 +122,7 @@
               style="width: 100%"
             ></el-time-picker>
             <el-checkbox-group v-model="newTask.weekend" class="row-mt">
-              <el-checkbox size="small" :label="$t('schedule.mon')" value="1"></el-checkbox>
+              <el-checkbox size="small" :label="$t('schedule.mon')"></el-checkbox>
               <el-checkbox size="small" :label="$t('schedule.tue')"></el-checkbox>
               <el-checkbox size="small" :label="$t('schedule.wen')"></el-checkbox>
               <el-checkbox size="small" :label="$t('schedule.thur')"></el-checkbox>
@@ -360,7 +360,7 @@ export default {
       const weekend = this.newTask.weekend;
       const w = [];
       weekend.forEach((v) => {
-        if (v == this.$t("schedule.mom")) w.push(1);
+        if (v == this.$t("schedule.mon")) w.push(1);
         if (v == this.$t("schedule.tue")) w.push(2);
         if (v == this.$t("schedule.wen")) w.push(3);
         if (v == this.$t("schedule.thur")) w.push(4);
