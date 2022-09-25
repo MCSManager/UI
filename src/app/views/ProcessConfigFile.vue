@@ -67,6 +67,8 @@ import configYml from "../../components/mc_process_config/config.yml";
 import bdsServerProperties from "../../components/mc_process_config/bds_server.properties";
 import mohistYml from "../../components/mc_process_config/mohist.yml";
 import paperYml from "../../components/mc_process_config/paper.yml";
+import paperGlobalYml from "../../components/mc_process_config/paper-global.yml";
+import paperWorldDefaultsYml from "../../components/mc_process_config/paper-world-defaults.yml";
 import geyserYml from "../../components/mc_process_config/geyser.yml";
 import mcdrConfigYml from "../../components/mc_process_config/mcdr_config.yml";
 import permissionYml from "../../components/mc_process_config/permission.yml";
@@ -82,6 +84,8 @@ export default {
     "bds/server.properties": bdsServerProperties,
     "mohist/mohist.yml": mohistYml,
     "paper/paper.yml": paperYml,
+    "paper/paper-global.yml": paperGlobalYml,
+    "paper/paper-world-defaults.yml": paperWorldDefaultsYml,
     "geyser/config.yml": geyserYml,
     "mcdr/config.yml": mcdrConfigYml,
     "mcdr/permission.yml": permissionYml

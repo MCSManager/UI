@@ -184,6 +184,26 @@ export const INSTANCE_CONFIGS = [
     category: [TYPE_MINECRAFT_JAVA, TYPE_MINECRAFT_PAPER]
   },
   {
+    fileName: "[Paper] paper-global.yml",
+    type: "yml",
+    info: "PaperSpigot 服务端软件全局配置文件，能够进一步的配置高级参数以及更具体化的游戏设置，对整体性能有极大的决定效果",
+    path: "config/paper-global.yml",
+    redirect: "paper/paper-global.yml",
+    author: "Lazy",
+    github: "https://github.com/LazyCreeper",
+    category: [TYPE_MINECRAFT_JAVA, TYPE_MINECRAFT_PAPER]
+  },
+  {
+    fileName: "[Paper] paper-world-defaults.yml",
+    type: "yml",
+    info: "PaperSpigot 服务端软件世界配置文件，能够进一步在每个世界的基础上进行配置",
+    path: "config/paper-world-defaults.yml",
+    redirect: "paper/paper-world-defaults.yml",
+    author: "Lazy",
+    github: "https://github.com/LazyCreeper",
+    category: [TYPE_MINECRAFT_JAVA, TYPE_MINECRAFT_PAPER]
+  },
+  {
     fileName: "[Geyser] config.yml",
     type: "yml",
     info: "Geyser 服务端软件配置文件，拥有基本的服务器参数设定（如端口，最大玩家数等）并且也可以设定服务端细节参数（区块缓存，线程数等）",
