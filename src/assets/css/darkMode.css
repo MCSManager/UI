@@ -1,10 +1,10 @@
 /*
 
-    @FileName: MCSManager 9 Vivid主题夜间模式
+    @FileName: MCSManager 9 夜间模式
     @Last Date: 2022.9.26
-    @Create Date: 2022.9.26	
+    @Create Date: 2022.9.27
     @Author: Lazy
-    @Description：适用于 MCSManager 9.6 Viivd主题的夜间模式样式
+    @Description：适用于 MCSManager 9.6 的夜间模式样式
 
 */
 .dark a {
@@ -16,8 +16,7 @@
     color: #ff65ae;
 }
 
-.dark,
-#login-panel-wrapper {
+.dark,#login-panel-wrapper {
     background: #111111;
 }
 
@@ -73,7 +72,7 @@
 }
 
 .dark .el-input__inner,
-.el-textarea__inner {
+.dark .el-textarea__inner {
     background-color: #252525;
     color: #fff;
 }
@@ -83,8 +82,8 @@
 }
 
 .dark .el-pagination.is-background .btn-next,
-.el-pagination.is-background .btn-prev,
-.el-pagination.is-background .el-pager li {
+.dark .el-pagination.is-background .btn-prev,
+.dark .el-pagination.is-background .el-pager li {
     background-color: #444444;
 }
 
@@ -104,6 +103,10 @@
 
 .dark .el-button.is-plain:focus,.dark .el-button.is-plain:hover {
     background: #292929;
+}
+
+.dark .el-button--warning {
+    background: #242200;
 }
 
 .dark .el-button:focus,
@@ -129,16 +132,18 @@
 .dark .el-select-dropdown__item.hover,
 .dark .el-select-dropdown__item:hover,
 .dark .el-dropdown-menu__item:focus,
-.dark .el-dropdown-menu__item:not(.is-disabled):hover {
+.dark .el-dropdown-menu__item:not(.is-disabled):hover,
+.dark .el-popper {
     background-color: #353535;
 }
 
 .dark .line-info,
-.el-tabs__item,
-.el-message-box__title,
-.el-message-box__message,
-.home-copyright,
-.sub-title-title {
+.dark .el-tabs__item,
+.dark .el-message-box__title,
+.dark .el-message-box__message,
+.dark .home-copyright,
+.dark .sub-title-title,
+.dark .el-popper {
     color: #ffffff;
 }
 
@@ -172,8 +177,7 @@
         color: #ff65ae;
     }
 
-    .auto,
-    #login-panel-wrapper {
+    .auto,#login-panel-wrapper {
         background: #111111;
     }
 
@@ -229,7 +233,7 @@
     }
 
     .auto .el-input__inner,
-    .el-textarea__inner {
+    .auto .el-textarea__inner {
         background-color: #252525;
         color: #fff;
     }
@@ -239,8 +243,8 @@
     }
 
     .auto .el-pagination.is-background .btn-next,
-    .el-pagination.is-background .btn-prev,
-    .el-pagination.is-background .el-pager li {
+    .auto .el-pagination.is-background .btn-prev,
+    .auto .el-pagination.is-background .el-pager li {
         background-color: #444444;
     }
 
@@ -285,16 +289,18 @@
     .auto .el-select-dropdown__item.hover,
     .auto .el-select-dropdown__item:hover,
     .auto .el-dropdown-menu__item:focus,
-    .auto .el-dropdown-menu__item:not(.is-disabled):hover {
+    .auto .el-dropdown-menu__item:not(.is-disabled):hover,
+    .dark .el-popper {
         background-color: #353535;
     }
 
-    .auto .line-info,
-    .el-tabs__item,
-    .el-message-box__title,
-    .el-message-box__message,
-    .home-copyright,
-    .sub-title-title {
+    .auto .auto .line-info,
+    .auto .el-tabs__item,
+    .auto .el-message-box__title,
+    .auto .el-message-box__message,
+    .auto .home-copyright,
+    .auto .sub-title-title,
+    .dark .el-popper {
         color: #ffffff;
     }
 

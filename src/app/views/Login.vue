@@ -341,6 +341,10 @@ export default {
   transition-delay: 0s;
 }
 
+.light #login-panel-wrapper {
+  background: #e4e4e4;
+}
+
 #login-panel {
   min-height: 330px;
   width: 430px;
