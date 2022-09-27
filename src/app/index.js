@@ -48,4 +48,6 @@ app.component("FunctionGroup", FunctionGroup);
 app.component("FunctionComponent", FunctionGroupComponent);
 app.mount("#app");
 
-document.body.setAttribute("class",localStorage.getItem("theme"));
+if((localStorage.getItem("theme"))){
+    document.body.setAttribute("class",localStorage.getItem("theme"));
+}
