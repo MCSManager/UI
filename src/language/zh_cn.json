@@ -882,7 +882,24 @@
     "sponsorList": "开源项目赞助名单",
     "sponsorListInfo": "只含前 40 名赞助者，查看完整赞助名单或进行赞助支持请前往",
 
-    "settingUpdate": "已更新，部分选项生效可能需要重启面板"
+    "settingUpdate": "已更新，部分选项生效可能需要重启面板",
+    "selectColor": {
+      "title": "选择颜色",
+      "auto": "自动",
+      "light": "亮色",
+      "dark": "暗色"
+    },
+
+    "aboutTheme": {
+      "title": "关于主题",
+      "info": "该主题由 Lazy 开发",
+      "info2": "如果你在使用主题过程中遇到任何问题或发现错误，可反馈到我的邮箱：",
+      "blog": "博客发布地址：",
+      "goLink": "点击前往",
+      "qrCode": "赞助二维码：",
+      "ver": "当前主题版本：",
+      "checkVer": "检查更新"
+    }
   },
   "home": {
     "totalInstance": "实例总计",

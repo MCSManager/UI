@@ -881,7 +881,24 @@
     "sponsorList": "Open source project sponsor list",
     "sponsorListInfo": "Only the first 40 sponsors are included. For full sponsorship list or sponsorship support, please go to",
 
-    "settingUpdate": "Updated, some options may need to restart the panel to take effect"
+    "settingUpdate": "Updated, some options may need to restart the panel to take effect",
+    "selectColor": {
+      "title": "Color",
+      "auto": "Auto",
+      "light": "Light",
+      "dark": "Dark"
+    },
+
+    "aboutTheme": {
+      "title": "About Theme",
+      "info": "This theme made by Lazy",
+      "info2": "If you encounter any problems or find errors in the process of using the theme, you can feedback to my mailbox:",
+      "blog": "Blog Link: ",
+      "goLink": "Click here",
+      "qrCode": "Sponso me: ",
+      "ver": "Theme Version:",
+      "checkVer": "Check Update"
+    }
   },
   "home": {
     "totalInstance": "Total instance",

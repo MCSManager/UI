@@ -34,8 +34,6 @@ export default {
   padding: 2px 0px;
   overflow: hidden;
   display: block;
-
-  color: #333;
   /* user-select: none; */
   transition: all 0.4s;
 }

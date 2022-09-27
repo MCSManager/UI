@@ -11,6 +11,7 @@ import "../assets/css/common.css";
 import "../assets/css/tools.css";
 import "../assets/css/responsive.css";
 import "../assets/css/action.css";
+import "../assets/css/darkMode.css";
 
 import App from "./App.vue";
 import "./service/protocol";
@@ -46,3 +47,5 @@ app.component("ItemGroup", ItemGroup);
 app.component("FunctionGroup", FunctionGroup);
 app.component("FunctionComponent", FunctionGroupComponent);
 app.mount("#app");
+
+document.body.setAttribute("class",localStorage.getItem("theme"));
