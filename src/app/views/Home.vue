@@ -160,13 +160,13 @@
 
   <!-- Instance details dialog -->
   <Dialog v-model="editInstance.is">
-    <template #title>{{ $t("instance.Dialog.instanceParameterEdit") }}</template>
+    <template #title>{{ $t("instances.dialog.instanceParameterEdit") }}</template>
     <template #default>
       <div>
         <div class="sub-title">
           <p class="sub-title-title">{{ $t("instances.dialog.commandClose") }}</p>
           <p class="sub-title-info"></p>
-          {{ $t("instance.dialog.commandCloseIndo") }}
+          {{ $t("instances.dialog.commandCloseInfo") }}
         </div>
         <div class="flex">
           <el-input v-model="editInstance.instance.stopCommand" size="small"></el-input>

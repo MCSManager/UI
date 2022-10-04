@@ -622,7 +622,7 @@ export default {
     async batDelete(type) {
       if (type === 1) {
         await this.$confirm(
-          this.$t("notify.confirmBatchDelContent"),
+          this.$t("notify.confirmBatchDelFileContent"),
           this.$t("notify.confirmDelTitle"),
           {
             confirmButtonText: this.$t("general.confirm"),
@@ -632,7 +632,7 @@ export default {
         );
       } else {
         await this.$confirm(
-          this.$t("notify.confirmBatchDelFileContent"),
+          this.$t("notify.confirmBatchDelContent"),
           this.$t("notify.confirmDelTitle"),
           {
             confirmButtonText: this.$t("general.confirm"),

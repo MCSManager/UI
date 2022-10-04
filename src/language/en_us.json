@@ -946,7 +946,7 @@
     "confirmDelTitle": "Final Confirmation",
     "confirmDelContent": "Are you sure you want to remove/delete?",
     "confirmBatchDelContent": "Are you sure you want to perform batch removal? This operation will not delete the actual file of the instance, only the instance",
-    "confirmBatchDelFileContent": "Are you sure you want to perform batch removal? This operation will not delete the actual file of the instance, only the instance",
+    "confirmBatchDelFileContent": "Are you sure you want to perform batch removal? This operation will delete the actual file of the instance",
     "editSuccess": "Modified successfully",
     "saveSuccess": "Save successfully",
     "createSuccess": "Create success",
