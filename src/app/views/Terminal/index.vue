@@ -401,7 +401,7 @@
         <div class="sub-title">
           <p class="sub-title-title">{{ $t("terminal.pingConfig.addr") }}</p>
           <p class="sub-title-info">
-            {{ $t("terminal.pingConfig.") }}
+            {{ $t("terminal.pingConfig.inputAddr") }}
           </p>
         </div>
         <el-input
