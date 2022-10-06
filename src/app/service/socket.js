@@ -38,7 +38,7 @@ export function connectRemoteService(
     } else {
       ElNotification({
         title: i18n.global.t("instances.UnableToConnect"),
-        message: `<span style="font-size: 12px;">${i18n.global.t('instance.UnableToConnectInfo')}</span>`,
+        message: `<span style="font-size: 12px;">${i18n.global.t('instances.UnableToConnectInfo')}</span>`,
         dangerouslyUseHTMLString: true,
         type: "error",
         duration: 0

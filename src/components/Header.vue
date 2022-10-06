@@ -26,6 +26,19 @@
         </div>
       </el-col>
       <el-col :span="12" style="text-align: right; line-height: 28px">
+        <el-dropdown style="margin: 0px 10px" :lr="true">
+          <span class="el-dropdown-link">
+            {{ $t("settings.selectColor.title") }}
+            <i class="el-icon-arrow-down el-icon--right"></i>
+          </span>
+          <template #dropdown>
+            <el-dropdown-menu>
+              <el-dropdown-item @click="auto">{{ $t("settings.selectColor.auto") }}</el-dropdown-item>
+              <el-dropdown-item @click="light">{{ $t("settings.selectColor.light") }}</el-dropdown-item>
+              <el-dropdown-item @click="dark">{{ $t("settings.selectColor.dark") }}</el-dropdown-item>
+            </el-dropdown-menu>
+          </template>
+        </el-dropdown>
         <el-dropdown style="margin: 0px 10px">
           <span class="el-dropdown-link">
             {{ userInfo.userName }}
@@ -56,6 +69,21 @@
           </div>
         </div>
       </router-link>
+      <div style="height: 36px; line-height: 36px; margin-left: auto;">
+        <el-dropdown style="margin: 0px 10px" :lr="true">
+          <span class="el-dropdown-link">
+            {{ $t("settings.selectColor.title") }}
+            <i class="el-icon-arrow-down el-icon--right"></i>
+          </span>
+          <template #dropdown>
+            <el-dropdown-menu>
+              <el-dropdown-item @click="auto">{{ $t("settings.selectColor.auto") }}</el-dropdown-item>
+              <el-dropdown-item @click="light">{{ $t("settings.selectColor.light") }}</el-dropdown-item>
+              <el-dropdown-item @click="dark">{{ $t("settings.selectColor.dark") }}</el-dropdown-item>
+            </el-dropdown-menu>
+          </template>
+        </el-dropdown>
+      </div>
       <div style="height: 36px; line-height: 36px">
         <ItemGroup :lr="true">
           <router-link to="/home">
@@ -95,6 +123,25 @@ export default {
     }
   },
   methods: {
+    auto() {
+      localStorage.setItem("theme", "auto");
+      document.body.setAttribute("class","auto");
+      this.$message({ message: this.$t("fileManager.setSuccess"), type: "success" });
+    },
+    dark() {
+      localStorage.setItem("theme", "dark");
+      document.body.setAttribute("class","dark");
+      this.$message({ message: this.$t("fileManager.setSuccess"), type: "success" });
+    },
+    light() {
+      localStorage.setItem("theme", "light");
+      document.body.setAttribute("class","light");
+      this.$message({ message: this.$t("fileManager.setSuccess"), type: "success" });
+    },
+    async refresh() {
+      await this.render();
+      this.$message({ message: this.$t("general.refreshFinish"), type: "success" });
+    },
     toAside() {
       this.$props.aside();
     },

@@ -38,7 +38,6 @@ export default {
   height: 100%;
   width: 100%;
   margin: auto;
-  background-color: rgb(255, 255, 255);
   transition: all 0.5s;
   border: 1px solid rgb(239, 239, 239);
 }
