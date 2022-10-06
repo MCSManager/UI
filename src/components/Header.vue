@@ -26,31 +26,29 @@
         </div>
       </el-col>
       <el-col :span="12" style="text-align: right; line-height: 28px">
-        <el-dropdown style="margin: 0px 10px" :lr="true">
-          <span class="el-dropdown-link">
-            {{ $t("settings.selectColor.title") }}
-            <i class="el-icon-arrow-down el-icon--right"></i>
-          </span>
-          <template #dropdown>
-            <el-dropdown-menu>
-              <el-dropdown-item @click="auto">{{ $t("settings.selectColor.auto") }}</el-dropdown-item>
-              <el-dropdown-item @click="light">{{ $t("settings.selectColor.light") }}</el-dropdown-item>
-              <el-dropdown-item @click="dark">{{ $t("settings.selectColor.dark") }}</el-dropdown-item>
-            </el-dropdown-menu>
-          </template>
-        </el-dropdown>
-        <el-dropdown style="margin: 0px 10px">
-          <span class="el-dropdown-link">
-            {{ userInfo.userName }}
-            <i class="el-icon-arrow-down el-icon--right"></i>
-          </span>
-          <template #dropdown>
-            <el-dropdown-menu>
-              <el-dropdown-item @click="toPrivate">{{ $t("root.private") }}</el-dropdown-item>
-              <el-dropdown-item @click="logout">{{ $t("root.logout") }}</el-dropdown-item>
-            </el-dropdown-menu>
-          </template>
-        </el-dropdown>
+        <ItemGroup :lr="true">
+          <el-link @click="toPrivate" class="el-dropdown-link">{{ $t("root.private") }}</el-link>
+          <el-dropdown style="margin: 0px 10px" :lr="true">
+            <span class="el-dropdown-link">
+              {{ $t("settings.selectColor.title") }}
+              <i class="el-icon-arrow-down el-icon--right"></i>
+            </span>
+            <template #dropdown>
+              <el-dropdown-menu>
+                <el-dropdown-item @click="setTheme('auto')">{{
+                  $t("settings.selectColor.auto")
+                }}</el-dropdown-item>
+                <el-dropdown-item @click="setTheme('light')">
+                  {{ $t("settings.selectColor.light") }}
+                </el-dropdown-item>
+                <el-dropdown-item @click="setTheme('dark')">
+                  {{ $t("settings.selectColor.dark") }}
+                </el-dropdown-item>
+              </el-dropdown-menu>
+            </template>
+          </el-dropdown>
+          <el-link class="el-dropdown-link" @click="logout">{{ $t("root.logout") }}</el-link>
+        </ItemGroup>
       </el-col>
     </el-row>
   </el-card>
@@ -69,29 +67,35 @@
           </div>
         </div>
       </router-link>
-      <div style="height: 36px; line-height: 36px; margin-left: auto;">
-        <el-dropdown style="margin: 0px 10px" :lr="true">
-          <span class="el-dropdown-link">
-            {{ $t("settings.selectColor.title") }}
-            <i class="el-icon-arrow-down el-icon--right"></i>
-          </span>
-          <template #dropdown>
-            <el-dropdown-menu>
-              <el-dropdown-item @click="auto">{{ $t("settings.selectColor.auto") }}</el-dropdown-item>
-              <el-dropdown-item @click="light">{{ $t("settings.selectColor.light") }}</el-dropdown-item>
-              <el-dropdown-item @click="dark">{{ $t("settings.selectColor.dark") }}</el-dropdown-item>
-            </el-dropdown-menu>
-          </template>
-        </el-dropdown>
-      </div>
+
       <div style="height: 36px; line-height: 36px">
         <ItemGroup :lr="true">
-          <router-link to="/home">
-            <el-link :underline="false" class="only-pc-display header-a">{{
-              userInfo.userName
-            }}</el-link>
-          </router-link>
+          <!-- <router-link to="/home">
+            <el-link :underline="false" class="only-pc-display header-a">
+              {{ userInfo.userName }}
+            </el-link>
+          </router-link> -->
+
           <el-link @click="toPrivate" class="header-a">{{ $t("root.private") }}</el-link>
+          <el-dropdown style="margin: 0px 10px" :lr="true">
+            <span class="el-dropdown-link" style="color: white">
+              {{ $t("settings.selectColor.title") }}
+              <i class="el-icon-arrow-down el-icon--right"></i>
+            </span>
+            <template #dropdown>
+              <el-dropdown-menu>
+                <el-dropdown-item @click="setTheme('auto')">
+                  {{ $t("settings.selectColor.auto") }}
+                </el-dropdown-item>
+                <el-dropdown-item @click="setTheme('light')">
+                  {{ $t("settings.selectColor.light") }}
+                </el-dropdown-item>
+                <el-dropdown-item @click="setTheme('dark')">
+                  {{ $t("settings.selectColor.dark") }}
+                </el-dropdown-item>
+              </el-dropdown-menu>
+            </template>
+          </el-dropdown>
           <el-link @click="logout" class="header-a">{{ $t("root.logout") }}</el-link>
         </ItemGroup>
       </div>
@@ -123,19 +127,9 @@ export default {
     }
   },
   methods: {
-    auto() {
-      localStorage.setItem("theme", "auto");
-      document.body.setAttribute("class","auto");
-      this.$message({ message: this.$t("fileManager.setSuccess"), type: "success" });
-    },
-    dark() {
-      localStorage.setItem("theme", "dark");
-      document.body.setAttribute("class","dark");
-      this.$message({ message: this.$t("fileManager.setSuccess"), type: "success" });
-    },
-    light() {
-      localStorage.setItem("theme", "light");
-      document.body.setAttribute("class","light");
+    setTheme(v = "") {
+      localStorage.setItem("theme", v);
+      document.body.setAttribute("class", v);
       this.$message({ message: this.$t("fileManager.setSuccess"), type: "success" });
     },
     async refresh() {

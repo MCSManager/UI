@@ -883,7 +883,7 @@
 
     "settingUpdate": "Updated, some options may need to restart the panel to take effect",
     "selectColor": {
-      "title": "Color",
+      "title": "Theme",
       "auto": "Auto",
       "light": "Light",
       "dark": "Dark"

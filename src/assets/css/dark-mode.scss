@@ -1,0 +1,198 @@
+/* Dark theme */
+
+@mixin top {
+  a {
+    color: #ff8cc3;
+    transition: all 0.3s;
+  }
+
+  a:hover {
+    color: #ff65ae;
+  }
+
+  .app {
+    background: #111111;
+  }
+
+  #login-panel-wrapper {
+    background: #111111;
+  }
+
+  .el-card,
+  .el-button--primary {
+    background: #202020;
+    color: #fff;
+    border: 1px solid #606061;
+  }
+
+  .el-button,
+  .el-input__inner,
+  .el-textarea__inner {
+    border: 1px solid #606061;
+  }
+
+  #app-menu {
+    background: #202020;
+    border-right: 1px solid #787878;
+  }
+
+  .el-drawer {
+    background: #202020;
+    border: 1px solid #565454;
+  }
+
+  .overview-info-title {
+    color: #b3e8ff;
+  }
+
+  .sub-title-info {
+    color: #afeaff;
+  }
+
+  .el-table,
+  th.el-table__cell,
+  .el-table__cell {
+    background-color: #202020 !important;
+    border-bottom: 1px solid #606061 !important;
+  }
+
+  .el-table tr {
+    background-color: #1d1d1d;
+  }
+
+  .el-table--enable-row-hover .el-table__body tr:hover > td.el-table__cell {
+    background-color: #2d2d2d;
+  }
+
+  .el-table--striped .el-table__body tr.el-table__row--striped td.el-table__cell {
+    background: #282828;
+  }
+
+  .el-table thead {
+    color: #fff;
+  }
+
+  .el-table {
+    color: #eeeeee;
+  }
+
+  .el-table__body-wrapper.is-scrolling-none {
+    background: #3b3b3b;
+  }
+
+  .el-input__inner,
+  .el-textarea__inner {
+    background-color: #252525;
+    color: #fff;
+  }
+
+  .el-input.is-disabled .el-input__inner {
+    filter: invert(1);
+  }
+
+  .el-pagination.is-background .btn-next,
+  .el-pagination.is-background .btn-prev,
+  .el-pagination.is-background .el-pager li {
+    background-color: #444444;
+  }
+
+  .el-button--default {
+    box-shadow: unset;
+    background: #1a1a1a;
+    color: #e4e4e4;
+  }
+
+  .el-button--danger.is-plain {
+    background: #2e1b1b;
+  }
+
+  .el-button--success.is-plain {
+    background: #1c2e1b;
+  }
+
+  .el-button.is-plain:focus,
+  .el-button.is-plain:hover {
+    background: #292929;
+  }
+
+  .el-button--warning {
+    background: #242200;
+  }
+
+  .el-button:focus,
+  .el-button:hover {
+    color: #ffffff;
+    filter: brightness(0.8);
+  }
+
+  .el-loading-mask {
+    background-color: rgb(0 0 0 / 60%);
+  }
+
+  .el-select__popper.el-popper[role="tooltip"],
+  .el-dropdown-menu {
+    background: #232323;
+  }
+
+  .el-select-dropdown__item,
+  .el-dropdown-menu__item {
+    color: #c0c0c0;
+  }
+
+  .el-select-dropdown__item.hover,
+  .el-select-dropdown__item:hover,
+  .el-dropdown-menu__item:focus,
+  .el-dropdown-menu__item:not(.is-disabled):hover,
+  .el-popper {
+    background-color: #353535;
+  }
+
+  .line-info,
+  .el-tabs__item,
+  .el-message-box__title,
+  .el-message-box__message,
+  .home-copyright,
+  .sub-title-title,
+  .el-popper {
+    color: #ffffff;
+  }
+
+  .components-block-button-warpper {
+    background-color: #2d2d2d;
+  }
+
+  .select-block:hover {
+    border: 1px solid #aaa;
+  }
+
+  .el-message-box {
+    background-color: #212121;
+  }
+
+  .page-header-img {
+    background: unset;
+  }
+
+  .el-tag.el-tag--info {
+    background-color: #060606;
+  }
+
+  .el-table--border::after,
+  .el-table--group::after,
+  .el-table::before {
+    background-color: rgba(255, 255, 255, 0) !important;
+  }
+
+  table {
+  }
+}
+
+.dark {
+  @include top;
+}
+
+@media (prefers-color-scheme: dark) {
+  .auto {
+    @include top;
+  }
+}
