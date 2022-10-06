@@ -556,7 +556,7 @@
   },
   "fileManagerEditor": {
     "title": "编辑文件",
-    "updateFile": "更新文件",
+    "updateFile": "保存文件",
     "backToFileManager": "回到文件列表",
     "backViaHistory": "回到简单编辑视图",
     "editError": "编辑文件错误",

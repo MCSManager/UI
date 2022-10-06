@@ -66,6 +66,8 @@ export default {
     await this.render();
     this.editor = window.ace.edit("editor");
     this.editor.setTheme("ace/theme/monokai");
+    this.editor.setShowPrintMargin(false);
+    this.editor.setFontSize(16);
     const extName = path.extname(this.target);
     if (extName === ".js") this.editor.session.setMode("ace/mode/javascript");
     if (extName === ".json") this.editor.session.setMode("ace/mode/json");
