@@ -49,7 +49,14 @@
     color: #afeaff;
   }
 
-  .el-table,
+  .el-table {
+    background-color: #202020 !important;
+  }
+
+  .el-table::before {
+    display: none;
+  }
+
   th.el-table__cell,
   .el-table__cell {
     background-color: #202020 !important;
@@ -175,15 +182,6 @@
 
   .el-tag.el-tag--info {
     background-color: #060606;
-  }
-
-  .el-table--border::after,
-  .el-table--group::after,
-  .el-table::before {
-    background-color: rgba(255, 255, 255, 0) !important;
-  }
-
-  table {
   }
 }
 
