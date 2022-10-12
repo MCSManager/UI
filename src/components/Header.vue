@@ -191,6 +191,12 @@ export default {
 </script>
 
 <style scoped>
+.box-card {
+  transition: all 0.4s;
+}
+.box-card:hover {
+  transform: scale(1.01);
+}
 .el-dropdown-link {
   display: inline-block;
   cursor: pointer;
