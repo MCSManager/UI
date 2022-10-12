@@ -124,7 +124,7 @@ export default {
 
 .el-dropdown-link i {
   font-weight: 400;
-  font-size: 18px;
+  font-size: 16px;
   color: #409eff;
 }
 </style>
