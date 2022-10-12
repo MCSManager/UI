@@ -27,32 +27,54 @@
       </el-col>
       <el-col :span="12" style="text-align: right; line-height: 28px">
         <ItemGroup :lr="true">
-          <el-link @click="toPrivate" class="el-dropdown-link">{{ $t("root.private") }}</el-link>
-          <el-dropdown style="margin: 0px 10px" :lr="true">
-            <span class="el-dropdown-link">
-              {{ $t("settings.selectColor.title") }}
-              <i class="el-icon-arrow-down el-icon--right"></i>
-            </span>
-            <template #dropdown>
-              <el-dropdown-menu>
-                <el-dropdown-item @click="setTheme('auto')">{{
-                  $t("settings.selectColor.auto")
-                }}</el-dropdown-item>
-                <el-dropdown-item @click="setTheme('light')">
-                  {{ $t("settings.selectColor.light") }}
-                </el-dropdown-item>
-                <el-dropdown-item @click="setTheme('dark')">
-                  {{ $t("settings.selectColor.dark") }}
-                </el-dropdown-item>
-              </el-dropdown-menu>
-            </template>
-          </el-dropdown>
-          <el-link class="el-dropdown-link" @click="logout">{{ $t("root.logout") }}</el-link>
+          <div class="el-dropdown-link">
+            <el-tooltip
+              class="item"
+              effect="dark"
+              :content="$t('settings.selectColor.title')"
+              placement="bottom"
+            >
+              <el-dropdown style="margin: 0px 0px" :lr="true">
+                <span>
+                  <i class="el-icon-brush"></i>
+                </span>
+                <template #dropdown>
+                  <el-dropdown-menu>
+                    <el-dropdown-item @click="setTheme('auto')">
+                      {{ $t("settings.selectColor.auto") }}
+                    </el-dropdown-item>
+                    <el-dropdown-item @click="setTheme('light')">
+                      {{ $t("settings.selectColor.light") }}
+                    </el-dropdown-item>
+                    <el-dropdown-item @click="setTheme('dark')">
+                      {{ $t("settings.selectColor.dark") }}
+                    </el-dropdown-item>
+                  </el-dropdown-menu>
+                </template>
+              </el-dropdown>
+            </el-tooltip>
+          </div>
+          <div class="el-dropdown-link">
+            <el-tooltip class="item" effect="dark" :content="$t('root.private')" placement="bottom">
+              <el-link :underline="false" @click="toPrivate">
+                <i class="el-icon-user"></i>
+              </el-link>
+            </el-tooltip>
+          </div>
+
+          <div class="el-dropdown-link">
+            <el-tooltip class="item" effect="dark" :content="$t('root.logout')" placement="bottom">
+              <el-link :underline="false" @click="logout">
+                <i class="el-icon-switch-button"></i>
+              </el-link>
+            </el-tooltip>
+          </div>
         </ItemGroup>
       </el-col>
     </el-row>
   </el-card>
 
+  <!-- User Navigation Bar -->
   <el-card
     v-if="!isTopPermission"
     class="box-card page-header-img"
@@ -170,10 +192,25 @@ export default {
 
 <style scoped>
 .el-dropdown-link {
+  display: inline-block;
   cursor: pointer;
-  color: #409eff;
-  font-weight: 400;
+  text-align: center;
+  transition: all 0.2s;
+  padding: 0px 2px;
+  background-color: white;
+  border-radius: 4px;
 }
+.el-dropdown-link:hover {
+  padding: 0px 12px;
+  background-color: rgb(236, 236, 236);
+}
+
+.el-dropdown-link i {
+  font-weight: 400;
+  font-size: 18px;
+  color: #409eff;
+}
+
 .el-icon-arrow-down {
   font-size: 12px;
 }
