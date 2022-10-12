@@ -91,7 +91,7 @@ export default {
 }
 .page-el-menu {
   background: url("../assets/side.png");
-  transition: all 1s;
+  transition: all 0.4s;
 }
 
 .page-el-menu:hover {

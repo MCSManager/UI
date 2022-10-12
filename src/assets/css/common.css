@@ -3,7 +3,15 @@
 /* menu */
 #app-menu {
   height: 100%;
-  transition: all 1s;
+  transition: all 0.4s;
+}
+
+#app-menu aside {
+  transition: all 0.4s;
+}
+
+#app-menu aside:hover {
+  width: 250px !important;
 }
 
 /* animation */

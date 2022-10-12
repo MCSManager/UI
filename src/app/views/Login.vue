@@ -348,11 +348,13 @@ export default {
 #login-panel {
   min-height: 330px;
   width: 430px;
-  transition: all 1s;
+  transition: all 0.4s 0.2s;
 }
 
 #login-panel:hover {
-  border: 1px solid #77797c;
+  /* box-shadow: 0 0px 18px rgba(0, 0, 0, 0.1); */
+  border: 1px solid #828487;
+  transform: scale(1.04);
 }
 
 .login-btn-wrapper {
