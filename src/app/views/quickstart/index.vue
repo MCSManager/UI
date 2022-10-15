@@ -3,45 +3,51 @@
 -->
 
 <template>
-  <div class="quick-title">
-    <h4>{{ title }}</h4>
+  <div v-if="displayType === 1" v-loading="loading">
+    <div class="quick-title">
+      <h4>{{ title }}</h4>
+    </div>
+    <div class="quick-container">
+      <el-row :gutter="10" justify="center" style="width: 100%">
+        <el-col
+          :md="6"
+          :offset="0"
+          v-for="(item, index) in quickItems"
+          :key="index"
+          @click="item.fn(item.value)"
+        >
+          <ItemGroup>
+            <QuickStartButton style="height: 120px">
+              <template #title>{{ item.title }}</template>
+              <template #info>{{ item.subTitle }}</template>
+            </QuickStartButton>
+          </ItemGroup>
+        </el-col>
+      </el-row>
+    </div>
   </div>
-  <div class="quick-container">
-    <el-row :gutter="10" justify="center" style="width: 100%">
-      <el-col
-        :md="6"
-        :offset="0"
-        v-for="(item, index) in quickItems"
-        :key="index"
-        @click="item.fn(item.value)"
-      >
-        、
-        <ItemGroup>
-          <QuickStartButton style="height: 120px">
-            <template #title>{{ item.title }}</template>
-            <template #info>{{ item.subTitle }}</template>
-          </QuickStartButton>
-        </ItemGroup>
-      </el-col>
-    </el-row>
-  </div>
+  <McPreset v-else-if="displayType === 2"></McPreset>
 </template>
 
 <script>
 import QuickStartButton from "@/components/SelectBlock";
 import { request } from "@/app/service/protocol";
 import { API_SERVICE } from "../../service/common";
+import McPreset from "./McPreset";
 
 export default {
   // eslint-disable-next-line vue/no-unused-components
-  components: { QuickStartButton },
+  components: { QuickStartButton, McPreset },
   data: function () {
     return {
+      loading: false,
+      displayType: 1,
       title: this.$t("quickStart.title"),
       remoteObjects: [],
       quickStartType: 0,
       selectedHostUuid: "",
       step: 0,
+      isMC: false,
       quickItems: [
         {
           title: this.$t("quickStart.quickItems[0].title"),
@@ -92,6 +98,9 @@ export default {
 
     // 选择快速启动
     selectQuickStartType(v) {
+      if (v === 1) {
+        this.isMC = true;
+      }
       if (v === 4) {
         return window.open("https://docs.mcsmanager.com/");
       }
@@ -113,12 +122,22 @@ export default {
     selectHost(uuid) {
       console.log("Select host:", uuid);
       this.selectedHostUuid = uuid;
-      this.quickItems = this.minecraftCreateMethod;
+      this.title = "选择创建方式";
+      if (this.isMC) {
+        this.quickItems = this.minecraftCreateMethod;
+      } else {
+        this.$router.push({
+          path: `/new_instance/${this.selectedHostUuid}`,
+          query: {
+            type: this.quickStartType
+          }
+        });
+      }
     },
 
     mcSelectCreateMethod(type = 0) {
       if (type === 1) {
-        //
+        this.displayType = 2;
       }
 
       if (type === 2) {
@@ -138,6 +157,7 @@ export default {
   display: flex;
   justify-content: center;
   align-items: center;
+  font-size: 24px;
 }
 .quick-container {
   display: flex;
