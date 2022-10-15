@@ -3,82 +3,79 @@
 -->
 
 <template>
+  <div class="quick-title">
+    <h4>{{ title }}</h4>
+  </div>
   <div class="quick-container">
-    <Panel style="max-width: 1200px">
-      <template #title>{{ title }}</template>
-      <template #default>
-        <div v-show="step == 0">
-          <el-row :gutter="10" justify="center" class="">
-            <el-col
-              :md="6"
-              :offset="0"
-              v-for="(item, index) in quickItems"
-              :key="index"
-              @click="selectQuickStartType(item.value)"
-            >
-              <ItemGroup>
-                <SelectBlock style="height: 120px;">
-                  <template #title>{{ item.title }}</template>
-                  <template #info>{{ item.subTitle }}</template>
-                </SelectBlock>
-              </ItemGroup>
-            </el-col>
-          </el-row>
-        </div>
-
-        <div v-if="step == 1">
-          <el-row :gutter="10" justify="center">
-            <template v-for="(item, index) in remoteObjects" :key="index">
-              <el-col :md="6" :offset="0" @click="selectHost(item.uuid)" v-if="item.available">
-                <ItemGroup>
-                  <SelectBlock style="height: 120px;">
-                    <template #title>{{ item.ip }}:{{ item.port }}</template>
-                    <template #info>{{ item.remarks }}</template>
-                  </SelectBlock>
-                </ItemGroup>
-              </el-col>
-            </template>
-          </el-row>
-        </div>
-      </template>
-    </Panel>
+    <el-row :gutter="10" justify="center" style="width: 100%">
+      <el-col
+        :md="6"
+        :offset="0"
+        v-for="(item, index) in quickItems"
+        :key="index"
+        @click="item.fn(item.value)"
+      >
+        、
+        <ItemGroup>
+          <QuickStartButton style="height: 120px">
+            <template #title>{{ item.title }}</template>
+            <template #info>{{ item.subTitle }}</template>
+          </QuickStartButton>
+        </ItemGroup>
+      </el-col>
+    </el-row>
   </div>
 </template>
 
 <script>
-import SelectBlock from "@/components/SelectBlock";
+import QuickStartButton from "@/components/SelectBlock";
 import { request } from "@/app/service/protocol";
 import { API_SERVICE } from "../../service/common";
-import Panel from "@/components/Panel";
+
 export default {
-  components: { SelectBlock, Panel },
+  // eslint-disable-next-line vue/no-unused-components
+  components: { QuickStartButton },
   data: function () {
     return {
       title: this.$t("quickStart.title"),
       remoteObjects: [],
       quickStartType: 0,
+      selectedHostUuid: "",
       step: 0,
       quickItems: [
         {
           title: this.$t("quickStart.quickItems[0].title"),
           subTitle: this.$t("quickStart.quickItems[0].subTitle"),
-          value: 1
+          value: 1,
+          fn: this.selectQuickStartType
         },
         {
           title: this.$t("quickStart.quickItems[1].title"),
           subTitle: this.$t("quickStart.quickItems[1].subTitle"),
-          value: 2
+          value: 2,
+          fn: this.selectQuickStartType
         },
         {
           title: this.$t("quickStart.quickItems[2].title"),
           subTitle: this.$t("quickStart.quickItems[2].subTitle"),
-          value: 3
+          value: 3,
+          fn: this.selectQuickStartType
         }
-        // {
-        //   title: this.$t("quickStart.quickItems[3].title"),
-        //   subTitle: this.$t("quickStart.quickItems[3].subTitle"),
-        //   value: 4
-        // }
+      ],
+
+      minecraftCreateMethod: [
+        {
+          title: "一键快速开服（推荐初学者）",
+          subTitle: "适合初学者，通过预设模板快速帮助您部署和启动服务器！",
+          value: 1,
+          fn: this.mcSelectCreateMethod
+        },
+        {
+          title: "自定义创建服务器",
+          subTitle: "适合初学者，快速帮助您部署和启动服务器！",
+          value: 2,
+          fn: this.mcSelectCreateMethod
+        }
       ]
     };
   },
@@ -92,24 +89,61 @@ export default {
         url: API_SERVICE
       });
     },
+
+    // 选择快速启动
     selectQuickStartType(v) {
       if (v === 4) {
         return window.open("https://docs.mcsmanager.com/");
       }
       this.quickStartType = v;
       this.title = this.$t("quickStart.whichServer");
-      this.step = 1;
-    },
-    selectHost(uuid) {
-      this.$router.push({
-        path: `/new_instance/${uuid}`,
-        query: {
-          type: this.quickStartType
-        }
+
+      // 载入主机选择
+      this.quickItems = this.remoteObjects.map((v) => {
+        return {
+          title: `HOST: ${v.ip}:${v.port}`,
+          subTitle: "备注：" + v.remarks,
+          value: v.uuid,
+          fn: this.selectHost
+        };
       });
+    },
+
+    // 选择主机
+    selectHost(uuid) {
+      console.log("Select host:", uuid);
+      this.selectedHostUuid = uuid;
+      this.quickItems = this.minecraftCreateMethod;
+    },
+
+    mcSelectCreateMethod(type = 0) {
+      if (type === 1) {
+        //
+      }
+
+      if (type === 2) {
+        this.$router.push({
+          path: `/new_instance/${this.selectedHostUuid}`,
+          query: {
+            type: this.quickStartType
+          }
+        });
+      }
     }
   }
 };
 </script>
-
-<style scoped></style>
+<style lang="scss" scoped>
+.quick-title {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.quick-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+}
+</style>

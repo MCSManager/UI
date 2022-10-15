@@ -3,52 +3,50 @@
 -->
 
 <template>
-  <div class="select-block" :style="style">
-    <div>
-      <p class="color-black block-title">
+  <div class="quick-btn-wrapper">
+    <el-card class="box-card" :style="style">
+      <p class="title">
         <slot name="title"></slot>
       </p>
-      <p class="sub-title">
+      <p class="body">
         <slot name="info"></slot>
       </p>
-    </div>
+    </el-card>
   </div>
 </template>
 
 <script>
 export default {
   props: {
-    style: String
-  },
-  data: function () {
-    return {};
-  },
-  methods: {}
+    size: String,
+    space: String,
+    style: Object
+  }
 };
 </script>
 
-<style scoped>
-.block-title {
-  font-size: 14px;
-  font-weight: 600;
-  letter-spacing: -0.4px;
-  margin: 10px 0px !important;
-}
-.select-block {
-  border: 1px solid #dcdfe6;
-  cursor: pointer;
-  border-radius: 4px;
-  overflow: hidden;
-  transition: all 0.4s;
-  padding: 4px 14px;
-}
+<style lang="scss" scoped>
+.quick-btn-wrapper {
+  .box-card {
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.4s;
+  }
 
-.select-block:hover {
-  border: 1px solid #409eff;
-}
+  .box-card:hover {
+    transform: scale(1.04);
+    background-color: rgb(235, 235, 235);
+    border: 1px solid rgb(12, 88, 174);
+  }
 
-.sub-title {
-  color: gray;
-  font-size: 13px;
+  .title {
+    font-weight: 600;
+    margin: 0px;
+    margin-bottom: 8px;
+  }
+  .body {
+    margin: 0px;
+    font-size: 13px;
+  }
 }
 </style>

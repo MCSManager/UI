@@ -888,7 +888,17 @@
         "subTitle": "我们将打开官方文档以帮助您获取更多有用信息"
       }
     ],
-    "whichServer": "请选择您期望部署到哪台主机？"
+    "whichServer": "你希望在哪台服务器上部署这台机器？",
+    "quickItems[0]": {
+      "title": "创建 Minecraft 服务器"
+    },
+    "quickItems[1]": {
+      "title": "创建其他游戏服务器",
+      "subTitle": "尝试帮助您创建其他游戏服务器，有一定技术难度。"
+    },
+    "quickItems[2]": {
+      "title": "管理我的控制台程序"
+    }
   },
   "install": {
     "welcome": "欢迎使用 MCSManager 管理面板",
