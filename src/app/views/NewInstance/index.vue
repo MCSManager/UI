@@ -49,13 +49,6 @@
         </div>
 
         <div v-show="page == 1" class="panel-context row-mt">
-          <div class="sub-title">
-            <p class="sub-title-title">{{ $t("newInstances.selectCreateType") }}</p>
-            <p class="sub-title-info">
-              {{ $t("newInstances.selectCreateTypeInfo") }}
-            </p>
-          </div>
-
           <el-row :gutter="10" justify="center" class="col-md-responsive">
             <el-col :md="8" :offset="0" v-if="form.type != TYPE_MINECRAFT_BEDROCK">
               <SelectBlock @click="selectTypeB(1)" style="min-height: 120px">

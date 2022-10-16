@@ -18,12 +18,24 @@
         >
           <ItemGroup>
             <QuickStartButton style="height: 120px">
-              <template #title>{{ item.title }}</template>
-              <template #info>{{ item.subTitle }}</template>
+              <template #title>
+                <p class="sub-title-title">{{ item.title }}</p>
+              </template>
+              <template #info>
+                <p class="sub-title-info">
+                  {{ item.subTitle }}
+                </p>
+              </template>
             </QuickStartButton>
           </ItemGroup>
         </el-col>
       </el-row>
+    </div>
+
+    <div v-if="step === 0" class="task-container">
+      <el-link type="primary" :underline="false">
+        查看正在进行的任务<i class="el-icon-right"></i>
+      </el-link>
     </div>
   </div>
   <McPreset v-else-if="displayType === 2"></McPreset>
@@ -38,6 +50,7 @@ import McPreset from "./McPreset";
 export default {
   // eslint-disable-next-line vue/no-unused-components
   components: { QuickStartButton, McPreset },
+  inject: ["appLoading"],
   data: function () {
     return {
       loading: false,
@@ -48,6 +61,13 @@ export default {
       selectedHostUuid: "",
       step: 0,
       isMC: false,
+      // 已经在运行的任务列表
+      taskList: [
+        {
+          id: 213213,
+          daemonUuid: "sad"
+        }
+      ],
       quickItems: [
         {
           title: this.$t("quickStart.quickItems[0].title"),
@@ -96,8 +116,19 @@ export default {
       });
     },
 
+    async startLoading() {
+      this.loading = true;
+      return new Promise((ok) => {
+        setTimeout(() => {
+          this.loading = false;
+          ok();
+        }, 1200);
+      });
+    },
+
     // 选择快速启动
     selectQuickStartType(v) {
+      this.step++;
       if (v === 1) {
         this.isMC = true;
       }
@@ -119,10 +150,12 @@ export default {
     },
 
     // 选择主机
-    selectHost(uuid) {
+    async selectHost(uuid) {
+      this.step++;
       console.log("Select host:", uuid);
       this.selectedHostUuid = uuid;
       this.title = "选择创建方式";
+      await this.startLoading();
       if (this.isMC) {
         this.quickItems = this.minecraftCreateMethod;
       } else {
@@ -135,8 +168,10 @@ export default {
       }
     },
 
-    mcSelectCreateMethod(type = 0) {
+    async mcSelectCreateMethod(type = 0) {
+      this.step++;
       if (type === 1) {
+        await this.startLoading();
         this.displayType = 2;
       }
 
@@ -165,5 +200,13 @@ export default {
   align-items: center;
   height: 100%;
   width: 100%;
+}
+.task-container {
+  text-align: center;
+  margin-top: 30px;
+
+  .el-link {
+    font-size: 18px;
+  }
 }
 </style>

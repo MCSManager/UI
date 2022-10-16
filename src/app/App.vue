@@ -2,7 +2,7 @@
 Copyright (C) 2022 MCSManager <mcsmanager-dev@outlook.com>
 -->
 <template>
-  <el-container>
+  <el-container v-loading="viewLoading">
     <!-- Manage users phone screen menu bar -->
     <el-drawer
       v-if="isTopPermission"
@@ -50,12 +50,20 @@ import router from "./router";
 export default {
   name: "App",
   components: { Aside, Header },
-  data: function () {
+  data() {
     return {
       loading: true,
+      viewLoading: false,
       breadCrumbs: [],
       mode: 1,
       drawer: false
+    };
+  },
+  provide() {
+    return {
+      appLoading: (v) => {
+        this.viewLoading = v;
+      }
     };
   },
   computed: {
