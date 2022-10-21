@@ -46,6 +46,7 @@ export const API_INSTANCE_UPDATE = `${API_URL}/api/protected_instance/instance_u
 export const API_INSTANCE_RESTART = `${API_URL}/api/protected_instance/restart`;
 export const API_INSTANCE_OUTPUT = `${API_URL}/api/protected_instance/outputlog`;
 export const API_INSTANCE_ASYNC_TASK = `${API_URL}/api/protected_instance/asynchronous`;
+export const API_INSTANCE_ASYNC_QUERY = `${API_URL}/api/protected_instance/query_asynchronous`;
 export const API_INSTANCE_ASYNC_STOP = `${API_URL}/api/protected_instance/stop_asynchronous`;
 
 export const API_PROCESS_CONFIG_LIST = `${API_URL}/api/protected_instance/process_config/list`;
@@ -62,6 +63,8 @@ export const API_PROGRESS = `${API_URL}/api/environment/progress`;
 
 export const API_PANEL_STATUS = `${API_URL}/api/auth/status`;
 export const API_PANEL_INSTALL = `${API_URL}/api/auth/install`;
+
+export const API_GET_QUICK_INSTALL_LIST_ADDR = `${API_URL}/api/instance/quick_install_list`;
 
 export const TERMINAL_CODE = [
   { label: "UTF-8", value: "UTF-8" },

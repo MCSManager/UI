@@ -27,6 +27,8 @@
             </template>
           </el-table-column>
         </el-table>
+
+        <p>目标主机 ID: {{ remoteUuid }}</p>
       </template>
     </Panel>
 
@@ -56,9 +58,16 @@
 <script>
 import Dialog from "@/components/Dialog";
 import Panel from "@/components/Panel";
+import { API_GET_QUICK_INSTALL_LIST_ADDR, API_INSTANCE_ASYNC_TASK } from "../../service/common";
+import { request } from "../../service/protocol";
 export default {
   // eslint-disable-next-line vue/no-unused-components
   components: { Panel, Dialog },
+  props: {
+    remoteUuid: {
+      type: String
+    }
+  },
   data: function () {
     return {
       tableData: [],
@@ -68,42 +77,31 @@ export default {
     };
   },
   methods: {
-    init() {
-      this.tableData = [
-        {
-          info: "[原版生存] 基友快速联机必备，让你和你的小伙伴一起享受原汁原味的极致生存！",
-          mc: "1.19.2",
-          java: "1.17",
-          size: 500,
-          remark: "内存至少8G才可使用哦~"
-        },
-        {
-          info: "[原版生存] 基友快速联机必备，让你和你的小伙伴一起享受原汁原味的极致生存！",
-          mc: "1.18",
-          java: "1.17",
-          size: 500,
-          remark: "内存至少8G才可使用哦~"
-        },
-        {
-          info: "[原版生存] 基友快速联机必备，让你和你的小伙伴一起享受原汁原味的极致生存！",
-          mc: "1.17",
-          java: "1.17",
-          size: 500,
-          remark: "内存至少8G才可使用哦~"
-        },
-        {
-          info: "[原版生存] 基友快速联机必备，让你和你的小伙伴一起享受原汁原味的极致生存！",
-          mc: "1.16",
-          java: "1.17",
-          size: 500,
-          remark: "内存至少8G才可使用哦~"
-        }
-      ];
+    async init() {
+      const data = await request({
+        method: "GET",
+        url: API_GET_QUICK_INSTALL_LIST_ADDR
+      });
+      this.tableData = data;
     },
 
     // 开始安装
-    handleSelectTemplate() {
+    async handleSelectTemplate() {
       this.loading = true;
+      await request({
+        method: "POST",
+        url: API_INSTANCE_ASYNC_TASK,
+        params: {
+          remote_uuid: this.remoteUuid,
+          uuid: "-",
+          task_name: "quick_install"
+        },
+        data: {
+          time: new Date().getTime(),
+          newInstanceName: "测试服务器",
+          targetLink: "http://oss.duzuii.com/d/MCSManager/Minecraft-Server-Software/paper1.19.zip"
+        }
+      });
       setTimeout(() => {
         this.percentage = 100;
         this.installed();

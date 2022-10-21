@@ -38,7 +38,7 @@
       </el-link>
     </div>
   </div>
-  <McPreset v-else-if="displayType === 2"></McPreset>
+  <McPreset :remote-uuid="selectedHostUuid" v-else-if="displayType === 2"></McPreset>
 </template>
 
 <script>
