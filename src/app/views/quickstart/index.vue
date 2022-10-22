@@ -38,7 +38,7 @@
       </el-row>
     </div>
 
-    <div class="task-container">
+    <div class="task-container" v-if="selectedHostUuid">
       <div>
         <h4>这台主机下的历史安装任务:</h4>
       </div>
