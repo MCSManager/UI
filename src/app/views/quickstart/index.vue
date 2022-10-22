@@ -1,7 +1,6 @@
 <!--
   Copyright (C) 2022 MCSManager <mcsmanager-dev@outlook.com>
 -->
-
 <template>
   <div v-if="displayType === 1" v-loading="loading">
     <div class="quick-title">
@@ -40,13 +39,11 @@
 
     <div class="task-container" v-if="selectedHostUuid">
       <div>
-        <h4>这台主机下的历史安装任务:</h4>
+        <h4>{{ $t("views.quickstart_index.001") }}</h4>
       </div>
       <div>
         <div v-if="taskList.length === 0">
-          <el-link type="info" :underline="false">
-            没有任何安装任务，您可以点击上述选项来创建
-          </el-link>
+          <el-link type="info" :underline="false">{{ $t("views.quickstart_index.002") }}</el-link>
         </div>
         <div class="task-btn" v-for="(item, index) in taskList" :key="index">
           <span>
@@ -58,28 +55,26 @@
               v-if="item.status === 0"
               style="margin-left: 4px"
               @click="toInstance(selectedHostUuid, item.detail.instanceUuid)"
+              >{{ $t("views.quickstart_index.003") }}</el-link
             >
-              前往控制台
-            </el-link>
           </span>
           <span style="margin-left: 8px">
             <span v-if="item.status === 0">
-              <el-tag type="success" size="mini">安装完成</el-tag>
+              <el-tag type="success" size="mini">{{ $t("CommonText.001") }}</el-tag>
             </span>
             <span v-else-if="item.status === 1">
               <el-tag type="primary" size="mini">
-                <i class="el-icon-loading"></i>
-                安装中
-              </el-tag>
+                <i class="el-icon-loading"></i>{{ $t("CommonText.002") }}</el-tag
+              >
             </span>
             <span v-else>
-              <el-tag type="danger" size="mini">安装失败</el-tag>
+              <el-tag type="danger" size="mini">{{ $t("CommonText.003") }}</el-tag>
             </span>
           </span>
         </div>
       </div>
       <div v-if="taskList.length > 0">
-        <el-link type="info" @click="refresh" size="mini">刷新</el-link>
+        <el-link type="info" @click="refresh" size="mini">{{ $t("CommonText.004") }}</el-link>
       </div>
     </div>
   </div>
@@ -95,10 +90,11 @@ import QuickStartButton from "@/components/SelectBlock";
 import { request } from "@/app/service/protocol";
 import { API_INSTANCE_ASYNC_QUERY, API_SERVICE } from "../../service/common";
 import McPreset from "./McPreset";
-
 export default {
-  // eslint-disable-next-line vue/no-unused-components
-  components: { QuickStartButton, McPreset },
+  components: {
+    QuickStartButton,
+    McPreset
+  },
   inject: ["app"],
   data: function () {
     return {
@@ -112,7 +108,6 @@ export default {
       taskDetailPageId: "",
       step: 0,
       isMC: false,
-      // 已经在运行的任务列表
       taskList: [],
       quickItems: [
         {
@@ -121,7 +116,7 @@ export default {
           value: 1,
           fn: this.selectQuickStartType,
           extra: {
-            title: "查看历史安装任务",
+            title: window.$t("views.quickstart_index.004"),
             fn: this.selectQuickStartType
           }
         },
@@ -138,34 +133,38 @@ export default {
           fn: this.selectQuickStartType
         }
       ],
-
       minecraftCreateMethod: [
         {
-          title: "一键快速开服（初次使用推荐）",
-          subTitle: "适合初学者，通过预设模板快速帮助您部署和启动服务器。",
+          title: window.$t("views.quickstart_index.005"),
+          subTitle: window.$t("views.quickstart_index.006"),
           value: 1,
           fn: this.mcSelectCreateMethod
         },
         {
-          title: "普通流程创建服务器",
-          subTitle: "导入本地服务器，或自定义创建一个服务器。",
+          title: window.$t("views.quickstart_index.007"),
+          subTitle: window.$t("views.quickstart_index.008"),
           value: 2,
           fn: this.mcSelectCreateMethod
         }
       ]
     };
   },
+
   async mounted() {
     this.taskDetailPageId = this.$route.query.task_id;
     this.selectedHostUuid = this.$route.query.remote_uuid;
+
     if (this.taskDetailPageId) {
       this.displayType = 2;
     }
+
     await this.initRemoteHost();
   },
+
   unmounted() {
     clearInterval(this.invTask);
   },
+
   methods: {
     async initRemoteHost() {
       this.remoteObjects = await request({
@@ -184,23 +183,24 @@ export default {
       });
     },
 
-    // 选择快速启动
     selectQuickStartType(v) {
       this.step++;
+
       if (v === 1) {
         this.isMC = true;
       }
+
       if (v === 4) {
         return window.open("https://docs.mcsmanager.com/");
       }
+
       this.quickStartType = v;
       this.title = this.$t("quickStart.whichServer");
 
-      // 载入主机选择
       this.quickItems = this.remoteObjects.map((v) => {
         return {
           title: `HOST: ${v.ip}:${v.port}`,
-          subTitle: "备注：" + v.remarks,
+          subTitle: window.$t("CommonText.005") + v.remarks,
           value: v.uuid,
           fn: this.selectHost
         };
@@ -211,13 +211,13 @@ export default {
       }
     },
 
-    // 选择主机
     async selectHost(uuid) {
       this.step++;
       console.log("Select host:", uuid);
       this.selectedHostUuid = uuid;
-      this.title = "选择创建方式";
+      this.title = window.$t("views.quickstart_index.009");
       await this.startLoading();
+
       if (this.isMC) {
         this.quickItems = this.minecraftCreateMethod;
         this.startQueryTasks();
@@ -233,6 +233,7 @@ export default {
 
     async mcSelectCreateMethod(type = 0) {
       this.step++;
+
       if (type === 1) {
         await this.startLoading();
         this.displayType = 2;
@@ -257,28 +258,13 @@ export default {
 
     refresh() {
       this.queryAllTaskStatus();
-      this.$message({ message: this.$t("general.refreshFinish"), type: "success" });
+      this.$message({
+        message: this.$t("general.refreshFinish"),
+        type: "success"
+      });
     },
 
     async queryAllTaskStatus() {
-      // Task Class
-      // [
-      //   {
-      //     taskId:
-      //       "QuickInstallTask-3ad03650f2ba4eadb11362867444cb4f-0acd53bb-15a1-445d-b9ed-31e6fb11d2f7",
-      //     status: 1,
-      //     detail: {
-      //       taskId:
-      //         "QuickInstallTask-3ad03650f2ba4eadb11362867444cb4f-0acd53bb-15a1-445d-b9ed-31e6fb11d2f7",
-      //       status: 1,
-      //       instanceUuid: "3ad03650f2ba4eadb11362867444cb4f",
-      //       instanceStatus: 0,
-      //       instanceConfig: {
-      //         nickname: "T"
-      //       }
-      //     }
-      //   }
-      // ];
       const tasks = await request({
         method: "POST",
         url: API_INSTANCE_ASYNC_QUERY,
@@ -314,6 +300,7 @@ export default {
   }
 };
 </script>
+
 <style lang="scss" scoped>
 .quick-title {
   display: flex;
