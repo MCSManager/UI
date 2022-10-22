@@ -11,4 +11,6 @@ const i18n = createI18n({
     },
 })
 
+window.$t = i18n.global.t
+
 export default i18n
