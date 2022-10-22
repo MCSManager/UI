@@ -40,11 +40,11 @@
 
         <div v-if="viewType === 2">
           <p class="sub-title-title row-mb">
-            使用 HiPer 的去中心化服务实现虚拟局域网，从而让您与其他人共同进入服务器。
+            通过 HiPer 使您与主流的 Minecraft 启动器进行安全、快速、稳定的多人联机。
           </p>
           <p class="sub-title-title">
             对于中国大陆用户，最新版本的 HMCL，PCL 启动器均已支持 HiPer
-            联机，您的朋友必须也要使用最新的启动器并启动 HiPer 网络联机模式才可以与您一起游玩。
+            联机，您与朋友们可以使用最新版本的多人联机功能加入服务器。
           </p>
           <p>
             状态：
@@ -54,7 +54,7 @@
             IP 地址：
             <span class="color-green">-</span>
           </p>
-          <el-button type="primary" size="small" @click="startHiPer">开始使用</el-button>
+          <el-button type="primary" size="small" @click="startHiPer">立刻接入</el-button>
         </div>
       </div>
     </template>
