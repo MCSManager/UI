@@ -5,9 +5,9 @@
 <template>
   <div class="quick-container-install">
     <Panel style="width: 100%" v-if="!installView">
-      <template #title>预设安装模板</template>
+      <template #title>{{ $t("views.quickstart_McPreset.001") }}</template>
       <template #default>
-        <p>节点 ID: {{ remoteUuid }}</p>
+        <p>{{ $t("views.quickstart_McPreset.002", [remoteUuid]) }}</p>
         <el-table
           :data="tableData"
           size="small"
@@ -15,39 +15,52 @@
           style="width: 100%"
           v-loading="requestLoading"
         >
-          <el-table-column prop="info" label="介绍" min-width="300px"></el-table-column>
-          <el-table-column prop="mc" label="Minecraft 版本" width="120px"></el-table-column>
-          <el-table-column prop="java" label="Java 版本要求" width="120px"></el-table-column>
-          <el-table-column prop="size" label="整合包大小" width="120px">
-            <template v-slot="scope">约{{ scope.row.size }}MB</template>
+          <el-table-column
+            prop="info"
+            min-width="300px"
+            :label="$t('CommonText.006')"
+          ></el-table-column>
+          <el-table-column
+            prop="mc"
+            width="120px"
+            :label="$t('views.quickstart_McPreset.003')"
+          ></el-table-column>
+          <el-table-column
+            prop="java"
+            width="120px"
+            :label="$t('views.quickstart_McPreset.004')"
+          ></el-table-column>
+          <el-table-column prop="size" width="120px" :label="$t('views.quickstart_McPreset.005')">
+            <template v-slot="scope">{{
+              $t("views.quickstart_McPreset.006", [scope.row.size])
+            }}</template>
           </el-table-column>
-          <el-table-column prop="remark" label="备注"></el-table-column>
-          <el-table-column label="操作">
+          <el-table-column prop="remark" :label="$t('CommonText.007')"></el-table-column>
+          <el-table-column :label="$t('CommonText.008')">
             <template v-slot="scope">
               <el-button
                 type="success"
                 size="small"
                 @click="handleSelectTemplate(scope.$index, scope.row)"
+                >{{ $t("CommonText.009") }}</el-button
               >
-                使用
-              </el-button>
             </template>
           </el-table-column>
         </el-table>
 
-        <p>快速安装服务由 独醉科技 提供下载支持。</p>
+        <p>{{ $t("views.quickstart_McPreset.007") }}</p>
       </template>
     </Panel>
 
     <Panel style="width: 600px" v-if="installView && !isInstalled">
-      <template #title>{{ "正在安装中" }}</template>
+      <template #title>{{ $t("views.quickstart_McPreset.014") }}</template>
       <template #default>
         <div class="display-center">
           <div style="text-align: center">
-            <el-progress type="circle" :percentage="percentage" />
+            <el-progress type="circle" :percentage="percentage"></el-progress>
             <div style="margin-top: 12px; text-align: center">
-              <p class="tip-title">正在下载文件...</p>
-              <p class="sub-title-info">实际所需时间与网速，处理器运行速度有关，请务必耐心等待。</p>
+              <p class="tip-title">{{ $t("views.quickstart_McPreset.008") }}</p>
+              <p class="sub-title-info">{{ $t("views.quickstart_McPreset.009") }}</p>
             </div>
           </div>
         </div>
@@ -55,12 +68,14 @@
     </Panel>
 
     <Panel style="width: 600px" v-if="installView && isInstalled">
-      <template #title>{{ "安装完毕" }}</template>
+      <template #title>{{ $t("CommonText.010") }}</template>
       <template #default>
         <div class="display-center">
           <div style="margin: 16px">
-            <p class="tip-title">大功告成！接下来您只需要进入“实例控制台”，轻点“启动实例”即可。</p>
-            <el-button type="primary" size="default" @click="toInstance">前往实例控制台</el-button>
+            <p class="tip-title">{{ $t("views.quickstart_McPreset.010") }}</p>
+            <el-button type="primary" size="default" @click="toInstance">{{
+              $t("views.quickstart_McPreset.011")
+            }}</el-button>
           </div>
         </div>
       </template>
@@ -69,7 +84,6 @@
 </template>
 
 <script>
-import Dialog from "@/components/Dialog";
 import Panel from "@/components/Panel";
 import {
   API_GET_QUICK_INSTALL_LIST_ADDR,
@@ -79,7 +93,9 @@ import {
 import { request } from "../../service/protocol";
 export default {
   // eslint-disable-next-line vue/no-unused-components
-  components: { Panel, Dialog },
+  components: {
+    Panel
+  },
   props: {
     remoteUuid: {
       type: String
@@ -119,9 +135,8 @@ export default {
         url: API_GET_QUICK_INSTALL_LIST_ADDR
       });
       this.tableData = data;
-      this.requestLoading = false;
+      this.requestLoading = false; // 直接前往详情页
 
-      // 直接前往详情页
       if (this.taskId) {
         this.percentage = 50;
         this.startDownloadTask();
@@ -139,13 +154,12 @@ export default {
       }, 3000);
     },
 
-    // 开始安装
+    // Start install
     async handleSelectTemplate(index, row) {
       this.requestLoading = true;
       this.installView = true;
       this.isInstalled = false;
 
-      // eslint-disable-next-line no-unreachable
       this.newTaskInfo = await request({
         method: "POST",
         url: API_INSTANCE_ASYNC_TASK,
@@ -156,7 +170,7 @@ export default {
         },
         data: {
           time: new Date().getTime(),
-          newInstanceName: "测试服务器",
+          newInstanceName: window.$t("views.quickstart_McPreset.012"),
           targetLink: row.targetLink
         }
       });
@@ -184,22 +198,22 @@ export default {
       }
     },
 
-    // 安装完毕状态
     installed() {
-      console.log("已安装完毕");
+      console.log(window.$t("views.quickstart_McPreset.013"));
       this.isInstalled = true;
     },
 
-    // 前往控制台
     toInstance() {
       this.$router.push({
         path: `/terminal/${this.remoteUuid}/${this.taskInfo.detail.instanceUuid}/`
       });
     }
   },
+
   mounted() {
     this.init();
   },
+
   unmounted() {
     clearInterval(this.intervalTask);
   }
