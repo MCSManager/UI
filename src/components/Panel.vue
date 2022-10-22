@@ -60,7 +60,7 @@ export default {
 }
 
 .box-card-content {
-  font-size: 12px;
+  font-size: 13px;
   font-weight: 400;
 }
 

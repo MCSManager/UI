@@ -355,7 +355,8 @@
     ],
     "startError": "启动命令中不可包含换行，这并非脚本文件，不可执行多条命令，请检查",
     "cantGetImageList": "无法获得远程主机镜像列表，建议前往“服务环境”界面创建镜像",
-    "cantGetNetModeList": "无法获得远程主机网络列表，建议检查 Docker 配置"
+    "cantGetNetModeList": "无法获得远程主机网络列表，建议检查 Docker 配置",
+    "networkTip": "联机模式"
   },
   "instanceTypeList": {
     "General console program": "控制台程序（通用）",

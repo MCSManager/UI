@@ -161,6 +161,7 @@ import Dialog from "@/components/Dialog";
 import { request } from "@/app//service/protocol";
 import { API_INSTANCE_UPDATE } from "@/app/service/common";
 import { TERMINAL_CODE } from "../../service/common";
+
 export default {
   components: { Dialog },
   props: {
