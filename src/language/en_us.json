@@ -888,7 +888,7 @@
         "subTitle": "We will open the official documentation to help you get more useful information"
       }
     ],
-    "whichServer": "Please select which host do you wish to deploy to?"
+    "whichServer": "Please select host:"
   },
   "install": {
     "welcome": "Welcome to use MCSManager Panel",

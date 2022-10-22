@@ -28,15 +28,26 @@
               </template>
             </QuickStartButton>
           </ItemGroup>
+
+          <div v-if="item.extra" style="text-align: center">
+            <el-link type="primary" @click="item.fn(item.value)">
+              {{ item.extra.title }}
+            </el-link>
+          </div>
         </el-col>
       </el-row>
     </div>
 
-    <div v-if="taskList.length" class="task-container">
+    <div class="task-container">
       <div>
         <h4>这台主机下的历史安装任务:</h4>
       </div>
       <div>
+        <div v-if="taskList.length === 0">
+          <el-link type="info" :underline="false">
+            没有任何安装任务，您可以点击上述选项来创建
+          </el-link>
+        </div>
         <div class="task-btn" v-for="(item, index) in taskList" :key="index">
           <span>
             <el-link type="primary">
@@ -46,7 +57,7 @@
               type="info"
               v-if="item.status === 0"
               style="margin-left: 4px"
-              @click="toInstance(selectedHostUuid, item.detail.instanceConfig.instanceUuid)"
+              @click="toInstance(selectedHostUuid, item.detail.instanceUuid)"
             >
               前往控制台
             </el-link>
@@ -67,7 +78,7 @@
           </span>
         </div>
       </div>
-      <div>
+      <div v-if="taskList.length > 0">
         <el-link type="info" @click="refresh" size="mini">刷新</el-link>
       </div>
     </div>
@@ -108,7 +119,11 @@ export default {
           title: this.$t("quickStart.quickItems[0].title"),
           subTitle: this.$t("quickStart.quickItems[0].subTitle"),
           value: 1,
-          fn: this.selectQuickStartType
+          fn: this.selectQuickStartType,
+          extra: {
+            title: "查看历史安装任务",
+            fn: this.selectQuickStartType
+          }
         },
         {
           title: this.$t("quickStart.quickItems[1].title"),
@@ -190,6 +205,10 @@ export default {
           fn: this.selectHost
         };
       });
+
+      if (this.quickItems.length === 1) {
+        this.selectHost(this.quickItems[0].value);
+      }
     },
 
     // 选择主机

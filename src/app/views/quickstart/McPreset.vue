@@ -5,8 +5,9 @@
 <template>
   <div class="quick-container-install">
     <Panel style="width: 100%" v-if="!installView">
-      <template #title>预设服务器模板</template>
+      <template #title>预设安装模板</template>
       <template #default>
+        <p>节点 ID: {{ remoteUuid }}</p>
         <el-table
           :data="tableData"
           size="small"
@@ -34,7 +35,7 @@
           </el-table-column>
         </el-table>
 
-        <p>目标主机 ID: {{ remoteUuid }}</p>
+        <p>快速安装服务由 独醉科技 提供下载支持。</p>
       </template>
     </Panel>
 

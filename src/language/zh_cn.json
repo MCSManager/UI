@@ -888,7 +888,7 @@
         "subTitle": "我们将打开官方文档以帮助您获取更多有用信息"
       }
     ],
-    "whichServer": "你希望在哪台服务器上部署这台服务器？",
+    "whichServer": "请选择远程主机",
     "quickItems[0]": {
       "title": "创建 Minecraft 服务器"
     },
