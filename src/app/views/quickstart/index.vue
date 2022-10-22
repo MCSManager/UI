@@ -34,19 +34,32 @@
 
     <div v-if="taskList.length" class="task-container">
       <div>
-        <h4>这台主机下，您有正在进行的安装任务:</h4>
+        <h4>这台主机下的历史安装任务:</h4>
       </div>
       <div>
         <div class="task-btn" v-for="(item, index) in taskList" :key="index">
-          <el-link type="primary">
-            {{ index + 1 }}. {{ item.detail.instanceConfig.nickname }}
-          </el-link>
+          <span>
+            <el-link type="primary">
+              {{ index + 1 }}. {{ item.detail.instanceConfig.nickname }}
+            </el-link>
+            <el-link
+              type="info"
+              v-if="item.status === 0"
+              style="margin-left: 4px"
+              @click="toInstance(selectedHostUuid, item.detail.instanceConfig.instanceUuid)"
+            >
+              前往控制台
+            </el-link>
+          </span>
           <span style="margin-left: 8px">
             <span v-if="item.status === 0">
               <el-tag type="success" size="mini">安装完成</el-tag>
             </span>
             <span v-else-if="item.status === 1">
-              <el-tag type="primary" size="mini">安装中</el-tag>
+              <el-tag type="primary" size="mini">
+                <i class="el-icon-loading"></i>
+                安装中
+              </el-tag>
             </span>
             <span v-else>
               <el-tag type="danger" size="mini">安装失败</el-tag>
@@ -54,21 +67,28 @@
           </span>
         </div>
       </div>
+      <div>
+        <el-link type="info" @click="refresh" size="mini">刷新</el-link>
+      </div>
     </div>
   </div>
-  <McPreset :remote-uuid="selectedHostUuid" v-else-if="displayType === 2"></McPreset>
+  <McPreset
+    :task-id="taskDetailPageId"
+    :remote-uuid="selectedHostUuid"
+    v-else-if="displayType === 2"
+  ></McPreset>
 </template>
 
 <script>
 import QuickStartButton from "@/components/SelectBlock";
 import { request } from "@/app/service/protocol";
-import { API_SERVICE } from "../../service/common";
+import { API_INSTANCE_ASYNC_QUERY, API_SERVICE } from "../../service/common";
 import McPreset from "./McPreset";
 
 export default {
   // eslint-disable-next-line vue/no-unused-components
   components: { QuickStartButton, McPreset },
-  inject: ["appLoading"],
+  inject: ["app"],
   data: function () {
     return {
       loading: false,
@@ -78,6 +98,7 @@ export default {
       quickStartType: 0,
       selectedHostUuid: "",
       invTask: null,
+      taskDetailPageId: "",
       step: 0,
       isMC: false,
       // 已经在运行的任务列表
@@ -120,6 +141,11 @@ export default {
     };
   },
   async mounted() {
+    this.taskDetailPageId = this.$route.query.task_id;
+    this.selectedHostUuid = this.$route.query.remote_uuid;
+    if (this.taskDetailPageId) {
+      this.displayType = 2;
+    }
     await this.initRemoteHost();
   },
   unmounted() {
@@ -205,9 +231,14 @@ export default {
 
     async startQueryTasks() {
       await this.queryAllTaskStatus();
-      this.setTimeout(() => {
+      setTimeout(() => {
         this.queryAllTaskStatus();
       }, 3000);
+    },
+
+    refresh() {
+      this.queryAllTaskStatus();
+      this.$message({ message: this.$t("general.refreshFinish"), type: "success" });
     },
 
     async queryAllTaskStatus() {
@@ -229,64 +260,37 @@ export default {
       //     }
       //   }
       // ];
-      // const tasks = await request({
-      //   method: "POST",
-      //   url: API_INSTANCE_ASYNC_QUERY,
-      //   params: {
-      //     remote_uuid: this.selectedHostUuid,
-      //     uuid: "-",
-      //     task_name: "quick_install"
-      //   },
-      //   data: {}
-      // });
-      const tasks = [
-        {
-          taskId:
-            "QuickInstallTask-3ad03650f2ba4eadb11362867444cb4f-0acd53bb-15a1-445d-b9ed-31e6fb11d2f7",
-          status: 0,
-          detail: {
-            taskId:
-              "QuickInstallTask-3ad03650f2ba4eadb11362867444cb4f-0acd53bb-15a1-445d-b9ed-31e6fb11d2f7",
-            status: 1,
-            instanceUuid: "3ad03650f2ba4eadb11362867444cb4f",
-            instanceStatus: 1,
-            instanceConfig: {
-              nickname: "TSDSDSD"
-            }
-          }
+      const tasks = await request({
+        method: "POST",
+        url: API_INSTANCE_ASYNC_QUERY,
+        params: {
+          remote_uuid: this.selectedHostUuid,
+          uuid: "-",
+          task_name: "quick_install"
         },
-        {
-          taskId:
-            "QuickInstallTask-3ad03650f2ba4eadb11362867444cb4f-0acd53bb-15a1-445d-b9ed-31e6fb11d2f7",
-          status: 1,
-          detail: {
-            taskId:
-              "QuickInstallTask-3ad03650f2ba4eadb11362867444cb4f-0acd53bb-15a1-445d-b9ed-31e6fb11d2f7",
-            status: 1,
-            instanceUuid: "3ad03650f2ba4eadb11362867444cb4f",
-            instanceStatus: 0,
-            instanceConfig: {
-              nickname: "TDISHOIDSD"
-            }
-          }
-        },
-        {
-          taskId:
-            "QuickInstallTask-3ad03650f2ba4eadb11362867444cb4f-0acd53bb-15a1-445d-b9ed-31e6fb11d2f7",
-          status: -1,
-          detail: {
-            taskId:
-              "QuickInstallTask-3ad03650f2ba4eadb11362867444cb4f-0acd53bb-15a1-445d-b9ed-31e6fb11d2f7",
-            status: 1,
-            instanceUuid: "3ad03650f2ba4eadb11362867444cb4f",
-            instanceStatus: 0,
-            instanceConfig: {
-              nickname: "TDISHOIDSD"
-            }
-          }
-        }
-      ];
+        data: {}
+      });
       this.taskList = tasks;
+    },
+
+    toTaskDetail(item = {}) {
+      this.$router.push({
+        path: "/quickstart",
+        query: {
+          task_id: item.taskId,
+          remote_uuid: this.selectedHostUuid
+        }
+      });
+      setTimeout(() => {
+        window.location.reload();
+      }, 1000);
+    },
+
+    // 前往控制台
+    toInstance(remoteUuid, instanceUuid) {
+      this.$router.push({
+        path: `/terminal/${remoteUuid}/${instanceUuid}/`
+      });
     }
   }
 };
@@ -310,10 +314,6 @@ export default {
   margin-top: 30px;
   width: 300px;
   margin: auto;
-
-  .el-link {
-    font-size: 18px;
-  }
 }
 .task-btn {
   margin: 8px;

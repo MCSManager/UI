@@ -82,6 +82,10 @@ export default {
   props: {
     remoteUuid: {
       type: String
+    },
+    taskId: {
+      type: String,
+      default: ""
     }
   },
   data: function () {
@@ -115,6 +119,23 @@ export default {
       });
       this.tableData = data;
       this.requestLoading = false;
+
+      // 直接前往详情页
+      if (this.taskId) {
+        this.percentage = 50;
+        this.startDownloadTask();
+      }
+    },
+
+    startDownloadTask() {
+      if (this.intervalTask) clearInterval(this.intervalTask);
+      this.requestLoading = false;
+      this.installView = true;
+      this.queryStatus();
+      this.intervalTask = setInterval(() => {
+        if (this.percentage <= 90) this.percentage += 4;
+        this.queryStatus();
+      }, 3000);
     },
 
     // 开始安装
@@ -139,12 +160,7 @@ export default {
         }
       });
       this.requestLoading = false;
-
-      // 开始轮询
-      setInterval(() => {
-        if (this.percentage <= 90) this.percentage += 4;
-        this.queryStatus();
-      }, 3000);
+      this.startDownloadTask();
     },
 
     async queryStatus() {
@@ -182,6 +198,9 @@ export default {
   },
   mounted() {
     this.init();
+  },
+  unmounted() {
+    clearInterval(this.intervalTask);
   }
 };
 </script>
