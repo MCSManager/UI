@@ -32,10 +32,28 @@
       </el-row>
     </div>
 
-    <div v-if="step === 0" class="task-container">
-      <el-link type="primary" :underline="false">
-        查看正在进行的任务<i class="el-icon-right"></i>
-      </el-link>
+    <div v-if="taskList.length" class="task-container">
+      <div>
+        <h4>这台主机下，您有正在进行的安装任务:</h4>
+      </div>
+      <div>
+        <div class="task-btn" v-for="(item, index) in taskList" :key="index">
+          <el-link type="primary">
+            {{ index + 1 }}. {{ item.detail.instanceConfig.nickname }}
+          </el-link>
+          <span style="margin-left: 8px">
+            <span v-if="item.status === 0">
+              <el-tag type="success" size="mini">安装完成</el-tag>
+            </span>
+            <span v-else-if="item.status === 1">
+              <el-tag type="primary" size="mini">安装中</el-tag>
+            </span>
+            <span v-else>
+              <el-tag type="danger" size="mini">安装失败</el-tag>
+            </span>
+          </span>
+        </div>
+      </div>
     </div>
   </div>
   <McPreset :remote-uuid="selectedHostUuid" v-else-if="displayType === 2"></McPreset>
@@ -59,15 +77,11 @@ export default {
       remoteObjects: [],
       quickStartType: 0,
       selectedHostUuid: "",
+      invTask: null,
       step: 0,
       isMC: false,
       // 已经在运行的任务列表
-      taskList: [
-        {
-          id: 213213,
-          daemonUuid: "sad"
-        }
-      ],
+      taskList: [],
       quickItems: [
         {
           title: this.$t("quickStart.quickItems[0].title"),
@@ -91,14 +105,14 @@ export default {
 
       minecraftCreateMethod: [
         {
-          title: "一键快速开服（推荐初学者）",
-          subTitle: "适合初学者，通过预设模板快速帮助您部署和启动服务器！",
+          title: "一键快速开服（初次使用推荐）",
+          subTitle: "适合初学者，通过预设模板快速帮助您部署和启动服务器。",
           value: 1,
           fn: this.mcSelectCreateMethod
         },
         {
-          title: "自定义创建服务器",
-          subTitle: "适合初学者，快速帮助您部署和启动服务器！",
+          title: "普通流程创建服务器",
+          subTitle: "导入本地服务器，或自定义创建一个服务器。",
           value: 2,
           fn: this.mcSelectCreateMethod
         }
@@ -107,6 +121,9 @@ export default {
   },
   async mounted() {
     await this.initRemoteHost();
+  },
+  unmounted() {
+    clearInterval(this.invTask);
   },
   methods: {
     async initRemoteHost() {
@@ -158,6 +175,7 @@ export default {
       await this.startLoading();
       if (this.isMC) {
         this.quickItems = this.minecraftCreateMethod;
+        this.startQueryTasks();
       } else {
         this.$router.push({
           path: `/new_instance/${this.selectedHostUuid}`,
@@ -183,6 +201,92 @@ export default {
           }
         });
       }
+    },
+
+    async startQueryTasks() {
+      await this.queryAllTaskStatus();
+      this.setTimeout(() => {
+        this.queryAllTaskStatus();
+      }, 3000);
+    },
+
+    async queryAllTaskStatus() {
+      // Task Class
+      // [
+      //   {
+      //     taskId:
+      //       "QuickInstallTask-3ad03650f2ba4eadb11362867444cb4f-0acd53bb-15a1-445d-b9ed-31e6fb11d2f7",
+      //     status: 1,
+      //     detail: {
+      //       taskId:
+      //         "QuickInstallTask-3ad03650f2ba4eadb11362867444cb4f-0acd53bb-15a1-445d-b9ed-31e6fb11d2f7",
+      //       status: 1,
+      //       instanceUuid: "3ad03650f2ba4eadb11362867444cb4f",
+      //       instanceStatus: 0,
+      //       instanceConfig: {
+      //         nickname: "T"
+      //       }
+      //     }
+      //   }
+      // ];
+      // const tasks = await request({
+      //   method: "POST",
+      //   url: API_INSTANCE_ASYNC_QUERY,
+      //   params: {
+      //     remote_uuid: this.selectedHostUuid,
+      //     uuid: "-",
+      //     task_name: "quick_install"
+      //   },
+      //   data: {}
+      // });
+      const tasks = [
+        {
+          taskId:
+            "QuickInstallTask-3ad03650f2ba4eadb11362867444cb4f-0acd53bb-15a1-445d-b9ed-31e6fb11d2f7",
+          status: 0,
+          detail: {
+            taskId:
+              "QuickInstallTask-3ad03650f2ba4eadb11362867444cb4f-0acd53bb-15a1-445d-b9ed-31e6fb11d2f7",
+            status: 1,
+            instanceUuid: "3ad03650f2ba4eadb11362867444cb4f",
+            instanceStatus: 1,
+            instanceConfig: {
+              nickname: "TSDSDSD"
+            }
+          }
+        },
+        {
+          taskId:
+            "QuickInstallTask-3ad03650f2ba4eadb11362867444cb4f-0acd53bb-15a1-445d-b9ed-31e6fb11d2f7",
+          status: 1,
+          detail: {
+            taskId:
+              "QuickInstallTask-3ad03650f2ba4eadb11362867444cb4f-0acd53bb-15a1-445d-b9ed-31e6fb11d2f7",
+            status: 1,
+            instanceUuid: "3ad03650f2ba4eadb11362867444cb4f",
+            instanceStatus: 0,
+            instanceConfig: {
+              nickname: "TDISHOIDSD"
+            }
+          }
+        },
+        {
+          taskId:
+            "QuickInstallTask-3ad03650f2ba4eadb11362867444cb4f-0acd53bb-15a1-445d-b9ed-31e6fb11d2f7",
+          status: -1,
+          detail: {
+            taskId:
+              "QuickInstallTask-3ad03650f2ba4eadb11362867444cb4f-0acd53bb-15a1-445d-b9ed-31e6fb11d2f7",
+            status: 1,
+            instanceUuid: "3ad03650f2ba4eadb11362867444cb4f",
+            instanceStatus: 0,
+            instanceConfig: {
+              nickname: "TDISHOIDSD"
+            }
+          }
+        }
+      ];
+      this.taskList = tasks;
     }
   }
 };
@@ -202,11 +306,16 @@ export default {
   width: 100%;
 }
 .task-container {
-  text-align: center;
+  text-align: left;
   margin-top: 30px;
+  width: 300px;
+  margin: auto;
 
   .el-link {
     font-size: 18px;
   }
+}
+.task-btn {
+  margin: 8px;
 }
 </style>
