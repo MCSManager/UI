@@ -4,7 +4,7 @@
 
 <template>
   <Dialog v-model="v" :cancel="close">
-    <template #title>联网方式</template>
+    <template #title>联机模式</template>
     <template #default>
       <div class="wrapper">
         <el-row :gutter="20" v-if="viewType === 0">
@@ -54,7 +54,30 @@
             IP 地址：
             <span class="color-green">-</span>
           </p>
-          <el-button type="primary" size="small" @click="startHiPer">立刻接入</el-button>
+          <div class="row-mb">
+            <div class="sub-title">
+              <div class="sub-title-title require-field">HiPer 索引码：</div>
+              <div class="sub-title-info">
+                索引码是接入 HiPer 网络的必备钥匙，您可以前往
+                <a href="" target="_blank"> 这里 </a>
+                获取
+              </div>
+            </div>
+            <el-input v-model="indexCode" placeholder="请输入索引码" size="small" clearable>
+            </el-input>
+          </div>
+
+          <div style="display: flex; justify-content: space-between">
+            <el-button type="primary" size="small" @click="startHiPer">启用</el-button>
+            <el-link
+              type="primary"
+              :underline="false"
+              href="https://docs.mcsmanager.com/#/"
+              target="_blank"
+            >
+              使用说明
+            </el-link>
+          </div>
         </div>
       </div>
     </template>
@@ -75,7 +98,8 @@ export default {
   data() {
     return {
       v: false,
-      viewType: 0
+      viewType: 0,
+      indexCode: ""
     };
   },
   watch: {
