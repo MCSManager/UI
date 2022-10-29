@@ -47,7 +47,7 @@
         </div>
         <div class="task-btn" v-for="(item, index) in taskList" :key="index">
           <span>
-            <el-link type="primary">
+            <el-link type="primary" v-if="item.detail && item.detail.instanceConfig">
               {{ index + 1 }}. {{ item.detail.instanceConfig.nickname }}
             </el-link>
             <el-link
