@@ -87,19 +87,26 @@
 <script>
 import Dialog from "@/components/Dialog";
 import SelectBlock from "@/components/SelectBlock";
+import { API_INSTANCE_ASYNC_TASK } from "../../service/common";
+import { request } from "../../service/protocol";
 export default {
   components: { Dialog, SelectBlock },
   props: {
     visible: {
       type: Boolean,
       default: false
+    },
+    daemonUuid: {
+      type: String,
+      default: ""
     }
   },
   data() {
     return {
       v: false,
       viewType: 0,
-      indexCode: ""
+      indexCode: "",
+      hiperTaskInfo: {}
     };
   },
   watch: {
@@ -121,7 +128,21 @@ export default {
     select(type) {
       this.viewType = type;
     },
-    startHiPer() {}
+    async startHiPer() {
+      this.hiperTaskInfo = await request({
+        method: "POST",
+        url: API_INSTANCE_ASYNC_TASK,
+        params: {
+          remote_uuid: this.daemonUuid,
+          uuid: "-",
+          task_name: "hiper"
+        },
+        data: {
+          indexCode: this.indexCode
+        }
+      });
+      console.log("this.hiperTaskInfo", this.hiperTaskInfo);
+    }
   }
 };
 </script>

@@ -520,7 +520,7 @@
     >
     </TermSetting>
 
-    <NetworkTip v-model:visible="networkTip"></NetworkTip>
+    <NetworkTip v-model:visible="networkTip" :daemonUuid="serviceUuid"></NetworkTip>
   </div>
 </template>
 
