@@ -60,9 +60,9 @@
             <span class="color-red" v-if="taskInfo.status == -1">启动错误</span>
           </p>
           <!-- <p>任务 ID: {{ taskInfo.taskId }}</p> -->
-          <p>
+          <p v-if="taskInfo.detail && taskInfo.detail.ip">
             IP 地址：
-            <span class="color-green">-</span>
+            <span class="color-green">{{ taskInfo.detail.ip }}</span>
           </p>
           <div class="row-mb">
             <div class="sub-title">
@@ -127,7 +127,8 @@ export default {
       indexCode: "",
       taskInfo: {
         status: 0,
-        taskId: "--"
+        taskId: "--",
+        ip: ""
       },
       timeTask: null
     };
@@ -142,15 +143,18 @@ export default {
   watch: {
     visible(n) {
       this.v = n;
-      this.init();
+      if (n) this.init();
     }
   },
 
-  unmounted() {
-    if (this.timeTask) clearInterval(this.timeTask);
-  },
+  unmounted() {},
   methods: {
+    clearIntervalTask() {
+      if (this.timeTask) clearInterval(this.timeTask);
+    },
     init() {
+      this.clearIntervalTask();
+      this.queryStatus();
       this.timeTask = setInterval(() => {
         this.queryStatus();
       }, 2500);
@@ -160,7 +164,7 @@ export default {
     },
     close() {
       this.$emit("update:visible", false);
-      if (this.timeTask) clearInterval(this.timeTask);
+      this.clearIntervalTask();
       this.viewType = 0;
     },
     select(type) {

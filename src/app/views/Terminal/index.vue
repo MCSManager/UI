@@ -626,7 +626,9 @@ export default {
     // Request data source (Websocket)
     async renderFromSocket() {
       this.sendResize(this.terminalWidth, this.terminalHeight);
-      this.socket.emit("stream/detail", {});
+      if (this.socket) {
+        this.socket.emit("stream/detail", {});
+      }
     },
     // establish a connection with the daemon
     async setUpWebsocket() {
