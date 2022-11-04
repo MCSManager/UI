@@ -236,6 +236,15 @@ Copyright (C) 2022 MCSManager <mcsmanager-dev@outlook.com>
                   >
                   </el-date-picker>
                 </el-col>
+
+                <el-col :lg="8" class="row-mt" :offset="0" v-iszh>
+                  <div class="sub-title">
+                    <div class="sub-title-title">联机方式</div>
+                    <div class="sub-title-info">了解如何让其他人连接到应用程序服务</div>
+                  </div>
+                  <el-button plain size="big" @click="openNetwork">查看</el-button>
+                </el-col>
+
                 <el-col :lg="24" class="row-mt">
                   <div class="sub-title">
                     <div class="sub-title-title require-field">
@@ -473,14 +482,14 @@ Copyright (C) 2022 MCSManager <mcsmanager-dev@outlook.com>
           <el-row :gutter="20" class="row-mt">
             <el-col :md="24" style="text-align: right">
               <ItemGroup>
-                <el-button size="small" @click="toConsole">{{
+                <el-button size="medium" @click="toConsole">{{
                   $t("instancesDetail.console")
                 }}</el-button>
-                <el-button size="small" @click="toFileManager">{{
+                <el-button @click="toFileManager">{{
                   $t("instancesDetail.fileManager")
                 }}</el-button>
-                <el-button size="small" @click="back">{{ $t("instancesDetail.back") }}</el-button>
-                <el-button type="success" size="small" @click="saveConfig">{{
+                <el-button @click="back">{{ $t("instancesDetail.back") }}</el-button>
+                <el-button type="success" @click="saveConfig">{{
                   $t("instancesDetail.saveSet")
                 }}</el-button>
               </ItemGroup>
@@ -489,6 +498,8 @@ Copyright (C) 2022 MCSManager <mcsmanager-dev@outlook.com>
         </div>
       </template>
     </Panel>
+
+    <NetworkTip v-model:visible="networkTip" :daemonUuid="serviceUuid"></NetworkTip>
 
     <!-- 命令助手 -->
     <CommandAssist v-model="commandAssistPanel" :result="commandAssistCallback"></CommandAssist>
@@ -510,6 +521,7 @@ Copyright (C) 2022 MCSManager <mcsmanager-dev@outlook.com>
 </template>
 
 <script>
+import NetworkTip from "../../components/NetworkTip";
 import { API_IMAGES, API_INSTANCE, API_NETWORK_MODES, TERMINAL_CODE } from "../service/common";
 import { processTypeList, statusCodeToText } from "../service/instance_tools";
 import Panel from "../../components/Panel";
@@ -521,7 +533,7 @@ import { INSTANCE_TYPE_DEF_CONFIG } from "../service/instance_type";
 // import qs from "qs";
 
 export default {
-  components: { Panel, CommandAssist, DockerVariableSetup },
+  components: { Panel, CommandAssist, DockerVariableSetup, NetworkTip },
   data() {
     return {
       serviceUuid: this.$route.params.serviceUuid,
@@ -532,7 +544,7 @@ export default {
       typeList: processTypeList(),
       display: false,
       loading: true,
-
+      networkTip: false,
       networkModes: [],
       imageListLoading: false,
       networkModeListLoading: false,
@@ -578,6 +590,9 @@ export default {
   methods: {
     back() {
       router.go(-1);
+    },
+    openNetwork() {
+      this.networkTip = true;
     },
     instanceTypeChange(type) {
       const config = INSTANCE_TYPE_DEF_CONFIG[type];
