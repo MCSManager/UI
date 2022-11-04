@@ -73,9 +73,9 @@
         <div class="display-center">
           <div style="margin: 16px">
             <p class="tip-title">{{ $t("views.quickstart_McPreset.010") }}</p>
-            <el-button type="primary" size="default" @click="toInstance">{{
-              $t("views.quickstart_McPreset.011")
-            }}</el-button>
+            <el-button type="primary" size="default" @click="toInstance">
+              {{ $t("views.quickstart_McPreset.011") }}
+            </el-button>
           </div>
         </div>
       </template>
@@ -156,6 +156,7 @@ export default {
 
     // Start install
     async handleSelectTemplate(index, row) {
+      const { value: instanceName } = await this.$prompt("请输入新建服务器的名字：");
       this.requestLoading = true;
       this.installView = true;
       this.isInstalled = false;
@@ -170,7 +171,7 @@ export default {
         },
         data: {
           time: new Date().getTime(),
-          newInstanceName: window.$t("views.quickstart_McPreset.012"),
+          newInstanceName: instanceName,
           targetLink: row.targetLink
         }
       });

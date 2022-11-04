@@ -55,8 +55,9 @@
               v-if="item.status === 0"
               style="margin-left: 4px"
               @click="toInstance(selectedHostUuid, item.detail.instanceUuid)"
-              >{{ $t("views.quickstart_index.003") }}</el-link
             >
+              {{ $t("views.quickstart_index.003") }}
+            </el-link>
           </span>
           <span style="margin-left: 8px">
             <span v-if="item.status === 0">
@@ -64,8 +65,8 @@
             </span>
             <span v-else-if="item.status === 1">
               <el-tag type="primary" size="mini">
-                <i class="el-icon-loading"></i>{{ $t("CommonText.002") }}</el-tag
-              >
+                <i class="el-icon-loading"></i>&nbsp;{{ $t("CommonText.002") }}
+              </el-tag>
             </span>
             <span v-else>
               <el-tag type="danger" size="mini">{{ $t("CommonText.003") }}</el-tag>
