@@ -20,7 +20,7 @@ git clone https://github.com/MCSManager/UI.git
 cd UI
 npm install
 npm run serve
-# Visit http://localhost:8080/ to preview the interface
+# Visit http://localhost:8080/
 ````
 
 > The panel-side projects need to run at the same time to provide back-end interface capabilities. By default, all requests are forwarded to port 23333.
