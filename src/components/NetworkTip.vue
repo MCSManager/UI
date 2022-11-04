@@ -4,14 +4,14 @@
 
 <template>
   <Dialog v-model="v" :cancel="close">
-    <template #title>联机模式</template>
+    <template #title>联机方式</template>
     <template #default>
       <div class="wrapper">
         <el-row :gutter="20" v-if="viewType === 0">
           <el-col :span="12" :offset="0">
             <SelectBlock style="height: 140px" @click="select(1)">
               <template #title>
-                <p class="sub-title-title">公网 IP 联机</p>
+                <p class="sub-title-title">服务器公网联机方案</p>
               </template>
               <template #info>
                 <p class="sub-title-info">您必须拥有一台公网IP的服务器，才可以使用此方式联网。</p>
@@ -21,20 +21,27 @@
           <el-col :span="12" :offset="0">
             <SelectBlock style="height: 140px" @click="select(2)">
               <template #title>
-                <p class="sub-title-title">使用 HiPer 提供的虚拟网络联机</p>
+                <p class="sub-title-title">家庭网络联机方案</p>
               </template>
               <template #info>
-                <p class="sub-title-info">适用于家庭宽带，动态公网IP，以及容易遭受攻击的用户。</p>
+                <p class="sub-title-info">
+                  使用由第三方提供的分布式虚拟局域网服务进行联机，实现家庭网络接入。
+                </p>
               </template>
             </SelectBlock>
           </el-col>
         </el-row>
 
         <div v-if="viewType === 1">
+          <div class="flex flex-space-between flex-space-center">
+            <div style="margin: 24px 0px 36px 0px">
+              <i class="el-icon-share" style="font-size: 72px"></i>
+            </div>
+          </div>
           <p class="sub-title-title">
             当您选择使用公网IP时，MCSManager
             无需进行任何操作，您只需使用公网IP+您的软件默认端口号即可让其他人连接您的服务器，列如
-            40.1.2.3:25565。
+            43.XXX.XXX.213:25565。
           </p>
         </div>
 
@@ -52,7 +59,7 @@
             <span class="color-green" v-if="taskInfo.status == 1">运行中</span>
             <span class="color-red" v-if="taskInfo.status == -1">启动错误</span>
           </p>
-          <p>任务 ID: {{ taskInfo.taskId }}</p>
+          <!-- <p>任务 ID: {{ taskInfo.taskId }}</p> -->
           <p>
             IP 地址：
             <span class="color-green">-</span>
@@ -99,8 +106,8 @@ import {
   API_INSTANCE_ASYNC_QUERY,
   API_INSTANCE_ASYNC_STOP,
   API_INSTANCE_ASYNC_TASK
-} from "../../service/common";
-import { request } from "../../service/protocol";
+} from "@/app/service/common";
+import { request } from "@/app/service/protocol";
 export default {
   components: { Dialog, SelectBlock },
   props: {
@@ -139,6 +146,9 @@ export default {
     }
   },
 
+  unmounted() {
+    if (this.timeTask) clearInterval(this.timeTask);
+  },
   methods: {
     init() {
       this.timeTask = setInterval(() => {
@@ -150,6 +160,7 @@ export default {
     },
     close() {
       this.$emit("update:visible", false);
+      if (this.timeTask) clearInterval(this.timeTask);
       this.viewType = 0;
     },
     select(type) {

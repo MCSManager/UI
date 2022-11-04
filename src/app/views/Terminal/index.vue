@@ -209,17 +209,6 @@
                   {{ $t("instancesDetail.fileManager") }}
                 </el-button>
               </el-col>
-              <el-col :lg="24" :offset="0" class="row-mb">
-                <el-button
-                  :disabled="!available"
-                  icon="el-icon-folder-opened"
-                  style="width: 100%"
-                  size="small"
-                  @click="networkTip = true"
-                >
-                  {{ $t("instancesDetail.networkTip") }}
-                </el-button>
-              </el-col>
               <el-col :lg="24" :offset="0" class="row-mb" v-iszh>
                 <el-button
                   :disabled="!instanceInfo.config.type"
@@ -519,8 +508,6 @@
       :instanceUuid="instanceUuid"
     >
     </TermSetting>
-
-    <NetworkTip v-model:visible="networkTip" :daemonUuid="serviceUuid"></NetworkTip>
   </div>
 </template>
 
@@ -553,11 +540,10 @@ import { statusCodeToText, typeTextToReadableText } from "../../service/instance
 import { initTerminalWindow, textToTermText } from "../../service/term";
 import { getPlayersOption } from "../../service/chart_option";
 import TermSetting from "./TermSetting";
-import NetworkTip from "./NetworkTip";
 
 export default {
   // eslint-disable-next-line vue/no-unused-components
-  components: { Panel, LineInfo, LineButton, Dialog, Logo, TermSetting, NetworkTip },
+  components: { Panel, LineInfo, LineButton, Dialog, Logo, TermSetting },
   data: function () {
     return {
       input1: "",
@@ -570,7 +556,6 @@ export default {
       command: "",
       available: false,
       socket: null,
-      networkTip: false,
       instanceInfo: {
         config: {}
       },
