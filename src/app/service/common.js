@@ -66,6 +66,10 @@ export const API_PANEL_INSTALL = `${API_URL}/api/auth/install`;
 
 export const API_GET_QUICK_INSTALL_LIST_ADDR = `${API_URL}/api/instance/quick_install_list`;
 
+export const API_FORWARD_REQUEST = `${API_URL}/api/instance/forward`;
+
+export const QUERY_PUBLIC_IP = "http://statistics.mcsmanager.com/ip"
+
 export const TERMINAL_CODE = [
   { label: "UTF-8", value: "UTF-8" },
   { label: "GBK", value: "GBK" },
