@@ -508,6 +508,8 @@
       :instanceUuid="instanceUuid"
     >
     </TermSetting>
+
+    <NetworkTip v-model:visible="visibleNetworkTip" :daemonUuid="serviceUuid"></NetworkTip>
   </div>
 </template>
 
@@ -540,10 +542,10 @@ import { statusCodeToText, typeTextToReadableText } from "../../service/instance
 import { initTerminalWindow, textToTermText } from "../../service/term";
 import { getPlayersOption } from "../../service/chart_option";
 import TermSetting from "./TermSetting";
-
+import NetworkTip from "@/components/NetworkTip";
 export default {
   // eslint-disable-next-line vue/no-unused-components
-  components: { Panel, LineInfo, LineButton, Dialog, Logo, TermSetting },
+  components: { Panel, LineInfo, LineButton, Dialog, Logo, TermSetting, NetworkTip },
   data: function () {
     return {
       input1: "",
@@ -553,6 +555,7 @@ export default {
       term: null,
       terminalWidth: 0,
       terminalHeight: 0,
+      visibleNetworkTip: false,
       command: "",
       available: false,
       socket: null,
@@ -1067,6 +1070,8 @@ export default {
   },
   async mounted() {
     try {
+      this.visibleNetworkTip = this.$route.query.network_tip ? true : false;
+
       // Initialize web local storage
       this.initStorage();
 

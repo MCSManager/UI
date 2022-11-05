@@ -295,7 +295,10 @@ export default {
     // 前往控制台
     toInstance(remoteUuid, instanceUuid) {
       this.$router.push({
-        path: `/terminal/${remoteUuid}/${instanceUuid}/`
+        path: `/terminal/${remoteUuid}/${instanceUuid}/`,
+        query: {
+          network_tip: 1
+        }
       });
     }
   }
