@@ -1,7 +1,3 @@
-<!--
-  Copyright (C) 2022 MCSManager <mcsmanager-dev@outlook.com>
--->
-
 <template>
   <Panel>
     <template #title>{{ $t("settings.setOperate") }}</template>
@@ -12,7 +8,7 @@
             <el-button type="success" size="small" @click="updateSettings">{{
               $t("settings.updateSet")
             }}</el-button>
-            <el-button type="" size="small" @click="refresh">{{ $t("general.refresh") }}</el-button>
+            <el-button type size="small" @click="refresh">{{ $t("general.refresh") }}</el-button>
           </ItemGroup>
         </div>
         <span class="color-gray hidden-md-and-down"
@@ -41,7 +37,7 @@
               </div>
               <el-select v-model="settings.language" :placeholder="$t('general.pleaseSelect')">
                 <el-option label="English" value="en_us"></el-option>
-                <el-option label="简体中文" value="zh_cn"></el-option>
+                <el-option value="zh_cn" :label="$t('CommonText.011')"></el-option>
                 <!-- <el-option label="Japanese" value="jp" disabled></el-option> -->
               </el-select>
             </div>
@@ -76,6 +72,14 @@
               </div>
               <el-input :placeholder="$t('settings.inputCopy')" v-model="settings.loginInfo">
               </el-input>
+            </div>
+
+            <div class="config-item" v-iszh>
+              <div class="sub-title">
+                <p class="sub-title-title">{{ $t("views.Settings.001") }}</p>
+                <p class="sub-title-info">{{ $t("views.Settings.002") }}</p>
+              </div>
+              <el-input placeholder="https://..." v-model="settings.quickInstallAddr"> </el-input>
             </div>
           </el-col>
 
@@ -203,22 +207,15 @@
   </div>
 </template>
 
-<style scoped>
-.selectedForwardMode {
-  border: 1px solid #0450ff;
-  color: #409eff;
-}
-</style>
-
 <script>
 import Panel from "../../components/Panel";
-import SystemIndex from "../../components/SystemImage.vue";
 import { API_SETTINGS } from "../service/common";
 import { request } from "../service/protocol";
-import SelectBlock from "../../components/SelectBlock";
 export default {
   // eslint-disable-next-line vue/no-unused-components
-  components: { Panel, SystemIndex, SelectBlock },
+  components: {
+    Panel
+  },
   data: function () {
     return {
       settings: {},
@@ -228,14 +225,19 @@ export default {
   methods: {
     async refresh() {
       await this.render();
-      this.$message({ message: this.$t("general.refreshFinish"), type: "success" });
+      this.$message({
+        message: this.$t("general.refreshFinish"),
+        type: "success"
+      });
     },
+
     async render() {
       this.settings = await request({
         method: "GET",
         url: API_SETTINGS
       });
     },
+
     async updateSettings() {
       try {
         await request({
@@ -244,14 +246,22 @@ export default {
           data: this.settings
         });
         window.location.reload();
-        this.$message({ message: this.$t("settings.settingUpdate"), type: "success" });
+        this.$message({
+          message: this.$t("settings.settingUpdate"),
+          type: "success"
+        });
       } catch (error) {
-        this.$message({ message: error, type: "error" });
+        this.$message({
+          message: error,
+          type: "error"
+        });
       }
     },
+
     loadSponsorList() {
       if (window.sponsorList) {
         const arr = window.sponsorList();
+
         for (const i in arr) {
           for (const j in arr) {
             if (arr[i].price > arr[j].price) {
@@ -261,20 +271,32 @@ export default {
             }
           }
         }
+
         this.sponsorList = arr.slice(0, 40);
       } else {
         this.sponsorList = null;
       }
-    }
-    //async changeForwardType(v) {
+    } //async changeForwardType(v) {
     //}
   },
+
   async mounted() {
     await this.render();
     setTimeout(this.loadSponsorList, 3000);
   }
 };
 </script>
+
+<!--
+  Copyright (C) 2022 MCSManager <mcsmanager-dev@outlook.com>
+-->
+
+<style scoped>
+.selectedForwardMode {
+  border: 1px solid #0450ff;
+  color: #409eff;
+}
+</style>
 
 <style scoped>
 .system-index-block {
