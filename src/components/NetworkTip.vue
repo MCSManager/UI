@@ -1,32 +1,29 @@
 <!--
   Copyright (C) 2022 MCSManager <mcsmanager-dev@outlook.com>
 -->
-
 <template>
   <Dialog v-model="v" :cancel="close">
-    <template #title>联机方式</template>
+    <template #title>{{ $t("CommonText.012") }} </template>
     <template #default>
       <div class="wrapper">
         <el-row :gutter="20" v-if="viewType === 0">
           <el-col :span="12" :offset="0">
             <SelectBlock style="height: 140px" @click="select(1)">
               <template #title>
-                <p class="sub-title-title">服务器公网联机方案</p>
+                <p class="sub-title-title">{{ $t("components.NetworkTip.001") }}</p>
               </template>
               <template #info>
-                <p class="sub-title-info">您必须拥有一台公网IP的服务器，才可以使用此方式联网。</p>
+                <p class="sub-title-info">{{ $t("components.NetworkTip.002") }}</p>
               </template>
             </SelectBlock>
           </el-col>
           <el-col :span="12" :offset="0">
             <SelectBlock style="height: 140px" @click="select(2)">
               <template #title>
-                <p class="sub-title-title">家庭网络联机方案</p>
+                <p class="sub-title-title">{{ $t("components.NetworkTip.003") }}</p>
               </template>
               <template #info>
-                <p class="sub-title-info">
-                  使用由第三方提供的分布式虚拟局域网服务进行联机，实现家庭网络接入。
-                </p>
+                <p class="sub-title-info">{{ $t("components.NetworkTip.004") }}</p>
               </template>
             </SelectBlock>
           </el-col>
@@ -37,47 +34,44 @@
             <div style="margin: 24px 0px 24px 0px; text-align: center">
               <i class="el-icon-share" style="font-size: 72px; margin-bottom: 12px"></i>
               <div>
-                <p class="sub-title color-green" v-if="ipv4">服务器 IP 地址：{{ ipv4 }}</p>
+                <p class="sub-title color-green" v-if="ipv4">
+                  {{ $t("components.NetworkTip.005", [ipv4]) }}
+                </p>
               </div>
             </div>
           </div>
 
           <p class="sub-title">
-            当您选择使用公网IP时，MCSManager 无需进行任何操作，您只需使用公网 IP
-            地址和您的软件默认端口号即可让其他人连接您的服务器，列如
-            {{ ipv4 ? ipv4 : "8.8.8.8" }}:25565。
+            {{ $t("components.NetworkTip.006", [ipv4 ? ipv4 : "8.8.8.8"]) }}
           </p>
 
-          <p class="sub-title">注意：此处获取的公网 IP 不一定正确。</p>
+          <p class="sub-title">{{ $t("components.NetworkTip.007") }}</p>
         </div>
 
         <div v-if="viewType === 2">
-          <p class="sub-title-title row-mb">
-            通过 HiPer 使您与主流的 Minecraft 启动器进行安全、快速、稳定的多人联机。
-          </p>
-          <p class="sub-title-title">
-            对于中国大陆用户，最新版本的 HMCL，PCL 启动器均已支持 HiPer
-            联机，您与朋友们可以使用最新版本的多人联机功能加入服务器。
-          </p>
+          <p class="sub-title-title row-mb">{{ $t("components.NetworkTip.008") }}</p>
+          <p class="sub-title-title">{{ $t("components.NetworkTip.009") }}</p>
           <p>
-            状态：
-            <span class="color-gray" v-if="taskInfo.status == 0">未启用</span>
-            <span class="color-green" v-if="taskInfo.status == 1">运行中</span>
-            <span class="color-red" v-if="taskInfo.status == -1">启动错误</span>
+            {{ $t("CommonText.013") }}
+            <span class="color-gray" v-if="taskInfo.status == 0">{{ $t("CommonText.014") }} </span>
+            <span class="color-green" v-if="taskInfo.status == 1">{{ $t("CommonText.015") }} </span>
+            <span class="color-red" v-if="taskInfo.status == -1">{{ $t("CommonText.016") }} </span>
           </p>
-          <!-- <p>任务 ID: {{ taskInfo.taskId }}</p> -->
           <p v-if="taskInfo.detail && taskInfo.detail.ip">
-            IP 地址：
-            <span class="color-green">{{ taskInfo.detail.ip }}</span>
+            {{ $t("components.NetworkTip.010") }}
+            <span class="color-green">{{ taskInfo.detail.ip }} </span>
           </p>
           <div class="row-mb">
             <div class="sub-title">
-              <div class="sub-title-title require-field">HiPer 索引码：</div>
-              <div class="sub-title-info">
-                索引码是接入 HiPer 网络的必备钥匙，您可以点击底部的“获取索引码”来获得。
-              </div>
+              <div class="sub-title-title require-field">{{ $t("components.NetworkTip.011") }}</div>
+              <div class="sub-title-info">{{ $t("components.NetworkTip.012") }}</div>
             </div>
-            <el-input v-model="indexCode" placeholder="请输入索引码" size="small" clearable>
+            <el-input
+              v-model="indexCode"
+              size="small"
+              clearable
+              :placeholder="$t('components.NetworkTip.013')"
+            >
             </el-input>
           </div>
 
@@ -85,10 +79,10 @@
             <div>
               <ItemGroup>
                 <el-button type="primary" size="small" @click="startHiPer" v-if="!isOpen">
-                  启用
+                  {{ $t("CommonText.017") }}
                 </el-button>
                 <el-button type="danger" size="small" @click="stopHiPer" v-if="isOpen">
-                  停止
+                  {{ $t("CommonText.018") }}
                 </el-button>
 
                 <el-link
@@ -97,7 +91,7 @@
                   href="https://docs.mcsmanager.com/#/"
                   target="_blank"
                 >
-                  获取索引码
+                  {{ $t("components.NetworkTip.014") }}
                 </el-link>
               </ItemGroup>
             </div>
@@ -107,7 +101,7 @@
               href="https://docs.mcsmanager.com/#/"
               target="_blank"
             >
-              使用教程
+              {{ $t("CommonText.019") }}
             </el-link>
           </div>
         </div>
@@ -127,7 +121,10 @@ import {
 import { request } from "@/app/service/protocol";
 import { API_FORWARD_REQUEST, QUERY_PUBLIC_IP } from "../app/service/common";
 export default {
-  components: { Dialog, SelectBlock },
+  components: {
+    Dialog,
+    SelectBlock
+  },
   props: {
     visible: {
       type: Boolean,
@@ -138,6 +135,7 @@ export default {
       default: ""
     }
   },
+
   data() {
     return {
       v: false,
@@ -158,7 +156,6 @@ export default {
       return this.taskInfo.status == 1;
     }
   },
-
   watch: {
     visible(n) {
       this.v = n;
@@ -167,6 +164,7 @@ export default {
   },
 
   unmounted() {},
+
   methods: {
     async getPublicIP() {
       const data = await request({
@@ -178,9 +176,11 @@ export default {
       });
       this.ipv4 = data.ipv4;
     },
+
     clearIntervalTask() {
       if (this.timeTask) clearInterval(this.timeTask);
     },
+
     init() {
       this.clearIntervalTask();
       this.queryStatus();
@@ -189,24 +189,29 @@ export default {
         this.queryStatus();
       }, 2500);
     },
+
     show() {
       this.$emit("update:visible", true);
     },
+
     close() {
       this.$emit("update:visible", false);
       this.clearIntervalTask();
       this.viewType = 0;
     },
+
     select(type) {
       this.viewType = type;
     },
+
     async startHiPer() {
       if (!this.indexCode) {
         return this.$message({
-          message: "请填写索引码",
+          message: window.$t("components.NetworkTip.015"),
           type: "error"
         });
       }
+
       try {
         await request({
           method: "POST",
@@ -220,7 +225,10 @@ export default {
             indexCode: this.indexCode
           }
         });
-        this.$message({ message: this.$t("general.success"), type: "success" });
+        this.$message({
+          message: this.$t("general.success"),
+          type: "success"
+        });
       } catch (error) {
         this.$message({
           message: `${this.$t("general.error")}: ${error.message}`,
@@ -228,6 +236,7 @@ export default {
         });
       }
     },
+
     async stopHiPer() {
       try {
         await request({
@@ -242,7 +251,10 @@ export default {
             taskId: this.taskInfo.taskId
           }
         });
-        this.$message({ message: this.$t("general.success"), type: "success" });
+        this.$message({
+          message: this.$t("general.success"),
+          type: "success"
+        });
       } catch (error) {
         this.$message({
           message: `${this.$t("general.error")}: ${error.message}`,

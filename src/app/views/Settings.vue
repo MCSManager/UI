@@ -1,3 +1,7 @@
+<!--
+  Copyright (C) 2022 MCSManager <mcsmanager-dev@outlook.com>
+-->
+
 <template>
   <Panel>
     <template #title>{{ $t("settings.setOperate") }}</template>
@@ -286,10 +290,6 @@ export default {
   }
 };
 </script>
-
-<!--
-  Copyright (C) 2022 MCSManager <mcsmanager-dev@outlook.com>
--->
 
 <style scoped>
 .selectedForwardMode {
