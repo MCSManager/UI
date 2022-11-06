@@ -17,7 +17,8 @@ import App from "./App.vue";
 import "./service/protocol";
 import directive from "./directive"
 
-
+// PWA
+import '../registerServiceWorker'
 
 const app = createApp(App);
 
