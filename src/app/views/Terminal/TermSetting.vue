@@ -22,31 +22,40 @@
             </div>
           </div>
 
-          <div class="row-mt">
-            <div class="sub-title">
-              <p class="sub-title-title">{{ $t("termSet.ptySize") }}</p>
-              <p class="sub-title-info">
-                {{ $t("termSet.ptySizeInfo") }}
-                <br />
-                {{ $t("termSet.ifHaveProblems") }}
-              </p>
-            </div>
+          <div>
             <div class="row-mt">
-              <span>{{ $t("termSet.col") }}</span>
-              <el-input
-                v-model="options.ptyWindowCol"
-                :disabled="!options.pty"
-                size="small"
-                style="width: 80px"
-              ></el-input>
-              &nbsp;
-              <span>{{ $t("termSet.line") }}</span>
-              <el-input
-                :disabled="!options.pty"
-                v-model="options.ptyWindowRow"
-                size="small"
-                style="width: 80px"
-              ></el-input>
+              <div class="sub-title">
+                <p class="sub-title-title">{{ $t("termSet.ptySize") }}</p>
+                <p class="sub-title-info">
+                  {{ $t("termSet.ptySizeInfo") }}
+                  <br />
+                  {{ $t("termSet.ifHaveProblems") }}
+                </p>
+              </div>
+              <div class="row-mt">
+                <span>{{ $t("termSet.col") }}</span>
+                <el-input v-model="options.ptyWindowCol" :disabled="!options.pty" size="small" style="width: 80px">
+                </el-input>
+                &nbsp;
+                <span>{{ $t("termSet.line") }}</span>
+                <el-input :disabled="!options.pty" v-model="options.ptyWindowRow" size="small" style="width: 80px">
+                </el-input>
+              </div>
+            </div>
+          </div>
+
+          <div>
+            <div class="row-mt">
+              <div class="sub-title">
+                <p class="sub-title-title">终端字体大小</p>
+                <p class="sub-title-info">默认13px，更改后刷新网页生效</p>
+              </div>
+              <div class="row-mt">
+                <el-input v-model="options.fontSize" size="small" style="width: 80px">
+                </el-input>
+                &nbsp;
+                <span>px</span>
+              </div>
             </div>
           </div>
 
@@ -85,12 +94,8 @@
               </p>
             </div>
             <div class="row-mt">
-              <el-select
-                v-model="options.crlf"
-                :placeholder="$t('general.pleaseSelect')"
-                size="small"
-                style="width: 220px"
-              >
+              <el-select v-model="options.crlf" :placeholder="$t('general.pleaseSelect')" size="small"
+                style="width: 220px">
                 <el-option :label="$t('termSet.newline')" :value="1"></el-option>
                 <el-option :label="$t('termSet.EnterNewline')" :value="2"></el-option>
               </el-select>
@@ -104,50 +109,25 @@
               </p>
             </div>
             <div class="row-mt" style="display: flex">
-              <el-select
-                v-model="options.oe"
-                filterable
-                allow-create
-                size="small"
-                default-first-option
-                :placeholder="$t('instancesDetail.oe')"
-                style="width: 220px"
-              >
-                <el-option
-                  v-for="item in TERMINAL_CODE"
-                  :key="item.value"
-                  :label="item.label"
-                  :value="item.value"
-                >
+              <el-select v-model="options.oe" filterable allow-create size="small" default-first-option
+                :placeholder="$t('instancesDetail.oe')" style="width: 220px">
+                <el-option v-for="item in TERMINAL_CODE" :key="item.value" :label="item.label" :value="item.value">
                 </el-option>
               </el-select>
 
-              <el-select
-                v-model="options.ie"
-                filterable
-                size="small"
-                allow-create
-                default-first-option
-                :placeholder="$t('instancesDetail.ie')"
-                style="width: 220px; margin-left: 12px"
-              >
-                <el-option
-                  v-for="item in TERMINAL_CODE"
-                  :key="item.value"
-                  :label="item.label"
-                  :value="item.value"
-                >
+              <el-select v-model="options.ie" filterable size="small" allow-create default-first-option
+                :placeholder="$t('instancesDetail.ie')" style="width: 220px; margin-left: 12px">
+                <el-option v-for="item in TERMINAL_CODE" :key="item.value" :label="item.label" :value="item.value">
                 </el-option>
               </el-select>
             </div>
           </div>
         </el-col>
       </el-row>
-
       <div class="row-mt">
         <ItemGroup>
           <el-button type="success" size="small" @click="submit">{{
-            $t("general.save")
+              $t("general.save")
           }}</el-button>
           <el-button size="small" @click="close">{{ $t("general.cancel") }}</el-button>
         </ItemGroup>
@@ -196,6 +176,8 @@ export default {
   methods: {
     init() {
       this.options = this.config;
+      this.options.fontSize = localStorage.getItem("terminalFontSize");
+      this.options.fontFamily = localStorage.getItem("terminalFontFamily");
     },
     show() {
       this.$emit("update:visible", true);
@@ -221,6 +203,8 @@ export default {
             stopCommand: this.options.stopCommand
           }
         });
+        localStorage.setItem("terminalFontSize", this.options.fontSize);
+        localStorage.setItem("terminalFontFamily", this.options.fontFamily);
         this.options = {};
         this.close();
         this.$message({

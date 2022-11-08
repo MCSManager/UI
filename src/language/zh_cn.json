@@ -483,7 +483,9 @@
     "EnterNewline": "回车换行符（\\r\\n）",
     "ioCode": "输入输出编码",
     "ioCodeInfo": "如果控制台中的内容出现乱码，您可以尝试修改此编码解决问题。",
-    "setUpdate": "实例配置已更新，部分配置可能需要重启实例生效"
+    "setUpdate": "实例配置已更新，部分配置可能需要重启实例生效",
+    "fontSize": "终端字体大小",
+    "fontSizeInfo": "默认 13px，更改后刷新网页生效"
   },
   "schedule": {
     "addSchedule": "新增计划任务",
