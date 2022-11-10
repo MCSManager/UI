@@ -16,7 +16,10 @@
         <div class="sub-title">
           <div class="sub-title">关于配置文件</div>
           <div class="sub-title-info">
-            Velocity 群组服务端的重要配置文件，可以进行分布式管理，节点控制等
+            Velocity 群组服务端的重要配置文件，可以进行分布式管理，节点控制等，配置较为复杂，建议搭配<a
+            href="https://docs.papermc.io/velocity/configuration"
+            >官方文档</a
+            >进行修改
           </div>
         </div>
       </template>
