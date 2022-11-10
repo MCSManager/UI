@@ -72,6 +72,7 @@ import paperWorldDefaultsYml from "../../components/mc_process_config/paper-worl
 import geyserYml from "../../components/mc_process_config/geyser.yml";
 import mcdrConfigYml from "../../components/mc_process_config/mcdr_config.yml";
 import permissionYml from "../../components/mc_process_config/permission.yml";
+import velocityToml from "../../components/mc_process_config/velocity.toml";
 
 export default {
   components: {
@@ -88,7 +89,8 @@ export default {
     "paper/paper-world-defaults.yml": paperWorldDefaultsYml,
     "geyser/config.yml": geyserYml,
     "mcdr/config.yml": mcdrConfigYml,
-    "mcdr/permission.yml": permissionYml
+    "mcdr/permission.yml": permissionYml,
+    "velocity/velocity.toml": velocityToml
   },
   data: function () {
     return {
