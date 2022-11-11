@@ -3,7 +3,7 @@
 -->
 
 <template>
-  <div>
+  <div v-menus:right="menus">
     <Panel>
       <template #title>
         <span id="fileManagerTop">
@@ -237,9 +237,86 @@ import path from "path";
 import { parseforwardAddress, request } from "@/app/service/protocol";
 import SelectUnzipCode from "./selectUnzipCode";
 import { API_FILE_STATUS } from "../../service/common";
+import { defineComponent, ref } from "vue";
+import { directive } from 'vue3-menus';
 
-export default {
+export default defineComponent({
   components: { Panel, SelectUnzipCode },
+  directives: {
+    menus: directive
+  },
+  setup() {
+    const menus = ref([
+        // {
+        //   label: "返回(B)",
+        //   tip: 'Alt+向左箭头',
+        //   click: () => {
+        //     window.history.back();
+        //   }
+        // },
+        {
+          label: "返回上层",
+          tip: '👆',
+          click: () => {
+            this.refresh();
+          }
+        },{
+          label: "复制",
+          tip: '',
+          click: () => {
+            return false;
+          }
+        },{
+          label: "粘贴",
+          tip: '',
+          click: () => {
+            return false;
+          }
+        },{
+          label: "剪切",
+          tip: '',
+          click: () => {
+            return false;
+          }
+        },{
+          label: "重命名",
+          tip: '',
+          click: () => {
+            return false;
+          }
+        },{
+          label: "删除",
+          tip: '',
+          click: () => {
+            return false;
+          }
+        },
+        {
+          label: "新建目录",
+          tip: '',
+          click: () => {
+            return false;
+          }
+        },
+        {
+          label: "压缩",
+          tip: '',
+          click: () => {
+            return false;
+          }
+        },
+        {
+          label: "解压",
+          tip: '',
+          click: () => {
+            return false;
+          }
+        },
+        
+      ]
+    );
+    return { menus }
+  },
   data() {
     return {
       serviceUuid: this.$route.params.serviceUuid,
@@ -726,7 +803,7 @@ export default {
       return new Promise((o, j) => j(false));
     }
   }
-};
+});
 </script>
 
 <style scoped>
