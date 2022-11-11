@@ -8,6 +8,7 @@ import {
   TYPE_MINECRAFT_BDS,
   TYPE_MINECRAFT_BUKKIT,
   TYPE_MINECRAFT_BUNGEECORD,
+  TYPE_MINECRAFT_VELOCITY,
   TYPE_MINECRAFT_GEYSER,
   TYPE_MINECRAFT_PAPER,
   TYPE_MINECRAFT_SPIGOT,
@@ -152,6 +153,16 @@ export const INSTANCE_CONFIGS = [
     author: "Lazy",
     github: "https://github.com/LazyCreeper/",
     category: [TYPE_MINECRAFT_JAVA, TYPE_MINECRAFT_BUNGEECORD]
+  },
+  {
+    fileName: "[Velocity] velocity.toml",
+    type: "toml",
+    info: "Velocity 群组服务端的重要配置文件，可以进行分布式管理，节点控制等，但此配置文件较为复杂，此处仅供简单的配置和操作",
+    path: "velocity.toml",
+    redirect: "velocity/velocity.toml",
+    author: "WhitePaper233",
+    github: "https://github.com/WhitePaper233/",
+    category: [TYPE_MINECRAFT_JAVA, TYPE_MINECRAFT_VELOCITY]
   },
   {
     fileName: "[Bedrock] server.properties",
