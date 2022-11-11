@@ -732,10 +732,17 @@ export default {
     initTerm() {
       // Create window and pass input event
       const terminalContainer = document.getElementById("terminal-container");
-
-      this.term = initTerminalWindow(terminalContainer, {
-        fontSize: 12
-      });
+      const ft = localStorage.getItem("terminalFontSize");
+      if (!(ft)) {
+        this.term = initTerminalWindow(terminalContainer, {
+          fontSize: 13,
+        });
+      } else {
+        this.term = initTerminalWindow(terminalContainer, {
+          fontSize: localStorage.getItem("terminalFontSize"),
+        });
+      }
+      
       this.term.onData(this.sendInput);
       this.onChangeTerminalContainerHeight();
     },
@@ -1022,7 +1029,6 @@ export default {
       const date = new Date(now - time);
       return `${date.getHours()}:${(Array(2).join(0) + date.getMinutes()).slice(-2)}`;
     },
-
     toFullTerminal(type = 1) {
       if (type === 1) {
         this.isFull = true;

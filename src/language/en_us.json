@@ -461,7 +461,9 @@
     "EnterNewline": "\\r\\n",
     "ioCode": "input and output code",
     "ioCodeInfo": "If the content in the console is garbled, you can try to modify this code to solve the problem.",
-    "setUpdate": "The instance configuration has been updated, some configurations may need to restart the instance to take effect"
+    "setUpdate": "The instance configuration has been updated, some configurations may need to restart the instance to take effect",
+    "fontSize": "Terminal font size",
+    "fontSizeInfo": "The default is 13px, after the change, refresh the page to take effect"
   },
   "schedule": {
     "addSchedule": "Add Scheduled Task",
