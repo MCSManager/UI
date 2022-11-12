@@ -11,6 +11,7 @@ export const TYPE_MINECRAFT_PAPER = "minecraft/java/paper";
 export const TYPE_MINECRAFT_FORGE = "minecraft/java/forge";
 export const TYPE_MINECRAFT_FABRIC = "minecraft/java/fabric";
 export const TYPE_MINECRAFT_BUNGEECORD = "minecraft/java/bungeecord";
+export const TYPE_MINECRAFT_VELOCITY = "minecraft/java/velocity";
 export const TYPE_MINECRAFT_GEYSER = "minecraft/java/geyser";
 export const TYPE_MINECRAFT_SPONGE = "minecraft/java/sponge";
 export const TYPE_MINECRAFT_MOHIST = "minecraft/java/mohist";
@@ -28,6 +29,7 @@ INSTANCE_TYPE_TRANSLATION[TYPE_MINECRAFT_BEDROCK] = "MC Bedrock Edition";
 INSTANCE_TYPE_TRANSLATION[TYPE_MINECRAFT_SPIGOT] = "MC Spigot";
 INSTANCE_TYPE_TRANSLATION[TYPE_MINECRAFT_PAPER] = "MC Paper";
 INSTANCE_TYPE_TRANSLATION[TYPE_MINECRAFT_BUNGEECORD] = "MC BungeeCord";
+INSTANCE_TYPE_TRANSLATION[TYPE_MINECRAFT_VELOCITY] = "MC Velocity";
 INSTANCE_TYPE_TRANSLATION[TYPE_MINECRAFT_BDS] = "MC Bedrock";
 INSTANCE_TYPE_TRANSLATION[TYPE_MINECRAFT_SPONGE] = "MC Sponge";
 INSTANCE_TYPE_TRANSLATION[TYPE_MINECRAFT_FORGE] = "MC Forge";
@@ -40,6 +42,9 @@ INSTANCE_TYPE_TRANSLATION[TYPE_WEB_SHELL] = "Web Shell";
 // Different types of specific configuration files
 const INSTANCE_TYPE_DEF_CONFIG = {
   [TYPE_MINECRAFT_BUNGEECORD]: {
+    stopCommand: "end"
+  },
+  [TYPE_MINECRAFT_VELOCITY]: {
     stopCommand: "end"
   },
   [TYPE_STEAM_SERVER_UNIVERSAL]: {
