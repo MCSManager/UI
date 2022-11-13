@@ -141,6 +141,7 @@
           size="mini"
           ref="multipleTable"
           @selection-change="selectionChange"
+          @row-contextmenu="fileRightClick"
         >
           <el-table-column type="selection" width="55"> </el-table-column>
           <el-table-column prop="name" :label="$t('fileManager.name')" min-width="240">
@@ -237,88 +238,81 @@ import path from "path";
 import { parseforwardAddress, request } from "@/app/service/protocol";
 import SelectUnzipCode from "./selectUnzipCode";
 import { API_FILE_STATUS } from "../../service/common";
-import { defineComponent, ref } from "vue";
-import { directive } from 'vue3-menus';
+import { defineComponent } from "vue";
+import { directive } from "vue3-menus";
 
 export default defineComponent({
   components: { Panel, SelectUnzipCode },
   directives: {
     menus: directive
   },
-  setup() {
-    const menus = ref([
-        // {
-        //   label: "返回(B)",
-        //   tip: 'Alt+向左箭头',
-        //   click: () => {
-        //     window.history.back();
-        //   }
-        // },
+
+  data() {
+    return {
+      menus: [
         {
           label: "返回上层",
-          tip: '👆',
           click: () => {
-            this.refresh();
+            this.toUpDir();
           }
-        },{
+        },
+        {
           label: "复制",
-          tip: '',
+          tip: "",
           click: () => {
-            return false;
+            this.copy();
           }
-        },{
+        },
+        {
           label: "粘贴",
-          tip: '',
+          tip: "",
           click: () => {
-            return false;
+            this.paste();
           }
-        },{
+        },
+        {
           label: "剪切",
-          tip: '',
+          tip: "",
           click: () => {
-            return false;
+            this.move();
           }
-        },{
+        },
+        {
           label: "重命名",
-          tip: '',
+          tip: "",
           click: () => {
-            return false;
+            this.rename();
           }
-        },{
+        },
+        {
           label: "删除",
-          tip: '',
+          tip: "",
           click: () => {
-            return false;
+            this.deleteFiles();
           }
         },
         {
           label: "新建目录",
-          tip: '',
+          tip: "",
           click: () => {
-            return false;
+            this.mkdir();
           }
         },
         {
           label: "压缩",
-          tip: '',
+          tip: "",
           click: () => {
-            return false;
+            this.compress(1);
           }
         },
         {
           label: "解压",
-          tip: '',
+          tip: "",
           click: () => {
-            return false;
+            this.compress(2);
           }
-        },
-        
-      ]
-    );
-    return { menus }
-  },
-  data() {
-    return {
+        }
+      ],
       serviceUuid: this.$route.params.serviceUuid,
       instanceUuid: this.$route.params.instanceUuid,
       multipleSelection: [],
@@ -392,6 +386,11 @@ export default defineComponent({
     // Directory next page or previous page event
     currentChange() {
       this.toDir(".");
+    },
+
+    fileRightClick(row) {
+      this.multipleSelection = [];
+      this.multipleSelection.push(row);
     },
 
     // Directory List function
