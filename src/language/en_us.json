@@ -18,7 +18,16 @@
     "016": "Start Failed",
     "017": "Enable",
     "018": "Stop",
-    "019": "Instructions"
+    "019": "Instructions",
+    "020": "Upper Dir",
+    "021": "Copy",
+    "022": "Paste",
+    "023": "Cut",
+    "024": "Rename",
+    "025": "Delete",
+    "026": "New directory",
+    "027": "Compression (ZIP)",
+    "028": "Decompress (ZIP)"
   },
   "general": {
     "search": "Search",
@@ -962,7 +971,7 @@
     "loading": "Loading",
     "overview": "Statistics",
     "home": "Data Overview",
-    "instances": "Application Instance(s)",
+    "instances": "Application",
     "services": "Daemon Management",
     "private": "Personal Information",
     "users": "User Management",
@@ -1065,6 +1074,10 @@
     "Settings": {
       "001": "Pre-defined resources download point",
       "002": "The download source used by the fast installation function. You can change this setting to download files from a different source."
+    },
+    "Terminal_TermSetting": {
+      "001": "terminal font size",
+      "002": "The default is 13px, after the change, refresh the page to take effect"
     }
   },
   "components": {
