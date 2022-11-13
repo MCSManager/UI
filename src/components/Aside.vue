@@ -52,6 +52,15 @@
           <i class="el-icon-setting"></i>
           <template #title>{{ $t("router.settings") }}</template>
         </el-menu-item>
+
+        <el-menu-item v-if="hasElectron()" @click="toElectronUI">
+          <i class="el-icon-postcard"></i>
+          <template #title>回到主界面</template>
+        </el-menu-item>
+        <el-menu-item v-if="hasElectron()" @click="toBrowser">
+          <i class="el-icon-position"></i>
+          <template #title>在浏览器中打开</template>
+        </el-menu-item>
       </el-menu-item-group>
     </el-scrollbar>
   </el-menu>
@@ -60,7 +69,7 @@
 <script>
 import router from "../app/router";
 import Logo from "../components/Logo.vue";
-
+import { hasElectron } from "@/app/utils/electron";
 export default {
   components: { Logo },
   data: function () {
@@ -76,8 +85,15 @@ export default {
     }
   },
   methods: {
+    hasElectron,
     toRouter(path) {
       router.push({ path });
+    },
+    toElectronUI() {
+      window.electionApi.openHome();
+    },
+    toBrowser() {
+      window.electionApi.openBrowser();
     }
   },
   mounted() {}

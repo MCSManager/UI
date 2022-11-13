@@ -382,7 +382,8 @@
     "MC Bukkit": "MC Bukkit",
     "MC Geyser": "MC Geyser",
     "MC MCDR": "MC MCDR",
-    "Web Shell": "Web Shell"
+    "Web Shell": "Web Shell",
+    "MC Velocity": "MC Velocity"
   },
   "terminal": {
     "name": "Name",
@@ -487,7 +488,6 @@
     "setUpdate": "The instance configuration has been updated, some configurations may need to restart the instance to take effect",
     "fontSize": "Terminal font size",
     "fontSizeInfo": "The default is 13px, after the change, refresh the page to take effect"
-
   },
   "schedule": {
     "addSchedule": "New Scheduled Task",
@@ -914,6 +914,7 @@
         "subTitle": "We will redirect you to the official documentation for more information."
       }
     ],
+
     "whichServer": "Please choose a remote daemon",
     "quickItems[0]": {
       "title": "Create Minecraft server"
@@ -1028,6 +1029,7 @@
     "binaryFileName": "File name of the binary executable",
     "inputBinaryFileName": "e.g. bedrock_server.exe (Windows) or bedrock_server (Linux)",
     "summonWin": "Generate command for Windows",
+
     "summonLinux": "Generate command for Linux",
     "program": "General command-lind program",
     "programName2": "file name of the executable",

@@ -83,6 +83,7 @@
             {{ $t("components.NetworkTip.010") }}
             <span class="color-green"> {{ taskInfo.detail.ip }} </span>
           </p>
+          <!-- ./frpc -u <您的UserToken/访问密钥> -p <隧道ID> -->
           <div class="row-mb">
             <div class="sub-title">
               <div class="sub-title-title require-field">
