@@ -9,9 +9,6 @@
 /**
  * @type {import('@vue/cli-service').ProjectOptions}
  */
-
- const { GenerateSW } = require('workbox-webpack-plugin')
-
 module.exports = {
   // options...
   pages: {
@@ -32,22 +29,6 @@ module.exports = {
   },
   productionSourceMap: false,
   configureWebpack: {
-    plugins: [
-      new GenerateSW({
-        clientsClaim: true,
-        skipWaiting: true
-      })
-    ]
-  },
-  pwa: {
-    name: 'MCSM 9',
-    short_name: 'MCSM 9',
-    iconPaths: {
-      favicon32: 'favicon.ico',
-      favicon16: 'favicon.ico',
-      appleTouchIcon: 'favicon.ico',
-      maskIcon: 'favicon.ico',
-      msTileImage: 'favicon.ico'
-    }
+    plugins: []
   }
 };

@@ -467,7 +467,6 @@
   },
   "termSet": {
     "title": "Terminal Settings",
-
     "pty": "emulated terminal",
     "ptyInfo": "The terminal is fully interactive by emulating the terminal forwarding program.<br />Including the use of Tab, Ctrl function keys, etc.",
     "ifHaveProblems": "If there is a problem with the use, it is recommended to close it.",
@@ -848,8 +847,6 @@
     "about": "About",
     "aboutTitle": "The software based on <a target='black' href='https://github.com/MCSManager/MCSManager-Daemon/blob/master/LICENSE'>Apache-2.0</a> Lisence<br />Copyright MCSManager development team",
     "aboutTitleInfo": "This license allows everyone to copy and modify codes, and allows for charging a fee to its end user.<br />",
-    "closedSource": "Close-source commercial license",
-    "closedSourceInfo": "If you want to further development a close-source copy for any activity (include but not limited to commercial or private use)",
     "learnMore": "Learn More",
     "userAgreement": "EULA",
     "sponsorList": "Donation List",
@@ -914,7 +911,6 @@
         "subTitle": "We will redirect you to the official documentation for more information."
       }
     ],
-
     "whichServer": "Please choose a remote daemon",
     "quickItems[0]": {
       "title": "Create Minecraft server"
@@ -1029,7 +1025,6 @@
     "binaryFileName": "File name of the binary executable",
     "inputBinaryFileName": "e.g. bedrock_server.exe (Windows) or bedrock_server (Linux)",
     "summonWin": "Generate command for Windows",
-
     "summonLinux": "Generate command for Linux",
     "program": "General command-lind program",
     "programName2": "file name of the executable",
@@ -1074,23 +1069,23 @@
   },
   "components": {
     "NetworkTip": {
-      "001": "Play with friends with Public IP",
-      "002": "You must have a server with a valid public IP to use this method.",
-      "003": "Play with friends with home network",
-      "004": "Connects via the distributed VPN provided by a third-party service.",
-      "005": "Server IP：{0}",
-      "006": "When you choose to use Public IP, others could connect to your server directly with your public IP\r            and the corresponding port number like\r            {0}:25565。",
-      "007": "Note：The public IP obtained here is not guaranteed to be correct.",
-      "008": "Play with friends via HiPer P2P network.",
-      "009": "Your friends need to download HiPer client to connect to each other.",
-      "010": "IP：",
-      "011": "HiPer 索引码：",
-      "012": "索引码是接入 HiPer 网络的必备钥匙，您可以点击底部的“获取索引码”来获得。",
-      "013": "请输入索引码",
-      "014": "获取索引码",
-      "015": "请填写索引码",
-      "016": "Hi~, is this your first time deploy a server? Please choose a network connection type!",
-      "017": "I'm an experienced user, and I don't need any tutorials."
+      "001": "Server public IP connection",
+      "002": "You must have a server with a public IP before you can use this method to connect to the Internet.",
+      "003": "home network connection",
+      "004": "Use the distributed virtual local area network service provided by the third party to connect to realize home network access.",
+      "005": "Server IP address: {0}",
+      "006": "When you choose to use the public IP, MCSManager does not need to do anything, you only need to use the public IP address and the default port number of your software to allow others to connect to your server, such as {0}:25565.",
+      "007": "Note: The public IP obtained here may not be correct.",
+      "008": "Let others join your server with OpenFrp network mapping.",
+      "009": "After the network mapping is successful, we will tell you your IP address, and your friends can join your server just by using this IP address.",
+      "010": "IP address:",
+      "011": "access key",
+      "012": "The key is necessary to use the FRP network, and you can get it by clicking \"Get Key\" at the bottom.",
+      "013": "Please enter key",
+      "014": "Register an account and get a key",
+      "015": "Please fill in the index code",
+      "016": "Hi~, is it the first time to deploy a server? \nPlease choose a network connection method!",
+      "017": "I know how to go online, I don't need any tutorials"
     }
   }
 }

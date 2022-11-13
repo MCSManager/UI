@@ -166,7 +166,7 @@
             <span v-html="$t('settings.aboutTitle')"></span>
           </p>
           <p class="sub-title-info">
-            <span v-html="$t('settings.aboutTitleInfo')"></span>
+            <span v-text="$t('settings.aboutTitleInfo')"></span>
           </p>
         </div>
 
