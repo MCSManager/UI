@@ -53,11 +53,11 @@
           <template #title>{{ $t("router.settings") }}</template>
         </el-menu-item>
 
-        <el-menu-item v-if="!hasElectron()" @click="toElectronUI">
+        <el-menu-item v-if="hasElectron()" @click="toElectronUI">
           <i class="el-icon-postcard"></i>
           <template #title>回到首页</template>
         </el-menu-item>
-        <el-menu-item v-if="!hasElectron()" @click="toElectronUI">
+        <el-menu-item v-if="hasElectron()" @click="toElectronUI">
           <i class="el-icon-position"></i>
           <template #title>在浏览器中打开</template>
         </el-menu-item>
