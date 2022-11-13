@@ -343,7 +343,8 @@
     ],
     "startError": "The start command cannot contain newlines, this is not a script file, and multiple commands cannot be executed, please check",
     "cantGetImageList": "Unable to get the remote host image list, it is recommended to go to the \"Service Environment\" interface to create an image",
-    "cantGetNetModeList": "Unable to get the remote host network list, it is recommended to check the Docker configuration"
+    "cantGetNetModeList": "Unable to get the remote host network list, it is recommended to check the Docker configuration",
+    "networkTip": "online mode"
   },
   "instanceTypeList": {
     "General console program": "Console program (General)",
@@ -360,7 +361,8 @@
     "MC Bukkit": "MC Bukkit",
     "MC Geyser": "MC Geyser",
     "MC MCDR": "MC MCDR",
-    "Web Shell": "Web Shell"
+    "Web Shell": "Web Shell",
+    "MC Velocity": "MC Velocity"
   },
   "terminal": {
     "name": "Name",
@@ -824,8 +826,6 @@
     "about": "About",
     "aboutTitle": "<p>Copyright MCSManager Team</p> ",
     "aboutTitleInfo": "https://github.com/mcsmanager | https://mcsmanager.com/ | mcsmanager-dev@outlook.com",
-    "closedSource": "Closed Source Commercial License",
-    "closedSourceInfo": "If you want to re-develop and use closed source for any activity (including but not limited to commercial, personal).",
     "learnMore": "Learn more",
     "userAgreement": "User Agreement",
     "sponsorList": "Open source project sponsor list",
@@ -890,7 +890,17 @@
         "subTitle": "We will open the official documentation to help you get more useful information"
       }
     ],
-    "whichServer": "Please select host:"
+    "whichServer": "Please select host:",
+    "quickItems[0]": {
+      "title": "Create a Minecraft server"
+    },
+    "quickItems[1]": {
+      "subTitle": "Attempts to help you create other game servers, full compatibility is not guaranteed",
+      "title": "Create an additional game server"
+    },
+    "quickItems[2]": {
+      "title": "Manage my console programs in the panel"
+    }
   },
   "install": {
     "welcome": "Welcome to use MCSManager Panel",
@@ -1002,5 +1012,80 @@
     "inputAdditional2": "Optional, no additional parameters are passed by default",
     "noContent": "Required fields do not have content",
     "noLinuxBds": "Because the Linux system environment is complex and changeable, we cannot generate a correct startup command, please write the startup command manually"
+  },
+  "components": {
+    "NetworkTip": {
+      "001": "Server public IP connection",
+      "002": "You must have a server with a public IP before you can use this method to connect to the Internet.",
+      "003": "home network connection",
+      "004": "Use the distributed virtual local area network service provided by the third party to connect to realize home network access.",
+      "005": "Server IP address: {0}",
+      "006": "When you choose to use the public IP, MCSManager does not need to do anything, you only need to use the public IP\r            \naddress and your software's default port number to allow others to connect to your server, such as\r            \n{0}:25565.",
+      "007": "Note: The public IP obtained here may not be correct.",
+      "008": "Let others join your server with OpenFrp network mapping.",
+      "009": "After the network mapping is successful, we will tell you your IP address, and your friends can join your server just by using this IP address.",
+      "010": "IP address:",
+      "011": "access key",
+      "012": "The key is necessary to use the FRP network, and you can get it by clicking \"Get Key\" at the bottom.",
+      "013": "Please enter key",
+      "014": "Register an account and get a key",
+      "015": "Please fill in the index code",
+      "016": "Hi~, is it the first time to deploy a server? \nPlease choose a network connection method!",
+      "017": "I know how to go online, I don't need any tutorials"
+    }
+  },
+  "CommonText": {
+    "001": "The installation is complete",
+    "002": "installing",
+    "003": "installation failed",
+    "004": "refresh",
+    "005": "Remark:",
+    "006": "introduce",
+    "007": "Remark",
+    "008": "operate",
+    "009": "use",
+    "010": "Installed",
+    "011": "Simplified Chinese",
+    "012": "online",
+    "013": "state:",
+    "014": "Not activated",
+    "015": "running",
+    "016": "startup error",
+    "017": "enable",
+    "018": "stop",
+    "019": "Use the tutorial"
+  },
+  "views": {
+    "Settings": {
+      "001": "Default resource download point",
+      "002": "The list of download sources when installing the server quickly. You can customize the default server-side download station by changing this address."
+    },
+    "quickstart_McPreset": {
+      "001": "Preset installation templates",
+      "002": "Node ID: {0}",
+      "003": "Minecraft version",
+      "004": "Java version requirements",
+      "005": "package size",
+      "006": "About {0}MB",
+      "007": "The quick installation service is provided by Doozui Technology to provide download support.",
+      "008": "Downloading file...",
+      "009": "The actual time required is related to the speed of the network and the running speed of the processor, please be patient.",
+      "010": "You're done! \nNext you just need to go to the \"Instance Console\" and tap \"Launch Instance\".",
+      "011": "Go to the instance console",
+      "012": "test server",
+      "013": "installed",
+      "014": "installing"
+    },
+    "quickstart_index": {
+      "001": "Historical installation tasks under this host:",
+      "002": "Without any installation task, you can click above option to create",
+      "003": "go to console",
+      "004": "View historical installation tasks",
+      "005": "One-click quick server opening (recommended for first-time use)",
+      "006": "Suitable for beginners, it quickly helps you deploy and start your server with preset templates.",
+      "007": "Normal process creation server",
+      "008": "Import a local server, or create a custom server.",
+      "009": "Choose how to create"
+    }
   }
 }
