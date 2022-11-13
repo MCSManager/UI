@@ -1,7 +1,3 @@
-<!--
-  Copyright (C) 2022 MCSManager <mcsmanager-dev@outlook.com>
--->
-
 <template>
   <Dialog v-model="v" :cancel="close">
     <template #title>{{ $t("termSet.title") }}</template>
@@ -34,11 +30,21 @@
               </div>
               <div class="row-mt">
                 <span>{{ $t("termSet.col") }}</span>
-                <el-input v-model="options.ptyWindowCol" :disabled="!options.pty" size="small" style="width: 80px">
+                <el-input
+                  v-model="options.ptyWindowCol"
+                  :disabled="!options.pty"
+                  size="small"
+                  style="width: 80px"
+                >
                 </el-input>
                 &nbsp;
                 <span>{{ $t("termSet.line") }}</span>
-                <el-input :disabled="!options.pty" v-model="options.ptyWindowRow" size="small" style="width: 80px">
+                <el-input
+                  :disabled="!options.pty"
+                  v-model="options.ptyWindowRow"
+                  size="small"
+                  style="width: 80px"
+                >
                 </el-input>
               </div>
             </div>
@@ -47,12 +53,11 @@
           <div>
             <div class="row-mt">
               <div class="sub-title">
-                <p class="sub-title-title">终端字体大小</p>
-                <p class="sub-title-info">默认13px，更改后刷新网页生效</p>
+                <p class="sub-title-title">{{ $t("views.Terminal_TermSetting.001") }}</p>
+                <p class="sub-title-info">{{ $t("views.Terminal_TermSetting.002") }}</p>
               </div>
               <div class="row-mt">
-                <el-input v-model="options.fontSize" size="small" style="width: 80px">
-                </el-input>
+                <el-input v-model="options.fontSize" size="small" style="width: 80px"> </el-input>
                 &nbsp;
                 <span>px</span>
               </div>
@@ -94,8 +99,12 @@
               </p>
             </div>
             <div class="row-mt">
-              <el-select v-model="options.crlf" :placeholder="$t('general.pleaseSelect')" size="small"
-                style="width: 220px">
+              <el-select
+                v-model="options.crlf"
+                :placeholder="$t('general.pleaseSelect')"
+                size="small"
+                style="width: 220px"
+              >
                 <el-option :label="$t('termSet.newline')" :value="1"></el-option>
                 <el-option :label="$t('termSet.EnterNewline')" :value="2"></el-option>
               </el-select>
@@ -109,15 +118,39 @@
               </p>
             </div>
             <div class="row-mt" style="display: flex">
-              <el-select v-model="options.oe" filterable allow-create size="small" default-first-option
-                :placeholder="$t('instancesDetail.oe')" style="width: 220px">
-                <el-option v-for="item in TERMINAL_CODE" :key="item.value" :label="item.label" :value="item.value">
+              <el-select
+                v-model="options.oe"
+                filterable
+                allow-create
+                size="small"
+                default-first-option
+                :placeholder="$t('instancesDetail.oe')"
+                style="width: 220px"
+              >
+                <el-option
+                  v-for="item in TERMINAL_CODE"
+                  :key="item.value"
+                  :label="item.label"
+                  :value="item.value"
+                >
                 </el-option>
               </el-select>
 
-              <el-select v-model="options.ie" filterable size="small" allow-create default-first-option
-                :placeholder="$t('instancesDetail.ie')" style="width: 220px; margin-left: 12px">
-                <el-option v-for="item in TERMINAL_CODE" :key="item.value" :label="item.label" :value="item.value">
+              <el-select
+                v-model="options.ie"
+                filterable
+                size="small"
+                allow-create
+                default-first-option
+                :placeholder="$t('instancesDetail.ie')"
+                style="width: 220px; margin-left: 12px"
+              >
+                <el-option
+                  v-for="item in TERMINAL_CODE"
+                  :key="item.value"
+                  :label="item.label"
+                  :value="item.value"
+                >
                 </el-option>
               </el-select>
             </div>
@@ -127,7 +160,7 @@
       <div class="row-mt">
         <ItemGroup>
           <el-button type="success" size="small" @click="submit">{{
-              $t("general.save")
+            $t("general.save")
           }}</el-button>
           <el-button size="small" @click="close">{{ $t("general.cancel") }}</el-button>
         </ItemGroup>
@@ -141,9 +174,10 @@ import Dialog from "@/components/Dialog";
 import { request } from "@/app//service/protocol";
 import { API_INSTANCE_UPDATE } from "@/app/service/common";
 import { TERMINAL_CODE } from "../../service/common";
-
 export default {
-  components: { Dialog },
+  components: {
+    Dialog
+  },
   props: {
     visible: {
       type: Boolean,
@@ -172,7 +206,6 @@ export default {
       this.init();
     }
   },
-
   methods: {
     init() {
       this.options = this.config;
@@ -190,7 +223,10 @@ export default {
         await request({
           method: "PUT",
           url: API_INSTANCE_UPDATE,
-          params: { remote_uuid: this.serviceUuid, uuid: this.instanceUuid },
+          params: {
+            remote_uuid: this.serviceUuid,
+            uuid: this.instanceUuid
+          },
           data: {
             terminalOption: {
               ...this.options
@@ -221,6 +257,10 @@ export default {
   }
 };
 </script>
+
+<!--
+  Copyright (C) 2022 MCSManager <mcsmanager-dev@outlook.com>
+-->
 
 <style scoped>
 .btn-area {
