@@ -4,7 +4,7 @@
     "002": "Installing",
     "003": "Installation Failed",
     "004": "Refresh",
-    "005": "Comments: ",
+    "005": "Remark: ",
     "006": "Introduction",
     "007": "Comments",
     "008": "Operation",
@@ -59,7 +59,8 @@
     "success": "Operation successfully",
     "config": "Configuration",
     "operation": "Operation",
-    "moreOperation": "More Operations"
+    "moreOperation": "More Operations",
+    "read": "Check"
   },
   "root": {
     "title": "Processing...",
@@ -1098,7 +1099,8 @@
       "014": "Register an account and get a key",
       "015": "Please fill in the index code",
       "016": "Hi~, is it the first time to deploy a server? \nPlease choose a network connection method!",
-      "017": "I know how to go online, I don't need any tutorials"
+      "017": "I know how to go online, I don't need any tutorials",
+      "018": "Learn how to let others connect to the application service"
     }
   }
 }

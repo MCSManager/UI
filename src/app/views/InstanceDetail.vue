@@ -239,10 +239,10 @@ Copyright (C) 2022 MCSManager <mcsmanager-dev@outlook.com>
 
                 <el-col :lg="8" class="row-mt" :offset="0" v-iszh>
                   <div class="sub-title">
-                    <div class="sub-title-title">联机方式</div>
-                    <div class="sub-title-info">了解如何让其他人连接到应用程序服务</div>
+                    <div class="sub-title-title">{{$t("CommonText.012")}}</div>
+                    <div class="sub-title-info">{{$t("components.NetworkTip.018")}}</div>
                   </div>
-                  <el-button plain size="big" @click="openNetwork">查看</el-button>
+                  <el-button plain size="big" @click="openNetwork">{{$t("general.read")}}</el-button>
                 </el-col>
 
                 <el-col :lg="24" class="row-mt">

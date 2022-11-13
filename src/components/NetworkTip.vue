@@ -101,6 +101,12 @@
             >
             </el-input>
           </div>
+          <div class="row-mb">
+            <div class="sub-title">
+              <div class="sub-title-title require-field">隧道 ID</div>
+            </div>
+            <el-input v-model="indexCode" size="small" clearable placeholder="隧道ID"> </el-input>
+          </div>
 
           <div style="display: flex; justify-content: space-between">
             <div>
@@ -120,18 +126,17 @@
                 >
                   {{ $t("components.NetworkTip.014") }}
                 </el-link>
+                -
+                <el-link
+                  type="primary"
+                  :underline="false"
+                  href="https://docs.mcsmanager.com/#/"
+                  target="_blank"
+                >
+                  {{ $t("CommonText.019") }}
+                </el-link>
               </ItemGroup>
             </div>
-            <ItemGroup>
-              <el-link
-                type="primary"
-                :underline="false"
-                href="https://docs.mcsmanager.com/#/"
-                target="_blank"
-              >
-                {{ $t("CommonText.019") }}
-              </el-link>
-            </ItemGroup>
           </div>
         </div>
       </div>
