@@ -18,7 +18,7 @@ import "./service/protocol";
 import directive from "./directive"
 
 // PWA
-import '../registerServiceWorker'
+// import '../registerServiceWorker'
 
 const app = createApp(App);
 
