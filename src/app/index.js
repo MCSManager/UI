@@ -1,7 +1,7 @@
 // Copyright (C) 2022 MCSManager <mcsmanager-dev@outlook.com>
 
 import { createApp } from "vue";
-import i18n from "./i18n"
+import i18n from "./i18n";
 import elementPlus from "element-plus";
 
 import "element-plus/dist/index.css";
@@ -15,22 +15,17 @@ import "../assets/css/dark-mode.scss";
 
 import App from "./App.vue";
 import "./service/protocol";
-import directive from "./directive"
-
-// PWA
-// import '../registerServiceWorker'
+import directive from "./directive";
 
 const app = createApp(App);
 
-// Vuex 
+// Vuex
 import store from "./store";
 app.use(store);
-app.use(i18n)
-
+app.use(i18n);
 
 // custom directive
-directive(app)
-
+directive(app);
 
 // Vue-Router
 import router from "./router";
@@ -51,6 +46,6 @@ app.component("FunctionGroup", FunctionGroup);
 app.component("FunctionComponent", FunctionGroupComponent);
 app.mount("#app");
 
-if ((localStorage.getItem("theme"))) {
-    document.body.setAttribute("class", localStorage.getItem("theme"));
+if (localStorage.getItem("theme")) {
+  document.body.setAttribute("class", localStorage.getItem("theme"));
 }
