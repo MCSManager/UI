@@ -3,7 +3,7 @@
 -->
 
 <template>
-  <div>
+  <div v-menus:right="menus">
     <Panel>
       <template #title>
         <span id="fileManagerTop">
@@ -141,6 +141,7 @@
           size="mini"
           ref="multipleTable"
           @selection-change="selectionChange"
+          @row-contextmenu="fileRightClick"
         >
           <el-table-column type="selection" width="55"> </el-table-column>
           <el-table-column prop="name" :label="$t('fileManager.name')" min-width="240">
@@ -237,11 +238,81 @@ import path from "path";
 import { parseforwardAddress, request } from "@/app/service/protocol";
 import SelectUnzipCode from "./selectUnzipCode";
 import { API_FILE_STATUS } from "../../service/common";
+import { defineComponent } from "vue";
+import { directive } from "vue3-menus";
 
-export default {
+export default defineComponent({
   components: { Panel, SelectUnzipCode },
+  directives: {
+    menus: directive
+  },
+
   data() {
     return {
+      menus: [
+        {
+          label: "返回上层",
+          click: () => {
+            this.toUpDir();
+          }
+        },
+        {
+          label: "复制",
+          tip: "",
+          click: () => {
+            this.copy();
+          }
+        },
+        {
+          label: "粘贴",
+          tip: "",
+          click: () => {
+            this.paste();
+          }
+        },
+        {
+          label: "剪切",
+          tip: "",
+          click: () => {
+            this.move();
+          }
+        },
+        {
+          label: "重命名",
+          tip: "",
+          click: () => {
+            this.rename();
+          }
+        },
+        {
+          label: "删除",
+          tip: "",
+          click: () => {
+            this.deleteFiles();
+          }
+        },
+        {
+          label: "新建目录",
+          tip: "",
+          click: () => {
+            this.mkdir();
+          }
+        },
+        {
+          label: "压缩",
+          tip: "",
+          click: () => {
+            this.compress(1);
+          }
+        },
+        {
+          label: "解压",
+          tip: "",
+          click: () => {
+            this.compress(2);
+          }
+        }
+      ],
       serviceUuid: this.$route.params.serviceUuid,
       instanceUuid: this.$route.params.instanceUuid,
       multipleSelection: [],
@@ -315,6 +386,11 @@ export default {
     // Directory next page or previous page event
     currentChange() {
       this.toDir(".");
+    },
+
+    fileRightClick(row) {
+      this.multipleSelection = [];
+      this.multipleSelection.push(row);
     },
 
     // Directory List function
@@ -726,7 +802,7 @@ export default {
       return new Promise((o, j) => j(false));
     }
   }
-};
+});
 </script>
 
 <style scoped>
