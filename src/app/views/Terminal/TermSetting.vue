@@ -1,3 +1,7 @@
+<!--
+  Copyright (C) 2022 MCSManager <mcsmanager-dev@outlook.com>
+-->
+
 <template>
   <Dialog v-model="v" :cancel="close">
     <template #title>{{ $t("termSet.title") }}</template>
@@ -257,10 +261,6 @@ export default {
   }
 };
 </script>
-
-<!--
-  Copyright (C) 2022 MCSManager <mcsmanager-dev@outlook.com>
--->
 
 <style scoped>
 .btn-area {

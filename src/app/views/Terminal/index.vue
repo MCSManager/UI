@@ -23,11 +23,12 @@
               </LineInfo>
               <LineInfo>
                 <i class="el-icon-tickets"></i> {{ $t("terminal.limit") }}:
-                <span class="color-blue" style="cursor: pointer"> 查看 </span>
+                <span class="color-blue" style="cursor: pointer" @click="openDockerInfoDialog">
+                  查看
+                </span>
               </LineInfo>
               <LineInfo v-if="instanceInfo.config.docker && instanceInfo.config.docker.ports">
-                <i class="el-icon-money"></i> {{ $t("terminal.dockerPort") }}
-                <i class="el-icon-question"></i>:
+                <i class="el-icon-money"></i> {{ $t("terminal.dockerPort") }}:
 
                 <div style="padding: 10px 0px 0px 16px">
                   <div
@@ -537,6 +538,11 @@
     </TermSetting>
 
     <NetworkTip v-model:visible="visibleNetworkTip" :daemonUuid="serviceUuid"></NetworkTip>
+    <DockerInfo
+      v-if="instanceInfo.config.docker"
+      ref="dockerInfoDialog"
+      :dockerInfo="instanceInfo.config.docker"
+    ></DockerInfo>
   </div>
 </template>
 
@@ -569,10 +575,12 @@ import { statusCodeToText, typeTextToReadableText } from "../../service/instance
 import { initTerminalWindow, textToTermText } from "../../service/term";
 import { getPlayersOption } from "../../service/chart_option";
 import TermSetting from "./TermSetting";
+import DockerInfo from "./DockerInfo";
 import NetworkTip from "@/components/NetworkTip";
+
 export default {
   // eslint-disable-next-line vue/no-unused-components
-  components: { Panel, LineInfo, LineButton, Dialog, Logo, TermSetting, NetworkTip },
+  components: { Panel, LineInfo, LineButton, Dialog, Logo, TermSetting, NetworkTip, DockerInfo },
   data: function () {
     return {
       input1: "",
@@ -1099,6 +1107,10 @@ export default {
           this.$nextTick(() => this.term.fitAddon.fit());
         }
       }
+    },
+
+    openDockerInfoDialog() {
+      this.$refs.dockerInfoDialog.open();
     },
 
     // [ "25565:25565/tcp", "27766:27766/tcp" ]
