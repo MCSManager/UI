@@ -11,26 +11,29 @@
         <el-row :gutter="20">
           <el-col :md="12" :offset="0">
             <LineInfo>
-              <i class="el-icon-tickets"></i> <span>镜像名：{{ dockerInfo.image }}</span>
+              <i class="el-icon-tickets"></i> <span>最大内存：{{ dockerInfo.memory }}MB</span>
             </LineInfo>
             <LineInfo>
               <i class="el-icon-tickets"></i> <span>网络模式：{{ dockerInfo.networkMode }}</span>
             </LineInfo>
             <LineInfo>
+              <i class="el-icon-tickets"></i> <span>镜像名：{{ dockerInfo.image }}</span>
+            </LineInfo>
+            <LineInfo>
               <i class="el-icon-tickets"></i> <span>容器名：{{ dockerInfo.containerName }}</span>
             </LineInfo>
-            <LineInfo>
+            <!-- <LineInfo>
               <i class="el-icon-tickets"></i> <span>挂载目录：{{ dockerInfo.extraVolumes }}</span>
-            </LineInfo>
+            </LineInfo> -->
           </el-col>
           <el-col :md="12" :offset="0">
-            <LineInfo>
-              <i class="el-icon-tickets"></i> <span>最大内存：{{ dockerInfo.memory }}MB</span>
-            </LineInfo>
             <!-- <LineInfo>
               <i class="el-icon-tickets"></i>
               <span>CPU 限制：{{ dockerInfo.cpuUsage }}%</span>
             </LineInfo> -->
+            <LineInfo>
+              <i class="el-icon-tickets"></i> <span>容器 ID：XXXXXXXXXXXXXXXXXXXXXXXXXXXX</span>
+            </LineInfo>
             <LineInfo v-if="dockerInfo && dockerInfo.ports">
               <i class="el-icon-tickets"></i> {{ $t("terminal.dockerPort") }}
               <i class="el-icon-question"></i>:
