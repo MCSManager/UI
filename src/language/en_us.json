@@ -60,7 +60,7 @@
     "config": "Configuration",
     "operation": "Operation",
     "moreOperation": "More Operations",
-    "read": "Check",
+    "read": "detail",
     "confirm2": "Confirm"
   },
   "root": {

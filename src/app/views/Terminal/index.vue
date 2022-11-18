@@ -21,13 +21,14 @@
                 <i class="el-icon-tickets"></i> {{ $t("terminal.type") }}:
                 {{ typeToText(instanceInfo.config.type) }}
               </LineInfo>
-              <LineInfo>
+              <LineInfo v-if="hasDocker">
                 <i class="el-icon-tickets"></i> {{ $t("terminal.limit") }}:
                 <span class="color-blue" style="cursor: pointer" @click="openDockerInfoDialog">
-                  查看
+                  {{ $t("general.read") }}
                 </span>
               </LineInfo>
-              <LineInfo v-if="instanceInfo.config.docker && instanceInfo.config.docker.ports">
+
+              <LineInfo v-if="hasDocker && instanceInfo.config.docker.ports">
                 <i class="el-icon-money"></i> {{ $t("terminal.dockerPort") }}:
 
                 <div style="padding: 10px 0px 0px 16px">
@@ -645,6 +646,9 @@ export default {
     },
     ptyRow() {
       return this.instanceInfo.config.terminalOption.ptyWindowRow ?? 40;
+    },
+    hasDocker() {
+      return this.instanceInfo.config?.docker?.image ? true : false;
     }
   },
   methods: {
