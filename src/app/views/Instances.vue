@@ -600,11 +600,27 @@ export default {
       router.push({ path: `/terminal/${serviceUuid}/${instanceUuid}/` });
     },
     async unlinkInstance(uuid, deleteFile = false) {
-      await this.$confirm(this.$t("notify.confirmDelContent"), this.$t("notify.confirmDelTitle"), {
-        confirmButtonText: this.$t("general.confirm"),
-        cancelButtonText: this.$t("general.cancel"),
-        type: "warning"
-      });
+      if (deleteFile) {
+        await this.$confirm(
+          this.$t("notify.confirmDelContent2"),
+          this.$t("notify.confirmDelTitle"),
+          {
+            confirmButtonText: this.$t("general.confirm2"),
+            cancelButtonText: this.$t("general.cancel"),
+            type: "warning"
+          }
+        );
+      } else {
+        await this.$confirm(
+          this.$t("notify.confirmDelContent"),
+          this.$t("notify.confirmDelTitle"),
+          {
+            confirmButtonText: this.$t("general.confirm"),
+            cancelButtonText: this.$t("general.cancel"),
+            type: "warning"
+          }
+        );
+      }
       await axios.request({
         method: "DELETE",
         url: API_INSTANCE,

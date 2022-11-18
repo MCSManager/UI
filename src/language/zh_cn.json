@@ -60,7 +60,8 @@
     "success": "操作成功",
     "config": "配置",
     "operation": "操作",
-    "moreOperation": "更多操作"
+    "moreOperation": "更多操作",
+    "confirm2": "我清楚后果并确定操作"
   },
   "root": {
     "title": "处理中...",
@@ -950,7 +951,7 @@
   "notify": {
     "connectDaemonError": "访问远程节点异常",
     "confirmDelTitle": "最终确认",
-    "confirmDelContent": "确定要进行移除/删除吗？",
+    "confirmDelContent": "确定移除此实例吗？此操作不会删除实例的本地文件",
     "confirmBatchDelContent": "确定要进行批量移除吗？此操作不会删除实例实际文件，只会删除实例",
     "confirmBatchDelFileContent": "确定要进行批量删除吗？此操作将会一并删除文件",
     "editSuccess": "修改成功",
@@ -965,7 +966,8 @@
     "stopCmdSend": "关闭命令已发出",
     "killCmdSend": "终止命令已发出",
     "dateLoadError": "数据加载出错",
-    "cmdSendInfo": "已成功向各个远程主机发布命令，具体操作可能略有延时，请稍等一段时间后查看结果"
+    "cmdSendInfo": "已成功向各个远程主机发布命令，具体操作可能略有延时，请稍等一段时间后查看结果",
+    "confirmDelContent2": "确定要删除此实例和文件吗？此操作将会删除实例目录的所有文件，请谨慎操作"
   },
   "router": {
     "panel": "控制面板",

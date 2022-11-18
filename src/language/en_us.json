@@ -60,7 +60,8 @@
     "config": "Configuration",
     "operation": "Operation",
     "moreOperation": "More Operations",
-    "read": "Check"
+    "read": "Check",
+    "confirm2": "Confirm"
   },
   "root": {
     "title": "Processing...",
@@ -950,7 +951,6 @@
   "notify": {
     "connectDaemonError": "Error accessing remote daemon",
     "confirmDelTitle": "Confirm",
-    "confirmDelContent": "Are you sure you want to remove/delete?",
     "confirmBatchDelContent": "Are you sure you want to bulk remove? This operation will not delete actual file from the disk, but only remove instance from the list.",
     "confirmBatchDelFileContent": "Are you sure you want to bulk delete? This operation will DELETE FILE FROM DISK.",
     "editSuccess": "Edit Successfully",
@@ -965,7 +965,9 @@
     "stopCmdSend": "Stop command sent",
     "killCmdSend": "Terminate command sent",
     "dateLoadError": "Error loading data",
-    "cmdSendInfo": "Successfully sent command(s) to the corresponding daemon, it make take some time for execution finishes."
+    "cmdSendInfo": "Successfully sent command(s) to the corresponding daemon, it make take some time for execution finishes.",
+    "confirmDelContent": "Are you sure you want to remove this instance? \nThis operation does not delete the instance's local files",
+    "confirmDelContent2": "Are you sure you want to delete this instance and file? \nThis operation will delete all files in the instance directory, please proceed with caution"
   },
   "router": {
     "panel": "Control Panel",
