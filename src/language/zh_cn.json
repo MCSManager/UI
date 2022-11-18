@@ -27,7 +27,9 @@
     "025": "删除",
     "026": "新建目录",
     "027": "压缩",
-    "028": "解压"
+    "028": "解压",
+    "029": "主机",
+    "030": "容器"
   },
   "general": {
     "search": "搜索",
@@ -455,7 +457,9 @@
     },
     "cantConnectTerm": "无法与终端建立连接",
     "cantSendCmdBecauseData": "无法执行命令，数据流通道不可用",
-    "cantSendCmdBecauseNotRun": "无法执行命令，服务器未开启"
+    "cantSendCmdBecauseNotRun": "无法执行命令，服务器未开启",
+    "dockerPort": "可用端口",
+    "limit": "资源限制"
   },
   "processConfig": {
     "title": "配置列表组",

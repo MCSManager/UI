@@ -324,7 +324,7 @@
     "dockerImage": "Environment image",
     "dockerImageInfo": "Specify instance image",
     "openPort": "Open port",
-    "openPortInfo": "Use space for multiple port. <Opened port on host>:<Opened port of container>, for simplicity, use the same port number.",
+    "openPortInfo": "Use space for multiple port. <port on host>:<port of container>.",
     "portExample": "Optional, For example: 25565:25565/tcp 3380:3380/udp",
     "quickEdit": "Quick edit",
     "extraVolumes": "Extra mount directory",
@@ -455,7 +455,8 @@
     },
     "cantConnectTerm": "Failed to establish connection to the terminal",
     "cantSendCmdBecauseData": "Unable to execute command: data channel unavailable",
-    "cantSendCmdBecauseNotRun": "Unable to execute command: sever not running"
+    "cantSendCmdBecauseNotRun": "Unable to execute command: sever not running",
+    "dockerPort": "Available ports"
   },
   "processConfig": {
     "title": "Configure List Group",

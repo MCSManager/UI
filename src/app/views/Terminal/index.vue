@@ -21,24 +21,51 @@
                 <i class="el-icon-tickets"></i> {{ $t("terminal.type") }}:
                 {{ typeToText(instanceInfo.config.type) }}
               </LineInfo>
+              <LineInfo>
+                <i class="el-icon-tickets"></i> {{ $t("terminal.limit") }}:
+                <span class="color-blue" style="cursor: pointer"> 查看 </span>
+              </LineInfo>
+              <LineInfo v-if="instanceInfo.config.docker && instanceInfo.config.docker.ports">
+                <i class="el-icon-money"></i> {{ $t("terminal.dockerPort") }}
+                <i class="el-icon-question"></i>:
+
+                <div style="padding: 10px 0px 0px 16px">
+                  <div
+                    style="margin-bottom: 2px"
+                    v-for="(item, index) in dockerPortsParse(instanceInfo.config.docker.ports)"
+                    :key="index"
+                  >
+                    <template v-if="!item.more">
+                      <span>{{ $t("CommonText.029") }}: {{ item.p1 }} </span>
+                      <span style="margin-left: 6px"
+                        >{{ $t("CommonText.030") }}: {{ item.p2 }}
+                      </span>
+                      <span style="margin-left: 8px">
+                        <el-tag type="success" size="mini">{{ item.protocol }}</el-tag>
+                      </span>
+                    </template>
+                    <template v-else>...</template>
+                  </div>
+                </div>
+              </LineInfo>
               <LineInfo
                 ><i class="el-icon-finished"></i> {{ $t("imageManager.status") }}:
-                <span v-if="instanceInfo.status === -1" class="color-red">{{
-                  $t("home.maintaining")
-                }}</span>
-                <span v-else-if="instanceInfo.status === 0" class="color-gray">{{
-                  $t("home.outOfRunning")
-                }}</span>
-                <span v-else-if="instanceInfo.status === 1" class="color-yellow">{{
-                  $t("home.stopping")
-                }}</span>
-                <span v-else-if="instanceInfo.status === 2" class="color-yellow">{{
-                  $t("home.starting")
-                }}</span>
-                <span v-else-if="instanceInfo.status === 3" class="color-green">{{
-                  $t("home.running")
-                }}</span>
-                <span v-else class="color-red">{{ $t("terminal.unknown") }}</span>
+                <span v-if="instanceInfo.status === -1" class="color-red">
+                  {{ $t("home.maintaining") }}
+                </span>
+                <span v-else-if="instanceInfo.status === 0" class="color-gray">
+                  {{ $t("home.outOfRunning") }}
+                </span>
+                <span v-else-if="instanceInfo.status === 1" class="color-yellow">
+                  {{ $t("home.stopping") }}
+                </span>
+                <span v-else-if="instanceInfo.status === 2" class="color-yellow">
+                  {{ $t("home.starting") }}
+                </span>
+                <span v-else-if="instanceInfo.status === 3" class="color-green">
+                  {{ $t("home.running") }}
+                </span>
+                <span v-else class="color-red"> {{ $t("terminal.unknown") }} </span>
               </LineInfo>
               <LineInfo v-if="instanceInfo.info && instanceInfo.info.currentPlayers != -1">
                 <i class="el-icon-user"></i> {{ $t("terminal.currentPlayers") }}:
@@ -733,16 +760,16 @@ export default {
       // Create window and pass input event
       const terminalContainer = document.getElementById("terminal-container");
       const ft = localStorage.getItem("terminalFontSize");
-      if (!(ft)) {
+      if (!ft) {
         this.term = initTerminalWindow(terminalContainer, {
-          fontSize: 13,
+          fontSize: 13
         });
       } else {
         this.term = initTerminalWindow(terminalContainer, {
-          fontSize: localStorage.getItem("terminalFontSize"),
+          fontSize: localStorage.getItem("terminalFontSize")
         });
       }
-      
+
       this.term.onData(this.sendInput);
       this.onChangeTerminalContainerHeight();
     },
@@ -1072,6 +1099,34 @@ export default {
           this.$nextTick(() => this.term.fitAddon.fit());
         }
       }
+    },
+
+    // [ "25565:25565/tcp", "27766:27766/tcp" ]
+    dockerPortsParse(list = []) {
+      let line = [];
+      list.forEach((v, index) => {
+        if (index >= 2) return;
+        const tmp = v.split("/");
+        if (tmp.length != 2) return;
+        const protocol = tmp[1];
+        const p = tmp[0].split(":");
+        if (p.length >= 2) {
+          line.push({
+            p1: p[0],
+            p2: p[1],
+            protocol: String(protocol).toUpperCase()
+          });
+        }
+      });
+      if (list.length >= 2) {
+        line.push({
+          p1: null,
+          p2: null,
+          protocol: null,
+          more: true
+        });
+      }
+      return line;
     }
   },
   async mounted() {
