@@ -9,7 +9,7 @@
       <div class="components-warpper">
         <p>{{ $t("selectUnzipCode.info") }}</p>
 
-        <p>
+        <p v-iszh>
           {{ $t("selectUnzipCode.CN") }}
           <br />
           {{ $t("selectUnzipCode.HKorTW") }}
