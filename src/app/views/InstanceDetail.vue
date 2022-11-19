@@ -239,10 +239,12 @@ Copyright (C) 2022 MCSManager <mcsmanager-dev@outlook.com>
 
                 <el-col :lg="8" class="row-mt" :offset="0" v-iszh>
                   <div class="sub-title">
-                    <div class="sub-title-title">{{$t("CommonText.012")}}</div>
-                    <div class="sub-title-info">{{$t("components.NetworkTip.018")}}</div>
+                    <div class="sub-title-title">{{ $t("CommonText.012") }}</div>
+                    <div class="sub-title-info">{{ $t("components.NetworkTip.018") }}</div>
                   </div>
-                  <el-button plain size="big" @click="openNetwork">{{$t("general.read")}}</el-button>
+                  <el-button plain size="big" @click="openNetwork">{{
+                    $t("general.read")
+                  }}</el-button>
                 </el-col>
 
                 <el-col :lg="24" class="row-mt">
@@ -482,9 +484,7 @@ Copyright (C) 2022 MCSManager <mcsmanager-dev@outlook.com>
           <el-row :gutter="20" class="row-mt">
             <el-col :md="24" style="text-align: right">
               <ItemGroup>
-                <el-button size="medium" @click="toConsole">{{
-                  $t("instancesDetail.console")
-                }}</el-button>
+                <el-button @click="toConsole">{{ $t("instancesDetail.console") }}</el-button>
                 <el-button @click="toFileManager">{{
                   $t("instancesDetail.fileManager")
                 }}</el-button>
@@ -499,7 +499,13 @@ Copyright (C) 2022 MCSManager <mcsmanager-dev@outlook.com>
       </template>
     </Panel>
 
-    <NetworkTip v-model:visible="networkTip" :daemonUuid="serviceUuid"></NetworkTip>
+    <NetworkTip
+      v-if="instanceInfo.config?.extraServiceConfig"
+      v-model:visible="networkTip"
+      :extraServiceConfig="instanceInfo.config.extraServiceConfig"
+      @submit="saveConfig"
+    >
+    </NetworkTip>
 
     <!-- 命令助手 -->
     <CommandAssist v-model="commandAssistPanel" :result="commandAssistCallback"></CommandAssist>

@@ -71,19 +71,18 @@
           <p class="sub-title-title">
             {{ $t("components.NetworkTip.009") }}
           </p>
-          <p>
+          <!-- <p>
             {{ $t("CommonText.013") }}
             <span class="color-gray" v-if="taskInfo.status == 0"> {{ $t("CommonText.014") }} </span>
             <span class="color-green" v-if="taskInfo.status == 1">
               {{ $t("CommonText.015") }}
             </span>
             <span class="color-red" v-if="taskInfo.status == -1"> {{ $t("CommonText.016") }} </span>
-          </p>
+          </p> -->
           <p v-if="taskInfo.detail && taskInfo.detail.ip">
             {{ $t("components.NetworkTip.010") }}
             <span class="color-green"> {{ taskInfo.detail.ip }} </span>
           </p>
-          <!-- ./frpc -u <您的UserToken/访问密钥> -p <隧道ID> -->
           <div class="row-mb">
             <div class="sub-title">
               <div class="sub-title-title require-field">
@@ -94,7 +93,7 @@
               </div>
             </div>
             <el-input
-              v-model="indexCode"
+              v-model="config.openFrpToken"
               size="small"
               clearable
               :placeholder="$t('components.NetworkTip.013')"
@@ -103,19 +102,24 @@
           </div>
           <div class="row-mb">
             <div class="sub-title">
-              <div class="sub-title-title require-field">隧道 ID</div>
+              <div class="sub-title-title require-field">{{ $t("CommonText.031") }}</div>
             </div>
-            <el-input v-model="indexCode" size="small" clearable placeholder="隧道ID"> </el-input>
+            <el-input
+              v-model="config.openFrpTunnelId"
+              size="small"
+              clearable
+              :placeholder="$t('CommonText.031')"
+            >
+            </el-input>
           </div>
+
+          {{ instanceInfo }}
 
           <div style="display: flex; justify-content: space-between">
             <div>
               <ItemGroup>
-                <el-button type="primary" size="small" @click="startHiPer" v-if="!isOpen">
-                  {{ $t("CommonText.017") }}
-                </el-button>
-                <el-button type="danger" size="small" @click="stopHiPer" v-if="isOpen">
-                  {{ $t("CommonText.018") }}
+                <el-button type="primary" size="small" @click="saveConfig">
+                  {{ $t("general.save") }}
                 </el-button>
 
                 <el-link
@@ -135,6 +139,8 @@
                 >
                   {{ $t("CommonText.019") }}
                 </el-link>
+
+                <p class="color-gray">{{ $t("components.NetworkTip.019") }}</p>
               </ItemGroup>
             </div>
           </div>
@@ -145,13 +151,14 @@
 </template>
 
 <script>
+// "extraServiceConfig": { "isOpenFrp": false, "openFrpTunnelId": "", "openFrpToken": "" } }
 import Dialog from "@/components/Dialog";
 import SelectBlock from "@/components/SelectBlock";
-import {
-  API_INSTANCE_ASYNC_QUERY,
-  API_INSTANCE_ASYNC_STOP,
-  API_INSTANCE_ASYNC_TASK
-} from "@/app/service/common";
+// import {
+//   API_INSTANCE_ASYNC_QUERY,
+//   API_INSTANCE_ASYNC_STOP,
+//   API_INSTANCE_ASYNC_TASK
+// } from "@/app/service/common";
 import { request } from "@/app/service/protocol";
 import { API_FORWARD_REQUEST, QUERY_PUBLIC_IP } from "../app/service/common";
 export default {
@@ -167,6 +174,10 @@ export default {
     daemonUuid: {
       type: String,
       default: ""
+    },
+    extraServiceConfig: {
+      type: Object,
+      default: () => {}
     }
   },
 
@@ -176,6 +187,8 @@ export default {
       viewType: 0,
       ipv4: "",
       indexCode: "",
+      tunnelId: "",
+      config: {},
       taskInfo: {
         status: 0,
         taskId: "--",
@@ -199,6 +212,7 @@ export default {
   watch: {
     visible(n) {
       this.v = n;
+      this.config = this.extraServiceConfig;
       if (n) this.init();
     }
   },
@@ -225,11 +239,7 @@ export default {
 
     init() {
       this.clearIntervalTask();
-      this.queryStatus();
       this.getPublicIP();
-      this.timeTask = setInterval(() => {
-        this.queryStatus();
-      }, 2500);
     },
 
     show() {
@@ -246,81 +256,86 @@ export default {
       this.viewType = type;
     },
 
-    async startHiPer() {
-      if (!this.indexCode) {
-        return this.$message({
-          message: window.$t("components.NetworkTip.015"),
-          type: "error"
-        });
-      }
-
-      try {
-        await request({
-          method: "POST",
-          url: API_INSTANCE_ASYNC_TASK,
-          params: {
-            remote_uuid: this.daemonUuid,
-            uuid: "-",
-            task_name: "hiper"
-          },
-          data: {
-            indexCode: this.indexCode
-          }
-        });
-        this.$message({
-          message: this.$t("general.success"),
-          type: "success"
-        });
-      } catch (error) {
-        this.$message({
-          message: `${this.$t("general.error")}: ${error.message}`,
-          type: "error"
-        });
-      }
-    },
-
-    async stopHiPer() {
-      try {
-        await request({
-          method: "POST",
-          url: API_INSTANCE_ASYNC_STOP,
-          params: {
-            remote_uuid: this.daemonUuid,
-            uuid: "-",
-            task_name: "hiper"
-          },
-          data: {
-            taskId: this.taskInfo.taskId
-          }
-        });
-        this.$message({
-          message: this.$t("general.success"),
-          type: "success"
-        });
-      } catch (error) {
-        this.$message({
-          message: `${this.$t("general.error")}: ${error.message}`,
-          type: "error"
-        });
-      }
-    },
-
-    async queryStatus() {
-      const taskInfo = await request({
-        method: "POST",
-        url: API_INSTANCE_ASYNC_QUERY,
-        params: {
-          remote_uuid: this.daemonUuid,
-          uuid: "-",
-          task_name: "hiper"
-        },
-        data: {}
-      });
-
-      if (taskInfo.length > 0) {
-        this.taskInfo = taskInfo[0];
-      }
+    saveConfig() {
+      this.$emit("submit", this.config);
+      this.close();
     }
+
+    // async startHiPer() {
+    //   if (!this.indexCode) {
+    //     return this.$message({
+    //       message: window.$t("components.NetworkTip.015"),
+    //       type: "error"
+    //     });
+    //   }
+
+    //   try {
+    //     await request({
+    //       method: "POST",
+    //       url: API_INSTANCE_ASYNC_TASK,
+    //       params: {
+    //         remote_uuid: this.daemonUuid,
+    //         uuid: "-",
+    //         task_name: "hiper"
+    //       },
+    //       data: {
+    //         indexCode: this.indexCode
+    //       }
+    //     });
+    //     this.$message({
+    //       message: this.$t("general.success"),
+    //       type: "success"
+    //     });
+    //   } catch (error) {
+    //     this.$message({
+    //       message: `${this.$t("general.error")}: ${error.message}`,
+    //       type: "error"
+    //     });
+    //   }
+    // },
+
+    // async stopHiPer() {
+    //   try {
+    //     await request({
+    //       method: "POST",
+    //       url: API_INSTANCE_ASYNC_STOP,
+    //       params: {
+    //         remote_uuid: this.daemonUuid,
+    //         uuid: "-",
+    //         task_name: "hiper"
+    //       },
+    //       data: {
+    //         taskId: this.taskInfo.taskId
+    //       }
+    //     });
+    //     this.$message({
+    //       message: this.$t("general.success"),
+    //       type: "success"
+    //     });
+    //   } catch (error) {
+    //     this.$message({
+    //       message: `${this.$t("general.error")}: ${error.message}`,
+    //       type: "error"
+    //     });
+    //   }
+    // },
+
+    // async queryStatus() {
+    //   const taskInfo = await request({
+    //     method: "POST",
+    //     url: API_INSTANCE_ASYNC_QUERY,
+    //     params: {
+    //       remote_uuid: this.daemonUuid,
+    //       uuid: "-",
+    //       task_name: "hiper"
+    //     },
+    //     data: {}
+    //   });
+
+    //   if (taskInfo.length > 0) {
+    //     this.taskInfo = taskInfo[0];
+    //   }
+    // }
   }
 };
 </script>

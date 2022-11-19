@@ -21,6 +21,13 @@
                 <i class="el-icon-tickets"></i> {{ $t("terminal.type") }}:
                 {{ typeToText(instanceInfo.config.type) }}
               </LineInfo>
+              <LineInfo v-if="instanceInfo.info?.openFrpStatus">
+                <i class="el-icon-share"></i> {{ $t("terminal.openfrp") }}:
+                <span class="color-green">
+                  {{ $t("instances.status.running") }}
+                </span>
+              </LineInfo>
+
               <LineInfo v-if="hasDocker">
                 <i class="el-icon-tickets"></i> {{ $t("terminal.limit") }}:
                 <span class="color-blue" style="cursor: pointer" @click="openDockerInfoDialog">
@@ -65,7 +72,7 @@
                   {{ $t("home.starting") }}
                 </span>
                 <span v-else-if="instanceInfo.status === 3" class="color-green">
-                  {{ $t("home.running") }}
+                  {{ $t("instances.status.running") }}
                 </span>
                 <span v-else class="color-red"> {{ $t("terminal.unknown") }} </span>
               </LineInfo>

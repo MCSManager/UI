@@ -27,7 +27,10 @@
     "025": "Delete",
     "026": "New directory",
     "027": "Compression (ZIP)",
-    "028": "Decompress (ZIP)"
+    "028": "Decompress (ZIP)",
+    "029": "the host",
+    "030": "container",
+    "031": "tunnel-id"
   },
   "general": {
     "search": "Search",
@@ -456,7 +459,9 @@
     "cantConnectTerm": "Failed to establish connection to the terminal",
     "cantSendCmdBecauseData": "Unable to execute command: data channel unavailable",
     "cantSendCmdBecauseNotRun": "Unable to execute command: sever not running",
-    "dockerPort": "Available ports"
+    "dockerPort": "Available ports",
+    "limit": "resource constraints",
+    "openfrp": "Intranet mapping"
   },
   "processConfig": {
     "title": "Configure List Group",
@@ -1103,7 +1108,8 @@
       "015": "Please fill in the index code",
       "016": "Hi~, is it the first time to deploy a server? \nPlease choose a network connection method!",
       "017": "I know how to go online, I don't need any tutorials",
-      "018": "Learn how to let others connect to the application service"
+      "018": "Learn how to let others connect to the application service",
+      "019": "The mapper is automatically run when the instance is started after saving."
     }
   }
 }
