@@ -36,7 +36,7 @@
                 <span>{{ $t("termSet.col") }}</span>
                 <el-input
                   v-model="options.ptyWindowCol"
-                  :disabled="!options.pty"
+                  :disabled="!options.pty || isDisable"
                   size="small"
                   style="width: 80px"
                 >
@@ -44,7 +44,7 @@
                 &nbsp;
                 <span>{{ $t("termSet.line") }}</span>
                 <el-input
-                  :disabled="!options.pty"
+                  :disabled="!options.pty || isDisable"
                   v-model="options.ptyWindowRow"
                   size="small"
                   style="width: 80px"
@@ -195,6 +195,10 @@ export default {
     },
     instanceUuid: {
       type: String
+    },
+    isDisable: {
+      type: Boolean,
+      default: false
     }
   },
   data() {

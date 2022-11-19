@@ -541,6 +541,7 @@
       v-model:visible="terminalSettingPanel.visible"
       v-model:config="terminalSettingPanel"
       :serviceUuid="serviceUuid"
+      :isDisable="instanceInfo.status != 0"
       :instanceUuid="instanceUuid"
     >
     </TermSetting>

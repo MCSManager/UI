@@ -1086,7 +1086,7 @@
     },
     "Terminal_TermSetting": {
       "001": "Terminal font size",
-      "002": "The default is 13px, after the change, refresh the page to take effect"
+      "002": "The default value is 12px, and it will take effect after refreshing the webpage after the change. Changing this item may cause the emulation terminal text to be blocked."
     }
   },
   "components": {
