@@ -123,13 +123,13 @@ Copyright (C) 2022 MCSManager <mcsmanager-dev@outlook.com>
                   <div class="sub-title">
                     <div class="sub-title-title">{{ $t("instancesDetail.updateCmd") }}</div>
                     <div class="sub-title-info">
-                      {{ $t("instancesDetail.updateCmdInfo") }}
+                      {{ $t("instancesDetail.updateCmdInfo", { t: "${mcsm_workspace}" }) }}
                     </div>
                   </div>
                   <el-input
                     v-model="instanceInfo.config.updateCommand"
                     type="text"
-                    :placeholder="$t('instancesDetail.updateCmdExample')"
+                    :placeholder="defaultInstallCommand"
                   >
                   </el-input>
                 </el-col>
@@ -555,7 +555,8 @@ export default {
       imageListLoading: false,
       networkModeListLoading: false,
       commandAssistPanel: false,
-
+      defaultInstallCommand:
+        'D:/SteamCMD/steamcmd.exe +login anonymous +force_install_dir "${mcsm_workspace}" "+app_update 380870 validate" +quit',
       dockerImages: [],
 
       // Docker port configuration table fields
