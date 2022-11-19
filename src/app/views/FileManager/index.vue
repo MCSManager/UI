@@ -198,7 +198,7 @@
 
         <div class="row-mt page-pagination">
           <div>
-            <el-link type="primary" :underline="false" href="javascript:void(0);">-</el-link>
+            <!-- <el-link type="primary" :underline="false" href="javascript:void(0);">-</el-link> -->
           </div>
           <el-pagination
             small
