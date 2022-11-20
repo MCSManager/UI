@@ -1,3 +1,6 @@
+<!--
+  Copyright (C) 2022 MCSManager <mcsmanager-dev@outlook.com>
+-->
 <template>
   <Dialog v-model="v" :cancel="close">
     <template #title> {{ $t("CommonText.012") }} </template>
@@ -65,12 +68,15 @@
         </div>
 
         <div v-if="viewType === 2">
-          <p class="sub-title-title row-mb">
-            {{ $t("components.NetworkTip.008") }}
-          </p>
-          <p class="sub-title-title">
-            {{ $t("components.NetworkTip.009") }}
-          </p>
+          <div class="row-mb">
+            <p class="sub-title-title">
+              {{ $t("components.NetworkTip.008") }}
+            </p>
+            <p class="sub-title-title">
+              {{ $t("components.NetworkTip.009") }}
+            </p>
+          </div>
+
           <!-- <p>
             {{ $t("CommonText.013") }}
             <span class="color-gray" v-if="taskInfo.status == 0"> {{ $t("CommonText.014") }} </span>
@@ -151,35 +157,16 @@
 </template>
 
 <script>
-// "extraServiceConfig": { "isOpenFrp": false, "openFrpTunnelId": "", "openFrpToken": "" } }
 import Dialog from "@/components/Dialog";
 import SelectBlock from "@/components/SelectBlock";
-// import {
-//   API_INSTANCE_ASYNC_QUERY,
-//   API_INSTANCE_ASYNC_STOP,
-//   API_INSTANCE_ASYNC_TASK
-// } from "@/app/service/common";
 import { request } from "@/app/service/protocol";
-import { API_FORWARD_REQUEST, QUERY_PUBLIC_IP } from "../app/service/common";
+import { API_FORWARD_REQUEST, API_INSTANCE_UPDATE, QUERY_PUBLIC_IP } from "../app/service/common";
 export default {
   components: {
     Dialog,
     SelectBlock
   },
-  props: {
-    visible: {
-      type: Boolean,
-      default: false
-    },
-    daemonUuid: {
-      type: String,
-      default: ""
-    },
-    extraServiceConfig: {
-      type: Object,
-      default: () => {}
-    }
-  },
+  props: ["serviceUuid", "instanceUuid", "extraServiceConfig"],
 
   data() {
     return {
@@ -188,13 +175,12 @@ export default {
       ipv4: "",
       indexCode: "",
       tunnelId: "",
-      config: {},
+      // config: {},
       taskInfo: {
         status: 0,
         taskId: "--",
         ip: ""
-      },
-      timeTask: null
+      }
     };
   },
 
@@ -205,15 +191,7 @@ export default {
 
     isFromTerminal() {
       const r = this.$route.query.network_tip ? true : false;
-
       return r;
-    }
-  },
-  watch: {
-    visible(n) {
-      this.v = n;
-      this.config = this.extraServiceConfig;
-      if (n) this.init();
     }
   },
 
@@ -233,116 +211,57 @@ export default {
       }
     },
 
-    clearIntervalTask() {
-      if (this.timeTask) clearInterval(this.timeTask);
-    },
-
     init() {
-      this.clearIntervalTask();
       this.getPublicIP();
     },
 
-    show() {
-      this.$emit("update:visible", true);
+    open() {
+      this.init();
+      this.v = true;
     },
 
     close() {
-      this.$emit("update:visible", false);
+      this.v = false;
       this.clearIntervalTask();
       this.viewType = 0;
     },
 
     select(type) {
+      console.log("extraServiceConfig", this.extraServiceConfig);
+      this.config = this.extraServiceConfig;
       this.viewType = type;
     },
 
-    saveConfig() {
+    async saveConfig() {
       this.$emit("submit", this.config);
+      await this.updateFrpConfig();
       this.close();
+    },
+
+    async updateFrpConfig() {
+      try {
+        await request({
+          method: "PUT",
+          url: API_INSTANCE_UPDATE,
+          params: { remote_uuid: this.serviceUuid, uuid: this.instanceUuid },
+          data: {
+            extraServiceConfig: this.config
+          }
+        });
+        this.$message({
+          type: "success",
+          message: this.$t("termSet.setUpdate")
+        });
+      } catch (error) {
+        this.$message({
+          message: `${this.$t("general.error")}: ${error.message}`,
+          type: "error"
+        });
+      }
     }
-
-    // async startHiPer() {
-    //   if (!this.indexCode) {
-    //     return this.$message({
-    //       message: window.$t("components.NetworkTip.015"),
-    //       type: "error"
-    //     });
-    //   }
-
-    //   try {
-    //     await request({
-    //       method: "POST",
-    //       url: API_INSTANCE_ASYNC_TASK,
-    //       params: {
-    //         remote_uuid: this.daemonUuid,
-    //         uuid: "-",
-    //         task_name: "hiper"
-    //       },
-    //       data: {
-    //         indexCode: this.indexCode
-    //       }
-    //     });
-    //     this.$message({
-    //       message: this.$t("general.success"),
-    //       type: "success"
-    //     });
-    //   } catch (error) {
-    //     this.$message({
-    //       message: `${this.$t("general.error")}: ${error.message}`,
-    //       type: "error"
-    //     });
-    //   }
-    // },
-
-    // async stopHiPer() {
-    //   try {
-    //     await request({
-    //       method: "POST",
-    //       url: API_INSTANCE_ASYNC_STOP,
-    //       params: {
-    //         remote_uuid: this.daemonUuid,
-    //         uuid: "-",
-    //         task_name: "hiper"
-    //       },
-    //       data: {
-    //         taskId: this.taskInfo.taskId
-    //       }
-    //     });
-    //     this.$message({
-    //       message: this.$t("general.success"),
-    //       type: "success"
-    //     });
-    //   } catch (error) {
-    //     this.$message({
-    //       message: `${this.$t("general.error")}: ${error.message}`,
-    //       type: "error"
-    //     });
-    //   }
-    // },
-
-    // async queryStatus() {
-    //   const taskInfo = await request({
-    //     method: "POST",
-    //     url: API_INSTANCE_ASYNC_QUERY,
-    //     params: {
-    //       remote_uuid: this.daemonUuid,
-    //       uuid: "-",
-    //       task_name: "hiper"
-    //     },
-    //     data: {}
-    //   });
-
-    //   if (taskInfo.length > 0) {
-    //     this.taskInfo = taskInfo[0];
-    //   }
-    // }
   }
 };
 </script>
-
-<!--
-  Copyright (C) 2022 MCSManager <mcsmanager-dev@outlook.com>
--->
 
 <style scoped>
 .wrapper {

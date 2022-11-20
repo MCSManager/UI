@@ -500,12 +500,11 @@ Copyright (C) 2022 MCSManager <mcsmanager-dev@outlook.com>
     </Panel>
 
     <NetworkTip
-      v-if="instanceInfo.config?.extraServiceConfig"
-      v-model:visible="networkTip"
+      ref="networkTip"
       :extraServiceConfig="instanceInfo.config.extraServiceConfig"
-      @submit="saveConfig"
-    >
-    </NetworkTip>
+      :instanceUuid="instanceUuid"
+      :serviceUuid="serviceUuid"
+    ></NetworkTip>
 
     <!-- 命令助手 -->
     <CommandAssist v-model="commandAssistPanel" :result="commandAssistCallback"></CommandAssist>
@@ -599,7 +598,7 @@ export default {
       router.go(-1);
     },
     openNetwork() {
-      this.networkTip = true;
+      this.$refs.networkTip.open();
     },
     instanceTypeChange(type) {
       const config = INSTANCE_TYPE_DEF_CONFIG[type];
@@ -637,12 +636,9 @@ export default {
         } else {
           postData.docker.extraVolumes = [];
         }
-        console.log(this.instanceInfo.config);
         if (!this.instanceInfo.config.endTime) postData.endTime = "";
         else if (typeof this.instanceInfo.config.endTime === "object")
           postData.endTime = this.instanceInfo.config.endTime.toLocaleDateString();
-
-        console.log(postData);
         await request({
           method: "PUT",
           url: API_INSTANCE,

@@ -546,7 +546,14 @@
     >
     </TermSetting>
 
-    <NetworkTip v-model:visible="visibleNetworkTip" :daemonUuid="serviceUuid"></NetworkTip>
+    <NetworkTip
+      ref="networkTip"
+      :extraServiceConfig="instanceInfo.config.extraServiceConfig"
+      :instanceUuid="instanceUuid"
+      :serviceUuid="serviceUuid"
+    >
+    </NetworkTip>
+
     <DockerInfo
       v-if="instanceInfo.config.docker"
       ref="dockerInfoDialog"
@@ -997,9 +1004,8 @@ export default {
           url: API_INSTANCE_UPDATE,
           params: { remote_uuid: this.serviceUuid, uuid: this.instanceUuid },
           data: {
-            pingConfig: this.pingConfigForm.is ? this.pingConfigForm : {},
-            eventTask: this.eventConfigPanel.visible ? this.eventConfigPanel : {},
-            terminalOption: {}
+            pingConfig: this.pingConfigForm.is ? this.pingConfigForm : null,
+            eventTask: this.eventConfigPanel.visible ? this.eventConfigPanel : null
           }
         });
         this.$message({
@@ -1176,6 +1182,10 @@ export default {
     } catch (error) {
       console.error(error);
       // neglect
+    } finally {
+      if (this.visibleNetworkTip) {
+        this.$refs.networkTip.open();
+      }
     }
 
     // Listen for window change events

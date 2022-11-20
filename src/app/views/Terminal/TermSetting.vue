@@ -239,8 +239,6 @@ export default {
             terminalOption: {
               ...this.options
             },
-            pingConfig: {},
-            eventTask: {},
             crlf: this.options.crlf,
             ie: this.options.ie,
             oe: this.options.oe,
