@@ -1,14 +1,17 @@
 <!--
   Copyright (C) 2022 MCSManager <mcsmanager-dev@outlook.com>
 -->
-
 <template>
   <Panel>
     <template #title>
       {{ $t("fileManagerEditor.title") }}
       {{ target }}
-      <el-tag type="warning" effect="plain" size="small" v-if="editStatus === 'edit'">编辑中</el-tag>
-      <el-tag type="success" effect="plain" size="small" v-if="editStatus === 'success'">已保存</el-tag>
+      <el-tag type="warning" effect="plain" size="small" v-if="editStatus === 'edit'">{{
+        $t("CommonText.032")
+      }}</el-tag>
+      <el-tag type="success" effect="plain" size="small" v-if="editStatus === 'success'">{{
+        $t("CommonText.033")
+      }}</el-tag>
     </template>
     <template #default>
       <div class="instance-table-wrapper">
@@ -23,14 +26,12 @@
               {{ $t("general.refresh") }}
             </el-button>
             <el-button size="small" @click="jumpToLine">
-              <i class="el-icon-sort-down"></i>
-              跳转行
-            </el-button>
+              <i class="el-icon-sort-down"></i>{{ $t("CommonText.034") }}</el-button
+            >
             <el-dropdown :hide-on-click="false">
               <el-button type="default" size="small">
-                <i class="el-icon-setting"></i>
-                编辑器设置
-                <i class="el-icon-arrow-down el-icon--right"></i>
+                <i class="el-icon-setting"></i>{{ $t("views.FileManagerEditor.001")
+                }}<i class="el-icon-arrow-down el-icon--right"></i>
               </el-button>
               <template #dropdown>
                 <el-dropdown-menu>
@@ -40,8 +41,8 @@
                       @change="setWrapMode($event)"
                       active-color="#13ce66"
                       inactive-color="#ff4949"
-                      active-text="自动换行"
-                    />
+                      :active-text="$t('CommonText.035')"
+                    ></el-switch>
                   </el-dropdown-item>
                   <el-dropdown-item>
                     <el-switch
@@ -49,8 +50,8 @@
                       @change="setBehavioursEnabled($event)"
                       active-color="#13ce66"
                       inactive-color="#ff4949"
-                      active-text="自动补全"
-                    />
+                      :active-text="$t('CommonText.036')"
+                    ></el-switch>
                   </el-dropdown-item>
                   <el-dropdown-item>
                     <el-switch
@@ -58,8 +59,8 @@
                       @change="setHighlightActiveLine($event)"
                       active-color="#13ce66"
                       inactive-color="#ff4949"
-                      active-text="高亮当前行"
-                    />
+                      :active-text="$t('views.FileManagerEditor.002')"
+                    ></el-switch>
                   </el-dropdown-item>
                   <el-dropdown-item>
                     <el-switch
@@ -67,8 +68,8 @@
                       @change="setReadOnly($event)"
                       active-color="#13ce66"
                       inactive-color="#ff4949"
-                      active-text="只读模式"
-                    />
+                      :active-text="$t('CommonText.037')"
+                    ></el-switch>
                   </el-dropdown-item>
                   <el-dropdown-item>
                     <el-switch
@@ -76,8 +77,8 @@
                       @change="setShowInvisibles($event)"
                       active-color="#13ce66"
                       inactive-color="#ff4949"
-                      active-text="显示隐藏字符"
-                    />
+                      :active-text="$t('views.FileManagerEditor.003')"
+                    ></el-switch>
                   </el-dropdown-item>
                   <el-dropdown-item>
                     <el-switch
@@ -85,8 +86,8 @@
                       @change="setEnableMultiselect($event)"
                       active-color="#13ce66"
                       inactive-color="#ff4949"
-                      active-text="选中多行"
-                    />
+                      :active-text="$t('CommonText.038')"
+                    ></el-switch>
                   </el-dropdown-item>
                   <el-dropdown-item>
                     <el-switch
@@ -94,8 +95,8 @@
                       @change="setShowLineNumbers($event)"
                       active-color="#13ce66"
                       inactive-color="#ff4949"
-                      active-text="显示行号"
-                    />
+                      :active-text="$t('CommonText.039')"
+                    ></el-switch>
                   </el-dropdown-item>
                 </el-dropdown-menu>
               </template>
@@ -104,16 +105,26 @@
               v-model="editorSettings.theme"
               filterable
               size="small"
-              placeholder="编辑器主题"
               @change="changeEditorTheme($event)"
+              :placeholder="$t('views.FileManagerEditor.004')"
             >
-            <el-option v-for="item in editorThemes" :key="item" :label="item" :value="item"></el-option>
+              <el-option
+                v-for="item in editorThemes"
+                :key="item"
+                :label="item"
+                :value="item"
+              ></el-option>
             </el-select>
-            <el-input-number v-model="editorSettings.fontSize" @change="changeEditorFontsize($event)" :min="1" :max="114.514" size="small"></el-input-number>
+            <el-input-number
+              v-model="editorSettings.fontSize"
+              @change="changeEditorFontsize($event)"
+              :min="1"
+              :max="114.514"
+              size="small"
+            ></el-input-number>
             <el-button type="default" size="small" @click="toHotKey">
-              <i class="el-icon-sort-down"></i>
-              快捷键提示
-            </el-button>
+              <i class="el-icon-sort-down"></i>{{ $t("views.FileManagerEditor.005") }}</el-button
+            >
             <el-button size="small" @click="back" v-if="!backType">
               <i class="el-icon-pie-chart"></i>
               {{ $t("fileManagerEditor.backToFileManager") }}
@@ -127,7 +138,8 @@
             type="primary"
             plain
             v-if="backType == 1"
-          >{{ $t("fileManagerEditor.backViaHistory") }}</el-button>
+            >{{ $t("fileManagerEditor.backViaHistory") }}</el-button
+          >
         </div>
       </div>
       <div v-show="!error" style="overflow: auto">
@@ -149,14 +161,16 @@
     </template>
   </Panel>
 </template>
+
 <script>
 import Panel from "../../components/Panel";
 import { API_FILE_URL } from "../service/common";
 import path from "path";
 import { request } from "../service/protocol";
-
 export default {
-  components: { Panel },
+  components: {
+    Panel
+  },
   data() {
     return {
       serviceUuid: this.$route.params.serviceUuid,
@@ -224,7 +238,6 @@ export default {
       editorHotKey: false
     };
   },
-
   async mounted() {
     await this.render();
     this.editor = window.ace.edit("editor");
@@ -244,7 +257,10 @@ export default {
     });
     this.editor.commands.addCommand({
       name: "saveFile",
-      bindKey: { win: "Ctrl-S", mac: "Command-S" },
+      bindKey: {
+        win: "Ctrl-S",
+        mac: "Command-S"
+      },
       exec: () => {
         this.saveFile();
         this.editStatus = "success";
@@ -276,15 +292,15 @@ export default {
     },
     jumpToLine() {
       this.editor.find();
-      this.$prompt("跳转到指定行", "提示", {
-        confirmButtonText: "确定",
-        cancelButtonText: "取消",
+      this.$prompt(window.$t("views.FileManagerEditor.006"), window.$t("CommonText.040"), {
+        confirmButtonText: window.$t("CommonText.041"),
+        cancelButtonText: window.$t("CommonText.042"),
         inputPattern: /^[0-9]*$/,
-        inputErrorMessage: "格式不正确"
+        inputErrorMessage: window.$t("views.FileManagerEditor.007")
       }).then(({ value }) => {
         this.$message({
           type: "success",
-          message: "已跳转到第 " + value + " 行"
+          message: window.$t("views.FileManagerEditor.008") + value + window.$t("CommonText.043")
         });
         this.editor.gotoLine(value);
       });
@@ -315,11 +331,14 @@ export default {
       localStorage.setItem("editorTheme", val);
     },
     toHotKey() {
-      window.open('https://github.com/ajaxorg/ace/wiki/Default-Keyboard-Shortcuts')
+      window.open("https://github.com/ajaxorg/ace/wiki/Default-Keyboard-Shortcuts");
     },
     async refresh() {
       await this.render();
-      this.$message({ message: this.$t("general.refreshFinish"), type: "success" });
+      this.$message({
+        message: this.$t("general.refreshFinish"),
+        type: "success"
+      });
     },
     async backTerminal() {
       this.$router.push({
@@ -328,19 +347,18 @@ export default {
     },
     async back() {
       if (this.editStatus === "edit") {
-        this.$confirm("你还未保存文件, 是否继续返回?", "提示", {
-          confirmButtonText: "确定",
-          cancelButtonText: "取消",
+        this.$confirm(window.$t("views.FileManagerEditor.009"), window.$t("CommonText.040"), {
+          confirmButtonText: window.$t("CommonText.041"),
+          cancelButtonText: window.$t("CommonText.042"),
           type: "warning"
-        })
-          .then(() => {
-            this.$router.push({
-              path: `/file/${this.serviceUuid}/${this.instanceUuid}/`,
-              query: {
-                path: path.dirname(this.target)
-              }
-            });
-          })
+        }).then(() => {
+          this.$router.push({
+            path: `/file/${this.serviceUuid}/${this.instanceUuid}/`,
+            query: {
+              path: path.dirname(this.target)
+            }
+          });
+        });
       } else {
         this.$router.push({
           path: `/file/${this.serviceUuid}/${this.instanceUuid}/`,
@@ -353,7 +371,6 @@ export default {
     backViaHistory() {
       this.$router.go(-1);
     },
-
     async render() {
       try {
         const text = await request({
@@ -375,7 +392,6 @@ export default {
         this.error = error.message;
       }
     },
-
     async saveFile() {
       this.edit.text = this.editor.getValue();
       await request({
@@ -390,7 +406,10 @@ export default {
           target: this.target
         }
       });
-      this.$message({ message: this.$t("fileManagerEditor.updateTextSuccess"), type: "success" });
+      this.$message({
+        message: this.$t("fileManagerEditor.updateTextSuccess"),
+        type: "success"
+      });
     }
   }
 };

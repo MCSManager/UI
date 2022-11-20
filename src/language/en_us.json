@@ -30,7 +30,19 @@
     "028": "Decompress (ZIP)",
     "029": "the host",
     "030": "container",
-    "031": "tunnel-id"
+    "031": "tunnel-id",
+    "032": "Edit",
+    "033": "Saved",
+    "034": "jump line",
+    "035": "word wrap",
+    "036": "Autocomplete",
+    "037": "read-only mode",
+    "038": "Select multiple rows",
+    "039": "show line number",
+    "040": "hint",
+    "041": "Sure",
+    "042": "Cancel",
+    "043": "Row"
   },
   "general": {
     "search": "Search",
@@ -1087,6 +1099,17 @@
     "Terminal_TermSetting": {
       "001": "Terminal font size",
       "002": "The default value is 12px, and it will take effect after refreshing the webpage after the change. Changing this item may cause the emulation terminal text to be blocked."
+    },
+    "FileManagerEditor": {
+      "001": "editor settings",
+      "002": "highlight current line",
+      "003": "show hidden characters",
+      "004": "editor theme",
+      "005": "KeyTips",
+      "006": "jump to the specified line",
+      "007": "incorrect format",
+      "008": "Jumped to the",
+      "009": "You haven't saved the file yet, do you want to go back?"
     }
   },
   "components": {
