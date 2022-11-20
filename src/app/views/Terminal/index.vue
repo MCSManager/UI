@@ -82,7 +82,7 @@
                 {{ instanceInfo.info.maxPlayers }}
               </LineInfo>
               <LineInfo v-if="instanceInfo.info && instanceInfo.info.version">
-                <i class="el-icon-user"></i> {{ $t("services.version") }}:
+                <i class="el-icon-collection"></i> {{ $t("services.version") }}:
                 {{ instanceInfo.info.version }}
               </LineInfo>
             </div>
