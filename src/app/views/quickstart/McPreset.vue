@@ -9,7 +9,6 @@
       <template #default>
         <div v-loading="requestLoading">
           <div v-if="tableData && tableData.length > 0">
-            <p>{{ $t("views.quickstart_McPreset.002", [remoteUuid]) }}</p>
             <el-table :data="tableData" size="small" stripe style="width: 100%">
               <el-table-column
                 prop="info"
@@ -35,18 +34,29 @@
                   $t("views.quickstart_McPreset.006", [scope.row.size])
                 }}</template>
               </el-table-column>
-              <el-table-column prop="remark" :label="$t('CommonText.007')"></el-table-column>
+              <el-table-column
+                prop="remark"
+                width="300px"
+                :label="$t('CommonText.007')"
+              ></el-table-column>
               <el-table-column :label="$t('CommonText.008')">
                 <template v-slot="scope">
                   <el-button
                     type="success"
                     size="small"
                     @click="handleSelectTemplate(scope.$index, scope.row)"
-                    >{{ $t("CommonText.009") }}</el-button
                   >
+                    {{ $t("CommonText.009") }}
+                  </el-button>
                 </template>
               </el-table-column>
             </el-table>
+            <p>
+              {{ $t("views.quickstart_McPreset.eulaReadTitle") }}
+              <a href="https://aka.ms/MinecraftEULA" target="_blank" rel="noopener noreferrer">
+                https://aka.ms/MinecraftEULA
+              </a>
+            </p>
             <p>{{ $t("views.quickstart_McPreset.007") }}</p>
           </div>
           <div v-else-if="!requestLoading" class="flex flex-align-items-center flex-space-center">
