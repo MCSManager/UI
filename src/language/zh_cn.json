@@ -963,7 +963,9 @@
     "ohhhInfo": "最后，您是第一次使用此软件吗？",
     "firstTime": "首次使用",
     "oldUSer": "老用户",
-    "adminOK": "管理员已创建"
+    "adminOK": "管理员已创建",
+    "stoppedServiceTitle": "正在维护中",
+    "stoppedServiceContent": "很抱歉，无法获取最新预设整合包列表，可能是您的网络问题或服务器正在维护中。"
   },
   "notify": {
     "connectDaemonError": "访问远程节点异常",

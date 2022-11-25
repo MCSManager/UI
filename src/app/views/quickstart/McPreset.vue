@@ -7,48 +7,58 @@
     <Panel style="width: 100%" v-if="!installView">
       <template #title>{{ $t("views.quickstart_McPreset.001") }}</template>
       <template #default>
-        <p>{{ $t("views.quickstart_McPreset.002", [remoteUuid]) }}</p>
-        <el-table
-          :data="tableData"
-          size="small"
-          stripe
-          style="width: 100%"
-          v-loading="requestLoading"
-        >
-          <el-table-column
-            prop="info"
-            min-width="300px"
-            :label="$t('CommonText.006')"
-          ></el-table-column>
-          <el-table-column
-            prop="mc"
-            width="120px"
-            :label="$t('views.quickstart_McPreset.003')"
-          ></el-table-column>
-          <el-table-column
-            prop="java"
-            width="120px"
-            :label="$t('views.quickstart_McPreset.004')"
-          ></el-table-column>
-          <el-table-column prop="size" width="120px" :label="$t('views.quickstart_McPreset.005')">
-            <template v-slot="scope">{{
-              $t("views.quickstart_McPreset.006", [scope.row.size])
-            }}</template>
-          </el-table-column>
-          <el-table-column prop="remark" :label="$t('CommonText.007')"></el-table-column>
-          <el-table-column :label="$t('CommonText.008')">
-            <template v-slot="scope">
-              <el-button
-                type="success"
-                size="small"
-                @click="handleSelectTemplate(scope.$index, scope.row)"
-                >{{ $t("CommonText.009") }}</el-button
+        <div v-loading="requestLoading">
+          <div v-if="tableData && tableData.length > 0">
+            <p>{{ $t("views.quickstart_McPreset.002", [remoteUuid]) }}</p>
+            <el-table :data="tableData" size="small" stripe style="width: 100%">
+              <el-table-column
+                prop="info"
+                min-width="300px"
+                :label="$t('CommonText.006')"
+              ></el-table-column>
+              <el-table-column
+                prop="mc"
+                width="120px"
+                :label="$t('views.quickstart_McPreset.003')"
+              ></el-table-column>
+              <el-table-column
+                prop="java"
+                width="120px"
+                :label="$t('views.quickstart_McPreset.004')"
+              ></el-table-column>
+              <el-table-column
+                prop="size"
+                width="120px"
+                :label="$t('views.quickstart_McPreset.005')"
               >
-            </template>
-          </el-table-column>
-        </el-table>
-
-        <p>{{ $t("views.quickstart_McPreset.007") }}</p>
+                <template v-slot="scope">{{
+                  $t("views.quickstart_McPreset.006", [scope.row.size])
+                }}</template>
+              </el-table-column>
+              <el-table-column prop="remark" :label="$t('CommonText.007')"></el-table-column>
+              <el-table-column :label="$t('CommonText.008')">
+                <template v-slot="scope">
+                  <el-button
+                    type="success"
+                    size="small"
+                    @click="handleSelectTemplate(scope.$index, scope.row)"
+                    >{{ $t("CommonText.009") }}</el-button
+                  >
+                </template>
+              </el-table-column>
+            </el-table>
+            <p>{{ $t("views.quickstart_McPreset.007") }}</p>
+          </div>
+          <div v-else-if="!requestLoading" class="flex flex-align-items-center flex-space-center">
+            <div style="text-align: center">
+              <i class="el-icon-warning-outline" style="font-size: 100px"></i>
+              <h2>{{ $t("install.stoppedServiceTitle") }}</h2>
+              <div>
+                <p>{{ $t("install.stoppedServiceContent") }}</p>
+              </div>
+            </div>
+          </div>
+        </div>
       </template>
     </Panel>
 
@@ -130,14 +140,20 @@ export default {
   methods: {
     async init() {
       this.requestLoading = true;
-      const data = await request({
-        method: "GET",
-        url: API_GET_QUICK_INSTALL_LIST_ADDR
-      });
-      this.tableData = data;
-      this.requestLoading = false; // 直接前往详情页
+      try {
+        const data = await request({
+          method: "GET",
+          url: API_GET_QUICK_INSTALL_LIST_ADDR
+        });
+        this.tableData = data || [];
+      } catch (error) {
+        this.$message({ type: "error", message: error.message });
+        this.tableData = null;
+      } finally {
+        this.requestLoading = false;
+      }
 
-      if (this.taskId) {
+      if (this.taskId && this.tableData) {
         this.percentage = 50;
         this.startDownloadTask();
       }
