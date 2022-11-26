@@ -789,7 +789,7 @@ export default {
       const ft = localStorage.getItem("terminalFontSize");
       if (!ft) {
         this.term = initTerminalWindow(terminalContainer, {
-          fontSize: 13
+          fontSize: 12
         });
       } else {
         this.term = initTerminalWindow(terminalContainer, {
