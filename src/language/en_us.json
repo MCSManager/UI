@@ -1124,7 +1124,7 @@
     "NetworkTip": {
       "001": "Server public IP connection",
       "002": "You must have a server with a public IP before you can use this method to connect to the Internet.",
-      "003": "home network connection",
+      "003": "home network connection (Windows only)",
       "004": "Use the distributed virtual local area network service provided by the third party to connect to realize home network access.",
       "005": "Server IP address: {0}",
       "006": "When you choose to use the public IP, MCSManager does not need to do anything, you only need to use the public IP address and the default port number of your software to allow others to connect to your server, such as {0}:25565.",
