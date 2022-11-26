@@ -896,7 +896,8 @@
       "qrCode": "Donation QR Code:",
       "ver": "Current Theme Version: ",
       "checkVer": "Check for Update"
-    }
+    },
+    "aboutTitle2": "You may copy or modify the source code, but you must keep all the copyright notice and attach it Powered by MCSManager."
   },
   "home": {
     "totalInstance": "Total Number of Instances",

@@ -166,7 +166,7 @@
             <span v-html="$t('settings.aboutTitle')"></span>
           </p>
           <p class="sub-title-info">
-            <span v-text="$t('settings.aboutTitleInfo')"></span>
+            {{ $t("settings.aboutTitle2") }}
           </p>
         </div>
 

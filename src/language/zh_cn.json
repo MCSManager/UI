@@ -874,8 +874,8 @@
     "attention": "注意事项",
     "attentionInfo": "这些配置设置需要一部分专业知识，您可以根据您的硬件设备来大概猜测哪些值适合您。<br />一般情况下，默认值可以满足个人日常的使用场景，如果规模一旦更大，对硬件的要求更高，为了不过分损失用户体验，一个合适的阈值是十分重要的。",
     "about": "关于",
-    "aboutTitle": "软件根据 <a target='black' href='https://github.com/MCSManager/MCSManager-Daemon/blob/master/LICENSE'>Apache-2.0</a> 开源软件协议发行<br />版权所有 MCSManager 开发团队",
-    "aboutTitleInfo": "此协议准许每个人都可以复制和修改代码副本，并且可以对使用者收取服务费用。<br />",
+    "aboutTitle": "软件根据 <a target='black' href='https://github.com/MCSManager/MCSManager-Daemon/blob/master/LICENSE'>Apache-2.0</a> 开源软件协议发行。",
+    "aboutTitleInfo": "此协议准许每个人都可以复制和修改代码副本，并且可以对使用者收取服务费用",
     "learnMore": "了解更多",
     "userAgreement": "用户协议",
     "sponsorList": "开源项目赞助名单",
@@ -896,7 +896,8 @@
       "qrCode": "赞助二维码：",
       "ver": "当前主题版本：",
       "checkVer": "检查更新"
-    }
+    },
+    "aboutTitle2": "你可以复制或修改源代码，但必须保留所有版权声明文字和并附上 Powered by MCSManager，不得删除。"
   },
   "home": {
     "totalInstance": "实例总计",
