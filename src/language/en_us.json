@@ -952,9 +952,9 @@
     }
   },
   "install": {
-    "welcome": "Welcome to the MCSManager Control Panel",
-    "desc": "Open-source, distributed, and out-of-box solution for Minecraft server and all command-line programs.",
-    "start": "Start using",
+    "welcome": "Welcome to the MCSManager",
+    "desc": "Open-source, Distributed, Lightweight Control Panel that supports most Game Servers and Console Programs.",
+    "start": "Install",
     "createAdminAccount": "Create an administrator account",
     "createAdminAccountInfo": "Username could contains any language, please make sure to store your password safely.",
     "passWord": "Password",

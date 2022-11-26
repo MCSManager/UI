@@ -76,12 +76,16 @@
       <template #title>{{ $t("views.quickstart_McPreset.014") }}</template>
       <template #default>
         <div class="display-center">
-          <div style="text-align: center">
+          <div style="text-align: center" v-if="taskInfo?.status != -1">
             <el-progress type="circle" :percentage="percentage"></el-progress>
             <div style="margin-top: 12px; text-align: center">
               <p class="tip-title">{{ $t("views.quickstart_McPreset.008") }}</p>
               <p class="sub-title-info">{{ $t("views.quickstart_McPreset.009") }}</p>
             </div>
+          </div>
+          <div style="text-align: center" v-else-if="taskInfo?.status == -1">
+            <h1>{{ $t("CommonText.044") }}</h1>
+            <p>{{ $t("views.quickstart_McPreset.015") }}</p>
           </div>
         </div>
       </template>
@@ -157,18 +161,19 @@ export default {
         });
         this.tableData = data || [];
       } catch (error) {
-        this.$message({ type: "error", message: error.message });
+        this.$message({
+          type: "error",
+          message: error.message
+        });
         this.tableData = null;
       } finally {
         this.requestLoading = false;
       }
-
       if (this.taskId && this.tableData) {
         this.percentage = 50;
         this.startDownloadTask();
       }
     },
-
     startDownloadTask() {
       if (this.intervalTask) clearInterval(this.intervalTask);
       this.requestLoading = false;
@@ -179,14 +184,14 @@ export default {
         this.queryStatus();
       }, 3000);
     },
-
     // Start install
     async handleSelectTemplate(index, row) {
-      const { value: instanceName } = await this.$prompt("请输入新建服务器的名字：");
+      const { value: instanceName } = await this.$prompt(
+        window.$t("views.quickstart_McPreset.016")
+      );
       this.requestLoading = true;
       this.installView = true;
       this.isInstalled = false;
-
       this.newTaskInfo = await request({
         method: "POST",
         url: API_INSTANCE_ASYNC_TASK,
@@ -204,7 +209,6 @@ export default {
       this.requestLoading = false;
       this.startDownloadTask();
     },
-
     async queryStatus() {
       this.taskInfo = await request({
         method: "POST",
@@ -218,18 +222,15 @@ export default {
           taskId: this.newTaskInfo.taskId
         }
       });
-
       if (this.taskInfo.status === 0) {
         this.percentage = 100;
         setTimeout(() => this.installed(), 2000);
       }
     },
-
     installed() {
       console.log(window.$t("views.quickstart_McPreset.013"));
       this.isInstalled = true;
     },
-
     toInstance() {
       this.$router.push({
         path: `/terminal/${this.remoteUuid}/${this.taskInfo.detail.instanceUuid}/`,
@@ -239,11 +240,9 @@ export default {
       });
     }
   },
-
   mounted() {
     this.init();
   },
-
   unmounted() {
     clearInterval(this.intervalTask);
   }
