@@ -325,6 +325,7 @@ export default {
   width: 100%;
 }
 .task-container {
+  color: #767676;
   text-align: left;
   margin-top: 30px;
   width: 300px;

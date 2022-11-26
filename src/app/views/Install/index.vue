@@ -4,6 +4,11 @@
 
 <template>
   <div class="contanier">
+    <el-skeleton :rows="5" animated />
+    <br />
+    <el-skeleton :rows="8" animated />
+    <br />
+    <el-skeleton :rows="4" animated />
     <div class="bg"></div>
 
     <!-- <div class="panel-wrapper" v-if="step == -1">
@@ -196,8 +201,8 @@ export default {
 <style scoped>
 .bg {
   z-index: 998;
-  background-color: rgb(228, 228, 228);
   position: fixed;
+  backdrop-filter: blur(10px) brightness(0.5);
   top: 0px;
   left: 0px;
   right: 0px;
@@ -223,7 +228,6 @@ export default {
 }
 
 .panel {
-  background-color: white;
   min-height: 340px;
   width: 520px;
   transition: all 0.4s;
