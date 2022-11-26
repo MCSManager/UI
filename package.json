@@ -1,6 +1,6 @@
 {
   "name": "mcsmanager-ui",
-  "version": "2.2.0",
+  "version": "3.0.0",
   "description": "Provides a Web UI for MCSManager to display data, terminals, tables, i18n, settings, and more",
   "homepage": "https://mcsmanager.com/",
   "author": "https://github.com/unitwk",
