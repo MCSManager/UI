@@ -127,23 +127,22 @@
                 <el-button type="primary" size="small" @click="saveConfig">
                   {{ $t("general.save") }}
                 </el-button>
-
                 <el-link
                   type="primary"
                   :underline="false"
-                  href="https://docs.mcsmanager.com/#/"
+                  href="https://docs.mcsmanager.com/#/tutorial/openfrp"
                   target="_blank"
                 >
-                  {{ $t("components.NetworkTip.014") }}
+                  {{ $t("CommonText.019") }}
                 </el-link>
                 -
                 <el-link
                   type="primary"
                   :underline="false"
-                  href="https://docs.mcsmanager.com/#/"
+                  href="https://www.openfrp.net/"
                   target="_blank"
                 >
-                  {{ $t("CommonText.019") }}
+                  {{ $t("components.NetworkTip.014") }}
                 </el-link>
 
                 <p class="color-gray">{{ $t("components.NetworkTip.019") }}</p>
