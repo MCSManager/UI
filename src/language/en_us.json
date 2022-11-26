@@ -42,7 +42,8 @@
     "040": "hint",
     "041": "Sure",
     "042": "Cancel",
-    "043": "Row"
+    "043": "Row",
+    "044": "install error"
   },
   "general": {
     "search": "Search",
@@ -965,7 +966,9 @@
     "oldUSer": "Experienced user",
     "adminOK": "Administrator created",
     "stoppedServiceTitle": "Maintenance",
-    "stoppedServiceContent": "Sorry, the latest preset package list could not be obtained, probably your network problem or server is being maintained."
+    "stoppedServiceContent": "Sorry, the latest preset package list could not be obtained, probably your network problem or server is being maintained.",
+    "firstTimeInfo": "We'll walk you through using and deploying your application.",
+    "oldUSerInfo": "With a more specialized UI for you to use."
   },
   "notify": {
     "connectDaemonError": "Error accessing Daemon",
@@ -1091,7 +1094,10 @@
       "011": "Go to instance console",
       "012": "Test server",
       "013": "Installed",
-      "014": "Installing"
+      "014": "Installing",
+      "eulaReadTitle": "Installing the pre-set integration will count as you have agreed and read the Minecraft End User Agreement:",
+      "016": "Please enter the name of the new server:",
+      "015": "The network connection may be disconnected or the server is being maintained. Please wait for a while and try again, or use another installation package."
     },
     "Settings": {
       "001": "Pre-defined resources download point",
