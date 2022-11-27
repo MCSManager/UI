@@ -217,8 +217,7 @@ export default {
   methods: {
     init() {
       this.options = this.config;
-      this.options.fontSize = localStorage.getItem("terminalFontSize");
-      this.options.fontFamily = localStorage.getItem("terminalFontFamily");
+      this.options.fontSize = parseInt(localStorage.getItem("terminalFontSize") || 12);
     },
     show() {
       this.$emit("update:visible", true);
@@ -246,7 +245,6 @@ export default {
           }
         });
         localStorage.setItem("terminalFontSize", this.options.fontSize);
-        localStorage.setItem("terminalFontFamily", this.options.fontFamily);
         this.options = {};
         this.close();
         this.$message({
