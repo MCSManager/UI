@@ -647,8 +647,8 @@
     "newUserDialog": {
       "inputSth": "Please Provide...",
       "userPasswd": "User Password",
-      "userPasswdInfo": "Required, 9 to 26 characters, limit to numbers, symbols, and letters.",
-      "inputPasswd": "Please provide the password"
+      "inputPasswd": "Please provide the password",
+      "userPasswdInfo": "Required, 12 to 36 characters, must contain uppercase and lowercase letters and numbers"
     },
     "ps": "Attention",
     "psInfo": "Please make sure all instances are running in Docker containers for commercial purpose. Otherwise, it possesses risk for the host to be compromised.",
