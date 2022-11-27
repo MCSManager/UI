@@ -648,7 +648,7 @@
       "inputSth": "Please Provide...",
       "userPasswd": "User Password",
       "inputPasswd": "Please provide the password",
-      "userPasswdInfo": "Required, 12 to 36 characters, must contain uppercase and lowercase letters and numbers"
+      "userPasswdInfo": "Required, 9 to 36 characters, must contain uppercase and lowercase letters and numbers"
     },
     "ps": "Attention",
     "psInfo": "Please make sure all instances are running in Docker containers for commercial purpose. Otherwise, it possesses risk for the host to be compromised.",

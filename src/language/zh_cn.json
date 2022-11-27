@@ -647,7 +647,7 @@
     "newUserDialog": {
       "inputSth": "请输入内容...",
       "userPasswd": "用户密码",
-      "userPasswdInfo": "必填，12 到 36 个字符，必须包含大小写字母和数字",
+      "userPasswdInfo": "必填，9 到 36 个字符，必须包含大小写字母和数字",
       "inputPasswd": "请输入密码"
     },
     "ps": "注意事项",
