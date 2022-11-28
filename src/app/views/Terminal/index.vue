@@ -511,11 +511,10 @@
       <template #default>
         <div class="sub-title">
           <p class="sub-title-title">
-            {{
-              unavailableIp
-                ? $t("terminal.unavailableTerminal.browserCannotConnect")` ${unavailableIp}`
-                : $t("terminal.unavailableTerminal.browserCannotConnect2")
-            }}
+            <span v-if="unavailableIp">
+              {{ $t("terminal.unavailableTerminal.browserCannotConnect") }} {{ unavailableIp }}
+            </span>
+            <span v-else>{{ $t("terminal.unavailableTerminal.browserCannotConnect2") }}</span>
           </p>
           <p class="sub-title-info">
             {{ $t("terminal.unavailableTerminal.maybe") }}
