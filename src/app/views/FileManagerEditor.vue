@@ -263,7 +263,6 @@ export default {
       },
       exec: () => {
         this.saveFile();
-        this.editStatus = "success";
       }
     });
     const extName = path.extname(this.target);
@@ -410,6 +409,7 @@ export default {
         message: this.$t("fileManagerEditor.updateTextSuccess"),
         type: "success"
       });
+      this.editStatus = "success";
     }
   }
 };
