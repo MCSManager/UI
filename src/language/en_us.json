@@ -569,6 +569,7 @@
   "fileManager": {
     "title": "File Management",
     "upperDir": "Upper Dir",
+    "touch": "New File",
     "mkdir": "New Dir",
     "zip": "Compress",
     "unzip": "Decompress",
@@ -594,6 +595,7 @@
     "fileCopied": "File copied, use 'Paste' button to paste to other location.",
     "fileMoved": "File cut, use 'Paste' button to move to other location.",
     "cantCopy": "Unable to paste: no file copied or cut.",
+    "newFileName": "New File Name",
     "newDirName": "New Directory Name",
     "confirmDelFile": "Are you sure you want to delete selected file(s)?",
     "selectAFile": "Please select at least one file.",
