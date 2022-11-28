@@ -137,12 +137,13 @@
   }
 
   .el-select__popper.el-popper[role="tooltip"],
-  .el-dropdown-menu {
+  .el-dropdown-menu,.v3-menus {
     background: #232323;
   }
 
   .el-select-dropdown__item,
-  .el-dropdown-menu__item {
+  .el-dropdown-menu__item,
+  .v3-menus-item {
     color: #c0c0c0;
   }
 
@@ -151,6 +152,10 @@
   .el-dropdown-menu__item:focus,
   .el-dropdown-menu__item:not(.is-disabled):hover,
   .el-popper {
+    background-color: #353535;
+  }
+
+  .v3-menus-active,.v3-menus-item:hover {
     background-color: #353535;
   }
 
