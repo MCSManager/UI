@@ -887,16 +887,6 @@
       "light": "浅色",
       "dark": "深色"
     },
-    "aboutTheme": {
-      "title": "关于主题",
-      "info": "该主题由 Lazy 开发",
-      "info2": "如果你在使用主题过程中遇到任何问题或发现错误，可反馈到我的邮箱：",
-      "blog": "博客发布地址：",
-      "goLink": "点击前往",
-      "qrCode": "赞助二维码：",
-      "ver": "当前主题版本：",
-      "checkVer": "检查更新"
-    },
     "aboutTitle2": "你可以复制或修改源代码，但必须保留所有版权声明文字和并附上 Powered by MCSManager，不得删除。"
   },
   "home": {

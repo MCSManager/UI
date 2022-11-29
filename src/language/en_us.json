@@ -887,16 +887,6 @@
       "light": "Light",
       "dark": "Dark"
     },
-    "aboutTheme": {
-      "title": "About Theme",
-      "info": "This theme was created by Lazy",
-      "info2": "If you encourted any issue using this theme, you can reach me at my email: ",
-      "blog": "Blog Address:",
-      "goLink": "Click to go",
-      "qrCode": "Donation QR Code:",
-      "ver": "Current Theme Version: ",
-      "checkVer": "Check for Update"
-    },
     "aboutTitle2": "You may copy or modify the source code, but you must keep all the copyright notice and attach it Powered by MCSManager."
   },
   "home": {
