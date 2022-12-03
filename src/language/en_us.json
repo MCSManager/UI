@@ -168,7 +168,7 @@
     "stop": "Stop",
     "kill": "Terminate",
     "remove": "Remove",
-    "delete": "Delete",
+    "delete": "Delete Instance&files",
     "selectRemoteError": "No daemon selected",
     "selectRemoteTitle": "Please choose a daemon from the drop-down menu.",
     "selectRemoteInfo": "Daemon on localhost will be selected by default. The MCSManager daemon could be deployed on any remote host, help you to manage a distribute system at one place.",
@@ -193,7 +193,7 @@
       "editConfig": "Edit Configuration",
       "controlPanel": "Control Panel",
       "remove": "Remove Instance",
-      "delete": "Delete Instance"
+      "delete": "Delete Instance and files"
     },
     "table": {
       "instancesList": "Instance List",

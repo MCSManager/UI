@@ -167,8 +167,8 @@
     "start": "开启",
     "stop": "关闭",
     "kill": "终止",
-    "remove": "移除",
-    "delete": "删除",
+    "remove": "删除",
+    "delete": "彻底删除",
     "selectRemoteError": "未选择任何远程节点",
     "selectRemoteTitle": "请在左上方的下拉框中选择远程节点",
     "selectRemoteInfo": "默认可选择 localhost 远程节点，远程节点可以部署在任意主机上，帮助您快速管理多个主机并且分布式部署。",
@@ -192,8 +192,8 @@
     "card": {
       "editConfig": "编辑配置",
       "controlPanel": "控制面板",
-      "remove": "移除实例",
-      "delete": "删除实例"
+      "remove": "删除实例",
+      "delete": "彻底删除"
     },
     "table": {
       "instancesList": "实例列表",
