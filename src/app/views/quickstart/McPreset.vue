@@ -1,76 +1,61 @@
 <!--
   Copyright (C) 2022 MCSManager <mcsmanager-dev@outlook.com>
 -->
-
 <template>
   <div class="quick-container-install">
-    <Panel style="width: 100%" v-if="!installView">
-      <template #title>{{ $t("views.quickstart_McPreset.001") }}</template>
-      <template #default>
-        <div v-loading="requestLoading">
-          <div v-if="tableData && tableData.length > 0">
-            <el-table :data="tableData" size="small" stripe style="width: 100%">
-              <el-table-column
-                prop="info"
-                min-width="300px"
-                :label="$t('CommonText.006')"
-              ></el-table-column>
-              <el-table-column
-                prop="mc"
-                width="120px"
-                :label="$t('views.quickstart_McPreset.003')"
-              ></el-table-column>
-              <el-table-column
-                prop="java"
-                width="120px"
-                :label="$t('views.quickstart_McPreset.004')"
-              ></el-table-column>
-              <el-table-column
-                prop="size"
-                width="120px"
-                :label="$t('views.quickstart_McPreset.005')"
-              >
-                <template v-slot="scope">{{
-                  $t("views.quickstart_McPreset.006", [scope.row.size])
-                }}</template>
-              </el-table-column>
-              <el-table-column
-                prop="remark"
-                width="300px"
-                :label="$t('CommonText.007')"
-              ></el-table-column>
-              <el-table-column :label="$t('CommonText.008')">
-                <template v-slot="scope">
-                  <el-button
-                    type="success"
-                    size="small"
-                    @click="handleSelectTemplate(scope.$index, scope.row)"
-                  >
-                    {{ $t("CommonText.009") }}
-                  </el-button>
-                </template>
-              </el-table-column>
-            </el-table>
-            <p>
-              {{ $t("views.quickstart_McPreset.eulaReadTitle") }}
-              <a href="https://aka.ms/MinecraftEULA" target="_blank" rel="noopener noreferrer">
-                https://aka.ms/MinecraftEULA
-              </a>
-            </p>
-            <p>{{ $t("views.quickstart_McPreset.007") }}</p>
-          </div>
-          <div v-else-if="!requestLoading" class="flex flex-align-items-center flex-space-center">
-            <div style="text-align: center">
-              <i class="el-icon-warning-outline" style="font-size: 100px"></i>
-              <h2>{{ $t("install.stoppedServiceTitle") }}</h2>
-              <div>
-                <p>{{ $t("install.stoppedServiceContent") }}</p>
+    <div v-if="!installView">
+      <Panel>
+        <template #title>注意事项</template>
+        <template #default>
+          <p>
+            {{ $t("views.quickstart_McPreset.eulaReadTitle") }}
+            <a href="https://aka.ms/MinecraftEULA" target="_blank" rel="noopener noreferrer">
+              https://aka.ms/MinecraftEULA
+            </a>
+          </p>
+          <p>{{ $t("views.quickstart_McPreset.007") }}</p>
+        </template>
+      </Panel>
+      <el-row :gutter="20" v-loading="requestLoading" v-if="tableData && tableData.length > 0">
+        <el-col :span="6" :offset="0" v-for="(item, index) in tableData" :key="index">
+          <Panel>
+            <template #title>
+              {{ item.mc }}
+            </template>
+            <template #default>
+              <div class="package-info-wrapper">
+                <p class="color-gray">{{ item.info }}</p>
+                <p>{{ $t("views.quickstart_McPreset.004") }}: {{ item.java }}</p>
+                <p>
+                  {{ $t("views.quickstart_McPreset.005") }}:
+                  {{ $t("views.quickstart_McPreset.006", [item.size]) }}
+                </p>
+
+                <p>
+                  {{ item.remark }}
+                </p>
               </div>
+              <div class="package-op-wrapper">
+                <el-button type="text" size="medium" @click="handleSelectTemplate(index, item)">
+                  {{ $t("router.install") }}
+                </el-button>
+              </div>
+            </template>
+          </Panel>
+        </el-col>
+      </el-row>
+      <Panel v-else-if="!requestLoading" class="flex flex-align-items-center flex-space-center">
+        <template #default>
+          <div style="text-align: center">
+            <i class="el-icon-warning-outline" style="font-size: 100px"></i>
+            <h2>{{ $t("install.stoppedServiceTitle") }}</h2>
+            <div>
+              <p>{{ $t("install.stoppedServiceContent") }}</p>
             </div>
           </div>
-        </div>
-      </template>
-    </Panel>
+        </template>
+      </Panel>
+    </div>
 
     <Panel style="width: 600px" v-if="installView && !isInstalled">
       <template #title>{{ $t("views.quickstart_McPreset.014") }}</template>
@@ -250,6 +235,16 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.package-info-wrapper {
+  height: 140px;
+  overflow: hidden;
+  p {
+    margin: 0px 0px 6px 0px;
+  }
+}
+.package-op-wrapper {
+  text-align: center;
+}
 .panel-action {
   transition: all 0.4s;
 }

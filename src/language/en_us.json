@@ -43,7 +43,8 @@
     "041": "Sure",
     "042": "Cancel",
     "043": "Row",
-    "044": "install error"
+    "044": "install error",
+    "045": "third-party service"
   },
   "general": {
     "search": "Search",
@@ -1130,7 +1131,10 @@
       "016": "Hi~, is it the first time to deploy a server? \nPlease choose a network connection method!",
       "017": "I know how to go online, I don't need any tutorials",
       "018": "Learn how to let others connect to the application service",
-      "019": "The mapper is automatically run when the instance is started after saving."
+      "019": "The mapper is automatically run when the instance is started after saving.",
+      "020": "To open this window again, go to Instance Configuration and click the \"Online Mode\" button in the lower right.",
+      "021": "Use the OpenFrp Intranet to penetrate the service",
+      "022": "May include paid content, third-party providers to provide you with a home network connection solution."
     }
   }
 }
