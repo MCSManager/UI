@@ -239,6 +239,7 @@ export default {
   height: 140px;
   overflow: hidden;
   p {
+    font-size: 13px;
     margin: 0px 0px 6px 0px;
   }
 }

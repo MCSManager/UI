@@ -570,7 +570,7 @@
   "fileManager": {
     "title": "文件管理",
     "upperDir": "上层目录",
-    "touch": "新文件",
+    "touch": "新建文件",
     "mkdir": "新建目录",
     "zip": "压缩",
     "unzip": "解压",
