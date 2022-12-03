@@ -31,6 +31,7 @@ export default {
     border-radius: 4px;
     cursor: pointer;
     transition: all 0.4s;
+    margin-bottom: 0px;
   }
 
   .box-card:hover {
