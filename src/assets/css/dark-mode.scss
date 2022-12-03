@@ -139,6 +139,7 @@
   .el-select__popper.el-popper[role="tooltip"],
   .el-dropdown-menu,.v3-menus {
     background: #232323;
+    border: 1px solid rgb(80, 80, 80)
   }
 
   .el-select-dropdown__item,
@@ -167,6 +168,21 @@
   .sub-title-title,
   .el-popper {
     color: #ffffff;
+  }
+
+  .el-popper.is-light {
+    border: 0;
+  }
+
+  .el-popper.is-light .el-popper__arrow::before {
+    content: "";
+    background: #4e4e4e;
+    border: unset;
+  }
+
+  .el-input-group__append, .el-input-group__prepend {
+    background-color: #313131;
+    border: 1px solid #606061;
   }
 
   .components-block-button-warpper {
