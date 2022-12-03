@@ -570,6 +570,7 @@
   "fileManager": {
     "title": "文件管理",
     "upperDir": "上层目录",
+    "touch": "新文件",
     "mkdir": "新建目录",
     "zip": "压缩",
     "unzip": "解压",
@@ -595,6 +596,7 @@
     "fileCopied": "文件已选择，使用粘贴即可复制到其他目录",
     "fileMoved": "文件已选择，使用粘贴即可移动到其他目录",
     "cantCopy": "未复制或剪切任何文件，无法粘贴",
+    "newFileName": "新文件名",
     "newDirName": "新建目录名",
     "confirmDelFile": "确定要删除选中的文件吗？",
     "selectAFile": "请至少选择一个文件",
