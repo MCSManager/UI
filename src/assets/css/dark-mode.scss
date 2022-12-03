@@ -15,7 +15,11 @@
   }
 
   #login-panel-wrapper {
-    background: #111111;
+    // background: #111111;
+  }
+
+  .el-skeleton__paragraph {
+    background: #939393 !important;
   }
 
   .el-card,
