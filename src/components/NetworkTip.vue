@@ -43,6 +43,7 @@
         </el-row>
 
         <div v-if="viewType === 0">
+          <p>{{ $t("components.NetworkTip.020") }}</p>
           <el-link type="primary" @click="close"> {{ $t("components.NetworkTip.017") }}</el-link>
         </div>
 
@@ -68,6 +69,21 @@
         </div>
 
         <div v-if="viewType === 2">
+          <SelectBlock style="height: 140px" @click="select(3)">
+            <template #title>
+              <p class="sub-title-title">
+                {{ $t("components.NetworkTip.021")
+                }}<el-tag type="success" size="small">{{ $t("CommonText.045") }}</el-tag>
+              </p>
+            </template>
+            <template #info>
+              <p class="sub-title-info">{{ $t("components.NetworkTip.022") }}</p>
+            </template>
+          </SelectBlock>
+          <el-link type="primary" @click="close"> {{ $t("components.NetworkTip.017") }}</el-link>
+        </div>
+
+        <div v-if="viewType === 3">
           <div class="row-mb">
             <p class="sub-title-title">
               {{ $t("components.NetworkTip.008") }}
@@ -135,7 +151,7 @@
                 >
                   {{ $t("CommonText.019") }}
                 </el-link>
-                -
+                <!-- -
                 <el-link
                   type="primary"
                   :underline="false"
@@ -143,9 +159,10 @@
                   target="_blank"
                 >
                   {{ $t("components.NetworkTip.014") }}
-                </el-link>
+                </el-link> -->
 
                 <p class="color-gray">{{ $t("components.NetworkTip.019") }}</p>
+                <p class="color-gray">{{ $t("components.NetworkTip.020") }}</p>
               </ItemGroup>
             </div>
           </div>
@@ -166,7 +183,6 @@ export default {
     SelectBlock
   },
   props: ["serviceUuid", "instanceUuid", "extraServiceConfig"],
-
   data() {
     return {
       v: false,
@@ -182,18 +198,15 @@ export default {
       }
     };
   },
-
   computed: {
     isOpen() {
       return this.taskInfo.status == 1;
     },
-
     isFromTerminal() {
       const r = this.$route.query.network_tip ? true : false;
       return r;
     }
   },
-
   methods: {
     async getPublicIP() {
       try {
@@ -209,40 +222,36 @@ export default {
         this.ipv4 = "";
       }
     },
-
     init() {
       this.getPublicIP();
     },
-
     open() {
       this.init();
       this.v = true;
     },
-
     close() {
-      this.v = false;
-      this.clearIntervalTask();
       this.viewType = 0;
+      this.v = false;
     },
-
     select(type) {
       console.log("extraServiceConfig", this.extraServiceConfig);
       this.config = this.extraServiceConfig;
       this.viewType = type;
     },
-
     async saveConfig() {
       this.$emit("submit", this.config);
       await this.updateFrpConfig();
       this.close();
     },
-
     async updateFrpConfig() {
       try {
         await request({
           method: "PUT",
           url: API_INSTANCE_UPDATE,
-          params: { remote_uuid: this.serviceUuid, uuid: this.instanceUuid },
+          params: {
+            remote_uuid: this.serviceUuid,
+            uuid: this.instanceUuid
+          },
           data: {
             extraServiceConfig: this.config
           }
