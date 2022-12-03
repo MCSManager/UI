@@ -81,7 +81,9 @@
               <p class="sub-title-info">{{ $t("components.NetworkTip.022") }}</p>
             </template>
           </SelectBlock>
-          <el-link type="primary" @click="close"> {{ $t("components.NetworkTip.017") }}</el-link>
+          <div class="row-mt">
+            <el-link type="primary" @click="close"> {{ $t("components.NetworkTip.017") }}</el-link>
+          </div>
         </div>
 
         <div v-if="viewType === 3">
