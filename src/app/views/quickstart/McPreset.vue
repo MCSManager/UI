@@ -3,7 +3,7 @@
 -->
 <template>
   <div class="quick-container-install">
-    <div v-if="!installView">
+    <div v-if="!installView" v-loading="requestLoading">
       <Panel>
         <template #title>注意事项</template>
         <template #default>
@@ -16,7 +16,7 @@
           <p>{{ $t("views.quickstart_McPreset.007") }}</p>
         </template>
       </Panel>
-      <el-row :gutter="20" v-loading="requestLoading" v-if="tableData && tableData.length > 0">
+      <el-row :gutter="20" v-if="tableData && tableData.length > 0">
         <el-col :span="6" :offset="0" v-for="(item, index) in tableData" :key="index">
           <Panel>
             <template #title>
@@ -36,9 +36,14 @@
                 </p>
               </div>
               <div class="package-op-wrapper">
-                <el-button type="text" size="medium" @click="handleSelectTemplate(index, item)">
+                <el-link
+                  type="primary"
+                  size="medium"
+                  href="javascript:void(0)"
+                  @click="handleSelectTemplate(index, item)"
+                >
                   {{ $t("router.install") }}
-                </el-button>
+                </el-link>
               </div>
             </template>
           </Panel>
@@ -76,7 +81,7 @@
       </template>
     </Panel>
 
-    <Panel style="width: 600px" v-if="installView && isInstalled">
+    <Panel style="width: 640px" v-if="installView && isInstalled">
       <template #title>{{ $t("CommonText.010") }}</template>
       <template #default>
         <div class="display-center">
@@ -245,6 +250,7 @@ export default {
 }
 .package-op-wrapper {
   text-align: center;
+  padding-bottom: 8px;
 }
 .panel-action {
   transition: all 0.4s;
