@@ -42,7 +42,7 @@
           </el-col>
         </el-row>
 
-        <div v-if="viewType === 0">
+        <div v-if="viewType === 0" class="row-mt">
           <p>{{ $t("components.NetworkTip.020") }}</p>
           <el-link type="primary" @click="close"> {{ $t("components.NetworkTip.017") }}</el-link>
         </div>
