@@ -8,7 +8,7 @@
             <el-button type="success" size="small" @click="updateSettings">{{
               $t("settings.updateSet")
             }}</el-button>
-            <el-button type size="small" @click="refresh">{{ $t("general.refresh") }}</el-button>
+            <el-button size="small" @click="refresh">{{ $t("general.refresh") }}</el-button>
           </ItemGroup>
         </div>
         <span class="color-gray hidden-md-and-down"

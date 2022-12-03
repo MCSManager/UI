@@ -137,9 +137,10 @@
   }
 
   .el-select__popper.el-popper[role="tooltip"],
-  .el-dropdown-menu,.v3-menus {
+  .el-dropdown-menu,
+  .v3-menus {
     background: #232323;
-    border: 1px solid rgb(80, 80, 80)
+    border: 1px solid rgb(80, 80, 80);
   }
 
   .el-select-dropdown__item,
@@ -156,7 +157,8 @@
     background-color: #353535;
   }
 
-  .v3-menus-active,.v3-menus-item:hover {
+  .v3-menus-active,
+  .v3-menus-item:hover {
     background-color: #353535;
   }
 
@@ -180,7 +182,8 @@
     border: unset;
   }
 
-  .el-input-group__append, .el-input-group__prepend {
+  .el-input-group__append,
+  .el-input-group__prepend {
     background-color: #313131;
     border: 1px solid #606061;
   }
@@ -195,6 +198,7 @@
 
   .el-message-box {
     background-color: #212121;
+    border: 1px solid #6e7074 !important;
   }
 
   .page-header-img {
@@ -205,17 +209,19 @@
     background-color: #060606;
   }
 
-  .el-switch__label,.quick-title {
-    color: #eeeeee
+  .el-switch__label,
+  .quick-title {
+    color: #eeeeee;
   }
 
-  .el-input-number__decrease,.el-input-number__increase{
-    background-color: rgb(42, 42, 42)
+  .el-input-number__decrease,
+  .el-input-number__increase {
+    background-color: rgb(42, 42, 42);
   }
 
   .el-dropdown-link:hover {
-    background-color: unset!important;
-    backdrop-filter: brightness(0.8)!important;
+    background-color: unset !important;
+    backdrop-filter: brightness(0.8) !important;
   }
 }
 

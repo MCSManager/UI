@@ -72,8 +72,9 @@
           <SelectBlock style="height: 140px" @click="select(3)">
             <template #title>
               <p class="sub-title-title">
-                {{ $t("components.NetworkTip.021")
-                }}<el-tag type="success" size="small">{{ $t("CommonText.045") }}</el-tag>
+                {{ $t("components.NetworkTip.021") }}
+                &nbsp;
+                <el-tag type="success" size="small">{{ $t("CommonText.045") }}</el-tag>
               </p>
             </template>
             <template #info>

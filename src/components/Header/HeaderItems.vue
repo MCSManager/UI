@@ -31,17 +31,17 @@
         </el-dropdown>
       </el-tooltip>
     </div>
-    <div class="el-dropdown-link">
+    <div class="el-dropdown-link" @click="toPrivate">
       <el-tooltip class="item" effect="dark" :content="$t('root.private')" placement="bottom">
-        <el-link :underline="false" @click="toPrivate">
+        <el-link :underline="false">
           <i class="el-icon-user"></i>
         </el-link>
       </el-tooltip>
     </div>
 
-    <div class="el-dropdown-link">
+    <div class="el-dropdown-link" @click="logout">
       <el-tooltip class="item" effect="dark" :content="$t('root.logout')" placement="bottom">
-        <el-link :underline="false" @click="logout">
+        <el-link :underline="false">
           <i class="el-icon-switch-button"></i>
         </el-link>
       </el-tooltip>
