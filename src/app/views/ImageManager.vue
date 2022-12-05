@@ -178,7 +178,7 @@ export default {
     async deleteImage(row) {
       await this.$confirm(this.$t("imageManager.foreverDeleteImage"), this.$t("imageManager.tip"), {
         confirmButtonText: this.$t("general.confirm"),
-        cancelButtonText: this.$t("general.confirm"),
+        cancelButtonText: this.$t("general.cancel"),
         type: "warning"
       });
       try {
