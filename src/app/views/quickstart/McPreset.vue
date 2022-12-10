@@ -17,7 +17,7 @@
         </template>
       </Panel>
       <el-row :gutter="20" v-if="tableData && tableData.length > 0">
-        <el-col :span="6" :offset="0" v-for="(item, index) in tableData" :key="index">
+        <el-col :md="6" :offset="0" v-for="(item, index) in tableData" :key="index">
           <Panel>
             <template #title>
               {{ item.mc }}
