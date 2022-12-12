@@ -4,36 +4,30 @@
 
 <template>
   <Dialog v-model="v" :cancel="close">
-    <template #title>容器资源限制信息</template>
+    <template #title>{{ $t("dockerInfoDialog.title") }}</template>
     <template #default>
       <div style="min-width: 480px">
-        <p>这里显示管理员分配给您的这个实例的资源信息。</p>
+        <p>{{ $t("dockerInfoDialog.subtitle") }}</p>
         <el-row :gutter="20">
           <el-col :md="12" :offset="0">
             <LineInfo>
-              <i class="el-icon-tickets"></i> <span>最大内存：{{ dockerInfo.memory }}MB</span>
+              <i class="el-icon-tickets"></i>
+              <span>{{ $t("dockerInfoDialog.memory") }}{{ dockerInfo.memory }}MB</span>
             </LineInfo>
             <LineInfo>
-              <i class="el-icon-tickets"></i> <span>网络模式：{{ dockerInfo.networkMode }}</span>
+              <i class="el-icon-tickets"></i>
+              <span>{{ $t("dockerInfoDialog.network") }}{{ dockerInfo.networkMode }}</span>
             </LineInfo>
             <LineInfo>
-              <i class="el-icon-tickets"></i> <span>镜像名：{{ dockerInfo.image }}</span>
+              <i class="el-icon-tickets"></i>
+              <span>{{ $t("dockerInfoDialog.imageName") }}{{ dockerInfo.image }}</span>
             </LineInfo>
             <LineInfo>
-              <i class="el-icon-tickets"></i> <span>容器名：{{ dockerInfo.containerName }}</span>
+              <i class="el-icon-tickets"></i>
+              <span>{{ $t("dockerInfoDialog.containerName") }}{{ dockerInfo.containerName }}</span>
             </LineInfo>
-            <!-- <LineInfo>
-              <i class="el-icon-tickets"></i> <span>挂载目录：{{ dockerInfo.extraVolumes }}</span>
-            </LineInfo> -->
           </el-col>
           <el-col :md="12" :offset="0">
-            <!-- <LineInfo>
-              <i class="el-icon-tickets"></i>
-              <span>CPU 限制：{{ dockerInfo.cpuUsage }}%</span>
-            </LineInfo> -->
-            <LineInfo>
-              <i class="el-icon-tickets"></i> <span>容器 ID：XXXXXXXXXXXXXXXXXXXXXXXXXXXX</span>
-            </LineInfo>
             <LineInfo v-if="dockerInfo && dockerInfo.ports">
               <i class="el-icon-tickets"></i> {{ $t("terminal.dockerPort") }}
               <i class="el-icon-question"></i>:
@@ -58,7 +52,7 @@
 </template>
 
 <script>
-// a = {
+// dockerInfo: {
 //   containerName: "",
 //   image: "",
 //   ports: ["8080:25565/tcp", "8081:27766/tcp", "8082:20348/udp", "23142:65563/udp", "214:2412/tcp"],

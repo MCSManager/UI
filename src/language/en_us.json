@@ -1138,5 +1138,13 @@
       "021": "Use the OpenFrp Intranet to penetrate the service",
       "022": "May include paid content, third-party providers to provide you with a home network connection solution."
     }
+  },
+  "dockerInfoDialog": {
+    "containerName": "Container name:",
+    "imageName": "Mirror name:",
+    "memory": "Maximum memory:",
+    "network": "Network mode:",
+    "subtitle": "This field displays the resource information of this instance assigned to you by the administrator.",
+    "title": "Container resource limit information"
   }
 }
