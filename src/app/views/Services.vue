@@ -165,7 +165,9 @@
           <div class="sub-title-info">
             {{ $t("services.keySub") }}
             <br />
-            <a href="https://docs.mcsmanager.com/" class="color-blue">
+            {{ $t("services.keySub2") }}
+            <br />
+            <a href="https://docs.mcsmanager.com/" class="color-blue" v-iszh>
               {{ $t("services.getKey") }}
             </a>
           </div>

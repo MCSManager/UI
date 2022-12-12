@@ -636,7 +636,7 @@
     "newUser": "New User",
     "delUser": "Delete user",
     "userName": "Username",
-    "userNameInfo": "Required, 6- 12 characters. Support Chinease, English, and symbols.",
+    "userNameInfo": "Required, 6-12 characters.",
     "regTime": "Register On",
     "lastTime": "Last Login",
     "permit": {
@@ -726,7 +726,7 @@
     "connect": "Connect",
     "changeKey": "Change Token",
     "remarks": "Remarks",
-    "remarksInfo": "Optional, support Simplified Chinese, for comment purpose.",
+    "remarksInfo": "Optional, Remarks",
     "remoteIP": "Public IP or Daemon",
     "remoteIPSub": "<b>has to be public IP </b> or localhost, otherwise your won't be able to connect to the daemon correctly.",
     "remoteIPInfo": "Required, e.g. mcsmanager.com, 43.123.211.12",
@@ -734,7 +734,7 @@
     "daemonPortInfo": "Required, e.g. 24444",
     "verifyKey": "Verify Token",
     "keySub": "Token will be displayed when the Daemon started, pleae make sure it is stored safely.",
-    "getKey": "How to obtain the token?",
+    "getKey": "How to get token?",
     "keyInfo": "Required, e.g. 6ff0fa1ef9a943f3c6f2fe0e4564a2fa383d35c4b78ccb5",
     "addNewWarn": {
       "title": "Warning for Adding New Daemon",
@@ -758,7 +758,8 @@
     "inputNewRemark": "Please new remarks",
     "updateRemarkSuccess": "Update remark success",
     "inputNewKey": "Please provide new token, the panel will automatically attempt to connect with new token later.",
-    "key": "Token"
+    "key": "Token",
+    "keySub2": "Linux, the token is usually in /opt/mcsmanager/daemon/data/Config/global.json"
   },
   "container": {
     "remoteList": "Daemon List",

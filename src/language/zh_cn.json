@@ -758,7 +758,8 @@
     "inputNewRemark": "请输入新的备注内容",
     "updateRemarkSuccess": "更新备注信息成功",
     "inputNewKey": "请输入新密钥，设置后将自动尝试连接",
-    "key": "密钥"
+    "key": "密钥",
+    "keySub2": "在 Linux 下，密钥一般在 /opt/mcsmanager/daemon/data/Config/global.json 中"
   },
   "container": {
     "remoteList": "远程节点列表",
