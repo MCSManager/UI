@@ -167,7 +167,15 @@
             <br />
             {{ $t("services.keySub2") }}
             <br />
-            <a href="https://docs.mcsmanager.com/" class="color-blue" v-iszh>
+            <a href="https://docs.mcsmanager.com/" target="_blank" class="color-blue" v-iszh>
+              {{ $t("services.getKey") }}
+            </a>
+            <a
+              href="   https://github.com/MCSManager/MCSManager/wiki/Connect-to-a-Remote-Daemon"
+              target="_blank"
+              class="color-blue"
+              v-isen
+            >
               {{ $t("services.getKey") }}
             </a>
           </div>
