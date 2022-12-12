@@ -53,6 +53,11 @@
             <!-- <el-input size="small" v-model="scope.row.remarks"></el-input> -->
           </template>
         </el-table-column>
+        <el-table-column label="UID" width="100">
+          <template #default="scope">
+            <el-input v-model="scope.row.uuid" placeholder="" size="small" readonly></el-input>
+          </template>
+        </el-table-column>
         <el-table-column :label="$t('services.platform')" width="100">
           <template #default="scope">
             <div v-if="scope.row.system">
@@ -111,7 +116,7 @@
             </span>
           </template>
         </el-table-column>
-        <el-table-column :label="$t('general.operate')" style="text-align: center" width="280px">
+        <el-table-column :label="$t('general.operate')" style="text-align: center" width="300px">
           <template #default="scope">
             <el-button size="mini" @click="linkService(scope.row, true)">
               {{ scope.row.available ? $t("services.update") : $t("services.connect") }}

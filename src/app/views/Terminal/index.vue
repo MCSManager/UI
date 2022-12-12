@@ -504,36 +504,8 @@
       </template>
     </Dialog>
 
-    <Dialog v-model="unavailableTerminal" style="z-index: 9999">
-      <template #title>
-        {{ $t("terminal.unavailableTerminal.title") }}
-      </template>
-      <template #default>
-        <div class="sub-title">
-          <p class="sub-title-title">
-            <span v-if="unavailableIp">
-              {{ $t("terminal.unavailableTerminal.browserCannotConnect") }} {{ unavailableIp }}
-            </span>
-            <span v-else>{{ $t("terminal.unavailableTerminal.browserCannotConnect2") }}</span>
-          </p>
-          <p class="sub-title-info">
-            {{ $t("terminal.unavailableTerminal.maybe") }}
-          </p>
-          <div style="text-align: center; margin: 20px">
-            <img
-              :src="require('@/assets/daemon_connection_error.png')"
-              alt=""
-              srcset=""
-              style="width: 460px"
-            />
-          </div>
-          <div class="sub-title">{{ $t("terminal.unavailableTerminal.solution") }}</div>
-          <ol style="padding-left: 20px">
-            <span v-html="$t('terminal.unavailableTerminal.solutions')"></span>
-          </ol>
-        </div>
-      </template>
-    </Dialog>
+    <UnavailableTerminalDialog ref="UnavailableTerminalDialog" :unavailableIp="unavailableIp">
+    </UnavailableTerminalDialog>
 
     <!-- Terminal Settings Dialog -->
     <TermSetting
@@ -565,10 +537,8 @@
 import * as echarts from "echarts";
 import Dialog from "@/components/Dialog";
 import Panel from "@/components/Panel";
-import Logo from "@/components/Logo.vue";
 import "@/assets/xterm/xterm.css";
 import LineInfo from "@/components/LineInfo";
-import LineButton from "@/components/LineButton";
 import { connectRemoteService } from "@/app/service/socket";
 import {
   API_INSTANCE,
@@ -592,10 +562,18 @@ import { getPlayersOption } from "../../service/chart_option";
 import TermSetting from "./TermSetting";
 import DockerInfo from "./DockerInfo";
 import NetworkTip from "@/components/NetworkTip";
+import UnavailableTerminalDialog from "./UnavailableTerminal.vue";
 
 export default {
-  // eslint-disable-next-line vue/no-unused-components
-  components: { Panel, LineInfo, LineButton, Dialog, Logo, TermSetting, NetworkTip, DockerInfo },
+  components: {
+    UnavailableTerminalDialog,
+    Panel,
+    LineInfo,
+    Dialog,
+    TermSetting,
+    NetworkTip,
+    DockerInfo
+  },
   data: function () {
     return {
       input1: "",
@@ -635,7 +613,6 @@ export default {
         visible: false
       },
 
-      unavailableTerminal: false,
       unavailableIp: null,
 
       playersChart: null,
@@ -686,7 +663,7 @@ export default {
         this.socket.emit("stream/detail", {});
       }
     },
-    // establish a connection with the daemon
+    // Create a connection with the daemon
     async setUpWebsocket() {
       // Request a task passport from the panel to get permission to connect directly to the daemon
       let res = null;
@@ -697,6 +674,7 @@ export default {
           params: { remote_uuid: this.serviceUuid, uuid: this.instanceUuid }
         });
       } catch (error) {
+        this.$refs.UnavailableTerminalDialog.open();
         ElNotification({
           title: this.$t("terminal.cantConnectTerm"),
           message: error,
@@ -704,7 +682,6 @@ export default {
           type: "error",
           duration: 0
         });
-        this.unavailableTerminal = true;
         return;
       }
 
@@ -716,13 +693,13 @@ export default {
         password,
         () => {
           this.unavailableIp = null;
-          this.unavailableTerminal = false;
+          this.$refs.UnavailableTerminalDialog.close();
           // Get a system log
           this.syncLog();
         },
         () => {
           this.unavailableIp = addr;
-          this.unavailableTerminal = true;
+          this.$refs.UnavailableTerminalDialog.open();
         }
       );
 
