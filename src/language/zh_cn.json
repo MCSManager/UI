@@ -90,7 +90,7 @@
   },
   "login": {
     "title": "身份验证",
-    "titleInfo": "使用服务器的 MCSManager 账号登录到面板",
+    "titleInfo": "使用 Friendship Cloud 账号登录",
     "account": "账号",
     "passWord": "密码",
     "forgotPassword": "忘记密码",
@@ -104,6 +104,60 @@
     "notify": {
       "title": "网页无法正确运作",
       "message": "无法获取身份数据，可能是您已被封禁，或者网络问题，请尝试刷新页面"
+    }
+  },
+  "webauthn": {
+    "login": {
+      "title": "或使用 Friendship Auth 可信设备认证登录",
+      "loginBtn": "设备认证",
+      "nullUsername": "Friendship Auth 账号不能为空值",
+      "logining": "正在使您登录...",
+      "logining_info": "稍后，一个安全窗口将被唤起。请在安全窗口内按要求完成设备认证。",
+      "error": {
+        "title": "未能成功登录",
+        "info_1": "很抱歉，在尝试使您通过 Friendship Auth 服务登录时遇到了致命错误。",
+        "info_2": "下面的错误信息可能有助于您排除故障:"
+      }
+    },
+    "register": {
+      "userDetail": {
+        "title": "Friendship Auth",
+        "subtitle_1": "什么是 Friendship Auth？",
+        "info_1": "Friendship Auth 是基于 WebAuthn 开发的无密码安全认证服务，通过 Friendship Auth 您可以使用指纹、面孔或者外置安全设备一键登录到 Friendship Cloud 服务。",
+        "subtitle_2": "添加 Friendship Auth 设备授权",
+        "info_2": "要在此设备上使用 Friendship Auth，您必须将此设备注册为安全设备。",
+        "subtitle_3": "撤销 Friendship Auth 设备授权",
+        "info_3": "撤销设备认证会抹除您账户下所有已注册的 Friendship Auth 安全设备。",
+        "warn_title": "危险操作区",
+        "regBtn": "注册新的设备",
+        "resetBtn": "删除全部设备"
+      },
+      "starter": {
+        "title": "为此设备注册 Friendship Auth",
+        "info_1": "通过使用 Friendship Auth 服务，您可以在不输入密码的情况下，通过安全认证因素 (如指纹、面孔或者移动安全设备等) 访问 Friendship Cloud 服务。",
+        "info_2": "如果您希望以 ",
+        "info_3": " 的身份注册，请继续，我们将为此设备注册 Friendship Auth 服务。",
+        "continue": "继续",
+        "cancel": "不，谢谢"
+      },
+      "processing": {
+        "title": "正在注册此设备...",
+        "info": "稍后，一个安全窗口将被唤起。请在安全窗口内按要求完成设备认证。",
+        "error": {
+          "title": "未能成功注册",
+          "info_1": "很抱歉，在尝试将此设备注册到 Friendship Auth 服务时遇到了致命错误。",
+          "info_2": "下面的错误信息可能有助于您排除故障:"
+        },
+        "success": {
+          "title": "注册成功",
+          "info": "您已经成功将此安全设备注册到 Friendship Auth 服务。您可以在下次登录时选择无密码方式登录。",
+          "finishBtn": "完成"
+        }
+      }
+    },
+    "reset": {
+      "confrimTitle": "您确定要移除您账户下所有的安全设备吗？此操作不可逆!",
+      "success": "重置成功"
     }
   },
   "overview": {

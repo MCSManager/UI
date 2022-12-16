@@ -4,97 +4,93 @@
 
 <template>
   <div>
-    <div
-      id="login-layer-top"
-      :class="{ 'login-layer-fadeout-top': close, 'login-layer-fadein-top': !close }"
-    ></div>
-    <div
-      id="login-layer-left"
-      :class="{ 'login-layer-fadeout-left': close, 'login-layer-fadein-left': !close }"
-    ></div>
-    <div
-      id="login-layer-right"
-      :class="{ 'login-layer-fadeout-right': close, 'login-layer-fadein-right': !close }"
-    ></div>
-    <div
-      id="login-layer-bottom"
-      :class="{ 'login-layer-fadeout-bottom': close, 'login-layer-fadein-bottom': !close }"
-    ></div>
+    <div id="login-layer-top" :class="{ 'login-layer-fadeout-top': close, 'login-layer-fadein-top': !close }"></div>
+    <div id="login-layer-left" :class="{ 'login-layer-fadeout-left': close, 'login-layer-fadein-left': !close }"></div>
+    <div id="login-layer-right" :class="{ 'login-layer-fadeout-right': close, 'login-layer-fadein-right': !close }">
+    </div>
+    <div id="login-layer-bottom" :class="{ 'login-layer-fadeout-bottom': close, 'login-layer-fadein-bottom': !close }">
+    </div>
 
     <div id="login-panel-wrapper" :class="{ 'login-panel-wrapper-out': closeWindow }">
       <Panel id="login-panel" body-style="padding:44px;" v-loading="loading">
         <template #default>
-          <form action="/login" method="post">
-            <div style="font-size: 24px; font-weight: 600">{{ $t("login.title") }}</div>
-            <p>{{ $t("login.titleInfo") }}</p>
-            <form action="/" method="post">
-              <div style="margin-top: 22px">
-                <div>
-                  <el-input
-                    type="text"
-                    name="mcsm_username"
-                    v-model="form.username"
-                    :placeholder="$t('login.account')"
-                    autocomplete="on"
-                    :disabled="close"
-                    @keyup.enter="submit"
-                  >
-                    <template #suffix>
-                      <i class="el-icon-user"></i>
-                    </template>
-                  </el-input>
-                </div>
-                <div class="row-mt">
-                  <el-input
-                    type="password"
-                    name="mcsm_password"
-                    v-model="form.password"
-                    :placeholder="$t('login.passWord')"
-                    autocomplete="on"
-                    :disabled="close"
-                    @keyup.enter="submit"
-                  >
-                    <template #suffix>
-                      <i class="el-icon-lock"></i>
-                    </template>
-                  </el-input>
-                </div>
-                <div class="login-btn-wrapper row-mt">
-                  <transition name="fade">
-                    <div v-if="cause" id="login-cause">{{ cause }}</div>
-                    <div v-else class="login-info-wrapper fgp" @click="forgotPassword">
-                      <a href="javascript:void(0)" rel="noopener noreferrer">
-                        {{ $t("login.forgotPassword") }}
-                      </a>
+          <div id="form-wrapper">
+            <div id="pwd-login" style="flex-grow:1.5;">
+              <form action="/login" method="post">
+                <div style="font-size: 24px; font-weight: 600">{{ $t("login.title") }}</div>
+                <p style="font-size: 14px;">{{ $t("login.titleInfo") }}</p>
+                <form action="/" method="post">
+                  <div style="margin-top: 22px">
+                    <div>
+                      <el-input type="text" name="mcsm_username" v-model="form.username"
+                        :placeholder="$t('login.account')" autocomplete="on" :disabled="close" @keyup.enter="submit">
+                        <template #suffix>
+                          <i class="el-icon-user"></i>
+                        </template>
+                      </el-input>
                     </div>
-                  </transition>
-                  <el-button
-                    type="primary"
-                    size="small"
-                    style="width: 110px"
-                    @click="login"
-                    :disabled="close"
-                    :loading="loading"
-                  >
-                    {{ loginText }}
+                    <div class="row-mt">
+                      <el-input type="password" name="mcsm_password" v-model="form.password"
+                        :placeholder="$t('login.passWord')" autocomplete="on" :disabled="close" @keyup.enter="submit">
+                        <template #suffix>
+                          <i class="el-icon-lock"></i>
+                        </template>
+                      </el-input>
+                    </div>
+                    <div class="login-btn-wrapper row-mt">
+                      <transition name="fade">
+                        <div v-if="cause" id="login-cause">{{ cause }}</div>
+                        <div v-else class="login-info-wrapper fgp" @click="forgotPassword">
+                          <a href="javascript:void(0)" rel="noopener noreferrer">
+                            {{ $t("login.forgotPassword") }}
+                          </a>
+                        </div>
+                      </transition>
+                      <el-button type="primary" size="small" style="width: 110px" @click="login" :disabled="close"
+                        :loading="loading">
+                        {{ $t("login.login") }}
+                      </el-button>
+                    </div>
+                    <div class="login-info-wrapper row-mt" v-if="loginInfo">
+                      <span class="color-gray">
+                        {{ loginInfo }}
+                      </span>
+                    </div>
+                  </div>
+                </form>
+              </form>
+            </div>
+            <div id="authn-login" style="flex-grow:0.3;">
+              <p style="font-size: 14px; margin-top: 15px;">{{ $t("webauthn.login.title") }}</p>
+              <div style="margin-top: 22px;">
+                <el-input type="text" name="webauthn_username" v-model="webauthn.username"
+                  :placeholder="$t('login.account')" autocomplete="on" :disabled="!isSupportWebauthn"
+                  @keyup.enter="webauthnLogin">
+                  <template #suffix>
+                    <i class="el-icon-user"></i>
+                  </template>
+                </el-input>
+                <transition name="fade">
+                  <div v-if="webauthn_cause" id="webauthn_cause">{{ webauthn_cause }}</div>
+                </transition>
+                <div style="text-align: right; margin-top: 12px;">
+                  <el-button type="primary" plain size="small" style="width: 110px" @click="webauthnLogin"
+                    :disabled="!isSupportWebauthn" :loading="loading">
+                    {{ $t("webauthn.login.loginBtn") }}
                   </el-button>
                 </div>
-                <div class="login-info-wrapper row-mt" v-if="loginInfo">
-                  <span class="color-gray">
-                    {{ loginInfo }}
-                  </span>
-                </div>
-                <div class="login-info-wrapper row-mt">
-                  <div>
-                    <span class="color-gray"
-                      >Powered by
-                      <a target="black" href="https://github.com/MCSManager">MCSManager</a></span
-                    >
+                <div class="login-info-wrapper row-mt" style="margin-top: 17px;">
+                  <div style="font-size: 12px;">
+                    <span class="color-gray">Powered by
+                      <a target="black" href="https://github.com/MCSManager">MCSManager</a></span>
+                    <br />
+                    <span class="color-gray">Modified by
+                      <a target="black" href="https://studio.friendship.org.cn">Friendship Studio</a></span>
                   </div>
                 </div>
               </div>
-            </form>
-          </form>
+            </div>
+          </div>
         </template>
       </Panel>
     </div>
@@ -167,9 +163,10 @@
 <script>
 import Panel from "../../components/Panel";
 // eslint-disable-next-line no-unused-vars
-// import router from "../router";
+ import router from "../router";
 import { API_USER_LOGIN, API_USER_LOGIN_INFO, sleep } from "../service/common";
 import { request, setupUserInfo } from "../service/protocol";
+import { browserSupportsWebAuthn } from '@simplewebauthn/browser';
 
 export default {
   components: { Panel },
@@ -179,12 +176,17 @@ export default {
         username: "",
         password: ""
       },
+      webauthn: {
+        username: ""
+      },
       close: false,
       closeWindow: false,
       loginText: this.$t("login.login"),
       loading: false,
       cause: "",
-      loginInfo: ""
+      webauthn_cause: "",
+      loginInfo: "",
+      isSupportWebauthn: false
     };
   },
   methods: {
@@ -256,6 +258,30 @@ export default {
         confirmButtonText: this.$t("general.confirm"),
         cancelButtonText: this.$t("general.closed")
       });
+    },
+    async webauthnLogin() {
+      try {
+        if (!this.webauthn.username) {
+          this.webauthn_cause = this.$t("webauthn.login.nullUsername");
+          return;
+        }
+        this.loading = true;
+        this.loginText = this.$t("login.logging");
+        await sleep(600);
+      } catch (error) {
+        this.failed(error);
+      } finally {
+        this.loading = false;
+      }
+      sessionStorage.setItem("username", this.webauthn.username);
+      router.push({ path: "/webauthn/login" });
+    },
+    checkBrowser() {
+      if (browserSupportsWebAuthn()) {
+        this.isSupportWebauthn = true;
+      } else {
+        this.webauthn_cause = "此浏览器不支持 Friendship Auth 服务";
+      }
     }
   },
   async mounted() {
@@ -263,6 +289,7 @@ export default {
     console.log("Copyright 2022 MCSManager All rights reserved.");
     // Request login copyleft text
     this.requestLoginInfo();
+    this.checkBrowser();
   }
 };
 </script>
@@ -355,6 +382,7 @@ export default {
   background-color: rgba(43, 43, 43, 0.183);
   position: fixed;
 }
+
 #login-layer-top {
   top: 0px;
   left: 0px;
@@ -366,11 +394,13 @@ export default {
   left: 0px;
   right: 0px;
 }
+
 #login-layer-left {
   top: 0px;
   right: 0px;
   bottom: 0px;
 }
+
 #login-layer-right {
   top: 0px;
   left: 0px;
@@ -404,11 +434,11 @@ export default {
   transition: all 0.4s 0.2s;
 }
 
-#login-panel:hover {
-  /* box-shadow: 0 0px 18px rgba(0, 0, 0, 0.1); */
+/* #login-panel:hover {
+  box-shadow: 0 0px 18px rgba(0, 0, 0, 0.1);
   border: 1px solid #828487;
   transform: scale(1.04);
-}
+} */
 
 .login-btn-wrapper {
   display: flex;
@@ -428,6 +458,7 @@ export default {
   text-decoration: underline;
 }
 
+#webauthn_cause,
 #login-cause {
   color: rgb(170, 8, 8);
   font-size: 12px;
@@ -452,9 +483,11 @@ export default {
     align-items: center;
     border-radius: 0px;
   }
+
   #login-panel:hover {
     border: none;
   }
+
   .login-btn-wrapper {
     display: flex;
     justify-content: flex-start;
@@ -462,10 +495,12 @@ export default {
     flex-direction: column-reverse;
     text-align: center;
   }
+
   #login-cause {
     margin-top: 12px;
     margin-right: 0px;
   }
+
   .login-info-wrapper {
     text-align: center;
     display: flex;

@@ -2,6 +2,12 @@
 
 export const API_URL = "//" + window.location.host;
 
+export const API_WEBAUTHN_generate_registration_options = `${API_URL}/api/webauthn/generate-registration-options`;
+export const API_WEBAUTHN_generate_authentication_options = `${API_URL}/api/webauthn/generate-authentication-options`;
+export const API_WEBAUTHN_verify_registration = `${API_URL}/api/webauthn/verify-registration`;
+export const API_WEBAUTHN_verify_authentication = `${API_URL}/api/webauthn/verify-authentication`;
+export const API_WEBAUTHN_reset = `${API_URL}/api/webauthn/remove-devices`;
+
 export const API_SERVICE_INSTANCES = `${API_URL}/api/service/remote_service_instances`;
 export const API_SERVICE_LIST = `${API_URL}/api/service/remote_services_list`;
 export const API_SERVICE = `${API_URL}/api/service/remote_services`;

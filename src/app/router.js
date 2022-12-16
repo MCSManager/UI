@@ -30,6 +30,9 @@ import Schedule from "./views/Schedule";
 import Update from "./views/Update";
 import Quickstart from "./views/quickstart";
 import Install from "./views/Install";
+import WebAuthn from "./views/WebAuthn";
+import WebAuthnLogin from "./views/WebAuthn/Login";
+import WebAuthnRegister from "./views/WebAuthn/Register";
 
 const routes = [
   {
@@ -183,6 +186,23 @@ const routes = [
     name: "install",
     component: Install
   },
+  {
+    path: "/webauthn",
+    name: "webauthn",
+    component: WebAuthn,
+    children: [
+      {
+        path: "login",
+        name: "webauthnlogin",
+        component: WebAuthnLogin
+      },
+      {
+        path: "register",
+        name: "webauthnregisiter",
+        component: WebAuthnRegister
+      }
+    ]
+  }
 ];
 
 const router = createRouter({
