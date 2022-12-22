@@ -123,12 +123,12 @@
             </div>
             <div class="row-mt" style="display: flex">
               <el-select
-                v-model="options.oe"
+                v-model="options.ie"
                 filterable
-                allow-create
                 size="small"
+                allow-create
                 default-first-option
-                :placeholder="$t('instancesDetail.oe')"
+                :placeholder="$t('instancesDetail.ie')"
                 style="width: 220px"
               >
                 <el-option
@@ -139,14 +139,13 @@
                 >
                 </el-option>
               </el-select>
-
               <el-select
-                v-model="options.ie"
+                v-model="options.oe"
                 filterable
-                size="small"
                 allow-create
+                size="small"
                 default-first-option
-                :placeholder="$t('instancesDetail.ie')"
+                :placeholder="$t('instancesDetail.oe')"
                 style="width: 220px; margin-left: 12px"
               >
                 <el-option
