@@ -440,6 +440,11 @@ export default {
 }
 
 @media (max-width: 900px) {
+  .fgp {
+    font-size: 12px;
+    margin-right: 0px;
+    margin-top: 8px;
+  }
   #login-panel {
     text-align: center;
     margin: 0;

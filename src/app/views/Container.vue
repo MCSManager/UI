@@ -78,9 +78,7 @@ export default {
   methods: {
     selectLink(type) {
       if (type === 1) {
-        window.open(
-          "https://github.com/MCSManager/MCSManager/wiki/%E6%A3%80%E6%9F%A5%E4%B8%BB%E6%9C%BA%E6%9C%AC%E5%9C%B0%E7%8E%AF%E5%A2%83"
-        );
+        window.open("https://docs.mcsmanager.com/");
       }
       if (type === 2) {
         window.open("https://www.runoob.com/docker/ubuntu-docker-install.html");
