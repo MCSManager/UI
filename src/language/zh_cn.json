@@ -462,19 +462,22 @@
       "autoStartInfo": "只要远程节点（远程节点）运行，就自动发起一次启动实例操作。<br />如果将远程节点开机自启则可用于开机自启实例。"
     },
     "unavailableTerminal": {
-      "title": "连接节点错误",
+      "title": "连接到远程节点错误",
       "browserCannotConnect": "浏览器无法连接到",
-      "browserCannotConnect2": "浏览器无法与远程节点建立连接",
-      "maybe": "可能是您未开放远程节点的端口导致，或是使用了内网地址的缘故",
+      "browserCannotConnect2": "您的浏览器无法连接到远程节点。",
+      "maybe": "可能是您未开放远程节点的端口导致，或是使用了内网地址，NAT 网络映射等原因。",
       "solution": "可能的解决方案",
-      "solutions": "<li>确保远程节点使用的地址是公网地址，且远程节点端口已经开放。</li><li>如果使用内网映射或其他网络代理，则必须确保你的浏览器和面板都要能够连接到节点。</li><li>若有 HTTPS 等，请采用 wss:// 协议连接节点。</li><li>前往 docs.mcsmanager.com 了解更多</li>"
+      "solutions": "<li>确保【节点管理】中的远程节点使用的地址是公网地址，且状态为正常。</li><li>如果使用内网映射或其他网络代理，则必须确保你的浏览器和面板都要能够连接到节点。</li><li>若有 HTTPS 等，请采用 wss:// 协议连接节点。</li><li>前往 docs.mcsmanager.com 了解更多</li>",
+      "whathappened": "发生了什么？",
+      "toDocs": "查看使用文档"
     },
     "cantConnectTerm": "无法与终端建立连接",
     "cantSendCmdBecauseData": "无法执行命令，数据流通道不可用",
     "cantSendCmdBecauseNotRun": "无法执行命令，服务器未开启",
     "dockerPort": "可用端口",
     "limit": "资源限制",
-    "openfrp": "内网映射"
+    "openfrp": "内网映射",
+    "backInstancesView": "回到应用实例列表"
   },
   "processConfig": {
     "title": "配置列表组",
@@ -1016,7 +1019,8 @@
     "login": "登录",
     "quickStart": "快速开始",
     "update": "版本控制",
-    "install": "安装"
+    "install": "安装",
+    "terminalError": "终端连接错误"
   },
   "aside": {
     "basic": "基础功能",

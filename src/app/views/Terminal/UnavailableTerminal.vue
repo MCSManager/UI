@@ -3,21 +3,22 @@
 -->
 
 <template>
-  <Dialog v-model="v" style="z-index: 9999">
+  <Panel style="max-width: 600px">
     <template #title>
-      <span v-if="v">
-        {{ $t("terminal.unavailableTerminal.title") }}
-      </span>
+      {{ $t("terminal.unavailableTerminal.title") }}
     </template>
     <template #default>
-      <div v-if="v" class="sub-title">
-        <p class="sub-title-title">
+      <div class="sub-title">
+        <div class="sub-title-title">
+          <strong> {{ $t("terminal.unavailableTerminal.whathappened") }}</strong>
+        </div>
+        <p class="sub-title-title row-mt">
           <span v-if="unavailableIp">
             {{ $t("terminal.unavailableTerminal.browserCannotConnect") }} {{ unavailableIp }}
           </span>
           <span v-else>{{ $t("terminal.unavailableTerminal.browserCannotConnect2") }}</span>
         </p>
-        <p class="sub-title-info">
+        <p class="sub-title-title">
           {{ $t("terminal.unavailableTerminal.maybe") }}
         </p>
         <div style="text-align: center; margin: 20px">
@@ -28,38 +29,57 @@
             style="width: 460px"
           />
         </div>
-        <div class="sub-title">{{ $t("terminal.unavailableTerminal.solution") }}</div>
+        <div class="sub-title">
+          <strong>{{ $t("terminal.unavailableTerminal.solution") }}</strong>
+        </div>
         <ol style="padding-left: 20px">
           <span v-html="$t('terminal.unavailableTerminal.solutions')"></span>
         </ol>
       </div>
+
+      <div class="btm-wrapper">
+        <el-button type="primary" size="small" @click="backInstancesView">
+          {{ $t("terminal.backInstancesView") }}
+        </el-button>
+        <el-button size="small" @click="toDocs" v-iszh>
+          {{ $t("terminal.unavailableTerminal.toDocs") }}
+        </el-button>
+      </div>
     </template>
-  </Dialog>
+  </Panel>
 </template>
 
 <script>
-import Dialog from "@/components/Dialog";
+import Panel from "@/components/Panel.vue";
+
 export default {
-  components: { Dialog },
-  props: {
-    unavailableIp: {
-      type: String,
-      default: null
-    }
-  },
+  components: { Panel },
+
   data() {
     return {
-      v: false
+      unavailableIp: ""
     };
   },
 
+  created() {
+    this.unavailableIp = this.$route.query.ip;
+  },
   methods: {
-    open() {
-      this.v = true;
+    backInstancesView() {
+      this.$router.push("/instances");
     },
-    close() {
-      this.v = false;
+    toDocs() {
+      window.open("https://docs.mcsmanager.com/#/qa/common_qa");
     }
   }
 };
 </script>
+
+<style scoped>
+.btm-wrapper {
+  margin: 24px;
+  display: flex;
+  justify-content: center;
+  align-content: center;
+}
+</style>

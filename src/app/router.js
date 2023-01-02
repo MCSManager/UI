@@ -30,6 +30,7 @@ import Schedule from "./views/Schedule";
 import Update from "./views/Update";
 import Quickstart from "./views/quickstart";
 import Install from "./views/Install";
+import UnavailableTerminal from "./views/Terminal/UnavailableTerminal";
 
 const routes = [
   {
@@ -116,6 +117,12 @@ const routes = [
     meta: { activeMenu: "/instances" }
   },
   {
+    path: "/terminal_error",
+    name: "terminalError",
+    component: UnavailableTerminal,
+    meta: { activeMenu: "/instances" }
+  },
+  {
     path: "/process_config_file/:serviceUuid/:instanceUuid/",
     name: "processConfigFile",
     component: ProcessConfigFile,
@@ -182,7 +189,7 @@ const routes = [
     path: "/install",
     name: "install",
     component: Install
-  },
+  }
 ];
 
 const router = createRouter({

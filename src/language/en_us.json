@@ -464,10 +464,10 @@
     "unavailableTerminal": {
       "title": "Connection Daemon Error",
       "browserCannotConnect": "The browser is unable to connect to",
-      "browserCannotConnect2": "The browser is unable to establish connection to Daemon",
+      "browserCannotConnect2": "The browser is unable to establish connection to \"Daemon\"",
       "maybe": "Possibly due to a blocked port or the usage of local IP.",
       "solution": "Possible solutions:",
-      "solutions": "<li>Make sure that the address used by the remote node is a public network address, and the port of the remote node has been opened. </li><li>If you use intranet mapping or other network modes, you must ensure that both your browser and the panel can connect to the node. </li><li>If there is HTTPS, etc., please use the wss:// protocol to connect to the node. </li>"
+      "solutions": "<li>Make sure that the address used by the \"Daemon\" is a public network address, and the port of the \"Daemon\" has been opened. </li><li>If you use intranet mapping or other network modes, you must ensure that both your browser and the panel can connect to the \"Daemon\". </li><li>If there is HTTPS, etc., please use the wss:// protocol to connect to the \"Daemon\". </li>"
     },
     "cantConnectTerm": "Failed to establish connection to the terminal",
     "cantSendCmdBecauseData": "Unable to execute command: data channel unavailable",

@@ -504,9 +504,6 @@
       </template>
     </Dialog>
 
-    <UnavailableTerminalDialog ref="UnavailableTerminalDialog" :unavailableIp="unavailableIp">
-    </UnavailableTerminalDialog>
-
     <!-- Terminal Settings Dialog -->
     <TermSetting
       v-model:visible="terminalSettingPanel.visible"
@@ -555,18 +552,15 @@ import {
 import router from "../../router";
 import { parseforwardAddress, request } from "../../service/protocol";
 import { encodeConsoleColor } from "../../service/terminal_color";
-import { ElNotification } from "element-plus";
 import { statusCodeToText, typeTextToReadableText } from "../../service/instance_tools";
 import { initTerminalWindow, textToTermText } from "../../service/term";
 import { getPlayersOption } from "../../service/chart_option";
 import TermSetting from "./TermSetting";
 import DockerInfo from "./DockerInfo";
 import NetworkTip from "@/components/NetworkTip";
-import UnavailableTerminalDialog from "./UnavailableTerminal.vue";
 
 export default {
   components: {
-    UnavailableTerminalDialog,
     Panel,
     LineInfo,
     Dialog,
@@ -674,13 +668,11 @@ export default {
           params: { remote_uuid: this.serviceUuid, uuid: this.instanceUuid }
         });
       } catch (error) {
-        this.$refs.UnavailableTerminalDialog.open();
-        ElNotification({
-          title: this.$t("terminal.cantConnectTerm"),
-          message: error,
-          dangerouslyUseHTMLString: true,
-          type: "error",
-          duration: 0
+        this.$router.push({
+          path: "/terminal_error",
+          query: {
+            ip: this.unavailableIp || ""
+          }
         });
         return;
       }
@@ -693,13 +685,16 @@ export default {
         password,
         () => {
           this.unavailableIp = null;
-          this.$refs.UnavailableTerminalDialog.close();
-          // Get a system log
           this.syncLog();
         },
         () => {
           this.unavailableIp = addr;
-          this.$refs.UnavailableTerminalDialog.open();
+          this.$router.push({
+            path: "/terminal_error",
+            query: {
+              ip: this.unavailableIp || ""
+            }
+          });
         }
       );
 
