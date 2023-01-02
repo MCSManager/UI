@@ -5,10 +5,13 @@
 <template>
   <Panel>
     <template #title>{{ $t("container.remoteList") }}</template>
-    <template #rtitle>
-      <p class="sub-title-info">{{ $t("Container.notSupportWindowsTip") }}</p>
-    </template>
+
     <template #default>
+      <p>
+        {{ $t("Container.info") }}
+        <br />
+        {{ $t("Container.notSupportWindowsTip") }}
+      </p>
       <el-table :data="services" stripe style="width: 100%" size="small">
         <el-table-column prop="ip" :label="$t('overview.addr')"></el-table-column>
         <el-table-column prop="port" :label="$t('overview.port')"></el-table-column>

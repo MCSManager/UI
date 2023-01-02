@@ -859,7 +859,7 @@
     "updateSet": "更新配置",
     "updateSetInfo": "部分配置可能需要重启面板才能生效",
     "languageSetting": "语言设置",
-    "languageSettingInfo": "改变语言后，控制面板将会把所有节点，界面等全部同步为同一种语言。",
+    "languageSettingInfo": "改变语言后，控制面板将会把所有节点，界面，报错信息，提示消息等全部同步设置为同一种语言，控制面板会自动为不同语言提供不同的本地化功能。",
     "basicSetting": "基础设置",
     "accessPort": "面板访问端口",
     "accessPortInfo": "浏览器访问网页面板的端口，必须防火墙放行此端口，重启面板生效。",
@@ -1156,6 +1156,7 @@
     "title": "容器资源限制信息"
   },
   "Container": {
-    "notSupportWindowsTip": "仅支持 Linux 下的 Docker 容器管理"
+    "notSupportWindowsTip": "仅支持 Linux 下的 Docker 容器管理",
+    "info": "可以在此管理所有基于 Docker 的容器和镜像情况，创建镜像后可以为实例分配指定镜像，确保运行环境隔离和宿主机的安全。"
   }
 }
