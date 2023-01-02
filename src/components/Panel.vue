@@ -4,14 +4,16 @@
 
 <template>
   <el-card class="box-card-shadow" :body-style="bodyStyle || 'padding:12px;'" :style="style">
-    <div v-bind:class="{ 'box-card-title': true }" v-if="$slots.title">
-      <span v-bind:class="{ 'left-tip': tipType }"></span>
-      <span>
-        <slot name="title"></slot>
-      </span>
-    </div>
-    <div class="box-card-rtitle" v-if="$slots.rtitle">
-      <slot name="rtitle"></slot>
+    <div class="box-card-title-wrapper">
+      <div v-bind:class="{ 'box-card-title': true }" v-if="$slots.title">
+        <span v-bind:class="{ 'left-tip': tipType }"></span>
+        <span>
+          <slot name="title"></slot>
+        </span>
+      </div>
+      <div class="box-card-rtitle" v-if="$slots.rtitle">
+        <slot name="rtitle"></slot>
+      </div>
     </div>
 
     <div class="box-card-content">
@@ -50,13 +52,16 @@ export default {
 <style scoped>
 .box-card-title {
   font-weight: 600;
-  margin-bottom: 12px;
   font-size: 14px;
-  display: inline-block;
+}
+.box-card-title-wrapper {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 12px;
 }
 
 .box-card-rtitle {
-  float: right;
+  /* float: right; */
 }
 
 .box-card-content {

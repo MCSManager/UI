@@ -84,7 +84,7 @@ export default {
         pvp: "是否允许玩家互相攻击",
         difficulty: "游戏难度",
         "player-idle-timeout": "允许的挂机时间，单位为分钟 超过限制后自动踢出服务器",
-        gamemode: "游戏模式 0=生存 1=创造 2=冒险 3=旁观",
+        gamemode: "游戏模式",
         "max-players": "服务器最大玩家数限制",
         "spawn-monsters": "生成攻击型生物（怪物）",
         "view-distance": "服务器发送给客户端的数据量，决定玩家能设置的视野",

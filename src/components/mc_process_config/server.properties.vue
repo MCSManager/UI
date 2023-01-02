@@ -67,9 +67,10 @@ export default {
         "texture-pack": "材质包",
         "online-mode": "在线（正版）验证",
         pvp: "是否允许玩家互相攻击",
-        difficulty: "游戏难度",
+        "enforce-secure-profile": "如果开启，则没有 Mojang 签名公钥的玩家将无法连接到服务器。",
+        difficulty: "游戏难度（peaceful, easy, normal,hard）",
         "player-idle-timeout": "允许的挂机时间，单位为分钟 超过限制后自动踢出服务器",
-        gamemode: "游戏模式 0=生存 1=创造 2=冒险 3=旁观",
+        gamemode: "游戏模式（survival，creative，adventure，spectator）",
         "max-players": "服务器最大玩家数限制",
         "spawn-monsters": "生成攻击型生物（怪物）",
         "view-distance": "服务器发送给客户端的数据量，决定玩家能设置的视野",
@@ -94,7 +95,20 @@ export default {
         "broadcast-console-to-ops": "向 OP 广播服务器控制台信息",
         "enforce-whitelist": "在服务器上强制使用白名单",
         "spawn-protection":
-          "通过将该值进行 2x+1 的运算来决定出生点的保护半径，设置为0将只保护出生点下方那一个方块。"
+          "通过将该值进行 2x+1 的运算来决定出生点的保护半径，设置为0将只保护出生点下方那一个方块。",
+        "max-chained-neighbor-updates": "在跳过其他更新之前限制连续临近更新的数量。负值移除限制。",
+        "enable-status":
+          "使服务器在服务器列表中显示为在线。如果设置为否，它将抑制来自客户端的回复。这意味着它将显示为脱机，但仍将接受连接。",
+        "resource-pack-prompt":
+          "可选，添加一个自定义消息，当使用require-resource-pack时，将显示在资源包提示窗口上。",
+        "hide-online-players": "是否隐藏在线人数",
+        "entity-broadcast-range-percentage": "控制客户端最远可见实体距离，可以适当优化缩小距离。",
+        "simulation-distance":
+          "设置生物实体与玩家之间的最大距离，以便服务器更新，以玩家每个方向的块为单位(半径)。如果实体在这个半径之外，那么它们将不会被服务器发送，也不会被玩家看到。",
+        "rate-limit": "当玩家客户端发送多少数据包总量时会被踢出，0代表关闭",
+        "previews-chat":
+          "如果设置为是，将启用聊天预览。如果启用，服务器禁止用户使用vpn或代理；如果禁用，服务器不阻止用户使用vpn或代理。",
+        "text-filtering-config": "文本过滤规则配置文件（可能工作不正常）"
       }
     };
   }

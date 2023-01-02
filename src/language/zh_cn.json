@@ -759,7 +759,8 @@
     "updateRemarkSuccess": "更新备注信息成功",
     "inputNewKey": "请输入新密钥，设置后将自动尝试连接",
     "key": "密钥",
-    "keySub2": "在 Linux 下，密钥一般在 /opt/mcsmanager/daemon/data/Config/global.json 中"
+    "keySub2": "在 Linux 下，密钥一般在 /opt/mcsmanager/daemon/data/Config/global.json 中",
+    "copyId": "（可用于 API 调用）"
   },
   "container": {
     "remoteList": "远程节点列表",
@@ -769,11 +770,11 @@
     "links": [
       {
         "title": "阅读官方中文文档",
-        "info": "学习如何在系统上知晓您当前的一些常用运行时环境"
+        "info": "通过阅读学习官方文档了解更多知识。"
       },
       {
         "title": "安装 Docker 软件",
-        "info": "学习如何在常见 Linux 发行版系统上安装 Docker 软件"
+        "info": "学习如何在 Linux 系统上安装 Docker 软件。"
       }
     ]
   },
@@ -919,7 +920,7 @@
     "title": "您希望使用 MCSManager 面板做什么？",
     "quickItems": [
       {
-        "title": "创建一个的 Minecraft 服务器",
+        "title": "创建一个 Minecraft 服务器",
         "subTitle": "帮助您快速部署 Java/基岩版 Minecraft 服务器"
       },
       {
@@ -927,8 +928,8 @@
         "subTitle": "尝试帮助您创建其他游戏服务器，不保证完全兼容"
       },
       {
-        "title": "在面板中管理我的控制台程序",
-        "subTitle": "让您的控制台程序，比如 Nginx.exe，frp.exe 和 cmd.exe 在网页上进行管理"
+        "title": "在面板中管理控制台程序",
+        "subTitle": "让您的控制台程序在网页上管理，比如 Nginx.exe，frp.exe 和 cmd.exe"
       },
       {
         "title": "获得更多信息",
@@ -1022,7 +1023,9 @@
     "user": "用户管理",
     "advanced": "高级功能",
     "node": "节点管理",
-    "more": "更多"
+    "more": "更多",
+    "backElectronMain": "回到主界面",
+    "toBrowser": "在浏览器中打开"
   },
   "businessWarning": {
     "title": "商业出租风险警告",
@@ -1147,5 +1150,8 @@
     "containerName": "容器名：",
     "subtitle": "这里显示管理员分配给您的这个实例的资源信息。",
     "title": "容器资源限制信息"
+  },
+  "Container": {
+    "notSupportWindowsTip": "仅支持 Linux 下的 Docker 容器管理"
   }
 }

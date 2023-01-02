@@ -586,7 +586,7 @@ export default defineComponent({
       }
     },
     // create a new file
-    async touch(){
+    async touch() {
       const { value } = await this.$prompt(this.$t("fileManager.newFileName"), undefined, {
         confirmButtonText: this.$t("general.confirm"),
         cancelButtonText: this.$t("general.cancel")

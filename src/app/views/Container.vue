@@ -5,15 +5,18 @@
 <template>
   <Panel>
     <template #title>{{ $t("container.remoteList") }}</template>
+    <template #rtitle>
+      <p class="sub-title-info">{{ $t("Container.notSupportWindowsTip") }}</p>
+    </template>
     <template #default>
       <el-table :data="services" stripe style="width: 100%" size="small">
         <el-table-column prop="ip" :label="$t('overview.addr')"></el-table-column>
         <el-table-column prop="port" :label="$t('overview.port')"></el-table-column>
         <el-table-column :label="$t('container.status')">
           <template #default="scope">
-            <span>{{
-              scope.row.available ? this.$t("overview.online") : this.$t("overview.offline")
-            }}</span>
+            <span>
+              {{ scope.row.available ? this.$t("overview.online") : this.$t("overview.offline") }}
+            </span>
           </template>
         </el-table-column>
         <el-table-column prop="remarks" :label="$t('overview.remarks')"></el-table-column>
@@ -23,8 +26,9 @@
               size="mini"
               @click="toImagesPanel(scope.row)"
               :disabled="!scope.row.available"
-              >{{ $t("container.imagesManage") }}</el-button
             >
+              {{ $t("container.imagesManage") }}
+            </el-button>
           </template>
         </el-table-column>
       </el-table>
@@ -47,7 +51,7 @@
           <ItemGroup>
             <SelectBlock style="min-height: 100px" @click="selectLink(2)">
               <template #title>{{ $t("container.links[1].title") }}</template>
-              <template #info>{{ $t("container.links[1].title") }}</template>
+              <template #info>{{ $t("container.links[1].info") }}</template>
             </SelectBlock>
           </ItemGroup>
         </el-col>

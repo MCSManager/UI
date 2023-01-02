@@ -55,11 +55,11 @@
 
         <el-menu-item v-if="hasElectron()" @click="toElectronUI">
           <i class="el-icon-postcard"></i>
-          <template #title>回到主界面</template>
+          <template #title>{{ $t("aside.backElectronMain") }}</template>
         </el-menu-item>
         <el-menu-item v-if="hasElectron()" @click="toBrowser">
           <i class="el-icon-position"></i>
-          <template #title>在浏览器中打开</template>
+          <template #title>{{ $t("aside.toBrowser") }}</template>
         </el-menu-item>
       </el-menu-item-group>
     </el-scrollbar>

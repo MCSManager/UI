@@ -44,6 +44,18 @@
             ></el-input>
           </template>
         </el-table-column>
+        <el-table-column label="ID" width="40">
+          <template #default="scope">
+            <el-tooltip
+              class="box-item"
+              effect="dark"
+              :content="scope.row.uuid + $t('services.copyId')"
+              placement="top"
+            >
+              <i class="pointer el-icon-document-copy" @click="copyText(scope.row.uuid)"></i>
+            </el-tooltip>
+          </template>
+        </el-table-column>
         <el-table-column :label="$t('overview.remarks')" width="210">
           <template #default="scope">
             <span
@@ -53,11 +65,7 @@
             <!-- <el-input size="small" v-model="scope.row.remarks"></el-input> -->
           </template>
         </el-table-column>
-        <el-table-column label="UID" width="100">
-          <template #default="scope">
-            <el-input v-model="scope.row.uuid" placeholder="" size="small" readonly></el-input>
-          </template>
-        </el-table-column>
+
         <el-table-column :label="$t('services.platform')" width="100">
           <template #default="scope">
             <div v-if="scope.row.system">
@@ -72,12 +80,12 @@
             </div>
           </template>
         </el-table-column>
-        <el-table-column :label="$t('overview.mem')">
+        <el-table-column :label="$t('overview.mem')" width="130">
           <template #default="scope">
             <div v-if="scope.row.system">{{ scope.row.system.memText }}</div>
           </template>
         </el-table-column>
-        <el-table-column :label="$t('services.instanceStatus')" width="140">
+        <el-table-column :label="$t('services.instanceStatus')">
           <template #default="scope">
             <div v-if="scope.row.instance">
               {{ scope.row.instance.running }}/{{ scope.row.instance.total }}
@@ -273,6 +281,7 @@ import Dialog from "../../components/Dialog";
 import axios from "axios";
 import { API_OVERVIEW, API_SERVICE_CURD, API_SERVICE_URL } from "../service/common";
 import { request } from "../service/protocol";
+import { copyText } from "../utils/index";
 
 export default {
   components: { Panel, Dialog },
@@ -296,6 +305,7 @@ export default {
     };
   },
   methods: {
+    copyText,
     // refresh button
     async refresh() {
       await this.render();
@@ -453,5 +463,10 @@ export default {
   display: flex;
   justify-content: space-between;
   align-items: center;
+}
+
+.pointer {
+  color: #409eff;
+  cursor: pointer;
 }
 </style>
