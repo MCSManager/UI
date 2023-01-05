@@ -53,7 +53,7 @@ export default {
         "enable-query": "是否允许使用 GameSpy4 协议的服务器监听器",
         "allow-flight": "是否允许玩家飞行（在任何游戏模式下）",
         "server-port": "服务器端口（若服务器有更高级的设置，此选项可能会失效）",
-        "level-type": "地图的生成类型",
+        "level-type": "地图的生成类型（默认：default，超平坦：flat，放大的世界：amplified，巨型生物群系：largeBiomes）",
         "enable-rcon": "是否允许远程访问服务器控制台（RCON）",
         "force-gamemode": "强制玩家加入时为默认游戏模式",
         "level-seed": "地图种子 默认留空",
