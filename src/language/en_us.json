@@ -459,7 +459,15 @@
       "autoRestart": "Auto Restart",
       "autoRestartInfo": "Start the server immediately if it was stopped for any reason other than the 'Stop' button. <br />Could be used to restart a crashed server.",
       "autoStart": "Auto Start",
-      "autoStartInfo": "Automatically start the instance with daemon.<br />Could be used to start server automatically during a system restart."
+      "autoStartInfo": "Automatically start the instance with daemon.<br />Could be used to start server automatically during a system restart.",
+      "childInstance": "Child Instance",
+      "childInstanceInfo": "Child instance uuid, spilt with comma",
+      "childInstanceStart": "Child Instance Auto Start",
+      "childInstanceStartInfo": "Automatically start child instance with this instance.",
+      "childInstanceStop": "Child Instance Auto Stop",
+      "childInstanceStopInfo": "Automatically stop child instance tree when this instance stop.",
+      "childInstanceRestart": "Child Instance Auto Restart",
+      "childInstanceRestartInfo": "Automatically restart child instance tree when this instance restart."
     },
     "unavailableTerminal": {
       "title": "Connection Daemon Error",

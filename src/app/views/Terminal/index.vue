@@ -491,6 +491,48 @@
           </div>
         </div>
 
+        <div class="sub-title">
+          <p class="sub-title-title">{{ $t("terminal.eventConfigPanel.childInstance") }}</p>
+          <p class="sub-title-info">
+            <span v-html="$t('terminal.eventConfigPanel.childInstanceInfo')"></span>
+          </p>
+          <div class="row-mt">
+            <el-input v-model="eventConfigPanel.childInstance"></el-input>
+          </div>
+        </div>
+
+        <div class="sub-title">
+          <p class="sub-title-title">{{ $t("terminal.eventConfigPanel.childInstanceStart") }}</p>
+          <p class="sub-title-info">
+            <span v-html="$t('terminal.eventConfigPanel.childInstanceStart')"></span>
+          </p>
+          <div class="row-mt">
+            <el-switch v-model="eventConfigPanel.childInstanceStart"></el-switch>
+          </div>
+        </div>
+
+
+        <div class="sub-title">
+          <p class="sub-title-title">{{ $t("terminal.eventConfigPanel.childInstanceStop") }}</p>
+          <p class="sub-title-info">
+            <span v-html="$t('terminal.eventConfigPanel.childInstanceStop')"></span>
+          </p>
+          <div class="row-mt">
+            <el-switch v-model="eventConfigPanel.childInstanceStop"></el-switch>
+          </div>
+        </div>
+
+
+        <div class="sub-title">
+          <p class="sub-title-title">{{ $t("terminal.eventConfigPanel.childInstanceRestart") }}</p>
+          <p class="sub-title-info">
+            <span v-html="$t('terminal.eventConfigPanel.childInstanceRestart')"></span>
+          </p>
+          <div class="row-mt">
+            <el-switch v-model="eventConfigPanel.childInstanceRestart"></el-switch>
+          </div>
+        </div>
+
         <div class="row-mt">
           <ItemGroup>
             <el-button type="success" size="small" @click="instanceConfigUpdate">{{
@@ -600,7 +642,11 @@ export default {
       eventConfigPanel: {
         visible: false,
         autoRestart: false,
-        autoStart: false
+        autoStart: false,
+        childInstance: "",
+        childInstanceStart: false,
+        childInstanceStop: false,
+        childInstanceRestart: false
       },
 
       terminalSettingPanel: {
@@ -936,6 +982,10 @@ export default {
       if (this.instanceInfo.config && this.instanceInfo.config.eventTask) {
         this.eventConfigPanel.autoRestart = this.instanceInfo.config.eventTask.autoRestart;
         this.eventConfigPanel.autoStart = this.instanceInfo.config.eventTask.autoStart;
+        this.eventConfigPanel.childInstance = this.instanceInfo.config.eventTask.childInstance;
+        this.eventConfigPanel.childInstanceStart = this.instanceInfo.config.eventTask.childInstanceStart;
+        this.eventConfigPanel.childInstanceStop = this.instanceInfo.config.eventTask.childInstanceStop;
+        this.eventConfigPanel.childInstanceRestart = this.instanceInfo.config.eventTask.childInstanceRestart;
       }
       this.eventConfigPanel.visible = true;
     },

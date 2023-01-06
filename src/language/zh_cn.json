@@ -459,7 +459,15 @@
       "autoRestart": "自动重启",
       "autoRestartInfo": "若实例状态在未经面板操作的情况下变为非运行状态将立刻发起启动实例操作。<br />可用于崩溃后自动重启功能。",
       "autoStart": "自动启动",
-      "autoStartInfo": "只要远程节点（远程节点）运行，就自动发起一次启动实例操作。<br />如果将远程节点开机自启则可用于开机自启实例。"
+      "autoStartInfo": "只要远程节点（远程节点）运行，就自动发起一次启动实例操作。<br />如果将远程节点开机自启则可用于开机自启实例。",
+      "childInstance": "子实例",
+      "childInstanceInfo": "填入子实例uuid，按逗号分隔。",
+      "childInstanceStart": "自动启动子实例",
+      "childInstanceStartInfo": "当此实例启动时同时启动子实例",
+      "childInstanceStop": "自动停止子实例",
+      "childInstanceStopInfo": "当此实例停止时同时停止子实例树",
+      "childInstanceRestart": "自动重启子实例",
+      "childInstanceRestartInfo": "当此实例重启时同时重启子实例树"
     },
     "unavailableTerminal": {
       "title": "连接到远程节点错误",
