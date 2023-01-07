@@ -461,11 +461,11 @@
       "autoStart": "Auto Start",
       "autoStartInfo": "Automatically start the instance with daemon.<br />Could be used to start server automatically during a system restart.",
       "childInstance": "Child Instance",
-      "childInstanceInfo": "Child instance uuid, spilt with comma",
+      "childInstanceInfo": "Child instance uuid, spilt with comma<br />Child instance process may fail due to insufficient privileges.",
       "childInstanceStart": "Child Instance Auto Start",
       "childInstanceStartInfo": "Automatically start child instance with this instance.",
       "childInstanceStop": "Child Instance Auto Stop",
-      "childInstanceStopInfo": "Automatically stop child instance tree when this instance stop.",
+      "childInstanceStopInfo": "Automatically stop child instance tree when this instance stop.<br />It will not stop child instance tree when force quit this instance.",
       "childInstanceRestart": "Child Instance Auto Restart",
       "childInstanceRestartInfo": "Automatically restart child instance tree when this instance restart."
     },

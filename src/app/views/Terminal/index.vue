@@ -504,7 +504,7 @@
         <div class="sub-title">
           <p class="sub-title-title">{{ $t("terminal.eventConfigPanel.childInstanceStart") }}</p>
           <p class="sub-title-info">
-            <span v-html="$t('terminal.eventConfigPanel.childInstanceStart')"></span>
+            <span v-html="$t('terminal.eventConfigPanel.childInstanceStartInfo')"></span>
           </p>
           <div class="row-mt">
             <el-switch v-model="eventConfigPanel.childInstanceStart"></el-switch>
@@ -515,7 +515,7 @@
         <div class="sub-title">
           <p class="sub-title-title">{{ $t("terminal.eventConfigPanel.childInstanceStop") }}</p>
           <p class="sub-title-info">
-            <span v-html="$t('terminal.eventConfigPanel.childInstanceStop')"></span>
+            <span v-html="$t('terminal.eventConfigPanel.childInstanceStopInfo')"></span>
           </p>
           <div class="row-mt">
             <el-switch v-model="eventConfigPanel.childInstanceStop"></el-switch>
@@ -526,7 +526,7 @@
         <div class="sub-title">
           <p class="sub-title-title">{{ $t("terminal.eventConfigPanel.childInstanceRestart") }}</p>
           <p class="sub-title-info">
-            <span v-html="$t('terminal.eventConfigPanel.childInstanceRestart')"></span>
+            <span v-html="$t('terminal.eventConfigPanel.childInstanceRestartInfo')"></span>
           </p>
           <div class="row-mt">
             <el-switch v-model="eventConfigPanel.childInstanceRestart"></el-switch>
