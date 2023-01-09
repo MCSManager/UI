@@ -76,7 +76,7 @@ export default {
         "view-distance": "服务器发送给客户端的数据量，决定玩家能设置的视野",
         "generate-structures": "生成世界时生成结构（如村庄）禁止后地牢和地下要塞仍然生成",
         motd: "服务器信息展示 若使用 ColorMotd 等插件可留空该选项",
-        "op-permission-level": "OP 权限等级 ",
+        "op-permission-level": "OP 权限等级 (1-4)",
         "announce-player-achievements": "玩家获得成就时，是否在服务器聊天栏显示（是否允许其装X）",
         "network-compression-threshold": "网络压缩阈值",
         "resource-pack-sha1": "资源包的 SHA-1 值，必须为小写十六进制，不是必填选项",
