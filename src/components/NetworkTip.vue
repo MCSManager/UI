@@ -95,7 +95,11 @@
               {{ $t("components.NetworkTip.009") }}
             </p>
           </div>
-
+          <div>
+            <p class="color-red-2">
+              {{ $t("components.NetworkTip.023") }}
+            </p>
+          </div>
           <!-- <p>
             {{ $t("CommonText.013") }}
             <span class="color-gray" v-if="taskInfo.status == 0"> {{ $t("CommonText.014") }} </span>

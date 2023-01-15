@@ -25,6 +25,10 @@
               <i class="el-icon-refresh"></i>
               {{ $t("general.refresh") }}
             </el-button>
+            <el-button size="small" @click="back" v-if="!backType">
+              <i class="el-icon-pie-chart"></i>
+              {{ $t("fileManagerEditor.backToFileManager") }}
+            </el-button>
             <el-button size="small" @click="jumpToLine">
               <i class="el-icon-sort-down"></i>{{ $t("CommonText.034") }}</el-button
             >
@@ -125,10 +129,6 @@
             <el-button type="default" size="small" @click="toHotKey">
               <i class="el-icon-sort-down"></i>{{ $t("views.FileManagerEditor.005") }}</el-button
             >
-            <el-button size="small" @click="back" v-if="!backType">
-              <i class="el-icon-pie-chart"></i>
-              {{ $t("fileManagerEditor.backToFileManager") }}
-            </el-button>
           </ItemGroup>
         </div>
         <div>
