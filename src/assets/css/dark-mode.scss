@@ -227,6 +227,18 @@
     background-color: unset !important;
     backdrop-filter: brightness(0.8) !important;
   }
+
+  .dir-node-back-btn {
+    border: 1px solid #606061 !important;
+  }
+
+  .dir-node-container {
+    border: 1px solid #606061 !important;
+  }
+
+  .dir-node:hover {
+    background-color: #2d2d2d !important;
+  }
 }
 
 .dark {

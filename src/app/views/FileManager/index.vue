@@ -96,6 +96,20 @@
           </el-row>
         </div>
 
+        <div class="dir-node-container row-mt">
+          <div class="dir-node dir-node-back-btn" style="margin: -1px" @click="toUpDir">
+            <i class="el-icon-caret-left"></i>
+          </div>
+          <div
+            class="flex flex-align-items-center"
+            v-for="(item, index) in currentDirArray"
+            :key="index"
+          >
+            <div class="dir-node" v-if="item" @click="changeDir(item.value)">{{ item.label }}</div>
+            <i class="el-icon-arrow-right" v-if="index < currentDirArray.length - 1"></i>
+          </div>
+        </div>
+
         <div class="row-mt page-pagination">
           <div>
             <div v-if="statusInfo.instanceFileTask">
@@ -107,18 +121,6 @@
               >
             </div>
           </div>
-
-          <div>
-            <el-pagination
-              small
-              background
-              layout="prev, pager, next"
-              v-model:currentPage="pageParam.page"
-              :page-size="pageParam.pageSize"
-              :total="pageParam.total"
-              @current-change="currentChange"
-            ></el-pagination>
-          </div>
         </div>
 
         <div class="row-mt" v-show="percentComplete > 0">
@@ -128,12 +130,6 @@
             :percentage="percentComplete"
           ></el-progress>
         </div>
-
-        <p>
-          <el-tag type="success" size="small">{{ $t("fileManager.dir") }}</el-tag>
-          &nbsp;
-          <el-tag type="info" size="small"> {{ currentDir }}</el-tag>
-        </p>
 
         <el-table
           :data="files"
@@ -219,11 +215,14 @@
     </Panel>
 
     <SelectUnzipCode ref="selectUnzipCode"></SelectUnzipCode>
+
+    <FloatFileEditor ref="floatFileEditor"></FloatFileEditor>
   </div>
 </template>
 
 <script>
 import Panel from "@/components/Panel";
+import FloatFileEditor from "../FloatFileEditor";
 import axios from "axios";
 import {
   API_FILE_COMPRESS,
@@ -245,7 +244,8 @@ import { directive } from "vue3-menus";
 export default defineComponent({
   components: {
     Panel,
-    SelectUnzipCode
+    SelectUnzipCode,
+    FloatFileEditor
   },
   directives: {
     menus: directive
@@ -342,6 +342,27 @@ export default defineComponent({
       statusRequestTask: null
     };
   },
+  computed: {
+    currentDirArray() {
+      let arr = this.currentDir.split("/");
+      arr = arr.filter((v) => v);
+      const newArr = arr.map((v, i) => {
+        const slice = arr.slice(0, i + 1);
+        return {
+          label: v,
+          value: `/${slice.join("/")}`
+        };
+      });
+      arr = [
+        {
+          label: "/",
+          value: "/"
+        },
+        ...newArr
+      ];
+      return arr;
+    }
+  },
   async mounted() {
     if (this.paramPath) {
       this.currentDir = this.paramPath;
@@ -387,6 +408,7 @@ export default defineComponent({
     },
     // return to the upper directory
     async toUpDir() {
+      this.pageParam.page = 1;
       const p = path.normalize(path.join(this.currentDir, "../"));
       await this.list(p);
     },
@@ -397,6 +419,10 @@ export default defineComponent({
     fileRightClick(row) {
       this.multipleSelection = [];
       this.multipleSelection.push(row);
+    },
+    async changeDir(cwd = ".") {
+      this.pageParam.page = 1;
+      return await this.list(cwd);
     },
     // Directory List function
     async list(cwd = ".") {
@@ -651,13 +677,9 @@ export default defineComponent({
     },
     // edit the file
     async toEditFilePage(row) {
+      console.log("this.$refs.floatFileEditor", this.$refs.floatFileEditor);
       const target = path.normalize(path.join(this.currentDir, row.name));
-      this.$router.push({
-        path: `/file_editor/${this.serviceUuid}/${this.instanceUuid}/`,
-        query: {
-          target
-        }
-      });
+      this.$refs.floatFileEditor.open(row, target);
     },
     // Delete Files
     async deleteFiles() {
@@ -877,7 +899,7 @@ export default defineComponent({
   Copyright (C) 2022 MCSManager <mcsmanager-dev@outlook.com>
 -->
 
-<style scoped>
+<style lang="scss" scoped>
 .filemanager-item-dir {
   font-size: 14px;
   text-decoration: underline;
@@ -925,5 +947,43 @@ export default defineComponent({
   justify-content: space-between;
   align-items: center;
   color: #409eff;
+}
+
+.dir-node-container {
+  border: 1px solid #dcdfe6;
+  /* background: #f3f3f3; */
+  overflow: hidden;
+  overflow-x: auto;
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  border-radius: 4px;
+  height: 32px;
+  font-size: 14px;
+}
+
+.dir-node {
+  font-size: 14px;
+  transition: all 0.4s;
+  cursor: pointer;
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  max-width: 200px;
+  height: 32px;
+  padding: 0px 10px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.dir-node-back-btn {
+  font-size: 14px;
+  padding: 0px 12px;
+  border-right: 1px solid #cfcfcf;
+}
+
+.dir-node:hover {
+  background: #f1f1f1;
 }
 </style>

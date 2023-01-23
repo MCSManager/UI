@@ -2,8 +2,8 @@
   Copyright (C) 2022 MCSManager <mcsmanager-dev@outlook.com>
 -->
 <template>
-  <Panel>
-    <template #title>
+  <div>
+    <!-- <div>
       {{ $t("fileManagerEditor.title") }}
       {{ target }}
       <el-tag type="warning" effect="plain" size="small" v-if="editStatus === 'edit'">{{
@@ -12,8 +12,9 @@
       <el-tag type="success" effect="plain" size="small" v-if="editStatus === 'success'">{{
         $t("CommonText.033")
       }}</el-tag>
-    </template>
-    <template #default>
+    </div> -->
+
+    <div>
       <div class="instance-table-wrapper">
         <div>
           <ItemGroup>
@@ -158,8 +159,8 @@
           show-icon
         ></el-alert>
       </div>
-    </template>
-  </Panel>
+    </div>
+  </div>
 </template>
 
 <script>
@@ -169,13 +170,15 @@ import path from "path";
 import { request } from "../service/protocol";
 export default {
   components: {
+    // eslint-disable-next-line vue/no-unused-components
     Panel
   },
+  props: ["target", "serviceUuid", "instanceUuid"],
   data() {
     return {
-      serviceUuid: this.$route.params.serviceUuid,
-      instanceUuid: this.$route.params.instanceUuid,
-      target: this.$route.query.target,
+      // serviceUuid: this.$route.params.serviceUuid,
+      // instanceUuid: this.$route.params.instanceUuid,
+      // target: this.$route.query.target,
       backType: this.$route.query.backType,
       error: null,
       edit: {
@@ -239,6 +242,7 @@ export default {
     };
   },
   async mounted() {
+    console.log("this.$route.params:", this.$route.params);
     await this.render();
     this.editor = window.ace.edit("editor");
     this.editor.setTheme("ace/theme/" + this.editorSettings.theme);
