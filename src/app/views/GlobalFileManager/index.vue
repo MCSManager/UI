@@ -24,7 +24,7 @@ export default {
   methods: {
     selectDaemon(daemon) {
       console.log("选择:", daemon);
-      this.$router.push({ path: `/global_files/${daemon?.uuid}/${GLOBAL_INSTANCE_UUID}` });
+      this.$router.push({ path: `/global_files/${daemon?.uuid}/${GLOBAL_INSTANCE_UUID}/` });
     }
   }
 };
