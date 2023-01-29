@@ -41,6 +41,15 @@
           <i class="el-icon-connection"></i>
           <template #title>{{ $t("aside.node") }}</template>
         </el-menu-item>
+        <el-menu-item key="/global_file_manager" index="/global_file_manager">
+          <i class="el-icon-folder-opened"></i>
+          <template #title>文件管理</template>
+        </el-menu-item>
+        <el-menu-item key="/global_terminal" index="/global_terminal">
+          <i class="el-icon-postcard"></i>
+          <template #title>命令终端</template>
+        </el-menu-item>
+
         <el-menu-item key="/container" index="/container">
           <i class="el-icon-takeaway-box"></i>
           <template #title>{{ $t("router.container") }}</template>

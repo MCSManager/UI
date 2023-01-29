@@ -1001,11 +1001,11 @@
     "users": "用户管理",
     "analysis": "面板数据分析",
     "news": "更新与通知",
-    "container": "环境镜像",
+    "container": "容器镜像",
     "imageManager": "镜像管理",
     "trigger": "面板触发器",
     "extension": "面板扩展",
-    "settings": "面板设置",
+    "settings": "设置",
     "newImage": "创建镜像",
     "terminal": "实例控制台",
     "processConfigFile": "实例配置文件",
@@ -1020,7 +1020,8 @@
     "quickStart": "快速开始",
     "update": "版本控制",
     "install": "安装",
-    "terminalError": "终端连接错误"
+    "terminalError": "终端连接错误",
+    "globalFileManager": "节点文件管理"
   },
   "aside": {
     "basic": "基础功能",

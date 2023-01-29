@@ -8,6 +8,7 @@ import Services from "./views/Services";
 import Users from "./views/Users";
 import UserDetail from "./views/UserDetail";
 import Analysis from "./views/Analysis";
+import GlobalFileManager from "./views/GlobalFileManager";
 import News from "./views/News";
 import Container from "./views/Container";
 import ImageManager from "./views/ImageManager";
@@ -189,6 +190,11 @@ const routes = [
     path: "/install",
     name: "install",
     component: Install
+  },
+  {
+    path: "/global_file_manager",
+    name: "globalFileManager",
+    component: GlobalFileManager
   }
 ];
 
