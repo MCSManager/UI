@@ -195,6 +195,12 @@ const routes = [
     path: "/global_file_manager",
     name: "globalFileManager",
     component: GlobalFileManager
+  },
+  {
+    path: "/global_files/:serviceUuid/:instanceUuid",
+    name: "fileManager",
+    component: FileManager,
+    meta: { activeMenu: "/global_file_manager" }
   }
 ];
 
