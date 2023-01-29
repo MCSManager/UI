@@ -97,7 +97,7 @@
         </div>
 
         <div class="dir-node-container row-mt">
-          <div class="dir-node dir-node-back-btn" style="margin: -1px" @click="toUpDir">
+          <div class="dir-node dir-node-back-btn" @click="toUpDir">
             <i class="el-icon-caret-left"></i>
           </div>
           <div
@@ -105,7 +105,14 @@
             v-for="(item, index) in currentDirArray"
             :key="index"
           >
-            <div class="dir-node" v-if="item" @click="changeDir(item.value)">{{ item.label }}</div>
+            <div
+              class="dir-node"
+              :style="{ 'padding-left': index == 0 ? '8px' : '4px' }"
+              v-if="item"
+              @click="changeDir(item.value)"
+            >
+              {{ item.label }}
+            </div>
             <i class="el-icon-arrow-right" v-if="index < currentDirArray.length - 1"></i>
           </div>
         </div>
@@ -355,7 +362,7 @@ export default defineComponent({
       });
       arr = [
         {
-          label: "/",
+          label: window.$t("fileManager.rootDir"),
           value: "/"
         },
         ...newArr
@@ -959,11 +966,11 @@ export default defineComponent({
   align-items: center;
   border-radius: 4px;
   height: 32px;
-  font-size: 14px;
+  font-size: 13px;
 }
 
 .dir-node {
-  font-size: 14px;
+  font-size: 13px;
   transition: all 0.4s;
   cursor: pointer;
   display: flex;
@@ -971,7 +978,7 @@ export default defineComponent({
   align-items: center;
   max-width: 200px;
   height: 32px;
-  padding: 0px 10px;
+  padding: 0px 4px;
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
