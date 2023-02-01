@@ -9,6 +9,7 @@ import Users from "./views/Users";
 import UserDetail from "./views/UserDetail";
 import Analysis from "./views/Analysis";
 import GlobalFileManager from "./views/GlobalFileManager";
+import FileManagerCopy from "./views/GlobalFileManager/copy";
 import News from "./views/News";
 import Container from "./views/Container";
 import ImageManager from "./views/ImageManager";
@@ -193,13 +194,13 @@ const routes = [
   },
   {
     path: "/global_file_manager",
-    name: "globalFileManager",
+    name: "globalFileManagerEntry",
     component: GlobalFileManager
   },
   {
     path: "/global_files/:serviceUuid/:instanceUuid",
-    name: "fileManager",
-    component: FileManager,
+    name: "globalFileManager",
+    component: FileManagerCopy,
     meta: { activeMenu: "/global_file_manager" }
   }
 ];
