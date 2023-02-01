@@ -5,7 +5,7 @@
 <template>
   <div>
     <el-row :gutter="20">
-      <el-col :md="6">
+      <el-col :md="6" v-if="!isGlobalTerminal">
         <Panel>
           <template #title>{{ $t("userDetail.basicInfo") }}</template>
           <template #default>
@@ -310,10 +310,11 @@
           </template>
         </Panel>
       </el-col>
-      <el-col :md="18">
+      <el-col :md="isGlobalTerminal ? 24 : 18">
         <Panel v-loading="!available">
           <template #title>
-            <span>{{ $t("router.terminal") }}</span>
+            <span v-if="!isGlobalTerminal">{{ $t("router.terminal") }}</span>
+            <span v-else>控制台</span>
           </template>
           <template #rtitle>
             <div>
@@ -366,7 +367,13 @@
             <div :class="{ 'terminal-wrapper': true, 'full-terminal-wrapper': isFull }">
               <div id="terminal-container"></div>
             </div>
-            <div :class="{ 'terminal-input-wrapper': true, 'full-terminal-input-wrapper': isFull }">
+            <div
+              :class="{
+                'terminal-input-wrapper': true,
+                'full-terminal-input-wrapper': isFull,
+                'global-terminal-flex': isGlobalTerminal
+              }"
+            >
               <el-input
                 :placeholder="$t('terminal.inputCmd')"
                 prefix-icon="el-icon-arrow-right"
@@ -376,10 +383,19 @@
                 @keyup.enter="sendCommand(command)"
               >
               </el-input>
+              <el-button
+                v-if="isGlobalTerminal"
+                icon="el-icon-video-pause"
+                size="small"
+                style="width: 110px"
+              >
+                {{ $t("instances.kill") }}
+              </el-button>
             </div>
           </template>
         </Panel>
-        <Panel>
+
+        <Panel v-if="!isGlobalTerminal">
           <template #title>{{ $t("terminal.cmdHistory") }}</template>
           <template #rtitle>
             <span class="terminal-right-botton" @click="deleteCommandHistory">
@@ -547,7 +563,8 @@ import {
   API_INSTANCE_STOP,
   API_INSTANCE_OUTPUT,
   API_INSTANCE_ASYNC_TASK,
-  API_INSTANCE_ASYNC_STOP
+  API_INSTANCE_ASYNC_STOP,
+  GLOBAL_INSTANCE_UUID
 } from "../../service/common";
 import router from "../../router";
 import { parseforwardAddress, request } from "../../service/protocol";
@@ -634,9 +651,17 @@ export default {
     },
     hasDocker() {
       return this.instanceInfo.config?.docker?.image ? true : false;
+    },
+    isGlobalTerminal() {
+      return this.$route.params.instanceUuid === GLOBAL_INSTANCE_UUID;
     }
   },
   methods: {
+    receiveInstanceDetailEvent() {
+      if (!this.isStarted && this.isGlobalTerminal) {
+        this.openInstance();
+      }
+    },
     // request data source (Ajax)
     async renderFromAjax() {
       try {
@@ -711,6 +736,7 @@ export default {
         this.instanceInfo = packet.data;
         this.resizePtyTerminalWindow();
         this.initChart();
+        this.receiveInstanceDetailEvent(this.instanceInfo);
       });
       // disconnect event
       this.socket.on("disconnect", () => {
@@ -1275,5 +1301,9 @@ export default {
   width: 100%;
   overflow-x: scroll !important;
   overflow-y: hidden;
+}
+
+.global-terminal-flex {
+  display: flex;
 }
 </style>

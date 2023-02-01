@@ -41,11 +41,11 @@
           <i class="el-icon-connection"></i>
           <template #title>{{ $t("aside.node") }}</template>
         </el-menu-item>
-        <el-menu-item key="/global_file_manager" index="/global_file_manager">
+        <el-menu-item key="/global_file_manager_entry" index="/global_file_manager_entry">
           <i class="el-icon-folder-opened"></i>
           <template #title>文件管理</template>
         </el-menu-item>
-        <el-menu-item key="/global_terminal" index="/global_terminal">
+        <el-menu-item key="/global_terminal_entry" index="/global_terminal_entry">
           <i class="el-icon-postcard"></i>
           <template #title>命令终端</template>
         </el-menu-item>
