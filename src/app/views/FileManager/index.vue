@@ -9,6 +9,28 @@
       <template #default>
         <div>
           <el-row :gutter="20">
+            <el-col :span="24">
+              <div class="dir-node-container row-mb">
+                <div class="dir-node dir-node-back-btn" @click="toUpDir">
+                  <i class="el-icon-caret-left"></i>
+                </div>
+                <div
+                  class="flex flex-align-items-center"
+                  v-for="(item, index) in currentDirArray"
+                  :key="index"
+                >
+                  <div
+                    class="dir-node"
+                    :style="{ 'padding-left': index == 0 ? '8px' : '4px' }"
+                    v-if="item"
+                    @click="changeDir(item.value)"
+                  >
+                    {{ item.label }}
+                  </div>
+                  <i class="el-icon-arrow-right" v-if="index < currentDirArray.length - 1"></i>
+                </div>
+              </div>
+            </el-col>
             <el-col :span="24" :offset="0">
               <FunctionGroup :container="true">
                 <FunctionComponent>
@@ -94,27 +116,6 @@
               </FunctionGroup></el-col
             >
           </el-row>
-        </div>
-
-        <div class="dir-node-container row-mt">
-          <div class="dir-node dir-node-back-btn" @click="toUpDir">
-            <i class="el-icon-caret-left"></i>
-          </div>
-          <div
-            class="flex flex-align-items-center"
-            v-for="(item, index) in currentDirArray"
-            :key="index"
-          >
-            <div
-              class="dir-node"
-              :style="{ 'padding-left': index == 0 ? '8px' : '4px' }"
-              v-if="item"
-              @click="changeDir(item.value)"
-            >
-              {{ item.label }}
-            </div>
-            <i class="el-icon-arrow-right" v-if="index < currentDirArray.length - 1"></i>
-          </div>
         </div>
 
         <div class="row-mt page-pagination">
