@@ -54,7 +54,7 @@ export default {
   },
   methods: {
     select(daemon) {
-      if (daemon.available) this.$emit("selected", daemon);
+      if (daemon?.available) this.$emit("selected", daemon);
     },
     async renderServices() {
       try {
@@ -62,10 +62,12 @@ export default {
           method: "GET",
           url: API_SERVICE_LIST
         });
+        let onlineCount = 0;
         for (const service of data) {
           const remarks = `${service.remarks}`;
           const ip = `${service.ip}:${service.port}`;
           if (service.available) {
+            onlineCount++;
             this.serviceList.push({
               value: service.uuid,
               label: remarks,
@@ -81,6 +83,9 @@ export default {
             });
           }
         }
+
+        if (onlineCount === 1)
+          return this.select(this.serviceList.filter((v) => v?.available)?.[0]);
       } catch (error) {
         this.$message({ type: "error", message: `Error: ${error.message}` });
       } finally {

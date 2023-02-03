@@ -1023,7 +1023,9 @@
     "install": "安装",
     "terminalError": "终端连接错误",
     "globalFileManagerEntry": "节点文件管理",
-    "globalFileManager": "节点文件管理"
+    "globalFileManager": "节点文件管理",
+    "globalTerminalEntry": "节点命令终端",
+    "globalTerminal": "节点终端"
   },
   "aside": {
     "basic": "基础功能",
