@@ -766,7 +766,7 @@
     "copyId": "(available for API calls)"
   },
   "container": {
-    "remoteList": "Daemon List",
+    "remoteList": "Select daemon",
     "status": "Status",
     "imagesManage": "Manage Environment Image",
     "relevantInfo": "Documentation",

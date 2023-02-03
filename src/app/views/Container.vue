@@ -5,62 +5,27 @@
 <template>
   <Panel>
     <template #title>{{ $t("container.remoteList") }}</template>
-
     <template #default>
       <p>
         {{ $t("Container.info") }}
         <br />
         {{ $t("Container.notSupportWindowsTip") }}
       </p>
-      <el-table :data="services" stripe style="width: 100%" size="small">
-        <el-table-column prop="ip" :label="$t('overview.addr')"></el-table-column>
-        <el-table-column prop="port" :label="$t('overview.port')"></el-table-column>
-        <el-table-column :label="$t('container.status')">
-          <template #default="scope">
-            <span>
-              {{ scope.row.available ? this.$t("overview.online") : this.$t("overview.offline") }}
-            </span>
-          </template>
-        </el-table-column>
-        <el-table-column prop="remarks" :label="$t('overview.remarks')"></el-table-column>
-        <el-table-column :label="$t('general.operate')" style="text-align: center" width="260px">
-          <template #default="scope">
-            <el-button
-              size="mini"
-              @click="toImagesPanel(scope.row)"
-              :disabled="!scope.row.available"
-            >
-              {{ $t("container.imagesManage") }}
-            </el-button>
-          </template>
-        </el-table-column>
-      </el-table>
-    </template>
-  </Panel>
 
-  <Panel v-iszh>
-    <template #title>{{ $t("container.relevantInfo") }}</template>
-    <template #default>
-      <el-row :gutter="10">
-        <el-col :md="6" :offset="0">
-          <ItemGroup>
-            <SelectBlock style="min-height: 100px" @click="selectLink(1)">
-              <template #title>{{ $t("container.links[0].title") }}</template>
-              <template #info>{{ $t("container.links[0].info") }}</template>
-            </SelectBlock>
-          </ItemGroup>
-        </el-col>
-        <el-col :md="6" :offset="0">
-          <ItemGroup>
-            <SelectBlock style="min-height: 100px" @click="selectLink(2)">
-              <template #title>{{ $t("container.links[1].title") }}</template>
-              <template #info>{{ $t("container.links[1].info") }}</template>
-            </SelectBlock>
-          </ItemGroup>
-        </el-col>
-        <el-col :md="6" :offset="0"> </el-col>
-        <el-col :md="6" :offset="0"> </el-col>
-      </el-row>
+      <SelectDaemon @selected="toImagesPanel"></SelectDaemon>
+
+      <p v-iszh>
+        {{ $t("container.relevantInfo") }}
+        <br />
+
+        <el-button type="text" size="small" @click="selectLink(1)">
+          {{ $t("container.links[0].title") }}
+        </el-button>
+
+        <el-button type="text" size="small" @click="selectLink(2)">
+          {{ $t("container.links[1].title") }}
+        </el-button>
+      </p>
     </template>
   </Panel>
 </template>
@@ -70,10 +35,10 @@ import router from "../router";
 import Panel from "../../components/Panel";
 import { API_SERVICE_LIST } from "../service/common";
 import { request } from "../service/protocol";
-import SelectBlock from "../../components/SelectBlock";
+import SelectDaemon from "@/components/SelectDaemon.vue";
 
 export default {
-  components: { Panel, SelectBlock },
+  components: { Panel, SelectDaemon },
   data: function () {
     return {
       services: []

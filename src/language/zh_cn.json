@@ -767,7 +767,7 @@
     "copyId": "（可用于 API 调用）"
   },
   "container": {
-    "remoteList": "远程节点列表",
+    "remoteList": "请选择一个节点",
     "status": "状态",
     "imagesManage": "环境镜像管理",
     "relevantInfo": "相关资料",
