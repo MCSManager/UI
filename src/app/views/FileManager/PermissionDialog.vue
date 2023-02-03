@@ -44,6 +44,8 @@
 <script>
 import Dialog from "@/components/Dialog";
 import { EventEmitter } from "events";
+import { API_FILE_CHMOD } from "../../service/common";
+import axios from "axios";
 
 const event = new EventEmitter();
 
@@ -88,12 +90,16 @@ export default {
   data() {
     return {
       DEFAULT_PERMISSIONS_OPTIONS,
+
+      serviceUuid: this.$route.params.serviceUuid,
+      instanceUuid: this.$route.params.instanceUuid,
       v: this.visible,
       includeSubDir: true,
       options: [],
       selected: "",
       func: null,
-      reject: null
+      reject: null,
+      row: {}
     };
   },
   watch: {
@@ -102,9 +108,11 @@ export default {
     }
   },
   methods: {
-    prompt({ mode }) {
+    prompt(row) {
       this.show();
-      const permissionArr = String(mode)
+      this.row = row;
+
+      const permissionArr = String(row.mode)
         .split("")
         .map((v) => parseInt(v));
 
@@ -141,9 +149,19 @@ export default {
       this.reject = null;
       this.$emit("update:visible", false);
     },
-    submit() {
+    async submit() {
       const chmod = this.getChmodValue();
+
       console.log("RRRR:", chmod);
+      await axios.request({
+        method: "PUT",
+        url: API_FILE_CHMOD,
+        params: {
+          remote_uuid: this.serviceUuid,
+          uuid: this.instanceUuid
+        },
+        data: { chmod, target: this.row.target, deep: this.includeSubDir }
+      });
       event.emit("submit", this.getChmodValue());
       this.close();
     },

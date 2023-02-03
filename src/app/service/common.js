@@ -14,6 +14,7 @@ export const API_FILE_LIST = `${API_URL}/api/files/list`;
 export const API_FILE_DOWNLOAD = `${API_URL}/api/files/download/`;
 export const API_FILE_UPLOAD = `${API_URL}/api/files/upload/`;
 export const API_FILE_TOUCH = `${API_URL}/api/files/touch`;
+export const API_FILE_CHMOD = `${API_URL}/api/files/chmod`;
 export const API_FILE_MKDIR = `${API_URL}/api/files/mkdir`;
 export const API_FILE_COPY = `${API_URL}/api/files/copy`;
 export const API_FILE_MOVE = `${API_URL}/api/files/move`;

@@ -432,6 +432,9 @@ export default defineComponent({
       this.toDir(".");
     },
     toEditFilePermission(row) {
+      row = JSON.parse(JSON.stringify(row));
+      const target = path.normalize(path.join(this.currentDir, row.name));
+      row.target = target;
       this.$refs.permissionDialog.prompt(row);
     },
     fileRightClick(row) {
