@@ -47,11 +47,6 @@
 
                 <FunctionGroup align="right">
                   <FunctionComponent>
-                    <el-button size="small" @click="toUpDir">
-                      <i class="el-icon-pie-chart"></i> {{ $t("fileManager.upperDir") }}
-                    </el-button>
-                  </FunctionComponent>
-                  <FunctionComponent>
                     <el-button size="small" @click="touch">
                       <i class="el-icon-document-add"></i> {{ $t("fileManager.touch") }}
                     </el-button>
@@ -189,8 +184,9 @@
             :label="$t('fileManager.lastEdit')"
             width="160"
           ></el-table-column>
-          <el-table-column :label="$t('general.operate')" style="text-align: center" width="180">
+          <el-table-column :label="$t('general.operate')" style="text-align: center" width="270">
             <template #default="scope">
+              <el-button size="mini" @click="toEditFilePermission(scope.row)">权限</el-button>
               <el-button
                 size="mini"
                 :disabled="scope.row.type != 1"
@@ -225,12 +221,15 @@
     <SelectUnzipCode ref="selectUnzipCode"></SelectUnzipCode>
 
     <FloatFileEditor ref="floatFileEditor"></FloatFileEditor>
+
+    <PermissionDialog ref="permissionDialog"></PermissionDialog>
   </div>
 </template>
 
 <script>
 import Panel from "@/components/Panel";
 import FloatFileEditor from "../FloatFileEditor";
+import PermissionDialog from "./PermissionDialog.vue";
 import axios from "axios";
 import {
   API_FILE_COMPRESS,
@@ -253,7 +252,8 @@ export default defineComponent({
   components: {
     Panel,
     SelectUnzipCode,
-    FloatFileEditor
+    FloatFileEditor,
+    PermissionDialog
   },
   directives: {
     menus: directive
@@ -423,6 +423,9 @@ export default defineComponent({
     // Directory next page or previous page event
     currentChange() {
       this.toDir(".");
+    },
+    toEditFilePermission(row) {
+      this.$refs.permissionDialog.prompt(row);
     },
     fileRightClick(row) {
       this.multipleSelection = [];
