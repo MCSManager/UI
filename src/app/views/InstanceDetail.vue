@@ -58,7 +58,11 @@ Copyright (C) 2022 MCSManager <mcsmanager-dev@outlook.com>
                     </div>
                     <div class="sub-title-info">{{ $t("newInstances.instanceNameInfo") }}</div>
                   </div>
-                  <el-input v-model="instanceInfo.config.nickname" type="text"></el-input>
+                  <el-input
+                    v-model="instanceInfo.config.nickname"
+                    type="text"
+                    :disabled="isGlobalInstance"
+                  ></el-input>
                 </el-col>
                 <el-col :md="24" class="row-mt">
                   <div class="sub-title">
@@ -70,6 +74,7 @@ Copyright (C) 2022 MCSManager <mcsmanager-dev@outlook.com>
                     </div>
                   </div>
                   <el-select
+                    :disabled="isGlobalInstance"
                     @change="instanceTypeChange(instanceInfo.config.type)"
                     v-model="instanceInfo.config.type"
                     :placeholder="$t('general.pleaseSelect')"
@@ -130,6 +135,7 @@ Copyright (C) 2022 MCSManager <mcsmanager-dev@outlook.com>
                     v-model="instanceInfo.config.updateCommand"
                     type="text"
                     :placeholder="defaultInstallCommand"
+                    :disabled="isGlobalInstance"
                   >
                   </el-input>
                 </el-col>
@@ -229,6 +235,7 @@ Copyright (C) 2022 MCSManager <mcsmanager-dev@outlook.com>
                     <div class="sub-title-info">{{ $t("instancesDetail.endTimeInfo") }}</div>
                   </div>
                   <el-date-picker
+                    :disabled="isGlobalInstance"
                     v-model="instanceInfo.config.endTime"
                     type="date"
                     :placeholder="$t('instancesDetail.unlimited')"
@@ -256,7 +263,11 @@ Copyright (C) 2022 MCSManager <mcsmanager-dev@outlook.com>
                       {{ $t("instancesDetail.launchTypeInfo") }}
                     </div>
                   </div>
-                  <el-select v-model="instanceInfo.config.processType" style="width: 100%">
+                  <el-select
+                    v-model="instanceInfo.config.processType"
+                    style="width: 100%"
+                    :disabled="isGlobalInstance"
+                  >
                     <el-option
                       :label="$t('instancesDetail.defaultType')"
                       value="general"
@@ -527,7 +538,13 @@ Copyright (C) 2022 MCSManager <mcsmanager-dev@outlook.com>
 
 <script>
 import NetworkTip from "../../components/NetworkTip";
-import { API_IMAGES, API_INSTANCE, API_NETWORK_MODES, TERMINAL_CODE } from "../service/common";
+import {
+  API_IMAGES,
+  API_INSTANCE,
+  API_NETWORK_MODES,
+  GLOBAL_INSTANCE_UUID,
+  TERMINAL_CODE
+} from "../service/common";
 import { processTypeList, statusCodeToText } from "../service/instance_tools";
 import Panel from "../../components/Panel";
 import router from "../router";
@@ -592,6 +609,11 @@ export default {
       // optional character encoding
       characters: TERMINAL_CODE
     };
+  },
+  computed: {
+    isGlobalInstance() {
+      return this.instanceInfo?.instanceUuid === GLOBAL_INSTANCE_UUID;
+    }
   },
   methods: {
     back() {

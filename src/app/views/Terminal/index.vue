@@ -311,13 +311,13 @@
         </Panel>
       </el-col>
       <el-col :md="isGlobalTerminal ? 24 : 18">
-        <Panel v-loading="!available">
+        <Panel v-loading="!available" :class="{ 'global-terminal-wrapper': isGlobalTerminal }">
           <template #title>
             <span v-if="!isGlobalTerminal">{{ $t("router.terminal") }}</span>
             <span v-else>控制台</span>
           </template>
           <template #rtitle>
-            <div>
+            <div v-if="!isGlobalTerminal">
               <el-tooltip
                 class="item"
                 effect="dark"
@@ -377,20 +377,40 @@
               <el-input
                 :placeholder="$t('terminal.inputCmd')"
                 prefix-icon="el-icon-arrow-right"
-                size="mini"
+                size="small"
                 v-model="command"
                 ref="terminalCommandInput"
                 @keyup.enter="sendCommand(command)"
               >
               </el-input>
-              <el-button
-                v-if="isGlobalTerminal"
-                icon="el-icon-video-pause"
-                size="small"
-                style="width: 110px"
-              >
-                {{ $t("instances.kill") }}
-              </el-button>
+              <div v-if="isGlobalTerminal" style="display: flex; margin-left: 6px">
+                <el-button
+                  icon="el-icon-video-pause"
+                  size="small"
+                  style="width: 100px"
+                  @click="killInstance"
+                >
+                  {{ $t("instances.kill") }}
+                </el-button>
+                <el-button
+                  :disabled="!available"
+                  icon="el-icon-monitor"
+                  style="width: 100px"
+                  size="small"
+                  @click="toTerminalSettingPanel"
+                >
+                  {{ $t("terminal.termSet") }}
+                </el-button>
+                <el-button
+                  :disabled="!available"
+                  icon="el-icon-setting"
+                  style="width: 100px"
+                  size="small"
+                  @click="toInstanceDetail"
+                >
+                  参数设置
+                </el-button>
+              </div>
             </div>
           </template>
         </Panel>
@@ -1305,5 +1325,10 @@ export default {
 
 .global-terminal-flex {
   display: flex;
+}
+
+.global-terminal-wrapper {
+  width: 900px;
+  margin: auto;
 }
 </style>
