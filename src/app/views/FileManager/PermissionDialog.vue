@@ -151,8 +151,6 @@ export default {
     },
     async submit() {
       const chmod = this.getChmodValue();
-
-      console.log("RRRR:", chmod);
       await axios.request({
         method: "PUT",
         url: API_FILE_CHMOD,
