@@ -164,10 +164,12 @@
             prop="typeText"
             :label="$t('fileManager.fileType')"
             width="120"
-            class="only-pc-display"
           ></el-table-column>
-          <el-table-column :label="$t('fileManager.fileSize')" width="140">
+          <el-table-column :label="$t('fileManager.fileSize')" width="110">
             <template #default="scope">
+              <span v-if="scope.row.size > 1024 * 1024 * 1024"
+                >{{ Number(Number(scope.row.size) / 1024 / 1024 / 1024).toFixed(0) }} GB</span
+              >
               <span v-if="scope.row.size > 1024 * 1024"
                 >{{ Number(Number(scope.row.size) / 1024 / 1024).toFixed(0) }} MB</span
               >
@@ -177,6 +179,11 @@
               <span v-else-if="scope.row.size > 0"
                 >{{ Number(Number(scope.row.size)).toFixed(0) }} B</span
               >
+            </template>
+          </el-table-column>
+          <el-table-column label="权限" width="80">
+            <template #default="scope">
+              {{ scope.row.mode }}
             </template>
           </el-table-column>
           <el-table-column
@@ -473,9 +480,7 @@ export default defineComponent({
           " " +
           new Date(iterator.time).toLocaleTimeString();
         this.files.push({
-          name: iterator.name,
-          type: iterator.type,
-          size: iterator.size,
+          ...iterator,
           typeText: typeText,
           timeText: timeText
         });
