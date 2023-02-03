@@ -62,6 +62,21 @@ const DEFAULT_PERMISSIONS_OPTIONS = [
   }
 ];
 
+const DEFAULT_OPTIONS = [
+  {
+    groupName: "所有者",
+    permissions: []
+  },
+  {
+    groupName: "用户组",
+    permissions: []
+  },
+  {
+    groupName: "任何人",
+    permissions: []
+  }
+];
+
 export default {
   components: { Dialog },
   props: {
@@ -75,20 +90,7 @@ export default {
       DEFAULT_PERMISSIONS_OPTIONS,
       v: this.visible,
       includeSubDir: true,
-      options: [
-        {
-          groupName: "所有者",
-          permissions: []
-        },
-        {
-          groupName: "用户组",
-          permissions: []
-        },
-        {
-          groupName: "任何人",
-          permissions: []
-        }
-      ],
+      options: [],
       selected: "",
       func: null,
       reject: null
@@ -100,30 +102,59 @@ export default {
     }
   },
   methods: {
-    prompt() {
+    prompt({ mode }) {
       this.show();
+      const permissionArr = String(mode)
+        .split("")
+        .map((v) => parseInt(v));
+
+      permissionArr.forEach((v, index) => {
+        if (v - 4 >= 0) {
+          this.options[index].permissions.push(4);
+          v -= 4;
+        }
+        if (v - 2 >= 0) {
+          this.options[index].permissions.push(2);
+          v -= 2;
+        }
+        if (v - 1 >= 0) {
+          this.options[index].permissions.push(1);
+          v -= 1;
+        }
+      });
       return new Promise((ok, reject) => {
         this.reject = reject;
-        event.on("submit", (v) => ok(v));
+        event.on("submit", (v) => {
+          ok(v);
+        });
       });
     },
     show() {
+      this.options = JSON.parse(JSON.stringify(DEFAULT_OPTIONS));
       this.v = true;
       this.$emit("update:visible", true);
     },
     close() {
+      this.options = [];
       this.v = false;
       if (this.reject) this.reject(new Error(this.$t("selectUnzipCode.cancel")));
       this.reject = null;
       this.$emit("update:visible", false);
     },
     submit() {
-      // if (!this.selected) {
-      //   return this.$message({ message: this.$t("selectUnzipCode.selectOneCode"), type: "info" });
-      // }
-      // event.emit("submit", this.selected);
-      // this.$emit("submit", this.selected);
-      // this.close();
+      const chmod = this.getChmodValue();
+      console.log("RRRR:", chmod);
+      event.emit("submit", this.getChmodValue());
+      this.close();
+    },
+    getChmodValue() {
+      let chmodValue = "";
+      for (let index = 0; index < this.options.length; index++) {
+        const { permissions } = this.options[index];
+        const v = permissions.reduce((v, c) => v + c);
+        chmodValue += String(v);
+      }
+      return parseInt(chmodValue);
     }
   }
 };
