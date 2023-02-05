@@ -121,7 +121,7 @@
               :key="item"
               @click="toDisk(item)"
             >
-              磁盘 {{ item }}
+              {{ $t("fileManager.disk") }} {{ item }}
             </el-button>
           </div>
         </div>
