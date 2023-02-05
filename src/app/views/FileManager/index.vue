@@ -114,6 +114,19 @@
         </div>
 
         <div class="row-mt page-pagination">
+          <div v-if="statusInfo.disks">
+            <el-button
+              v-for="item in statusInfo.disks"
+              size="small"
+              :key="item"
+              @click="toDisk(item)"
+            >
+              磁盘 {{ item }}
+            </el-button>
+          </div>
+        </div>
+
+        <div class="row-mt page-pagination">
           <div>
             <div v-if="statusInfo.instanceFileTask">
               <span>
@@ -365,7 +378,7 @@ export default defineComponent({
         const slice = arr.slice(0, i + 1);
         return {
           label: v,
-          value: `/${slice.join("/")}`
+          value: `${slice.join("/")}`
         };
       });
       arr = [
@@ -376,6 +389,9 @@ export default defineComponent({
         ...newArr
       ];
       return arr;
+    },
+    isWindows() {
+      return this.statusInfo?.platform === "win32";
     }
   },
   async mounted() {
@@ -445,6 +461,9 @@ export default defineComponent({
       this.pageParam.page = 1;
       return await this.list(cwd);
     },
+    toDisk(name) {
+      this.changeDir(name + ":\\");
+    },
     // Directory List function
     async list(cwd = ".") {
       this.$route.query.path = cwd;
@@ -460,7 +479,10 @@ export default defineComponent({
             page_size: this.pageParam.pageSize
           }
         });
-        const { items, total, page } = data;
+        // eslint-disable-next-line no-unused-vars
+        const { items, total, page, absolutePath } = data;
+
+        // this.currentDir = path.normalize(absolutePath).replace(/\\/gim, "/");
         this.currentDir = path.normalize(cwd);
         this.tableFilter(items);
         this.pageParam.total = total;
@@ -696,8 +718,8 @@ export default defineComponent({
     },
     // edit the file
     async toEditFilePage(row) {
-      console.log("this.$refs.floatFileEditor", this.$refs.floatFileEditor);
       const target = path.normalize(path.join(this.currentDir, row.name));
+      console.log("TTTT:", target);
       this.$refs.floatFileEditor.open(row, target);
     },
     // Delete Files
