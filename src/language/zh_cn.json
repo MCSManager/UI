@@ -78,7 +78,8 @@
     "config": "配置",
     "operation": "操作",
     "moreOperation": "更多操作",
-    "confirm2": "我清楚后果并确定操作"
+    "confirm2": "我清楚后果并确定操作",
+    "permission": "权限"
   },
   "root": {
     "title": "处理中...",

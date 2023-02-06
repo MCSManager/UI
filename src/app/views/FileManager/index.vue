@@ -194,7 +194,7 @@
               >
             </template>
           </el-table-column>
-          <el-table-column label="权限" width="80">
+          <el-table-column :label="$t('general.permission')" width="80">
             <template #default="scope">
               {{ scope.row.mode }}
             </template>
@@ -204,9 +204,15 @@
             :label="$t('fileManager.lastEdit')"
             width="160"
           ></el-table-column>
-          <el-table-column :label="$t('general.operate')" style="text-align: center" width="270">
+          <el-table-column
+            :label="$t('general.operate')"
+            style="text-align: center"
+            :width="isWindows ? 160 : 220"
+          >
             <template #default="scope">
-              <el-button size="mini" @click="toEditFilePermission(scope.row)">权限</el-button>
+              <el-button size="mini" v-if="!isWindows" @click="toEditFilePermission(scope.row)">
+                {{ $t("general.permission") }}
+              </el-button>
               <el-button
                 size="mini"
                 :disabled="scope.row.type != 1"
@@ -242,7 +248,7 @@
 
     <FloatFileEditor ref="floatFileEditor"></FloatFileEditor>
 
-    <PermissionDialog ref="permissionDialog"></PermissionDialog>
+    <PermissionDialog ref="permissionDialog" @submit="refresh"></PermissionDialog>
   </div>
 </template>
 

@@ -161,6 +161,7 @@ export default {
         data: { chmod, target: this.row.target, deep: this.includeSubDir }
       });
       event.emit("submit", this.getChmodValue());
+      this.$emit("submit");
       this.close();
     },
     getChmodValue() {
