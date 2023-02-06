@@ -5,12 +5,17 @@
   <div class="quick-container-install">
     <div v-if="!installView" v-loading="requestLoading">
       <Panel>
-        <template #title>注意事项</template>
+        <template #title>{{ $t("views.quickstart_McPreset.tip") }}</template>
         <template #default>
           <p>
             {{ $t("views.quickstart_McPreset.eulaReadTitle") }}
-            <a href="https://aka.ms/MinecraftEULA" target="_blank" rel="noopener noreferrer">
-              https://aka.ms/MinecraftEULA
+            <a
+              href="https://aka.ms/MinecraftEULA"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="color-blue"
+            >
+              {{ $t("views.quickstart_McPreset.eulaReadTitle2") }}
             </a>
           </p>
           <p>{{ $t("views.quickstart_McPreset.007") }}</p>
@@ -24,14 +29,13 @@
             </template>
             <template #default>
               <div class="package-info-wrapper">
-                <p class="color-gray">{{ item.info }}</p>
-                <p>{{ $t("views.quickstart_McPreset.004") }}: {{ item.java }}</p>
-                <p>
+                <p>{{ item.info }}</p>
+                <p class="color-gray">{{ $t("views.quickstart_McPreset.004") }}: {{ item.java }}</p>
+                <p class="color-gray">
                   {{ $t("views.quickstart_McPreset.005") }}:
                   {{ $t("views.quickstart_McPreset.006", [item.size]) }}
                 </p>
-
-                <p>
+                <p class="color-gray">
                   {{ item.remark }}
                 </p>
               </div>
@@ -54,8 +58,12 @@
           <div style="text-align: center">
             <i class="el-icon-warning-outline" style="font-size: 100px"></i>
             <h2>{{ $t("install.stoppedServiceTitle") }}</h2>
-            <div>
+            <div style="margin-bottom: 12px">
               <p>{{ $t("install.stoppedServiceContent") }}</p>
+
+              <el-button type="primary" size="small" @click="toCreateInstancePage">
+                {{ $t("install.toCreateInstancePage") }}
+              </el-button>
             </div>
           </div>
         </template>
@@ -227,6 +235,11 @@ export default {
         query: {
           network_tip: 1
         }
+      });
+    },
+    toCreateInstancePage() {
+      this.$router.push({
+        path: `/new_instance/${this.remoteUuid}`
       });
     }
   },

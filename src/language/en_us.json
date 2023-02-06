@@ -1097,7 +1097,7 @@
       "012": "Test server",
       "013": "Installed",
       "014": "Installing",
-      "eulaReadTitle": "Installing the pre-set integration will count as you have agreed and read the Minecraft End User Agreement:",
+      "eulaReadTitle": "Installing the pre-set integration will count as you have agreed and read ",
       "016": "Please enter the name of the new server:",
       "015": "The network connection may be disconnected or the server is being maintained. Please wait for a while and try again, or use another installation package."
     },
