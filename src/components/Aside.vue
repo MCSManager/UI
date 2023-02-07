@@ -1,7 +1,3 @@
-<!--
-  Copyright (C) 2022 MCSManager <mcsmanager-dev@outlook.com>
--->
-
 <template>
   <el-menu
     class="page-el-menu"
@@ -43,11 +39,11 @@
         </el-menu-item>
         <el-menu-item key="/global_file_manager_entry" index="/global_file_manager_entry">
           <i class="el-icon-folder-opened"></i>
-          <template #title>文件管理</template>
+          <template #title>{{ $t("CommonText.052") }}</template>
         </el-menu-item>
         <el-menu-item key="/global_terminal_entry" index="/global_terminal_entry">
           <i class="el-icon-postcard"></i>
-          <template #title>命令终端</template>
+          <template #title>{{ $t("CommonText.053") }}</template>
         </el-menu-item>
 
         <el-menu-item key="/container" index="/container">
@@ -80,7 +76,9 @@ import router from "../app/router";
 import Logo from "../components/Logo.vue";
 import { hasElectron } from "@/app/utils/electron";
 export default {
-  components: { Logo },
+  components: {
+    Logo
+  },
   data: function () {
     return {};
   },
@@ -96,7 +94,9 @@ export default {
   methods: {
     hasElectron,
     toRouter(path) {
-      router.push({ path });
+      router.push({
+        path
+      });
     },
     toElectronUI() {
       window.electionApi.openHome();
@@ -108,6 +108,10 @@ export default {
   mounted() {}
 };
 </script>
+
+<!--
+  Copyright (C) 2022 MCSManager <mcsmanager-dev@outlook.com>
+-->
 
 <style scoped>
 .logo-wrapper {

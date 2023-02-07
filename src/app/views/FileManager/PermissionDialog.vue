@@ -1,10 +1,6 @@
-<!--
-  Copyright (C) 2022 MCSManager <mcsmanager-dev@outlook.com>
--->
-
 <template>
   <Dialog v-model="v" :cancel="close">
-    <template #title>文件/文件夹权限</template>
+    <template #title>{{ $t("views.FileManager_PermissionDialog.001") }}</template>
     <template #default>
       <el-row :gutter="12">
         <el-col :md="8" :offset="0" v-for="(item, index) in options" :key="index">
@@ -26,7 +22,9 @@
       <el-row :gutter="20">
         <el-col :span="24" :offset="0">
           <div class="item-container">
-            <el-checkbox v-model="includeSubDir">应用到子目录</el-checkbox>
+            <el-checkbox v-model="includeSubDir">{{
+              $t("views.FileManager_PermissionDialog.002")
+            }}</el-checkbox>
           </div>
         </el-col>
       </el-row>
@@ -46,41 +44,39 @@ import Dialog from "@/components/Dialog";
 import { EventEmitter } from "events";
 import { API_FILE_CHMOD } from "../../service/common";
 import axios from "axios";
-
 const event = new EventEmitter();
-
 const DEFAULT_PERMISSIONS_OPTIONS = [
   {
-    label: "读取",
+    label: window.$t("CommonText.046"),
     value: 4
   },
   {
-    label: "写入",
+    label: window.$t("CommonText.047"),
     value: 2
   },
   {
-    label: "执行",
+    label: window.$t("CommonText.048"),
     value: 1
   }
 ];
-
 const DEFAULT_OPTIONS = [
   {
-    groupName: "所有者",
+    groupName: window.$t("CommonText.049"),
     permissions: []
   },
   {
-    groupName: "用户组",
+    groupName: window.$t("CommonText.050"),
     permissions: []
   },
   {
-    groupName: "任何人",
+    groupName: window.$t("CommonText.051"),
     permissions: []
   }
 ];
-
 export default {
-  components: { Dialog },
+  components: {
+    Dialog
+  },
   props: {
     visible: {
       type: Boolean,
@@ -90,7 +86,6 @@ export default {
   data() {
     return {
       DEFAULT_PERMISSIONS_OPTIONS,
-
       serviceUuid: this.$route.params.serviceUuid,
       instanceUuid: this.$route.params.instanceUuid,
       v: this.visible,
@@ -111,11 +106,9 @@ export default {
     prompt(row) {
       this.show();
       this.row = row;
-
       const permissionArr = String(row.mode)
         .split("")
         .map((v) => parseInt(v));
-
       permissionArr.forEach((v, index) => {
         if (v - 4 >= 0) {
           this.options[index].permissions.push(4);
@@ -158,7 +151,11 @@ export default {
           remote_uuid: this.serviceUuid,
           uuid: this.instanceUuid
         },
-        data: { chmod, target: this.row.target, deep: this.includeSubDir }
+        data: {
+          chmod,
+          target: this.row.target,
+          deep: this.includeSubDir
+        }
       });
       event.emit("submit", this.getChmodValue());
       this.$emit("submit");
@@ -176,6 +173,10 @@ export default {
   }
 };
 </script>
+
+<!--
+  Copyright (C) 2022 MCSManager <mcsmanager-dev@outlook.com>
+-->
 
 <style lang="scss" scoped>
 .group-container {

@@ -44,7 +44,15 @@
     "042": "Cancel",
     "043": "Row",
     "044": "install error",
-    "045": "third-party service"
+    "045": "third-party service",
+    "046": "read",
+    "047": "to write",
+    "048": "implement",
+    "049": "owner",
+    "050": "user group",
+    "051": "anyone",
+    "052": "file management",
+    "053": "command terminal"
   },
   "general": {
     "search": "Search",
@@ -78,7 +86,8 @@
     "config": "Configuration",
     "operation": "Operation",
     "moreOperation": "More Operations",
-    "confirm2": "Confirm"
+    "confirm2": "Confirm",
+    "permission": "permissions"
   },
   "root": {
     "title": "Processing...",
@@ -477,7 +486,8 @@
     "dockerPort": "Available ports",
     "limit": "resource constraints",
     "openfrp": "Intranet mapping",
-    "backInstancesView": "Back to Instance panelCpuUsageInfo"
+    "backInstancesView": "Back to Instance panelCpuUsageInfo",
+    "paramsSet": "parameter settings"
   },
   "processConfig": {
     "title": "Configure List Group",
@@ -612,7 +622,9 @@
     "inputUnzipDirName": "Pleae enther name for the decompressed folder.",
     "UnzipTaskStart": "Decompression task started.",
     "UnzipTaskStartInfo": "It took a while to finish an async decompression task. You can refresh the file list to view the content of target folder to determine if task decompression completed.",
-    "uploadOk": "Upload completed"
+    "uploadOk": "Upload completed",
+    "disk": "disk",
+    "rootDir": "Root directory"
   },
   "fileManagerEditor": {
     "title": "Edit",
@@ -967,7 +979,8 @@
     "stoppedServiceTitle": "Maintenance",
     "stoppedServiceContent": "Sorry, the latest preset package list could not be obtained, probably your network problem or server is being maintained.",
     "firstTimeInfo": "We'll walk you through using and deploying your application.",
-    "oldUSerInfo": "With a more specialized UI for you to use."
+    "oldUSerInfo": "With a more specialized UI for you to use.",
+    "toCreateInstancePage": "Try doing a manual install"
   },
   "notify": {
     "connectDaemonError": "Error accessing Daemon",
@@ -1020,7 +1033,11 @@
     "quickStart": "Quick Start",
     "update": "Version Control",
     "install": "Install",
-    "terminalError": "terminal connection error"
+    "terminalError": "terminal connection error",
+    "globalFileManager": "Node file management",
+    "globalFileManagerEntry": "Node file management",
+    "globalTerminal": "node terminal",
+    "globalTerminalEntry": "node command terminal"
   },
   "aside": {
     "basic": "Basic",
@@ -1099,7 +1116,9 @@
       "014": "Installing",
       "eulaReadTitle": "Installing the pre-set integration will count as you have agreed and read ",
       "016": "Please enter the name of the new server:",
-      "015": "The network connection may be disconnected or the server is being maintained. Please wait for a while and try again, or use another installation package."
+      "015": "The network connection may be disconnected or the server is being maintained. Please wait for a while and try again, or use another installation package.",
+      "eulaReadTitle2": "Minecraft End User Agreement (EULA)",
+      "tip": "Precautions"
     },
     "Settings": {
       "001": "Pre-defined resources download point",
@@ -1119,6 +1138,10 @@
       "007": "incorrect format",
       "008": "Jumped to the",
       "009": "You haven't saved the file yet, do you want to go back?"
+    },
+    "FileManager_PermissionDialog": {
+      "001": "File/folder permissions",
+      "002": "apply to subdirectory"
     }
   },
   "components": {
