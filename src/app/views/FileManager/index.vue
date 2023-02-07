@@ -362,7 +362,7 @@ export default defineComponent({
       },
       pageParam: {
         page: 1,
-        pageSize: 30,
+        pageSize: 20,
         total: 1
       },
       paramPath: this.$route.query.path,
