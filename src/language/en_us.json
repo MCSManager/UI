@@ -52,7 +52,8 @@
     "050": "user group",
     "051": "anyone",
     "052": "file management",
-    "053": "command terminal"
+    "053": "command terminal",
+    "054": "console"
   },
   "general": {
     "search": "Search",
@@ -1142,6 +1143,9 @@
     "FileManager_PermissionDialog": {
       "001": "File/folder permissions",
       "002": "apply to subdirectory"
+    },
+    "GlobalFileManager_index": {
+      "001": "access remote node"
     }
   },
   "components": {
@@ -1182,5 +1186,18 @@
   "Container": {
     "notSupportWindowsTip": "Only supports Docker container management under Linux",
     "info": "All Docker-based containers and mirrors can be managed here. After the mirror is created, the specified mirror can be assigned to the instance to ensure the isolation of the operating environment and the security of the host."
+  },
+  "service": {
+    "instance_type": {
+      "001": "group profile",
+      "002": "Server configuration file",
+      "003": "Spigot configuration file",
+      "004": "Paper configuration file",
+      "005": "Bedrock Edition configuration file",
+      "006": "Sponge configuration file",
+      "007": "Forge configuration file",
+      "008": "Fabric configuration file",
+      "009": "MCDR configuration file"
+    }
   }
 }
