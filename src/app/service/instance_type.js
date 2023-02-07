@@ -42,10 +42,12 @@ INSTANCE_TYPE_TRANSLATION[TYPE_WEB_SHELL] = "Web Shell";
 // Different types of specific configuration files
 const INSTANCE_TYPE_DEF_CONFIG = {
   [TYPE_MINECRAFT_BUNGEECORD]: {
-    stopCommand: "end"
+    stopCommand: "end",
+    configEntryName: "群组配置文件"
   },
   [TYPE_MINECRAFT_VELOCITY]: {
-    stopCommand: "end"
+    stopCommand: "end",
+    configEntryName: "服务端配置文件"
   },
   [TYPE_STEAM_SERVER_UNIVERSAL]: {
     stopCommand: "^c"
@@ -57,37 +59,48 @@ const INSTANCE_TYPE_DEF_CONFIG = {
     stopCommand: "^c"
   },
   [TYPE_MINECRAFT_JAVA]: {
-    stopCommand: "stop"
+    stopCommand: "stop",
+    configEntryName: "服务端配置文件"
   },
   [TYPE_MINECRAFT_BEDROCK]: {
-    stopCommand: "stop"
+    stopCommand: "stop",
+    configEntryName: "服务端配置文件"
   },
   [TYPE_MINECRAFT_SPIGOT]: {
-    stopCommand: "stop"
+    stopCommand: "stop",
+    configEntryName: "Spigot 配置文件"
   },
   [TYPE_MINECRAFT_PAPER]: {
-    stopCommand: "stop"
+    stopCommand: "stop",
+    configEntryName: "Paper 配置文件"
   },
   [TYPE_MINECRAFT_BDS]: {
-    stopCommand: "stop"
+    stopCommand: "stop",
+    configEntryName: "基岩版配置文件"
   },
   [TYPE_MINECRAFT_SPONGE]: {
-    stopCommand: "stop"
+    stopCommand: "stop",
+    configEntryName: "Sponge 配置文件"
   },
   [TYPE_MINECRAFT_FORGE]: {
-    stopCommand: "stop"
+    stopCommand: "stop",
+    configEntryName: "Forge 配置文件"
   },
   [TYPE_MINECRAFT_FABRIC]: {
-    stopCommand: "stop"
+    stopCommand: "stop",
+    configEntryName: "Fabric 配置文件"
   },
   [TYPE_MINECRAFT_BUKKIT]: {
-    stopCommand: "stop"
+    stopCommand: "stop",
+    configEntryName: "服务端配置文件"
   },
   [TYPE_MINECRAFT_GEYSER]: {
-    stopCommand: "geyser stop"
+    stopCommand: "geyser stop",
+    configEntryName: "服务端配置文件"
   },
   [TYPE_MINECRAFT_MCDR]: {
-    stopCommand: "stop"
+    stopCommand: "stop",
+    configEntryName: "MCDR 配置文件"
   }
 };
 

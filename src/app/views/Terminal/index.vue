@@ -193,6 +193,17 @@
           <template #title>{{ $t("terminal.functionGroup") }}</template>
           <template #default>
             <el-row :gutter="10">
+              <el-col :lg="24" :offset="0" class="row-mb" v-iszh v-if="isShowInstanceConfig">
+                <el-button
+                  :disabled="!instanceInfo.config.type"
+                  icon="el-icon-s-operation"
+                  style="width: 100%"
+                  size="small"
+                  @click="toProcessConfig"
+                >
+                  {{ getInstanceConfigBtnName }}
+                </el-button>
+              </el-col>
               <el-col :lg="12" :offset="0" class="row-mb">
                 <el-button
                   :disabled="!available"
@@ -245,16 +256,7 @@
                   {{ $t("instancesDetail.fileManager") }}
                 </el-button>
               </el-col>
-              <el-col :lg="24" :offset="0" class="row-mb" v-iszh>
-                <el-button
-                  :disabled="!instanceInfo.config.type"
-                  icon="el-icon-s-operation"
-                  style="width: 100%"
-                  size="small"
-                  @click="toProcessConfig"
-                  >{{ $t("terminal.processConfig") }}
-                </el-button>
-              </el-col>
+
               <el-col :lg="24" :offset="0" v-if="isTopPermission">
                 <el-button
                   :disabled="!available"
@@ -408,7 +410,7 @@
                   size="small"
                   @click="toInstanceDetail"
                 >
-                  参数设置
+                  {{ $t("terminal.paramsSet") }}
                 </el-button>
               </div>
             </div>
@@ -595,7 +597,7 @@ import { getPlayersOption } from "../../service/chart_option";
 import TermSetting from "./TermSetting";
 import DockerInfo from "./DockerInfo";
 import NetworkTip from "@/components/NetworkTip";
-
+import { INSTANCE_TYPE_DEF_CONFIG } from "@/app/service/instance_type";
 export default {
   components: {
     Panel,
@@ -607,6 +609,7 @@ export default {
   },
   data: function () {
     return {
+      INSTANCE_TYPE_DEF_CONFIG,
       input1: "",
       serviceUuid: this.$route.params.serviceUuid,
       instanceUuid: this.$route.params.instanceUuid,
@@ -674,6 +677,15 @@ export default {
     },
     isGlobalTerminal() {
       return this.$route.params.instanceUuid === GLOBAL_INSTANCE_UUID;
+    },
+    isShowInstanceConfig() {
+      if (INSTANCE_TYPE_DEF_CONFIG[this.instanceInfo?.config?.type]?.configEntryName) {
+        return true;
+      }
+      return false;
+    },
+    getInstanceConfigBtnName() {
+      return INSTANCE_TYPE_DEF_CONFIG[this.instanceInfo?.config?.type]?.configEntryName;
     }
   },
   methods: {

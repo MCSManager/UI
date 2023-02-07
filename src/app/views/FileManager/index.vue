@@ -34,7 +34,7 @@
             <el-col :span="24" :offset="0">
               <FunctionGroup :container="true">
                 <FunctionComponent>
-                  <el-button size="small" @click="back">
+                  <el-button size="small" type="primary" plain @click="back">
                     <i class="el-icon-pie-chart"></i> {{ $t("schedule.backToConsole") }}
                   </el-button>
                 </FunctionComponent>
@@ -725,7 +725,6 @@ export default defineComponent({
     // edit the file
     async toEditFilePage(row) {
       const target = path.normalize(path.join(this.currentDir, row.name));
-      console.log("TTTT:", target);
       this.$refs.floatFileEditor.open(row, target);
     },
     // Delete Files

@@ -478,7 +478,8 @@
     "dockerPort": "可用端口",
     "limit": "资源限制",
     "openfrp": "内网映射",
-    "backInstancesView": "回到应用实例列表"
+    "backInstancesView": "回到应用实例列表",
+    "paramsSet": "参数设置"
   },
   "processConfig": {
     "title": "配置列表组",
@@ -495,7 +496,7 @@
     "title": "配置文件",
     "reload": "重新加载",
     "back": "回到配置文件列表",
-    "editOriginal": "编辑源文件视图",
+    "editOriginal": "编辑源文件",
     "noFile": "文件不存在或权限不正确，无法查看此文件的具体配置，您也许可以尝试到 “文件管理”功能在线编辑此文件，或尝试重启实例刷新此文件。",
     "updateFailed": "更新失败"
   },
