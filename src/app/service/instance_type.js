@@ -3,7 +3,6 @@
 export const TYPE_UNIVERSAL = "universal";
 export const TYPE_WEB_SHELL = "universal/web_shell";
 export const TYPE_MINECRAFT_MCDR = "universal/mcdr";
-
 export const TYPE_MINECRAFT_JAVA = "minecraft/java";
 export const TYPE_MINECRAFT_BUKKIT = "minecraft/java/bukkit";
 export const TYPE_MINECRAFT_SPIGOT = "minecraft/java/spigot";
@@ -43,11 +42,11 @@ INSTANCE_TYPE_TRANSLATION[TYPE_WEB_SHELL] = "Web Shell";
 const INSTANCE_TYPE_DEF_CONFIG = {
   [TYPE_MINECRAFT_BUNGEECORD]: {
     stopCommand: "end",
-    configEntryName: "群组配置文件"
+    configEntryName: window.$t("service.instance_type.001")
   },
   [TYPE_MINECRAFT_VELOCITY]: {
     stopCommand: "end",
-    configEntryName: "服务端配置文件"
+    configEntryName: window.$t("service.instance_type.002")
   },
   [TYPE_STEAM_SERVER_UNIVERSAL]: {
     stopCommand: "^c"
@@ -60,48 +59,47 @@ const INSTANCE_TYPE_DEF_CONFIG = {
   },
   [TYPE_MINECRAFT_JAVA]: {
     stopCommand: "stop",
-    configEntryName: "服务端配置文件"
+    configEntryName: window.$t("service.instance_type.002")
   },
   [TYPE_MINECRAFT_BEDROCK]: {
     stopCommand: "stop",
-    configEntryName: "服务端配置文件"
+    configEntryName: window.$t("service.instance_type.002")
   },
   [TYPE_MINECRAFT_SPIGOT]: {
     stopCommand: "stop",
-    configEntryName: "Spigot 配置文件"
+    configEntryName: window.$t("service.instance_type.003")
   },
   [TYPE_MINECRAFT_PAPER]: {
     stopCommand: "stop",
-    configEntryName: "Paper 配置文件"
+    configEntryName: window.$t("service.instance_type.004")
   },
   [TYPE_MINECRAFT_BDS]: {
     stopCommand: "stop",
-    configEntryName: "基岩版配置文件"
+    configEntryName: window.$t("service.instance_type.005")
   },
   [TYPE_MINECRAFT_SPONGE]: {
     stopCommand: "stop",
-    configEntryName: "Sponge 配置文件"
+    configEntryName: window.$t("service.instance_type.006")
   },
   [TYPE_MINECRAFT_FORGE]: {
     stopCommand: "stop",
-    configEntryName: "Forge 配置文件"
+    configEntryName: window.$t("service.instance_type.007")
   },
   [TYPE_MINECRAFT_FABRIC]: {
     stopCommand: "stop",
-    configEntryName: "Fabric 配置文件"
+    configEntryName: window.$t("service.instance_type.008")
   },
   [TYPE_MINECRAFT_BUKKIT]: {
     stopCommand: "stop",
-    configEntryName: "服务端配置文件"
+    configEntryName: window.$t("service.instance_type.002")
   },
   [TYPE_MINECRAFT_GEYSER]: {
     stopCommand: "geyser stop",
-    configEntryName: "服务端配置文件"
+    configEntryName: window.$t("service.instance_type.002")
   },
   [TYPE_MINECRAFT_MCDR]: {
     stopCommand: "stop",
-    configEntryName: "MCDR 配置文件"
+    configEntryName: window.$t("service.instance_type.009")
   }
 };
-
 export { INSTANCE_TYPE_TRANSLATION, INSTANCE_TYPE_DEF_CONFIG };
