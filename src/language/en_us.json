@@ -51,8 +51,8 @@
     "049": "owner",
     "050": "user group",
     "051": "anyone",
-    "052": "file management",
-    "053": "command terminal",
+    "052": "Files",
+    "053": "Terminal",
     "054": "console"
   },
   "general": {
@@ -100,7 +100,7 @@
   },
   "login": {
     "title": "Login",
-    "titleInfo": "Use your MCSManager account to login.",
+    "titleInfo": "Please use your MCSManager account to login.",
     "account": "Username",
     "passWord": "Password",
     "forgotPassword": "Forgot password",
@@ -1035,10 +1035,10 @@
     "update": "Version Control",
     "install": "Install",
     "terminalError": "terminal connection error",
-    "globalFileManager": "Node file management",
-    "globalFileManagerEntry": "Node file management",
-    "globalTerminal": "node terminal",
-    "globalTerminalEntry": "node command terminal"
+    "globalFileManager": "Node File Management",
+    "globalFileManagerEntry": "Node File Management",
+    "globalTerminal": "Node Terminal",
+    "globalTerminalEntry": "Node Terminal"
   },
   "aside": {
     "basic": "Basic",

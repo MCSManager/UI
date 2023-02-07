@@ -46,6 +46,7 @@ import Header from "../components/Header";
 // eslint-disable-next-line no-unused-vars
 import { requestPanelStatus, setupUserInfo } from "./service/protocol.js";
 import router from "./router";
+import store from "./store";
 
 export default {
   name: "App",
@@ -83,23 +84,12 @@ export default {
   async created() {
     let needToRoot = false;
 
-    try {
-      // Get current panel status information
-      const statusInfo = await requestPanelStatus();
-      if (statusInfo.language) {
-        console.log("SET_LANGUAGE:", statusInfo.language, statusInfo);
-        this.$i18n.locale = statusInfo.language;
-      } else {
-        this.$i18n.locale = "en_us";
-      }
-      // If not installed, must route to /install
-      if (statusInfo?.isInstall === false) {
-        this.loading = false;
-        setTimeout(() => router.push({ path: "/install" }), 1200);
-        return;
-      }
-    } catch (error) {
-      alert(`Err: ${error}, Please refresh!`);
+    // If not installed, must route to /install
+    const statusInfo = store.state.panelStatus;
+    if (statusInfo?.isInstall === false) {
+      this.loading = false;
+      setTimeout(() => router.push({ path: "/install" }), 1200);
+      return;
     }
 
     try {
