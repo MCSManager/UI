@@ -1,3 +1,7 @@
+<!--
+  Copyright (C) 2022 MCSManager <mcsmanager-dev@outlook.com>
+-->
+
 <template>
   <el-menu
     class="page-el-menu"
@@ -108,10 +112,6 @@ export default {
   mounted() {}
 };
 </script>
-
-<!--
-  Copyright (C) 2022 MCSManager <mcsmanager-dev@outlook.com>
--->
 
 <style scoped>
 .logo-wrapper {

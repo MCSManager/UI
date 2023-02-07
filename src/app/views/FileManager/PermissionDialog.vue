@@ -1,3 +1,7 @@
+<!--
+  Copyright (C) 2023 MCSManager <mcsmanager-dev@outlook.com>
+-->
+
 <template>
   <Dialog v-model="v" :cancel="close">
     <template #title>{{ $t("views.FileManager_PermissionDialog.001") }}</template>
@@ -173,10 +177,6 @@ export default {
   }
 };
 </script>
-
-<!--
-  Copyright (C) 2022 MCSManager <mcsmanager-dev@outlook.com>
--->
 
 <style lang="scss" scoped>
 .group-container {
