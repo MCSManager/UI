@@ -59,47 +59,48 @@ const INSTANCE_TYPE_DEF_CONFIG = {
   },
   [TYPE_MINECRAFT_JAVA]: {
     stopCommand: "stop",
-    configEntryName: window.$t("service.instance_type.002")
+    getConfigEntryName: () => window.$t("service.instance_type.002")
   },
   [TYPE_MINECRAFT_BEDROCK]: {
     stopCommand: "stop",
-    configEntryName: window.$t("service.instance_type.002")
+    getConfigEntryName: () => window.$t("service.instance_type.002")
   },
   [TYPE_MINECRAFT_SPIGOT]: {
     stopCommand: "stop",
-    configEntryName: window.$t("service.instance_type.003")
+    getConfigEntryName: () => window.$t("service.instance_type.003")
   },
   [TYPE_MINECRAFT_PAPER]: {
     stopCommand: "stop",
-    configEntryName: window.$t("service.instance_type.004")
+    getConfigEntryName: () => window.$t("service.instance_type.004")
   },
   [TYPE_MINECRAFT_BDS]: {
     stopCommand: "stop",
-    configEntryName: window.$t("service.instance_type.005")
+    getConfigEntryName: () => window.$t("service.instance_type.005")
   },
   [TYPE_MINECRAFT_SPONGE]: {
     stopCommand: "stop",
-    configEntryName: window.$t("service.instance_type.006")
+    getConfigEntryName: () => window.$t("service.instance_type.006")
   },
   [TYPE_MINECRAFT_FORGE]: {
     stopCommand: "stop",
-    configEntryName: window.$t("service.instance_type.007")
+    getConfigEntryName: () => window.$t("service.instance_type.007")
   },
   [TYPE_MINECRAFT_FABRIC]: {
     stopCommand: "stop",
-    configEntryName: window.$t("service.instance_type.008")
+    getConfigEntryName: () => window.$t("service.instance_type.008")
   },
   [TYPE_MINECRAFT_BUKKIT]: {
     stopCommand: "stop",
-    configEntryName: window.$t("service.instance_type.002")
+    getConfigEntryName: () => window.$t("service.instance_type.002")
   },
   [TYPE_MINECRAFT_GEYSER]: {
     stopCommand: "geyser stop",
-    configEntryName: window.$t("service.instance_type.002")
+    getConfigEntryName: () => window.$t("service.instance_type.002")
   },
   [TYPE_MINECRAFT_MCDR]: {
     stopCommand: "stop",
-    configEntryName: window.$t("service.instance_type.009")
+    getConfigEntryName: () => window.$t("service.instance_type.009")
   }
 };
+
 export { INSTANCE_TYPE_TRANSLATION, INSTANCE_TYPE_DEF_CONFIG };

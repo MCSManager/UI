@@ -10,7 +10,7 @@
           <template #title>{{ $t("userDetail.basicInfo") }}</template>
           <template #default>
             <div v-if="!available">
-              <el-skeleton :rows="3" animated />
+              <el-skeleton :rows="3" animated></el-skeleton>
             </div>
             <div v-else>
               <LineInfo>
@@ -274,7 +274,7 @@
           <template #title>{{ $t("instances.detailsInfo") }}</template>
           <template #default>
             <div v-if="!available">
-              <el-skeleton :rows="5" animated />
+              <el-skeleton :rows="5" animated></el-skeleton>
             </div>
             <div v-else>
               <LineInfo>
@@ -316,7 +316,7 @@
         <Panel v-loading="!available" :class="{ 'global-terminal-wrapper': isGlobalTerminal }">
           <template #title>
             <span v-if="!isGlobalTerminal">{{ $t("router.terminal") }}</span>
-            <span v-else>控制台</span>
+            <span v-else>{{ $t("CommonText.054") }}</span>
           </template>
           <template #rtitle>
             <div v-if="!isGlobalTerminal">
@@ -627,28 +627,22 @@ export default {
       renderTask: null,
       commandhistory: [],
       busy: false,
-
       bool: false,
-
       pingConfigForm: {
         is: false,
         ip: "",
         port: "",
         type: 1
       },
-
       eventConfigPanel: {
         visible: false,
         autoRestart: false,
         autoStart: false
       },
-
       terminalSettingPanel: {
         visible: false
       },
-
       unavailableIp: null,
-
       playersChart: null,
       isShowPlayersChart: false
     };
@@ -679,13 +673,13 @@ export default {
       return this.$route.params.instanceUuid === GLOBAL_INSTANCE_UUID;
     },
     isShowInstanceConfig() {
-      if (INSTANCE_TYPE_DEF_CONFIG[this.instanceInfo?.config?.type]?.configEntryName) {
+      if (INSTANCE_TYPE_DEF_CONFIG[this.instanceInfo?.config?.type]?.getConfigEntryName()) {
         return true;
       }
       return false;
     },
     getInstanceConfigBtnName() {
-      return INSTANCE_TYPE_DEF_CONFIG[this.instanceInfo?.config?.type]?.configEntryName;
+      return INSTANCE_TYPE_DEF_CONFIG[this.instanceInfo?.config?.type]?.getConfigEntryName();
     }
   },
   methods: {
@@ -700,7 +694,10 @@ export default {
         const result = await request({
           method: "GET",
           url: API_INSTANCE,
-          params: { uuid: this.instanceUuid, remote_uuid: this.serviceUuid }
+          params: {
+            uuid: this.instanceUuid,
+            remote_uuid: this.serviceUuid
+          }
         });
         this.instanceInfo = result;
       } catch (err) {
@@ -722,7 +719,10 @@ export default {
         res = await request({
           method: "POST",
           url: API_INSTANCE_REMOTE_SERVICE_STREAM,
-          params: { remote_uuid: this.serviceUuid, uuid: this.instanceUuid }
+          params: {
+            remote_uuid: this.serviceUuid,
+            uuid: this.instanceUuid
+          }
         });
       } catch (error) {
         this.$router.push({
@@ -825,11 +825,9 @@ export default {
           fontSize: localStorage.getItem("terminalFontSize")
         });
       }
-
       this.term.onData(this.sendInput);
       this.onChangeTerminalContainerHeight();
     },
-
     // Fixed height and width based on backend configuration settings in PTY mode
     resizePtyTerminalWindow() {
       if (this.instanceInfo.config?.terminalOption?.pty) {
@@ -839,7 +837,6 @@ export default {
         );
       }
     },
-
     // Open the instance (Ajax)
     async openInstance() {
       // this. busy = true;
@@ -847,10 +844,16 @@ export default {
         await request({
           method: "GET",
           url: API_INSTANCE_OPEN,
-          params: { remote_uuid: this.serviceUuid, uuid: this.instanceUuid }
+          params: {
+            remote_uuid: this.serviceUuid,
+            uuid: this.instanceUuid
+          }
         });
       } catch (error) {
-        this.$message({ message: error.toString(), type: "error" });
+        this.$message({
+          message: error.toString(),
+          type: "error"
+        });
       } finally {
         setTimeout(() => (this.busy = false), 200);
       }
@@ -862,10 +865,16 @@ export default {
         await request({
           method: "GET",
           url: API_INSTANCE_STOP,
-          params: { remote_uuid: this.serviceUuid, uuid: this.instanceUuid }
+          params: {
+            remote_uuid: this.serviceUuid,
+            uuid: this.instanceUuid
+          }
         });
       } catch (error) {
-        this.$message({ message: error.toString(), type: "error" });
+        this.$message({
+          message: error.toString(),
+          type: "error"
+        });
       } finally {
         setTimeout(() => (this.busy = false), 200);
       }
@@ -876,10 +885,16 @@ export default {
         await request({
           method: "GET",
           url: API_INSTANCE_ASYNC_STOP,
-          params: { remote_uuid: this.serviceUuid, uuid: this.instanceUuid }
+          params: {
+            remote_uuid: this.serviceUuid,
+            uuid: this.instanceUuid
+          }
         });
       } catch (error) {
-        this.$message({ message: error.toString(), type: "error" });
+        this.$message({
+          message: error.toString(),
+          type: "error"
+        });
       } finally {
         setTimeout(() => (this.busy = false), 200);
       }
@@ -890,13 +905,20 @@ export default {
         await request({
           method: "POST",
           url: API_INSTANCE_ASYNC_TASK,
-          params: { remote_uuid: this.serviceUuid, uuid: this.instanceUuid, task_name: "update" },
+          params: {
+            remote_uuid: this.serviceUuid,
+            uuid: this.instanceUuid,
+            task_name: "update"
+          },
           data: {
             time: new Date().getTime()
           }
         });
       } catch (error) {
-        this.$message({ message: error.toString(), type: "error" });
+        this.$message({
+          message: error.toString(),
+          type: "error"
+        });
       } finally {
         setTimeout(() => (this.busy = false), 200);
       }
@@ -908,10 +930,16 @@ export default {
         await request({
           method: "GET",
           url: API_INSTANCE_KILL,
-          params: { remote_uuid: this.serviceUuid, uuid: this.instanceUuid }
+          params: {
+            remote_uuid: this.serviceUuid,
+            uuid: this.instanceUuid
+          }
         });
       } catch (error) {
-        this.$message({ message: error.toString(), type: "error" });
+        this.$message({
+          message: error.toString(),
+          type: "error"
+        });
       } finally {
         setTimeout(() => (this.busy = false), 200);
       }
@@ -923,10 +951,16 @@ export default {
         await request({
           method: "GET",
           url: API_INSTANCE_RESTART,
-          params: { remote_uuid: this.serviceUuid, uuid: this.instanceUuid }
+          params: {
+            remote_uuid: this.serviceUuid,
+            uuid: this.instanceUuid
+          }
         });
       } catch (error) {
-        this.$message({ message: error.toString(), type: "error" });
+        this.$message({
+          message: error.toString(),
+          type: "error"
+        });
       } finally {
         setTimeout(() => (this.busy = false), 2000);
       }
@@ -936,7 +970,10 @@ export default {
       if (!this.socket || !this.available) return;
       if (!this.isStarted) return;
       this.socket.emit("stream/resize", {
-        data: { w, h }
+        data: {
+          w,
+          h
+        }
       });
     },
     // Send input using Websocket
@@ -946,7 +983,9 @@ export default {
         if (!this.socket || !this.available || !this.isStarted)
           return console.log("!this.socket || !this.available || !this.isStarted");
         this.socket.emit("stream/write", {
-          data: { input }
+          data: {
+            input
+          }
         });
       }
     },
@@ -964,13 +1003,17 @@ export default {
         });
       if (method !== 1) this.pushHistoryCommand(command);
       this.socket.emit("stream/input", {
-        data: { command }
+        data: {
+          command
+        }
       });
       this.command = "";
     },
     // Go to the file management interface
     toFileManager() {
-      router.push({ path: `/file/${this.serviceUuid}/${this.instanceUuid}/` });
+      router.push({
+        path: `/file/${this.serviceUuid}/${this.instanceUuid}/`
+      });
     },
     toProcessConfig() {
       router.push({
@@ -981,7 +1024,9 @@ export default {
       });
     },
     toSchedule() {
-      router.push({ path: `/schedule/${this.serviceUuid}/${this.instanceUuid}/` });
+      router.push({
+        path: `/schedule/${this.serviceUuid}/${this.instanceUuid}/`
+      });
     },
     toPingPanel() {
       if (this.instanceInfo.config && this.instanceInfo.config.pingConfig) {
@@ -1012,7 +1057,10 @@ export default {
         const text = await request({
           url: API_INSTANCE_OUTPUT,
           method: "GET",
-          params: { remote_uuid: this.serviceUuid, uuid: this.instanceUuid }
+          params: {
+            remote_uuid: this.serviceUuid,
+            uuid: this.instanceUuid
+          }
         });
         this.term.clear();
         if (this.instanceInfo?.config?.terminalOption?.haveColor) {
@@ -1031,7 +1079,10 @@ export default {
         await request({
           method: "PUT",
           url: API_INSTANCE_UPDATE,
-          params: { remote_uuid: this.serviceUuid, uuid: this.instanceUuid },
+          params: {
+            remote_uuid: this.serviceUuid,
+            uuid: this.instanceUuid
+          },
           data: {
             pingConfig: this.pingConfigForm.is ? this.pingConfigForm : null,
             eventTask: this.eventConfigPanel.visible ? this.eventConfigPanel : null
@@ -1064,7 +1115,9 @@ export default {
       }
     },
     toInstanceDetail() {
-      this.$router.push({ path: `/instance_detail/${this.serviceUuid}/${this.instanceUuid}/` });
+      this.$router.push({
+        path: `/instance_detail/${this.serviceUuid}/${this.instanceUuid}/`
+      });
     },
     /**
      * Initialize the number of people to display the report
@@ -1126,7 +1179,6 @@ export default {
         window.open(`#/terminal/${this.serviceUuid}/${this.instanceUuid}/?full=1`);
       }
     },
-
     backTerminal() {
       this.isFull = false;
       this.onChangeTerminalContainerHeight();
@@ -1135,7 +1187,6 @@ export default {
         query: {}
       });
     },
-
     // Terminal window size adaptation event
     onChangeTerminalContainerHeight() {
       const terminalContainer = document.getElementById("terminal-container");
@@ -1155,11 +1206,9 @@ export default {
         }
       }
     },
-
     openDockerInfoDialog() {
       this.$refs.dockerInfoDialog.open();
     },
-
     // [ "25565:25565/tcp", "27766:27766/tcp" ]
     dockerPortsParse(list = []) {
       let line = [];
@@ -1224,7 +1273,6 @@ export default {
   beforeUnmount() {
     // Uninstall monitor browser window change time
     window.removeEventListener("resize", this.onChangeTerminalContainerHeight);
-
     try {
       // stop the timer
       this.stopInterval();

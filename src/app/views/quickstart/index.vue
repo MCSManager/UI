@@ -297,7 +297,6 @@ export default {
       }, 1000);
     },
 
-    // 前往控制台
     toInstance(remoteUuid, instanceUuid) {
       this.$router.push({
         path: `/terminal/${remoteUuid}/${instanceUuid}/`,

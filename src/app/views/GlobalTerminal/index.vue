@@ -5,7 +5,7 @@
 <template>
   <div>
     <Panel>
-      <template #title>进入远程节点</template>
+      <template #title>{{ $t("views.GlobalFileManager_index.001") }}</template>
       <template #default>
         <SelectDaemon @selected="selectDaemon"></SelectDaemon>
       </template>
