@@ -673,12 +673,13 @@ export default {
       return this.$route.params.instanceUuid === GLOBAL_INSTANCE_UUID;
     },
     isShowInstanceConfig() {
-      if (INSTANCE_TYPE_DEF_CONFIG[this.instanceInfo?.config?.type]?.getConfigEntryName()) {
-        return true;
-      }
-      return false;
+      return (
+        typeof INSTANCE_TYPE_DEF_CONFIG[this.instanceInfo?.config?.type]?.getConfigEntryName ===
+        "function"
+      );
     },
     getInstanceConfigBtnName() {
+      if (!this.isShowInstanceConfig) return null;
       return INSTANCE_TYPE_DEF_CONFIG[this.instanceInfo?.config?.type]?.getConfigEntryName();
     }
   },
