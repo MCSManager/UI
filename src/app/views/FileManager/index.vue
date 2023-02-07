@@ -9,10 +9,32 @@
       <template #default>
         <div>
           <el-row :gutter="20">
+            <el-col :span="24">
+              <div class="dir-node-container row-mb">
+                <div class="dir-node dir-node-back-btn" @click="toUpDir">
+                  <i class="el-icon-caret-left"></i>
+                </div>
+                <div
+                  class="flex flex-align-items-center"
+                  v-for="(item, index) in currentDirArray"
+                  :key="index"
+                >
+                  <div
+                    class="dir-node"
+                    :style="{ 'padding-left': index == 0 ? '8px' : '4px' }"
+                    v-if="item"
+                    @click="changeDir(item.value)"
+                  >
+                    {{ item.label }}
+                  </div>
+                  <i class="el-icon-arrow-right" v-if="index < currentDirArray.length - 1"></i>
+                </div>
+              </div>
+            </el-col>
             <el-col :span="24" :offset="0">
               <FunctionGroup :container="true">
                 <FunctionComponent>
-                  <el-button size="small" @click="back">
+                  <el-button size="small" type="primary" plain @click="back">
                     <i class="el-icon-pie-chart"></i> {{ $t("schedule.backToConsole") }}
                   </el-button>
                 </FunctionComponent>
@@ -24,11 +46,6 @@
                 </FunctionComponent>
 
                 <FunctionGroup align="right">
-                  <FunctionComponent>
-                    <el-button size="small" @click="toUpDir">
-                      <i class="el-icon-pie-chart"></i> {{ $t("fileManager.upperDir") }}
-                    </el-button>
-                  </FunctionComponent>
                   <FunctionComponent>
                     <el-button size="small" @click="touch">
                       <i class="el-icon-document-add"></i> {{ $t("fileManager.touch") }}
@@ -96,17 +113,16 @@
           </el-row>
         </div>
 
-        <div class="dir-node-container row-mt">
-          <div class="dir-node dir-node-back-btn" style="margin: -1px" @click="toUpDir">
-            <i class="el-icon-caret-left"></i>
-          </div>
-          <div
-            class="flex flex-align-items-center"
-            v-for="(item, index) in currentDirArray"
-            :key="index"
-          >
-            <div class="dir-node" v-if="item" @click="changeDir(item.value)">{{ item.label }}</div>
-            <i class="el-icon-arrow-right" v-if="index < currentDirArray.length - 1"></i>
+        <div class="row-mt page-pagination">
+          <div v-if="statusInfo.disks">
+            <el-button
+              v-for="item in statusInfo.disks"
+              size="small"
+              :key="item"
+              @click="toDisk(item)"
+            >
+              {{ $t("fileManager.disk") }} {{ item }}
+            </el-button>
           </div>
         </div>
 
@@ -161,10 +177,12 @@
             prop="typeText"
             :label="$t('fileManager.fileType')"
             width="120"
-            class="only-pc-display"
           ></el-table-column>
-          <el-table-column :label="$t('fileManager.fileSize')" width="140">
+          <el-table-column :label="$t('fileManager.fileSize')" width="110">
             <template #default="scope">
+              <span v-if="scope.row.size > 1024 * 1024 * 1024"
+                >{{ Number(Number(scope.row.size) / 1024 / 1024 / 1024).toFixed(0) }} GB</span
+              >
               <span v-if="scope.row.size > 1024 * 1024"
                 >{{ Number(Number(scope.row.size) / 1024 / 1024).toFixed(0) }} MB</span
               >
@@ -176,13 +194,25 @@
               >
             </template>
           </el-table-column>
+          <el-table-column :label="$t('general.permission')" width="80">
+            <template #default="scope">
+              {{ scope.row.mode }}
+            </template>
+          </el-table-column>
           <el-table-column
             prop="timeText"
             :label="$t('fileManager.lastEdit')"
             width="160"
           ></el-table-column>
-          <el-table-column :label="$t('general.operate')" style="text-align: center" width="180">
+          <el-table-column
+            :label="$t('general.operate')"
+            style="text-align: center"
+            :width="isWindows ? 160 : 220"
+          >
             <template #default="scope">
+              <el-button size="mini" v-if="!isWindows" @click="toEditFilePermission(scope.row)">
+                {{ $t("general.permission") }}
+              </el-button>
               <el-button
                 size="mini"
                 :disabled="scope.row.type != 1"
@@ -217,12 +247,15 @@
     <SelectUnzipCode ref="selectUnzipCode"></SelectUnzipCode>
 
     <FloatFileEditor ref="floatFileEditor"></FloatFileEditor>
+
+    <PermissionDialog ref="permissionDialog" @submit="refresh"></PermissionDialog>
   </div>
 </template>
 
 <script>
 import Panel from "@/components/Panel";
 import FloatFileEditor from "../FloatFileEditor";
+import PermissionDialog from "./PermissionDialog.vue";
 import axios from "axios";
 import {
   API_FILE_COMPRESS,
@@ -245,7 +278,8 @@ export default defineComponent({
   components: {
     Panel,
     SelectUnzipCode,
-    FloatFileEditor
+    FloatFileEditor,
+    PermissionDialog
   },
   directives: {
     menus: directive
@@ -328,7 +362,7 @@ export default defineComponent({
       },
       pageParam: {
         page: 1,
-        pageSize: 30,
+        pageSize: 20,
         total: 1
       },
       paramPath: this.$route.query.path,
@@ -350,17 +384,20 @@ export default defineComponent({
         const slice = arr.slice(0, i + 1);
         return {
           label: v,
-          value: `/${slice.join("/")}`
+          value: `${slice.join("/")}`
         };
       });
       arr = [
         {
-          label: "/",
+          label: window.$t("fileManager.rootDir"),
           value: "/"
         },
         ...newArr
       ];
       return arr;
+    },
+    isWindows() {
+      return this.statusInfo?.platform === "win32";
     }
   },
   async mounted() {
@@ -416,6 +453,12 @@ export default defineComponent({
     currentChange() {
       this.toDir(".");
     },
+    toEditFilePermission(row) {
+      row = JSON.parse(JSON.stringify(row));
+      const target = path.normalize(path.join(this.currentDir, row.name));
+      row.target = target;
+      this.$refs.permissionDialog.prompt(row);
+    },
     fileRightClick(row) {
       this.multipleSelection = [];
       this.multipleSelection.push(row);
@@ -423,6 +466,9 @@ export default defineComponent({
     async changeDir(cwd = ".") {
       this.pageParam.page = 1;
       return await this.list(cwd);
+    },
+    toDisk(name) {
+      this.changeDir(name + ":\\");
     },
     // Directory List function
     async list(cwd = ".") {
@@ -439,7 +485,10 @@ export default defineComponent({
             page_size: this.pageParam.pageSize
           }
         });
-        const { items, total, page } = data;
+        // eslint-disable-next-line no-unused-vars
+        const { items, total, page, absolutePath } = data;
+
+        // this.currentDir = path.normalize(absolutePath).replace(/\\/gim, "/");
         this.currentDir = path.normalize(cwd);
         this.tableFilter(items);
         this.pageParam.total = total;
@@ -462,9 +511,7 @@ export default defineComponent({
           " " +
           new Date(iterator.time).toLocaleTimeString();
         this.files.push({
-          name: iterator.name,
-          type: iterator.type,
-          size: iterator.size,
+          ...iterator,
           typeText: typeText,
           timeText: timeText
         });
@@ -677,7 +724,6 @@ export default defineComponent({
     },
     // edit the file
     async toEditFilePage(row) {
-      console.log("this.$refs.floatFileEditor", this.$refs.floatFileEditor);
       const target = path.normalize(path.join(this.currentDir, row.name));
       this.$refs.floatFileEditor.open(row, target);
     },
@@ -959,11 +1005,11 @@ export default defineComponent({
   align-items: center;
   border-radius: 4px;
   height: 32px;
-  font-size: 14px;
+  font-size: 13px;
 }
 
 .dir-node {
-  font-size: 14px;
+  font-size: 13px;
   transition: all 0.4s;
   cursor: pointer;
   display: flex;
@@ -971,7 +1017,7 @@ export default defineComponent({
   align-items: center;
   max-width: 200px;
   height: 32px;
-  padding: 0px 10px;
+  padding: 0px 4px;
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;

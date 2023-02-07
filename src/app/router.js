@@ -8,6 +8,9 @@ import Services from "./views/Services";
 import Users from "./views/Users";
 import UserDetail from "./views/UserDetail";
 import Analysis from "./views/Analysis";
+import GlobalFileManager from "./views/GlobalFileManager";
+import GlobalTerminalEntry from "./views/GlobalTerminal";
+import FileManagerCopy from "./views/GlobalFileManager/copy";
 import News from "./views/News";
 import Container from "./views/Container";
 import ImageManager from "./views/ImageManager";
@@ -189,6 +192,28 @@ const routes = [
     path: "/install",
     name: "install",
     component: Install
+  },
+  {
+    path: "/global_file_manager_entry",
+    name: "globalFileManagerEntry",
+    component: GlobalFileManager
+  },
+  {
+    path: "/global_files/:serviceUuid/:instanceUuid",
+    name: "globalFileManager",
+    component: FileManagerCopy,
+    meta: { activeMenu: "/global_file_manager_entry" }
+  },
+  {
+    path: "/global_terminal_entry",
+    name: "globalTerminalEntry",
+    component: GlobalTerminalEntry
+  },
+  {
+    path: "/global_terminal/:serviceUuid/:instanceUuid",
+    name: "globalTerminal",
+    component: Terminal,
+    meta: { activeMenu: "/global_terminal_entry" }
   }
 ];
 

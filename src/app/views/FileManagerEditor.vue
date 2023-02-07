@@ -194,7 +194,7 @@ export default {
         enableMultiselect: true,
         showLineNumbers: true,
         behavioursEnabled: true,
-        fontSize: parseInt(localStorage.getItem("editorFontSize") || 16),
+        fontSize: parseInt(localStorage.getItem("editorFontSize") || 13),
         theme: localStorage.getItem("editorTheme") || "monokai"
       },
       editorThemes: [

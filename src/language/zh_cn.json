@@ -44,7 +44,16 @@
     "042": "取消",
     "043": "行",
     "044": "安装错误",
-    "045": "第三方"
+    "045": "第三方",
+    "046": "读取",
+    "047": "写入",
+    "048": "执行",
+    "049": "所有者",
+    "050": "用户组",
+    "051": "任何人",
+    "052": "文件管理",
+    "053": "命令终端",
+    "054": "控制台"
   },
   "general": {
     "search": "搜索",
@@ -78,7 +87,8 @@
     "config": "配置",
     "operation": "操作",
     "moreOperation": "更多操作",
-    "confirm2": "我清楚后果并确定操作"
+    "confirm2": "我清楚后果并确定操作",
+    "permission": "权限"
   },
   "root": {
     "title": "处理中...",
@@ -477,7 +487,8 @@
     "dockerPort": "可用端口",
     "limit": "资源限制",
     "openfrp": "内网映射",
-    "backInstancesView": "回到应用实例列表"
+    "backInstancesView": "回到应用实例列表",
+    "paramsSet": "参数设置"
   },
   "processConfig": {
     "title": "配置列表组",
@@ -494,7 +505,7 @@
     "title": "配置文件",
     "reload": "重新加载",
     "back": "回到配置文件列表",
-    "editOriginal": "编辑源文件视图",
+    "editOriginal": "编辑源文件",
     "noFile": "文件不存在或权限不正确，无法查看此文件的具体配置，您也许可以尝试到 “文件管理”功能在线编辑此文件，或尝试重启实例刷新此文件。",
     "updateFailed": "更新失败"
   },
@@ -571,6 +582,7 @@
     "day": "日"
   },
   "fileManager": {
+    "rootDir": "根目录",
     "title": "文件管理",
     "upperDir": "上层目录",
     "touch": "新建文件",
@@ -612,7 +624,8 @@
     "inputUnzipDirName": "请输入新的解压文件夹名称",
     "UnzipTaskStart": "解压任务已开始",
     "UnzipTaskStartInfo": "异步解压需要一段时间，可以利用刷新文件列表查看目录内容来判断是否解压完毕",
-    "uploadOk": "上传完毕"
+    "uploadOk": "上传完毕",
+    "disk": "磁盘"
   },
   "fileManagerEditor": {
     "title": "编辑文件",
@@ -766,7 +779,7 @@
     "copyId": "（可用于 API 调用）"
   },
   "container": {
-    "remoteList": "远程节点列表",
+    "remoteList": "请选择一个节点",
     "status": "状态",
     "imagesManage": "环境镜像管理",
     "relevantInfo": "相关资料",
@@ -967,7 +980,8 @@
     "stoppedServiceTitle": "正在维护中",
     "stoppedServiceContent": "很抱歉，无法获取最新预设整合包列表，可能是您的网络问题或服务器正在维护中。",
     "firstTimeInfo": "我们将引导你使用并部署你的应用程序。",
-    "oldUSerInfo": "以更专业化的界面供你使用。"
+    "oldUSerInfo": "以更专业化的界面供你使用。",
+    "toCreateInstancePage": "尝试进行手动安装"
   },
   "notify": {
     "connectDaemonError": "访问远程节点异常",
@@ -1001,11 +1015,11 @@
     "users": "用户管理",
     "analysis": "面板数据分析",
     "news": "更新与通知",
-    "container": "环境镜像",
+    "container": "容器镜像",
     "imageManager": "镜像管理",
     "trigger": "面板触发器",
     "extension": "面板扩展",
-    "settings": "面板设置",
+    "settings": "设置",
     "newImage": "创建镜像",
     "terminal": "实例控制台",
     "processConfigFile": "实例配置文件",
@@ -1020,7 +1034,11 @@
     "quickStart": "快速开始",
     "update": "版本控制",
     "install": "安装",
-    "terminalError": "终端连接错误"
+    "terminalError": "终端连接错误",
+    "globalFileManagerEntry": "节点文件管理",
+    "globalFileManager": "节点文件管理",
+    "globalTerminalEntry": "节点命令终端",
+    "globalTerminal": "节点终端"
   },
   "aside": {
     "basic": "基础功能",
@@ -1076,8 +1094,8 @@
       "002": "没有任何安装任务，您可以点击上述选项来创建",
       "003": "前往控制台",
       "004": "查看历史安装任务",
-      "005": "一键快速开服（初次使用推荐）",
-      "006": "适合初学者，通过预设模板快速帮助您部署和启动服务器。",
+      "005": "一键开服（适合初学者）",
+      "006": "自动下载预设整合包，帮助您快速部署和启动服务器。",
       "007": "普通流程创建服务器",
       "008": "导入本地服务器，或自定义创建一个服务器。",
       "009": "选择创建方式"
@@ -1097,9 +1115,11 @@
       "012": "测试服务器",
       "013": "已安装完毕",
       "014": "正在安装中",
-      "eulaReadTitle": "安装预设整合包将视作你已同意并阅读 Minecraft 最终用户协议：",
+      "eulaReadTitle": "安装预设整合包将视作你已同意并阅读",
+      "eulaReadTitle2": "Minecraft 最终用户协议（EULA)",
       "015": "可能是因为网络不通畅或服务器正在维护中，请等待一段时间后再进行尝试，或使用其他安装包尝试。",
-      "016": "请输入新建服务器的名字："
+      "016": "请输入新建服务器的名字：",
+      "tip": "注意事项"
     },
     "Settings": {
       "001": "预设资源下载点",
@@ -1119,6 +1139,13 @@
       "007": "格式不正确",
       "008": "已跳转到第 ",
       "009": "你还未保存文件, 是否继续返回?"
+    },
+    "FileManager_PermissionDialog": {
+      "001": "文件/文件夹权限",
+      "002": "应用到子目录"
+    },
+    "GlobalFileManager_index": {
+      "001": "进入远程节点"
     }
   },
   "components": {
@@ -1159,5 +1186,18 @@
   "Container": {
     "notSupportWindowsTip": "仅支持 Linux 下的 Docker 容器管理",
     "info": "可以在此管理所有基于 Docker 的容器和镜像情况，创建镜像后可以为实例分配指定镜像，确保运行环境隔离和宿主机的安全。"
+  },
+  "service": {
+    "instance_type": {
+      "001": "群组配置文件",
+      "002": "服务端配置文件",
+      "003": "Spigot 配置文件",
+      "004": "Paper 配置文件",
+      "005": "基岩版配置文件",
+      "006": "Sponge 配置文件",
+      "007": "Forge 配置文件",
+      "008": "Fabric 配置文件",
+      "009": "MCDR 配置文件"
+    }
   }
 }

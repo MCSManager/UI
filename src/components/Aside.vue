@@ -41,6 +41,15 @@
           <i class="el-icon-connection"></i>
           <template #title>{{ $t("aside.node") }}</template>
         </el-menu-item>
+        <el-menu-item key="/global_file_manager_entry" index="/global_file_manager_entry">
+          <i class="el-icon-folder-opened"></i>
+          <template #title>{{ $t("CommonText.052") }}</template>
+        </el-menu-item>
+        <el-menu-item key="/global_terminal_entry" index="/global_terminal_entry">
+          <i class="el-icon-postcard"></i>
+          <template #title>{{ $t("CommonText.053") }}</template>
+        </el-menu-item>
+
         <el-menu-item key="/container" index="/container">
           <i class="el-icon-takeaway-box"></i>
           <template #title>{{ $t("router.container") }}</template>
@@ -71,7 +80,9 @@ import router from "../app/router";
 import Logo from "../components/Logo.vue";
 import { hasElectron } from "@/app/utils/electron";
 export default {
-  components: { Logo },
+  components: {
+    Logo
+  },
   data: function () {
     return {};
   },
@@ -87,7 +98,9 @@ export default {
   methods: {
     hasElectron,
     toRouter(path) {
-      router.push({ path });
+      router.push({
+        path
+      });
     },
     toElectronUI() {
       window.electionApi.openHome();

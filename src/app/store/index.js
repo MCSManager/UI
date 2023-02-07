@@ -2,7 +2,7 @@
 
 import { createStore } from "vuex";
 
-// Vuex 
+// Vuex
 const stateModel = {
   token: "",
   userInfo: {
@@ -14,9 +14,7 @@ const stateModel = {
     instances: [],
     apiKey: ""
   },
-  panelStatus: {
-
-  },
+  panelStatus: {},
   gameProfile: null,
   onlineNotice: null
 };
