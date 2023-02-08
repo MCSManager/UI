@@ -372,47 +372,52 @@
             <div
               :class="{
                 'terminal-input-wrapper': true,
-                'full-terminal-input-wrapper': isFull,
-                'global-terminal-flex': isGlobalTerminal
+                'full-terminal-input-wrapper': isFull
               }"
             >
-              <el-input
-                :placeholder="$t('terminal.inputCmd')"
-                prefix-icon="el-icon-arrow-right"
-                size="small"
-                v-model="command"
-                ref="terminalCommandInput"
-                @keyup.enter="sendCommand(command)"
-              >
-              </el-input>
-              <div v-if="isGlobalTerminal" style="display: flex; margin-left: 6px">
-                <el-button
-                  icon="el-icon-video-pause"
-                  size="small"
-                  style="width: 100px"
-                  @click="killInstance"
-                >
-                  {{ $t("instances.kill") }}
-                </el-button>
-                <el-button
-                  :disabled="!available"
-                  icon="el-icon-monitor"
-                  style="width: 100px"
-                  size="small"
-                  @click="toTerminalSettingPanel"
-                >
-                  {{ $t("terminal.termSet") }}
-                </el-button>
-                <el-button
-                  :disabled="!available"
-                  icon="el-icon-setting"
-                  style="width: 100px"
-                  size="small"
-                  @click="toInstanceDetail"
-                >
-                  {{ $t("terminal.paramsSet") }}
-                </el-button>
-              </div>
+              <el-row :gutter="20">
+                <el-col :md="isGlobalTerminal ? 16 : 24" :offset="0">
+                  <el-input
+                    :placeholder="$t('terminal.inputCmd')"
+                    prefix-icon="el-icon-arrow-right"
+                    size="small"
+                    v-model="command"
+                    ref="terminalCommandInput"
+                    @keyup.enter="sendCommand(command)"
+                  >
+                  </el-input>
+                </el-col>
+                <el-col v-if="isGlobalTerminal" :md="8" :offset="0">
+                  <div class="global-terminal-btn-container">
+                    <el-button
+                      icon="el-icon-video-pause"
+                      size="small"
+                      style="width: 100px"
+                      @click="killInstance"
+                    >
+                      {{ $t("instances.kill") }}
+                    </el-button>
+                    <el-button
+                      :disabled="!available"
+                      icon="el-icon-monitor"
+                      style="width: 100px"
+                      size="small"
+                      @click="toTerminalSettingPanel"
+                    >
+                      {{ $t("terminal.termSet") }}
+                    </el-button>
+                    <el-button
+                      :disabled="!available"
+                      icon="el-icon-setting"
+                      style="width: 100px"
+                      size="small"
+                      @click="toInstanceDetail"
+                    >
+                      {{ $t("terminal.paramsSet") }}
+                    </el-button>
+                  </div>
+                </el-col>
+              </el-row>
             </div>
           </template>
         </Panel>
@@ -1389,7 +1394,23 @@ export default {
 }
 
 .global-terminal-wrapper {
-  width: 900px;
+  max-width: 900px;
   margin: auto;
+}
+
+.global-terminal-btn-container {
+  text-align: center;
+  display: flex;
+  justify-content: center;
+}
+
+@media (max-width: 900px) {
+  .global-terminal-flex {
+    display: block;
+  }
+
+  .global-terminal-btn-container {
+    margin-top: 8px;
+  }
 }
 </style>

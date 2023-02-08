@@ -4,21 +4,16 @@
 
 <template>
   <div v-loading="loading">
-    <el-row :gutter="20">
-      <el-col :span="12" :offset="0"></el-col>
-      <el-col :span="12" :offset="0"></el-col>
-    </el-row>
-
     <el-row :gutter="10">
       <el-col
         v-for="item in serviceList"
         :key="item.value"
         :label="item.label"
         :value="item.value"
-        :span="6"
+        :md="6"
         :offset="0"
       >
-        <div class="daemon-card" @click="select(item)">
+        <div class="daemon-card row-mb" @click="select(item)">
           <el-card shadow="always" body-style="padding: 8px">
             <div class="daemon-card-body">
               <i class="el-icon-cpu"></i>
