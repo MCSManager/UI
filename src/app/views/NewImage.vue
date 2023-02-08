@@ -9,10 +9,8 @@
       <div class="flex flex-space-between flex-align-items-center">
         <div>
           <ItemGroup>
-            <el-button type="" size="small" @click="back">{{
-              $t("newImage.toImageList")
-            }}</el-button>
-            <el-button type="" size="small" @click="toProgress">{{
+            <el-button size="small" @click="back">{{ $t("newImage.toImageList") }}</el-button>
+            <el-button size="small" @click="toProgress">{{
               $t("newImage.buildProgress")
             }}</el-button>
           </ItemGroup>

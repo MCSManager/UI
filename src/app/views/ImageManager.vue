@@ -12,10 +12,10 @@
             <el-button type="success" size="small" @click="toNewImage">
               {{ $t("imageManager.newImage") }}
             </el-button>
-            <el-button type="" size="small" @click="refresh">
+            <el-button size="small" @click="refresh">
               {{ $t("general.refresh") }}
             </el-button>
-            <el-button type="" size="small" @click="back">
+            <el-button size="small" @click="back">
               {{ $t("instancesDetail.back") }}
             </el-button>
           </ItemGroup>

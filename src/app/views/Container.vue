@@ -18,13 +18,13 @@
         {{ $t("container.relevantInfo") }}
         <br />
 
-        <el-button type="text" size="small" @click="selectLink(1)">
+        <el-link type="primary" size="mini" @click="selectLink(1)">
           {{ $t("container.links[0].title") }}
-        </el-button>
-
-        <el-button type="text" size="small" @click="selectLink(2)">
+        </el-link>
+        &nbsp;
+        <el-link type="primary" size="mini" @click="selectLink(2)">
           {{ $t("container.links[1].title") }}
-        </el-button>
+        </el-link>
       </p>
     </template>
   </Panel>
