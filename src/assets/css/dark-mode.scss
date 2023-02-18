@@ -113,6 +113,11 @@
     color: #e4e4e4;
   }
 
+  .el-button.is-disabled, .el-button.is-disabled:focus, .el-button.is-disabled:hover {
+    background-color: unset;
+    filter: brightness(0.6);
+  }
+
   .el-button--danger.is-plain {
     background: #2e1b1b;
   }
