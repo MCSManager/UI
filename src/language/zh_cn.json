@@ -678,7 +678,12 @@
     "originalSet": "原值",
     "updateData": "更新数据",
     "SaveData": "保存数据",
-    "selectAUser": "请至少选择一个用户"
+    "selectAUser": "请至少选择一个用户",
+    "info": {
+      "admin": "管理员",
+      "user": "普通用户",
+      "baned": "被封禁"
+    }
   },
   "userResources": {
     "userInfo": "用户信息",

@@ -35,7 +35,7 @@
             ></el-input>
           </template>
         </el-table-column>
-        <el-table-column :label="$t('overview.port')" width="110">
+        <el-table-column :label="$t('overview.port')" width="100">
           <template #default="scope">
             <el-input
               size="small"
@@ -56,13 +56,12 @@
             </el-tooltip>
           </template>
         </el-table-column>
-        <el-table-column :label="$t('overview.remarks')" width="210">
+        <el-table-column :label="$t('overview.remarks')" width="190">
           <template #default="scope">
             <span
               >{{ scope.row.remarks }}
               <i style="cursor: pointer" class="el-icon-edit" @click="updateRemarks(scope.row)"></i
             ></span>
-            <!-- <el-input size="small" v-model="scope.row.remarks"></el-input> -->
           </template>
         </el-table-column>
 
@@ -85,7 +84,7 @@
             <div v-if="scope.row.system">{{ scope.row.system.memText }}</div>
           </template>
         </el-table-column>
-        <el-table-column :label="$t('services.instanceStatus')">
+        <el-table-column :label="$t('services.instanceStatus')" width="100">
           <template #default="scope">
             <div v-if="scope.row.instance">
               {{ scope.row.instance.running }}/{{ scope.row.instance.total }}
@@ -112,7 +111,7 @@
             </span>
           </template>
         </el-table-column>
-        <el-table-column :label="$t('overview.connectStatus')">
+        <el-table-column :label="$t('overview.connectStatus')" width="110">
           <template #default="scope">
             <span class="color-green" v-if="scope.row.available">
               <i class="el-icon-circle-check"></i> {{ $t("overview.online") }}

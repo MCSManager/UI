@@ -150,7 +150,7 @@
     "runningInstance": "Running instance",
     "daemonVersion": "Daemon version",
     "lowDaemonVersion": "Incompatible Version",
-    "connectStatus": "Connection Status",
+    "connectStatus": "Connection",
     "online": "Online",
     "errorConnect": "Unable to connect to specified IP or incorrect token.",
     "offline": "Offline",
@@ -488,7 +488,7 @@
     "limit": "resource constraints",
     "openfrp": "Intranet mapping",
     "backInstancesView": "Back to Instance panelCpuUsageInfo",
-    "paramsSet": "parameter settings"
+    "paramsSet": "Settings"
   },
   "processConfig": {
     "title": "Configure List Group",
@@ -624,8 +624,8 @@
     "UnzipTaskStart": "Decompression task started.",
     "UnzipTaskStartInfo": "It took a while to finish an async decompression task. You can refresh the file list to view the content of target folder to determine if task decompression completed.",
     "uploadOk": "Upload completed",
-    "disk": "disk",
-    "rootDir": "Root directory"
+    "disk": "Disk",
+    "rootDir": "Root Dir"
   },
   "fileManagerEditor": {
     "title": "Edit",
@@ -678,7 +678,12 @@
     "originalSet": "Original",
     "updateData": "Update",
     "SaveData": "Save",
-    "selectAUser": "Please select at least one user"
+    "selectAUser": "Please select at least one user",
+    "info": {
+      "admin": "Administrator",
+      "baned": "Banned",
+      "user": "General user"
+    }
   },
   "userResources": {
     "userInfo": "User Info",
@@ -732,11 +737,11 @@
   "services": {
     "remoteDaemonManage": "Add Daemon",
     "addDaemon": "Add Daemon",
-    "learnHowItWork": "Know how MCSManager works",
+    "learnHowItWork": "Principle",
     "Daemons": "Daemon List",
     "remoteInfo": "The Daemon (on any virtual/physical host) must be online and connected to each other. Corresponding port(s) and correct token need to be configured for connection from the Web Interface(Panel).<br />The Web page (i.e. your browser) needs to be able to connect directly to the Daemon(via opened port) for functions like uploading, downloading, and console to work. Please avoid using any LAN IP other than localhost, the daemon has to be connected via public IP or FQDN.<br />Corresponding daemon version for current Web Interface：{ specifiedDaemonVersion }",
     "platform": "Platform",
-    "instanceStatus": "Instance Status",
+    "instanceStatus": "Instances",
     "version": "Version",
     "update": "Update",
     "connect": "Connect",

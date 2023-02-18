@@ -69,10 +69,14 @@
               <el-table-column type="selection" width="55"> </el-table-column>
               <el-table-column prop="uuid" label="UUID" width="240"></el-table-column>
               <el-table-column prop="userName" :label="$t('users.userName')"></el-table-column>
-              <el-table-column
-                prop="permission"
-                :label="$t('users.permit.permissionLevel')"
-              ></el-table-column>
+              <el-table-column :label="$t('users.permit.permissionLevel')">
+                <template #default="scope">
+                  <span v-if="scope.row.permission == 10">{{ $t("users.info.admin") }}</span>
+                  <span v-else-if="scope.row.permission == 1">{{ $t("users.info.user") }}</span>
+                  <span v-else-if="scope.row.permission <= 0">{{ $t("users.info.baned") }}</span>
+                  <span v-else>{{ scope.row.permission }}</span>
+                </template>
+              </el-table-column>
               <el-table-column prop="registerTime" :label="$t('users.regTime')"></el-table-column>
               <el-table-column prop="loginTime" :label="$t('users.lastTime')"></el-table-column>
               <el-table-column

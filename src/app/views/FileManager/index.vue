@@ -210,7 +210,7 @@
           <el-table-column
             :label="$t('general.operate')"
             style="text-align: center"
-            :width="isWindows ? 160 : 220"
+            :width="isWindows ? 180 : 220"
           >
             <template #default="scope">
               <el-button size="mini" v-if="!isWindows" @click="toEditFilePermission(scope.row)">
