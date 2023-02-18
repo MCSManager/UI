@@ -159,8 +159,6 @@
         </el-col>
       </el-row>
     </div>
-
-    <div class="bg"></div>
   </div>
 </template>
 
@@ -268,15 +266,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.bg {
-  z-index: 997;
-  position: fixed;
-  backdrop-filter: blur(8px) brightness(0.5);
-  top: 0px;
-  left: 0px;
-  right: 0px;
-  bottom: 0px;
-}
 
 .login-panel-wrapper-out {
   opacity: 0;
@@ -385,9 +374,10 @@ export default {
   right: 0px;
   bottom: 0px;
 
+  backdrop-filter: blur(8px) brightness(0.5);
   display: flex;
   align-items: center;
-
+  
   transition-property: all;
   transition-duration: 1.5s;
   transition-timing-function: cubic-bezier(1, 0.05, 0.84, 0.74);
