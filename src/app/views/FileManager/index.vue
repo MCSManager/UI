@@ -113,13 +113,16 @@
           </el-row>
         </div>
 
-        <div class="row-mt page-pagination">
-          <div v-if="statusInfo.disks">
+        <div class="row-mt page-pagination" v-if="statusInfo.disks && statusInfo.isGlobalInstance">
+          <div>
             <el-button
+              icon="el-icon-receiving"
               v-for="item in statusInfo.disks"
               size="small"
               :key="item"
               @click="toDisk(item)"
+              type="success"
+              plain
             >
               {{ $t("fileManager.disk") }} {{ item }}
             </el-button>
@@ -194,7 +197,7 @@
               >
             </template>
           </el-table-column>
-          <el-table-column :label="$t('general.permission')" width="80">
+          <el-table-column v-if="!isWindows" :label="$t('general.permission')" width="80">
             <template #default="scope">
               {{ scope.row.mode }}
             </template>
