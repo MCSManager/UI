@@ -69,7 +69,7 @@ export default {
       this.$router.push("/instances");
     },
     toDocs() {
-      window.open("https://docs.mcsmanager.com/#/qa/common_qa");
+      window.open("https://docs.mcsmanager.com/");
     }
   }
 };
