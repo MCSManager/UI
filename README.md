@@ -40,10 +40,4 @@ If you find a serious security vulnerability and it is inconvenient to publish i
 
 Copyright 2022 [MCSManager Dev](https://github.com/mcsmanager), Apache-2.0 license.
 
-**Additional Requirements:**
-
-You must keep all copyright information and place "Powered by MCSManager" in a conspicuous position.
-
-
-
 
