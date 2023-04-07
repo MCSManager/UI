@@ -582,7 +582,6 @@
     "day": "日"
   },
   "fileManager": {
-    "rootDir": "根目录",
     "title": "文件管理",
     "upperDir": "上层目录",
     "touch": "新建文件",
@@ -625,7 +624,9 @@
     "UnzipTaskStart": "解压任务已开始",
     "UnzipTaskStartInfo": "异步解压需要一段时间，可以利用刷新文件列表查看目录内容来判断是否解压完毕",
     "uploadOk": "上传完毕",
-    "disk": "磁盘"
+    "disk": "磁盘",
+    "rootDir": "根目录",
+    "isRoot": "请勿在根目录操作"
   },
   "fileManagerEditor": {
     "title": "编辑文件",
