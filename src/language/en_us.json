@@ -625,7 +625,8 @@
     "UnzipTaskStartInfo": "It took a while to finish an async decompression task. You can refresh the file list to view the content of target folder to determine if task decompression completed.",
     "uploadOk": "Upload completed",
     "disk": "Disk",
-    "rootDir": "Root Dir"
+    "rootDir": "Root Dir",
+    "isRoot": "Don't operate in the root directory"
   },
   "fileManagerEditor": {
     "title": "Edit",
