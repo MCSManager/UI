@@ -3,74 +3,116 @@
 -->
 
 <template>
-  <div v-menus:right="menus">
-    <Panel>
+  <div>
+    <Panel v-menus:right="menus">
       <template #title>
-        <span id="fileManagerTop">
-          {{ $t("fileManager.title") }}
-        </span>
+        <span id="fileManagerTop">{{ $t("fileManager.title") }}</span>
       </template>
       <template #default>
         <div>
           <el-row :gutter="20">
+<<<<<<< Updated upstream
             <el-col :span="24" :offset="0">
               <FunctionGroup :container="true">
                 <FunctionComponent>
                   <el-button size="small" @click="back">
                     <i class="el-icon-pie-chart"></i> {{ $t("schedule.backToConsole") }}
+=======
+            <el-col :span="24">
+              <div class="dir-node-container row-mb">
+                <div class="dir-node dir-node-back-btn" @click="toUpDir">
+                  <i class="el-icon-caret-left"></i>
+                </div>
+                <div
+                  class="flex flex-align-items-center"
+                  v-for="(item, index) in currentDirArray"
+                  :key="index"
+                >
+                  <div
+                    class="dir-node"
+                    :style="{ 'padding-left': index == 0 ? '8px' : '4px' }"
+                    v-if="item"
+                    @click="changeDir(item.value)"
+                  >{{ item.label }}</div>
+                  <i class="el-icon-arrow-right" v-if="index < currentDirArray.length - 1"></i>
+                </div>
+              </div>
+            </el-col>
+            <el-col :span="24" :offset="0">
+              <FunctionGroup :container="true">
+                <FunctionComponent>
+                  <el-button size="small" type="primary" plain @click="back">
+                    <i class="el-icon-pie-chart"></i>
+                    {{ $t("schedule.backToConsole") }}
+>>>>>>> Stashed changes
                   </el-button>
                 </FunctionComponent>
 
                 <FunctionComponent>
                   <el-button size="small" @click="refresh">
-                    <i class="el-icon-refresh"></i> {{ $t("general.refresh") }}
+                    <i class="el-icon-refresh"></i>
+                    {{ $t("general.refresh") }}
                   </el-button>
                 </FunctionComponent>
 
                 <FunctionGroup align="right">
                   <FunctionComponent>
+<<<<<<< Updated upstream
                     <el-button size="small" @click="toUpDir">
                       <i class="el-icon-pie-chart"></i> {{ $t("fileManager.upperDir") }}
+=======
+                    <el-button size="small" @click="touch">
+                      <i class="el-icon-document-add"></i>
+                      {{ $t("fileManager.touch") }}
+>>>>>>> Stashed changes
                     </el-button>
                   </FunctionComponent>
                   <FunctionComponent>
                     <el-button size="small" @click="mkdir">
-                      <i class="el-icon-folder-add"></i> {{ $t("fileManager.mkdir") }}
+                      <i class="el-icon-folder-add"></i>
+                      {{ $t("fileManager.mkdir") }}
                     </el-button>
                   </FunctionComponent>
                   <FunctionComponent>
                     <el-button size="small" @click="compress(1)">
-                      <i class="el-icon-box"></i> {{ $t("fileManager.zip") }}
+                      <i class="el-icon-box"></i>
+                      {{ $t("fileManager.zip") }}
                     </el-button>
                   </FunctionComponent>
                   <FunctionComponent>
                     <el-button size="small" @click="compress(2)">
-                      <i class="el-icon-files"></i> {{ $t("fileManager.unzip") }}
+                      <i class="el-icon-files"></i>
+                      {{ $t("fileManager.unzip") }}
                     </el-button>
                   </FunctionComponent>
                   <FunctionComponent>
                     <el-button size="small" @click="rename">
-                      <i class="el-icon-document"></i> {{ $t("fileManager.rename") }}
+                      <i class="el-icon-document"></i>
+                      {{ $t("fileManager.rename") }}
                     </el-button>
                   </FunctionComponent>
                   <FunctionComponent>
                     <el-button size="small" @click="move">
-                      <i class="el-icon-scissors"></i> {{ $t("fileManager.cut") }}
+                      <i class="el-icon-scissors"></i>
+                      {{ $t("fileManager.cut") }}
                     </el-button>
                   </FunctionComponent>
                   <FunctionComponent>
                     <el-button size="small" @click="copy">
-                      <i class="el-icon-document-copy"></i> {{ $t("fileManager.copy") }}
+                      <i class="el-icon-document-copy"></i>
+                      {{ $t("fileManager.copy") }}
                     </el-button>
                   </FunctionComponent>
                   <FunctionComponent>
                     <el-button size="small" @click="paste">
-                      <i class="el-icon-tickets"></i> {{ $t("fileManager.paste") }}
+                      <i class="el-icon-tickets"></i>
+                      {{ $t("fileManager.paste") }}
                     </el-button>
                   </FunctionComponent>
                   <FunctionComponent>
                     <el-button size="small" type="danger" @click="deleteFiles">
-                      <i class="el-icon-document-delete"></i> {{ $t("general.delete") }}
+                      <i class="el-icon-document-delete"></i>
+                      {{ $t("general.delete") }}
                     </el-button>
                   </FunctionComponent>
                 </FunctionGroup>
@@ -86,24 +128,40 @@
                     style="display: inline-block"
                   >
                     <el-button size="small" type="success" @click="upload">
-                      <i class="el-icon-plus"></i> {{ $t("fileManager.uploadFile") }}
+                      <i class="el-icon-plus"></i>
+                      {{ $t("fileManager.uploadFile") }}
                     </el-button>
                   </el-upload>
                 </FunctionComponent>
-              </FunctionGroup></el-col
-            >
+              </FunctionGroup>
+            </el-col>
           </el-row>
         </div>
 
+<<<<<<< Updated upstream
+=======
+        <div class="row-mt page-pagination" v-if="statusInfo.disks && statusInfo.isGlobalInstance">
+          <div>
+            <el-button
+              icon="el-icon-receiving"
+              v-for="item in statusInfo.disks"
+              size="small"
+              :key="item"
+              @click="toDisk(item)"
+              type="success"
+              plain
+            >{{ $t("fileManager.disk") }} {{ item }}</el-button>
+          </div>
+        </div>
+
+>>>>>>> Stashed changes
         <div class="row-mt page-pagination">
           <div>
             <div v-if="statusInfo.instanceFileTask">
               <span>
                 <i class="el-icon-loading"></i>
               </span>
-              <span>
-                {{ $t("fileManager.unzipInfo", { tasks: statusInfo.instanceFileTask }) }}</span
-              >
+              <span>{{ $t("fileManager.unzipInfo", { tasks: statusInfo.instanceFileTask }) }}</span>
             </div>
           </div>
 
@@ -121,11 +179,7 @@
         </div>
 
         <div class="row-mt" v-show="percentComplete > 0">
-          <el-progress
-            :text-inside="true"
-            :stroke-width="14"
-            :percentage="percentComplete"
-          ></el-progress>
+          <el-progress :text-inside="true" :stroke-width="14" :percentage="percentComplete"></el-progress>
         </div>
 
         <p>
@@ -143,7 +197,7 @@
           @selection-change="selectionChange"
           @row-contextmenu="fileRightClick"
         >
-          <el-table-column type="selection" width="55"> </el-table-column>
+          <el-table-column type="selection" width="55"></el-table-column>
           <el-table-column prop="name" :label="$t('fileManager.name')" min-width="240">
             <template #default="scope">
               <div
@@ -160,6 +214,7 @@
               </div>
             </template>
           </el-table-column>
+<<<<<<< Updated upstream
           <el-table-column
             prop="typeText"
             :label="$t('fileManager.fileType')"
@@ -186,16 +241,48 @@
           ></el-table-column>
           <el-table-column :label="$t('general.operate')" style="text-align: center" width="180">
             <template #default="scope">
+=======
+          <el-table-column prop="typeText" :label="$t('fileManager.fileType')" width="120"></el-table-column>
+          <el-table-column :label="$t('fileManager.fileSize')" width="110">
+            <template #default="scope">
+              <span
+                v-if="scope.row.size > 1024 * 1024 * 1024"
+              >{{ Number(Number(scope.row.size) / 1024 / 1024 / 1024).toFixed(0) }} GB</span>
+              <span
+                v-if="scope.row.size > 1024 * 1024"
+              >{{ Number(Number(scope.row.size) / 1024 / 1024).toFixed(0) }} MB</span>
+              <span
+                v-else-if="scope.row.size > 1024"
+              >{{ Number(Number(scope.row.size) / 1024).toFixed(0) }} KB</span>
+              <span v-else-if="scope.row.size > 0">{{ Number(Number(scope.row.size)).toFixed(0) }} B</span>
+            </template>
+          </el-table-column>
+          <el-table-column v-if="!isWindows" :label="$t('general.permission')" width="80">
+            <template #default="scope">{{ scope.row.mode }}</template>
+          </el-table-column>
+          <el-table-column prop="timeText" :label="$t('fileManager.lastEdit')" width="160"></el-table-column>
+          <el-table-column
+            :label="$t('general.operate')"
+            style="text-align: center"
+            :width="isWindows ? 180 : 220"
+          >
+            <template #default="scope">
+              <el-button
+                size="mini"
+                v-if="!isWindows"
+                @click="toEditFilePermission(scope.row)"
+              >{{ $t("general.permission") }}</el-button>
+>>>>>>> Stashed changes
               <el-button
                 size="mini"
                 :disabled="scope.row.type != 1"
                 @click="toEditFilePage(scope.row)"
-              >
-                {{ $t("general.edit") }}
-              </el-button>
-              <el-button size="mini" :disabled="scope.row.type != 1" @click="download(scope.row)">
-                {{ $t("fileManager.download") }}
-              </el-button>
+              >{{ $t("general.edit") }}</el-button>
+              <el-button
+                size="mini"
+                :disabled="scope.row.type != 1"
+                @click="download(scope.row)"
+              >{{ $t("fileManager.download") }}</el-button>
             </template>
           </el-table-column>
         </el-table>
