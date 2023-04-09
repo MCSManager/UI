@@ -319,11 +319,11 @@ export default {
         },
         {
           name: this.$t("overview.webPanelTime"),
-          value: system.time
+          value: new Date(system.time).toLocaleString()
         },
         {
           name: this.$t("overview.localTime"),
-          value: new Date().toLocaleDateString() + " " + new Date().toLocaleTimeString()
+          value: new Date().toLocaleString()
         },
         {
           name: this.$t("overview.computerName"),
