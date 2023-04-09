@@ -15,7 +15,11 @@
   }
 
   #login-panel-wrapper {
-    background: #111111;
+    // background: #111111;
+  }
+
+  .el-skeleton__paragraph {
+    background: #939393 !important;
   }
 
   .el-card,
@@ -109,6 +113,11 @@
     color: #e4e4e4;
   }
 
+  .el-button.is-disabled, .el-button.is-disabled:focus, .el-button.is-disabled:hover {
+    background-color: unset;
+    filter: brightness(0.6);
+  }
+
   .el-button--danger.is-plain {
     background: #2e1b1b;
   }
@@ -137,12 +146,15 @@
   }
 
   .el-select__popper.el-popper[role="tooltip"],
-  .el-dropdown-menu {
+  .el-dropdown-menu,
+  .v3-menus {
     background: #232323;
+    border: 1px solid rgb(80, 80, 80);
   }
 
   .el-select-dropdown__item,
-  .el-dropdown-menu__item {
+  .el-dropdown-menu__item,
+  .v3-menus-item {
     color: #c0c0c0;
   }
 
@@ -151,6 +163,11 @@
   .el-dropdown-menu__item:focus,
   .el-dropdown-menu__item:not(.is-disabled):hover,
   .el-popper {
+    background-color: #353535;
+  }
+
+  .v3-menus-active,
+  .v3-menus-item:hover {
     background-color: #353535;
   }
 
@@ -164,6 +181,22 @@
     color: #ffffff;
   }
 
+  .el-popper.is-light {
+    border: 0;
+  }
+
+  .el-popper.is-light .el-popper__arrow::before {
+    content: "";
+    background: #4e4e4e;
+    border: unset;
+  }
+
+  .el-input-group__append,
+  .el-input-group__prepend {
+    background-color: #313131;
+    border: 1px solid #606061;
+  }
+
   .components-block-button-warpper {
     background-color: #2d2d2d;
   }
@@ -174,6 +207,7 @@
 
   .el-message-box {
     background-color: #212121;
+    border: 1px solid #6e7074 !important;
   }
 
   .page-header-img {
@@ -182,6 +216,33 @@
 
   .el-tag.el-tag--info {
     background-color: #060606;
+  }
+
+  .el-switch__label,
+  .quick-title {
+    color: #eeeeee;
+  }
+
+  .el-input-number__decrease,
+  .el-input-number__increase {
+    background-color: rgb(42, 42, 42);
+  }
+
+  .el-dropdown-link:hover {
+    background-color: unset !important;
+    backdrop-filter: brightness(0.8) !important;
+  }
+
+  .dir-node-back-btn {
+    border: 1px solid #606061 !important;
+  }
+
+  .dir-node-container {
+    border: 1px solid #606061 !important;
+  }
+
+  .dir-node:hover {
+    background-color: #2d2d2d !important;
   }
 }
 

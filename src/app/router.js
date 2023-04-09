@@ -8,6 +8,9 @@ import Services from "./views/Services";
 import Users from "./views/Users";
 import UserDetail from "./views/UserDetail";
 import Analysis from "./views/Analysis";
+import GlobalFileManager from "./views/GlobalFileManager";
+import GlobalTerminalEntry from "./views/GlobalTerminal";
+import FileManagerCopy from "./views/GlobalFileManager/copy";
 import News from "./views/News";
 import Container from "./views/Container";
 import ImageManager from "./views/ImageManager";
@@ -30,6 +33,7 @@ import Schedule from "./views/Schedule";
 import Update from "./views/Update";
 import Quickstart from "./views/quickstart";
 import Install from "./views/Install";
+import UnavailableTerminal from "./views/Terminal/UnavailableTerminal";
 
 const routes = [
   {
@@ -116,6 +120,12 @@ const routes = [
     meta: { activeMenu: "/instances" }
   },
   {
+    path: "/terminal_error",
+    name: "terminalError",
+    component: UnavailableTerminal,
+    meta: { activeMenu: "/instances" }
+  },
+  {
     path: "/process_config_file/:serviceUuid/:instanceUuid/",
     name: "processConfigFile",
     component: ProcessConfigFile,
@@ -183,6 +193,28 @@ const routes = [
     name: "install",
     component: Install
   },
+  {
+    path: "/global_file_manager_entry",
+    name: "globalFileManagerEntry",
+    component: GlobalFileManager
+  },
+  {
+    path: "/global_files/:serviceUuid/:instanceUuid",
+    name: "globalFileManager",
+    component: FileManagerCopy,
+    meta: { activeMenu: "/global_file_manager_entry" }
+  },
+  {
+    path: "/global_terminal_entry",
+    name: "globalTerminalEntry",
+    component: GlobalTerminalEntry
+  },
+  {
+    path: "/global_terminal/:serviceUuid/:instanceUuid",
+    name: "globalTerminal",
+    component: Terminal,
+    meta: { activeMenu: "/global_terminal_entry" }
+  }
 ];
 
 const router = createRouter({

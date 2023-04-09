@@ -1,3 +1,6 @@
+<!--
+  Copyright (C) 2022 MCSManager <mcsmanager-dev@outlook.com>
+-->
 <template>
   <Dialog v-model="v" :cancel="close">
     <template #title> {{ $t("CommonText.012") }} </template>
@@ -39,7 +42,8 @@
           </el-col>
         </el-row>
 
-        <div v-if="viewType === 0">
+        <div v-if="viewType === 0" class="row-mt">
+          <p>{{ $t("components.NetworkTip.020") }}</p>
           <el-link type="primary" @click="close"> {{ $t("components.NetworkTip.017") }}</el-link>
         </div>
 
@@ -65,20 +69,45 @@
         </div>
 
         <div v-if="viewType === 2">
-          <p class="sub-title-title row-mb">
-            {{ $t("components.NetworkTip.008") }}
-          </p>
-          <p class="sub-title-title">
-            {{ $t("components.NetworkTip.009") }}
-          </p>
-          <p>
+          <SelectBlock style="height: 140px" @click="select(3)">
+            <template #title>
+              <p class="sub-title-title">
+                {{ $t("components.NetworkTip.021") }}
+                &nbsp;
+                <el-tag type="success" size="small">{{ $t("CommonText.045") }}</el-tag>
+              </p>
+            </template>
+            <template #info>
+              <p class="sub-title-info">{{ $t("components.NetworkTip.022") }}</p>
+            </template>
+          </SelectBlock>
+          <div class="row-mt">
+            <el-link type="primary" @click="close"> {{ $t("components.NetworkTip.017") }}</el-link>
+          </div>
+        </div>
+
+        <div v-if="viewType === 3">
+          <div class="row-mb">
+            <p class="sub-title-title">
+              {{ $t("components.NetworkTip.008") }}
+            </p>
+            <p class="sub-title-title">
+              {{ $t("components.NetworkTip.009") }}
+            </p>
+          </div>
+          <div>
+            <p class="color-red-2">
+              {{ $t("components.NetworkTip.023") }}
+            </p>
+          </div>
+          <!-- <p>
             {{ $t("CommonText.013") }}
             <span class="color-gray" v-if="taskInfo.status == 0"> {{ $t("CommonText.014") }} </span>
             <span class="color-green" v-if="taskInfo.status == 1">
               {{ $t("CommonText.015") }}
             </span>
             <span class="color-red" v-if="taskInfo.status == -1"> {{ $t("CommonText.016") }} </span>
-          </p>
+          </p> -->
           <p v-if="taskInfo.detail && taskInfo.detail.ip">
             {{ $t("components.NetworkTip.010") }}
             <span class="color-green"> {{ taskInfo.detail.ip }} </span>
@@ -93,44 +122,56 @@
               </div>
             </div>
             <el-input
-              v-model="indexCode"
+              v-model="config.openFrpToken"
               size="small"
               clearable
               :placeholder="$t('components.NetworkTip.013')"
             >
             </el-input>
           </div>
+          <div class="row-mb">
+            <div class="sub-title">
+              <div class="sub-title-title require-field">{{ $t("CommonText.031") }}</div>
+            </div>
+            <el-input
+              v-model="config.openFrpTunnelId"
+              size="small"
+              clearable
+              :placeholder="$t('CommonText.031')"
+            >
+            </el-input>
+          </div>
+
+          {{ instanceInfo }}
 
           <div style="display: flex; justify-content: space-between">
             <div>
               <ItemGroup>
-                <el-button type="primary" size="small" @click="startHiPer" v-if="!isOpen">
-                  {{ $t("CommonText.017") }}
+                <el-button type="primary" size="small" @click="saveConfig">
+                  {{ $t("general.save") }}
                 </el-button>
-                <el-button type="danger" size="small" @click="stopHiPer" v-if="isOpen">
-                  {{ $t("CommonText.018") }}
-                </el-button>
-
                 <el-link
                   type="primary"
                   :underline="false"
-                  href="https://docs.mcsmanager.com/#/"
+                  href="https://docs.mcsmanager.com/#/tutorial/openfrp"
+                  target="_blank"
+                >
+                  {{ $t("CommonText.019") }}
+                </el-link>
+                <!-- -
+                <el-link
+                  type="primary"
+                  :underline="false"
+                  href="https://www.openfrp.net/"
                   target="_blank"
                 >
                   {{ $t("components.NetworkTip.014") }}
-                </el-link>
+                </el-link> -->
+
+                <p class="color-gray">{{ $t("components.NetworkTip.019") }}</p>
+                <p class="color-gray">{{ $t("components.NetworkTip.020") }}</p>
               </ItemGroup>
             </div>
-            <ItemGroup>
-              <el-link
-                type="primary"
-                :underline="false"
-                href="https://docs.mcsmanager.com/#/"
-                target="_blank"
-              >
-                {{ $t("CommonText.019") }}
-              </el-link>
-            </ItemGroup>
           </div>
         </div>
       </div>
@@ -141,62 +182,38 @@
 <script>
 import Dialog from "@/components/Dialog";
 import SelectBlock from "@/components/SelectBlock";
-import {
-  API_INSTANCE_ASYNC_QUERY,
-  API_INSTANCE_ASYNC_STOP,
-  API_INSTANCE_ASYNC_TASK
-} from "@/app/service/common";
 import { request } from "@/app/service/protocol";
-import { API_FORWARD_REQUEST, QUERY_PUBLIC_IP } from "../app/service/common";
+import { API_FORWARD_REQUEST, API_INSTANCE_UPDATE, QUERY_PUBLIC_IP } from "../app/service/common";
 export default {
   components: {
     Dialog,
     SelectBlock
   },
-  props: {
-    visible: {
-      type: Boolean,
-      default: false
-    },
-    daemonUuid: {
-      type: String,
-      default: ""
-    }
-  },
-
+  props: ["serviceUuid", "instanceUuid", "extraServiceConfig"],
   data() {
     return {
       v: false,
       viewType: 0,
       ipv4: "",
       indexCode: "",
+      tunnelId: "",
+      // config: {},
       taskInfo: {
         status: 0,
         taskId: "--",
         ip: ""
-      },
-      timeTask: null
+      }
     };
   },
-
   computed: {
     isOpen() {
       return this.taskInfo.status == 1;
     },
-
     isFromTerminal() {
       const r = this.$route.query.network_tip ? true : false;
-
       return r;
     }
   },
-  watch: {
-    visible(n) {
-      this.v = n;
-      if (n) this.init();
-    }
-  },
-
   methods: {
     async getPublicIP() {
       try {
@@ -212,116 +229,54 @@ export default {
         this.ipv4 = "";
       }
     },
-
-    clearIntervalTask() {
-      if (this.timeTask) clearInterval(this.timeTask);
-    },
-
     init() {
-      this.clearIntervalTask();
-      this.queryStatus();
       this.getPublicIP();
-      this.timeTask = setInterval(() => {
-        this.queryStatus();
-      }, 2500);
     },
-
-    show() {
-      this.$emit("update:visible", true);
+    open() {
+      this.init();
+      this.v = true;
     },
-
     close() {
-      this.$emit("update:visible", false);
-      this.clearIntervalTask();
       this.viewType = 0;
+      this.v = false;
     },
-
     select(type) {
+      console.log("extraServiceConfig", this.extraServiceConfig);
+      this.config = this.extraServiceConfig;
       this.viewType = type;
     },
-
-    async startHiPer() {
-      if (!this.indexCode) {
-        return this.$message({
-          message: window.$t("components.NetworkTip.015"),
-          type: "error"
-        });
-      }
-
+    async saveConfig() {
+      this.$emit("submit", this.config);
+      await this.updateFrpConfig();
+      this.close();
+    },
+    async updateFrpConfig() {
       try {
         await request({
-          method: "POST",
-          url: API_INSTANCE_ASYNC_TASK,
+          method: "PUT",
+          url: API_INSTANCE_UPDATE,
           params: {
-            remote_uuid: this.daemonUuid,
-            uuid: "-",
-            task_name: "hiper"
+            remote_uuid: this.serviceUuid,
+            uuid: this.instanceUuid
           },
           data: {
-            indexCode: this.indexCode
+            extraServiceConfig: this.config
           }
         });
         this.$message({
-          message: this.$t("general.success"),
-          type: "success"
+          type: "success",
+          message: this.$t("termSet.setUpdate")
         });
       } catch (error) {
         this.$message({
           message: `${this.$t("general.error")}: ${error.message}`,
           type: "error"
         });
-      }
-    },
-
-    async stopHiPer() {
-      try {
-        await request({
-          method: "POST",
-          url: API_INSTANCE_ASYNC_STOP,
-          params: {
-            remote_uuid: this.daemonUuid,
-            uuid: "-",
-            task_name: "hiper"
-          },
-          data: {
-            taskId: this.taskInfo.taskId
-          }
-        });
-        this.$message({
-          message: this.$t("general.success"),
-          type: "success"
-        });
-      } catch (error) {
-        this.$message({
-          message: `${this.$t("general.error")}: ${error.message}`,
-          type: "error"
-        });
-      }
-    },
-
-    async queryStatus() {
-      const taskInfo = await request({
-        method: "POST",
-        url: API_INSTANCE_ASYNC_QUERY,
-        params: {
-          remote_uuid: this.daemonUuid,
-          uuid: "-",
-          task_name: "hiper"
-        },
-        data: {}
-      });
-
-      if (taskInfo.length > 0) {
-        this.taskInfo = taskInfo[0];
       }
     }
   }
 };
 </script>
-
-<!--
-  Copyright (C) 2022 MCSManager <mcsmanager-dev@outlook.com>
--->
 
 <style scoped>
 .wrapper {

@@ -32,22 +32,14 @@
         </el-alert>
       </div>
       <div v-for="(item, index) in configs" :key="index" class="row-mb">
-        <BlockButton v-if="item.check" style="padding: 8px 0px">
-          <template #title
-            >{{ item.fileName }}
-            <el-tag size="mini" type="warning" v-if="item.conflict">{{
-              $t("processConfig.sameFile")
-            }}</el-tag>
+        <BlockButton v-if="item.check" style="padding: 24px 0px 12px 0px">
+          <template #title>
+            {{ item.fileName }}
+            <el-tag size="mini" type="warning" v-if="item.conflict">
+              {{ $t("processConfig.sameFile") }}
+            </el-tag>
           </template>
           <template #default>
-            <div>
-              {{ $t("processConfig.author") }}：<a
-                class="alink"
-                target="_black"
-                :href="item.github"
-                >{{ item.author }}</a
-              >
-            </div>
             <div class="row-mt">
               <span>{{ item.info }}</span>
               <br />

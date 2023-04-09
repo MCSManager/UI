@@ -47,18 +47,16 @@
           }}</el-button>
         </div>
       </div>
+      <FloatFileEditor ref="floatFileEditor"></FloatFileEditor>
     </template>
   </Panel>
 </template>
 
 <script>
-/* eslint-disable vue/no-unused-components */
-/* eslint-disable no-unused-vars */
-
 import Panel from "../../components/Panel";
 import { request } from "../service/protocol";
 import { API_PROCESS_CONFIG_FILE, toUnicode } from "../service/common";
-
+import FloatFileEditor from "./FloatFileEditor";
 import serverProperties from "../../components/mc_process_config/server.properties";
 import spigotYml from "../../components/mc_process_config/spigot.yml";
 import bukkitYml from "../../components/mc_process_config/bukkit.yml";
@@ -72,10 +70,12 @@ import paperWorldDefaultsYml from "../../components/mc_process_config/paper-worl
 import geyserYml from "../../components/mc_process_config/geyser.yml";
 import mcdrConfigYml from "../../components/mc_process_config/mcdr_config.yml";
 import permissionYml from "../../components/mc_process_config/permission.yml";
+import velocityToml from "../../components/mc_process_config/velocity.toml";
 
 export default {
   components: {
     Panel,
+    FloatFileEditor,
     "common/server.properties": serverProperties,
     "common/eula.txt": eulaTxt,
     "bukkit/spigot.yml": spigotYml,
@@ -88,7 +88,8 @@ export default {
     "paper/paper-world-defaults.yml": paperWorldDefaultsYml,
     "geyser/config.yml": geyserYml,
     "mcdr/config.yml": mcdrConfigYml,
-    "mcdr/permission.yml": permissionYml
+    "mcdr/permission.yml": permissionYml,
+    "velocity/velocity.toml": velocityToml
   },
   data: function () {
     return {
@@ -111,14 +112,7 @@ export default {
       this.loading = false;
     },
     toEdit() {
-      console.log(`Go to Edit:${this.configPath}`);
-      this.$router.push({
-        path: `/file_editor/${this.serviceUuid}/${this.instanceUuid}/`,
-        query: {
-          target: this.configPath,
-          backType: 1
-        }
-      });
+      this.$refs.floatFileEditor.open(null, this.configPath);
     },
     back() {
       this.$router.go(-1);

@@ -119,12 +119,6 @@
   text-align: center;
 }
 
-.only-line-text {
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
-
 .require-field:before {
   content: "*";
   color: #f56c6c;

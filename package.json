@@ -1,7 +1,7 @@
 {
   "name": "mcsmanager-ui",
-  "version": "2.1.0",
-  "description": "ui for mcsmanager",
+  "version": "3.2.0",
+  "description": "Provides a Web UI for MCSManager to display data, terminals, tables, i18n, settings, and more",
   "homepage": "https://mcsmanager.com/",
   "author": "https://github.com/unitwk",
   "scripts": {
@@ -18,7 +18,7 @@
     "echarts": "^5.2.2",
     "element-plus": "^1.1.0-beta.15",
     "register-service-worker": "^1.7.2",
-    "socket.io": "^4.4.1",
+    "socket.io": "^4.5.3",
     "socket.io-client": "^4.1.2",
     "vue": "^3.2.9",
     "vue-i18n": "^9.1.10",

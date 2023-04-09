@@ -4,9 +4,14 @@
 
 <template>
   <div class="contanier">
+    <el-skeleton :rows="5" animated />
+    <br />
+    <el-skeleton :rows="8" animated />
+    <br />
+    <el-skeleton :rows="4" animated />
     <div class="bg"></div>
 
-    <div class="panel-wrapper" v-if="step == -1">
+    <!-- <div class="panel-wrapper" v-if="step == -1">
       <Panel class="panel tc" body-style="padding:40px;">
         <h1 class="title">
           <i class="el-icon-guide"></i>
@@ -24,7 +29,7 @@
           </ItemGroup>
         </div>
       </Panel>
-    </div>
+    </div> -->
 
     <div class="panel-wrapper" v-if="step == 0">
       <Panel class="panel tc" body-style="padding:40px;">
@@ -74,11 +79,13 @@
         <ItemGroup>
           <SelectBlock @click="toQuickStart">
             <template #title>{{ $t("install.firstTime") }}</template>
+            <template #info>{{ $t("install.firstTimeInfo") }}</template>
           </SelectBlock>
         </ItemGroup>
         <ItemGroup>
           <SelectBlock @click="toOverview">
             <template #title>{{ $t("install.oldUSer") }}</template>
+            <template #info>{{ $t("install.oldUSerInfo") }}</template>
           </SelectBlock>
         </ItemGroup>
       </Panel>
@@ -96,7 +103,7 @@ export default {
   data: function () {
     return {
       isLoading: false,
-      step: -1,
+      step: 0,
       initUser: {
         userName: "",
         passWord: ""
@@ -124,6 +131,14 @@ export default {
         }
       }
     };
+  },
+  mounted() {
+    const language = window.navigator.language;
+    if (language.includes("zh")) {
+      this.selectLanguage("zh_cn");
+    } else {
+      this.selectLanguage("en_us");
+    }
   },
   methods: {
     next() {
@@ -165,9 +180,7 @@ export default {
       try {
         this.isLoading = true;
         await this.updateSettings({ language: lang });
-        this.$message({ message: this.$t("settings.settingUpdate"), type: "success" });
         this.$i18n.locale = lang;
-        this.next();
       } catch (error) {
         this.$message({ message: error, type: "error" });
       } finally {
@@ -188,8 +201,8 @@ export default {
 <style scoped>
 .bg {
   z-index: 998;
-  background-color: rgb(228, 228, 228);
   position: fixed;
+  backdrop-filter: blur(10px) brightness(0.5);
   top: 0px;
   left: 0px;
   right: 0px;
@@ -215,7 +228,6 @@ export default {
 }
 
 .panel {
-  background-color: white;
   min-height: 340px;
   width: 520px;
   transition: all 0.4s;

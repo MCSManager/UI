@@ -123,13 +123,6 @@
           <template #default="scope">
             <el-button
               size="small"
-              @click="toEditInstance(scope.row)"
-              :disabled="scope.row.status == -1"
-            >
-              {{ $t("general.edit") }}
-            </el-button>
-            <el-button
-              size="small"
               @click="toInstance(scope.row.serviceUuid, scope.row.instanceUuid)"
               :disabled="scope.row.status == -1"
             >
@@ -157,41 +150,6 @@
       >
     </div>
   </div>
-
-  <!-- Instance details dialog -->
-  <Dialog v-model="editInstance.is">
-    <template #title>{{ $t("instances.dialog.instanceParameterEdit") }}</template>
-    <template #default>
-      <div>
-        <div class="sub-title">
-          <p class="sub-title-title">{{ $t("instances.dialog.commandClose") }}</p>
-          <p class="sub-title-info"></p>
-          {{ $t("instances.dialog.commandCloseInfo") }}
-        </div>
-        <div class="flex">
-          <el-input v-model="editInstance.instance.stopCommand" size="small"></el-input>
-        </div>
-        <div class="sub-title row-mt">
-          <p class="sub-title-title">{{ $t("instances.dialog.inputOrOutputCode") }}</p>
-          <p class="sub-title-info">{{ $t("instances.dialog.inputOrOutputCodeInfo") }}</p>
-        </div>
-        <div class="flex">
-          <ItemGroup :lr="true">
-            <el-input v-model="editInstance.instance.ie" size="small" style="width: 40%"></el-input>
-            <el-input v-model="editInstance.instance.oe" size="small" style="width: 40%"></el-input>
-          </ItemGroup>
-        </div>
-        <div class="row-mt">
-          <el-button type="success" size="small" @click="saveInstance">{{
-            $t("instances.dialog.update")
-          }}</el-button>
-          <el-button @click="editInstance.is = !editInstance.is" size="small">{{
-            $t("instances.dialog.close")
-          }}</el-button>
-        </div>
-      </div>
-    </template>
-  </Dialog>
 </template>
 
 <style></style>
@@ -205,6 +163,7 @@ import { request, requestUserInfo } from "../service/protocol";
 import { API_INSTANCE_LOW_PERMISSION_PUT } from "../service/common";
 import { statusCodeToText } from "../service/instance_tools";
 export default {
+  // eslint-disable-next-line vue/no-unused-components
   components: { Panel, LineLabel, Dialog, ValueCard },
   data: function () {
     return {

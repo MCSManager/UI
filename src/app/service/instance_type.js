@@ -3,7 +3,6 @@
 export const TYPE_UNIVERSAL = "universal";
 export const TYPE_WEB_SHELL = "universal/web_shell";
 export const TYPE_MINECRAFT_MCDR = "universal/mcdr";
-
 export const TYPE_MINECRAFT_JAVA = "minecraft/java";
 export const TYPE_MINECRAFT_BUKKIT = "minecraft/java/bukkit";
 export const TYPE_MINECRAFT_SPIGOT = "minecraft/java/spigot";
@@ -11,6 +10,7 @@ export const TYPE_MINECRAFT_PAPER = "minecraft/java/paper";
 export const TYPE_MINECRAFT_FORGE = "minecraft/java/forge";
 export const TYPE_MINECRAFT_FABRIC = "minecraft/java/fabric";
 export const TYPE_MINECRAFT_BUNGEECORD = "minecraft/java/bungeecord";
+export const TYPE_MINECRAFT_VELOCITY = "minecraft/java/velocity";
 export const TYPE_MINECRAFT_GEYSER = "minecraft/java/geyser";
 export const TYPE_MINECRAFT_SPONGE = "minecraft/java/sponge";
 export const TYPE_MINECRAFT_MOHIST = "minecraft/java/mohist";
@@ -28,6 +28,7 @@ INSTANCE_TYPE_TRANSLATION[TYPE_MINECRAFT_BEDROCK] = "MC Bedrock Edition";
 INSTANCE_TYPE_TRANSLATION[TYPE_MINECRAFT_SPIGOT] = "MC Spigot";
 INSTANCE_TYPE_TRANSLATION[TYPE_MINECRAFT_PAPER] = "MC Paper";
 INSTANCE_TYPE_TRANSLATION[TYPE_MINECRAFT_BUNGEECORD] = "MC BungeeCord";
+INSTANCE_TYPE_TRANSLATION[TYPE_MINECRAFT_VELOCITY] = "MC Velocity";
 INSTANCE_TYPE_TRANSLATION[TYPE_MINECRAFT_BDS] = "MC Bedrock";
 INSTANCE_TYPE_TRANSLATION[TYPE_MINECRAFT_SPONGE] = "MC Sponge";
 INSTANCE_TYPE_TRANSLATION[TYPE_MINECRAFT_FORGE] = "MC Forge";
@@ -40,7 +41,12 @@ INSTANCE_TYPE_TRANSLATION[TYPE_WEB_SHELL] = "Web Shell";
 // Different types of specific configuration files
 const INSTANCE_TYPE_DEF_CONFIG = {
   [TYPE_MINECRAFT_BUNGEECORD]: {
-    stopCommand: "end"
+    stopCommand: "end",
+    configEntryName: window.$t("service.instance_type.001")
+  },
+  [TYPE_MINECRAFT_VELOCITY]: {
+    stopCommand: "end",
+    configEntryName: window.$t("service.instance_type.002")
   },
   [TYPE_STEAM_SERVER_UNIVERSAL]: {
     stopCommand: "^c"
@@ -52,37 +58,48 @@ const INSTANCE_TYPE_DEF_CONFIG = {
     stopCommand: "^c"
   },
   [TYPE_MINECRAFT_JAVA]: {
-    stopCommand: "stop"
+    stopCommand: "stop",
+    getConfigEntryName: () => window.$t("service.instance_type.002")
   },
   [TYPE_MINECRAFT_BEDROCK]: {
-    stopCommand: "stop"
+    stopCommand: "stop",
+    getConfigEntryName: () => window.$t("service.instance_type.002")
   },
   [TYPE_MINECRAFT_SPIGOT]: {
-    stopCommand: "stop"
+    stopCommand: "stop",
+    getConfigEntryName: () => window.$t("service.instance_type.003")
   },
   [TYPE_MINECRAFT_PAPER]: {
-    stopCommand: "stop"
+    stopCommand: "stop",
+    getConfigEntryName: () => window.$t("service.instance_type.004")
   },
   [TYPE_MINECRAFT_BDS]: {
-    stopCommand: "stop"
+    stopCommand: "stop",
+    getConfigEntryName: () => window.$t("service.instance_type.005")
   },
   [TYPE_MINECRAFT_SPONGE]: {
-    stopCommand: "stop"
+    stopCommand: "stop",
+    getConfigEntryName: () => window.$t("service.instance_type.006")
   },
   [TYPE_MINECRAFT_FORGE]: {
-    stopCommand: "stop"
+    stopCommand: "stop",
+    getConfigEntryName: () => window.$t("service.instance_type.007")
   },
   [TYPE_MINECRAFT_FABRIC]: {
-    stopCommand: "stop"
+    stopCommand: "stop",
+    getConfigEntryName: () => window.$t("service.instance_type.008")
   },
   [TYPE_MINECRAFT_BUKKIT]: {
-    stopCommand: "stop"
+    stopCommand: "stop",
+    getConfigEntryName: () => window.$t("service.instance_type.002")
   },
   [TYPE_MINECRAFT_GEYSER]: {
-    stopCommand: "geyser stop"
+    stopCommand: "geyser stop",
+    getConfigEntryName: () => window.$t("service.instance_type.002")
   },
   [TYPE_MINECRAFT_MCDR]: {
-    stopCommand: "stop"
+    stopCommand: "stop",
+    getConfigEntryName: () => window.$t("service.instance_type.009")
   }
 };
 

@@ -1,7 +1,3 @@
-<!--
-  Copyright (C) 2022 MCSManager <mcsmanager-dev@outlook.com>
--->
-
 <template>
   <Panel>
     <template #title>{{ $t("settings.setOperate") }}</template>
@@ -12,7 +8,7 @@
             <el-button type="success" size="small" @click="updateSettings">{{
               $t("settings.updateSet")
             }}</el-button>
-            <el-button type size="small" @click="refresh">{{ $t("general.refresh") }}</el-button>
+            <el-button size="small" @click="refresh">{{ $t("general.refresh") }}</el-button>
           </ItemGroup>
         </div>
         <span class="color-gray hidden-md-and-down"
@@ -170,7 +166,7 @@
             <span v-html="$t('settings.aboutTitle')"></span>
           </p>
           <p class="sub-title-info">
-            <span v-html="$t('settings.aboutTitleInfo')"></span>
+            {{ $t("settings.aboutTitle2") }}
           </p>
         </div>
 

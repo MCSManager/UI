@@ -109,6 +109,7 @@
               <FunctionComponent
                 component="button"
                 size="small"
+                type="danger"
                 :plain="true"
                 v-if="showTableList"
                 @click="batDelete(2)"
@@ -181,9 +182,13 @@
         :tipType="0"
       >
         <template #title>
-          <span style="font-size: 13px" class="only-line-text">
+          <div
+            style="font-size: 13px"
+            class="only-line-text"
+            @click="toInstance(item.serviceUuid, item.instanceUuid)"
+          >
             {{ item.nickname }}
-          </span>
+          </div>
         </template>
         <template #rtitle>
           <div>
@@ -356,32 +361,20 @@
       </Panel>
     </el-col>
   </el-row>
-
-  <el-row :gutter="20">
-    <el-col :span="24" :offset="0">
-      <div class="instance-table-wrapper">
-        <div>
-          <div class="color-red" v-if="!currentRemoteUuid">
-            &nbsp;Error: {{ $t("instances.selectRemoteError") }}
-          </div>
-        </div>
-        <div>
-          <el-pagination
-            background
-            layout="prev, pager, next"
-            :total="maxPage"
-            v-model:currentPage="page"
-            :page-size="1"
-            @current-change="handleCurrentChange"
-            small
-          ></el-pagination>
-        </div>
-      </div>
-    </el-col>
-  </el-row>
 </template>
 
 <style scoped>
+.only-line-text {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  transition: all 0.2s;
+}
+
+.only-line-text:hover {
+  color: #409eff;
+}
+
 .instanceTitle {
   cursor: pointer;
 }
@@ -600,11 +593,27 @@ export default {
       router.push({ path: `/terminal/${serviceUuid}/${instanceUuid}/` });
     },
     async unlinkInstance(uuid, deleteFile = false) {
-      await this.$confirm(this.$t("notify.confirmDelContent"), this.$t("notify.confirmDelTitle"), {
-        confirmButtonText: this.$t("general.confirm"),
-        cancelButtonText: this.$t("general.cancel"),
-        type: "warning"
-      });
+      if (deleteFile) {
+        await this.$confirm(
+          this.$t("notify.confirmDelContent2"),
+          this.$t("notify.confirmDelTitle"),
+          {
+            confirmButtonText: this.$t("general.confirm2"),
+            cancelButtonText: this.$t("general.cancel"),
+            type: "warning"
+          }
+        );
+      } else {
+        await this.$confirm(
+          this.$t("notify.confirmDelContent"),
+          this.$t("notify.confirmDelTitle"),
+          {
+            confirmButtonText: this.$t("general.confirm"),
+            cancelButtonText: this.$t("general.cancel"),
+            type: "warning"
+          }
+        );
+      }
       await axios.request({
         method: "DELETE",
         url: API_INSTANCE,
@@ -622,7 +631,7 @@ export default {
     async batDelete(type) {
       if (type === 1) {
         await this.$confirm(
-          this.$t("notify.confirmBatchDelFileContent"),
+          this.$t("notify.confirmBatchDelContent"),
           this.$t("notify.confirmDelTitle"),
           {
             confirmButtonText: this.$t("general.confirm"),
@@ -632,10 +641,10 @@ export default {
         );
       } else {
         await this.$confirm(
-          this.$t("notify.confirmBatchDelContent"),
+          this.$t("notify.confirmDelContent2"),
           this.$t("notify.confirmDelTitle"),
           {
-            confirmButtonText: this.$t("general.confirm"),
+            confirmButtonText: this.$t("general.confirm2"),
             cancelButtonText: this.$t("general.cancel"),
             type: "warning"
           }

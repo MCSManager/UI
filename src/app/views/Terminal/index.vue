@@ -5,12 +5,12 @@
 <template>
   <div>
     <el-row :gutter="20">
-      <el-col :md="6">
+      <el-col :md="6" v-if="!isGlobalTerminal">
         <Panel>
           <template #title>{{ $t("userDetail.basicInfo") }}</template>
           <template #default>
             <div v-if="!available">
-              <el-skeleton :rows="3" animated />
+              <el-skeleton :rows="3" animated></el-skeleton>
             </div>
             <div v-else>
               <LineInfo>
@@ -21,24 +21,60 @@
                 <i class="el-icon-tickets"></i> {{ $t("terminal.type") }}:
                 {{ typeToText(instanceInfo.config.type) }}
               </LineInfo>
+              <LineInfo v-if="instanceInfo.info?.openFrpStatus">
+                <i class="el-icon-share"></i> {{ $t("terminal.openfrp") }}:
+                <span class="color-green">
+                  {{ $t("instances.status.running") }}
+                </span>
+              </LineInfo>
+
+              <LineInfo v-if="hasDocker">
+                <i class="el-icon-tickets"></i> {{ $t("terminal.limit") }}:
+                <span class="color-blue" style="cursor: pointer" @click="openDockerInfoDialog">
+                  {{ $t("general.read") }}
+                </span>
+              </LineInfo>
+
+              <LineInfo v-if="hasDocker && instanceInfo.config.docker.ports">
+                <i class="el-icon-money"></i> {{ $t("terminal.dockerPort") }}:
+
+                <div style="padding: 10px 0px 0px 16px">
+                  <div
+                    style="margin-bottom: 2px"
+                    v-for="(item, index) in dockerPortsParse(instanceInfo.config.docker.ports)"
+                    :key="index"
+                  >
+                    <template v-if="!item.more">
+                      <span>{{ $t("CommonText.029") }}: {{ item.p1 }} </span>
+                      <span style="margin-left: 6px"
+                        >{{ $t("CommonText.030") }}: {{ item.p2 }}
+                      </span>
+                      <span style="margin-left: 8px">
+                        <el-tag type="success" size="mini">{{ item.protocol }}</el-tag>
+                      </span>
+                    </template>
+                    <template v-else>...</template>
+                  </div>
+                </div>
+              </LineInfo>
               <LineInfo
                 ><i class="el-icon-finished"></i> {{ $t("imageManager.status") }}:
-                <span v-if="instanceInfo.status === -1" class="color-red">{{
-                  $t("home.maintaining")
-                }}</span>
-                <span v-else-if="instanceInfo.status === 0" class="color-gray">{{
-                  $t("home.outOfRunning")
-                }}</span>
-                <span v-else-if="instanceInfo.status === 1" class="color-yellow">{{
-                  $t("home.stopping")
-                }}</span>
-                <span v-else-if="instanceInfo.status === 2" class="color-yellow">{{
-                  $t("home.starting")
-                }}</span>
-                <span v-else-if="instanceInfo.status === 3" class="color-green">{{
-                  $t("home.running")
-                }}</span>
-                <span v-else class="color-red">{{ $t("terminal.unknown") }}</span>
+                <span v-if="instanceInfo.status === -1" class="color-red">
+                  {{ $t("home.maintaining") }}
+                </span>
+                <span v-else-if="instanceInfo.status === 0" class="color-gray">
+                  {{ $t("home.outOfRunning") }}
+                </span>
+                <span v-else-if="instanceInfo.status === 1" class="color-yellow">
+                  {{ $t("home.stopping") }}
+                </span>
+                <span v-else-if="instanceInfo.status === 2" class="color-yellow">
+                  {{ $t("home.starting") }}
+                </span>
+                <span v-else-if="instanceInfo.status === 3" class="color-green">
+                  {{ $t("instances.status.running") }}
+                </span>
+                <span v-else class="color-red"> {{ $t("terminal.unknown") }} </span>
               </LineInfo>
               <LineInfo v-if="instanceInfo.info && instanceInfo.info.currentPlayers != -1">
                 <i class="el-icon-user"></i> {{ $t("terminal.currentPlayers") }}:
@@ -46,7 +82,7 @@
                 {{ instanceInfo.info.maxPlayers }}
               </LineInfo>
               <LineInfo v-if="instanceInfo.info && instanceInfo.info.version">
-                <i class="el-icon-user"></i> {{ $t("services.version") }}:
+                <i class="el-icon-collection"></i> {{ $t("services.version") }}:
                 {{ instanceInfo.info.version }}
               </LineInfo>
             </div>
@@ -157,6 +193,17 @@
           <template #title>{{ $t("terminal.functionGroup") }}</template>
           <template #default>
             <el-row :gutter="10">
+              <el-col :lg="24" :offset="0" class="row-mb" v-iszh v-if="isShowInstanceConfig">
+                <el-button
+                  :disabled="!instanceInfo.config.type"
+                  icon="el-icon-s-operation"
+                  style="width: 100%"
+                  size="small"
+                  @click="toProcessConfig"
+                >
+                  {{ getInstanceConfigBtnName }}
+                </el-button>
+              </el-col>
               <el-col :lg="12" :offset="0" class="row-mb">
                 <el-button
                   :disabled="!available"
@@ -209,16 +256,7 @@
                   {{ $t("instancesDetail.fileManager") }}
                 </el-button>
               </el-col>
-              <el-col :lg="24" :offset="0" class="row-mb" v-iszh>
-                <el-button
-                  :disabled="!instanceInfo.config.type"
-                  icon="el-icon-s-operation"
-                  style="width: 100%"
-                  size="small"
-                  @click="toProcessConfig"
-                  >{{ $t("terminal.processConfig") }}
-                </el-button>
-              </el-col>
+
               <el-col :lg="24" :offset="0" v-if="isTopPermission">
                 <el-button
                   :disabled="!available"
@@ -236,7 +274,7 @@
           <template #title>{{ $t("instances.detailsInfo") }}</template>
           <template #default>
             <div v-if="!available">
-              <el-skeleton :rows="5" animated />
+              <el-skeleton :rows="5" animated></el-skeleton>
             </div>
             <div v-else>
               <LineInfo>
@@ -274,13 +312,14 @@
           </template>
         </Panel>
       </el-col>
-      <el-col :md="18">
-        <Panel v-loading="!available">
+      <el-col :md="isGlobalTerminal ? 24 : 18">
+        <Panel v-loading="!available" :class="{ 'global-terminal-wrapper': isGlobalTerminal }">
           <template #title>
-            <span>{{ $t("router.terminal") }}</span>
+            <span v-if="!isGlobalTerminal">{{ $t("router.terminal") }}</span>
+            <span v-else>{{ $t("CommonText.054") }}</span>
           </template>
           <template #rtitle>
-            <div>
+            <div v-if="!isGlobalTerminal">
               <el-tooltip
                 class="item"
                 effect="dark"
@@ -330,20 +369,60 @@
             <div :class="{ 'terminal-wrapper': true, 'full-terminal-wrapper': isFull }">
               <div id="terminal-container"></div>
             </div>
-            <div :class="{ 'terminal-input-wrapper': true, 'full-terminal-input-wrapper': isFull }">
-              <el-input
-                :placeholder="$t('terminal.inputCmd')"
-                prefix-icon="el-icon-arrow-right"
-                size="mini"
-                v-model="command"
-                ref="terminalCommandInput"
-                @keyup.enter="sendCommand(command)"
-              >
-              </el-input>
+            <div
+              :class="{
+                'terminal-input-wrapper': true,
+                'full-terminal-input-wrapper': isFull
+              }"
+            >
+              <el-row :gutter="20">
+                <el-col :md="isGlobalTerminal ? 16 : 24" :offset="0">
+                  <el-input
+                    :placeholder="$t('terminal.inputCmd')"
+                    prefix-icon="el-icon-arrow-right"
+                    size="small"
+                    v-model="command"
+                    ref="terminalCommandInput"
+                    @keyup.enter="sendCommand(command)"
+                  >
+                  </el-input>
+                </el-col>
+                <el-col v-if="isGlobalTerminal" :md="8" :offset="0">
+                  <div class="global-terminal-btn-container">
+                    <el-button
+                      icon="el-icon-video-pause"
+                      size="small"
+                      style="width: 100px"
+                      @click="killInstance"
+                    >
+                      {{ $t("instances.kill") }}
+                    </el-button>
+                    <el-button
+                      :disabled="!available"
+                      icon="el-icon-monitor"
+                      style="width: 100px"
+                      size="small"
+                      @click="toTerminalSettingPanel"
+                    >
+                      {{ $t("terminal.termSet") }}
+                    </el-button>
+                    <el-button
+                      :disabled="!available"
+                      icon="el-icon-setting"
+                      style="width: 100px"
+                      size="small"
+                      @click="toInstanceDetail"
+                    >
+                      {{ $t("terminal.paramsSet") }}
+                    </el-button>
+                  </div>
+                </el-col>
+              </el-row>
             </div>
           </template>
         </Panel>
-        <Panel>
+
+        <Panel v-if="!isGlobalTerminal">
           <template #title>{{ $t("terminal.cmdHistory") }}</template>
           <template #rtitle>
             <span class="terminal-right-botton" @click="deleteCommandHistory">
@@ -468,48 +547,29 @@
       </template>
     </Dialog>
 
-    <Dialog v-model="unavailableTerminal" style="z-index: 9999">
-      <template #title>
-        {{ $t("terminal.unavailableTerminal.title") }}
-      </template>
-      <template #default>
-        <div class="sub-title">
-          <p class="sub-title-title">
-            {{
-              unavailableIp
-                ? $t("terminal.unavailableTerminal.browserCannotConnect")` ${unavailableIp}`
-                : $t("terminal.unavailableTerminal.browserCannotConnect2")
-            }}
-          </p>
-          <p class="sub-title-info">
-            {{ $t("terminal.unavailableTerminal.maybe") }}
-          </p>
-          <div style="text-align: center; margin: 20px">
-            <img
-              :src="require('@/assets/daemon_connection_error.png')"
-              alt=""
-              srcset=""
-              style="width: 460px"
-            />
-          </div>
-          <div class="sub-title">{{ $t("terminal.unavailableTerminal.solution") }}</div>
-          <ol style="padding-left: 20px">
-            <span v-html="$t('terminal.unavailableTerminal.solutions')"></span>
-          </ol>
-        </div>
-      </template>
-    </Dialog>
-
     <!-- Terminal Settings Dialog -->
     <TermSetting
       v-model:visible="terminalSettingPanel.visible"
       v-model:config="terminalSettingPanel"
       :serviceUuid="serviceUuid"
+      :isDisable="instanceInfo.status != 0"
       :instanceUuid="instanceUuid"
     >
     </TermSetting>
 
-    <NetworkTip v-model:visible="visibleNetworkTip" :daemonUuid="serviceUuid"></NetworkTip>
+    <NetworkTip
+      ref="networkTip"
+      :extraServiceConfig="instanceInfo.config.extraServiceConfig"
+      :instanceUuid="instanceUuid"
+      :serviceUuid="serviceUuid"
+    >
+    </NetworkTip>
+
+    <DockerInfo
+      v-if="instanceInfo.config.docker"
+      ref="dockerInfoDialog"
+      :dockerInfo="instanceInfo.config.docker"
+    ></DockerInfo>
   </div>
 </template>
 
@@ -517,10 +577,8 @@
 import * as echarts from "echarts";
 import Dialog from "@/components/Dialog";
 import Panel from "@/components/Panel";
-import Logo from "@/components/Logo.vue";
 import "@/assets/xterm/xterm.css";
 import LineInfo from "@/components/LineInfo";
-import LineButton from "@/components/LineButton";
 import { connectRemoteService } from "@/app/service/socket";
 import {
   API_INSTANCE,
@@ -532,22 +590,31 @@ import {
   API_INSTANCE_STOP,
   API_INSTANCE_OUTPUT,
   API_INSTANCE_ASYNC_TASK,
-  API_INSTANCE_ASYNC_STOP
+  API_INSTANCE_ASYNC_STOP,
+  GLOBAL_INSTANCE_UUID
 } from "../../service/common";
 import router from "../../router";
 import { parseforwardAddress, request } from "../../service/protocol";
 import { encodeConsoleColor } from "../../service/terminal_color";
-import { ElNotification } from "element-plus";
 import { statusCodeToText, typeTextToReadableText } from "../../service/instance_tools";
 import { initTerminalWindow, textToTermText } from "../../service/term";
 import { getPlayersOption } from "../../service/chart_option";
 import TermSetting from "./TermSetting";
+import DockerInfo from "./DockerInfo";
 import NetworkTip from "@/components/NetworkTip";
+import { INSTANCE_TYPE_DEF_CONFIG } from "@/app/service/instance_type";
 export default {
-  // eslint-disable-next-line vue/no-unused-components
-  components: { Panel, LineInfo, LineButton, Dialog, Logo, TermSetting, NetworkTip },
+  components: {
+    Panel,
+    LineInfo,
+    Dialog,
+    TermSetting,
+    NetworkTip,
+    DockerInfo
+  },
   data: function () {
     return {
+      INSTANCE_TYPE_DEF_CONFIG,
       input1: "",
       serviceUuid: this.$route.params.serviceUuid,
       instanceUuid: this.$route.params.instanceUuid,
@@ -565,29 +632,22 @@ export default {
       renderTask: null,
       commandhistory: [],
       busy: false,
-
       bool: false,
-
       pingConfigForm: {
         is: false,
         ip: "",
         port: "",
         type: 1
       },
-
       eventConfigPanel: {
         visible: false,
         autoRestart: false,
         autoStart: false
       },
-
       terminalSettingPanel: {
         visible: false
       },
-
-      unavailableTerminal: false,
       unavailableIp: null,
-
       playersChart: null,
       isShowPlayersChart: false
     };
@@ -610,16 +670,40 @@ export default {
     },
     ptyRow() {
       return this.instanceInfo.config.terminalOption.ptyWindowRow ?? 40;
+    },
+    hasDocker() {
+      return this.instanceInfo.config?.docker?.image ? true : false;
+    },
+    isGlobalTerminal() {
+      return this.$route.params.instanceUuid === GLOBAL_INSTANCE_UUID;
+    },
+    isShowInstanceConfig() {
+      return (
+        typeof INSTANCE_TYPE_DEF_CONFIG[this.instanceInfo?.config?.type]?.getConfigEntryName ===
+        "function"
+      );
+    },
+    getInstanceConfigBtnName() {
+      if (!this.isShowInstanceConfig) return null;
+      return INSTANCE_TYPE_DEF_CONFIG[this.instanceInfo?.config?.type]?.getConfigEntryName();
     }
   },
   methods: {
+    receiveInstanceDetailEvent() {
+      if (!this.isStarted && this.isGlobalTerminal) {
+        this.openInstance();
+      }
+    },
     // request data source (Ajax)
     async renderFromAjax() {
       try {
         const result = await request({
           method: "GET",
           url: API_INSTANCE,
-          params: { uuid: this.instanceUuid, remote_uuid: this.serviceUuid }
+          params: {
+            uuid: this.instanceUuid,
+            remote_uuid: this.serviceUuid
+          }
         });
         this.instanceInfo = result;
       } catch (err) {
@@ -633,7 +717,7 @@ export default {
         this.socket.emit("stream/detail", {});
       }
     },
-    // establish a connection with the daemon
+    // Create a connection with the daemon
     async setUpWebsocket() {
       // Request a task passport from the panel to get permission to connect directly to the daemon
       let res = null;
@@ -641,17 +725,18 @@ export default {
         res = await request({
           method: "POST",
           url: API_INSTANCE_REMOTE_SERVICE_STREAM,
-          params: { remote_uuid: this.serviceUuid, uuid: this.instanceUuid }
+          params: {
+            remote_uuid: this.serviceUuid,
+            uuid: this.instanceUuid
+          }
         });
       } catch (error) {
-        ElNotification({
-          title: this.$t("terminal.cantConnectTerm"),
-          message: error,
-          dangerouslyUseHTMLString: true,
-          type: "error",
-          duration: 0
+        this.$router.push({
+          path: "/terminal_error",
+          query: {
+            ip: this.unavailableIp || ""
+          }
         });
-        this.unavailableTerminal = true;
         return;
       }
 
@@ -663,13 +748,16 @@ export default {
         password,
         () => {
           this.unavailableIp = null;
-          this.unavailableTerminal = false;
-          // Get a system log
           this.syncLog();
         },
         () => {
           this.unavailableIp = addr;
-          this.unavailableTerminal = true;
+          this.$router.push({
+            path: "/terminal_error",
+            query: {
+              ip: this.unavailableIp || ""
+            }
+          });
         }
       );
 
@@ -686,6 +774,7 @@ export default {
         this.instanceInfo = packet.data;
         this.resizePtyTerminalWindow();
         this.initChart();
+        this.receiveInstanceDetailEvent(this.instanceInfo);
       });
       // disconnect event
       this.socket.on("disconnect", () => {
@@ -732,14 +821,19 @@ export default {
     initTerm() {
       // Create window and pass input event
       const terminalContainer = document.getElementById("terminal-container");
-
-      this.term = initTerminalWindow(terminalContainer, {
-        fontSize: 12
-      });
+      const ft = localStorage.getItem("terminalFontSize");
+      if (!ft) {
+        this.term = initTerminalWindow(terminalContainer, {
+          fontSize: 12
+        });
+      } else {
+        this.term = initTerminalWindow(terminalContainer, {
+          fontSize: localStorage.getItem("terminalFontSize")
+        });
+      }
       this.term.onData(this.sendInput);
       this.onChangeTerminalContainerHeight();
     },
-
     // Fixed height and width based on backend configuration settings in PTY mode
     resizePtyTerminalWindow() {
       if (this.instanceInfo.config?.terminalOption?.pty) {
@@ -749,7 +843,6 @@ export default {
         );
       }
     },
-
     // Open the instance (Ajax)
     async openInstance() {
       // this. busy = true;
@@ -757,10 +850,16 @@ export default {
         await request({
           method: "GET",
           url: API_INSTANCE_OPEN,
-          params: { remote_uuid: this.serviceUuid, uuid: this.instanceUuid }
+          params: {
+            remote_uuid: this.serviceUuid,
+            uuid: this.instanceUuid
+          }
         });
       } catch (error) {
-        this.$message({ message: error.toString(), type: "error" });
+        this.$message({
+          message: error.toString(),
+          type: "error"
+        });
       } finally {
         setTimeout(() => (this.busy = false), 200);
       }
@@ -772,10 +871,16 @@ export default {
         await request({
           method: "GET",
           url: API_INSTANCE_STOP,
-          params: { remote_uuid: this.serviceUuid, uuid: this.instanceUuid }
+          params: {
+            remote_uuid: this.serviceUuid,
+            uuid: this.instanceUuid
+          }
         });
       } catch (error) {
-        this.$message({ message: error.toString(), type: "error" });
+        this.$message({
+          message: error.toString(),
+          type: "error"
+        });
       } finally {
         setTimeout(() => (this.busy = false), 200);
       }
@@ -786,10 +891,16 @@ export default {
         await request({
           method: "GET",
           url: API_INSTANCE_ASYNC_STOP,
-          params: { remote_uuid: this.serviceUuid, uuid: this.instanceUuid }
+          params: {
+            remote_uuid: this.serviceUuid,
+            uuid: this.instanceUuid
+          }
         });
       } catch (error) {
-        this.$message({ message: error.toString(), type: "error" });
+        this.$message({
+          message: error.toString(),
+          type: "error"
+        });
       } finally {
         setTimeout(() => (this.busy = false), 200);
       }
@@ -800,13 +911,20 @@ export default {
         await request({
           method: "POST",
           url: API_INSTANCE_ASYNC_TASK,
-          params: { remote_uuid: this.serviceUuid, uuid: this.instanceUuid, task_name: "update" },
+          params: {
+            remote_uuid: this.serviceUuid,
+            uuid: this.instanceUuid,
+            task_name: "update"
+          },
           data: {
             time: new Date().getTime()
           }
         });
       } catch (error) {
-        this.$message({ message: error.toString(), type: "error" });
+        this.$message({
+          message: error.toString(),
+          type: "error"
+        });
       } finally {
         setTimeout(() => (this.busy = false), 200);
       }
@@ -818,10 +936,16 @@ export default {
         await request({
           method: "GET",
           url: API_INSTANCE_KILL,
-          params: { remote_uuid: this.serviceUuid, uuid: this.instanceUuid }
+          params: {
+            remote_uuid: this.serviceUuid,
+            uuid: this.instanceUuid
+          }
         });
       } catch (error) {
-        this.$message({ message: error.toString(), type: "error" });
+        this.$message({
+          message: error.toString(),
+          type: "error"
+        });
       } finally {
         setTimeout(() => (this.busy = false), 200);
       }
@@ -833,10 +957,16 @@ export default {
         await request({
           method: "GET",
           url: API_INSTANCE_RESTART,
-          params: { remote_uuid: this.serviceUuid, uuid: this.instanceUuid }
+          params: {
+            remote_uuid: this.serviceUuid,
+            uuid: this.instanceUuid
+          }
         });
       } catch (error) {
-        this.$message({ message: error.toString(), type: "error" });
+        this.$message({
+          message: error.toString(),
+          type: "error"
+        });
       } finally {
         setTimeout(() => (this.busy = false), 2000);
       }
@@ -846,7 +976,10 @@ export default {
       if (!this.socket || !this.available) return;
       if (!this.isStarted) return;
       this.socket.emit("stream/resize", {
-        data: { w, h }
+        data: {
+          w,
+          h
+        }
       });
     },
     // Send input using Websocket
@@ -856,7 +989,9 @@ export default {
         if (!this.socket || !this.available || !this.isStarted)
           return console.log("!this.socket || !this.available || !this.isStarted");
         this.socket.emit("stream/write", {
-          data: { input }
+          data: {
+            input
+          }
         });
       }
     },
@@ -874,13 +1009,17 @@ export default {
         });
       if (method !== 1) this.pushHistoryCommand(command);
       this.socket.emit("stream/input", {
-        data: { command }
+        data: {
+          command
+        }
       });
       this.command = "";
     },
     // Go to the file management interface
     toFileManager() {
-      router.push({ path: `/file/${this.serviceUuid}/${this.instanceUuid}/` });
+      router.push({
+        path: `/file/${this.serviceUuid}/${this.instanceUuid}/`
+      });
     },
     toProcessConfig() {
       router.push({
@@ -891,7 +1030,9 @@ export default {
       });
     },
     toSchedule() {
-      router.push({ path: `/schedule/${this.serviceUuid}/${this.instanceUuid}/` });
+      router.push({
+        path: `/schedule/${this.serviceUuid}/${this.instanceUuid}/`
+      });
     },
     toPingPanel() {
       if (this.instanceInfo.config && this.instanceInfo.config.pingConfig) {
@@ -922,7 +1063,10 @@ export default {
         const text = await request({
           url: API_INSTANCE_OUTPUT,
           method: "GET",
-          params: { remote_uuid: this.serviceUuid, uuid: this.instanceUuid }
+          params: {
+            remote_uuid: this.serviceUuid,
+            uuid: this.instanceUuid
+          }
         });
         this.term.clear();
         if (this.instanceInfo?.config?.terminalOption?.haveColor) {
@@ -941,11 +1085,13 @@ export default {
         await request({
           method: "PUT",
           url: API_INSTANCE_UPDATE,
-          params: { remote_uuid: this.serviceUuid, uuid: this.instanceUuid },
+          params: {
+            remote_uuid: this.serviceUuid,
+            uuid: this.instanceUuid
+          },
           data: {
-            pingConfig: this.pingConfigForm.is ? this.pingConfigForm : {},
-            eventTask: this.eventConfigPanel.visible ? this.eventConfigPanel : {},
-            terminalOption: {}
+            pingConfig: this.pingConfigForm.is ? this.pingConfigForm : null,
+            eventTask: this.eventConfigPanel.visible ? this.eventConfigPanel : null
           }
         });
         this.$message({
@@ -975,7 +1121,9 @@ export default {
       }
     },
     toInstanceDetail() {
-      this.$router.push({ path: `/instance_detail/${this.serviceUuid}/${this.instanceUuid}/` });
+      this.$router.push({
+        path: `/instance_detail/${this.serviceUuid}/${this.instanceUuid}/`
+      });
     },
     /**
      * Initialize the number of people to display the report
@@ -1022,7 +1170,6 @@ export default {
       const date = new Date(now - time);
       return `${date.getHours()}:${(Array(2).join(0) + date.getMinutes()).slice(-2)}`;
     },
-
     toFullTerminal(type = 1) {
       if (type === 1) {
         this.isFull = true;
@@ -1038,7 +1185,6 @@ export default {
         window.open(`#/terminal/${this.serviceUuid}/${this.instanceUuid}/?full=1`);
       }
     },
-
     backTerminal() {
       this.isFull = false;
       this.onChangeTerminalContainerHeight();
@@ -1047,7 +1193,6 @@ export default {
         query: {}
       });
     },
-
     // Terminal window size adaptation event
     onChangeTerminalContainerHeight() {
       const terminalContainer = document.getElementById("terminal-container");
@@ -1066,6 +1211,36 @@ export default {
           this.$nextTick(() => this.term.fitAddon.fit());
         }
       }
+    },
+    openDockerInfoDialog() {
+      this.$refs.dockerInfoDialog.open();
+    },
+    // [ "25565:25565/tcp", "27766:27766/tcp" ]
+    dockerPortsParse(list = []) {
+      let line = [];
+      list.forEach((v, index) => {
+        if (index >= 2) return;
+        const tmp = v.split("/");
+        if (tmp.length != 2) return;
+        const protocol = tmp[1];
+        const p = tmp[0].split(":");
+        if (p.length >= 2) {
+          line.push({
+            p1: p[0],
+            p2: p[1],
+            protocol: String(protocol).toUpperCase()
+          });
+        }
+      });
+      if (list.length >= 2) {
+        line.push({
+          p1: null,
+          p2: null,
+          protocol: null,
+          more: true
+        });
+      }
+      return line;
     }
   },
   async mounted() {
@@ -1091,6 +1266,10 @@ export default {
     } catch (error) {
       console.error(error);
       // neglect
+    } finally {
+      if (this.visibleNetworkTip) {
+        this.$refs.networkTip.open();
+      }
     }
 
     // Listen for window change events
@@ -1100,7 +1279,6 @@ export default {
   beforeUnmount() {
     // Uninstall monitor browser window change time
     window.removeEventListener("resize", this.onChangeTerminalContainerHeight);
-
     try {
       // stop the timer
       this.stopInterval();
@@ -1209,5 +1387,30 @@ export default {
   width: 100%;
   overflow-x: scroll !important;
   overflow-y: hidden;
+}
+
+.global-terminal-flex {
+  display: flex;
+}
+
+.global-terminal-wrapper {
+  max-width: 900px;
+  margin: auto;
+}
+
+.global-terminal-btn-container {
+  text-align: center;
+  display: flex;
+  justify-content: center;
+}
+
+@media (max-width: 900px) {
+  .global-terminal-flex {
+    display: block;
+  }
+
+  .global-terminal-btn-container {
+    margin-top: 8px;
+  }
 }
 </style>

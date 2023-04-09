@@ -28,7 +28,7 @@
             </QuickStartButton>
           </ItemGroup>
 
-          <div v-if="item.extra" style="text-align: center">
+          <div v-if="item.extra && isCN()" style="text-align: center">
             <el-link type="primary" @click="item.fn(item.value)">
               {{ item.extra.title }}
             </el-link>
@@ -37,7 +37,7 @@
       </el-row>
     </div>
 
-    <div class="task-container" v-if="selectedHostUuid">
+    <div class="task-container" v-if="selectedHostUuid && isCN()">
       <div>
         <h4>{{ $t("views.quickstart_index.001") }}</h4>
       </div>
@@ -91,6 +91,7 @@ import QuickStartButton from "@/components/SelectBlock";
 import { request } from "@/app/service/protocol";
 import { API_INSTANCE_ASYNC_QUERY, API_SERVICE } from "../../service/common";
 import McPreset from "./McPreset";
+import { isCN } from "@/app/utils/lang";
 export default {
   components: {
     QuickStartButton,
@@ -136,12 +137,6 @@ export default {
       ],
       minecraftCreateMethod: [
         {
-          title: window.$t("views.quickstart_index.005"),
-          subTitle: window.$t("views.quickstart_index.006"),
-          value: 1,
-          fn: this.mcSelectCreateMethod
-        },
-        {
           title: window.$t("views.quickstart_index.007"),
           subTitle: window.$t("views.quickstart_index.008"),
           value: 2,
@@ -159,6 +154,15 @@ export default {
       this.displayType = 2;
     }
 
+    if (isCN()) {
+      this.minecraftCreateMethod.splice(0, null, {
+        title: window.$t("views.quickstart_index.005"),
+        subTitle: window.$t("views.quickstart_index.006"),
+        value: 1,
+        fn: this.mcSelectCreateMethod
+      });
+    }
+
     await this.initRemoteHost();
   },
 
@@ -167,6 +171,7 @@ export default {
   },
 
   methods: {
+    isCN,
     async initRemoteHost() {
       this.remoteObjects = await request({
         method: "GET",
@@ -292,7 +297,6 @@ export default {
       }, 1000);
     },
 
-    // 前往控制台
     toInstance(remoteUuid, instanceUuid) {
       this.$router.push({
         path: `/terminal/${remoteUuid}/${instanceUuid}/`,
@@ -320,6 +324,7 @@ export default {
   width: 100%;
 }
 .task-container {
+  color: #767676;
   text-align: left;
   margin-top: 30px;
   width: 300px;

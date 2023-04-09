@@ -12,10 +12,10 @@
             <el-button type="success" size="small" @click="toNewImage">
               {{ $t("imageManager.newImage") }}
             </el-button>
-            <el-button type="" size="small" @click="refresh">
+            <el-button size="small" @click="refresh">
               {{ $t("general.refresh") }}
             </el-button>
-            <el-button type="" size="small" @click="back">
+            <el-button size="small" @click="back">
               {{ $t("instancesDetail.back") }}
             </el-button>
           </ItemGroup>
@@ -178,7 +178,7 @@ export default {
     async deleteImage(row) {
       await this.$confirm(this.$t("imageManager.foreverDeleteImage"), this.$t("imageManager.tip"), {
         confirmButtonText: this.$t("general.confirm"),
-        cancelButtonText: this.$t("general.confirm"),
+        cancelButtonText: this.$t("general.cancel"),
         type: "warning"
       });
       try {
