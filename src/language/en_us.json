@@ -512,22 +512,22 @@
   "termSet": {
     "title": "Terminal Settings",
     "pty": "Emulated terminal",
-    "ptyInfo": "The terminal is fully interactive by emulating the terminal forwarding program.<br />Including the use of Tab, Ctrl function keys, etc.",
+    "ptyInfo": "The terminal is fully interactive by emulating the terminal forwarding program.\nIncluding the use of Tab, Ctrl function keys, etc.",
     "ifHaveProblems": "If there is a problem with the use, it is recommended to close it.",
     "ptySize": "Size of the emulated terminal window",
-    "ptySizeInfo": "It takes effect when the emulated terminal is turned on. It is used to set the height and width of the emulated terminal. The instance needs to be restarted for changes to take effect.",
+    "ptySizeInfo": "It takes effect when the emulated terminal is turned on.\nIt is used to set the height and width of the emulated terminal.\nThe instance needs to be restarted for changes to take effect.",
     "col": "Column:",
     "line": "Line:",
     "WebColor": "Web color rendering",
-    "WebColorInfo": "The web page automatically adds color rendering to the output content, and the rendered color may not be completely correct.<br />If the color rendering function conflicts with the color function that comes with the software, you can turn off this function.",
-    "stopCmdInfo": "When the \"Close Instance\" button is clicked, this command will be executed immediately, ^C stands for Ctrl+C signal.",
+    "WebColorInfo": "Automatically render colors of the content (maybe not completely correct).\nIf it conflicts with the color coming with the software, you can turn off it.",
+    "stopCmdInfo": "Command to execute on clicking \"Close Instance\" button.\n^C stands for Ctrl+C signal.",
     "crlf": "Command executes carriage return",
-    "crlfInfo": "If you enter a command and press enter and nothing happens, try adjusting this option.",
-    "crlfInfo2": "It is usually \"carriage return and line feed\" under Windows platform, and \"line feed\" under Linux/MacOS platform.",
+    "crlfInfo": "If nothing happens when pressing enter, try adjusting this option.",
+    "crlfInfo2": "It is usually \"carriage return and line feed\" under Windows platform,\n and \"line feed\" under Linux/MacOS platform.",
     "newline": "\\n",
     "EnterNewline": "\\r\\n",
     "ioCode": "input and output code",
-    "ioCodeInfo": "If the content in the console is garbled, you can try to modify this code to solve the problem.",
+    "ioCodeInfo": "If the characters in the console are garbled, you can try to modify it.",
     "setUpdate": "The instance configuration has been updated, some configurations may need to restart the instance to take effect",
     "fontSize": "Terminal font size",
     "fontSizeInfo": "The default is 13px, after the change, refresh the page to take effect"
@@ -1132,7 +1132,7 @@
     },
     "Terminal_TermSetting": {
       "001": "Terminal font size",
-      "002": "The default value is 12px, and it will take effect after refreshing the webpage after the change. Changing this item may cause the emulation terminal text to be blocked."
+      "002": "The default value is 12px.\nIt will take effect after refreshing the webpage after the change.\nChanging this item may cause the emulation terminal text to be blocked."
     },
     "FileManagerEditor": {
       "001": "editor settings",

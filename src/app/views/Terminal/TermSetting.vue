@@ -12,7 +12,7 @@
             <div class="sub-title">
               <p class="sub-title-title">{{ $t("termSet.pty") }}</p>
               <p class="sub-title-info">
-                <span v-html="$t('termSet.ptyInfo')"></span>
+                {{ $t('termSet.ptyInfo') }}
                 <br />
                 {{ $t("termSet.ifHaveProblems") }}
               </p>
@@ -72,7 +72,7 @@
             <div class="sub-title row-mt">
               <p class="sub-title-title">{{ $t("termSet.WebColor") }}</p>
               <p class="sub-title-info">
-                <span v-html="$t('termSet.WebColorInfo')"></span>
+                {{ $t("termSet.WebColorInfo") }}
               </p>
             </div>
             <div class="row-mt">
@@ -264,5 +264,9 @@ export default {
 <style scoped>
 .btn-area {
   margin-top: 8px;
+}
+
+p {
+  white-space: pre-wrap;
 }
 </style>
