@@ -102,7 +102,7 @@ export default {
           method: "GET",
           url: API_USER_LOGOUT
         });
-        window.location.href = "/";
+        window.location.href = "./";
         this.$notify({
           title: this.$t("root.logoutSuccess"),
           message: this.$t("root.logoutSuccessInfo"),

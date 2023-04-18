@@ -168,10 +168,10 @@ export default {
       });
     },
     toQuickStart() {
-      window.location.href = "/#/quickstart?from_install=1";
+      window.location.href = "./#/quickstart?from_install=1";
     },
     toOverview() {
-      window.location.href = "/#/overview?from_install=1";
+      window.location.href = "./#/overview?from_install=1";
     },
     installLib() {
       this.next();
