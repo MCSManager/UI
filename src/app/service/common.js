@@ -1,6 +1,6 @@
 // Copyright (C) 2022 MCSManager <mcsmanager-dev@outlook.com>
 
-export const API_URL = "//" + window.location.host + window.location.pathname;
+export const API_URL = (window.location.pathname.length > 1)? "//" + window.location.host + window.location.pathname : "//" + window.location.host;
 
 export const API_SERVICE_INSTANCES = `${API_URL}/api/service/remote_service_instances`;
 export const API_SERVICE_LIST = `${API_URL}/api/service/remote_services_list`;
