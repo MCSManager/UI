@@ -49,34 +49,7 @@ import { EventEmitter } from "events";
 import { API_FILE_CHMOD } from "../../service/common";
 import axios from "axios";
 const event = new EventEmitter();
-const DEFAULT_PERMISSIONS_OPTIONS = [
-  {
-    label: window.$t("CommonText.046"),
-    value: 4
-  },
-  {
-    label: window.$t("CommonText.047"),
-    value: 2
-  },
-  {
-    label: window.$t("CommonText.048"),
-    value: 1
-  }
-];
-const DEFAULT_OPTIONS = [
-  {
-    groupName: window.$t("CommonText.049"),
-    permissions: []
-  },
-  {
-    groupName: window.$t("CommonText.050"),
-    permissions: []
-  },
-  {
-    groupName: window.$t("CommonText.051"),
-    permissions: []
-  }
-];
+
 export default {
   components: {
     Dialog
@@ -89,7 +62,34 @@ export default {
   },
   data() {
     return {
-      DEFAULT_PERMISSIONS_OPTIONS,
+      DEFAULT_PERMISSIONS_OPTIONS: [
+        {
+          label: window.$t("CommonText.046"),
+          value: 4
+        },
+        {
+          label: window.$t("CommonText.047"),
+          value: 2
+        },
+        {
+          label: window.$t("CommonText.048"),
+          value: 1
+        }
+      ],
+      DEFAULT_OPTIONS: [
+        {
+          groupName: window.$t("CommonText.049"),
+          permissions: []
+        },
+        {
+          groupName: window.$t("CommonText.050"),
+          permissions: []
+        },
+        {
+          groupName: window.$t("CommonText.051"),
+          permissions: []
+        }
+      ],
       serviceUuid: this.$route.params.serviceUuid,
       instanceUuid: this.$route.params.instanceUuid,
       v: this.visible,
@@ -135,7 +135,7 @@ export default {
       });
     },
     show() {
-      this.options = JSON.parse(JSON.stringify(DEFAULT_OPTIONS));
+      this.options = JSON.parse(JSON.stringify(this.DEFAULT_OPTIONS));
       this.v = true;
       this.$emit("update:visible", true);
     },
