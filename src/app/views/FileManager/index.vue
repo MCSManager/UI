@@ -22,7 +22,9 @@
                     :style="{ 'padding-left': index == 0 ? '8px' : '4px' }"
                     v-if="item"
                     @click="changeDir(item.value)"
-                  >{{ item.label }}</div>
+                  >
+                    {{ item.label }}
+                  </div>
                   <i class="el-icon-arrow-right" v-if="index < currentDirArray.length - 1"></i>
                 </div>
               </div>
@@ -131,7 +133,8 @@
               @click="toDisk(item)"
               type="success"
               plain
-            >{{ $t("fileManager.disk") }} {{ item }}</el-button>
+              >{{ $t("fileManager.disk") }} {{ item }}</el-button
+            >
           </div>
         </div>
 
@@ -147,7 +150,11 @@
         </div>
 
         <div class="row-mt" v-show="percentComplete > 0">
-          <el-progress :text-inside="true" :stroke-width="14" :percentage="percentComplete"></el-progress>
+          <el-progress
+            :text-inside="true"
+            :stroke-width="14"
+            :percentage="percentComplete"
+          ></el-progress>
         </div>
 
         <el-table
@@ -160,7 +167,7 @@
           @row-contextmenu="fileRightClick"
         >
           <el-table-column type="selection" width="55"></el-table-column>
-          <el-table-column prop="name" :label="$t('fileManager.name')" min-width="240">
+          <el-table-column prop="name" :label="$t('fileManager.name')" min-width="100">
             <template #default="scope">
               <div
                 v-if="scope.row.type == 0"
@@ -176,46 +183,49 @@
               </div>
             </template>
           </el-table-column>
-          <el-table-column prop="typeText" :label="$t('fileManager.fileType')" width="120"></el-table-column>
+          <el-table-column
+            prop="typeText"
+            :label="$t('fileManager.fileType')"
+            width="120"
+          ></el-table-column>
           <el-table-column :label="$t('fileManager.fileSize')" width="110">
             <template #default="scope">
-              <span
-                v-if="scope.row.size > 1024 * 1024 * 1024"
-              >{{ Number(Number(scope.row.size) / 1024 / 1024 / 1024).toFixed(0) }} GB</span>
-              <span
-                v-if="scope.row.size > 1024 * 1024"
-              >{{ Number(Number(scope.row.size) / 1024 / 1024).toFixed(0) }} MB</span>
-              <span
-                v-else-if="scope.row.size > 1024"
-              >{{ Number(Number(scope.row.size) / 1024).toFixed(0) }} KB</span>
-              <span v-else-if="scope.row.size > 0">{{ Number(Number(scope.row.size)).toFixed(0) }} B</span>
+              <span v-if="scope.row.size > 1024 * 1024 * 1024"
+                >{{ Number(Number(scope.row.size) / 1024 / 1024 / 1024).toFixed(0) }} GB</span
+              >
+              <span v-if="scope.row.size > 1024 * 1024"
+                >{{ Number(Number(scope.row.size) / 1024 / 1024).toFixed(0) }} MB</span
+              >
+              <span v-else-if="scope.row.size > 1024"
+                >{{ Number(Number(scope.row.size) / 1024).toFixed(0) }} KB</span
+              >
+              <span v-else-if="scope.row.size > 0"
+                >{{ Number(Number(scope.row.size)).toFixed(0) }} B</span
+              >
             </template>
           </el-table-column>
-          <el-table-column v-if="!isWindows" :label="$t('general.permission')" width="80">
+          <el-table-column v-if="!isWindows" :label="$t('general.permission')" width="100">
             <template #default="scope">{{ scope.row.mode }}</template>
           </el-table-column>
-          <el-table-column prop="timeText" :label="$t('fileManager.lastEdit')" width="160"></el-table-column>
           <el-table-column
-            :label="$t('general.operate')"
-            style="text-align: center"
-            :width="isWindows ? 180 : 220"
-          >
+            prop="timeText"
+            :label="$t('fileManager.lastEdit')"
+            width="160"
+          ></el-table-column>
+          <el-table-column :label="$t('general.operate')" style="text-align: center">
             <template #default="scope">
-              <el-button
-                size="mini"
-                v-if="!isWindows"
-                @click="toEditFilePermission(scope.row)"
-              >{{ $t("general.permission") }}</el-button>
+              <el-button size="mini" v-if="!isWindows" @click="toEditFilePermission(scope.row)">{{
+                $t("general.permission")
+              }}</el-button>
               <el-button
                 size="mini"
                 :disabled="scope.row.type != 1"
                 @click="toEditFilePage(scope.row)"
-              >{{ $t("general.edit") }}</el-button>
-              <el-button
-                size="mini"
-                :disabled="scope.row.type != 1"
-                @click="download(scope.row)"
-              >{{ $t("fileManager.download") }}</el-button>
+                >{{ $t("general.edit") }}</el-button
+              >
+              <el-button size="mini" :disabled="scope.row.type != 1" @click="download(scope.row)">{{
+                $t("fileManager.download")
+              }}</el-button>
             </template>
           </el-table-column>
         </el-table>

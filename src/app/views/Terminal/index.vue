@@ -376,7 +376,7 @@
               }"
             >
               <el-row :gutter="20">
-                <el-col :md="isGlobalTerminal ? 16 : 24" :offset="0">
+                <el-col :md="isGlobalTerminal ? 14 : 24" :offset="0">
                   <el-input
                     :placeholder="$t('terminal.inputCmd')"
                     prefix-icon="el-icon-arrow-right"
@@ -387,8 +387,16 @@
                   >
                   </el-input>
                 </el-col>
-                <el-col v-if="isGlobalTerminal" :md="8" :offset="0">
+                <el-col v-if="isGlobalTerminal" :md="10" :offset="0">
                   <div class="global-terminal-btn-container">
+                    <el-button
+                      icon="el-icon-video-play"
+                      size="small"
+                      style="width: 100px"
+                      @click="openInstance"
+                    >
+                      {{ $t("instances.start") }}
+                    </el-button>
                     <el-button
                       icon="el-icon-video-pause"
                       size="small"
@@ -674,9 +682,7 @@ export default {
   },
   methods: {
     receiveInstanceDetailEvent() {
-      if (!this.isStarted && this.isGlobalTerminal) {
-        this.openInstance();
-      }
+      // empty
     },
     // request data source (Ajax)
     async renderFromAjax() {

@@ -493,7 +493,7 @@
   "processConfig": {
     "title": "配置列表组",
     "aboutConfig": "关于配置文件列表",
-    "aboutConfigInfo": "配置文件适配工作由开发团队与开源社区开发者共同开发，相关作者已在具体项目中显示“模块作者”。如果出现多个同名的配置文件，在配置文件最前方已经标上适用于哪个服务端，请手动选择服务端/或衍生类服务端类型。",
+    "aboutConfigInfo": "配置文件适配工作由开发团队与开源社区开发者共同开发。如果没有看见您需要的配置文件，请前往实例配置界面手动选择服务端/或衍生类服务端类型。",
     "noConfigFile": "暂无任何配置文件",
     "noConfigFileInfo": "经过特定实例类型({type})并配合文件扫描未检测出有任何符合条件的配置文件，请进行进程配置初始化或更改实例类型来进行调整",
     "sameFile": "存在同名文件",
@@ -913,7 +913,7 @@
       "light": "浅色",
       "dark": "深色"
     },
-    "aboutTitle2": "你可以复制或修改源代码，但必须保留所有版权声明文字和并附上 Powered by MCSManager，不得删除。"
+    "aboutTitle2": "https://github.com/MCSManager/MCSManager/blob/master/LICENSE"
   },
   "home": {
     "totalInstance": "实例总计",

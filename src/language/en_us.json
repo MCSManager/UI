@@ -88,7 +88,7 @@
     "operation": "Operation",
     "moreOperation": "More Operations",
     "confirm2": "Confirm",
-    "permission": "permissions"
+    "permission": "Permissions"
   },
   "root": {
     "title": "Processing...",
@@ -913,7 +913,7 @@
       "light": "Light",
       "dark": "Dark"
     },
-    "aboutTitle2": "You may copy or modify the source code, but you must keep all the copyright notice and attach it Powered by MCSManager."
+    "aboutTitle2": "https://github.com/MCSManager/MCSManager/blob/master/LICENSE"
   },
   "home": {
     "totalInstance": "Total Number of Instances",
