@@ -450,22 +450,6 @@
             </div>
           </template>
         </Panel>
-        <Panel
-          v-if="
-            instanceInfo &&
-            instanceInfo.info &&
-            instanceInfo.info.playersChart &&
-            instanceInfo.info.playersChart.length
-          "
-        >
-          <template #title>{{ $t("terminal.panelOnline") }}</template>
-          <template #default>
-            <p>{{ $t("terminal.panelOnlineInfo") }}</p>
-            <div class="echart-wrapper">
-              <div id="echart-wrapper-players" style="width: 100%; height: 200px"></div>
-            </div>
-          </template>
-        </Panel>
       </el-col>
     </el-row>
 
