@@ -488,7 +488,8 @@
     "limit": "资源限制",
     "openfrp": "内网映射",
     "backInstancesView": "回到应用实例列表",
-    "paramsSet": "参数设置"
+    "paramsSet": "参数设置",
+    "globalTerminalTip": "控制台提供 WebShell 能力，适用于日常的服务器维护工作。"
   },
   "processConfig": {
     "title": "配置列表组",

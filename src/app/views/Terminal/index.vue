@@ -426,6 +426,10 @@
                   </div>
                 </el-col>
               </el-row>
+
+              <div class="sub-title-info row-mt" style="" v-if="isGlobalTerminal">
+                {{ $t("terminal.globalTerminalTip") }}
+              </div>
             </div>
           </template>
         </Panel>
