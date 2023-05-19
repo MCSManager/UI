@@ -626,7 +626,8 @@
     "UnzipTaskStart": "解压任务已开始",
     "UnzipTaskStartInfo": "异步解压需要一段时间，可以利用刷新文件列表查看目录内容来判断是否解压完毕",
     "uploadOk": "上传完毕",
-    "disk": "磁盘"
+    "disk": "磁盘",
+    "searchFile": "输入文件名，回车键搜索"
   },
   "fileManagerEditor": {
     "title": "编辑文件",

@@ -6,8 +6,8 @@
       </template>
       <template #default>
         <div>
-          <el-row :gutter="20">
-            <el-col :span="24">
+          <el-row :gutter="10">
+            <el-col :md="18">
               <div class="dir-node-container row-mb">
                 <div class="dir-node dir-node-back-btn" @click="toUpDir">
                   <i class="el-icon-caret-left"></i>
@@ -27,6 +27,17 @@
                   </div>
                   <i class="el-icon-arrow-right" v-if="index < currentDirArray.length - 1"></i>
                 </div>
+              </div>
+            </el-col>
+            <el-col :md="6">
+              <div class="flex flex-space-center flex-align-items-center">
+                <el-input
+                  v-model="searchFileName"
+                  :placeholder="$t('fileManager.searchFile')"
+                  size="small"
+                  style="width: 100%"
+                  @change="searchFile"
+                ></el-input>
               </div>
             </el-col>
             <el-col :span="24" :offset="0">
@@ -71,12 +82,6 @@
                     </el-button>
                   </FunctionComponent>
                   <FunctionComponent>
-                    <el-button size="small" @click="rename">
-                      <i class="el-icon-document"></i>
-                      {{ $t("fileManager.rename") }}
-                    </el-button>
-                  </FunctionComponent>
-                  <FunctionComponent>
                     <el-button size="small" @click="move">
                       <i class="el-icon-scissors"></i>
                       {{ $t("fileManager.cut") }}
@@ -92,6 +97,12 @@
                     <el-button size="small" @click="paste">
                       <i class="el-icon-tickets"></i>
                       {{ $t("fileManager.paste") }}
+                    </el-button>
+                  </FunctionComponent>
+                  <FunctionComponent>
+                    <el-button size="small" @click="rename">
+                      <i class="el-icon-document"></i>
+                      {{ $t("fileManager.rename") }}
                     </el-button>
                   </FunctionComponent>
                   <FunctionComponent>
@@ -369,6 +380,7 @@ export default defineComponent({
         total: 1
       },
       paramPath: this.$route.query.path,
+      searchFileName: "",
       // Move, copy, paste the required data of the file
       tmpFile: {
         tmpFileNames: null,
@@ -473,6 +485,9 @@ export default defineComponent({
     toDisk(name) {
       this.changeDir(name + ":\\");
     },
+    async searchFile() {
+      this.list();
+    },
     // Directory List function
     async list(cwd = ".") {
       this.$route.query.path = cwd;
@@ -485,7 +500,8 @@ export default defineComponent({
             uuid: this.instanceUuid,
             target: cwd,
             page: parseInt(this.pageParam.page) - 1,
-            page_size: this.pageParam.pageSize
+            page_size: this.pageParam.pageSize,
+            fileName: this.searchFileName
           }
         });
         // eslint-disable-next-line no-unused-vars
@@ -1007,7 +1023,7 @@ export default defineComponent({
   justify-content: start;
   align-items: center;
   border-radius: 4px;
-  height: 32px;
+  height: 30px;
   font-size: 13px;
 }
 
@@ -1019,7 +1035,7 @@ export default defineComponent({
   justify-content: start;
   align-items: center;
   max-width: 200px;
-  height: 32px;
+  height: 30px;
   padding: 0px 4px;
   overflow: hidden;
   white-space: nowrap;
