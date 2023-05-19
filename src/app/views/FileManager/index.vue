@@ -501,7 +501,7 @@ export default defineComponent({
             target: cwd,
             page: parseInt(this.pageParam.page) - 1,
             page_size: this.pageParam.pageSize,
-            fileName: this.searchFileName
+            file_name: this.searchFileName
           }
         });
         // eslint-disable-next-line no-unused-vars
