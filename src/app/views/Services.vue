@@ -95,17 +95,12 @@
           <template #default="scope">
             <span
               class="color-green"
-              v-if="scope.row.version && scope.row.version === specifiedDaemonVersion"
+              v-if="isCorrectDaemonVersion(scope.row.version, specifiedDaemonVersion)"
             >
               <i class="el-icon-circle-check"></i> {{ scope.row.version }}
             </span>
-            <span class="color-red">
-              <el-tooltip
-                effect="dark"
-                v-if="scope.row.version !== specifiedDaemonVersion"
-                placement="top"
-                :content="$t('overview.lowDaemonVersion')"
-              >
+            <span class="color-red" v-else>
+              <el-tooltip effect="dark" placement="top" :content="$t('overview.lowDaemonVersion')">
                 <span><i class="el-icon-warning-outline"></i> {{ scope.row.version }}</span>
               </el-tooltip>
             </span>
@@ -445,6 +440,11 @@ export default {
     },
     openPrinciplePanel() {
       this.isOpenPrinciplePanel = true;
+    },
+    isCorrectDaemonVersion(remoteVersion = "", specifiedDaemonVersion = "") {
+      const [major1, minor1] = remoteVersion.split(".");
+      const [major2, minor2] = specifiedDaemonVersion.split(".");
+      return major1 === major2 && minor1 === minor2;
     }
   },
   async mounted() {
