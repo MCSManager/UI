@@ -19,121 +19,166 @@
           }}</el-button>
         </ItemGroup>
       </div>
+      <div>
+        <p v-html="$t('services.remoteInfo', { specifiedDaemonVersion })"></p>
+      </div>
     </template>
   </Panel>
-  <Panel>
-    <template #title>{{ $t("services.Daemons") }}</template>
-    <template #default>
-      <p v-html="$t('services.remoteInfo', { specifiedDaemonVersion })"></p>
-      <el-table :data="services" style="width: 100%" size="small">
-        <el-table-column :label="$t('overview.addr')" width="170">
-          <template #default="scope">
-            <el-input
-              size="small"
-              v-model="scope.row.ip"
-              :placeholder="$t('general.required')"
-            ></el-input>
-          </template>
-        </el-table-column>
-        <el-table-column :label="$t('overview.port')" width="100">
-          <template #default="scope">
-            <el-input
-              size="small"
-              v-model="scope.row.port"
-              :placeholder="$t('general.required')"
-            ></el-input>
-          </template>
-        </el-table-column>
-        <el-table-column label="ID" width="40">
-          <template #default="scope">
-            <el-tooltip
-              class="box-item"
-              effect="dark"
-              :content="scope.row.uuid + $t('services.copyId')"
-              placement="top"
-            >
-              <i class="pointer el-icon-document-copy" @click="copyText(scope.row.uuid)"></i>
-            </el-tooltip>
-          </template>
-        </el-table-column>
-        <el-table-column :label="$t('overview.remarks')" width="190">
-          <template #default="scope">
-            <span
-              >{{ scope.row.remarks }}
-              <i style="cursor: pointer" class="el-icon-edit" @click="updateRemarks(scope.row)"></i
-            ></span>
-          </template>
-        </el-table-column>
 
-        <el-table-column :label="$t('services.platform')" width="100">
-          <template #default="scope">
-            <div v-if="scope.row.system">
-              {{ scope.row.system.platform == "win32" ? "windows" : scope.row.system.platform }}
+  <div>
+    <el-row :gutter="20">
+      <el-col :md="12" :lg="12" :xl="6" :offset="0" v-for="node in services" :key="node.uuid">
+        <Panel :tipType="0">
+          <template #title>
+            <div style="font-size: 13px" class="only-line-text">
+              {{ node.remarks || `${node.ip}:${node.port}` }}
             </div>
           </template>
-        </el-table-column>
-        <el-table-column label="CPU">
-          <template #default="scope">
-            <div v-if="scope.row.system">
-              {{ Number(scope.row.system.cpuUsage * 100).toFixed(1) }}%
+          <template #default>
+            <div class="daemonInfoArea">
+              <div class="daemonValueArea">
+                <el-row :gutter="20">
+                  <el-col :span="6" :offset="0">
+                    <p>
+                      {{ $t("services.platform") }}
+                    </p>
+                    <div>
+                      {{
+                        node?.system?.platform == "win32"
+                          ? "windows"
+                          : node?.system?.platform || "--"
+                      }}
+                    </div>
+                  </el-col>
+                  <el-col :span="6" :offset="0">
+                    <p>
+                      {{ $t("overview.mem") }}
+                    </p>
+                    <div>
+                      {{ node?.system?.memText || "--" }}
+                    </div>
+                  </el-col>
+                  <el-col :span="6" :offset="0">
+                    <p>CPU</p>
+                    <div v-if="node.system">
+                      {{ Number(node.system.cpuUsage * 100).toFixed(1) }}%
+                    </div>
+                  </el-col>
+                  <el-col :span="6" :offset="0">
+                    <p>{{ $t("services.instanceStatus") }}</p>
+                    <div v-if="node.instance">
+                      {{ node.instance.running }}/{{ node.instance.total }}
+                    </div>
+                  </el-col>
+                  <el-col :span="6" :offset="0">
+                    <p>{{ $t("overview.connectStatus") }}</p>
+                    <div v-if="node.instance">
+                      <span class="color-green" v-if="node.available">
+                        <i class="el-icon-circle-check"></i> {{ $t("overview.online") }}
+                      </span>
+                      <span class="color-red" v-else>
+                        <el-tooltip
+                          effect="dark"
+                          :content="$t('overview.errorConnect')"
+                          placement="top"
+                        >
+                          <span>
+                            <i class="el-icon-warning-outline"></i>
+                            {{ $t("overview.offline") }}
+                          </span>
+                        </el-tooltip>
+                      </span>
+                    </div>
+                  </el-col>
+                  <el-col :span="6" :offset="0">
+                    <p>{{ $t("services.version") }}</p>
+                    <div v-if="node.instance">
+                      <span
+                        class="color-green"
+                        v-if="isCorrectDaemonVersion(node.version, specifiedDaemonVersion)"
+                      >
+                        <i class="el-icon-circle-check"></i> {{ node.version }}
+                      </span>
+                      <span class="color-red" v-else>
+                        <el-tooltip
+                          effect="dark"
+                          placement="top"
+                          :content="$t('overview.lowDaemonVersion')"
+                        >
+                          <span><i class="el-icon-warning-outline"></i> {{ node.version }}</span>
+                        </el-tooltip>
+                      </span>
+                    </div>
+                  </el-col>
+                  <el-col :span="6" :offset="0">
+                    <p>Node ID</p>
+                    <div>
+                      <el-tooltip
+                        class="box-item"
+                        effect="dark"
+                        :content="node.uuid + $t('services.copyId')"
+                        placement="top"
+                      >
+                        <i class="pointer el-icon-document-copy" @click="copyText(node.uuid)"></i>
+                      </el-tooltip>
+                    </div>
+                  </el-col>
+                </el-row>
+              </div>
+            </div>
+            <div>
+              <el-row :gutter="0" justify="space-between">
+                <el-col :md="12" :offset="0">
+                  <div class="">
+                    <el-input
+                      size="mini"
+                      v-model="node.ip"
+                      :placeholder="$t('overview.addr')"
+                      style="max-width: 120px"
+                    ></el-input>
+                    &nbsp;
+                    <el-input
+                      size="mini"
+                      v-model="node.port"
+                      :placeholder="$t('overview.port')"
+                      style="max-width: 70px"
+                    ></el-input>
+                  </div>
+                </el-col>
+                <el-col :md="12" :offset="0">
+                  <div style="text-align: right">
+                    <template v-if="node.available">
+                      <el-button type="text" size="small" @click="deleteService(node.uuid)">
+                        <span class="color-black">{{ $t("services.toTerminal") }}</span>
+                      </el-button>
+                      <el-button type="text" size="small" @click="deleteService(node.uuid)">
+                        <span class="color-black">{{ $t("services.toFileManager") }}</span>
+                      </el-button>
+                      <el-button type="text" size="small" @click="deleteService(node.uuid)">
+                        <span class="color-black">{{ $t("services.toDocker") }}</span>
+                      </el-button>
+                    </template>
+                    <span class="color-gray"> | </span>
+                    <el-button type="text" size="small" @click="linkService(node, true)">{{
+                      node.available ? $t("services.update") : $t("services.connect")
+                    }}</el-button>
+                    <el-button type="text" size="small" @click="updateKey(node, true)">{{
+                      $t("services.changeKey")
+                    }}</el-button>
+                    <el-button type="text" size="small" @click="deleteService(node.uuid)">
+                      <span class="color-red">
+                        {{ $t("general.delete") }}
+                      </span>
+                    </el-button>
+                  </div>
+                </el-col>
+              </el-row>
             </div>
           </template>
-        </el-table-column>
-        <el-table-column :label="$t('overview.mem')" width="130">
-          <template #default="scope">
-            <div v-if="scope.row.system">{{ scope.row.system.memText }}</div>
-          </template>
-        </el-table-column>
-        <el-table-column :label="$t('services.instanceStatus')" width="100">
-          <template #default="scope">
-            <div v-if="scope.row.instance">
-              {{ scope.row.instance.running }}/{{ scope.row.instance.total }}
-            </div>
-          </template>
-        </el-table-column>
-        <el-table-column :label="$t('services.version')">
-          <template #default="scope">
-            <span
-              class="color-green"
-              v-if="isCorrectDaemonVersion(scope.row.version, specifiedDaemonVersion)"
-            >
-              <i class="el-icon-circle-check"></i> {{ scope.row.version }}
-            </span>
-            <span class="color-red" v-else>
-              <el-tooltip effect="dark" placement="top" :content="$t('overview.lowDaemonVersion')">
-                <span><i class="el-icon-warning-outline"></i> {{ scope.row.version }}</span>
-              </el-tooltip>
-            </span>
-          </template>
-        </el-table-column>
-        <el-table-column :label="$t('overview.connectStatus')" width="110">
-          <template #default="scope">
-            <span class="color-green" v-if="scope.row.available">
-              <i class="el-icon-circle-check"></i> {{ $t("overview.online") }}
-            </span>
-            <span class="color-red" v-if="!scope.row.available">
-              <el-tooltip effect="dark" :content="$t('overview.errorConnect')" placement="top">
-                <span><i class="el-icon-warning-outline"></i> {{ $t("overview.offline") }}</span>
-              </el-tooltip>
-            </span>
-          </template>
-        </el-table-column>
-        <el-table-column :label="$t('general.operate')" style="text-align: center" width="300px">
-          <template #default="scope">
-            <el-button size="mini" @click="linkService(scope.row, true)">
-              {{ scope.row.available ? $t("services.update") : $t("services.connect") }}
-            </el-button>
-            <el-button size="mini" @click="updateKey(scope.row, true)">{{
-              $t("services.changeKey")
-            }}</el-button>
-            <el-button size="mini" type="danger" plain @click="deleteService(scope.row.uuid)">{{
-              $t("general.delete")
-            }}</el-button>
-          </template>
-        </el-table-column>
-      </el-table>
-    </template>
-  </Panel>
+        </Panel>
+      </el-col>
+    </el-row>
+  </div>
 
   <Dialog v-model="isNewService">
     <template #title>{{ $t("services.addDaemon") }}</template>
@@ -458,7 +503,7 @@ export default {
 };
 </script>
 
-<style scoped>
+<style scoped lang="scss">
 .collapse-item-title-table {
   width: 100%;
 }
@@ -472,5 +517,24 @@ export default {
 .pointer {
   color: #409eff;
   cursor: pointer;
+}
+
+.daemonInfoArea > * {
+  margin-bottom: 6px;
+}
+
+.daemonValueArea {
+  p,
+  div {
+    margin-bottom: 6px;
+  }
+  p {
+    margin-top: 0;
+    font-size: 13px;
+    line-height: 13px;
+  }
+  div {
+    font-size: 12px;
+  }
 }
 </style>

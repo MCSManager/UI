@@ -364,17 +364,6 @@
 </template>
 
 <style scoped>
-.only-line-text {
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  transition: all 0.2s;
-}
-
-.only-line-text:hover {
-  color: #409eff;
-}
-
 .instanceTitle {
   cursor: pointer;
 }

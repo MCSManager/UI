@@ -142,7 +142,7 @@
     "systemLoadPercentage": "Host CPU/RAM Usage",
     "daemonOverview": "Daemon Overview",
     "daemonOverviewInfo": "Offlined daemons will be unavailable, please ensure all daemons online. <br> Panel version  {panelVersion} must corresponds to Daemon version {specifiedDaemonVersion} .",
-    "addr": "Address",
+    "addr": "IP Address",
     "remarks": "Remarks",
     "port": "Port",
     "mem": "Memory",

@@ -124,3 +124,13 @@
   color: #f56c6c;
   margin-right: 4px;
 }
+
+.only-line-text {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  transition: all 0.2s;
+}
+/* .only-line-text:hover {
+  color: #409eff;
+} */
