@@ -3,29 +3,31 @@
 -->
 
 <template>
-  <transition name="el-fade-in-linear">
-    <div v-show="modelValue" class="component-dialog-wrapper" :style="style">
-      <div class="component-dialog-overflow">
-        <transition name="el-zoom-in-center">
-          <Panel v-show="modelValue" style="margin-bottom: 0px">
-            <template #title>
-              <slot name="title"></slot>
-            </template>
-            <template #rtitle>
-              <div class="component-dialog-close-button" @click="close" v-if="canClose">
-                <i class="el-icon-close"></i>
-              </div>
-            </template>
-            <template #default>
-              <div class="component-dialog-body">
-                <slot></slot>
-              </div>
-            </template>
-          </Panel>
-        </transition>
+  <div>
+    <transition name="el-fade-in-linear">
+      <div v-show="modelValue" class="component-dialog-wrapper">
+        <div class="component-dialog-overflow">
+          <transition name="el-zoom-in-center">
+            <Panel v-show="modelValue" style="margin-bottom: 0px">
+              <template #title>
+                <slot name="title"></slot>
+              </template>
+              <template #rtitle>
+                <div class="component-dialog-close-button" @click="close" v-if="canClose">
+                  <i class="el-icon-close"></i>
+                </div>
+              </template>
+              <template #default>
+                <div class="component-dialog-body">
+                  <slot></slot>
+                </div>
+              </template>
+            </Panel>
+          </transition>
+        </div>
       </div>
-    </div>
-  </transition>
+    </transition>
+  </div>
 </template>
 
 <script>
@@ -35,7 +37,7 @@ export default {
   props: {
     modelValue: Boolean,
     cancel: Function,
-    style: String,
+
     canClose: {
       type: Boolean,
       default: true

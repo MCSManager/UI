@@ -250,7 +250,12 @@
       </div>
       <div class="sub-title">{{ $t("services.principlePanel.principleImage") }}</div>
       <div style="text-align: center">
-        <img :src="require('../../assets/principle.png')" alt="" srcset="" style="height: 460px" />
+        <img
+          :src="require('../../assets/principle.png')"
+          alt=""
+          srcset=""
+          style="max-height: 460px; width: 100%"
+        />
       </div>
 
       <div class="sub-title">
