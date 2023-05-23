@@ -27,12 +27,17 @@
 
   <div>
     <el-row :gutter="20">
-      <el-col :md="12" :lg="12" :xl="6" :offset="0" v-for="node in services" :key="node.uuid">
-        <Panel :tipType="0">
+      <el-col
+        :md="12"
+        :lg="12"
+        :xl="6"
+        :offset="0"
+        v-for="(node, index) in services"
+        :key="node.uuid"
+      >
+        <Panel :tipType="1">
           <template #title>
-            <div style="font-size: 13px" class="only-line-text">
-              {{ node.remarks || `${node.ip}:${node.port}` }}
-            </div>
+            <span>{{ node.remarks || `${node.ip}:${node.port}` }}</span>
           </template>
           <template #default>
             <div class="daemonInfoArea">
@@ -63,16 +68,18 @@
                     <div v-if="node.system">
                       {{ Number(node.system.cpuUsage * 100).toFixed(1) }}%
                     </div>
+                    <div v-else>--</div>
                   </el-col>
                   <el-col :span="6" :offset="0">
                     <p>{{ $t("services.instanceStatus") }}</p>
                     <div v-if="node.instance">
                       {{ node.instance.running }}/{{ node.instance.total }}
                     </div>
+                    <div v-else>--</div>
                   </el-col>
                   <el-col :span="6" :offset="0">
                     <p>{{ $t("overview.connectStatus") }}</p>
-                    <div v-if="node.instance">
+                    <div>
                       <span class="color-green" v-if="node.available">
                         <i class="el-icon-circle-check"></i> {{ $t("overview.online") }}
                       </span>
@@ -109,9 +116,10 @@
                         </el-tooltip>
                       </span>
                     </div>
+                    <div v-else>--</div>
                   </el-col>
                   <el-col :span="6" :offset="0">
-                    <p>Node ID</p>
+                    <p>Daemon ID</p>
                     <div>
                       <el-tooltip
                         class="box-item"
@@ -125,10 +133,30 @@
                   </el-col>
                 </el-row>
               </div>
+              <div class="daemonChartArea">
+                <el-row :gutter="20">
+                  <el-col :md="12" :offset="0">
+                    <p>CPU</p>
+                    <div
+                      class="daemon-chart"
+                      :id="'echart-wrapper-daemon-cpu-' + index"
+                      style="width: 100%; height: 40px"
+                    ></div>
+                  </el-col>
+                  <el-col :md="12" :offset="0">
+                    <p>{{ $t("overview.mem") }}</p>
+                    <div
+                      class="daemon-chart"
+                      :id="'echart-wrapper-daemon-mem-' + index"
+                      style="width: 100%; height: 40px"
+                    ></div>
+                  </el-col>
+                </el-row>
+              </div>
             </div>
             <div>
               <el-row :gutter="0" justify="space-between">
-                <el-col :md="12" :offset="0">
+                <el-col :md="12" :xl="24" :offset="0">
                   <div class="">
                     <el-input
                       size="mini"
@@ -143,9 +171,13 @@
                       :placeholder="$t('overview.port')"
                       style="max-width: 70px"
                     ></el-input>
+                    &nbsp;
+                    <el-button size="mini" @click="linkService(node, true)">{{
+                      node.available ? $t("services.update") : $t("services.connect")
+                    }}</el-button>
                   </div>
                 </el-col>
-                <el-col :md="12" :offset="0">
+                <el-col :md="12" :xl="24" :offset="0">
                   <div style="text-align: right">
                     <template v-if="node.available">
                       <el-button type="text" size="small" @click="deleteService(node.uuid)">
@@ -159,9 +191,7 @@
                       </el-button>
                     </template>
                     <span class="color-gray"> | </span>
-                    <el-button type="text" size="small" @click="linkService(node, true)">{{
-                      node.available ? $t("services.update") : $t("services.connect")
-                    }}</el-button>
+
                     <el-button type="text" size="small" @click="updateKey(node, true)">{{
                       $t("services.changeKey")
                     }}</el-button>
@@ -320,12 +350,14 @@
 </template>
 
 <script>
+import * as echarts from "echarts";
 import Panel from "../../components/Panel";
 import Dialog from "../../components/Dialog";
 import axios from "axios";
 import { API_OVERVIEW, API_SERVICE_CURD, API_SERVICE_URL } from "../service/common";
 import { request } from "../service/protocol";
 import { copyText } from "../utils/index";
+import { getDaemonMemChartOption } from "../service/chart_option";
 
 export default {
   components: { Panel, Dialog },
@@ -345,7 +377,9 @@ export default {
       isOpenPrinciplePanel: false,
 
       panelVersion: null,
-      specifiedDaemonVersion: null
+      specifiedDaemonVersion: null,
+
+      daemonCharts: []
     };
   },
   methods: {
@@ -374,6 +408,22 @@ export default {
       // Version related data rendering
       this.specifiedDaemonVersion = result.specifiedDaemonVersion;
       this.panelVersion = result.version;
+
+      if (this.daemonCharts.length === 0) {
+        this.$nextTick(() => {
+          for (let i = 0; i < this.services.length; i++) {
+            // const element = this.services[i];
+            const echartCpuDom = echarts.init(
+              document.querySelector("#echart-wrapper-daemon-cpu-" + i)
+            );
+            echartCpuDom.setOption(getDaemonMemChartOption());
+            const echartMemDom = echarts.init(
+              document.querySelector("#echart-wrapper-daemon-mem-" + i)
+            );
+            echartMemDom.setOption(getDaemonMemChartOption());
+          }
+        });
+      }
     },
     // add service
     async toNewService(enforce = false) {
@@ -523,10 +573,11 @@ export default {
   margin-bottom: 6px;
 }
 
-.daemonValueArea {
+.daemonValueArea,
+.daemonChartArea {
   p,
   div {
-    margin-bottom: 6px;
+    margin-bottom: 8px;
   }
   p {
     margin-top: 0;
@@ -536,5 +587,9 @@ export default {
   div {
     font-size: 12px;
   }
+}
+
+.daemon-chart {
+  overflow: hidden;
 }
 </style>

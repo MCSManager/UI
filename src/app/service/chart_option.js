@@ -1,4 +1,5 @@
 // Copyright (C) 2022 MCSManager <mcsmanager-dev@outlook.com>
+import * as echarts from "echarts";
 
 export function getDefaultOption() {
   return {
@@ -87,6 +88,48 @@ export function getPlayersOption() {
         type: "line",
         areaStyle: {},
         symbol: "none"
+      }
+    ]
+  };
+}
+
+export function getDaemonMemChartOption() {
+  let randomNumbers = Array.from({ length: 60 }, () => Math.floor(Math.random() * 190) + 1);
+  randomNumbers = randomNumbers.map((v) => (v > 100 ? 100 : v));
+
+  return {
+    grid: {
+      show: false,
+      borderWidth: 0,
+      top: 10,
+      bottom: 0,
+      left: 0,
+      right: 0
+    },
+    xAxis: { type: "category", show: false },
+    yAxis: { type: "value", min: 0, max: 100, show: false, minInterval: 1 },
+    series: [
+      {
+        data: randomNumbers,
+        type: "line",
+        smooth: true,
+        showSymbol: false,
+        lineStyle: {
+          color: "rgb(67, 145, 250,0.9)",
+          width: 1
+        },
+        areaStyle: {
+          color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+            {
+              offset: 0,
+              color: "rgb(67, 145, 250,0.8)"
+            },
+            {
+              offset: 1,
+              color: "rgb(17, 95, 200,0)"
+            }
+          ])
+        }
       }
     ]
   };
