@@ -488,7 +488,8 @@
     "limit": "resource constraints",
     "openfrp": "Intranet mapping",
     "backInstancesView": "Back to Instance panelCpuUsageInfo",
-    "paramsSet": "Settings"
+    "paramsSet": "Settings",
+    "globalTerminalTip": "The console provides WebShell capability, which is suitable for daily server maintenance."
   },
   "processConfig": {
     "title": "Configure List Group",
@@ -625,7 +626,8 @@
     "UnzipTaskStartInfo": "It took a while to finish an async decompression task. You can refresh the file list to view the content of target folder to determine if task decompression completed.",
     "uploadOk": "Upload completed",
     "disk": "Disk",
-    "rootDir": "Root Dir"
+    "rootDir": "Root Dir",
+    "searchFile": "type file name, enter to search"
   },
   "fileManagerEditor": {
     "title": "Edit",

@@ -486,10 +486,11 @@ export default defineComponent({
       this.changeDir(name + ":\\");
     },
     async searchFile() {
-      this.list();
+      this.pageParam.page = 1;
+      this.list(this.currentDir);
     },
     // Directory List function
-    async list(cwd = ".") {
+    async list(cwd = this.currentDir) {
       this.$route.query.path = cwd;
       try {
         const data = await request({
