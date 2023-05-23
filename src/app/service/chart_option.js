@@ -93,10 +93,8 @@ export function getPlayersOption() {
   };
 }
 
-export function getDaemonMemChartOption() {
-  let randomNumbers = Array.from({ length: 60 }, () => Math.floor(Math.random() * 190) + 1);
-  randomNumbers = randomNumbers.map((v) => (v > 100 ? 100 : v));
-
+export function getDaemonMemChartOption(data = []) {
+  const randomNumbers = Array.from({ length: 60 }, () => 0);
   return {
     grid: {
       show: false,
@@ -110,7 +108,7 @@ export function getDaemonMemChartOption() {
     yAxis: { type: "value", min: 0, max: 100, show: false, minInterval: 1 },
     series: [
       {
-        data: randomNumbers,
+        data: data || randomNumbers,
         type: "line",
         smooth: true,
         showSymbol: false,

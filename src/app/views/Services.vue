@@ -379,7 +379,7 @@ export default {
       panelVersion: null,
       specifiedDaemonVersion: null,
 
-      daemonCharts: []
+      daemonCharts: {}
     };
   },
   methods: {
@@ -409,21 +409,38 @@ export default {
       this.specifiedDaemonVersion = result.specifiedDaemonVersion;
       this.panelVersion = result.version;
 
-      if (this.daemonCharts.length === 0) {
-        this.$nextTick(() => {
-          for (let i = 0; i < this.services.length; i++) {
-            // const element = this.services[i];
+      if (Object.keys(this.daemonCharts).length != 0) {
+        for (const key in this.daemonCharts) {
+          const chart1 = this.daemonCharts[key]?.cpuChartInstance;
+          const chart2 = this.daemonCharts[key]?.memChartInstance;
+          chart1?.dispose();
+          chart2?.dispose();
+          delete this.daemonCharts[key];
+        }
+      }
+      this.$nextTick(() => {
+        for (let i = 0; i < this.services.length; i++) {
+          const element = this.services[i];
+          if (element.available && element.cpuMemChart) {
             const echartCpuDom = echarts.init(
               document.querySelector("#echart-wrapper-daemon-cpu-" + i)
             );
-            echartCpuDom.setOption(getDaemonMemChartOption());
             const echartMemDom = echarts.init(
               document.querySelector("#echart-wrapper-daemon-mem-" + i)
             );
-            echartMemDom.setOption(getDaemonMemChartOption());
+            const cpuChartData = element?.cpuMemChart.map((v) => v.cpu);
+            const memChartData = element?.cpuMemChart.map((v) => v.mem);
+            echartCpuDom.setOption(getDaemonMemChartOption(cpuChartData));
+            echartMemDom.setOption(getDaemonMemChartOption(memChartData));
+            this.daemonCharts[element.uuid] = {
+              cpu: echartCpuDom,
+              mem: echartMemDom,
+              cpuChartInstance: echartCpuDom,
+              memChartInstance: echartMemDom
+            };
           }
-        });
-      }
+        }
+      });
     },
     // add service
     async toNewService(enforce = false) {
