@@ -156,7 +156,7 @@
             </div>
             <div>
               <el-row :gutter="0" justify="space-between">
-                <el-col :md="12" :xl="24" :offset="0">
+                <el-col :md="12" :xl="12" :offset="0">
                   <div class="">
                     <el-input
                       size="mini"
@@ -177,33 +177,33 @@
                     }}</el-button>
                   </div>
                 </el-col>
-                <el-col :md="12" :xl="24" :offset="0">
-                  <div style="text-align: right">
+                <el-col :md="12" :xl="12" :offset="0">
+                  <div class="daemon-operations" style="text-align: right">
                     <template v-if="node.available">
-                      <el-button type="text" size="small" @click="toDaemonTerminalPage(node.uuid)">
+                      <el-link type="primary" size="mini" @click="toDaemonTerminalPage(node.uuid)">
                         <span class="color-black">{{ $t("services.toTerminal") }}</span>
-                      </el-button>
-                      <el-button
-                        type="text"
+                      </el-link>
+                      <el-link
+                        type="primary"
                         size="small"
                         @click="toDaemonFileManagerPage(node.uuid)"
                       >
                         <span class="color-black">{{ $t("services.toFileManager") }}</span>
-                      </el-button>
-                      <el-button type="text" size="small" @click="toDaemonImagesPage(node.uuid)">
+                      </el-link>
+                      <el-link type="primary" size="mini" @click="toDaemonImagesPage(node.uuid)">
                         <span class="color-black">{{ $t("services.toDocker") }}</span>
-                      </el-button>
+                      </el-link>
                     </template>
                     <span class="color-gray" v-if="node.available"> | </span>
 
-                    <el-button type="text" size="small" @click="updateKey(node, true)">{{
+                    <el-link type="primary" size="mini" @click="updateKey(node, true)">{{
                       $t("services.changeKey")
-                    }}</el-button>
-                    <el-button type="text" size="small" @click="deleteService(node.uuid)">
+                    }}</el-link>
+                    <el-link type="primary" size="mini" @click="deleteService(node.uuid)">
                       <span class="color-red">
                         {{ $t("general.delete") }}
                       </span>
-                    </el-button>
+                    </el-link>
                   </div>
                 </el-col>
               </el-row>
@@ -636,5 +636,13 @@ export default {
 
 .daemon-chart {
   overflow: hidden;
+}
+.daemon-operations {
+  .el-link,
+  > span {
+    font-size: 12px;
+    line-height: 28px;
+    margin-left: 4px;
+  }
 }
 </style>
