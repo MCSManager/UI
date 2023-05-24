@@ -81,17 +81,18 @@
           ></p>
           <el-table :data="servicesStatus" style="width: 100%" size="small">
             <el-table-column prop="ip" :label="$t('overview.addr')" width="180"> </el-table-column>
+            <el-table-column prop="port" :label="$t('overview.port')" width="90"> </el-table-column>
             <el-table-column prop="remarks" :label="$t('overview.remarks')"> </el-table-column>
-            <el-table-column prop="port" :label="$t('overview.port')" width="180">
+
+            <el-table-column prop="cpu" label="CPU" width="90"> </el-table-column>
+            <el-table-column prop="mem" :label="$t('overview.mem')" width="130"> </el-table-column>
+            <el-table-column prop="instance" :label="$t('overview.runningInstance')" width="140">
+              <template #default="scope">
+                {{ scope.row.started }}/{{ scope.row.instance }}
+              </template>
             </el-table-column>
-            <el-table-column prop="cpu" label="CPU"> </el-table-column>
-            <el-table-column prop="mem" :label="$t('overview.mem')"> </el-table-column>
-            <el-table-column prop="instance" :label="$t('overview.instance')" width="160">
-            </el-table-column>
-            <el-table-column prop="started" :label="$t('overview.runningInstance')" width="160">
-            </el-table-column
-            >0
-            <el-table-column prop="version" :label="$t('overview.daemonVersion')" width="160">
+
+            <el-table-column prop="version" :label="$t('overview.daemonVersion')" width="120">
               <template #default="scope">
                 <span
                   class="color-green"
@@ -109,8 +110,8 @@
                     <span><i class="el-icon-warning-outline"></i> {{ scope.row.version }}</span>
                   </el-tooltip>
                 </span>
-              </template> </el-table-column
-            >0
+              </template>
+            </el-table-column>
             <el-table-column prop="status" :label="$t('overview.connectStatus')" width="160">
               <template #default="scope">
                 <span class="color-green" v-if="scope.row.status">

@@ -180,17 +180,21 @@
                 <el-col :md="12" :xl="24" :offset="0">
                   <div style="text-align: right">
                     <template v-if="node.available">
-                      <el-button type="text" size="small" @click="deleteService(node.uuid)">
+                      <el-button type="text" size="small" @click="toDaemonTerminalPage(node.uuid)">
                         <span class="color-black">{{ $t("services.toTerminal") }}</span>
                       </el-button>
-                      <el-button type="text" size="small" @click="deleteService(node.uuid)">
+                      <el-button
+                        type="text"
+                        size="small"
+                        @click="toDaemonFileManagerPage(node.uuid)"
+                      >
                         <span class="color-black">{{ $t("services.toFileManager") }}</span>
                       </el-button>
-                      <el-button type="text" size="small" @click="deleteService(node.uuid)">
+                      <el-button type="text" size="small" @click="toDaemonImagesPage(node.uuid)">
                         <span class="color-black">{{ $t("services.toDocker") }}</span>
                       </el-button>
                     </template>
-                    <span class="color-gray"> | </span>
+                    <span class="color-gray" v-if="node.available"> | </span>
 
                     <el-button type="text" size="small" @click="updateKey(node, true)">{{
                       $t("services.changeKey")
@@ -562,6 +566,21 @@ export default {
       const [major1, minor1] = remoteVersion.split(".");
       const [major2, minor2] = specifiedDaemonVersion.split(".");
       return major1 === major2 && minor1 === minor2;
+    },
+    toDaemonTerminalPage(uuid) {
+      this.$router.push({
+        path: `/global_terminal/${uuid}/global0001/`
+      });
+    },
+    toDaemonFileManagerPage(uuid) {
+      this.$router.push({
+        path: `/global_files/${uuid}/global0001/`
+      });
+    },
+    toDaemonImagesPage(uuid) {
+      this.$router.push({
+        path: `/image/${uuid}`
+      });
     }
   },
   async mounted() {
