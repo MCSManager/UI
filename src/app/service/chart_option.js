@@ -16,9 +16,25 @@ export function getDefaultOption() {
     series: [
       {
         type: "line",
-        areaStyle: {},
+
         smooth: true,
-        symbol: "none"
+        symbol: "none",
+        lineStyle: {
+          color: "rgb(67, 145, 250,0.9)",
+          width: 1
+        },
+        areaStyle: {
+          color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+            {
+              offset: 0,
+              color: "rgb(67, 145, 250,0.8)"
+            },
+            {
+              offset: 1,
+              color: "rgb(17, 95, 200,0)"
+            }
+          ])
+        }
       }
     ]
   };
@@ -39,9 +55,24 @@ export function getStatusChartOption1() {
     series: [
       {
         type: "line",
-        areaStyle: {},
         smooth: true,
-        symbol: "none"
+        symbol: "none",
+        lineStyle: {
+          color: "rgb(67, 145, 250,0.9)",
+          width: 1
+        },
+        areaStyle: {
+          color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+            {
+              offset: 0,
+              color: "rgb(67, 145, 250,0.8)"
+            },
+            {
+              offset: 1,
+              color: "rgb(17, 95, 200,0)"
+            }
+          ])
+        }
       }
     ]
   };
@@ -63,9 +94,24 @@ export function getStatusChartOption2() {
       {
         name: "Running",
         type: "line",
-        areaStyle: {},
         smooth: true,
-        symbol: "none"
+        symbol: "none",
+        lineStyle: {
+          color: "rgb(67, 145, 250,0.9)",
+          width: 1
+        },
+        areaStyle: {
+          color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+            {
+              offset: 0,
+              color: "rgb(67, 145, 250,0.8)"
+            },
+            {
+              offset: 1,
+              color: "rgb(17, 95, 200,0)"
+            }
+          ])
+        }
       }
     ]
   };

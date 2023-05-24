@@ -136,7 +136,7 @@
               <div class="daemonChartArea">
                 <el-row :gutter="20">
                   <el-col :md="12" :offset="0">
-                    <p>CPU</p>
+                    <p>{{ $t("services.cpuChartTip") }}</p>
                     <div
                       class="daemon-chart"
                       :id="'echart-wrapper-daemon-cpu-' + index"
@@ -144,7 +144,7 @@
                     ></div>
                   </el-col>
                   <el-col :md="12" :offset="0">
-                    <p>{{ $t("overview.mem") }}</p>
+                    <p>{{ $t("services.memChartTip") }}</p>
                     <div
                       class="daemon-chart"
                       :id="'echart-wrapper-daemon-mem-' + index"

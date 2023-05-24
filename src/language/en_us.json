@@ -786,7 +786,9 @@
     "copyId": "(available for API calls)",
     "toDocker": "Docker",
     "toFileManager": "Files",
-    "toTerminal": "Terminal"
+    "toTerminal": "Terminal",
+    "cpuChartTip": "CPU (10 min)",
+    "memChartTip": "Memory (10 min)"
   },
   "container": {
     "remoteList": "Select daemon",

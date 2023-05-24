@@ -786,7 +786,9 @@
     "copyId": "（可用于 API 调用）",
     "toFileManager": "文件管理",
     "toTerminal": "控制台",
-    "toDocker": "镜像管理"
+    "toDocker": "镜像管理",
+    "cpuChartTip": "CPU（10min）",
+    "memChartTip": "内存（10min）"
   },
   "container": {
     "remoteList": "请选择一个节点",
