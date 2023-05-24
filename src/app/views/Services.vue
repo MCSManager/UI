@@ -162,16 +162,16 @@
                       size="mini"
                       v-model="node.ip"
                       :placeholder="$t('overview.addr')"
-                      style="max-width: 120px"
+                      style="max-width: 120px; margin-right: 4px"
                     ></el-input>
-                    &nbsp;
+
                     <el-input
                       size="mini"
                       v-model="node.port"
                       :placeholder="$t('overview.port')"
-                      style="max-width: 70px"
+                      style="max-width: 70px; margin-right: 4px"
                     ></el-input>
-                    &nbsp;
+
                     <el-button size="mini" @click="linkService(node, true)">{{
                       node.available ? $t("services.update") : $t("services.connect")
                     }}</el-button>
@@ -425,13 +425,13 @@ export default {
       this.$nextTick(() => {
         for (let i = 0; i < this.services.length; i++) {
           const element = this.services[i];
+          const echartCpuDom = echarts.init(
+            document.querySelector("#echart-wrapper-daemon-cpu-" + i)
+          );
+          const echartMemDom = echarts.init(
+            document.querySelector("#echart-wrapper-daemon-mem-" + i)
+          );
           if (element.available && element.cpuMemChart) {
-            const echartCpuDom = echarts.init(
-              document.querySelector("#echart-wrapper-daemon-cpu-" + i)
-            );
-            const echartMemDom = echarts.init(
-              document.querySelector("#echart-wrapper-daemon-mem-" + i)
-            );
             const cpuChartData = element?.cpuMemChart.map((v) => v.cpu);
             const memChartData = element?.cpuMemChart.map((v) => v.mem);
             echartCpuDom.setOption(getDaemonMemChartOption(cpuChartData));
@@ -439,6 +439,15 @@ export default {
             this.daemonCharts[element.uuid] = {
               cpu: echartCpuDom,
               mem: echartMemDom,
+              cpuChartInstance: echartCpuDom,
+              memChartInstance: echartMemDom
+            };
+          } else {
+            echartCpuDom.setOption(getDaemonMemChartOption(null));
+            echartMemDom.setOption(getDaemonMemChartOption(null));
+            this.daemonCharts[element.uuid] = {
+              cpu: [],
+              mem: [],
               cpuChartInstance: echartCpuDom,
               memChartInstance: echartMemDom
             };
