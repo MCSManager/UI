@@ -137,7 +137,7 @@ export default {
     },
     back() {
       this.$router.push({
-        path: "/container"
+        path: "/services"
       });
     },
     toNewImage() {
