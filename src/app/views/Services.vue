@@ -38,12 +38,15 @@
         <Panel :tipType="1">
           <template #title>
             <span>{{ node.remarks || `${node.ip}:${node.port}` }}</span>
+            <span style="margin-left: 8px">
+              <i style="cursor: pointer" class="el-icon-edit" @click="updateRemarks(node)"></i>
+            </span>
           </template>
           <template #default>
             <div class="daemonInfoArea">
               <div class="daemonValueArea">
                 <el-row :gutter="20">
-                  <el-col :span="6" :offset="0">
+                  <el-col :md="12" :xs="12" :lg="6" :offset="0">
                     <p>
                       {{ $t("services.platform") }}
                     </p>
@@ -55,7 +58,7 @@
                       }}
                     </div>
                   </el-col>
-                  <el-col :span="6" :offset="0">
+                  <el-col :md="12" :xs="12" :lg="6" :offset="0">
                     <p>
                       {{ $t("overview.mem") }}
                     </p>
@@ -63,21 +66,21 @@
                       {{ node?.system?.memText || "--" }}
                     </div>
                   </el-col>
-                  <el-col :span="6" :offset="0">
+                  <el-col :md="12" :xs="12" :lg="6" :offset="0">
                     <p>CPU</p>
                     <div v-if="node.system">
                       {{ Number(node.system.cpuUsage * 100).toFixed(1) }}%
                     </div>
                     <div v-else>--</div>
                   </el-col>
-                  <el-col :span="6" :offset="0">
+                  <el-col :md="12" :xs="12" :lg="6" :offset="0">
                     <p>{{ $t("services.instanceStatus") }}</p>
                     <div v-if="node.instance">
                       {{ node.instance.running }}/{{ node.instance.total }}
                     </div>
                     <div v-else>--</div>
                   </el-col>
-                  <el-col :span="6" :offset="0">
+                  <el-col :md="12" :xs="12" :lg="6" :offset="0">
                     <p>{{ $t("overview.connectStatus") }}</p>
                     <div>
                       <span class="color-green" v-if="node.available">
@@ -97,7 +100,7 @@
                       </span>
                     </div>
                   </el-col>
-                  <el-col :span="6" :offset="0">
+                  <el-col :md="12" :xs="12" :lg="6" :offset="0">
                     <p>{{ $t("services.version") }}</p>
                     <div v-if="node.instance">
                       <span
@@ -118,7 +121,7 @@
                     </div>
                     <div v-else>--</div>
                   </el-col>
-                  <el-col :span="6" :offset="0">
+                  <el-col :md="12" :xs="12" :lg="6" :offset="0">
                     <p>Daemon ID</p>
                     <div>
                       <el-tooltip
@@ -178,7 +181,7 @@
                   </div>
                 </el-col>
                 <el-col :md="12" :xl="12" :offset="0">
-                  <div class="daemon-operations" style="text-align: right">
+                  <div class="daemon-operations">
                     <template v-if="node.available">
                       <el-link type="primary" size="mini" @click="toDaemonTerminalPage(node.uuid)">
                         <span class="color-black">{{ $t("services.toTerminal") }}</span>
@@ -638,11 +641,24 @@ export default {
   overflow: hidden;
 }
 .daemon-operations {
+  text-align: right;
   .el-link,
   > span {
     font-size: 12px;
     line-height: 28px;
-    margin-left: 4px;
+    margin-left: 6px;
+  }
+}
+
+@media (max-width: 900px) {
+  .daemon-operations {
+    margin-top: 12px;
+    text-align: left;
+    .el-link,
+    > span {
+      margin-left: 0px !important;
+      margin-right: 8px;
+    }
   }
 }
 </style>

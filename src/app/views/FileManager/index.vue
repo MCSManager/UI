@@ -30,7 +30,7 @@
               </div>
             </el-col>
             <el-col :md="6">
-              <div class="flex flex-space-center flex-align-items-center">
+              <div class="flex flex-space-center flex-align-items-center row-mb">
                 <el-input
                   v-model="searchFileName"
                   :placeholder="$t('fileManager.searchFile')"
@@ -223,7 +223,7 @@
             :label="$t('fileManager.lastEdit')"
             width="160"
           ></el-table-column>
-          <el-table-column :label="$t('general.operate')" style="text-align: center">
+          <el-table-column :label="$t('general.operate')" style="text-align: center" width="280">
             <template #default="scope">
               <el-button size="mini" v-if="!isWindows" @click="toEditFilePermission(scope.row)">{{
                 $t("general.permission")
@@ -412,7 +412,7 @@ export default defineComponent({
       return arr;
     },
     isWindows() {
-      return this.statusInfo?.platform === "win32";
+      return this.statusInfo?.platform == "win32";
     }
   },
   async mounted() {

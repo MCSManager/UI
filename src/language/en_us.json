@@ -45,12 +45,12 @@
     "043": "Row",
     "044": "install error",
     "045": "third-party service",
-    "046": "read",
-    "047": "to write",
-    "048": "executable",
-    "049": "owner",
-    "050": "user group",
-    "051": "anyone",
+    "046": "Read",
+    "047": "Write",
+    "048": "Executable",
+    "049": "Owner",
+    "050": "User Group",
+    "051": "Anyone",
     "052": "Files",
     "053": "Terminal",
     "054": "Console"
@@ -1153,7 +1153,7 @@
       "009": "You haven't saved the file yet, do you want to go back?"
     },
     "FileManager_PermissionDialog": {
-      "001": "File/folder permissions",
+      "001": "File permissions",
       "002": "apply to subdirectory"
     },
     "GlobalFileManager_index": {
