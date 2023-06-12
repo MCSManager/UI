@@ -132,6 +132,9 @@ export default {
         },
         "world-settings": {
           default: {
+            "random-light-updates": "随机亮度更新",
+            "save-structure-info": "保存结构更新",
+            "seed-feature": "种子特征",
             verbose:
               "是否在服务器启动时在控制台/日志中显示每个世界的详细报告和配置。可以全局禁用/启用，也可以按世界禁用/启用",
             "item-despawn-rate": "控制在地面上的项目实体删除之前所需的 Tick(s)（20 Ticks = 1s）",
