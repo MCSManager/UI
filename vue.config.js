@@ -11,6 +11,7 @@
  */
 module.exports = {
   // options...
+  publicPath: "./",
   pages: {
     index: {
       entry: "src/app/index.js",
