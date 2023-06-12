@@ -55,6 +55,12 @@ export default {
         "compression-threshold": "要压缩的原始网络有效负载的最小大小",
         "server-authoritative-movement": "是否启用服务端权威性移动",
         "player-movement-score-threshold": "报告异常行为之前所需的数据不一致的数量",
+        "enable-lan-visibility": "开启局域网可见",
+        "compression-algorithm": "压缩算法",
+        "player-movement-action-direction-threshold": "玩家运动方向阈值",
+        "chat-restriction": "聊天限制",
+        "disable-player-interaction": "禁用玩家互动",
+        "client-side-chunk-generation-enabled": "启用客户端块生成",
         "player-movement-distance-threshold": "在检测到异常行为之前，服务端与客户端数值之差",
         "player-movement-duration-threshold-in-ms":
           "服务端和客户端位置的时间长度可能不同步 (在 server-authoritative-movement 选项为 false 时失效)",
