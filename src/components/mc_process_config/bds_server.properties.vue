@@ -1,8 +1,3 @@
-<!--
-  Copyright (C) 2022 MCSManager <mcsmanager-dev@outlook.com>
-  This page is for Chinese users only
--->
-
 <template>
   <!-- 当前文件的说明，请根据需要自定义修改文字 -->
   <LineOption :custom="true">
