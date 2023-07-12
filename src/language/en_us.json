@@ -444,6 +444,7 @@
     "lastDatetime": "Last Run",
     "ie": "Input Encoding",
     "oe": "Output Encoding",
+    "clearTerminal": "Clear",
     "newFullScreen": "New Full Screen",
     "fullScreen": "Full Screen",
     "restart2": "Restart",

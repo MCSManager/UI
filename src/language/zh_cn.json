@@ -444,6 +444,7 @@
     "lastDatetime": "最后启动",
     "ie": "输入编码",
     "oe": "输出编码",
+    "clearTerminal": "清空终端",
     "newFullScreen": "新开全屏",
     "fullScreen": "立刻全屏",
     "restart2": "重启",
