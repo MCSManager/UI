@@ -622,7 +622,7 @@
     "zipTaskStart": "Compression task started.",
     "zipTaskStartInfo": "It took a while to finish an async compression task. You can refresh the file list to view the current size of the archive to determine if the task completed. The compression encoding is UTF-8.",
     "onlyUnzipOne": "Only a single archive can be decompressed at the same time.",
-    "inputUnzipDirName": "Pleae enther name for the decompressed folder.",
+    "inputUnzipDirName": "Pleae enter name for the decompressed folder.",
     "UnzipTaskStart": "Decompression task started.",
     "UnzipTaskStartInfo": "It took a while to finish an async decompression task. You can refresh the file list to view the content of target folder to determine if task decompression completed.",
     "uploadOk": "Upload completed",
