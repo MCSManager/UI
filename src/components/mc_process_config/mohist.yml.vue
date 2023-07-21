@@ -54,20 +54,20 @@ export default {
     return {
       config: null,
       description: {
-        mohist: {
-          check_update: "是否检查更新",
-          lang: "语言",
-          check_libraries: "是否检查依赖库",
-          disable_mods_blacklist: "禁用 MOD 黑名单",
-          disable_plugins_blacklist: "禁用插件黑名单",
-          check_update_auto_download: "是否检查更新并且自动下载",
-          use_custom_java8: "是否准许自定义下载",
-          showlogo: "是否显示 Logo",
-          optimize_explosions: "是否优化爆炸时的算法",
-          prevent_from_entering_unloaded_chunks: "是否防止进入已卸载块",
-          ignore_empty_time: "忽略所有空时间"
+        "mohist": {
+          "check_update": this.$t("processConfig.mohistYml.mohist.checkUpdate"),
+          "lang": this.$t("processConfig.mohistYml.mohist.lang"),
+          "check_libraries": this.$t("processConfig.mohistYml.mohist.checkLibraries"),
+          "disable_mods_blacklist": this.$t("processConfig.mohistYml.mohist.disableModsBlacklist"),
+          "disable_plugins_blacklist": this.$t("processConfig.mohistYml.mohist.disablePluginsBlacklist"),
+          "check_update_auto_download": this.$t("processConfig.mohistYml.mohist.checkUpdateAutoDownload"),
+          "use_custom_java8": this.$t("processConfig.mohistYml.mohist.useCustomJava8"),
+          "showlogo": this.$t("processConfig.mohistYml.mohist.showlogo"),
+          "optimize_explosions": this.$t("processConfig.mohistYml.mohist.optimizeExplosions"),
+          "prevent_from_entering_unloaded_chunks": this.$t("processConfig.mohistYml.mohist.preventFromEnteringUnloadedChunks"),
+          "ignore_empty_time": this.$t("processConfig.mohistYml.mohist.ignoreEmptyTime")
         },
-        libraries_black_list: "依赖库黑名单"
+        "libraries_black_list": this.$t("processConfig.mohistYml.librariesBlackList")
       }
     };
   }

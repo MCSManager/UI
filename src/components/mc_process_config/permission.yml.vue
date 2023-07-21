@@ -17,9 +17,9 @@
         <div class="sub-title">关于配置文件</div>
         <div class="sub-title-info">
           此配置适用于 MCDReforged 服务端控制工具，建议搭配其<a
-            href="https://mcdreforged.readthedocs.io/zh_CN/latest/permission.html"
-            >官方文档</a
-          >进行修改。
+          href="https://mcdreforged.readthedocs.io/zh_CN/latest/permission.html"
+        >官方文档</a
+        >进行修改。
         </div>
       </div>
     </template>
@@ -43,6 +43,7 @@
 import { getDescriptionByTitle, jsonToMap } from "../../app/service/common";
 import LineOption from "../LineOption";
 import LineOptionList from "../LineOptionList";
+
 export default {
   // eslint-disable-next-line vue/no-unused-components
   components: { LineOption, LineOptionList },
@@ -63,12 +64,12 @@ export default {
     return {
       config: null,
       description: {
-        default_level: "新玩家默认的权限等级",
-        owner: "所有者",
-        admin: "管理员",
-        helper: "助手",
-        user: "普通玩家",
-        guest: "访客"
+        "default_level": this.$t("processConfig.permissionYml.defaultLevel"),
+        "owner": this.$t("processConfig.permissionYml.owner"),
+        "admin": this.$t("processConfig.permissionYml.admin"),
+        "helper": this.$t("processConfig.permissionYml.helper"),
+        "user": this.$t("processConfig.permissionYml.user"),
+        "guest": this.$t("processConfig.permissionYml.guest")
       }
     };
   }

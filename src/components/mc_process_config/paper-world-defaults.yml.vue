@@ -60,277 +60,277 @@ export default {
     return {
       config: null,
       description: {
-        "_version": "",
+        "_version": this.$t("processConfig.paperWorldDefaultsYml.Version"),
         "anticheat": {
           "anti-xray": {
-            "enabled": "是否开启反矿透。（Anti-Xray）",
-            "engine-mode": "设置 Anti-Xray 引擎模式。",
-            "hidden-blocks": "",
-            "lava-obscures": "是否混淆接触岩浆的方块。",
-            "max-block-height": "设置 Anti-Xray 操作的最大高度。只接受 16 的整数倍。",
-            "replacement-blocks": "",
-            "update-radius": "当客户端与方块交互时，将发送包含真实方块数据的方块更新的半径。只可以设置 0、1和2。（0仅用于测试目的，不要在生产环境中使用）",
-            "use-permission": "是否允许有 paper.antixray.bypass 权限的玩家绕过 Anti-Xray。",
+            "enabled": this.$t("processConfig.paperWorldDefaultsYml.anticheat.antiXray.enabled"),
+            "engine-mode": this.$t("processConfig.paperWorldDefaultsYml.anticheat.antiXray.engineMode"),
+            "hidden-blocks": this.$t("processConfig.paperWorldDefaultsYml.anticheat.antiXray.hiddenBlocks"),
+            "lava-obscures": this.$t("processConfig.paperWorldDefaultsYml.anticheat.antiXray.lavaObscures"),
+            "max-block-height": this.$t("processConfig.paperWorldDefaultsYml.anticheat.antiXray.maxBlockHeight"),
+            "replacement-blocks": this.$t("processConfig.paperWorldDefaultsYml.anticheat.antiXray.replacementBlocks"),
+            "update-radius": this.$t("processConfig.paperWorldDefaultsYml.anticheat.antiXray.updateRadius"),
+            "use-permission": this.$t("processConfig.paperWorldDefaultsYml.anticheat.antiXray.usePermission")
           },
           "obfuscation": {
             "items": {
-              "hide-durability": "是否将耐久度信息发送给其他玩家的客户端。",
-              "hide-itemmeta": "否应将作弊客户端中的不必要的物品信息（例如附魔、潜影盒中的物品等）发送给其他玩家的客户端。",
-            },
-          },
+              "hide-durability": this.$t("processConfig.paperWorldDefaultsYml.anticheat.obfuscation.items.hideDurability"),
+              "hide-itemmeta": this.$t("processConfig.paperWorldDefaultsYml.anticheat.obfuscation.items.hideItemmeta")
+            }
+          }
         },
         "chunks": {
-          "auto-save-interval": "以 Tick 为单位配置世界自动保存间隔。",
-          "delay-chunk-unloads-by": "设置区块延迟卸载的时间。",
-          "fixed-chunk-inhabited-time": "",
-          "max-auto-save-chunks-per-tick": "自动保存系统将在每 Tick 中保存的最大区块数。",
-          "prevent-moving-into-unloaded-chunks": "是否阻止玩家进入未加载的区块。",
+          "auto-save-interval": this.$t("processConfig.paperWorldDefaultsYml.chunks.autoSaveInterval"),
+          "delay-chunk-unloads-by": this.$t("processConfig.paperWorldDefaultsYml.chunks.delayChunkUnloadsBy"),
+          "fixed-chunk-inhabited-time": this.$t("processConfig.paperWorldDefaultsYml.chunks.fixedChunkInhabitedTime"),
+          "max-auto-save-chunks-per-tick": this.$t("processConfig.paperWorldDefaultsYml.chunks.maxAutoSaveChunksPerTick"),
+          "prevent-moving-into-unloaded-chunks": this.$t("processConfig.paperWorldDefaultsYml.chunks.preventMovingIntoUnloadedChunks")
         },
         "collisions": {
-          "allow-player-cramming-damage": "",
-          "allow-vehicle-collisions": "交通工具否能够碰撞。",
-          "fix-climbing-bypassing-cramming-rule": "攀爬是否绕过实体填塞限制。",
-          "max-entity-collisions": "设置服务器在达到此值后停止处理碰撞。",
-          "only-players-collide": "是否仅当玩家是两个碰撞实体之一时才计算碰撞。",
+          "allow-player-cramming-damage": this.$t("processConfig.paperWorldDefaultsYml.collisions.allowPlayerCrammingDamage"),
+          "allow-vehicle-collisions": this.$t("processConfig.paperWorldDefaultsYml.collisions.allowVehicleCollisions"),
+          "fix-climbing-bypassing-cramming-rule": this.$t("processConfig.paperWorldDefaultsYml.collisions.fixClimbingBypassingCrammingRule"),
+          "max-entity-collisions": this.$t("processConfig.paperWorldDefaultsYml.collisions.maxEntityCollisions"),
+          "only-players-collide": this.$t("processConfig.paperWorldDefaultsYml.collisions.onlyPlayersCollide")
         },
         "entities": {
           "armor-stands": {
-            "do-collision-entity-lookups": "盔甲架实体是否进行实体碰撞检查。",
-            "tick": "禁用以防止盔甲架 Ticking。（可以提高许多盔甲架的性能）",
+            "do-collision-entity-lookups": this.$t("processConfig.paperWorldDefaultsYml.entities.armorStands.doCollisionEntityLookups"),
+            "tick": this.$t("processConfig.paperWorldDefaultsYml.entities.armorStands.tick")
           },
           "behavior": {
-            "baby-zombie-movement-modifier": "修改小僵尸移动的速度，0.5 比基本速度快 50%，-0.4 慢 40%。",
-            "disable-chest-cat-detection": "箱子上坐着一只猫时是否可以打开箱子。",
-            "disable-creeper-lingering-effect": "是否禁用随机苦力怕，并留下一个挥之不去的区域效果云。",
-            "disable-player-crits": "是否禁用暴击。",
+            "baby-zombie-movement-modifier": this.$t("processConfig.paperWorldDefaultsYml.entities.behavior.babyZombieMovementModifier"),
+            "disable-chest-cat-detection": this.$t("processConfig.paperWorldDefaultsYml.entities.behavior.disableChestCatDetection"),
+            "disable-creeper-lingering-effect": this.$t("processConfig.paperWorldDefaultsYml.entities.behavior.disableCreeperLingeringEffect"),
+            "disable-player-crits": this.$t("processConfig.paperWorldDefaultsYml.entities.behavior.disablePlayerCrits"),
             "door-breaking-difficulty": {
-              "husk": "尸壳可以破门的难度。",
-              "vindicator": "卫道士可以破门的难度。",
-              "zombie": "僵尸可以破门的难度。",
-              "zombie_villager": "僵尸村民可以破门的难度。",
-              "zombified_piglin": "僵尸猪灵可以破门的难度。",
+              "husk": this.$t("processConfig.paperWorldDefaultsYml.entities.behavior.doorBreakingDifficulty.husk"),
+              "vindicator": this.$t("processConfig.paperWorldDefaultsYml.entities.behavior.doorBreakingDifficulty.vindicator"),
+              "zombie": this.$t("processConfig.paperWorldDefaultsYml.entities.behavior.doorBreakingDifficulty.zombie"),
+              "zombie_villager": this.$t("processConfig.paperWorldDefaultsYml.entities.behavior.doorBreakingDifficulty.zombieVillager"),
+              "zombified_piglin": this.$t("processConfig.paperWorldDefaultsYml.entities.behavior.doorBreakingDifficulty.zombifiedPiglin")
             },
-            "ender-dragons-death-always-places-dragon-egg": "末影龙是否总是在死亡时掉落龙蛋。",
-            "experience-merge-max-value": "设置服务器单个经验球最大值，防止它们全部合并为 1 个经验球。",
+            "ender-dragons-death-always-places-dragon-egg": this.$t("processConfig.paperWorldDefaultsYml.entities.behavior.enderDragonsDeathAlwaysPlacesDragonEgg"),
+            "experience-merge-max-value": this.$t("processConfig.paperWorldDefaultsYml.entities.behavior.experienceMergeMaxValue"),
             "mobs-can-always-pick-up-loot": {
-              "skeletons": "骷髅是否总是能够拾取战利品。（如果设置为 false，捡起物品的概率取决于世界的难度）",
-              "zombies": "僵尸是否总是能够拾取战利品。（如果设置为 false，捡起物品的概率取决于世界的难度）",
+              "skeletons": this.$t("processConfig.paperWorldDefaultsYml.entities.behavior.mobsCanAlwaysPickUpLoot.skeletons"),
+              "zombies": this.$t("processConfig.paperWorldDefaultsYml.entities.behavior.mobsCanAlwaysPickUpLoot.zombies")
             },
-            "nerf-pigmen-from-nether-portals": "从通过下界传送门传送的猪灵身上移除 AI。",
-            "parrots-are-unaffected-by-player-movement": "是否防止鹦鹉在玩家移动时从玩家的肩膀上掉下来。",
-            "phantoms-do-not-spawn-on-creative-players": "是否在创造模式下禁止生成幻翼。",
-            "phantoms-only-attack-insomniacs": "是否防止幻翼攻击已经睡觉的玩家。",
-            "piglins-guard-chests": "猪灵在被激怒时是否应该保护箱子。",
+            "nerf-pigmen-from-nether-portals": this.$t("processConfig.paperWorldDefaultsYml.entities.behavior.nerfPigmenFromNetherPortals"),
+            "parrots-are-unaffected-by-player-movement": this.$t("processConfig.paperWorldDefaultsYml.entities.behavior.parrotsAreUnaffectedByPlayerMovement"),
+            "phantoms-do-not-spawn-on-creative-players": this.$t("processConfig.paperWorldDefaultsYml.entities.behavior.phantomsDoNotSpawnOnCreativePlayers"),
+            "phantoms-only-attack-insomniacs": this.$t("processConfig.paperWorldDefaultsYml.entities.behavior.phantomsOnlyAttackInsomniacs"),
+            "piglins-guard-chests": this.$t("processConfig.paperWorldDefaultsYml.entities.behavior.piglinsGuardChests"),
             "pillager-patrols": {
-              "disable": "是否禁用掠夺者巡逻和相关的 AI。",
-              "spawn-chance": "修改掠夺者的生成几率",
+              "disable": this.$t("processConfig.paperWorldDefaultsYml.entities.behavior.pillagerPatrols.disable"),
+              "spawn-chance": this.$t("processConfig.paperWorldDefaultsYml.entities.behavior.pillagerPatrols.spawnChance"),
               "spawn-delay": {
-                "per-player": "",
-                "ticks": "",
+                "per-player": this.$t("processConfig.paperWorldDefaultsYml.entities.behavior.pillagerPatrols.spawnDelay.perPlayer"),
+                "ticks": this.$t("processConfig.paperWorldDefaultsYml.entities.behavior.pillagerPatrols.spawnDelay.ticks")
               },
               "start": {
-                "day": "",
-                "per-player": "",
-              },
+                "day": this.$t("processConfig.paperWorldDefaultsYml.entities.behavior.pillagerPatrols.start.day"),
+                "per-player": this.$t("processConfig.paperWorldDefaultsYml.entities.behavior.pillagerPatrols.start.perPlayer")
+              }
             },
-            "should-remove-dragon": "如果没有传送门存在，是否移除末影龙。",
-            "spawner-nerfed-mobs-should-jump": "",
-            "zombie-villager-infection-chance": "设置村民转换为僵尸村民的变化几率。如果基于游戏难度变化就设置为 -1.0。（设置为 0.0 则始终让村民在被僵尸杀死时死亡，设置为 100.0 则始终将村民转化为僵尸村民）",
-            "zombies-target-turtle-eggs": "设置僵尸和僵尸猪灵是否会自动寻找并破坏海龟蛋。",
+            "should-remove-dragon": this.$t("processConfig.paperWorldDefaultsYml.entities.behavior.shouldRemoveDragon"),
+            "spawner-nerfed-mobs-should-jump": this.$t("processConfig.paperWorldDefaultsYml.entities.behavior.spawnerNerfedMobsShouldJump"),
+            "zombie-villager-infection-chance": this.$t("processConfig.paperWorldDefaultsYml.entities.behavior.zombieVillagerInfectionChance"),
+            "zombies-target-turtle-eggs": this.$t("processConfig.paperWorldDefaultsYml.entities.behavior.zombiesTargetTurtleEggs")
           },
-          "entities-target-with-follow-range": "设置服务器在定位实体时是否应使用跟踪范围。",
+          "entities-target-with-follow-range": this.$t("processConfig.paperWorldDefaultsYml.entities.entitiesTargetWithFollowRange"),
           "mob-effects": {
             "immune-to-wither-effect": {
-              "wither": "",
-              "wither-skeleton": "凋灵骷髅是否免疫凋零效果",
+              "wither": this.$t("processConfig.paperWorldDefaultsYml.entities.mobEffects.immuneToWitherEffect.wither"),
+              "wither-skeleton": this.$t("processConfig.paperWorldDefaultsYml.entities.mobEffects.immuneToWitherEffect.witherSkeleton")
             },
-            "spiders-immune-to-poison-effect": "蜘蛛是否免疫中毒效果",
-            "undead-immune-to-certain-effects": "亡灵生物是否免疫再生和中毒效果",
+            "spiders-immune-to-poison-effect": this.$t("processConfig.paperWorldDefaultsYml.entities.mobEffects.spidersImmuneToPoisonEffect"),
+            "undead-immune-to-certain-effects": this.$t("processConfig.paperWorldDefaultsYml.entities.mobEffects.undeadImmuneToCertainEffects")
           },
           "spawning": {
-            "all-chunks-are-slime-chunks": "是否将所有区块设置为史莱姆区块，允许史莱姆在任何区块中生成。（这实际上可能会减少你遇到史莱姆的机会，因为它们现在有更大的潜在生成区域。）",
+            "all-chunks-are-slime-chunks": this.$t("processConfig.paperWorldDefaultsYml.entities.spawning.allChunksAreSlimeChunks"),
             "alt-item-despawn-rate": {
-              "enabled": "设置物品是否具有不同的消失率。",
+              "enabled": this.$t("processConfig.paperWorldDefaultsYml.entities.spawning.altItemDespawnRate.enabled"),
               "items": {
-                "cobblestone": "圆石消失的概率。",
-              },
+                "cobblestone": this.$t("processConfig.paperWorldDefaultsYml.entities.spawning.altItemDespawnRate.items.cobblestone")
+              }
             },
-            "count-all-mobs-for-spawning": "是否将刷怪蛋生成的怪物和其他杂类生物计入全局生物限制。",
-            "creative-arrow-despawn-rate": "玩家在创造模式下射出的箭消失的速率，以 Tick 为单位。",
+            "count-all-mobs-for-spawning": this.$t("processConfig.paperWorldDefaultsYml.entities.spawning.countAllMobsForSpawning"),
+            "creative-arrow-despawn-rate": this.$t("processConfig.paperWorldDefaultsYml.entities.spawning.creativeArrowDespawnRate"),
             "despawn-ranges": {
               "ambient": {
-                "hard": "",
-                "soft": "",
+                "hard": this.$t("processConfig.paperWorldDefaultsYml.entities.spawning.despawnRanges.ambient.hard"),
+                "soft": this.$t("processConfig.paperWorldDefaultsYml.entities.spawning.despawnRanges.ambient.soft")
               },
               "axolotls": {
-                "hard": "美西螈距离玩家的方块数，超过这个距离将被强制消失",
-                "soft": "美西螈距离玩家的方块数，超过这个距离将被随机消失",
+                "hard": this.$t("processConfig.paperWorldDefaultsYml.entities.spawning.despawnRanges.axolotls.hard"),
+                "soft": this.$t("processConfig.paperWorldDefaultsYml.entities.spawning.despawnRanges.axolotls.soft")
               },
               "creature": {
-                "hard": "动物距离玩家的方块数，超过这个距离将被强制消失",
-                "soft": "动物距离玩家的方块数，超过这个距离将被随机消失",
+                "hard": this.$t("processConfig.paperWorldDefaultsYml.entities.spawning.despawnRanges.creature.hard"),
+                "soft": this.$t("processConfig.paperWorldDefaultsYml.entities.spawning.despawnRanges.creature.soft")
               },
               "misc": {
-                "hard": "杂物距离玩家的方块数，超过这个距离将被强制消失",
-                "soft": "杂物距离玩家的方块数，超过这个距离将被随机消失",
+                "hard": this.$t("processConfig.paperWorldDefaultsYml.entities.spawning.despawnRanges.misc.hard"),
+                "soft": this.$t("processConfig.paperWorldDefaultsYml.entities.spawning.despawnRanges.misc.soft")
               },
               "monster": {
-                "hard": "怪物距离玩家的方块数，超过这个距离将被强制消失",
-                "soft": "怪物距离玩家的方块数，超过这个距离将被随机消失",
+                "hard": this.$t("processConfig.paperWorldDefaultsYml.entities.spawning.despawnRanges.monster.hard"),
+                "soft": this.$t("processConfig.paperWorldDefaultsYml.entities.spawning.despawnRanges.monster.soft")
               },
               "underground_water_creature": {
-                "hard": "水下生物距离玩家的方块数，超过这个距离将被强制消失",
-                "soft": "水下生物距离玩家的方块数，超过这个距离将被随机消失",
+                "hard": this.$t("processConfig.paperWorldDefaultsYml.entities.spawning.despawnRanges.undergroundWaterCreature.hard"),
+                "soft": this.$t("processConfig.paperWorldDefaultsYml.entities.spawning.despawnRanges.undergroundWaterCreature.soft")
               },
               "water_ambient": {
-                "hard": "",
-                "soft": "",
+                "hard": this.$t("processConfig.paperWorldDefaultsYml.entities.spawning.despawnRanges.waterAmbient.hard"),
+                "soft": this.$t("processConfig.paperWorldDefaultsYml.entities.spawning.despawnRanges.waterAmbient.soft")
               },
               "water_creature": {
-                "hard": "水中动物距离玩家的方块数，超过这个距离将被强制消失",
-                "soft": "水中动物距离玩家的方块数，超过这个距离将被随机消失",
-              },
+                "hard": this.$t("processConfig.paperWorldDefaultsYml.entities.spawning.despawnRanges.waterCreature.hard"),
+                "soft": this.$t("processConfig.paperWorldDefaultsYml.entities.spawning.despawnRanges.waterCreature.soft")
+              }
             },
-            "disable-mob-spawner-spawn-egg-transformation": "是否阻止玩家用刷怪蛋改变刷怪笼的类型。",
+            "disable-mob-spawner-spawn-egg-transformation": this.$t("processConfig.paperWorldDefaultsYml.entities.spawning.disableMobSpawnerSpawnEggTransformation"),
             "duplicate-uuid": {
-              "mode": "指定服务器用来解析具有重复 UUID 的实体的方法。（SAFE_REGEN：为实体重新生成一个 UUID，如果它们关闭，则将其删除。DELETE: 删除实体。SILENT: 什么都不做，不打印日志。WARN: 什么都不做，打印日志。）",
-              "safe-regen-delete-range": "",
+              "mode": this.$t("processConfig.paperWorldDefaultsYml.entities.spawning.duplicateUuid.mode"),
+              "safe-regen-delete-range": this.$t("processConfig.paperWorldDefaultsYml.entities.spawning.duplicateUuid.safeRegenDeleteRange")
             },
-            "filter-nbt-data-from-spawn-eggs-and-related": "是否从刷怪蛋、掉落的方块和其他在创造模式中经常被滥用的物品中删除某些 NBT 数据。",
-            "iron-golems-can-spawn-in-air": "铁傀儡是否可以在空中生成。",
-            "monster-spawn-max-light-level": "",
-            "non-player-arrow-despawn-rate": "非玩家实体射出的箭头消失的速率（以 Tick 为单位）",
-            "per-player-mob-spawns": "设置是按玩家还是整个服务器计算暴民限制（在 bukkit.yml 中）。启用此设置会产生大致相同数量的生物，但分布更均匀，可防止一个玩家使用整个生物上限并提供更像单人游戏的体验。",
-            "scan-for-legacy-ender-dragon": "",
-            "skeleton-horse-thunder-spawn-chance": "设置“骷髅陷阱”（4 个骷髅骑士）在雷暴中生成的几率。",
+            "filter-nbt-data-from-spawn-eggs-and-related": this.$t("processConfig.paperWorldDefaultsYml.entities.spawning.filterNbtDataFromSpawnEggsAndRelated"),
+            "iron-golems-can-spawn-in-air": this.$t("processConfig.paperWorldDefaultsYml.entities.spawning.ironGolemsCanSpawnInAir"),
+            "monster-spawn-max-light-level": this.$t("processConfig.paperWorldDefaultsYml.entities.spawning.monsterSpawnMaxLightLevel"),
+            "non-player-arrow-despawn-rate": this.$t("processConfig.paperWorldDefaultsYml.entities.spawning.nonPlayerArrowDespawnRate"),
+            "per-player-mob-spawns": this.$t("processConfig.paperWorldDefaultsYml.entities.spawning.perPlayerMobSpawns"),
+            "scan-for-legacy-ender-dragon": this.$t("processConfig.paperWorldDefaultsYml.entities.spawning.scanForLegacyEnderDragon"),
+            "skeleton-horse-thunder-spawn-chance": this.$t("processConfig.paperWorldDefaultsYml.entities.spawning.skeletonHorseThunderSpawnChance"),
             "slime-spawn-height": {
               "slime-chunk": {
-                "maximum": "设置史莱姆区块中自然生成史莱姆的最大 Y 位置。",
+                "maximum": this.$t("processConfig.paperWorldDefaultsYml.entities.spawning.slimeSpawnHeight.slimeChunk.maximum")
               },
               "surface-biome": {
-                "maximum": "设置沼泽生物群系中自然生成史莱姆的最大 Y 位置。",
-                "minimum": "设置沼泽生物群系中自然生成史莱姆的最小 Y 位置。",
-              },
+                "maximum": this.$t("processConfig.paperWorldDefaultsYml.entities.spawning.slimeSpawnHeight.surfaceBiome.maximum"),
+                "minimum": this.$t("processConfig.paperWorldDefaultsYml.entities.spawning.slimeSpawnHeight.surfaceBiome.minimum")
+              }
             },
             "spawn-limits": {},
             "wandering-trader": {
-              "spawn-chance-failure-increment": "",
-              "spawn-chance-max": "生成流浪商人的最大几率。",
-              "spawn-chance-min": "生成流浪商人的最小几率。",
-              "spawn-day-length": "生成流浪商人的时间间隔。",
-              "spawn-minute-length": "",
+              "spawn-chance-failure-increment": this.$t("processConfig.paperWorldDefaultsYml.entities.spawning.wanderingTrader.spawnChanceFailureIncrement"),
+              "spawn-chance-max": this.$t("processConfig.paperWorldDefaultsYml.entities.spawning.wanderingTrader.spawnChanceMax"),
+              "spawn-chance-min": this.$t("processConfig.paperWorldDefaultsYml.entities.spawning.wanderingTrader.spawnChanceMin"),
+              "spawn-day-length": this.$t("processConfig.paperWorldDefaultsYml.entities.spawning.wanderingTrader.spawnDayLength"),
+              "spawn-minute-length": this.$t("processConfig.paperWorldDefaultsYml.entities.spawning.wanderingTrader.spawnMinuteLength")
             },
             "wateranimal-spawn-height": {
-              "maximum": "水生动物产卵的最大高度。",
-              "minimum": "水生动物产卵的最小高度。",
+              "maximum": this.$t("processConfig.paperWorldDefaultsYml.entities.spawning.wateranimalSpawnHeight.maximum"),
+              "minimum": this.$t("processConfig.paperWorldDefaultsYml.entities.spawning.wateranimalSpawnHeight.minimum")
             }
-          },
+          }
         },
         "environment": {
-          "disable-explosion-knockback": "是否阻止因爆炸而被击退。",
-          "disable-ice-and-snow": "是否禁用冰雪生成。",
-          "disable-teleportation-suffocation-check": "是否禁用服务器在传送玩家之前执行的卡墙检查。",
-          "disable-thunder": "是否禁用雷暴。",
+          "disable-explosion-knockback": this.$t("processConfig.paperWorldDefaultsYml.environment.disableExplosionKnockback"),
+          "disable-ice-and-snow": this.$t("processConfig.paperWorldDefaultsYml.environment.disableIceAndSnow"),
+          "disable-teleportation-suffocation-check": this.$t("processConfig.paperWorldDefaultsYml.environment.disableTeleportationSuffocationCheck"),
+          "disable-thunder": this.$t("processConfig.paperWorldDefaultsYml.environment.disableThunder"),
           "frosted-ice": {
             "delay": {
-              "max": "应用结霜冰效果的最大 RNG 值。",
-              "min": "应用结霜冰效果的最小 RNG 值。",
+              "max": this.$t("processConfig.paperWorldDefaultsYml.environment.frostedIce.delay.max"),
+              "min": this.$t("processConfig.paperWorldDefaultsYml.environment.frostedIce.delay.min")
             },
-            "enabled": "是否启用结霜的冰块。",
+            "enabled": this.$t("processConfig.paperWorldDefaultsYml.environment.frostedIce.enabled")
           },
-          "generate-flat-bedrock": "基岩是否生成为单层。（类似于超平坦）",
-          "nether-ceiling-void-damage-height": "玩家在地狱受到虚空伤害的等级。",
-          "optimize-explosions": "服务器是否在爆炸期间缓存实体查找，而不是在整个过程中重新计算。",
-          "portal-create-radius": "服务器在生成新传送门时尝试创建传送门的最大半径。",
-          "portal-search-radius": "服务器将用于查找现有下界传送门的最大半径。如果在该范围内找不到一个，将生成一个新的。",
-          "portal-search-vanilla-dimension-scaling": "",
+          "generate-flat-bedrock": this.$t("processConfig.paperWorldDefaultsYml.environment.generateFlatBedrock"),
+          "nether-ceiling-void-damage-height": this.$t("processConfig.paperWorldDefaultsYml.environment.netherCeilingVoidDamageHeight"),
+          "optimize-explosions": this.$t("processConfig.paperWorldDefaultsYml.environment.optimizeExplosions"),
+          "portal-create-radius": this.$t("processConfig.paperWorldDefaultsYml.environment.portalCreateRadius"),
+          "portal-search-radius": this.$t("processConfig.paperWorldDefaultsYml.environment.portalSearchRadius"),
+          "portal-search-vanilla-dimension-scaling": this.$t("processConfig.paperWorldDefaultsYml.environment.portalSearchVanillaDimensionScaling"),
           "treasure-maps": {
-            "enabled": "",
+            "enabled": this.$t("processConfig.paperWorldDefaultsYml.environment.treasureMaps.enabled"),
             "find-already-discovered": {
-              "loot-tables": "",
-              "villager-trade": "",
+              "loot-tables": this.$t("processConfig.paperWorldDefaultsYml.environment.treasureMaps.findAlreadyDiscovered.lootTables"),
+              "villager-trade": this.$t("processConfig.paperWorldDefaultsYml.environment.treasureMaps.findAlreadyDiscovered.villagerTrade")
             }
           },
-          "water-over-lava-flow-speed": "设置水流过岩浆时的速度。",
+          "water-over-lava-flow-speed": this.$t("processConfig.paperWorldDefaultsYml.environment.waterOverLavaFlowSpeed")
         },
         "feature-seeds": {
-          "generate-random-seeds-for-all": "是否为尚未设置种子的所有可用功能启用随机种子自动填充。",
+          "generate-random-seeds-for-all": this.$t("processConfig.paperWorldDefaultsYml.featureSeeds.generateRandomSeedsForAll")
         },
         "fishing-time-range": {
-          "maximum": "钓到一条鱼所需的最大 RNG Tick。",
-          "minimum": "钓到一条鱼所需的最小 RNG Tick。",
+          "maximum": this.$t("processConfig.paperWorldDefaultsYml.fishingTimeRange.maximum"),
+          "minimum": this.$t("processConfig.paperWorldDefaultsYml.fishingTimeRange.minimum")
         },
         "fixes": {
-          "disable-unloaded-chunk-enderpearl-exploit": "",
-          "falling-block-height-nerf": "方块从高空掉落超过多少个方块时会被服务器移除。（<1则禁用此功能）",
-          "fix-curing-zombie-villager-discount-exploit": "是否修复通过感染和治愈僵尸村民来获得大量折扣的漏洞。",
-          "fix-items-merging-through-walls": "是否防止物品通过墙壁合并。",
-          "prevent-tnt-from-moving-in-water": "是否阻止已启动的 TNT 实体在流动的水中移动。",
-          "split-overstacked-loot": "",
-          "tnt-entity-height-nerf": "",
+          "disable-unloaded-chunk-enderpearl-exploit": this.$t("processConfig.paperWorldDefaultsYml.fixes.disableUnloadedChunkEnderpearlExploit"),
+          "falling-block-height-nerf": this.$t("processConfig.paperWorldDefaultsYml.fixes.fallingBlockHeightNerf"),
+          "fix-curing-zombie-villager-discount-exploit": this.$t("processConfig.paperWorldDefaultsYml.fixes.fixCuringZombieVillagerDiscountExploit"),
+          "fix-items-merging-through-walls": this.$t("processConfig.paperWorldDefaultsYml.fixes.fixItemsMergingThroughWalls"),
+          "prevent-tnt-from-moving-in-water": this.$t("processConfig.paperWorldDefaultsYml.fixes.preventTntFromMovingInWater"),
+          "split-overstacked-loot": this.$t("processConfig.paperWorldDefaultsYml.fixes.splitOverstackedLoot"),
+          "tnt-entity-height-nerf": this.$t("processConfig.paperWorldDefaultsYml.fixes.tntEntityHeightNerf")
         },
         "hopper": {
-          "cooldown-when-full": "在漏斗装满时是否有短暂的冷却时间，而不是不断尝试吸新物品。",
-          "disable-move-event": "",
-          "ignore-occluding-blocks": "漏斗是否会忽略遮挡方块内的容器，例如沙子内的漏斗矿车。启用此功能将提高漏斗检查流入物品位置的性能。",
+          "cooldown-when-full": this.$t("processConfig.paperWorldDefaultsYml.hopper.cooldownWhenFull"),
+          "disable-move-event": this.$t("processConfig.paperWorldDefaultsYml.hopper.disableMoveEvent"),
+          "ignore-occluding-blocks": this.$t("processConfig.paperWorldDefaultsYml.hopper.ignoreOccludingBlocks")
         },
         "lootables": {
-          "auto-replenish": "",
-          "max-refills": "",
-          "refresh-max": "",
-          "refresh-min": "",
-          "reset-seed-on-fill": "",
-          "restrict-player-reloot": "",
+          "auto-replenish": this.$t("processConfig.paperWorldDefaultsYml.lootables.autoReplenish"),
+          "max-refills": this.$t("processConfig.paperWorldDefaultsYml.lootables.maxRefills"),
+          "refresh-max": this.$t("processConfig.paperWorldDefaultsYml.lootables.refreshMax"),
+          "refresh-min": this.$t("processConfig.paperWorldDefaultsYml.lootables.refreshMin"),
+          "reset-seed-on-fill": this.$t("processConfig.paperWorldDefaultsYml.lootables.resetSeedOnFill"),
+          "restrict-player-reloot": this.$t("processConfig.paperWorldDefaultsYml.lootables.restrictPlayerReloot")
         },
         "maps": {
-          "item-frame-cursor-limit": "每个地图允许的光标（标记）数量。",
-          "item-frame-cursor-update-interval": "更新物品展示框中地图上的光标的时间间隔。（将此设置为小于 1 的数字将完全禁用更新）",
+          "item-frame-cursor-limit": this.$t("processConfig.paperWorldDefaultsYml.maps.itemFrameCursorLimit"),
+          "item-frame-cursor-update-interval": this.$t("processConfig.paperWorldDefaultsYml.maps.itemFrameCursorUpdateInterval")
         },
         "max-growth-height": {
           "bamboo": {
-            "max": "竹子自然会长到的最大高度。",
-            "min": "竹子自然会长到的最低高度。",
+            "max": this.$t("processConfig.paperWorldDefaultsYml.maxGrowthHeight.bamboo.max"),
+            "min": this.$t("processConfig.paperWorldDefaultsYml.maxGrowthHeight.bamboo.min")
           },
-          "cactus": "仙人掌块的自然生长最大高度。",
-          "reeds": "甘蔗自然生长的最大高度。",
+          "cactus": this.$t("processConfig.paperWorldDefaultsYml.maxGrowthHeight.cactus"),
+          "reeds": this.$t("processConfig.paperWorldDefaultsYml.maxGrowthHeight.reeds")
         },
         "misc": {
-          "disable-end-credits": "是否在离开游戏结束时永远不要发送游戏结束点数。",
-          "disable-relative-projectile-velocity": "是否在计算射箭速度时忽略射手速度。",
-          "disable-sprint-interruption-on-attack": "玩家冲刺时受到攻击是否会被打断。",
-          "light-queue-size": "设置每个世界的主线程的光照更新队列有多大。",
-          "max-leash-distance": "配置拴绳的最大距离。",
-          "redstone-implementation": "指定服务器使用的红石实现。替代实现可以通过优化功率计算和减少发出的方块和形状更新的数量来大大减少红石粉造成的延迟。可以使用以下实现：VANILLA(原版)、EIGENCRAFT、ALTERNATE-CURRENT",
-          "shield-blocking-delay": "玩家激活他们的盾牌和它实际阻挡伤害之间的 Tick。",
-          "show-sign-click-command-failure-msgs-to-player": "通过单击告示牌执行的命令是否应向玩家显示执行失败的消息。",
-          "update-pathfinding-on-block-update": "控制在世界中更新一个方块时是否更新怪物的寻路AI。禁用此选项可以显着提高服务器性能，而对游戏机制几乎没有明显影响。当加载了很多实体并且你有自动农场或红石时钟时，建议开启此选项。",
+          "disable-end-credits": this.$t("processConfig.paperWorldDefaultsYml.misc.disableEndCredits"),
+          "disable-relative-projectile-velocity": this.$t("processConfig.paperWorldDefaultsYml.misc.disableRelativeProjectileVelocity"),
+          "disable-sprint-interruption-on-attack": this.$t("processConfig.paperWorldDefaultsYml.misc.disableSprintInterruptionOnAttack"),
+          "light-queue-size": this.$t("processConfig.paperWorldDefaultsYml.misc.lightQueueSize"),
+          "max-leash-distance": this.$t("processConfig.paperWorldDefaultsYml.misc.maxLeashDistance"),
+          "redstone-implementation": this.$t("processConfig.paperWorldDefaultsYml.misc.redstoneImplementation"),
+          "shield-blocking-delay": this.$t("processConfig.paperWorldDefaultsYml.misc.shieldBlockingDelay"),
+          "show-sign-click-command-failure-msgs-to-player": this.$t("processConfig.paperWorldDefaultsYml.misc.showSignClickCommandFailureMsgsToPlayer"),
+          "update-pathfinding-on-block-update": this.$t("processConfig.paperWorldDefaultsYml.misc.updatePathfindingOnBlockUpdate")
         },
         "scoreboards": {
-          "allow-non-player-entities-on-scoreboards": "在计算碰撞时是否将非玩家实体视为从未出现在记分板上。",
-          "use-vanilla-world-scoreboard-name-coloring": "是否使用原版计分板为玩家昵称着色。",
+          "allow-non-player-entities-on-scoreboards": this.$t("processConfig.paperWorldDefaultsYml.scoreboards.allowNonPlayerEntitiesOnScoreboards"),
+          "use-vanilla-world-scoreboard-name-coloring": this.$t("processConfig.paperWorldDefaultsYml.scoreboards.useVanillaWorldScoreboardNameColoring")
         },
         "spawn": {
-          "allow-using-signs-inside-spawn-protection": "是否允许玩家在重生点保护区内使用告示牌。",
-          "keep-spawn-loaded": "是否保持重生点保护区为常加载区块。",
-          "keep-spawn-loaded-range": "重生点保护区常加载区块范围。",
+          "allow-using-signs-inside-spawn-protection": this.$t("processConfig.paperWorldDefaultsYml.spawn.allowUsingSignsInsideSpawnProtection"),
+          "keep-spawn-loaded": this.$t("processConfig.paperWorldDefaultsYml.spawn.keepSpawnLoaded"),
+          "keep-spawn-loaded-range": this.$t("processConfig.paperWorldDefaultsYml.spawn.keepSpawnLoadedRange")
         },
         "tick-rates": {
           "behavior": {
             "villager": {
-              "validatenearbypoi": ""
+              "validatenearbypoi": this.$t("processConfig.paperWorldDefaultsYml.tickRates.behavior.villager.validatenearbypoi")
             }
           },
-          "container-update": "服务器更新容器和库存的速率（以 Tick 为单位）",
-          "grass-spread": "设置服务器散播草的延迟。（以 Tick 为单位）",
-          "mob-spawner": "刷怪笼应该多久计算一次可用的生成区域并在世界中生成新实体。（-1 值将禁用所有刷怪笼）",
+          "container-update": this.$t("processConfig.paperWorldDefaultsYml.tickRates.containerUpdate"),
+          "grass-spread": this.$t("processConfig.paperWorldDefaultsYml.tickRates.grassSpread"),
+          "mob-spawner": this.$t("processConfig.paperWorldDefaultsYml.tickRates.mobSpawner"),
           "sensor": {
             "villager": {
-              "secondarypoisensor": ""
-            },
-          },
+              "secondarypoisensor": this.$t("processConfig.paperWorldDefaultsYml.tickRates.sensor.villager.secondarypoisensor")
+            }
+          }
         },
         "unsupported-settings": {
-          "fix-invulnerable-end-crystal-exploit": "如果设置为 false，将允许创建无敌的末影水晶。",
+          "fix-invulnerable-end-crystal-exploit": this.$t("processConfig.paperWorldDefaultsYml.unsupportedSettings.fixInvulnerableEndCrystalExploit")
         }
       }
     };

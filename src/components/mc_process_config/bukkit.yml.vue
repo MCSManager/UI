@@ -63,40 +63,37 @@ export default {
     return {
       config: null,
       description: {
-        settings: {
-          "allow-end": "是否开启末地",
-          "warn-on-overload": "服务器过载警告",
-          "permissions-file": "自定义权限文件的名字",
-          "update-folder":
-            "插件更新文件夹，放进新版本插件的文件夹名字，这个文件夹会在服务器重新启动时自动更新插件",
-          "plugin-profiling": "允许使用命令 /timings。用于测量插件为事件所花费的时间",
-          "connection-throttle": "客户端在最近一次连接尝试后，在允许再次连接之前的间隔",
-          "query-plugins": "在 MCSM 内置控制台查询时，服务器是否返回插件列表",
-          "deprecated-verbose": "当插件注册已弃用事件时，服务器是否显示警告",
-          "shutdown-message": "服务器关闭后游戏客户端提示的信息",
-          "minimum-api": ""
+        "settings": {
+          "allow-end": this.$t("processConfig.bukkitYml.settings.allowEnd"),
+          "warn-on-overload": this.$t("processConfig.bukkitYml.settings.warnOnOverload"),
+          "permissions-file": this.$t("processConfig.bukkitYml.settings.permissionsFile"),
+          "update-folder": this.$t("processConfig.bukkitYml.settings.updateFolder"),
+          "plugin-profiling": this.$t("processConfig.bukkitYml.settings.pluginProfiling"),
+          "connection-throttle": this.$t("processConfig.bukkitYml.settings.connectionThrottle"),
+          "query-plugins": this.$t("processConfig.bukkitYml.settings.queryPlugins"),
+          "deprecated-verbose": this.$t("processConfig.bukkitYml.settings.deprecatedVerbose"),
+          "shutdown-message": this.$t("processConfig.bukkitYml.settings.shutdownMessage"),
+          "minimum-api": this.$t("processConfig.bukkitYml.settings.minimumApi")
         },
         "spawn-limits": {
-          monsters: "每个世界可以产生的怪物数量",
-          animals: "每个世界可以产生的动物数量",
-          "water-animals": "每个世界可以产生的水生动物的数量",
-          "water-ambient": "",
-          ambient: "可以按世界生成的周围生物（又名蝙蝠）的数量"
+          "monsters": this.$t("processConfig.bukkitYml.spawnLimits.monsters"),
+          "animals": this.$t("processConfig.bukkitYml.spawnLimits.animals"),
+          "water-animals": this.$t("processConfig.bukkitYml.spawnLimits.waterAnimals"),
+          "water-ambient": this.$t("processConfig.bukkitYml.spawnLimits.waterAmbient"),
+          "ambient": this.$t("processConfig.bukkitYml.spawnLimits.ambient")
         },
         "chunk-gc": {
-          "period-in-ticks": "每个大区块垃圾回收之间的 Tick"
+          "period-in-ticks": this.$t("processConfig.bukkitYml.chunkGc.periodInTicks")
         },
         "ticks-per": {
-          "animal-spawns":
-            "每 Tick 尝试生成一次动物，值为 400 表示服务器将尝试在每 400 Ticks 尝试生成一次动物，值小于 0 将重置为 Minecraft 的默认值",
-          "monster-spawns": "每 Tick 尝试生成一次怪物，同上",
-          autosave:
-            "自动保存，值 6000 表示服务器将尝试每 5 分钟自动保存一次世界。注: 过小可能会导致服务器卡顿",
-          "water-spawns": "",
-          "water-ambient-spawns": "",
-          "ambient-spawns": ""
+          "animal-spawns": this.$t("processConfig.bukkitYml.ticksPer.animalSpawns"),
+          "monster-spawns": this.$t("processConfig.bukkitYml.ticksPer.monsterSpawns"),
+          "autosave": this.$t("processConfig.bukkitYml.ticksPer.autosave"),
+          "water-spawns": this.$t("processConfig.bukkitYml.ticksPer.waterSpawns"),
+          "water-ambient-spawns": this.$t("processConfig.bukkitYml.ticksPer.waterAmbientSpawns"),
+          "ambient-spawns": this.$t("processConfig.bukkitYml.ticksPer.ambientSpawns")
         },
-        aliases: "简化指令文件"
+        "aliases": this.$t("processConfig.bukkitYml.aliases")
       }
     };
   }

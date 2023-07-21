@@ -197,7 +197,7 @@
           <template #title>{{ $t("terminal.functionGroup") }}</template>
           <template #default>
             <el-row :gutter="10">
-              <el-col :lg="24" :offset="0" class="row-mb" v-iszh v-if="isShowInstanceConfig">
+              <el-col :lg="24" :offset="0" class="row-mb" v-if="isShowInstanceConfig">
                 <el-button
                   :disabled="!instanceInfo.config.type"
                   icon="el-icon-s-operation"
