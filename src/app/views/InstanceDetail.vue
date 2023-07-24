@@ -200,7 +200,10 @@ Copyright (C) 2022 MCSManager <mcsmanager-dev@outlook.com>
                       {{ $t("instancesDetail.stopCmdInfo") }}
                     </div>
                   </div>
-                  <el-input v-model="instanceInfo.config.stopCommand" type="text"></el-input>
+                  <el-input v-model="instanceInfo.config.stopCommand"
+                      :rows="2"
+                      type="textarea"
+                      resize="none"></el-input>
                 </el-col>
                 <el-col :lg="8" class="row-mt">
                   <div class="sub-title">
