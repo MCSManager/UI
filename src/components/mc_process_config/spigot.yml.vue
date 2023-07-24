@@ -18,7 +18,7 @@
     <!-- 当前文件的说明，请根据需要自定义修改文字，勿修改排版 -->
     <LineOption :custom="true">
       <template #default>
-        <div class="sub-title">
+        <div class="sub-title" v-iszh>
           <div class="sub-title">关于配置兼容与翻译</div>
           <div class="sub-title-info">
             此界面由开源社区开发者开发与翻译，若翻译发现错误可前往开源社区进行反馈。Spigot
