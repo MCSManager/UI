@@ -603,223 +603,223 @@
     },
     "bukkitYml": {
       "settings": {
-        "allowDnd": "是否开启末地",
-        "warnOnOverload": "服务器过载警告",
-        "permissionsFile": "自定义权限文件的名字",
-        "updateFolder": "插件更新文件夹，放进新版本插件的文件夹名字，这个文件夹会在服务器重新启动时自动更新插件",
-        "pluginProfiling": "允许使用命令 /timings。用于测量插件为事件所花费的时间",
-        "connectionThrottle": "客户端在最近一次连接尝试后，在允许再次连接之前的间隔",
-        "queryPlugins": "在 MCSM 内置控制台查询时，服务器是否返回插件列表",
-        "deprecatedVerbose": "当插件注册已弃用事件时，服务器是否显示警告",
-        "shutdownMessage": "服务器关闭后游戏客户端提示的信息",
+        "allowDnd": "Whether or not to enable Mordor",
+        "warnOnOverload": "Warning of server overload",
+        "permissionsFile": "Customize the name of the permissions file",
+        "updateFolder": "Plugin update folder, name of the folder where new versions of plugins are put, this folder will automatically update the plugins when the server restarts",
+        "pluginProfiling": "Allows the command /timings. used to measure the amount of time the plugin spends for events",
+        "connectionThrottle": "The interval after the client's most recent connection attempt before it is allowed to connect again.",
+        "queryPlugins": "Whether the server returns a list of plugins when queried by the MCSM built-in console.",
+        "deprecatedVerbose": "Whether the server displays a warning when a plugin registers a deprecated event.",
+        "shutdownMessage": "The information prompted by the game client after the server is closed",
         "minimumApi": ""
       },
       "spawnLimits": {
-        "monsters": "每个世界可以产生的怪物数量",
-        "animals": "每个世界可以产生的动物数量",
-        "waterAnimals": "每个世界可以产生的水生动物的数量",
+        "monsters": "Number of monsters that can be spawned per world",
+        "animals": "The number of animals that can spawn in each world.",
+        "waterAnimals": "The number of aquatic animals that can spawn in each world.",
         "waterAmbient": "",
-        "ambient": "可以按世界生成的周围生物（又名蝙蝠）的数量"
+        "ambient": "Number of ambient creatures (aka bats) that can be spawned per world"
       },
       "chunkGc": {
-        "periodInTicks": "每个大区块垃圾回收之间的 Tick"
+        "periodInTicks": "Tick between each large block of garbage collection"
       },
       "ticksPer": {
-        "animalSpawns": "每 Tick 尝试生成一次动物，值为 400 表示服务器将尝试在每 400 Ticks 尝试生成一次动物，值小于 0 将重置为 Minecraft 的默认值",
-        "monsterSpawns": "每 Tick 尝试生成一次怪物，同上",
-        "autosave": "自动保存，值 6000 表示服务器将尝试每 5 分钟自动保存一次世界。注: 过小可能会导致服务器卡顿",
+        "animalSpawns": "Attempt to spawn an animal every Tick, a value of 400 means the server will attempt to spawn an animal every 400 Ticks, a value of less than 0 will reset to Minecraft's default value",
+        "monsterSpawns": "Attempts to spawn a monster every Tick, ditto",
+        "autosave": "Autosave, a value of 6000 means the server will try to autosave the world every 5 minutes. Note: Too small a value may cause the server to lag.",
         "waterSpawns": "",
         "waterAmbientSpawns": "",
         "ambientSpawns": ""
       },
-      "aliases": "简化指令文件"
+      "aliases": "Simplified command file"
     },
     "configYml": {
-      "preventProxyConnections": "是否向 Mojang 发送玩家 IP 数据以阻止使用了代理的玩家进入服务器",
+      "preventProxyConnections": "Whether to send player IP data to Mojang to prevent players using proxies from entering the server.",
       "listeners": [
         {
-          "queryPort": "UDP查询端口",
-          "motd": "当仅有一个默认服务器时，服务器将会显示给玩家的 Motd。当 ping_passthrough 被开启时，此项无效",
-          "tabList": "连接到服务器的玩家的 TAB 列表所显示的内容格式",
-          "queryEnabled": "是否开启 UDP 查询",
-          "proxyProtocol": "是否开启对 HAProxy 的支持",
-          "forcedHosts": "端口转发设置",
-          "pingPassthrough": "是否开启 ping 穿透",
-          "priorities": "优先级设置",
-          "bindLocalAddress": "是否显示 BungeeCord 正在监听的 IP 地址",
-          "host": "监听的 IP 地址和端口",
-          "maxPlayers": "玩家客户端将会显示的最大玩家数，默认值为 1。此项只作为装饰，并未真实的最大玩家数设置",
-          "tabSize": "显示在 TAB 列表上的最大玩家数量",
-          "forceDefaultServer": "每次玩家进入服务器时，是否强制将玩家传送到默认服务器中"
+          "queryPort": "UDP query port",
+          "motd": "When there is only one default server, the server will display the player's Motd. This has no effect when ping_passthrough is enabled",
+          "tabList": "The content format displayed in the TAB list of players connected to the server",
+          "queryEnabled": "Whether to enable UDP query",
+          "proxyProtocol": "Whether to enable HAProxy support",
+          "forcedHosts": "Port Forwarding Settings",
+          "pingPassthrough": "Whether to enable ping passthrough",
+          "priorities": "Priority Settings",
+          "bindLocalAddress": "Whether to show the IP address that BungeeCord is listening on",
+          "host": "Listening IP address and port",
+          "maxPlayers": "The maximum number of players that the player client will display, the default value is 1. This is only for decoration, not the actual maximum number of players set",
+          "tabSize": "Maximum number of players to display on the TAB list",
+          "forceDefaultServer": "Whether to force the player to be teleported to the default server every time the player enters the server"
         }
       ],
       "remotePingCache": "",
       "networkCompressionThreshold": "",
       "permissions": {
-        "default": "默认用户组权限",
-        "admin": "管理员用户组权限"
+        "default": "Default User Group Permissions",
+        "admin": "Admin user group permissions"
       },
-      "logPings": "是否在控制台记录玩家客户端向 BungeeCord 发起 ping 请求的记录",
-      "connectionThrottle": "断开时间",
-      "connectionThrottleLimit": "断开次数",
+      "logPings": "Whether to log the player client's ping request to BungeeCord in the console",
+      "connectionThrottle": "ConnectionThrottle",
+      "connectionThrottleLimit": "Number of disconnections",
       "serverConnectTimeout": "",
-      "timeout": "超时时间",
-      "playerLimit": "整个 BungeeCord 实例能够接受的最大玩家数量，默认值为-1，即不限数量",
-      "ipForward": "是否启用 IP 追踪",
-      "groups": "权限组设置",
+      "timeout": "Timeout",
+      "playerLimit": "The maximum number of players that the entire BungeeCord instance can accept, the default value is -1, which means unlimited",
+      "ipForward": "Whether to enable IP tracking",
+      "groups": "Permission Group Settings",
       "remotePingTimeout": "",
-      "logCommands": "是否在控制台记录玩家输入的指令（仅记录 BungeeCord 指令）",
+      "logCommands": "Whether to log the commands entered by the player in the console (only log BungeeCord commands)",
       "stats": "",
-      "onlineMode": "正版验证",
-      "forgeSupport": "是否启用对 Forge 的支持",
-      "disabledCommands": "禁用的指令",
-      "servers": "下游服务端设置，只有在此处设置过的下游服务器才可被连接"
+      "onlineMode": "Genuine Verification",
+      "forgeSupport": "Whether to enable Forge support",
+      "disabledCommands": "Disabled Commands",
+      "servers": "Downstream server settings, only the downstream servers set here can be connected"
     },
     "eulaTxt": {
-      "eula": "是否同意 Minecraft EULA协议，如果您要启动 Minecraft 服务器，则此选项是必须开启"
+      "eula": "Do you agree to the Minecraft EULA agreement, if you want to start the Minecraft server, this option must be enabled"
     },
     "geyserYml": {
       "bedrock": {
-        "address": "Geyser 端服务器 IP",
-        "port": "服务器端口",
-        "cloneRemotePort": "使每次启动服务器时 Geyser 端端口与 Java 端端口相同（仅限插件版）",
-        "motd1": "第一行 MOTD；如果“passthroughMotd”设置为 true 则忽略此项",
-        "motd2": "第二行 MOTD",
-        "serverName": "服务器名称，在暂停菜单和设置菜单中都可见",
-        "compressionLevel": "压缩网络流量的量。值越大，CPU 使用率越高，但使用的带宽越小。小于 -1 或大于 9 时没有用。设置为 -1 时禁用。",
-        "enableProxyProtocol": "是否为客户端启用代理协议。除非使用 UDP 反代，否则不需要此功能"
+        "address": "Geyser server IP",
+        "port": "Server Port",
+        "cloneRemotePort": "Make the Geyser side port the same as the Java side port every time the server is started (plugin version only)",
+        "motd1": "First line MOTD; ignored if 'passthroughMotd' is true",
+        "motd2": "Second row MOTD",
+        "serverName": "Server name, visible in both pause and settings menus",
+        "compressionLevel": "Amount to compress network traffic. Higher values use more CPU, but use less bandwidth. Values less than -1 or greater than 9 are useless. Set to -1 to disable.",
+        "enableProxyProtocol": "Whether to enable the proxy protocol for the client. This feature is not required unless UDP proxy is used"
       },
       "remote": {
-        "address": "需要连接的 Java 服务器的 IP",
-        "port": "需要连接的 Java 服务器的端口",
-        "authType": "验证方式（online、offline、floodgate）",
-        "allowPasswordAuthentication": "允许通过 Geyser 使用基于密码的验证方法。仅在正版验证模式下有用。",
-        "useProxyProtocol": "连接到服务器时是否启用代理协议。如果你不知道这是什么，不要更改！",
-        "forwardHostname": "转发BE客户端用于连接到 Java 服务器的主机名,这是为代理而设计的"
+        "address": "The IP of the Java server to connect to",
+        "port": "The port of the Java server to connect to",
+        "authType": "Authentication method (online, offline, floodgate)",
+        "allowPasswordAuthentication": "Allows password-based authentication via Geyser. Only useful in genuine authentication mode.",
+        "useProxyProtocol": "Whether to enable the proxy protocol when connecting to the server. If you don't know what this is, don't change it!",
+        "forwardHostname": "The hostname used by the forward BE client to connect to the Java server, which is designed for proxies"
       },
-      "extendedWorldHeight": "允许将世界高度从 0-255 扩展到 -64-319，这将导致 1.17.0-1.17.2 的玩家无法连接。需要重启以应用。",
-      "floodgateKeyFile": "Floodgate 生成的公钥（不使用 Floodgate 时请忽略此项）",
-      "commandSuggestions": "是否启用命令提示",
-      "passthroughMotd": "是否使用 Java 服务器的 MOTD",
-      "passthroughProtocolName": "是否使用 Java 服务器的协议",
-      "passthroughPlayerCounts": "是否同步显示 Java 服务器的玩家数量",
-      "legacyPingPassthrough": "是否开启LEGACY ping passthrough，除非你的 MOTD 或玩家数量显示不正确，否则无需启用此功能",
-      "pingPassthroughInterval": "ping 远程 Java 服务器的频率，以秒为单位。",
-      "forwardPlayerPing": "是否将玩家 ping 转发到服务器。启用后玩家将拥有更精确的 ping",
-      "maxPlayers": "最大玩家限制",
-      "debugMode": "调试模式",
-      "generalThreadPool": "线程池大小",
-      "allowThirdPartyCapes": "允许第三方披风可见（目前支持 OptiFine、LabyMod、5Zig、Minecraft 官方）",
-      "allowThirdPartyDars": "允许第三方 deadmau5 ears",
-      "showCooldown": "允许显示虚假的攻击冷却时间",
-      "defaultLocale": "默认语言",
-      "cacheChunks": "是否启用区块缓存（建议在生产环境中禁用，因为会吃掉大量的内存）",
-      "showCoordinates": "是否向玩家显示坐标",
-      "emoteOffhandWorkaround": "如果设置了，当一个基岩版玩家发送任何表情时，将交换副手和主手，就像 Java 版本的 F 一样",
-      "cacheImages": "设置图像缓存的天数（有助于节省从网络下载它们的时间。设置为 0 即可禁用；默认值：0）",
-      "allowCustomSkulls": "允许显示自定义头颅。使其处于启用状态可能会导致较差设备的性能下降。",
-      "addNonBedrockItems": "是否将动力矿车作为游戏中的一个单独项目添加",
-      "aboveBedrockNetherBuilding": "是否允许在地狱建造和显示高于 Y127 的方块",
-      "forceResourcePacks": "强制客户端加载所有资源包（如果有）",
-      "xboxAchievementsDnabled": "允许解锁 Xbox 成就",
+      "extendedWorldHeight": "Allows extending the world height from 0-255 to -64-319, which will cause players on 1.17.0-1.17.2 to be unable to connect. Requires a restart to apply.",
+      "floodgateKeyFile": "Public key generated by Floodgate (ignore this if not using Floodgate)",
+      "commandSuggestions": "Whether to enable command prompt",
+      "passthroughMotd": "Whether to use Java server's MOTD",
+      "passthroughProtocolName": "Whether to use the protocol of the Java server",
+      "passthroughPlayerCounts": "Whether to display the number of players in the Java server synchronously",
+      "legacyPingPassthrough": "Whether to enable LEGACY ping passthrough, unless your MOTD or player count is not showing correctly, you don't need to enable this feature",
+      "pingPassthroughInterval": "How often to ping the remote Java server, in seconds.",
+      "forwardPlayerPing": "Whether to forward player pings to the server. Players will have more accurate pings when enabled",
+      "maxPlayers": "Maximum player limit",
+      "debugMode": "Debug Mode",
+      "generalThreadPool": "Thread Pool Size",
+      "allowThirdPartyCapes": "Allow third party capes to be visible (currently supports OptiFine, LabyMod, 5Zig, Minecraft official)",
+      "allowThirdPartyDars": "Allow third party deadmau5 ears",
+      "showCooldown": "Allows to show fake attack cooldown",
+      "defaultLocale": "Default Language",
+      "cacheChunks": "Whether to enable chunk cache (it is recommended to disable in production environment, because it will eat a lot of memory)",
+      "showCoordinates": "Whether to show coordinates to the player",
+      "emoteOffhandWorkaround": "If set, when a Bedrock Edition player sends any emote, offhand and mainhand will be swapped, just like Java version of F",
+      "cacheImages": "Sets the number of days images are cached (useful to save time downloading them from the network. Set to 0 to disable; default: 0)",
+      "allowCustomSkulls": "Allows custom skulls to be displayed. Leaving it enabled may cause performance degradation on poorer devices.",
+      "addNonBedrockItems": "Whether to add powered minecarts as a separate item in the game",
+      "aboveBedrockNetherBuilding": "Whether to allow building and displaying blocks higher than Y127 in hell",
+      "forceResourcePacks": "Force the client to load all resource packs (if any)",
+      "xboxAchievementsDnabled": "Allow unlocking Xbox achievements",
       "metrics": {
-        "enabled": "是否启用 bStats 统计",
-        "uuid": "服务器 UUID，请勿更改！"
+        "enabled": "Whether to enable bStats statistics",
+        "uuid": "Server UUID, do not change!"
       },
-      "scoreboardPacketThreshold": "指定在每秒收到多少个记分板数据包之后，记分板更新将限制为每秒四次更新",
-      "enableProxyConnections": "是否允许来自 ProxyPass 和 Waterdog 的连接",
-      "useDirectConnection": "是否直接连接到 Java 服务器而不创建 TCP 连接",
-      "configVersion": "配置文件版本"
+      "scoreboardPacketThreshold": "Specifies how many scoreboard packets per second after which scoreboard updates will be limited to four updates per second",
+      "enableProxyConnections": "Whether to allow connections from ProxyPass and Waterdog",
+      "useDirectConnection": "Whether to connect directly to the Java server without creating a TCP connection",
+      "configVersion": "Configuration file version"
     },
     "mcdrConfigYml": {
-      "language": "MCDR 用于输出信息的语言",
-      "workingDirectory": "服务端的工作目录",
-      "startCommand": "启动服务端的控制台命令",
-      "handler": "服务端处理器",
-      "encoding": "输入内容的编码格式，留空以自动选择",
-      "decoding": "输出内容的解码格式，留空以自动选择",
-      "pluginDirectories": "插件目录列表",
+      "language": "Language used by MCDR to output messages",
+      "workingDirectory": "Server's working directory",
+      "startCommand": "Start the console command of the server",
+      "handler": "Server Handler",
+      "encoding": "The encoding format of the input content, leave blank to select automatically",
+      "decoding": "The decoding format of the output content, leave blank to select automatically",
+      "pluginDirectories": "List of plugin directories",
       "rcon": {
-        "enable": "rcon 开关",
-        "address": "rcon 地址",
-        "port": "rcon 端口",
-        "password": "rcon 密码"
+        "enable": "rcon switch",
+        "address": "rcon address",
+        "port": "rcon port",
+        "password": "rcon password"
       },
-      "checkUpdate": "更新检测",
-      "advancedConsole": "高级控制台",
-      "disableConsoleThread": "禁用控制台线程",
-      "disableConsoleColor": "禁用控制台颜色",
-      "customHandlers": "自定义服务端处理器列表",
-      "customInfoReactors": "自定义 info 响应器列表",
+      "checkUpdate": "Update Check",
+      "advancedConsole": "Advanced Console",
+      "disableConsoleThread": "Disable the console thread",
+      "disableConsoleColor": "Disable Console Color",
+      "customHandlers": "List of custom server handlers",
+      "customInfoReactors": "List of custom info responders",
       "debug": {
-        "all": "开启全部调试日志",
-        "mcdr": "MCDR 调试日志",
-        "handler": "服务端处理器调试日志",
-        "reactor": "info 相应器调试日志",
-        "plugin": "插件调试日志",
-        "permission": "权限系统调试日志",
-        "command": "指令管理器调试日志"
+        "all": "Enable all debug logs",
+        "mcdr": "MCDR debug log",
+        "handler": "Server Handler Debug Log",
+        "reactor": "info reactor debug log",
+        "plugin": "Plugin Debug Log",
+        "permission": "Permission system debug log",
+        "command": "Command Manager Debug Log"
       }
     },
     "mohistYml": {
       "mohist": {
-        "checkUpdate": "是否检查更新",
-        "lang": "语言",
-        "checkLibraries": "是否检查依赖库",
-        "disableModsBlacklist": "禁用 MOD 黑名单",
-        "disablePluginsBlacklist": "禁用插件黑名单",
-        "checkUpdateAutoDownload": "是否检查更新并且自动下载",
-        "useCustomJava8": "是否准许自定义下载",
-        "showlogo": "是否显示 Logo",
-        "optimizeExplosions": "是否优化爆炸时的算法",
-        "preventFromEnteringUnloadedChunks": "是否防止进入已卸载块",
-        "ignoreEmptyTime": "忽略所有空时间"
+        "checkUpdate": "Whether to check for updates",
+        "lang": "Language",
+        "checkLibraries": "Whether to check dependent libraries",
+        "disableModsBlacklist": "Disable MOD Blacklist",
+        "disablePluginsBlacklist": "Disable Plugins Blacklist",
+        "checkUpdateAutoDownload": "Whether to check for updates and download them automatically",
+        "useCustomJava8": "Whether to allow custom downloads",
+        "showlogo": "Whether to display the Logo",
+        "optimizeExplosions": "Whether to optimize the algorithm when exploding",
+        "preventFromEnteringUnloadedChunks": "Whether to prevent entering unloaded chunks",
+        "ignoreEmptyTime": "ignore all empty times"
       },
-      "librariesBlackList": "依赖库黑名单"
+      "librariesBlackList": "Dependent Libraries Blacklist"
     },
     "paperYml": {
-      "useDisplayNameInQuitMessage": "设置服务器是否应该在退出消息中使用玩家名称(dispalyname)",
-      "verbose": "设置服务器是否在启动时将所有配置值转储到服务器日志。",
-      "configVersion": "配置文件版本（请勿更改）",
+      "useDisplayNameInQuitMessage": "Sets whether the server should use the player name (dispalyname) in the exit message",
+      "verbose": "Sets whether the server should dump all configuration values to the server log on startup.",
+      "configVersion": "Configuration file version (do not change)",
       "settings": {
-        "consoleHasAllPermissions": "是否允许服务端控制台获得所有权限",
-        "useAlternativeLuckFormula": "使用 Aikar 的运气公式替换原版运气公式。（或许对钓鱼有帮助）",
-        "chunkTasksPerTick": "每tick中可以完成多少区块任务。这有助于渲染和块生成。",
-        "saveDmptyScoreboardTeams": "是否保留空的计分板团队数据",
-        "enablePlayerCollisions": "是否启用玩家碰撞",
-        "playerAutoSaveRate": "设置玩家应该被保存的频率",
-        "maxPlayerAutoSavePerTick": "在每 Tick 中最多应该保存多少个玩家数据",
-        "trackPluginScoreboards": "服务器是否应该跟踪只有虚拟目标的插件计分板",
-        "regionFileCacheSize": "设置区域文件缓存的最大大小",
-        "incomingPacketSpamThreshold": "设置服务器将传入数据包视为垃圾邮件并忽略它们的阈值。",
+        "consoleHasAllPermissions": "Whether to allow the server console to get all permissions",
+        "useAlternativeLuckFormula": "Use Aikar's luck formula instead of vanilla luck formula. (Maybe helpful for fishing)",
+        "chunkTasksPerTick": "How many chunk tasks can be done per tick. This helps with rendering and chunk generation.",
+        "saveDmptyScoreboardTeams": "Whether to keep empty scoreboard team data",
+        "enablePlayerCollisions": "Whether to enable player collision",
+        "playerAutoSaveRate": "Sets how often players should be saved",
+        "maxPlayerAutoSavePerTick": "How many player data should be saved at most in each Tick",
+        "trackPluginScoreboards": "Should the server track plugin scoreboards with only dummy targets",
+        "regionFileCacheSize": "Set the maximum size of the region file cache",
+        "incomingPacketSpamThreshold": "Sets the threshold at which the server treats incoming packets as spam and ignores them.",
         "suggestPlayerNamesWhenNullTabCompletions": "Instructs the server to return a list of players when tabCompleting if the plugin has no tab completions of its own.",
-        "bungeeOnlineMode": "设置为和 server.properties 一样即可",
-        "maxJoinsPerTick": "最大连接数，设置允许同时加入服务器的最大玩家数量。如果超过这个数，他们将被推迟加入。",
-        "loadPermissionsYmlBeforePlugins": "在插件之前加载 bukkit 的 permission.yml 文件，允许他们在启用时立即检查权限。",
-        "useDisplayNameInQuitMessage": "设置服务器是否应该在退出消息中使用玩家名称(dispalyname)",
-        "fixDntityPositionDesync": "修复了客户端和服务器之间项目位置不同步的问题",
-        "logNamedDntityDeaths": "是否记录命名实体的死亡信息",
-        "savePlayerData": "设置服务器是否应该保存玩家数据，例如背包、经验和成就",
+        "bungeeOnlineMode": "Set it to be the same as server.properties",
+        "maxJoinsPerTick": "Maximum number of connections, sets the maximum number of players allowed to join the server at the same time. If this number is exceeded, they will be delayed from joining.",
+        "loadPermissionsYmlBeforePlugins": "Load bukkit's permission.yml file before plugins, allowing them to check permissions immediately when enabled.",
+        "useDisplayNameInQuitMessage": "Sets whether the server should use the player name (dispalyname) in the exit message",
+        "fixDntityPositionDesync": "Fixed item position desync between client and server",
+        "logNamedDntityDeaths": "Whether to log the death information of named entities",
+        "savePlayerData": "Sets whether the server should save player data such as inventory, experience and achievements",
         "useVersionedWorld": "",
         "unsupportedSettings": {
-          "allowPermanentBlockBreakDxploits": "是否可以使用原版漏洞破坏不可破坏的方块",
-          "allowPistonDuplication": "是否允许刷方块，例如复制 TNT、刷地毯和铁轨",
-          "allowHeadlessPistons": "是否允许无头活塞，通常用于破坏基岩等方块",
+          "allowPermanentBlockBreakDxploits": "Whether vanilla exploits can break non-breakable blocks",
+          "allowPistonDuplication": "Whether to allow to spawn blocks, such as duplicating TNT, spawning carpets and rails",
+          "allowHeadlessPistons": "Whether to allow headless pistons, usually used to break blocks such as bedrock",
           "allowPermanentBlockBreakDxploitsReadme": "",
           "allowPistonDuplicationReadme": "",
           "allowHeadlessPistonsReadme": ""
         },
         "asyncChunks": {
           "enable": "",
-          "threads": "服务器用于保存和加载世界的线程数"
+          "threads": "Number of threads the server uses to save and load worlds"
         },
         "watchdog": {
           "earlyWarningDvery": "The interval in milliseconds between printed thread dumps while the server is hanging",
           "earlyWarningDelay": "The number of milliseconds before the watchdog thread starts printing thread dumps after the server starts hanging."
         },
         "bookSize": {
-          "pageMax": "书本中单个页面的最大字节数可构成书本允许的字节总数",
-          "totalMultiplier": "每一页都有上一页的字节数的倍数"
+          "pageMax": "The maximum number of bytes of a single page in a book can constitute the total number of bytes allowed by the book",
+          "totalMultiplier": "Each page has a multiple of the previous page's bytes"
         },
         "spamLimiter": {
           "tabSpamIncrement": "The number that the internal tab spam counter increases by when a player presses tab in the chat window",
@@ -828,18 +828,18 @@
           "recipeSpamLimit": "The number that the recipe spam counter can reach until the server kicks the player for spam"
         },
         "velocitySupport": {
-          "enabled": "如果此服务器被Velocity代理之后，则将此设置为 true 。如果这是真的，请不要在 spigot.yml 中启用 bungeecord 设置。",
+          "enabled": "Set this to true if this server is behind a Velocity proxy. If this is true, do not enable the bungeecord setting in spigot.yml.",
           "onlineMode": "",
-          "secret": "Velocity 代理和此服务器共享的密钥。这需要与你代理的 forwardingSecret 设置相匹配。"
+          "secret": "The secret shared by the Velocity agent and this server. This needs to match your agent's forwardingSecret setting."
         },
         "itemValidation": {
-          "displayName": "物品显示名称长度的限制（覆盖 Spigot.yml）",
-          "locName": "locName 长度的限制（覆盖 Spigot.yml）",
-          "loreLine": "物品 Lore 长度的限制（覆盖 Spigot.yml）",
+          "displayName": "Limit on item display name length (overrides Spigot.yml)",
+          "locName": "LocName length limit (overrides Spigot.yml)",
+          "loreLine": "Item Lore length limit (overrides Spigot.yml)",
           "book": {
-            "title": "书名长度限制（覆盖 Spigot.yml）",
-            "author": "作者名字长度限制（覆盖 Spigot.yml）",
-            "page": "单个书页长度限制（覆盖 Spigot.yml）"
+            "title": "Book title length limit (override Spigot.yml)",
+            "author": "Author name length limit (overrides Spigot.yml)",
+            "page": "Single page length limit (overrides Spigot.yml)"
           },
           "console": {
             "enableBrigadierHighlighting": " Enables Mojang’s Brigadier highlighting in the server console",
@@ -851,119 +851,119 @@
         }
       },
       "timings": {
-        "enabled": "是否启用 Timings",
+        "enabled": "Whether to enable Timings",
         "verbose": "Instructs Timings to provide more specific information in its reports. For example, specific entity types causing lag rather than just “entities”",
         "serverNamePrivacy": "Instructs Timings to hide server name information in reports.",
-        "url": "指定 Timings 报告应上传到的 Timings Viewer 服务器的 URL",
-        "hiddenConfigDntries": "要隐藏在 Timings 报告中的配置条目",
-        "historyInterval": "Timings 报告中各个点之间的间隔（以秒为单位）",
-        "historyLength": "为单个报告保留的数据最大量",
-        "serverName": "设置为服务器名称输入内容的时间"
+        "url": "Specify the URL of the Timings Viewer server to which the Timings report should be uploaded",
+        "hiddenConfigDntries": "Config entries to hide from the Timings report",
+        "historyInterval": "Interval in seconds between points in the Timings report",
+        "historyLength": "Maximum amount of data to keep for a single report",
+        "serverName": "Set the time of input for the server name"
       },
       "messages": {
-        "noPermission": "没有权限时客户端提示的消息",
+        "noPermission": "The message that the client prompts when there is no permission",
         "kick": {
-          "connectionThrottle": "当玩家连接受到限制时提示的消息",
-          "flyingPlayer": "当玩家在服务器内飞行被踢出的消息",
-          "flyingVehicle": "当玩家在服务器内用飞行器飞行被踢出的消息",
-          "authenticationServersDown": "当玩家因为 Mojang 身份验证服务器关闭而断开连接时被踢出的消息"
+          "connectionThrottle": "Message when a player's connection is throttled",
+          "flyingPlayer": "The message that the player is kicked when flying in the server",
+          "flyingVehicle": "The message that the player is kicked when flying a vehicle in the server",
+          "authenticationServersDown": "The message that gets kicked when a player disconnects because the Mojang authentication servers are down"
         }
       },
       "worldSettings": {
         "default": {
           "armorStandsTick": "Disable to prevent armor stands from ticking. Can improve performance with many armor stands",
-          "disableTeleportationSuffocationCheck": "在传送玩家之前禁用服务器检测目的地是否安全",
-          "removeCorruptTileDntities": "服务器是否自动删除损坏且无法修复的 Tile 实体",
-          "experienceMergeMaxValue": "设置服务器经验球最大值，防止它们全部合并为 1 个",
+          "disableTeleportationSuffocationCheck": "Disables the server checking if the destination is safe before teleporting the player",
+          "removeCorruptTileDntities": "Whether the server should automatically remove corrupted Tile entities that cannot be repaired",
+          "experienceMergeMaxValue": "Sets the maximum value of server experience orbs to prevent them all from being merged into 1",
           "fallingBlockHeightNerf": "The height at which falling blocks will be removed from the server",
           "tntDntityHeightNerf": "The height at which Primed TNT entities will be removed from the server",
-          "phantomsDoNotSpawnOnCreativePlayers": "玩家在创造模式下禁止产生幻翼",
-          "phantomsOnlyAttackInsomniacs": "防止幻翼攻击睡着的玩家",
-          "maxAutoSaveChunksPerTick": "每 Tick 中系统自动保存的最大区块数",
-          "perPlayerMobSpawns": "生物限制（在 bukkit.yml 中）是计算每个玩家还是整个服务器",
+          "phantomsDoNotSpawnOnCreativePlayers": "Players are prohibited from spawning phantoms in creative mode",
+          "phantomsOnlyAttackInsomniacs": "Prevents phantoms from attacking sleeping players",
+          "maxAutoSaveChunksPerTick": "The maximum number of chunks automatically saved by the system per Tick",
+          "perPlayerMobSpawns": "Whether the mob limit (in bukkit.yml) counts per player or the entire server",
           "delayChunkUnloadsBy": "Delays chunk unloads by the specified time",
-          "disableThunder": "禁用雷暴",
-          "keepSpawnLoadedRange": "围绕出生点区块保持加载的区块范围",
+          "disableThunder": "Disable Thunderstorm",
+          "keepSpawnLoadedRange": "Range of chunks to keep loaded around spawn chunks",
           "spawnerNerfedMobsShouldJump": "Determines if spawner nerfed mobs should attempt to float (jump) in water",
           "entitiesTargetWithFollowRange": "Sets whether the server should use follow range when targeting entities",
-          "nonPlayerArrowDespawnRate": "从非玩家实体（发射器）射出的箭消失的速率，以 Tick 为单位",
-          "creativeArrowDespawnRate": "玩家在创造模式下射出的箭消失的速率，以 Tick 为单位",
-          "zombiesTargetTurtleDggs": "设置僵尸和僵尸猪灵是否以海龟蛋为目标",
-          "zombieVillagerInfectionChance": "设置村民转换为僵尸村民的变化，根据游戏难度设置。默认为 -1.0，设置为0始终让村民在被僵尸杀死时死亡；设置为 100 则始终将村民转换为僵尸村民",
-          "allChunksAreSlimeChunks": "是否允许服务器将所有区块视为史莱姆区块（可能并不会增加生成史莱姆的几率）",
-          "mobSpawnerTickRate": "刷怪笼应该多久计算一次可用的生成区域并将新实体生成到该区域中",
+          "nonPlayerArrowDespawnRate": "The rate at which arrows fired from non-player entities (emitters) disappear, in Ticks",
+          "creativeArrowDespawnRate": "The rate at which arrows fired by the player in creative mode disappear, in Ticks",
+          "zombiesTargetTurtleDggs": "Sets whether zombies and zombified piglins target turtle eggs",
+          "zombieVillagerInfectionChance": "Sets the variance of villagers converting to zombie villagers, set according to the difficulty of the game. Default is -1.0, set to 0 to always make villagers die when killed by zombies; set to 100 to always convert villagers to zombie villagers",
+          "allChunksAreSlimeChunks": "Whether to allow the server to treat all chunks as slime chunks (may not increase the chance of spawning slimes)",
+          "mobSpawnerTickRate": "How often the spawner should calculate the available spawn area and spawn new entities into it",
           "seedBasedFeatureSearch": "Whether the server should check if a chunk’s biome (determined by world seed) can support the desired feature before loading it during feature searches.",
-          "preventTntFromMovingInWater": "是否防止点燃的 TNT 在水中移动",
-          "ironGolemsCanSpawnInAir": "设置铁傀儡是否可以在空中生成",
-          "skeletonHorseThunderSpawnChance": "设置 4 个骷髅骑士在雷暴中生成的几率",
-          "disableIceAndSnow": "禁用冰和雪的形成",
-          "waterOverLavaFlowSpeed": "设置水在岩浆上流动的速度",
-          "useFasterDigencraftRedstone": "提升红石性能",
+          "preventTntFromMovingInWater": "Whether to prevent lit TNT from moving in water",
+          "ironGolemsCanSpawnInAir": "Sets whether iron golems can spawn in the air",
+          "skeletonHorseThunderSpawnChance": "Sets the chance that 4 skeleton horsemen will spawn in a thunderstorm",
+          "disableIceAndSnow": "Disable ice and snow formation",
+          "waterOverLavaFlowSpeed": "Sets the speed at which water flows over lava",
+          "useFasterDigencraftRedstone": "Increase redstone performance",
           "netherCeilingVoidDamageHeight": "Sets the level above which players in the nether will take void damage",
-          "allowNonPlayerDntitiesOnScoreboards": "是否允许非玩家实体在记分板上",
-          "parrotsAreUnaffectedByPlayerMovement": "防止鹦鹉在玩家移动时从玩家的肩膀上掉下来",
-          "portalSearchRadius": "查找现有下界传送门的最大范围。如果在该范围内找不到一个，将生成一个新的",
+          "allowNonPlayerDntitiesOnScoreboards": "Whether to allow non-player entities on the scoreboard",
+          "parrotsAreUnaffectedByPlayerMovement": "Prevents parrots from falling off the player's shoulders while the player is moving",
+          "portalSearchRadius": "The maximum range to search for existing nether portals. If one is not found within that range, a new one will be generated",
           "portalCreateRadius": "The maximum range the server will try to create a portal around when generating a new portal",
-          "disableDxplosionKnockback": "防止被炸飞",
+          "disableDxplosionKnockback": "Prevent being blown up",
           "containerUpdateTickRate": "The rate, in ticks, at which the server updates containers and inventories",
-          "keepSpawnLoaded": "保持出生点区块加载",
+          "keepSpawnLoaded": "Keep spawn chunks loaded",
           "armorStandsDoCollisionDntityLookups": "Instructs armor stand entities to do entity collision checks",
-          "grassSpreadTickRate": "草这种植物每 Tick 的生长速度",
+          "grassSpreadTickRate": "The growth rate of grass plants per Tick",
           "shouldRemoveDragon": "Sets whether or not to remove the dragon if it exists without a portal.",
-          "useVanillaWorldScoreboardNameColoring": "使用原版世界记分板名称着色",
+          "useVanillaWorldScoreboardNameColoring": "Use vanilla world scoreboard name coloring",
           "fixedChunkInhabitedTime": "If 0 or greater, set the chunk inhabited time to a fixed number",
-          "preventMovingIntoUnloadedChunks": "服务器是否阻止玩家进入未加载的区块",
-          "babyZombieMovementModifier": "修改幼年僵尸移动的速度",
-          "countAllMobsForSpawning": "刷怪笼和其他生物是否计入全局生物限制",
-          "optimizeDxplosions": "优化 TNT/苦力怕等爆炸",
-          "duplicateUuidResolver": "指定服务器用于解析具有重复 UUID 的实体的方法（saferegen：为实体重新生成一个UUID；delete：删除实体；silent：什么都不做，不打印日志；warn：什么都不做，打印日志）",
+          "preventMovingIntoUnloadedChunks": "Whether the server prevents players from moving into unloaded chunks",
+          "babyZombieMovementModifier": "Modifies the speed at which baby zombies move",
+          "countAllMobsForSpawning": "Whether mob spawners and other mobs count towards the global mob limit",
+          "optimizeDxplosions": "Optimize TNT/creeper etc. explosions",
+          "duplicateUuidResolver": "Specify the server's method for resolving entities with duplicate UUIDs (saferegen: regenerate a UUID for the entity; delete: delete the entity; silent: do nothing, do not print logs; warn: do nothing, print logs)",
           "duplicateUuidSaferegenDeleteRange": "If multiple entities with duplicate UUIDs are within this many blocks, saferegen will delete all but 1 of them",
-          "disableCreeperLingeringDffect": "随机禁用苦力怕，留下一个挥之不去的区域效果云",
-          "maxDntityCollisions": "最大实体碰撞，服务器在达到此值后停止处理碰撞冲突",
-          "filterNbtDataFromSpawnDggsAndRelated": "从创造模式中的生成蛋、掉落方块和其他经常被滥用的物品中删除某些 NBT 数据",
+          "disableCreeperLingeringDffect": "Randomly disables creepers, leaving a lingering area effect cloud",
+          "maxDntityCollisions": "Maximum entity collisions after which the server stops processing collisions",
+          "filterNbtDataFromSpawnDggsAndRelated": "Removes certain NBT data from spawned eggs, dropped blocks, and other commonly abused items in creative mode",
           "lightQueueSize": "Sets how large the queue of light updates off the main thread for each world should be",
-          "autoSaveInterval": "自动保存间隔",
-          "enableTreasureMaps": "是否允许村民交易藏宝图",
+          "autoSaveInterval": "Auto Save Interval",
+          "enableTreasureMaps": "Whether to allow villagers to trade treasure maps",
           "treasureMapsReturnAlreadyDiscovered": "Instructs the server to target the first treasure location found, rather than the first undiscovered one",
           "showSignClickCommandFailureMsgsToPlayer": "Whether commands executed by sign click should show failure messages to players",
-          "fixItemsMergingThroughWalls": "是否禁止物品穿过墙壁合并（启用后可能会导致性能下降）",
-          "fixClimbingBypassingCrammingRule": "设置攀爬是否应绕过 Cramming 限制",
+          "fixItemsMergingThroughWalls": "Whether to prevent items from merging through walls (enable may cause performance degradation)",
+          "fixClimbingBypassingCrammingRule": "Sets whether climbing should bypass Cramming restrictions",
           "onlyPlayersCollide": "Only calculate collisions if a player is one of the two entities colliding",
-          "allowVehicleCollisions": "允许车辆碰撞",
+          "allowVehicleCollisions": "Allow Vehicle Collisions",
           "portalSearchVanillaDimensionScaling": "Whether to apply vanilla dimension scaling to portalSearchRadius",
-          "seedBasedFeatureSearchLoadsChunks": "基于种子的特征搜索加载区块（禁用后会提高性能，但会影响 /locate 指令）",
-          "maxLeashDistance": "配置拴绳的最大距离，如果超过这个距离则断开",
-          "fixWitherTargetingBug": "修复凋零目标错误（MC-29274）",
-          "allowPlayerCrammingDamage": "允许玩家在游戏规则设置中的更多的实体发生碰撞时受到的来自 maxEntityCramming 的伤害",
-          "updatePathfindingOnBlockUpdate": "控制在世界中更新区块时是否更新怪物的寻路 balabala（禁用此选项可以显着提高服务器性能）",
-          "mapItemFrameCursorLimit": "每个地图在展示框的光标限制（就是绿色那个箭头），",
-          "enderDragonsDeathAlwaysPlacesDragonDgg": "末影龙死亡是否掉落龙蛋",
-          "allowUsingSignsInsideSpawnProtection": "允许玩家在出生点保护区内使用告示牌",
+          "seedBasedFeatureSearchLoadsChunks": "Seed-based feature search loads chunks (disabled to improve performance, but affects /locate directive)",
+          "maxLeashDistance": "Configures the maximum distance of the leash, if it exceeds this distance, it will break",
+          "fixWitherTargetingBug": "Fix WitherTargetingBug (MC-29274)",
+          "allowPlayerCrammingDamage": "Allow the player to receive damage from maxEntityCramming when more entities collide in the game rules settings",
+          "updatePathfindingOnBlockUpdate": "Controls whether to update pathfinding balabala for mobs when blocks are updated in the world (disabling this option can significantly improve server performance)",
+          "mapItemFrameCursorLimit": "The cursor limit of each map in the display frame (that is the green arrow),",
+          "enderDragonsDeathAlwaysPlacesDragonDgg": "Whether the ender dragon will drop dragon eggs when it dies",
+          "allowUsingSignsInsideSpawnProtection": "Allow players to use signs inside the spawn protection area",
           "bedSearchRadius": "",
           "allowLeashingUndeadHorse": "",
-          "babyZombieMovementSpeed": "修改小僵尸移动的速度（0.5 表示比基本速度快 50%，-0.4 会慢 40%）",
+          "babyZombieMovementSpeed": "Modifies the speed at which baby zombies move (0.5 means 50% faster than base speed, -0.4 makes it 40% slower)",
           "doorBreakingDifficulty": {
-            "zombie": "列出僵尸能够破门的难度列表",
-            "vindicator": "列出卫道士能够破门的难度列表"
+            "zombie": "List of difficulties that zombies can break through",
+            "vindicator": "Lists the difficulty list that vindicator can break"
           },
           "mobsCanAlwaysPickUpLoot": {
-            "zombies": "设置僵尸是否可以捡起物品。如果设置为 false，那么僵尸捡起物品的概率取决于世界的难度",
-            "skeletons": "设置骷髅是否可以捡起物品。如果设置为 false，那么僵尸捡起物品的概率取决于世界的难度"
+            "zombies": "Sets whether zombies can pick up items. If set to false, the probability of zombies picking up items depends on the difficulty of the world",
+            "skeletons": "Sets whether skeletons can pick up items. If set to false, the probability of zombies picking up items depends on the difficulty of the world"
           },
           "spawnLimits": {
-            "monsters": "每个世界可以生成的怪物数量（如果为 -1，则使用 bukkit.yml 中的设置，下同）",
-            "animals": "每个世界可以生成的动物数量",
-            "waterAnimals": "每个世界可以生成的水生动物的数量",
-            "waterAmbient": "每个世界可以生成的 waterAmbient 数量",
-            "ambient": "每个世界可以生成的ambient数量"
+            "monsters": "The number of monsters that can be spawned per world (if -1, use the settings in bukkit.yml, the same below)",
+            "animals": "Number of animals that can spawn per world",
+            "waterAnimals": "Number of aquatic animals that can spawn per world",
+            "waterAmbient": "The amount of waterAmbient that can be generated per world",
+            "ambient": "The number of ambients that can be spawned per world"
           },
           "entityPerChunkSaveLimit": {
-            "experience_orb": "限制每个区块保存/加载的 经验球 数量（-1 则禁用此限制，下同）",
-            "snowball": "限制每个区块保存/加载的 雪球 数量",
-            "ender_pearl": "限制每个区块保存/加载的 末影珍珠 数量",
-            "fireball": "限制每个区块保存/加载的 火焰弹 数量",
-            "small_fireball": "限制每个区块保存/加载 烈焰人喷出来的火球 的数量",
-            "arrow": "限制每个区块保存/加载 箭 的数量"
+            "experience_orb": "Limit the number of experience orbs saved/loaded per chunk (-1 disables this limit, same below)",
+            "snowball": "Limit the number of snowballs saved/loaded per chunk",
+            "ender_pearl": "Limit the number of ender pearls saved/loaded per chunk",
+            "fireball": "Limit number of fireballs saved/loaded per chunk",
+            "small_fireball": "Limits the number of fireballs a blaze spews per chunk save/load",
+            "arrow": "Limit the number of arrows saved/loaded per chunk"
           },
           "mobDffects": {
             "undeadImmuneToCertainDffects": "",
@@ -982,35 +982,35 @@
             }
           },
           "fishingTimeRange": {
-            "MinimumTicks": "钓到一条鱼所需的最小 RNG Tick",
-            "MaximumTicks": "钓到一条鱼之前的最大 RNG Tick"
+            "MinimumTicks": "Minimum RNG Ticks required to catch a fish",
+            "MaximumTicks": "Maximum RNG Ticks before catching a fish"
           },
           "despawnRanges": {
-            "soft": "距离玩家的方块数，一旦超过，实体将随机清除",
-            "hard": "距离玩家的方块数，一旦超过，实体将被强制清除"
+            "soft": "The number of blocks away from the player, once exceeded, the entity will be cleared randomly",
+            "hard": "The number of blocks away from the player, once exceeded, the entity will be forcibly cleared"
           },
-          "frostedIce": {
-            "enabled": "是否启用霜冰",
+          "frosted ice": {
+            "enabled": "Whether frost is enabled",
             "delay": {
               "min": "Minimum RNG value to apply frostedIce effects at",
               "max": "Maximum RNG value to apply frostedIce effects at"
             }
           },
           "gameMechanics": {
-            "disablePillagerPatrols": "禁用掠夺者巡逻和相关的AI",
+            "disablePillagerPatrols": "Disables pillager patrols and related AI",
             "disableRelativeProjectileVelocity": "",
-            "disableUnloadedChunkDnderpearlDxploit": "防止末影珍珠在未加载的区块中存放投掷器",
-            "disableChestCatDetection": "箱子上面有猫时是否可以打开",
-            "nerfPigmenFromNetherPortals": "是否把通过下界传送门到主世界的猪人移除其 AI",
-            "disablePlayerCrits": "是否禁用玩家暴击",
+            "disableUnloadedChunkDnderpearlDxploit": "Prevents enderpearls from storing droppers in unloaded chunks",
+            "disableChestCatDetection": "Whether the chest can be opened when there is a cat on it",
+            "nerfPigmenFromNetherPortals": "Whether to remove AI from pigmen that go through nether portals to overworld",
+            "disablePlayerCrits": "Whether to disable player crits",
             "shieldBlockingDelay": "Instructs the server to ignore shooter velocity when calculating the velocity of a fired arrow",
             "disableDndCredits": "Instructs the server to never send the end game credits when leaving the end",
-            "scanForLegacyDnderDragon": "服务器在加载旧世界时是否搜索末影龙",
-            "disableSprintInterruptionOnAttack": "如果冲刺玩家受到攻击，是否会打断他们",
-            "fixCuringZombieVillagerDiscountDxploit": "修复通过感染和治愈僵尸村民来获得大量折扣的漏洞",
-            "disableMobSpawnerSpawnDggTransformation": "是否阻止玩家使用刷怪蛋改变刷怪笼的类型",
+            "scanForLegacyDnderDragon": "Whether the server searches for the ender dragon when loading old worlds",
+            "disableSprintInterruptionOnAttack": "Whether to interrupt sprinting players if they are attacked",
+            "fixCuringZombieVillagerDiscountDxploit": "Fix bug that gave huge discounts for infecting and curing zombie villagers",
+            "disableMobSpawnerSpawnDggTransformation": "Whether to prevent players from using spawn eggs to change the type of spawner",
             "pillagerPatrols": {
-              "spawnChance": "掠夺者巡逻队的生成几率",
+              "spawnChance": "Spawn Chance for Marauder Patrols",
               "spawnDelay": {
                 "perPlayer": "Makes spawnDelay per player",
                 "ticks": "Delay in ticks between spawn chance"
@@ -1025,64 +1025,64 @@
             "noTickViewDistance": "Sets the noTick view distance"
           },
           "antiXray": {
-            "enabled": "是否启用反Xray",
-            "engineMode": "设置反Xray引擎模式。其中 1 是用石头替换隐藏方块，2 是用随机方块数据替换所有方块",
+            "enabled": "Whether anti-Xray is enabled",
+            "engineMode": "Set anti-Xray engine mode. Where 1 is to replace hidden blocks with stones, 2 is to replace all blocks with random block data",
             "maxChunkSectionIndex": "",
             "updateRadius": "Controls the distance in blocks from air or water that hiddenBlocks are hidden by the antiXray engine",
-            "lavaObscures": "是否混淆接触岩浆的方块",
-            "maxBlockHeight": "设置反Xray尝试隐藏矿石的最大高度（只允许16的倍数，若输入其他值则向下舍入为 16 的倍数）",
-            "usePermission": "是否允许有 paper.antixray.bypass 权限的玩家 绕过反 Xray",
+            "lavaObscures": "Whether to obfuscate blocks touching lava",
+            "maxBlockHeight": "Set the maximum height that anti-Xray will try to hide ores (only multiples of 16 are allowed, if other values are entered, they will be rounded down to multiples of 16)",
+            "usePermission": "Whether to allow players with paper.antixray.bypass permission to bypass anti-Xray",
             "chunkDdgeMode": "",
-            "replacementBlocks": "在引擎模式 2 中应该被隐藏方块替换的方块列表",
-            "hiddenBlocks": "在引擎模式 1 中要隐藏的方块列表"
+            "replacementBlocks": "List of blocks that should be replaced by hidden blocks in engine mode 2",
+            "hiddenBlocks": "List of blocks to hide in engine mode 1"
           },
           "squidSpawnHeight": {
-            "maximum": "鱿鱼生成的最大高度"
+            "maximum": "Maximum height for squid to spawn"
           },
           "generatorSettings": {
             "flatBedrock": "Instructs the server to generate bedrock as a single flat layer"
           },
           "maxGrowthHeight": {
-            "cactus": "仙人掌自然生长的最大高度",
-            "reeds": "甘蔗自然生长的最大高度",
+            "cactus": "The maximum height a cactus can grow naturally",
+            "reeds": "The maximum height of sugarcane natural growth",
             "bamboo": {
-              "max": "竹子自然生长的最大高度",
-              "min": "竹子自然生长的最小高度"
+              "max": "The maximum height of bamboo's natural growth",
+              "min": "The minimum height for bamboo to grow naturally"
             }
           },
           "lootables": {
             "autoReplenish": "Instructs the server to automatically replenish lootable containers",
-            "restrictPlayerReloot": "防止相同的玩家回来并一遍又一遍地重新掠夺相同的容器",
+            "restrictPlayerReloot": "Prevents the same player from coming back and relooting the same container over and over",
             "resetSeedOnFill": "Resets the loot seed each time the lootable is refilled. Effectively randomizing the new loot items on each refill",
             "maxRefills": "Sets the maximum number of times a lootable may be refilled",
             "refreshMin": "The minimum amount of time that must pass before a lootable will be eligible to be refilled",
             "refreshMax": "The maximum amount of time that can pass before a lootable is refilled"
           },
           "hopper": {
-            "cooldownWhenFull": "设置服务器在漏斗已满时应用短暂的冷却时间，而不是不断尝试拉出新物品",
-            "disableMoveDvent": "完全禁用漏斗的InventoryMoveItemEvent，显着提高漏斗性能。但会破坏保护插件和任何其他依赖于此事件的插件",
+            "cooldownWhenFull": "Sets the server to apply a short cooldown when the hopper is full, instead of constantly trying to pull new items",
+            "disableMoveDvent": "Completely disables the hopper's InventoryMoveItemEvent, significantly improving hopper performance. But will break protection plugins and any other plugins that depend on this event",
             "disableMoveDventQuickshopTips": ""
           },
           "altItemDespawnRate": {
-            "enabled": "物品是否具有不同的消失率",
+            "enabled": "Whether items have a different disappearance rate",
             "items": {
-              "COBBLESTONE": "（默认值）原石"
+              "COBBLESTONE": "(Default) Rough Stone"
             }
           },
           "lightningStrikeDistanceLimit": {
-            "sound": "玩家听到闪电的距离",
-            "impactSound": "玩家听到闪电冲击的距离",
-            "flash": "玩家看到闪电在天空中的距离"
+            "sound": "The distance at which the player hears lightning",
+            "impactSound": "The distance at which players hear lightning impact",
+            "flash": "How far in the sky the player sees lightning"
           },
           "wanderingTrader": {
-            "spawnMinuteLength": "流浪商人刷新分钟的长度（以 Tick 为单位）",
-            "spawnDayLength": "流浪商人生成之间的时间间隔（以 Tick 为单位）",
+            "spawnMinuteLength": "The length of minutes in which the wandering trader spawns (in Ticks)",
+            "spawnDayLength": "Time interval in Ticks between wandering trader spawns",
             "spawnChanceFailureIncrement": "How much the spawn chance will be increased on every failed wandering trader spawn.",
-            "spawnChanceMin": "生成流浪商人的最小机会",
-            "spawnChanceMax": "生成流浪商人的最大机会"
+            "spawnChanceMin": "Minimum chance to spawn a wandering trader",
+            "spawnChanceMax": "Maximum chance to spawn a wandering trader"
           },
           "unsupportedSettings": {
-            "fixInvulnerableDndCrystalDxploit": "修复无敌的末影水晶漏洞利用（MC-108513）"
+            "fixInvulnerableDndCrystalDxploit": "Fix invulnerable ender crystal exploit (MC-108513)"
           }
         }
       }
@@ -1090,84 +1090,84 @@
     "paperGlobalYml": {
       "version": "",
       "asyncChunks": {
-        "threads": "服务器应该用于世界保存和块加载的线程数。默认值 (-1) 表示 Paper 将使用系统的一半线程来加载块，除非另有说明。用于保存和加载块的最大默认值为 4 个线程。这可以通过添加 -Dpaper.maxChunkThreads=[number] 到你的启动参数来覆盖"
+        "threads": "Number of threads the server should use for world saving and chunk loading. The default value (-1) means that Paper will use half the system's threads to load chunks, unless otherwise specified. The maximum default value for saving and loading chunks is 4 threads. This can be overridden by adding -Dpaper.maxChunkThreads=[number] to your startup parameters"
       },
       "chunkLoading": {
-        "autoconfigSendDistance": "是否使用客户端的渲染距离作为服务器的区块发送距离。这将专门更改发送到客户端的区块的半径，并且不会影响服务器端的区块加载或 ticking。",
-        "enableFrustumPriority": "是否在将区块加载到玩家的侧面或后面之前尝试在玩家前面加载区块。由于客户端对无序接收区块反应不佳，默认情况下禁用此功能，通常不建议使用。",
-        "globalMaxChunkLoadRate": "整个服务器每秒加载的最大区块数。优先于 playerMaxChunkLoadRate",
-        "globalMaxChunkSendRate": "整个服务器每秒发送的最大区块数。这可能有助于服务器端的峰值带宽使用。",
-        "globalMaxConcurrentLoads": "一次为整个服务器处理的最大区块加载数。如果超过 playerMaxConcurrentLoads 将覆盖",
-        "maxConcurrentSends": "每次排队发送的最大区块数。较低的值将有助于缓解服务器端网络瓶颈，例如反矿透。但是，它不太可能帮助网不好的玩家。",
-        "minLoadRadius": "玩家周围没有限制加载区块的区块半径。受影响的块区数实际上是配置值加一，此配置能控制客户端实际能够渲染的区块数。",
-        "playerMaxChunkLoadRate": "每个玩家每秒加载的最大区块数。",
-        "playerMaxConcurrentLoads": "每个玩家一次处理的最大区块加载数。",
-        "targetPlayerChunkSendRate": "在一秒钟内发送给单个玩家的最大区块数。"
+        "autoconfigSendDistance": "Whether to use the client's render distance as the server's chunk send distance. This will specifically change the radius of chunks sent to the client and will not affect server side chunk loading or ticking.",
+        "enableFrustumPriority": "Whether to try to load chunks in front of the player before loading chunks to the side or back of the player. This is disabled by default and generally not recommended due to clients' poor reaction to receiving chunks out of order.",
+        "globalMaxChunkLoadRate": "Maximum chunks per second for the entire server to load. Takes precedence over playerMaxChunkLoadRate",
+        "globalMaxChunkSendRate": "The maximum number of chunks sent per second by the entire server. This may help with peak bandwidth usage on the server side.",
+        "globalMaxConcurrentLoads": "Maximum number of chunk loads to process for the entire server at once. Will override if playerMaxConcurrentLoads is exceeded",
+        "maxConcurrentSends": "Maximum number of blocks to send per queue. A lower value will help alleviate network bottlenecks on the server side, such as anti-mining. However, it is unlikely to help players with a bad network.",
+        "minLoadRadius": "There is no chunk radius around the player that limits loading chunks. The number of chunks affected is actually a config value plus one, which controls how many chunks the client can actually render.",
+        "playerMaxChunkLoadRate": "Maximum chunks to load per second per player.",
+        "playerMaxConcurrentLoads": "Maximum chunk loads per player to process at once.",
+        "targetPlayerChunkSendRate": "The maximum number of chunks to send to a single player in one second."
       },
       "collisions": {
-        "enablePlayerCollisions": "设置服务器是否允许玩家碰撞。与记分板交互的插件可能会破坏此选项。如果你在使用此选项时遇到问题，请尝试不要安装插件。",
-        "sendFullPosForHardCollidingDntities": "尝试通过发送涉及冲突的实体的精确位置来缓解这种不同步。启用此功能将使用更多带宽；然而，在大多数情况下，这是一个值得权衡的选择。"
+        "enablePlayerCollisions": "Sets whether the server allows player collisions. Plugins that interact with the scoreboard may break this option. If you have trouble using this option, try not installing plugins.",
+        "sendFullPosForHardCollidingDntities": "Attempts to mitigate this out-of-sync by sending the precise positions of entities involved in collisions. Enabling this will use more bandwidth; however, it is a worthwhile trade-off in most cases."
       },
       "commands": {
-        "fixTargetSelectorTagCompletion": "解决客户端错误，防止实体类型标记建议在目标选择器中发挥作用。",
-        "suggestPlayerNamesWhenNullTabCompletions": "设置服务器在选项卡完成时，如果没有其他完成项可用，则返回玩家列表。",
-        "timeCommandAffectsAllWorlds": "/time 命令是否作用于所有世界？false 则只作用于发送者当前的世界。"
+        "fixTargetSelectorTagCompletion": "Fix a client bug preventing entity type tag suggestions from working in target selectors.",
+        "suggestPlayerNamesWhenNullTabCompletions": "Sets the server to return a list of players on tab completion if no other completions are available.",
+        "timeCommandAffectsAllWorlds": "Does the /time command affect all worlds? false to only affect the sender's current world."
       },
       "console": {
-        "enableBrigadierCompletions": "在服务器控制台中启用 Mojang 的准将（高级）命令完成。",
-        "enableBrigadierHighlighting": "在服务器控制台中启用 Mojang 的准将突出显示。",
-        "hasAllPermissions": "控制台命令是否拥有所有权限。"
+        "enableBrigadierCompletions": "Enables Mojang's Brigadier (advanced) command completions in the server console.",
+        "enableBrigadierHighlighting": "Enables Mojang's BrigadierHighlighting in the server console.",
+        "hasAllPermissions": "Whether the console command has all permissions."
       },
       "itemValidation": {
         "book": {
-          "author": "书本作者的最大长度（以字符为单位）",
-          "page": "一本书页面的最大长度（以字符为单位",
-          "title": "书名的最大长度（以字符为单位）"
+          "author": "Maximum length (in characters) of a book author",
+          "page": "The maximum length of a book page in characters",
+          "title": "Maximum length of book title (in characters)"
         },
         "bookSize": {
           "pageMax": "",
           "totalMultiplier": ""
         },
-        "displayName": "物品显示名称的最大长度。（以字符为单位）",
-        "loreLine": "物品 lore 的最大长度。（以字符为单位）",
-        "resolveSelectorsInBooks": "是否解析书中的选择器。启用此功能后，获得创造模式的玩家将能够以另一种方式使服务器崩溃。"
+        "displayName": "The maximum length of an item's display name. (in characters)",
+        "loreLine": "Maximum length of item lore. (in characters)",
+        "resolveSelectorsInBooks": "Whether to resolve selectors in books. When enabled, players who get creative mode will be able to crash the server in another way."
       },
       "logging": {
-        "deobfuscateStacktraces": "是否将 Spigot 映射的堆栈跟踪重新映射到日志记录中的 Mojang 映射。对 Mojang 映射服务器没有影响。",
-        "logPlayerIpAddresses": "服务器是否应记录玩家 IP 地址。这不会影响插件记录玩家 IP 地址的功能。",
-        "useRgbForNamedTextColors": "是否应使用 RGB 代码记录命名的 ANSI 颜色。"
+        "deobfuscateStacktraces": "Whether to remap stack traces from Spigot maps to Mojang maps in logging. Has no effect on Mojang map servers.",
+        "logPlayerIpAddresses": "Whether the server should log player IP addresses. This does not affect the plugin's ability to log player IP addresses.",
+        "useRgbForNamedTextColors": "Whether named ANSI colors should be documented using RGB codes."
       },
       "messages": {
         "kick": {
-          "authenticationServersDown": "当 Mojang 的身份验证服务器无法访问时发送给玩家的消息。",
-          "connectionThrottle": "当玩家由于连接受到限制而无法加入时发送给玩家的消息。",
-          "flyingPlayer": "发送给被检测到飞行的玩家的消息。",
-          "flyingVehicle": "发送给被检测到乘坐飞行器的玩家的消息。"
+          "authenticationServersDown": "Message to send to players when Mojang's authentication servers are unreachable.",
+          "connectionThrottle": "Message to send to players when they are unable to join due to connection throttling.",
+          "flyingPlayer": "Message to send to players detected flying.",
+          "flyingVehicle": "Message sent to players detected flying in a vehicle."
         },
-        "noPermission": "当玩家没有足够的权限进行操作时发送给玩家的消息",
-        "useDisplayNameInQuitMessage": "服务器是否应该在退出消息中使用玩家的显示名称（由插件设置）或实际名称"
+        "noPermission": "Message sent to player when player does not have sufficient permission to perform an action",
+        "useDisplayNameInQuitMessage": "Whether the server should use the player's display name (set by plugin) or actual name in the quit message"
       },
       "misc": {
         "chatThreads": {
           "chatDxecutorCoreSize": "",
           "chatDxecutorMaxSize": ""
         },
-        "fixDntityPositionDesync": "固定实体位置同步。",
-        "lagCompensateBlockBreaking": "服务器是否使用时间或 TPS 来确定区块中断的持续时间。客户端假设服务器始终以 20 TPS 运行，当服务器延迟期间方块被破坏时会导致不一致。此设置可防止这种不同步。",
-        "loadPermissionsYmlBeforePlugins": "是否在插件加载之前加载 bukkit 的 permission.yml 文件，允许他们在启用时立即检查那里的设置信息",
-        "maxJoinsPerTick": "设置一次可以加入服务器的最大玩家数量。如果有更多玩家加入，他们将被推迟到稍后的 ticks 加入，但不会被踢出。这与 bukkit.yml 中的连接限制无关",
-        "regionFileCacheSize": "区域文件缓存的最大大小。",
+        "fixDntityPositionDesync": "Fix entity position synchronization.",
+        "lagCompensateBlockBreaking": "Whether the server uses time or TPS to determine the duration of block breaks. Clients assume the server is always running at 20 TPS, causing inconsistencies when blocks are broken during server lag. This setting prevents this desync.",
+        "loadPermissionsYmlBeforePlugins": "Whether to load bukkit's permissions.yml file before plugins are loaded, allowing them to immediately check settings there when enabled",
+        "maxJoinsPerTick": "Sets the maximum number of players that can join the server at one time. If more players join, they will be postponed until later ticks to join, but will not be kicked. This has nothing to do with the connection limit in bukkit.yml",
+        "regionFileCacheSize": "Maximum size of the region file cache.",
         "strictAdvancementDimensionCheck": "",
-        "useAlternativeLuckFormula": "是否使用 替代运气公式 ，允许将运气应用于没有定义质量的项目。对钓鱼公式进行了重大更改。",
-        "useDimensionTypeForCustomSpawners": "幻翼、流浪商人等是否应该能够在自定义世界中生成"
+        "useAlternativeLuckFormula": "Whether to use the Alternative Luck Formula , allowing luck to be applied to items that don't have a defined quality. Significant changes to the fishing formula.",
+        "useDimensionTypeForCustomSpawners": "Whether phantoms, wandering traders, etc. should be able to spawn in custom worlds"
       },
       "packetLimiter": {
         "allPackets": {
-          "action": "一旦违反限制就采取的行动。可能的值 DROP 将忽略超过限制的数据包，并且 KICK 将踢出超过限制的玩家。",
-          "interval": "应用的时间间隔。（单位为秒）",
-          "maxPacketRate": "间隔内每个玩家允许的数据包数。"
+          "action": "Action to take when the limit is violated. Possible values DROP will ignore packets exceeding the limit, and KICK will kick players who exceed the limit.",
+          "interval": "The time interval to apply. (in seconds)",
+          "maxPacketRate": "The number of packets allowed per player in the interval."
         },
-        "kickMessage": "玩家因发送太多数据包而被踢的消息。",
+        "kickMessage": "The message that the player was kicked for sending too many packets.",
         "overrides": {
           "ServerboundPlaceRecipePacket": {
             "action": "",
@@ -1177,117 +1177,117 @@
         }
       },
       "playerAutoSave": {
-        "maxPerTick": "一个 tick 内最多可以保存多少名玩家数据。",
-        "rate": "玩家数据应该多久保存一次。"
+        "maxPerTick": "The maximum number of player data that can be saved in a tick.",
+        "rate": "How often player data should be saved."
       },
       "proxies": {
         "bungeeCord": {
-          "onlineMode": "设置为与你的 bungeeCord 的 onlineMode 相同。"
+          "onlineMode": "Set to be the same as your bungeeCord's onlineMode."
         },
-        "proxyProtocol": "服务器是否应该处理 代理协议消息。这与 Velocity 或 BungeeCord 完全无关。仅当你使用 HAProxy 或类似工具时才启用此功能。",
+        "proxyProtocol": "Whether the server should handle proxy protocol messages. This has absolutely nothing to do with Velocity or BungeeCord. Only enable this if you are using HAProxy or similar.",
         "velocity": {
-          "enabled": "服务器是否应该接受 Velocity 代理。",
-          "onlineMode": "设置为与你的 Velocity 的 onlineMode 相同。",
-          "secret": "由 Velocity 代理和此服务器共享的密钥字符串。这需要与你的 Velocity 的 forwardingSecret 设置相同。"
+          "enabled": "Whether the server should accept Velocity proxies.",
+          "onlineMode": "Set to be the same as your Velocity's onlineMode.",
+          "secret": "The secret string shared by the Velocity agent and this server. This needs to be the same as your Velocity's forwardingSecret setting."
         }
       },
       "scoreboards": {
-        "saveDmptyScoreboardTeams": "设置服务器是否应自动删除那些空的队伍的计分板。",
-        "trackPluginScoreboards": "服务器是否应该跟踪只有虚拟目标的插件的记分牌。"
+        "saveDmptyScoreboardTeams": "Sets whether the server should automatically delete scoreboards for teams that are empty.",
+        "trackPluginScoreboards": "Whether the server should track scoreboards for plugins that only have dummy targets."
       },
       "spamLimiter": {
-        "incomingPacketThreshold": "设置服务器认为传入数据包是垃圾邮件并忽略它们的阈值。",
-        "recipeSpamIncrement": "当玩家按下配方时，配方垃圾计数器增加的数字。",
-        "recipeSpamLimit": "在服务器将玩家踢出垃圾邮件之前，配方垃圾邮件计数器可以达到的数量。",
-        "tabSpamIncrement": "当玩家在聊天窗口中按下选项卡时，内部选项卡垃圾邮件计数器增加的数量。",
-        "tabSpamLimit": "在服务器将玩家踢出垃圾邮件之前，内部标签垃圾邮件计数器可以达到的数量。"
+        "incomingPacketThreshold": "Sets the threshold at which the server considers incoming packets as spam and ignores them.",
+        "recipeSpamIncrement": "Number to increment the recipe spam counter when the player presses the recipe.",
+        "recipeSpamLimit": "How much the recipe spam counter can reach before the server kicks the player out of spam.",
+        "tabSpamIncrement": "Amount to increment the internal tab spam counter when a player presses tab in the chat window.",
+        "tabSpamLimit": "The amount the internal tab spam counter can reach before the server kicks the player out of spam."
       },
       "timings": {
-        "enabled": "是否启用 Timings",
-        "hiddenConfigDntries": "要隐藏在 Timings 报告中的配置条目。",
-        "historyInterval": "Timings 报告中各个点之间的间隔。（以秒为单位）",
-        "historyLength": "为单个报告保留的数据总量。此值在服务器端经过验证。超过这个数的报告将被拒绝。",
-        "serverName": "设置 Timings 输入服务器名称的内容。",
-        "serverNamePrivacy": "设置 Timings 是否在报告中隐藏服务器名称。",
-        "url": "设置 Timings Viewer 的服务器的 URL。",
-        "verbose": "设置 Timings 是否在其报告中提供更具体的信息。"
+        "enabled": "Whether to enable Timings",
+        "hiddenConfigDntries": "Config entries to hide from the Timings report.",
+        "historyInterval": "Interval between points in the Timings report. (in seconds)",
+        "historyLength": "The total amount of data to keep for a single report. This value is validated on the server side. Reports exceeding this number will be rejected.",
+        "serverName": "Set the contents of the Timings input server name.",
+        "serverNamePrivacy": "Sets whether Timings should hide server names in reports.",
+        "url": "Set the URL of the Timings Viewer server.",
+        "verbose": "Sets whether Timings should provide more specific information in its reports."
       },
       "unsupportedSettings": {
-        "allowHeadlessPistons": "服务器是否允许创建无头活塞。",
-        "allowPermanentBlockBreakDxploits": "是否可以通过普通漏洞破坏不可破坏的方块。",
-        "allowPistonDuplication": "是否允许复制 TNT、地毯和铁轨。这不能控制沙子的复制。",
-        "performUsernameValidation": "是否允许名称中包含特殊字符的玩家加入。"
+        "allowHeadlessPistons": "Whether the server allows the creation of headless pistons.",
+        "allowPermanentBlockBreakDxploits": "Whether non-breakable blocks can be broken through normal exploits.",
+        "allowPistonDuplication": "Whether to allow duplication of TNT, carpet and rails. This does not control sand duplication.",
+        "performUsernameValidation": "Whether to allow players with special characters in their name to join."
       },
       "watchdog": {
-        "earlyWarningDelay": "在服务器开始挂起后看门狗线程开始打印线程转储之前的毫秒数。",
-        "earlyWarningDvery": "服务器挂起时打印线程转储之间的间隔。（以毫秒为单位）"
+        "earlyWarningDelay": "Number of milliseconds before the watchdog thread starts printing thread dumps after the server starts hanging.",
+        "earlyWarningDvery": "Interval between printing thread dumps when the server hangs. (in milliseconds)"
       }
     },
     "paperWorldDefaults": {
       "_version": "",
       "anticheat": {
         "antiXray": {
-          "enabled": "是否开启反矿透。（Anti-Xray）",
-          "engineMode": "设置 Anti-Xray 引擎模式。",
+          "enabled": "Whether to enable anti-mine penetration. (Anti-Xray)",
+          "engineMode": "Set the Anti-Xray engine mode.",
           "hiddenBlocks": "",
-          "lavaObscures": "是否混淆接触岩浆的方块。",
-          "maxBlockHeight": "设置 Anti-Xray 操作的最大高度。只接受 16 的整数倍。",
+          "lavaObscures": "Whether to obfuscate blocks exposed to lava.",
+          "maxBlockHeight": "Set the maximum height for Anti-Xray operations. Only integer multiples of 16 are accepted.",
           "replacementBlocks": "",
-          "updateRadius": "当客户端与方块交互时，将发送包含真实方块数据的方块更新的半径。只可以设置 0、1和2。（0仅用于测试目的，不要在生产环境中使用）",
-          "usePermission": "是否允许有 paper.antixray.bypass 权限的玩家绕过 Anti-Xray。"
+          "updateRadius": "The radius at which block updates containing real block data will be sent when the client interacts with the block. Only 0, 1, and 2 can be set. (0 is for testing purposes only, do not use in production)",
+          "usePermission": "Whether to allow players with paper.antixray.bypass permission to bypass Anti-Xray."
         },
         "obfuscation": {
           "items": {
-            "hideDurability": "是否将耐久度信息发送给其他玩家的客户端。",
-            "hideItemmeta": "否应将作弊客户端中的不必要的物品信息（例如附魔、潜影盒中的物品等）发送给其他玩家的客户端。"
+            "hideDurability": "Whether to send durability information to other players' clients.",
+            "hideItemmeta": "Whether unnecessary item information (such as enchantments, items in shulker boxes, etc.) from cheat clients should be sent to other players' clients."
           }
         }
       },
       "chunks": {
-        "autoSaveInterval": "以 Tick 为单位配置世界自动保存间隔。",
-        "delayChunkUnloadsBy": "设置区块延迟卸载的时间。",
+        "autoSaveInterval": "Configures the world autosave interval in Ticks.",
+        "delayChunkUnloadsBy": "Set the chunk unload delay time.",
         "fixedChunkInhabitedTime": "",
-        "maxAutoSaveChunksPerTick": "自动保存系统将在每 Tick 中保存的最大区块数。",
-        "preventMovingIntoUnloadedChunks": "是否阻止玩家进入未加载的区块。"
+        "maxAutoSaveChunksPerTick": "The maximum number of chunks the autosave system will save per Tick.",
+        "preventMovingIntoUnloadedChunks": "Whether to prevent players from moving into unloaded chunks."
       },
       "collisions": {
         "allowPlayerCrammingDamage": "",
-        "allowVehicleCollisions": "交通工具否能够碰撞。",
-        "fixClimbingBypassingCrammingRule": "攀爬是否绕过实体填塞限制。",
-        "maxDntityCollisions": "设置服务器在达到此值后停止处理碰撞。",
-        "onlyPlayersCollide": "是否仅当玩家是两个碰撞实体之一时才计算碰撞。"
+        "allowVehicleCollisions": "Whether vehicles can collide.",
+        "fixClimbingBypassingCrammingRule": "Whether climbing bypasses entity cramming restrictions.",
+        "maxDntityCollisions": "Sets the server to stop processing collisions after reaching this value.",
+        "onlyPlayersCollide": "Whether to only calculate collisions if the player is one of the two colliding entities."
       },
       "entities": {
         "armorStands": {
-          "doCollisionDntityLookups": "盔甲架实体是否进行实体碰撞检查。",
-          "tick": "禁用以防止盔甲架 Ticking。（可以提高许多盔甲架的性能）"
+          "doCollisionDntityLookups": "Whether armor stand entities should be checked for entity collisions.",
+          "tick": "Disable to prevent armor stand Ticking. (Can improve performance of many armor stands)"
         },
         "behavior": {
-          "babyZombieMovementModifier": "修改小僵尸移动的速度，0.5 比基本速度快 50%，-0.4 慢 40%。",
-          "disableChestCatDetection": "箱子上坐着一只猫时是否可以打开箱子。",
-          "disableCreeperLingeringDffect": "是否禁用随机苦力怕，并留下一个挥之不去的区域效果云。",
-          "disablePlayerCrits": "是否禁用暴击。",
+          "babyZombieMovementModifier": "Modifies baby zombie movement speed, 0.5 is 50% faster than base speed, -0.4 is 40% slower.",
+          "disableChestCatDetection": "Whether it is possible to open the chest when there is a cat sitting on it.",
+          "disableCreeperLingeringDffect": "Whether to disable random creepers and leave a lingering area effect cloud.",
+          "disablePlayerCrits": "Whether to disable crit.",
           "doorBreakingDifficulty": {
-            "husk": "尸壳可以破门的难度。",
-            "vindicator": "卫道士可以破门的难度。",
-            "zombie": "僵尸可以破门的难度。",
-            "zombieVillager": "僵尸村民可以破门的难度。",
-            "zombifiedPiglin": "僵尸猪灵可以破门的难度。"
+            "husk": "How hard husks can break doors.",
+            "vindicator": "How difficult a vindicator can break through.",
+            "zombie": "How difficult the door can be broken by zombies.",
+            "zombieVillager": "How difficult a zombie villager can break doors.",
+            "zombifiedPiglin": "How difficult a zombified piglin can break through."
           },
-          "enderDragonsDeathAlwaysPlacesDragonDgg": "末影龙是否总是在死亡时掉落龙蛋。",
-          "experienceMergeMaxValue": "设置服务器单个经验球最大值，防止它们全部合并为 1 个经验球。",
+          "enderDragonsDeathAlwaysPlacesDragonDgg": "Whether the ender dragon always drops dragon eggs on death.",
+          "experienceMergeMaxValue": "Sets the server's maximum value for a single experience orb, preventing them all from being merged into 1 experience orb.",
           "mobsCanAlwaysPickUpLoot": {
-            "skeletons": "骷髅是否总是能够拾取战利品。（如果设置为 false，捡起物品的概率取决于世界的难度）",
-            "zombies": "僵尸是否总是能够拾取战利品。（如果设置为 false，捡起物品的概率取决于世界的难度）"
+            "skeletons": "Whether skeletons can always pick up loot. (If set to false, the probability of picking up items depends on the difficulty of the world)",
+            "zombies": "Whether zombies can always pick up loot. (If set to false, the probability of picking up items depends on the difficulty of the world)"
           },
-          "nerfPigmenFromNetherPortals": "从通过下界传送门传送的猪灵身上移除 AI。",
-          "parrotsAreUnaffectedByPlayerMovement": "是否防止鹦鹉在玩家移动时从玩家的肩膀上掉下来。",
-          "phantomsDoNotSpawnOnCreativePlayers": "是否在创造模式下禁止生成幻翼。",
-          "phantomsOnlyAttackInsomniacs": "是否防止幻翼攻击已经睡觉的玩家。",
-          "piglinsGuardChests": "猪灵在被激怒时是否应该保护箱子。",
+          "nerfPigmenFromNetherPortals": "Remove AI from piglins that teleport through nether portals.",
+          "parrotsAreUnaffectedByPlayerMovement": "Whether to prevent parrots from falling off the player's shoulders while the player is moving.",
+          "phantomsDoNotSpawnOnCreativePlayers": "Whether to disable phantom spawning in creative mode.",
+          "phantomsOnlyAttackInsomniacs": "Whether to prevent phantoms from attacking sleeping players.",
+          "piglinsGuardChests": "Whether piglins should guard chests when enraged.",
           "pillagerPatrols": {
-            "disable": "是否禁用掠夺者巡逻和相关的 AI。",
-            "spawnChance": "修改掠夺者的生成几率",
+            "disable": "Whether to disable pillager patrols and associated AI.",
+            "spawnChance": "Modifies the spawn chance of pillagers",
             "spawnDelay": {
               "perPlayer": "",
               "ticks": ""
@@ -1297,146 +1297,146 @@
               "perPlayer": ""
             }
           },
-          "shouldRemoveDragon": "如果没有传送门存在，是否移除末影龙。",
+          "shouldRemoveDragon": "Should remove the ender dragon if no portal exists.",
           "spawnerNerfedMobsShouldJump": "",
-          "zombieVillagerInfectionChance": "设置村民转换为僵尸村民的变化几率。如果基于游戏难度变化就设置为 -1.0。（设置为 0.0 则始终让村民在被僵尸杀死时死亡，设置为 100.0 则始终将村民转化为僵尸村民）",
-          "zombiesTargetTurtleDggs": "设置僵尸和僵尸猪灵是否会自动寻找并破坏海龟蛋。"
+          "zombieVillagerInfectionChance": "Sets the chance for a villager to convert to a zombie villager. Set to -1.0 if it varies based on game difficulty. (Set to 0.0 to always let a villager die when killed by a zombie, set to 100.0 to always convert a villager to a zombie villager)",
+          "zombiesTargetTurtleDggs": "Sets whether zombies and zombified piglins will automatically seek out and destroy turtle eggs."
         },
-        "entitiesTargetWithFollowRange": "设置服务器在定位实体时是否应使用跟踪范围。",
+        "entitiesTargetWithFollowRange": "Sets whether the server should use a follow range when locating entities.",
         "mobDffects": {
           "immuneToWitherDffect": {
             "wither": "",
-            "witherSkeleton": "凋灵骷髅是否免疫凋零效果"
+            "witherSkeleton": "Whether wither skeletons are immune to wither effects"
           },
-          "spidersImmuneToPoisonDffect": "蜘蛛是否免疫中毒效果",
-          "undeadImmuneToCertainDffects": "亡灵生物是否免疫再生和中毒效果"
+          "spidersImmuneToPoisonDffect": "Are spiders immune to poison effects",
+          "undeadImmuneToCertainDffects": "Whether undead mobs are immune to regeneration and poison effects"
         },
         "spawning": {
-          "allChunksAreSlimeChunks": "是否将所有区块设置为史莱姆区块，允许史莱姆在任何区块中生成。（这实际上可能会减少你遇到史莱姆的机会，因为它们现在有更大的潜在生成区域。）",
+          "allChunksAreSlimeChunks": "Whether to set all chunks to be slime chunks, allowing slimes to spawn in any chunk. (This may actually reduce your chances of encountering slimes, as they now have a larger potential spawn area.)",
           "altItemDespawnRate": {
-            "enabled": "设置物品是否具有不同的消失率。",
+            "enabled": "Sets whether items have different disappearance rates.",
             "items": {
-              "cobblestone": "圆石消失的概率。"
+              "cobblestone": "The probability that a cobblestone will disappear."
             }
           },
-          "countAllMobsForSpawning": "是否将刷怪蛋生成的怪物和其他杂类生物计入全局生物限制。",
-          "creativeArrowDespawnRate": "玩家在创造模式下射出的箭消失的速率，以 Tick 为单位。",
+          "countAllMobsForSpawning": "Whether mobs and other miscellaneous mobs spawned by spawn eggs count towards the global mob limit.",
+          "creativeArrowDespawnRate": "The rate at which arrows fired by the player in creative mode disappear, in Ticks.",
           "despawnRanges": {
             "ambient": {
               "hard": "",
               "soft": ""
             },
             "axolotls": {
-              "hard": "美西螈距离玩家的方块数，超过这个距离将被强制消失",
-              "soft": "美西螈距离玩家的方块数，超过这个距离将被随机消失"
+              "hard": "The number of blocks the axolotl is away from the player before it will be forced to disappear",
+              "soft": "The number of blocks the axolotl is away from the player before it will be randomly despawned"
             },
             "creature": {
-              "hard": "动物距离玩家的方块数，超过这个距离将被强制消失",
-              "soft": "动物距离玩家的方块数，超过这个距离将被随机消失"
+              "hard": "Animals are the number of blocks away from the player before they will be forced to disappear",
+              "soft": "The number of blocks the animal is away from the player before it will be randomly despawned"
             },
             "misc": {
-              "hard": "杂物距离玩家的方块数，超过这个距离将被强制消失",
-              "soft": "杂物距离玩家的方块数，超过这个距离将被随机消失"
+              "hard": "The number of blocks away from the player, beyond this distance will be forced to disappear",
+              "soft": "The number of blocks away from the player, beyond this distance will be randomly disappeared"
             },
             "monster": {
-              "hard": "怪物距离玩家的方块数，超过这个距离将被强制消失",
-              "soft": "怪物距离玩家的方块数，超过这个距离将被随机消失"
+              "hard": "The number of blocks the monster is away from the player, beyond which it will be forced to disappear",
+              "soft": "The number of blocks the monster is away from the player, beyond which it will disappear randomly"
             },
             "undergroundWaterCreature": {
-              "hard": "水下生物距离玩家的方块数，超过这个距离将被强制消失",
-              "soft": "水下生物距离玩家的方块数，超过这个距离将被随机消失"
+              "hard": "The number of blocks the underwater creature is away from the player, beyond which it will be forced to disappear",
+              "soft": "The number of blocks that underwater creatures are away from the player, beyond which they will disappear randomly"
             },
-            "waterAmbient": {
+            "water ambient": {
               "hard": "",
               "soft": ""
             },
             "waterCreature": {
-              "hard": "水中动物距离玩家的方块数，超过这个距离将被强制消失",
-              "soft": "水中动物距离玩家的方块数，超过这个距离将被随机消失"
+              "hard": "Animals in the water are the number of blocks away from the player, beyond which they will be forced to disappear",
+              "soft": "Animals in the water are the number of blocks away from the player, beyond this distance they will disappear randomly"
             }
           },
-          "disableMobSpawnerSpawnDggTransformation": "是否阻止玩家用刷怪蛋改变刷怪笼的类型。",
+          "disableMobSpawnerSpawnDggTransformation": "Whether to prevent players from using spawn eggs to change the type of spawner.",
           "duplicateUuid": {
-            "mode": "指定服务器用来解析具有重复 UUID 的实体的方法。（SAFE_REGEN：为实体重新生成一个 UUID，如果它们关闭，则将其删除。DELETE: 删除实体。SILENT: 什么都不做，不打印日志。WARN: 什么都不做，打印日志。）",
+            "mode": "Specify the method the server uses to resolve entities with duplicate UUIDs. (SAFE_REGEN: Regenerate a UUID for entities, delete them if they are down. DELETE: Delete entities. SILENT: Do nothing, do not print logs. WARN: Do nothing, print logs.)",
             "safeRegenDeleteRange": ""
           },
-          "filterNbtDataFromSpawnDggsAndRelated": "是否从刷怪蛋、掉落的方块和其他在创造模式中经常被滥用的物品中删除某些 NBT 数据。",
-          "ironGolemsCanSpawnInAir": "铁傀儡是否可以在空中生成。",
+          "filterNbtDataFromSpawnDggsAndRelated": "Whether to remove certain NBT data from spawn eggs, dropped blocks, and other items that are often abused in creative mode.",
+          "ironGolemsCanSpawnInAir": "Whether iron golems can spawn in air.",
           "monsterSpawnMaxLightLevel": "",
-          "nonPlayerArrowDespawnRate": "非玩家实体射出的箭头消失的速率（以 Tick 为单位）",
-          "perPlayerMobSpawns": "设置是按玩家还是整个服务器计算暴民限制（在 bukkit.yml 中）。启用此设置会产生大致相同数量的生物，但分布更均匀，可防止一个玩家使用整个生物上限并提供更像单人游戏的体验。",
+          "nonPlayerArrowDespawnRate": "The rate (in Ticks) at which arrows fired by non-player entities will disappear",
+          "perPlayerMobSpawns": "Sets whether mob limits are calculated per player or the entire server (in bukkit.yml). Enabling this setting spawns roughly the same number of mobs, but with a more even distribution, preventing one player from using the entire mob cap and providing a more single player-like experience.",
           "scanForLegacyDnderDragon": "",
-          "skeletonHorseThunderSpawnChance": "设置“骷髅陷阱”（4 个骷髅骑士）在雷暴中生成的几率。",
+          "skeletonHorseThunderSpawnChance": "Sets the chance that a \"skeleton trap\" (4 skeleton horsemen) will spawn in a thunderstorm.",
           "slimeSpawnHeight": {
             "slimeChunk": {
-              "maximum": "设置史莱姆区块中自然生成史莱姆的最大 Y 位置。"
+              "maximum": "Sets the maximum Y position of naturally spawned slimes in slime chunks."
             },
             "surfaceBiome": {
-              "maximum": "设置沼泽生物群系中自然生成史莱姆的最大 Y 位置。",
-              "minimum": "设置沼泽生物群系中自然生成史莱姆的最小 Y 位置。"
+              "maximum": "Sets the maximum Y position of naturally spawned slimes in swamp biomes.",
+              "minimum": "Sets the minimum Y position for naturally spawning slimes in swamp biomes."
             }
           },
           "spawnLimits": {},
           "wanderingTrader": {
             "spawnChanceFailureIncrement": "",
-            "spawnChanceMax": "生成流浪商人的最大几率。",
-            "spawnChanceMin": "生成流浪商人的最小几率。",
-            "spawnDayLength": "生成流浪商人的时间间隔。",
+            "spawnChanceMax": "Maximum chance of spawning wandering traders.",
+            "spawnChanceMin": "Minimum chance to spawn a wandering trader.",
+            "spawnDayLength": "Time interval between spawning wandering traders.",
             "spawnMinuteLength": ""
           },
           "wateranimalSpawnHeight": {
-            "maximum": "水生动物产卵的最大高度。",
-            "minimum": "水生动物产卵的最小高度。"
+            "maximum": "Maximum height for aquatic animals to spawn.",
+            "minimum": "Minimum height for aquatic animals to spawn."
           }
         }
       },
       "environment": {
-        "disableDxplosionKnockback": "是否阻止因爆炸而被击退。",
-        "disableIceAndSnow": "是否禁用冰雪生成。",
-        "disableTeleportationSuffocationCheck": "是否禁用服务器在传送玩家之前执行的卡墙检查。",
-        "disableThunder": "是否禁用雷暴。",
-        "frostedIce": {
+        "disableDxplosionKnockback": "Whether to prevent knockback from explosions.",
+        "disableIceAndSnow": "Whether to disable ice and snow generation.",
+        "disableTeleportationSuffocationCheck": "Whether to disable the stuck wall check performed by the server before teleporting the player.",
+        "disableThunder": "Whether to disable thunderstorms.",
+        "frosted ice": {
           "delay": {
-            "max": "应用结霜冰效果的最大 RNG 值。",
-            "min": "应用结霜冰效果的最小 RNG 值。"
+            "max": "Maximum RNG value at which to apply the frosted ice effect.",
+            "min": "Minimum RNG value at which to apply the frosty ice effect."
           },
-          "enabled": "是否启用结霜的冰块。"
+          "enabled": "Whether frosted ice is enabled."
         },
-        "generateFlatBedrock": "基岩是否生成为单层。（类似于超平坦）",
-        "netherCeilingVoidDamageHeight": "玩家在地狱受到虚空伤害的等级。",
-        "optimizeDxplosions": "服务器是否在爆炸期间缓存实体查找，而不是在整个过程中重新计算。",
-        "portalCreateRadius": "服务器在生成新传送门时尝试创建传送门的最大半径。",
-        "portalSearchRadius": "服务器将用于查找现有下界传送门的最大半径。如果在该范围内找不到一个，将生成一个新的。",
+        "generateFlatBedrock": "Whether bedrock is generated as a single layer. (similar to superflat)",
+        "netherCeilingVoidDamageHeight": "The level at which the player will take void damage in hell.",
+        "optimizeDxplosions": "Whether the server caches entity lookups during an explosion, rather than recalculating them throughout.",
+        "portalCreateRadius": "The maximum radius the server will attempt to create a portal when spawning a new portal.",
+        "portalSearchRadius": "The maximum radius the server will use to find existing nether portals. If one is not found within that range, a new one will be generated.",
         "portalSearchVanillaDimensionScaling": "",
         "treasureMaps": {
           "enabled": "",
           "findAlreadyDiscovered": {
             "lootTables": "",
-            "villagerTrade": ""
+            "villageTrade": ""
           }
         },
-        "waterOverLavaFlowSpeed": "设置水流过岩浆时的速度。"
+        "waterOverLavaFlowSpeed": "Sets the speed at which water flows through lava."
       },
       "featureSeeds": {
-        "generateRandomSeedsForAll": "是否为尚未设置种子的所有可用功能启用随机种子自动填充。"
+        "generateRandomSeedsForAll": "Whether to enable random seed autofill for all available features that have not been seeded."
       },
       "fishingTimeRange": {
-        "maximum": "钓到一条鱼所需的最大 RNG Tick。",
-        "minimum": "钓到一条鱼所需的最小 RNG Tick。"
+        "maximum": "The maximum RNG Tick required to catch a fish.",
+        "minimum": "Minimum RNG Tick required to catch a fish."
       },
       "fixes": {
         "disableUnloadedChunkDnderpearlDxploit": "",
-        "fallingBlockHeightNerf": "方块从高空掉落超过多少个方块时会被服务器移除。（<1则禁用此功能）",
-        "fixCuringZombieVillagerDiscountDxploit": "是否修复通过感染和治愈僵尸村民来获得大量折扣的漏洞。",
-        "fixItemsMergingThroughWalls": "是否防止物品通过墙壁合并。",
-        "preventTntFromMovingInWater": "是否阻止已启动的 TNT 实体在流动的水中移动。",
+        "fallingBlockHeightNerf": "The number of blocks a block will be removed from when it falls from a height. (<1 disables this feature)",
+        "fixCuringZombieVillagerDiscountDxploit": "Whether to fix the exploit that gave huge discounts for infecting and curing zombie villagers.",
+        "fixItemsMergingThroughWalls": "Whether to prevent items from merging through walls.",
+        "preventTntFromMovingInWater": "Whether to prevent activated TNT entities from moving in moving water.",
         "splitOverstackedLoot": "",
         "tntDntityHeightNerf": ""
       },
       "hopper": {
-        "cooldownWhenFull": "在漏斗装满时是否有短暂的冷却时间，而不是不断尝试吸新物品。",
+        "cooldownWhenFull": "Whether to have a short cooldown when the hopper is full, instead of constantly trying to suck new items.",
         "disableMoveDvent": "",
-        "ignoreOccludingBlocks": "漏斗是否会忽略遮挡方块内的容器，例如沙子内的漏斗矿车。启用此功能将提高漏斗检查流入物品位置的性能。"
+        "ignoreOccludingBlocks": "Whether the hopper should ignore containers inside occluding blocks, such as a hopper minecart inside sand. Enabling this will improve the performance of the hopper's ability to check the location of incoming items."
       },
       "lootables": {
         "autoReplenish": "",
@@ -1447,312 +1447,312 @@
         "restrictPlayerReloot": ""
       },
       "maps": {
-        "itemFrameCursorLimit": "每个地图允许的光标（标记）数量。",
-        "itemFrameCursorUpdateInterval": "更新物品展示框中地图上的光标的时间间隔。（将此设置为小于 1 的数字将完全禁用更新）"
+        "itemFrameCursorLimit": "Number of cursors (markers) allowed per map.",
+        "itemFrameCursorUpdateInterval": "The time interval for updating the cursor on the map in an item frame. (Setting this to a number less than 1 will completely disable updates)"
       },
       "maxGrowthHeight": {
         "bamboo": {
-          "max": "竹子自然会长到的最大高度。",
-          "min": "竹子自然会长到的最低高度。"
+          "max": "The maximum height that bamboo will naturally grow to.",
+          "min": "The minimum height that bamboo will naturally grow to."
         },
-        "cactus": "仙人掌块的自然生长最大高度。",
-        "reeds": "甘蔗自然生长的最大高度。"
+        "cactus": "Maximum natural growth height for cactus blocks.",
+        "reeds": "Maximum height at which sugar cane will naturally grow."
       },
       "misc": {
-        "disableDndCredits": "是否在离开游戏结束时永远不要发送游戏结束点数。",
-        "disableRelativeProjectileVelocity": "是否在计算射箭速度时忽略射手速度。",
-        "disableSprintInterruptionOnAttack": "玩家冲刺时受到攻击是否会被打断。",
-        "lightQueueSize": "设置每个世界的主线程的光照更新队列有多大。",
-        "maxLeashDistance": "配置拴绳的最大距离。",
-        "redstoneImplementation": "指定服务器使用的红石实现。替代实现可以通过优化功率计算和减少发出的方块和形状更新的数量来大大减少红石粉造成的延迟。可以使用以下实现：VANILLA(原版)、EIGENCRAFT、ALTERNATE-CURRENT",
-        "shieldBlockingDelay": "玩家激活他们的盾牌和它实际阻挡伤害之间的 Tick。",
-        "showSignClickCommandFailureMsgsToPlayer": "通过单击告示牌执行的命令是否应向玩家显示执行失败的消息。",
-        "updatePathfindingOnBlockUpdate": "控制在世界中更新一个方块时是否更新怪物的寻路AI。禁用此选项可以显着提高服务器性能，而对游戏机制几乎没有明显影响。当加载了很多实体并且你有自动农场或红石时钟时，建议开启此选项。"
+        "disableDndCredits": "Whether to never send game end credits when leaving game end.",
+        "disableRelativeProjectileVelocity": "Whether to ignore archer velocity when calculating archery velocity.",
+        "disableSprintInterruptionOnAttack": "Whether the player will be interrupted when being attacked while sprinting.",
+        "lightQueueSize": "Sets how big the main thread light update queue is per world.",
+        "maxLeashDistance": "Configures the maximum distance for the leash.",
+        "redstoneImplementation": "Specifies the redstone implementation used by the server. Alternative implementations can greatly reduce the delay caused by redstone dust by optimizing power calculations and reducing the number of block and shape updates issued. The following implementations can be used: VANILLA (vanilla), EIGENCRAFT, ALTERNATE-CURRENT",
+        "shieldBlockingDelay": "The Tick between when a player activates their shield and when it actually blocks damage.",
+        "showSignClickCommandFailureMsgsToPlayer": "Whether commands executed by clicking on signs should show the player a message that they failed to execute.",
+        "updatePathfindingOnBlockUpdate": "Controls whether to update the mob's pathfinding AI when a block is updated in the world. Disabling this option can significantly improve server performance with little noticeable effect on game mechanics. It is recommended to enable this option when there are many entities loaded and you have autofarming or redstone clocks."
       },
       "scoreboards": {
-        "allowNonPlayerDntitiesOnScoreboards": "在计算碰撞时是否将非玩家实体视为从未出现在记分板上。",
-        "useVanillaWorldScoreboardNameColoring": "是否使用原版计分板为玩家昵称着色。"
+        "allowNonPlayerDntitiesOnScoreboards": "Whether to treat non-player entities as if they were never on the scoreboard when calculating collisions.",
+        "useVanillaWorldScoreboardNameColoring": "Whether to use vanilla WorldScoreboardNameColoring for player nicknames."
       },
       "spawn": {
-        "allowUsingSignsInsideSpawnProtection": "是否允许玩家在重生点保护区内使用告示牌。",
-        "keepSpawnLoaded": "是否保持重生点保护区为常加载区块。",
-        "keepSpawnLoadedRange": "重生点保护区常加载区块范围。"
+        "allowUsingSignsInsideSpawnProtection": "Whether to allow players to use signs inside the spawn protection area.",
+        "keepSpawnLoaded": "Whether to keep the spawn point protection area as a constant loading block.",
+        "keepSpawnLoadedRange": "The spawn point guard area always loads a range of chunks."
       },
       "tickRates": {
         "behavior": {
-          "villager": {
+          "village": {
             "validatenearbypoi": ""
           }
         },
-        "containerUpdate": "服务器更新容器和库存的速率（以 Tick 为单位）",
-        "grassSpread": "设置服务器散播草的延迟。（以 Tick 为单位）",
-        "mobSpawner": "刷怪笼应该多久计算一次可用的生成区域并在世界中生成新实体。（-1 值将禁用所有刷怪笼）",
+        "containerUpdate": "The rate at which the server updates containers and inventory (in Ticks)",
+        "grassSpread": "Set the delay for the server to spread grass. (in Ticks)",
+        "mobSpawner": "How often the spawner should calculate the available spawn area and spawn new entities in the world. (A value of -1 will disable all spawners)",
         "sensor": {
-          "villager": {
-            "secondarypoisensor": ""
+          "village": {
+            "secondary poisensor": ""
           }
         }
       },
       "unsupportedSettings": {
-        "fixInvulnerableDndCrystalDxploit": "如果设置为 false，将允许创建无敌的末影水晶。"
+        "fixInvulnerableDndCrystalDxploit": "If set to false, will allow creation of invulnerable ender crystals."
       }
     },
     "permissionYml": {
-      "default_level": "新玩家默认的权限等级",
-      "owner": "所有者",
-      "admin": "管理员",
-      "helper": "助手",
-      "user": "普通玩家",
-      "guest": "访客"
+      "default_level": "Default permission level for new players",
+      "owner": "owner",
+      "admin": "Administrator",
+      "helper": "Helper",
+      "user": "Normal Player",
+      "guest": "Visitor"
     },
     "serverProperties": {
-      "requireResourcePack": "是否需要资源包",
-      "enableJmxMonitoring": "是否启用 JMX 监视",
-      "syncChunkWrites": "是否启用同步区块写入",
-      "generatorSettings": "用于自定义超平坦世界的生成，不生成超平坦世界请留空",
-      "allowNether": "是否允许下界（包括地狱）",
-      "levelName": "世界（地图）名称 不要使用中文",
-      "enableQuery": "是否允许使用 GameSpy4 协议的服务器监听器",
-      "allowFlight": "是否允许玩家飞行（在任何游戏模式下）",
-      "serverPort": "服务器端口（若服务器有更高级的设置，此选项可能会失效）",
-      "levelType": "地图的生成类型（默认：default，超平坦：flat，放大的世界：amplified，巨型生物群系：largeBiomes）",
-      "enableRcon": "是否允许远程访问服务器控制台（RCON）",
-      "forceGamemode": "强制玩家加入时为默认游戏模式",
-      "levelSeed": "地图种子 默认留空",
-      "serverIp": "服务器ip，若不绑定请留空",
-      "maxBuildHeight": "玩家在服务器放置方块的最高高度",
-      "spawnNpcs": "是否生成村民",
-      "whiteList": "是否开启白名单",
-      "spawnAnimals": "是否生成动物",
-      "snooperDnabled": "启用数据采集",
-      "hardcore": "极限模式（死后自动封禁）",
-      "texturePack": "材质包",
-      "onlineMode": "在线（正版）验证",
-      "pvp": "是否允许玩家互相攻击",
-      "enforceSecureProfile": "如果开启，则没有 Mojang 签名公钥的玩家将无法连接到服务器。",
-      "difficulty": "游戏难度（peaceful, easy, normal,hard）",
-      "playerIdleTimeout": "允许的挂机时间，单位为分钟 超过限制后自动踢出服务器",
-      "gamemode": "游戏模式（survival，creative，adventure，spectator）",
-      "maxPlayers": "服务器最大玩家数限制",
-      "spawnMonsters": "生成攻击型生物（怪物）",
-      "viewDistance": "服务器发送给客户端的数据量，决定玩家能设置的视野",
-      "generateStructures": "生成世界时生成结构（如村庄）禁止后地牢和地下要塞仍然生成",
-      "motd": "服务器信息展示 若使用 ColorMotd 等插件可留空该选项",
-      "opPermissionLevel": "OP 权限等级 (1-4)",
-      "announcePlayerAchievements": "玩家获得成就时，是否在服务器聊天栏显示（是否允许其装X）",
-      "networkCompressionThreshold": "网络压缩阈值",
-      "resourcePackSha1": "资源包的 SHA-1 值，必须为小写十六进制，不是必填选项",
-      "enableCommandBlock": "启用命令方块",
-      "resourcePack": "统一资源标识符 (URI) 指向一个资源包。玩家可选择是否使用",
-      "maxWorldSize": "最大世界大小",
-      "functionPermissionLevel": "设定函数的默认权限等级",
-      "maxTickTime": "设置每个 Tick 花费的最大毫秒数",
-      "preventProxyConnections": "是否允许玩家使用网络代理进入服务器",
-      "rconPort": "设置 RCON 远程访问的端口号",
-      "rconPassword": "设置 RCON 远程访问的密码（参见 enableRcon）",
-      "queryPort": "设置监听服务器的端口号（参见 enableRcon）",
-      "useNativeTransport": "是否使用针对 Linux 平台的数据包收发优化 [ 仅 Linux ]",
-      "debug": "调试模式",
-      "broadcastRconToOps": "向 OP 广播 RCON 信息",
-      "broadcastConsoleToOps": "向 OP 广播服务器控制台信息",
-      "enforceWhitelist": "在服务器上强制使用白名单",
-      "spawnProtection": "通过将该值进行 2x+1 的运算来决定出生点的保护半径，设置为0将只保护出生点下方那一个方块。",
-      "maxChainedNeighborUpdates": "在跳过其他更新之前限制连续临近更新的数量。负值移除限制。",
-      "enableStatus": "使服务器在服务器列表中显示为在线。如果设置为否，它将抑制来自客户端的回复。这意味着它将显示为脱机，但仍将接受连接。",
-      "resourcePackPrompt": "可选，添加一个自定义消息，当使用requireResourcePack时，将显示在资源包提示窗口上。",
-      "hideOnlinePlayers": "是否隐藏在线人数",
-      "entityBroadcastRangePercentage": "控制客户端最远可见实体距离，可以适当优化缩小距离。",
-      "simulationDistance": "设置生物实体与玩家之间的最大距离，以便服务器更新，以玩家每个方向的块为单位(半径)。如果实体在这个半径之外，那么它们将不会被服务器发送，也不会被玩家看到。",
-      "rateLimit": "当玩家客户端发送多少数据包总量时会被踢出，0代表关闭",
-      "previewsChat": "如果设置为是，将启用聊天预览。如果启用，服务器禁止用户使用vpn或代理；如果禁用，服务器不阻止用户使用vpn或代理。",
-      "textFilteringConfig": "文本过滤规则配置文件（可能工作不正常）"
+      "requireResourcePack": "Whether a resource pack is required",
+      "enableJmxMonitoring": "Whether to enable JMX monitoring",
+      "syncChunkWrites": "Whether to enable synchronous chunk writing",
+      "generatorSettings": "Used to customize the generation of superflat worlds, please leave blank if you do not want to generate superflat worlds",
+      "allowNether": "Whether to allow nether (including hell)",
+      "levelName": "Do not use Chinese for the world (map) name",
+      "enableQuery": "Whether to allow server listeners using the GameSpy4 protocol",
+      "allowFlight": "Whether the player is allowed to fly (in any game mode)",
+      "serverPort": "Server port (if the server has more advanced settings, this option may fail)",
+      "levelType": "The map generation type (default: default, superflat: flat, amplified world: amplified, large biomes: largeBiomes)",
+      "enableRcon": "Whether to allow remote access to the server console (RCON)",
+      "forceGamemode": "Default gamemode when forcing players to join",
+      "levelSeed": "Map seed is left blank by default",
+      "serverIp": "Server ip, please leave blank if not bound",
+      "maxBuildHeight": "Maximum height a player can place a block on the server",
+      "spawnNpcs": "Whether to spawn villagers",
+      "whiteList": "Whether to enable the whitelist",
+      "spawnAnimals": "Whether to spawn animals",
+      "snooperDnabled": "Enable data collection",
+      "hardcore": "Hardcore mode (auto-ban after death)",
+      "texturePack": "Texture Pack",
+      "onlineMode": "Online (genuine) verification",
+      "pvp": "Whether players are allowed to attack each other",
+      "enforceSecureProfile": "If enabled, players without a Mojang signed public key will not be able to connect to the server.",
+      "difficulty": "Game difficulty (peaceful, easy, normal, hard)",
+      "playerIdleTimeout": "The allowed idle time, in minutes, will be automatically kicked out of the server after exceeding the limit",
+      "gamemode": "Game mode (survival, creative, adventure, spectator)",
+      "maxPlayers": "Server maximum player limit",
+      "spawnMonsters": "Spawn hostile mobs (monsters)",
+      "viewDistance": "The amount of data sent by the server to the client determines the field of view that the player can set",
+      "generateStructures": "Dungeons and underground strongholds still generate when generating structures (such as villages) are disabled during world generation",
+      "motd": "Server information display If you use plugins such as ColorMotd, you can leave this option blank",
+      "opPermissionLevel": "OP permission level (1-4)",
+      "announcePlayerAchievements": "Whether to display in the server chat bar when a player gets an achievement (whether it is allowed to install X)",
+      "networkCompressionThreshold": "Network Compression Threshold",
+      "resourcePackSha1": "The SHA-1 value of the resource pack, must be lowercase hexadecimal, not a required option",
+      "enableCommandBlock": "Enable Command Block",
+      "resourcePack": "Uniform Resource Identifier (URI) pointing to a resource pack. Use is optional",
+      "maxWorldSize": "Maximum World Size",
+      "functionPermissionLevel": "Set the default permission level for functions",
+      "maxTickTime": "Set the maximum number of milliseconds each Tick takes",
+      "preventProxyConnections": "Whether to allow players to use web proxies to connect to the server",
+      "rconPort": "Set the port number for RCON remote access",
+      "rconPassword": "Set password for RCON remote access (see enableRcon)",
+      "queryPort": "Set the port number of the listening server (see enableRcon)",
+      "useNativeTransport": "Whether to use packet sending and receiving optimization for Linux platform [Linux only]",
+      "debug": "Debug Mode",
+      "broadcastRconToOps": "Broadcast RCON info to OP",
+      "broadcastConsoleToOps": "Broadcast server console info to OP",
+      "enforceWhitelist": "Enforce a whitelist on the server",
+      "spawnProtection": "Determines the spawn protection radius by multiplying this value by 2x+1, setting it to 0 will only protect the block below the spawn point.",
+      "maxChainedNeighborUpdates": "Limit the number of consecutive neighbor updates before skipping other updates. Negative values remove the limit.",
+      "enableStatus": "Makes the server appear online in the server list. If set to no, it will suppress replies from clients. This means it will appear offline, but will still accept connections.",
+      "resourcePackPrompt": "Optional, add a custom message that will be displayed on the resource pack prompt window when using requireResourcePack.",
+      "hideOnlinePlayers": "Whether to hide online players",
+      "entityBroadcastRangePercentage": "Control the distance of the furthest visible entity on the client side, which can be properly optimized to reduce the distance.",
+      "simulationDistance": "Sets the maximum distance between biological entities and the player for the server to update, in blocks in each direction of the player (radius). If entities are outside this radius, they will not be sent by the server and will not be seen by the player.",
+      "rateLimit": "When the total amount of data packets sent by the player client will be kicked out, 0 means off",
+      "previewsChat": "If set to yes, chat previews will be enabled. If enabled, the server prohibits users from using vpns or proxies; if disabled, the server does not prevent users from using vpns or proxies.",
+      "textFilteringConfig": "Text filtering rules configuration file (may not work properly)"
     },
     "spigotYml": {
-      "configVersion": "配置版本号，一般情况无需修改",
+      "configVersion": "Configuration version number, generally no need to modify",
       "settings": {
-        "debug": "调试模式",
-        "saveUserCacheOnStopOnly": "是否只要停止时才准缓存用户数据",
-        "movedWronglyThreshold": "控制“错误移动”检查的阈值",
-        "movedTooQuicklyMultiplier": "判断移动速度太快的倍数阈值",
-        "logVillagerDeaths": "是否记载村民死亡",
-        "timeoutTime": "连接超时时间",
-        "restartOnCrash": "崩溃时是否自动重启",
-        "restartScript": "重启时执行的脚本名（如 ./start.sh）",
-        "sampleCount": "控制将鼠标悬停在客户端服务器列表中的玩家计数上时显示的(随机选择的)样本玩家数量。",
-        "userCacheSize": "用户缓存大小",
-        "nettyThreads": "Netty 通信线程数",
-        "playerShuffle": "每隔多少 ticks（20ticks/1s）刷新玩家在数据遍历中的顺序，可以有效调整玩家在内存中顺序，在 PvP 服务器上有些帮助，低于100会导致性能问题",
-        "bungeecord": "是否开启集群模式（还需要更多辅助软件与配置结合使用）",
+        "debug": "Debug Mode",
+        "saveUserCacheOnStopOnly": "Whether to cache user data only when it is stopped",
+        "movedWronglyThreshold": "Controls the threshold for the \"moved Wrongly\" check",
+        "movedTooQuicklyMultiplier": "The multiplier threshold for judging that the moving speed is too fast",
+        "logVillagerDeaths": "Whether to log villager deaths",
+        "timeoutTime": "Connection timeout",
+        "restartOnCrash": "Whether to restart automatically when it crashes",
+        "restartScript": "Script name to be executed on restart (such as ./start.sh)",
+        "sampleCount": "Controls the number of (randomly selected) sample players displayed when hovering over the player count in the client server list.",
+        "userCacheSize": "User cache size",
+        "nettyThreads": "Number of Netty communication threads",
+        "playerShuffle": "Every number of ticks (20ticks/1s) to refresh the order of players in the data traversal, which can effectively adjust the order of players in memory. It is helpful on PvP servers. Less than 100 will cause performance problems",
+        "bungeecord": "Whether to enable cluster mode (more auxiliary software and configuration are needed to be used together)",
         "attribute": {
           "maxHealth": {
-            "max": "服务器最大的生命值上限",
-            "min": "服务器最小的生命值上限"
+            "max": "The server's maximum health limit",
+            "min": "The server's minimum health limit"
           },
           "movementSpeed": {
-            "max": "服务器最大的速度上限",
-            "min": "服务器最小的生命值上限"
+            "max": "The server's maximum speed limit",
+            "min": "The server's minimum health limit"
           },
           "attackDamage": {
-            "max": "服务器最大的伤害上限",
-            "min": "服务器最小的生命值上限"
+            "max": "The server's maximum damage limit",
+            "min": "The server's minimum health limit"
           }
         }
       },
       "stats": {
-        "disableSaving": "如果启用，则服务器将不保存玩家统计数据或成就",
-        "forcedStats": "无法修改，暂不支持"
+        "disableSaving": "If enabled, the server will not save player stats or achievements",
+        "forcedStats": "Cannot be modified, currently not supported"
       },
       "players": {
         "disableSaving": ""
       },
       "messages": {
-        "whitelist": "当玩家被白名单阻止时显示的文本内容",
-        "unknownCommand": "当玩家执行未知命令时所提示的文本内容",
-        "serverFull": "当服务器满人时的提示文本",
-        "outdatedClient": "当客户端版本过低时，提示的文本内容，其中 {0} 为服务器版本变量",
-        "outdatedServer": "当服务器版本过低时，提示的文本内容，其中 {0} 为客户端版本变量",
-        "restart": "当服务器重启时玩家进入服务器的文本提示"
+        "whitelist": "Text displayed when player is blocked by whitelist",
+        "unknownCommand": "The text displayed when the player executes an unknown command",
+        "serverFull": "Prompt text when the server is full",
+        "outdatedClient": "When the client version is too low, the text content of the prompt, where {0} is the server version variable",
+        "outdatedServer": "When the server version is too low, the text content of the prompt, where {0} is the client version variable",
+        "restart": "Text prompt for player to enter server when server restarts"
       },
       "commands": {
-        "silentCommandblockConsole": "屏蔽命令方块的控制台输出",
-        "log": "是否开启日志输出",
-        "tabComplete": "控制是否允许玩家按下 TAB 键来自动完成命令。-1 为关闭，0 为立即，1 为第一个字母，以此类推",
-        "sendNamespaced": "是否发送命令命令空间",
-        "replaceCommands": "禁用 Bukkit 对所列命令的实现，并启用它们的原始行为，支持多项且使用英文逗号分隔",
-        "spamDxclusions": "垃圾排除,支持多项且使用英文逗号分隔"
+        "silentCommandblockConsole": "Mute command block console output",
+        "log": "Whether to enable log output",
+        "tabComplete": "Controls whether to allow the player to press the TAB key to autocomplete commands. -1 is off, 0 is immediate, 1 is the first letter, etc",
+        "sendNamespaced": "Whether to send command namespace",
+        "replaceCommands": "Disable Bukkit's implementation of the listed commands and enable their original behavior, multiple comma-separated are supported",
+        "spamDxclusions": "Spam exclusions, support multiple items separated by commas"
       },
       "worldSettings": {
         "default": {
-          "randomLightUpdates": "随机亮度更新",
-          "saveStructureInfo": "保存结构更新",
-          "seedFeature": "种子特征",
-          "verbose": "是否在服务器启动时在控制台/日志中显示每个世界的详细报告和配置。可以全局禁用/启用，也可以按世界禁用/启用",
-          "itemDespawnRate": "控制在地面上的项目实体删除之前所需的 Tick(s)（20 Ticks = 1s）",
-          "enableZombiePigmenPortalSpawns": "是否启用僵尸猪人入口生成",
-          "viewDistance": "控制所有玩家最远视距，最低为 1，最高为 15，调整到 8 左右可以显著提升服务器性能",
-          "hangingTickFrequency": "每 Tick 的更新频率",
-          "mobSpawnRange": "怪物生成范围",
-          "hopperAmount": "控制漏斗在漏斗 Tick 周期中接收/发出的最大物品数量。最好与每个漏斗转移和检查的更高 Tick 结合使用以将动作合二为一",
-          "maxTntPerTick": "每 Tick 刷新时最大更新的 TNT 数量",
-          "witherSpawnSoundRadius": "生成凋灵的声音范围",
-          "arrowDespawnRate": "箭消失距离",
-          "tridentDespawnRate": "三叉戟消失距离",
-          "seedVillage": "生成村庄的种子码",
-          "seedDesert": "生成沙漠的种子码",
-          "seedIgloo": "生成小屋的种子码",
-          "seedJungle": "生成丛林的种子码",
-          "seedSwamp": "生成沼泽的种子码",
-          "seedMonument": "生成遗迹的种子码",
-          "seedShipwreck": "生成船骸的种子码",
-          "seedOcean": "生成海洋的种子码",
-          "seedOutpost": "生成守护者前哨的种子码",
-          "seedDndcity": "生成末地城的种子码",
-          "seedSlime": "生成黏液区块的种子码",
-          "seedBastion": "生成造箭台的种子码",
-          "seedFortress": "生成要塞的种子码",
-          "seedMansion": "生成宅邸的种子码",
-          "seedFossil": "生成化石的种子码",
-          "seedPortal": "生成传送门的种子码",
-          "nerfSpawnerMobs": "启用后，由怪物生成的新怪物将不会有任何 AI",
-          "dragonDeathSoundRadius": "末地龙死亡声音范围",
-          "zombieAggressiveTowardsVillager": "是否准许生成僵尸村民",
-          "endPortalSoundRadius": "下界传送门声音范围",
+          "randomLightUpdates": "Random Light Updates",
+          "saveStructureInfo": "Save structure updates",
+          "seedFeature": "Seed Feature",
+          "verbose": "Whether to display per-world verbose reports and configuration in the console/log at server startup. Can be disabled/enabled globally or per world",
+          "itemDespawnRate": "Controls the Tick(s) required before an item entity on the ground is dropped (20 Ticks = 1s)",
+          "enableZombiePigmenPortalSpawns": "Whether to enable Zombie Pigmen Portal Spawns",
+          "viewDistance": "Control the farthest viewing distance of all players, the lowest is 1, the highest is 15, adjusting to about 8 can significantly improve server performance",
+          "hangingTickFrequency": "Update frequency per Tick",
+          "mobSpawnRange": "Mob Spawn Range",
+          "hopperAmount": "Controls the maximum amount of items the hopper will receive/emit in the hopper Tick period. Best used in conjunction with higher Ticks for each hopper transfer and check to combine actions into one",
+          "maxTntPerTick": "Maximum number of updated TNTs per Tick refresh",
+          "witherSpawnSoundRadius": "Spawn radius of the wither",
+          "arrowDespawnRate": "Arrow disappear distance",
+          "tridentDespawnRate": "Trident Despawn Rate",
+          "seedVillage": "Generate the seed code of the village",
+          "seedDesert": "Generate the desert seed code",
+          "seedIgloo": "Generation hut seed code",
+          "seedJungle": "Generate a jungle seed",
+          "seedSwamp": "Swamp seed code",
+          "seedMonument": "Seed to generate the Monument",
+          "seedShipwreck": "Generation shipwreck seed code",
+          "seedOcean": "Generate the ocean's seed code",
+          "seedOutpost": "Generate the seed code for Guardian Outpost",
+          "seedDndcity": "Generate the seed code of the end city",
+          "seedSlime": "Seed to generate slime blocks",
+          "seedBastion": "Generate the seed for the fletching bench",
+          "seedFortress": "Seed fortress generation",
+          "seedMansion": "Generate the seed code of the mansion",
+          "seedFossil": "Seed code for generating fossils",
+          "seedPortal": "Generate the seed code of the portal",
+          "nerfSpawnerMobs": "When enabled, new mobs spawned by mobs will not have any AI",
+          "dragonDeathSoundRadius": "End Dragon Death Sound Radius",
+          "zombieAggressiveTowardsVillager": "Whether to allow spawning zombie villagers",
+          "endPortalSoundRadius": "Nether Portal Sound Radius",
           "entityTrackingRange": {
-            "players": "实体AI追踪玩家的最大范围，调小此值可轻微节约服务器计算资源",
-            "animals": "实体AI追踪动物的最大范围，调小此值可轻微节约服务器计算资源",
-            "monsters": "实体AI追踪怪物的最大范围，调小此值可轻微节约服务器计算资源",
-            "misc": "实体AI追踪物品的最大范围，调小此值可轻微节约服务器计算资源",
-            "other": "实体AI追踪其他的最大范围，调小此值可轻微节约服务器计算资源"
+            "players": "The maximum range for entity AI to track players, reducing this value can slightly save server computing resources",
+            "animals": "The maximum range for entity AI to track animals, reducing this value can slightly save server computing resources",
+            "monsters": "The maximum range for entity AI to track monsters, reducing this value can slightly save server computing resources",
+            "misc": "Maximum range for entity AI to track items, reducing this value can slightly save server computing resources",
+            "other": "Maximum range for entity AI to track others, reducing this value can slightly save server computing resources"
           },
           "mergeRadius": {
-            "item": "物品距离多少时会互相合并吸引",
-            "exp": "经验球距离多少时会互相合并吸引"
+            "item": "When the items are far away, they will merge and attract each other",
+            "exp": "When the experience balls are far away, they will merge and attract each other"
           },
           "ticksPer": {
-            "hopperTransfer": "漏斗推/拉/接收物品与漏斗推/拉更多物品之间的时间，在服务器每个 Tick 中更新 8 个行为",
-            "hopperCheck": "自上次尝试后，漏斗尝试推/拉物品。例如，值8表示空料斗每隔 8 个刻度查找上方的物料实体、上方的库存等。值 0 或 1 反映原版行为。当 HOPPER-ALT-TICKING 设置为\"是\"时，此选项被禁用"
+            "hopperTransfer": "Time between hopper pushing/pulling/receiving an item and hopper pushing/pulling more items, update 8 behaviors every Tick on server",
+            "hopperCheck": "The hopper attempts to push/pull items since the last attempt. For example, a value of 8 means that an empty hopper looks for material entities above, inventory above, etc. every 8 ticks. Values 0 or 1 reflect vanilla behavior. This option is disabled when HOPPER-ALT-TICKING is set to \"Yes\""
           },
           "growth": {
-            "cactusModifier": "仙人掌生长速度",
-            "caneModifier": "甘蔗速度",
-            "melonModifier": "西瓜速度",
-            "mushroomModifier": "蘑菇速度",
-            "pumpkinModifier": "南瓜速度",
-            "saplingModifier": "树苗生长速度",
-            "beetrootModifier": "甜菜根生长速度",
-            "carrotModifier": "胡萝卜生长速度",
-            "potatoModifier": "马铃薯生长速度",
-            "wheatModifier": "小麦生长速度",
-            "netherwartModifier": "地狱疣生长速度",
-            "vineModifier": "藤曼生长速度",
-            "cocoaModifier": "可可豆生长速度",
-            "bambooModifier": "柱子生长速度",
-            "sweetberryModifier": "甜莓生长速度",
-            "kelpModifier": "海藻生长速度"
+            "cactusModifier": "Cactus Growth Rate",
+            "caneModifier": "Cane Speed",
+            "melonModifier": "Watermelon Speed",
+            "mushroomModifier": "Mushroom Speed",
+            "pumpkinModifier": "Pumpkin Speed",
+            "saplingModifier": "Sapling Growth Rate",
+            "beetrootModifier": "Beetroot Growth Rate",
+            "carrotModifier": "Carrot growth rate",
+            "potatoModifier": "Potato Growth Rate",
+            "wheatModifier": "Wheat Growth Rate",
+            "netherwartModifier": "Netherwart Growth Rate",
+            "vineModifier": "Vine growth rate",
+            "cocoaModifier": "Cocoa bean growth rate",
+            "bambooModifier": "Pillar growth rate",
+            "sweetberryModifier": "Sweetberry Growth Rate",
+            "kelpModifier": "Kelp Growth Rate"
           },
           "hunger": {
-            "jumpWalkDxhaustion": "跳跃跑步动作时消耗的饥饿度",
-            "jumpSprintDxhaustion": "跳跃冲刺动作时消耗的饥饿度",
-            "combatDxhaustion": "战斗时消耗的饥饿度",
-            "regenDxhaustion": "回复时消耗的饥饿度",
-            "swimMultiplier": "游泳时消耗的饥饿度倍率",
-            "sprintMultiplier": "仅冲刺时消耗的饥饿度倍率",
-            "otherMultiplier": "其他动作消耗的饥饿度倍率"
+            "jumpWalkDxhaustion": "Hunger consumed when jumping and running",
+            "jumpSprintDxhaustion": "Hunger consumed when jumping and sprinting",
+            "combatDxhaustion": "Hunger spent in combat",
+            "regenDxhaustion": "Hunger consumed when regenerating",
+            "swimMultiplier": "Hunger multiplier consumed while swimming",
+            "sprintMultiplier": "Hunger multiplier consumed only when sprinting",
+            "otherMultiplier": "Hunger multiplier consumed by other actions"
           },
           "entityActivationRange": {
-            "animals": "动物最大激活范围",
-            "monsters": "怪物最大激活范围",
-            "raiders": "突袭最大激活范围",
-            "misc": "物品最大激活范围",
-            "tickInactiveVillagers": "是否更新不活跃的村民"
+            "animals": "Maximum animal activation range",
+            "monsters": "Monster Max Activation Range",
+            "raiders": "Raid Max Activation Range",
+            "misc": "Item Max Activation Range",
+            "tickInactiveVillagers": "Whether to update inactive villagers"
           },
           "squidSpawnRange": {
-            "min": "鱿鱼最小生成范围"
+            "min": "Squid minimum spawn range"
           },
           "maxTickTime": {
-            "tile": "分配给 Tile 的最大 Tick 时间",
-            "entity": "分配给实体的最大 Tick 时间"
+            "tile": "Maximum Tick time allocated to Tile",
+            "entity": "Maximum Tick time allocated to an entity"
           }
         }
       }
     },
     "velocityToml": {
-      "configVersion": "配置文件版本, 不要更改这个选项",
-      "bind": "监听地址",
+      "configVersion": "Configuration file version, do not change this option",
+      "bind": "Listening address",
       "motd": "MOTD",
-      "showMaxPlayers": "展示的最大玩家数量（实际Velocity不限制玩家数）",
-      "onlineMode": "是否启用正版验证",
-      "forceKeyAuthentication": "是否开启强制秘钥验证",
-      "preventClientProxyConnections": "是否禁止客户端代理连接",
-      "playerInfoForwardingMode": "玩家信息转发模式",
-      "forwardingSecretFile": "转发秘钥文件",
-      "announceForge": "是否广播服务器支持Forge",
-      "kickDxistingPlayers": "是否踢出已存在的玩家",
-      "pingPassthrough": "PING请求透传模式",
-      "enablePlayerAddressLogging": "如果不启用，玩家的IP地址将在日志中被<ip address withheld>取代",
+      "showMaxPlayers": "The maximum number of players displayed (actual Velocity does not limit the number of players)",
+      "onlineMode": "Whether to enable genuine verification",
+      "forceKeyAuthentication": "Whether to enable forced key authentication",
+      "preventClientProxyConnections": "Whether to prevent client proxy connections",
+      "playerInfoForwardingMode": "Player Information Forwarding Mode",
+      "forwardingSecretFile": "Forwarding Secret File",
+      "announceForge": "Whether the broadcast server supports Forge",
+      "kickDxistingPlayers": "Whether to kick existing players",
+      "pingPassthrough": "PING request passthrough mode",
+      "enablePlayerAddressLogging": "If not enabled, the player's IP address will be replaced by <ip address withheld> in the logs",
       "servers": {
-        "try": "尝试连接服务器顺序（格式如：lobby,minigame1,minigame2）"
+        "try": "Try to connect to the server order (format: lobby,minigame1,minigame2)"
       },
       "advanced": {
-        "compressionThreshold": "网络数据包压缩阈值，设置为 0 将压缩所有数据包，设置为 -1 将会完全禁用所有数据包压缩",
-        "compressionLevel": "压缩等级（0 - 9，设为 -1 使用默认值 6）",
-        "loginRatelimit": "客户端登录冷却时间",
-        "connectionTimeout": "连接超时时间",
-        "readTimeout": "读取超时时间",
-        "haproxyProtocol": "是否启用对 HAProxy 协议的支持",
-        "tcpFastOpen": "是否启用对 tcp fast open 的支持，需要运行在 Linux 上",
-        "bungeePluginMessageChannel": "是否启用对 BungeeCord 自定义消息信道支持",
-        "showPingRequests": "是否在代理端上显示来自于客户端的 PING 请求",
-        "failoverOnUnexpectedServerDisconnect": "是否禁止当用户连接意外丢失但服务器的连接而没有显式断开的情况下 Velocity 将玩家行为回退（Read Timeout 除外），而不是断开与玩家的连接的处理方式",
-        "announceProxyCommands": "是否向 1.13+ 客户端声明代理端指令（这将允许客户端接收到代理端的指令补全等信息）",
-        "logCommandDxecutions": "是否记录代理端的指令使用情况",
-        "logPlayerConnections": "是否录代理端的玩家连接情况"
+        "compressionThreshold": "Network packet compression threshold, set to 0 to compress all packets, set to -1 to completely disable all packet compression",
+        "compressionLevel": "Compression level (0 - 9, set -1 to use default 6)",
+        "loginRatelimit": "Client login cooldown",
+        "connectionTimeout": "Connection Timeout",
+        "readTimeout": "Read Timeout",
+        "haproxyProtocol": "Whether to enable support for the HAProxy protocol",
+        "tcpFastOpen": "Whether to enable support for tcp fast open, need to run on Linux",
+        "bungeePluginMessageChannel": "Whether to enable BungeeCord custom message channel support",
+        "showPingRequests": "Whether to show PING requests from clients on the agent",
+        "failoverOnUnexpectedServerDisconnect": "Whether to prevent Velocity from rolling back player actions (except Read Timeout) instead of disconnecting the player when the user connection is unexpectedly lost but the server connection is not explicitly disconnected",
+        "announceProxyCommands": "Whether to announce proxy commands to 1.13+ clients (this will allow clients to receive proxy command completions etc.)",
+        "logCommandDxecutions": "Whether to log the command usage of the agent",
+        "logPlayerConnections": "Whether to log player connections on the agent side"
       },
       "query": {
-        "enabled": "是否开启对 GameSpy 4 查询的响应",
-        "port": "查询协议监听端口",
-        "map": "反馈给查询服务的 map 名",
-        "showPlugins": "是否将插件展示在查询响应结果中"
+        "enabled": "Whether to enable response to GameSpy 4 queries",
+        "port": "Query protocol listening port",
+        "map": "The name of the map fed back to the query service",
+        "showPlugins": "Whether to show plugins in query response results"
       }
     }
   },
