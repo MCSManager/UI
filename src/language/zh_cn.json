@@ -502,6 +502,81 @@
     "author": "模块作者",
     "unknownCompatible": "面板无法得知此配置文件是否兼容，请您自行根据类型进入相应配置文件界面。",
     "browse": "浏览",
+    "introduction": {
+      "common": {
+        "aboutConfig": "关于配置文件"
+      },
+      "bdsServerProperties": {
+        "name": "[Bedrock] server.properties",
+        "info": "此配置文件为基岩版专用服务器主要配置文件，基岩版服务器绝大部分配置都在此配置文件进行设置，例如服务器端口，人数，视距和限制参数等。",
+        "infoLong": "此配置文件为基岩版专用服务器主要配置文件，基岩版服务器绝大部分配置都在此配置文件进行设置，例如服务器端口，人数，视距和限制参数等。"
+      },
+      "bukkitYml": {
+        "name": "[Bukkit] bukkit.yml",
+        "info": "Bukkit 原始配置文件",
+        "infoLong": "此配置文件为 Bukkit 类或其他衍生类服务端常见的配置文件，一般情况下，此配置文件无需过多修改，您可以根据翻译进行适当调节，但如果使用 Bukkit 衍生类服务端软件，可能这个配置文件将是无效的。"
+      },
+      "configYml": {
+        "name": "[Bungeecord] config.yml",
+        "info": "Bungeecord 群组服务端的重要配置文件，可以进行分布式管理，节点控制等，但此配置文件较为复杂，此处仅供简单的配置和操作",
+        "infoLong": "此配置适用于 BungeeCord 群组服务端软件，但由于此配置文件略微有些复杂，大部分配置只能进行简单修改，建议您使用文件在线管理功能编辑此文件。"
+      },
+      "eulaTxt": {
+        "name": "[通用] eula.txt",
+        "info": "软件最终用户协议，此协议必须设置同意，否则无法启用服务端软件",
+        "infoLong": "此配置文件为 Minecraft 服务端的 EULA（最终用户许可协议），您必须同意此协议才可以正常运行服务端软件，如果您发现此设置并不是“是”状态，那么请立即修改。\n最终用户许可协议是软件应用程序作者或者发布者与应用程序使用者之间的合法合同。最终用户许可协议（EULA），通常是指“软件许可”，它与租赁协议类似；用户同意支付软件的使用费用，并且向软件作者或者发行者承诺遵守EULA中规定的所有约束条件。用户被告知，当他们打开软件包的包装、打开CD盒的封条、将卡片寄回给软件发行者、安装应用程序、执行下载文件或者简单的使用应用程序的时候就意味着他们已经“接受”了EULA中的条款。"
+      },
+      "geyserYml": {
+        "name": "[通用] eula.txt",
+        "info": "Geyser 服务端软件配置文件，拥有基本的服务器参数设定（如端口，最大玩家数等）并且也可以设定服务端细节参数（区块缓存，线程数等）",
+        "infoLong": "Geyser 服务端软件配置文件，拥有基本的服务器参数设定（如端口，最大玩家数等）并且也可以设定服务端细节参数（区块缓存，线程数等）"
+      },
+      "mcdrConfigYml": {
+        "name": "[MCDR] config.yml",
+        "info": "MCDReforged 服务端控制工具配置文件",
+        "infoLong": "此配置适用于 MCDReforged 服务端控制工具，建议搭配其<a href=\"https://mcdreforged.readthedocs.io/zh_CN/latest/configure.html\">官方文档</a>进行修改。"
+      },
+      "mohistYml": {
+        "name": "[Mohist] mohist.yml",
+        "info": "mohist.yml 服务端配置文件",
+        "infoLong": "此文件为 Mohist 服务端专用的配置文件，可以进一步的设置服务端的一些高级参数。"
+      },
+      "paperYml": {
+        "name": "[Paper] paper.yml",
+        "info": "PaperSpigot 服务端软件配置文件，能够进一步的配置高级参数以及更具体化的游戏设置，对整体性能有极大的决定效果",
+        "infoLong": "此文件是 Paper 服务端软件专用配置文件，有近 400 行的服务器具体参数配置，Paper 每个版本的各个参数都可能有细节变化从而导致翻译工作及其困难，部分参数可能不会有中文翻译。"
+      },
+      "paperGlobalYml": {
+        "name": "[Paper] paper-global.yml",
+        "info": "PaperSpigot 服务端软件全局配置文件，能够进一步的配置高级参数以及更具体化的游戏设置，对整体性能有极大的决定效果",
+        "infoLong": "此文件是 Paper 服务端软件专用配置文件，Paper 每个版本的各个参数都可能有细节变化从而导致翻译工作及其困难，部分参数可能不会有中文翻译。"
+      },
+      "paperWorldDefaultsYml": {
+        "name": "[Paper] paper-world-defaults.yml",
+        "info": "PaperSpigot 服务端软件世界配置文件，能够进一步在每个世界的基础上进行配置",
+        "infoLong": "此文件是 Paper 服务端软件专用配置文件，Paper 每个版本的各个参数都可能有细节变化从而导致翻译工作及其困难，部分参数可能不会有中文翻译。"
+      },
+      "permissionYml": {
+        "name": "[MCDR] permission.yml",
+        "info": "MCDReforged 服务端控制工具权限配置文件",
+        "infoLong": "此配置适用于 MCDReforged 服务端权限控制工具，建议搭配其<a href=\"https://mcdreforged.readthedocs.io/zh_CN/latest/permission.html\">官方文档</a>进行修改。"
+      },
+      "serverProperties": {
+        "name": "[通用] server.properties",
+        "info": "Minecraft 服务端极其重要的配置文件，几乎绝大部分常用配置（端口，人数，视距等）均在此文件中进行编辑",
+        "infoLong": "Minecraft 服务端极其重要的配置文件，几乎绝大部分常用配置（端口，人数，视距等）均在此文件中进行编辑"
+      },
+      "spigotYml": {
+        "name": "[Spigot] spigot.yml",
+        "info": "Spigot 配置文件，能够进一步的控制服务器的行为和具体参数，一些更为高级的限制都在此配置文件中",
+        "infoLong": "此文件为 Spigot 服务端专用的配置文件，可以进一步的设置服务端的一些高级参数，比如实体 AI 范围，玩家限制，视距限制和区块限制等。"
+      },
+      "velocityToml": {
+        "name": "[Velocity] velocity.toml",
+        "info": "Velocity 群组服务端的重要配置文件，可以进行分布式管理，节点控制等，但此配置文件较为复杂，此处仅供简单的配置和操作",
+        "infoLong": "Velocity 群组服务端的重要配置文件，可以进行分布式管理，节点控制等，配置较为复杂，建议搭配<a href=\"https://docs.papermc.io/velocity/configuration\">官方文档</a>进行修改"
+      }
+    },
     "bdsServerProperties": {
       "serverName": "服务器名称",
       "allowCheats": "是否允许使用类似命令的作弊手段",
@@ -565,7 +640,7 @@
       "preventProxyConnections": "是否允许玩家使用网络代理进入服务器",
       "rconPort": "设置 RCON 远程访问的端口号",
       "rconPassword": "设置 RCON 远程访问的密码（参见 enableRcon）",
-      "query.port": "设置监听服务器的端口号（参见 enableRcon）",
+      "queryPort": "设置监听服务器的端口号（参见 enableRcon）",
       "useNativeTransport": "是否使用针对 Linux 平台的数据包收发优化 [ 仅 Linux ]",
       "debug": "调试模式",
       "broadcastRconToOps": "向 OP 广播 RCON 信息",

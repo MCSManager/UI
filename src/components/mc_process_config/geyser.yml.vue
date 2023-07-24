@@ -1,6 +1,5 @@
 <!--
   Copyright (C) 2022 MCSManager <mcsmanager-dev@outlook.com>
-  This page is for Chinese users only
 -->
 
 <template>
@@ -13,9 +12,9 @@
         </div>
       </div>
       <div class="sub-title">
-        <div class="sub-title">关于配置文件</div>
+        <div class="sub-title">{{this.$t("processConfig.introduction.common.aboutConfig")}}</div>
         <div class="sub-title-info">
-          此文件为 Geyser 服务端专用的配置文件，可以进一步的设置服务端的一些高级参数。
+          {{this.$t("processConfig.introduction.geyserYml.infoLong")}}
         </div>
       </div>
     </template>

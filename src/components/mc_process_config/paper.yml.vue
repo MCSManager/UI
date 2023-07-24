@@ -1,23 +1,21 @@
 <!--
   Copyright (C) 2022 MCSManager <mcsmanager-dev@outlook.com>
-  This page is for Chinese users only
 -->
 
 <template>
   <div v-if="modelValue">
     <LineOption :custom="true">
       <template #default>
-        <div class="sub-title"iszh>
+        <div class="sub-title" v-iszh>
           <div class="sub-title">关于配置兼容与翻译</div>
           <div class="sub-title-info">
             此界面由开源社区开发者开发与翻译，若翻译发现错误可前往开源社区进行反馈。配置文件部分设置因版本和服务端类型不同会有些许变化，某些配置文件子元素过于复杂，可能会导致配置项值无法正常显示，如遇到不正常的配置项值切勿进行修改。若对配置文件要进行更为详细的配置，建议前往文件在线管理功能进行文件编辑。
           </div>
         </div>
         <div class="sub-title">
-          <div class="sub-title">关于配置文件</div>
+          <div class="sub-title">{{this.$t("processConfig.introduction.common.aboutConfig")}}</div>
           <div class="sub-title-info">
-            此文件是 Paper 服务端软件专用配置文件，有近 400 行的服务器具体参数配置，Paper
-            每个版本的各个参数都可能有细节变化从而导致翻译工作及其困难，部分参数可能不会有中文翻译。
+            {{this.$t("processConfig.introduction.paperYml.infoLong")}}
           </div>
         </div>
       </template>

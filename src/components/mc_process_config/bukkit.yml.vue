@@ -1,6 +1,5 @@
 <!--
   Copyright (C) 2022 MCSManager <mcsmanager-dev@outlook.com>
-  This page is for Chinese users only
 -->
 
 <template>
@@ -15,11 +14,9 @@
           </div>
         </div>
         <div class="sub-title">
-          <div class="sub-title">关于配置文件</div>
+          <div class="sub-title">{{this.$t("processConfig.introduction.common.aboutConfig")}}</div>
           <div class="sub-title-info">
-            此配置文件为 Bukkit
-            类或其他衍生类服务端常见的配置文件，一般情况下，此配置文件无需过多修改，您可以根据翻译进行适当调节，但如果使用
-            Bukkit 衍生类服务端软件，可能这个配置文件将是无效的。
+            {{this.$t("processConfig.introduction.bukkitYml.infoLong")}}
           </div>
         </div>
       </template>

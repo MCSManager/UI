@@ -9,9 +9,9 @@
         </div>
       </div>
       <div class="sub-title">
-        <div class="sub-title">关于配置文件</div>
+        <div class="sub-title">{{this.$t("processConfig.introduction.common.aboutConfig")}}</div>
         <div class="sub-title-info">
-          此配置文件为基岩版专用服务器主要配置文件，基岩版服务器绝大部分配置都在此配置文件进行设置，例如服务器端口，人数，视距和限制参数等。
+          {{this.$t("processConfig.introduction.bdsServerProperties.infoLong")}}
         </div>
       </div>
     </template>

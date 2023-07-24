@@ -1,6 +1,5 @@
 <!--
   Copyright (C) 2022 MCSManager <mcsmanager-dev@outlook.com>
-  This page is for Chinese users only
 -->
 
 <template>
@@ -14,12 +13,9 @@
         </div>
       </div>
       <div class="sub-title">
-        <div class="sub-title">关于配置文件</div>
+        <div class="sub-title">{{this.$t("processConfig.introduction.common.aboutConfig")}}</div>
         <div class="sub-title-info">
-          此配置适用于 MCDReforged 服务端控制工具，建议搭配其<a
-          href="https://mcdreforged.readthedocs.io/zh_CN/latest/permission.html"
-        >官方文档</a
-        >进行修改。
+          {{this.$t("processConfig.introduction.permissionYml.infoLong")}}
         </div>
       </div>
     </template>
