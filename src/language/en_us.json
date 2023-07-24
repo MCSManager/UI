@@ -504,77 +504,77 @@
     "browse": "Browse",
     "introduction": {
       "common": {
-        "aboutConfig": "关于配置文件"
+        "aboutConfig": "About config"
       },
       "bdsServerProperties": {
         "name": "[Bedrock] server.properties",
-        "info": "此配置文件为基岩版专用服务器主要配置文件，基岩版服务器绝大部分配置都在此配置文件进行设置，例如服务器端口，人数，视距和限制参数等。",
-        "infoLong": "此配置文件为基岩版专用服务器主要配置文件，基岩版服务器绝大部分配置都在此配置文件进行设置，例如服务器端口，人数，视距和限制参数等。"
+        "info": "This configuration file is the main configuration file for the bedrock edition.",
+        "infoLong": "This configuration file is the main configuration file for the Keystone Edition dedicated server, most of the configuration of the Bedrock Edition server is set in this configuration file, such as server ports, number of people, view distance and limit parameters."
       },
       "bukkitYml": {
         "name": "[Bukkit] bukkit.yml",
-        "info": "Bukkit 原始配置文件",
-        "infoLong": "此配置文件为 Bukkit 类或其他衍生类服务端常见的配置文件，一般情况下，此配置文件无需过多修改，您可以根据翻译进行适当调节，但如果使用 Bukkit 衍生类服务端软件，可能这个配置文件将是无效的。"
+        "info": "Bukkit original configuration file",
+        "infoLong": "This configuration file is a common configuration file for Bukkit or other derivatives server, in general, this configuration file does not need much modification, you can adjust it according to the translation, but if you use Bukkit derivatives server software, maybe this configuration file will be invalid."
       },
       "configYml": {
         "name": "[Bungeecord] config.yml",
-        "info": "Bungeecord 群组服务端的重要配置文件，可以进行分布式管理，节点控制等，但此配置文件较为复杂，此处仅供简单的配置和操作",
-        "infoLong": "此配置适用于 BungeeCord 群组服务端软件，但由于此配置文件略微有些复杂，大部分配置只能进行简单修改，建议您使用文件在线管理功能编辑此文件。"
+        "info": "Important configuration file of Bungeecord server, you can carry out distributed management, node control, etc., but this configuration file is more complex, this is only a simple configuration and operation.",
+        "infoLong": "Important configuration file of Bungeecord server, you can carry out distributed management, node control, etc., but this configuration file is more complex, this is only a simple configuration and operation."
       },
       "eulaTxt": {
-        "name": "[通用] eula.txt",
-        "info": "软件最终用户协议，此协议必须设置同意，否则无法启用服务端软件",
-        "infoLong": "此配置文件为 Minecraft 服务端的 EULA（最终用户许可协议），您必须同意此协议才可以正常运行服务端软件，如果您发现此设置并不是“是”状态，那么请立即修改。\n最终用户许可协议是软件应用程序作者或者发布者与应用程序使用者之间的合法合同。最终用户许可协议（EULA），通常是指“软件许可”，它与租赁协议类似；用户同意支付软件的使用费用，并且向软件作者或者发行者承诺遵守EULA中规定的所有约束条件。用户被告知，当他们打开软件包的包装、打开CD盒的封条、将卡片寄回给软件发行者、安装应用程序、执行下载文件或者简单的使用应用程序的时候就意味着他们已经“接受”了EULA中的条款。"
+        "name": "[Common] eula.txt",
+        "info": "Software End-User Agreement, this agreement must be set to agree or the server-side software will not be enabled",
+        "infoLong": "This profile is the EULA (End User License Agreement) for the Minecraft server, you must agree to this agreement in order to run the server software properly, if you find that this setting is not in the \"Yes\" state, then please change it immediately. \\n End User License Agreement (EULA) is a legal contract between the author or publisher of a software application and the user of the application. An End User License Agreement (EULA), often referred to as a \"software license\", is similar to a lease agreement; the user agrees to pay for the use of the software and promises the software author or publisher to abide by all the constraints set forth in the EULA. Users are told that they have \"accepted\" the terms of the EULA when they unpack the software package, open the seal on the CD case, send the card back to the software publisher, install the application, execute the downloaded file, or simply use the application."
       },
       "geyserYml": {
-        "name": "[通用] eula.txt",
-        "info": "Geyser 服务端软件配置文件，拥有基本的服务器参数设定（如端口，最大玩家数等）并且也可以设定服务端细节参数（区块缓存，线程数等）",
-        "infoLong": "Geyser 服务端软件配置文件，拥有基本的服务器参数设定（如端口，最大玩家数等）并且也可以设定服务端细节参数（区块缓存，线程数等）"
+        "name": "[Common] eula.txt",
+        "info": "Geyser server software configuration file with basic server parameters (e.g. ports, maximum number of players, etc.) and also server details (block cache, number of threads, etc.).",
+        "infoLong": "Geyser server software configuration file with basic server parameters (e.g. ports, maximum number of players, etc.) and also server details (block cache, number of threads, etc.)."
       },
       "mcdrConfigYml": {
         "name": "[MCDR] config.yml",
-        "info": "MCDReforged 服务端控制工具配置文件",
-        "infoLong": "此配置适用于 MCDReforged 服务端控制工具，建议搭配其<a href=\"https://mcdreforged.readthedocs.io/zh_CN/latest/configure.html\">官方文档</a>进行修改。"
+        "info": "MCDReforged config",
+        "infoLong": "This config applies to MCDReforged and is recommended to be modified with its <a href=\"https://mcdreforged.readthedocs.io/en/latest/configuration.html\">official documentation</a>."
       },
       "mohistYml": {
         "name": "[Mohist] mohist.yml",
-        "info": "mohist.yml 服务端配置文件",
-        "infoLong": "此文件为 Mohist 服务端专用的配置文件，可以进一步的设置服务端的一些高级参数。"
+        "info": "mohist.yml server config",
+        "infoLong": "This is Mohist config, which allows you to further set some advanced parameters of the server."
       },
       "paperYml": {
         "name": "[Paper] paper.yml",
-        "info": "PaperSpigot 服务端软件配置文件，能够进一步的配置高级参数以及更具体化的游戏设置，对整体性能有极大的决定效果",
-        "infoLong": "此文件是 Paper 服务端软件专用配置文件，有近 400 行的服务器具体参数配置，Paper 每个版本的各个参数都可能有细节变化从而导致翻译工作及其困难，部分参数可能不会有中文翻译。"
+        "info": "Paper server config, with the ability to further configure advanced parameters as well as more specific game settings, can have a dramatic determining effect on overall performance",
+        "infoLong": "Paper server config, with the ability to further configure advanced parameters as well as more specific game settings, can have a dramatic determining effect on overall performance, with nearly 400 lines of server-specific parameters."
       },
       "paperGlobalYml": {
         "name": "[Paper] paper-global.yml",
-        "info": "PaperSpigot 服务端软件全局配置文件，能够进一步的配置高级参数以及更具体化的游戏设置，对整体性能有极大的决定效果",
-        "infoLong": "此文件是 Paper 服务端软件专用配置文件，Paper 每个版本的各个参数都可能有细节变化从而导致翻译工作及其困难，部分参数可能不会有中文翻译。"
+        "info": "Paper server global config, with the ability to further configure advanced parameters as well as more specific game settings, can have a dramatic determining effect on overall performance",
+        "infoLong": "Paper server global config, with the ability to further configure advanced parameters as well as more specific game settings, can have a dramatic determining effect on overall performance"
       },
       "paperWorldDefaultsYml": {
         "name": "[Paper] paper-world-defaults.yml",
-        "info": "PaperSpigot 服务端软件世界配置文件，能够进一步在每个世界的基础上进行配置",
-        "infoLong": "此文件是 Paper 服务端软件专用配置文件，Paper 每个版本的各个参数都可能有细节变化从而导致翻译工作及其困难，部分参数可能不会有中文翻译。"
+        "info": "Paper server world config, with ability to further configure on a per-world basis",
+        "infoLong": "Paper server world config, with ability to further configure on a per-world basis"
       },
       "permissionYml": {
         "name": "[MCDR] permission.yml",
-        "info": "MCDReforged 服务端控制工具权限配置文件",
-        "infoLong": "此配置适用于 MCDReforged 服务端权限控制工具，建议搭配其<a href=\"https://mcdreforged.readthedocs.io/zh_CN/latest/permission.html\">官方文档</a>进行修改。"
+        "info": "MCDReforged permission config",
+        "infoLong": "This is permission config of MCDReforged and is recommended to be modified with its <a href=\"https://mcdreforged.readthedocs.io/en/latest/permission.html\">official documentation</a>"
       },
       "serverProperties": {
-        "name": "[通用] server.properties",
-        "info": "Minecraft 服务端极其重要的配置文件，几乎绝大部分常用配置（端口，人数，视距等）均在此文件中进行编辑",
-        "infoLong": "Minecraft 服务端极其重要的配置文件，几乎绝大部分常用配置（端口，人数，视距等）均在此文件中进行编辑"
+        "name": "[Common] server.properties",
+        "info": "Minecraft server-side configuration file is extremely important, almost most of the common configuration (port, number of people, field of view, etc.) are edited in this file",
+        "infoLong": "Minecraft server-side configuration file is extremely important, almost most of the common configuration (port, number of people, field of view, etc.) are edited in this file"
       },
       "spigotYml": {
         "name": "[Spigot] spigot.yml",
-        "info": "Spigot 配置文件，能够进一步的控制服务器的行为和具体参数，一些更为高级的限制都在此配置文件中",
-        "infoLong": "此文件为 Spigot 服务端专用的配置文件，可以进一步的设置服务端的一些高级参数，比如实体 AI 范围，玩家限制，视距限制和区块限制等。"
+        "info": "Spigot config to further control the behavior of the server and specific parameters, some of the more advanced restrictions in this configuration file",
+        "infoLong": "Spigot server config, which allows you to further set some of the server's advanced parameters, such as entity AI ranges, player limits, line-of-sight limits, and block limits."
       },
       "velocityToml": {
         "name": "[Velocity] velocity.toml",
-        "info": "Velocity 群组服务端的重要配置文件，可以进行分布式管理，节点控制等，但此配置文件较为复杂，此处仅供简单的配置和操作",
-        "infoLong": "Velocity 群组服务端的重要配置文件，可以进行分布式管理，节点控制等，配置较为复杂，建议搭配<a href=\"https://docs.papermc.io/velocity/configuration\">官方文档</a>进行修改"
+        "info": "Velocity group server-side important configuration file, you can carry out distributed management, node control, etc., but this configuration file is more complex, here is only a simple configuration and operation",
+        "infoLong": "Velocity group server-side configuration files, can be distributed management, node control, etc., the configuration is more complex, it is recommended that modify with the <a href=\"https://docs.papermc.io/velocity/configuration\">official documentation</a>"
       }
     },
     "bdsServerProperties": {
