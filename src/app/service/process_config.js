@@ -35,20 +35,20 @@ export function getInstanceConfigByType(type) {
 export const INSTANCE_CONFIGS = [
   {
     fileName: $t("processConfig.introduction.bdsServerProperties.name"),
-    path: "server.properties",
-    redirect: "bds/server.properties",
     type: "properties",
     info: $t("processConfig.introduction.bdsServerProperties.info"),
+    path: "server.properties",
+    redirect: "bds/server.properties",
     author: "Lazy",
     github: "https://github.com/LazyCreeper",
     category: [TYPE_MINECRAFT_BDS, TYPE_MINECRAFT_BEDROCK]
   },
   {
     fileName: $t("processConfig.introduction.bukkitYml.name"),
-    path: "bukkit.yml",
-    redirect: $t("processConfig.introduction.bukkitYml.info"),
     type: "yml",
-    info: "Bukkit 原始配置文件",
+    info: $t("processConfig.introduction.bukkitYml.info"),
+    path: "bukkit.yml",
+    redirect: "bukkit/bukkit.yml",
     author: "AlexanderMC8533 & Lazy",
     github: "https://github.com/AlexanderMC8533/",
     category: [
@@ -148,9 +148,9 @@ export const INSTANCE_CONFIGS = [
   {
     fileName: $t("processConfig.introduction.permissionYml.name"),
     type: "yml",
-    info: "MCDReforged 服务端控制工具权限配置文件",
+    info: $t("processConfig.introduction.permissionYml.info"),
     path: "permission.yml",
-    redirect: $t("processConfig.introduction.permissionYml.info"),
+    redirect: "mcdr/permission.yml",
     author: "Huaji_MUR233",
     github: "https://github.com/HuajiMUR233",
     category: [TYPE_MINECRAFT_JAVA, TYPE_MINECRAFT_MCDR]
@@ -175,10 +175,10 @@ export const INSTANCE_CONFIGS = [
   },
   {
     fileName: $t("processConfig.introduction.spigotYml.name"),
-    path: "spigot.yml",
-    redirect: "bukkit/spigot.yml",
     type: "yml",
     info: $t("processConfig.introduction.spigotYml.info"),
+    path: "spigot.yml",
+    redirect: "bukkit/spigot.yml",
     author: "Unitwk",
     github: "https://github.com/Unitwk",
     category: [
