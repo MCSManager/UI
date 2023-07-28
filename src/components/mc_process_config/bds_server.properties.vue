@@ -9,9 +9,9 @@
         </div>
       </div>
       <div class="sub-title">
-        <div class="sub-title">{{this.$t("processConfig.introduction.common.aboutConfig")}}</div>
+        <div class="sub-title">{{ this.$t("processConfig.introduction.common.aboutConfig") }}</div>
         <div class="sub-title-info">
-          {{this.$t("processConfig.introduction.bdsServerProperties.infoLong")}}
+          {{ this.$t("processConfig.introduction.bdsServerProperties.infoLong") }}
         </div>
       </div>
     </template>
@@ -40,27 +40,41 @@ export default {
     return {
       description: {
         "server-name": this.$t("processConfig.bdsServerProperties.serverName"),
+        "gamemode": this.$t("processConfig.bdsServerProperties.gamemode"),
+        "force-gamemode": this.$t("processConfig.bdsServerProperties.forceGamemode"),
+        "difficulty": this.$t("processConfig.bdsServerProperties.difficulty"),
         "allow-cheats": this.$t("processConfig.bdsServerProperties.allowCheats"),
+        "max-players": this.$t("processConfig.bdsServerProperties.maxPlayers"),
+        "online-mode": this.$t("processConfig.bdsServerProperties.onlineMode"),
+        "allow-list": this.$t("processConfig.bdsServerProperties.allowList"),
+        "server-port": this.$t("processConfig.bdsServerProperties.serverPort"),
         "server-portv6": this.$t("processConfig.bdsServerProperties.serverPortv6"),
+        "enable-lan-visibility": this.$t("processConfig.bdsServerProperties.enableLanVisibility"),
+        "view-distance": this.$t("processConfig.bdsServerProperties.viewDistance"),
         "tick-distance": this.$t("processConfig.bdsServerProperties.tickDistance"),
+        "player-idle-timeout": this.$t("processConfig.bdsServerProperties.playerIdleTimeout"),
         "max-threads": this.$t("processConfig.bdsServerProperties.maxThreads"),
+        "level-name": this.$t("processConfig.bdsServerProperties.levelName"),
+        "level-seed": this.$t("processConfig.bdsServerProperties.levelSeed"),
         "default-player-permission-level": this.$t("processConfig.bdsServerProperties.defaultPlayerPermissionLevel"),
         "texturepack-required": this.$t("processConfig.bdsServerProperties.texturepackRequired"),
         "content-log-file-enabled": this.$t("processConfig.bdsServerProperties.contentLogFileEnabled"),
         "compression-threshold": this.$t("processConfig.bdsServerProperties.compressionThreshold"),
+        "compression-algorithm": this.$t("processConfig.bdsServerProperties.compressionAlgorithm"),
         "server-authoritative-movement": this.$t("processConfig.bdsServerProperties.serverAuthoritativeMovement"),
         "player-movement-score-threshold": this.$t("processConfig.bdsServerProperties.playerMovementScoreThreshold"),
-        "enable-lan-visibility": this.$t("processConfig.bdsServerProperties.enableLanVisibility"),
-        "compression-algorithm": this.$t("processConfig.bdsServerProperties.compressionAlgorithm"),
         "player-movement-action-direction-threshold": this.$t("processConfig.bdsServerProperties.playerMovementActionDirectionThreshold"),
-        "chat-restriction": this.$t("processConfig.bdsServerProperties.chatRestriction"),
-        "disable-player-interaction": this.$t("processConfig.bdsServerProperties.disablePlayerInteraction"),
-        "client-side-chunk-generation-enabled": this.$t("processConfig.bdsServerProperties.clientSideChunkGenerationEnabled"),
-        "player-movement-distance-threshold": this.$t("processConfig.bdsServerProperties.playerMovementDistanceThreshold"),
+        "player-movementdistance-threshold": this.$t("processConfig.bdsServerProperties.playerMovementDistanceThreshold"),
         "player-movement-duration-threshold-in-ms": this.$t("processConfig.bdsServerProperties.playerMovementDurationThresholdInMs"),
         "correct-player-movement": this.$t("processConfig.bdsServerProperties.correctPlayerMovement"),
         "server-authoritative-block-breaking": this.$t("processConfig.bdsServerProperties.serverAuthoritativeBlockBreaking"),
-        "level-name": this.$t("processConfig.bdsServerProperties.levelName"),
+        "chat-restriction": this.$t("processConfig.bdsServerProperties.chatRestriction"),
+        "disable-player-interaction": this.$t("processConfig.bdsServerProperties.disablePlayerInteraction"),
+        "client-side-chunk-generation-enabled": this.$t("processConfig.bdsServerProperties.clientSideChunkGenerationEnabled"),
+        "block-network-ids-are-hashes": this.$t("processConfig.bdsServerProperties.blockNetworkIdsAreHashes"),
+        "disable-persona": this.$t("processConfig.bdsServerProperties.disablePersona"),
+        "disable-customSkins": this.$t("processConfig.bdsServerProperties.disableCustomSkins"),
+        "server-build-radius-ratio": this.$t("processConfig.bdsServerProperties.serverBuildRadiusRatio")
       }
     };
   }
