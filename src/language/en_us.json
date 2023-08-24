@@ -502,6 +502,1273 @@
     "author": "Module Author",
     "unknownCompatible": "The panel is unable to confirm the compatibility of this config file, please use at your own risk.",
     "browse": "Browse"
+    "introduction": {
+      "common": {
+        "aboutConfig": "About config"
+      },
+      "bdsServerProperties": {
+        "name": "[Bedrock] server.properties",
+        "info": "This configuration file is the main configuration file for the bedrock edition.",
+        "infoLong": "This configuration file is the main configuration file for the Keystone Edition dedicated server, most of the configuration of the Bedrock Edition server is set in this configuration file, such as server ports, number of people, view distance and limit parameters."
+      },
+      "bukkitYml": {
+        "name": "[Bukkit] bukkit.yml",
+        "info": "Bukkit original configuration file",
+        "infoLong": "This configuration file is a common configuration file for Bukkit or other derivatives server, in general, this configuration file does not need much modification, you can adjust it according to the translation, but if you use Bukkit derivatives server software, maybe this configuration file will be invalid."
+      },
+      "configYml": {
+        "name": "[Bungeecord] config.yml",
+        "info": "Important configuration file of Bungeecord server, you can carry out distributed management, node control, etc., but this configuration file is more complex, this is only a simple configuration and operation.",
+        "infoLong": "Important configuration file of Bungeecord server, you can carry out distributed management, node control, etc., but this configuration file is more complex, this is only a simple configuration and operation."
+      },
+      "eulaTxt": {
+        "name": "[Common] eula.txt",
+        "info": "Software End-User Agreement, this agreement must be set to agree or the server-side software will not be enabled",
+        "infoLong": "This profile is the EULA (End User License Agreement) for the Minecraft server, you must agree to this agreement in order to run the server software properly, if you find that this setting is not in the \"Yes\" state, then please change it immediately. \\n End User License Agreement (EULA) is a legal contract between the author or publisher of a software application and the user of the application. An End User License Agreement (EULA), often referred to as a \"software license\", is similar to a lease agreement; the user agrees to pay for the use of the software and promises the software author or publisher to abide by all the constraints set forth in the EULA. Users are told that they have \"accepted\" the terms of the EULA when they unpack the software package, open the seal on the CD case, send the card back to the software publisher, install the application, execute the downloaded file, or simply use the application."
+      },
+      "geyserYml": {
+        "name": "[Common] eula.txt",
+        "info": "Geyser server software configuration file with basic server parameters (e.g. ports, maximum number of players, etc.) and also server details (block cache, number of threads, etc.).",
+        "infoLong": "Geyser server software configuration file with basic server parameters (e.g. ports, maximum number of players, etc.) and also server details (block cache, number of threads, etc.)."
+      },
+      "mcdrConfigYml": {
+        "name": "[MCDR] config.yml",
+        "info": "MCDReforged config",
+        "infoLong": "This config applies to MCDReforged and is recommended to be modified with its <a href=\"https://mcdreforged.readthedocs.io/en/latest/configuration.html\">official documentation</a>."
+      },
+      "mohistYml": {
+        "name": "[Mohist] mohist.yml",
+        "info": "mohist.yml server config",
+        "infoLong": "This is Mohist config, which allows you to further set some advanced parameters of the server."
+      },
+      "paperYml": {
+        "name": "[Paper] paper.yml",
+        "info": "Paper server config, with the ability to further configure advanced parameters as well as more specific game settings, can have a dramatic determining effect on overall performance",
+        "infoLong": "Paper server config, with the ability to further configure advanced parameters as well as more specific game settings, can have a dramatic determining effect on overall performance, with nearly 400 lines of server-specific parameters."
+      },
+      "paperGlobalYml": {
+        "name": "[Paper] paper-global.yml",
+        "info": "Paper server global config, with the ability to further configure advanced parameters as well as more specific game settings, can have a dramatic determining effect on overall performance",
+        "infoLong": "Paper server global config, with the ability to further configure advanced parameters as well as more specific game settings, can have a dramatic determining effect on overall performance"
+      },
+      "paperWorldDefaultsYml": {
+        "name": "[Paper] paper-world-defaults.yml",
+        "info": "Paper server world config, with ability to further configure on a per-world basis",
+        "infoLong": "Paper server world config, with ability to further configure on a per-world basis"
+      },
+      "permissionYml": {
+        "name": "[MCDR] permission.yml",
+        "info": "MCDReforged permission config",
+        "infoLong": "This is permission config of MCDReforged and is recommended to be modified with its <a href=\"https://mcdreforged.readthedocs.io/en/latest/permission.html\">official documentation</a>"
+      },
+      "serverProperties": {
+        "name": "[Common] server.properties",
+        "info": "Minecraft server-side configuration file is extremely important, almost most of the common configuration (port, number of people, field of view, etc.) are edited in this file",
+        "infoLong": "Minecraft server-side configuration file is extremely important, almost most of the common configuration (port, number of people, field of view, etc.) are edited in this file"
+      },
+      "spigotYml": {
+        "name": "[Spigot] spigot.yml",
+        "info": "Spigot config to further control the behavior of the server and specific parameters, some of the more advanced restrictions in this configuration file",
+        "infoLong": "Spigot server config, which allows you to further set some of the server's advanced parameters, such as entity AI ranges, player limits, line-of-sight limits, and block limits."
+      },
+      "velocityToml": {
+        "name": "[Velocity] velocity.toml",
+        "info": "Velocity group server-side important configuration file, you can carry out distributed management, node control, etc., but this configuration file is more complex, here is only a simple configuration and operation",
+        "infoLong": "Velocity group server-side configuration files, can be distributed management, node control, etc., the configuration is more complex, it is recommended that modify with the <a href=\"https://docs.papermc.io/velocity/configuration\">official documentation</a>"
+      }
+    },
+    "bdsServerProperties": {
+      "serverName": "Used as the server name",
+      "gamemode": "Sets the game mode for new players.",
+      "forceGamemode": "forces the server to send to the client gamemode values other than the gamemode value saved by the server during world creation",
+      "difficulty": "Sets the difficulty of the world.",
+      "allowCheats": "If true then cheats like commands can be used.",
+      "maxPlayers": "The maximum number of players that can play on the server.",
+      "onlineMode": "If true then all connected players must be authenticated to Xbox Live.",
+      "allowList": "If true then all connected players must be listed in the separate allowlist.json file.",
+      "serverPort": "Which IPv4 port the server should listen to.",
+      "serverPortv6": "Which IPv4 port the server should listen to.",
+      "enableLanVisibility": "Listen and respond to clients that are looking for servers on the LAN.",
+      "viewDistance": "The maximum allowed view distance in number of chunks.",
+      "tickDistance": "The world will be ticked this many chunks away from any player.",
+      "playerIdleTimeout": "After a player has idled for this many minutes they will be kicked. If set to 0 then players can idle indefinitely.",
+      "maxThreads": "Maximum number of threads the server will try to use. If set to 0 or removed then it will use as many as possible.",
+      "levelName": "Allowed values: Any string without semicolon symbol or symbols illegal for file name: /\\n\\r\\t\\f`?*\\\\<>|\\\":",
+      "levelSeed": "Use to randomize the world",
+      "defaultPlayerPermissionLevel": "Permission level for new players joining for the first time. Allowed values: \"visitor\", \"member\", \"operator\"",
+      "texturepackRequired": "Force clients to use texture packs in the current world",
+      "contentLogFileEnabled": "Enables logging content errors to a file",
+      "compressionThreshold": "Determines the smallest size of raw network payload to compress",
+      "compressionAlgorithm": "Determines the compression algorithm to use for networking",
+      "serverAuthoritativeMovement": "Enables server authoritative movement.",
+      "playerMovementScoreThreshold": "The number of incongruent time intervals needed before abnormal behavior is reported.",
+      "playerMovementActionDirectionThreshold": "The amount that the player's attack direction and look direction can differ.",
+      "playerMovementDistanceThreshold": "The difference between server and client positions that needs to be exceeded before abnormal behavior is detected.",
+      "playerMovementDurationThresholdInMs": "The duration of time the server and client positions can be out of sync (as defined by player-movement-distance-threshold) before the abnormal movement score is incremented. This value is defined in milliseconds.",
+      "correctPlayerMovement": "If true, the client position will get corrected to the server position if the movement score exceeds the threshold.\n",
+      "serverAuthoritativeBlockBreaking": "If true, the server will compute block mining operations in sync with the client so it can verify that the client should be able to break blocks when it thinks it can.",
+      "chatRestriction": "This represents the level of restriction applied to the chat for each player that joins the server.",
+      "disablePlayerInteraction": "If true, the server will inform clients that they should ignore other players when interacting with the world. This is not server authoritative.",
+      "clientSideChunkGenerationEnabled": "If true, the server will inform clients that they have the ability to generate visual level chunks outside of player interaction distances.",
+      "blockNetworkIdsAreHashes": "If true, the server will send hashed block network ID's instead of id's that start from 0 and go up. These id's are stable and won't change regardless of other block changes.",
+      "disablePersona": "Internal Use Only",
+      "disableCustomSkins": "If true, disable players customized skins that were customized outside of the Minecraft store assets or in game assets.  This is used to disable possibly offensive custom skins players make.",
+      "serverBuildRadiusRatio": "If \"Disabled\" the server will dynamically calculate how much of the player's view it will generate, assigning the rest to the client to build.\nOtherwise from the overridden ratio tell the server how much of the player's view to generate, disregarding client hardware capability."
+    },
+    "bukkitYml": {
+      "settings": {
+        "allowDnd": "Whether or not to enable Mordor",
+        "warnOnOverload": "Warning of server overload",
+        "permissionsFile": "Customize the name of the permissions file",
+        "updateFolder": "Plugin update folder, name of the folder where new versions of plugins are put, this folder will automatically update the plugins when the server restarts",
+        "pluginProfiling": "Allows the command /timings. used to measure the amount of time the plugin spends for events",
+        "connectionThrottle": "The interval after the client's most recent connection attempt before it is allowed to connect again.",
+        "queryPlugins": "Whether the server returns a list of plugins when queried by the MCSM built-in console.",
+        "deprecatedVerbose": "Whether the server displays a warning when a plugin registers a deprecated event.",
+        "shutdownMessage": "The information prompted by the game client after the server is closed",
+        "minimumApi": ""
+      },
+      "spawnLimits": {
+        "monsters": "Number of monsters that can be spawned per world",
+        "animals": "The number of animals that can spawn in each world.",
+        "waterAnimals": "The number of aquatic animals that can spawn in each world.",
+        "waterAmbient": "",
+        "ambient": "Number of ambient creatures (aka bats) that can be spawned per world"
+      },
+      "chunkGc": {
+        "periodInTicks": "Tick between each large block of garbage collection"
+      },
+      "ticksPer": {
+        "animalSpawns": "Attempt to spawn an animal every Tick, a value of 400 means the server will attempt to spawn an animal every 400 Ticks, a value of less than 0 will reset to Minecraft's default value",
+        "monsterSpawns": "Attempts to spawn a monster every Tick, ditto",
+        "autosave": "Autosave, a value of 6000 means the server will try to autosave the world every 5 minutes. Note: Too small a value may cause the server to lag.",
+        "waterSpawns": "",
+        "waterAmbientSpawns": "",
+        "ambientSpawns": ""
+      },
+      "aliases": "Simplified command file"
+    },
+    "configYml": {
+      "preventProxyConnections": "Whether to send player IP data to Mojang to prevent players using proxies from entering the server.",
+      "listeners": [
+        {
+          "queryPort": "UDP query port",
+          "motd": "When there is only one default server, the server will display the player's Motd. This has no effect when ping_passthrough is enabled",
+          "tabList": "The content format displayed in the TAB list of players connected to the server",
+          "queryEnabled": "Whether to enable UDP query",
+          "proxyProtocol": "Whether to enable HAProxy support",
+          "forcedHosts": "Port Forwarding Settings",
+          "pingPassthrough": "Whether to enable ping passthrough",
+          "priorities": "Priority Settings",
+          "bindLocalAddress": "Whether to show the IP address that BungeeCord is listening on",
+          "host": "Listening IP address and port",
+          "maxPlayers": "The maximum number of players that the player client will display, the default value is 1. This is only for decoration, not the actual maximum number of players set",
+          "tabSize": "Maximum number of players to display on the TAB list",
+          "forceDefaultServer": "Whether to force the player to be teleported to the default server every time the player enters the server"
+        }
+      ],
+      "remotePingCache": "",
+      "networkCompressionThreshold": "",
+      "permissions": {
+        "default": "Default User Group Permissions",
+        "admin": "Admin user group permissions"
+      },
+      "logPings": "Whether to log the player client's ping request to BungeeCord in the console",
+      "connectionThrottle": "ConnectionThrottle",
+      "connectionThrottleLimit": "Number of disconnections",
+      "serverConnectTimeout": "",
+      "timeout": "Timeout",
+      "playerLimit": "The maximum number of players that the entire BungeeCord instance can accept, the default value is -1, which means unlimited",
+      "ipForward": "Whether to enable IP tracking",
+      "groups": "Permission Group Settings",
+      "remotePingTimeout": "",
+      "logCommands": "Whether to log the commands entered by the player in the console (only log BungeeCord commands)",
+      "stats": "",
+      "onlineMode": "Genuine Verification",
+      "forgeSupport": "Whether to enable Forge support",
+      "disabledCommands": "Disabled Commands",
+      "servers": "Downstream server settings, only the downstream servers set here can be connected"
+    },
+    "eulaTxt": {
+      "eula": "Do you agree to the Minecraft EULA agreement, if you want to start the Minecraft server, this option must be enabled"
+    },
+    "geyserYml": {
+      "bedrock": {
+        "address": "Geyser server IP",
+        "port": "Server Port",
+        "cloneRemotePort": "Make the Geyser side port the same as the Java side port every time the server is started (plugin version only)",
+        "motd1": "First line MOTD; ignored if 'passthroughMotd' is true",
+        "motd2": "Second row MOTD",
+        "serverName": "Server name, visible in both pause and settings menus",
+        "compressionLevel": "Amount to compress network traffic. Higher values use more CPU, but use less bandwidth. Values less than -1 or greater than 9 are useless. Set to -1 to disable.",
+        "enableProxyProtocol": "Whether to enable the proxy protocol for the client. This feature is not required unless UDP proxy is used"
+      },
+      "remote": {
+        "address": "The IP of the Java server to connect to",
+        "port": "The port of the Java server to connect to",
+        "authType": "Authentication method (online, offline, floodgate)",
+        "allowPasswordAuthentication": "Allows password-based authentication via Geyser. Only useful in genuine authentication mode.",
+        "useProxyProtocol": "Whether to enable the proxy protocol when connecting to the server. If you don't know what this is, don't change it!",
+        "forwardHostname": "The hostname used by the forward BE client to connect to the Java server, which is designed for proxies"
+      },
+      "extendedWorldHeight": "Allows extending the world height from 0-255 to -64-319, which will cause players on 1.17.0-1.17.2 to be unable to connect. Requires a restart to apply.",
+      "floodgateKeyFile": "Public key generated by Floodgate (ignore this if not using Floodgate)",
+      "commandSuggestions": "Whether to enable command prompt",
+      "passthroughMotd": "Whether to use Java server's MOTD",
+      "passthroughProtocolName": "Whether to use the protocol of the Java server",
+      "passthroughPlayerCounts": "Whether to display the number of players in the Java server synchronously",
+      "legacyPingPassthrough": "Whether to enable LEGACY ping passthrough, unless your MOTD or player count is not showing correctly, you don't need to enable this feature",
+      "pingPassthroughInterval": "How often to ping the remote Java server, in seconds.",
+      "forwardPlayerPing": "Whether to forward player pings to the server. Players will have more accurate pings when enabled",
+      "maxPlayers": "Maximum player limit",
+      "debugMode": "Debug Mode",
+      "generalThreadPool": "Thread Pool Size",
+      "allowThirdPartyCapes": "Allow third party capes to be visible (currently supports OptiFine, LabyMod, 5Zig, Minecraft official)",
+      "allowThirdPartyDars": "Allow third party deadmau5 ears",
+      "showCooldown": "Allows to show fake attack cooldown",
+      "defaultLocale": "Default Language",
+      "cacheChunks": "Whether to enable chunk cache (it is recommended to disable in production environment, because it will eat a lot of memory)",
+      "showCoordinates": "Whether to show coordinates to the player",
+      "emoteOffhandWorkaround": "If set, when a Bedrock Edition player sends any emote, offhand and mainhand will be swapped, just like Java version of F",
+      "cacheImages": "Sets the number of days images are cached (useful to save time downloading them from the network. Set to 0 to disable; default: 0)",
+      "allowCustomSkulls": "Allows custom skulls to be displayed. Leaving it enabled may cause performance degradation on poorer devices.",
+      "addNonBedrockItems": "Whether to add powered minecarts as a separate item in the game",
+      "aboveBedrockNetherBuilding": "Whether to allow building and displaying blocks higher than Y127 in hell",
+      "forceResourcePacks": "Force the client to load all resource packs (if any)",
+      "xboxAchievementsDnabled": "Allow unlocking Xbox achievements",
+      "metrics": {
+        "enabled": "Whether to enable bStats statistics",
+        "uuid": "Server UUID, do not change!"
+      },
+      "scoreboardPacketThreshold": "Specifies how many scoreboard packets per second after which scoreboard updates will be limited to four updates per second",
+      "enableProxyConnections": "Whether to allow connections from ProxyPass and Waterdog",
+      "useDirectConnection": "Whether to connect directly to the Java server without creating a TCP connection",
+      "configVersion": "Configuration file version"
+    },
+    "mcdrConfigYml": {
+      "language": "Language used by MCDR to output messages",
+      "workingDirectory": "Server's working directory",
+      "startCommand": "Start the console command of the server",
+      "handler": "Server Handler",
+      "encoding": "The encoding format of the input content, leave blank to select automatically",
+      "decoding": "The decoding format of the output content, leave blank to select automatically",
+      "pluginDirectories": "List of plugin directories",
+      "rcon": {
+        "enable": "rcon switch",
+        "address": "rcon address",
+        "port": "rcon port",
+        "password": "rcon password"
+      },
+      "checkUpdate": "Update Check",
+      "advancedConsole": "Advanced Console",
+      "disableConsoleThread": "Disable the console thread",
+      "disableConsoleColor": "Disable Console Color",
+      "customHandlers": "List of custom server handlers",
+      "customInfoReactors": "List of custom info responders",
+      "debug": {
+        "all": "Enable all debug logs",
+        "mcdr": "MCDR debug log",
+        "handler": "Server Handler Debug Log",
+        "reactor": "info reactor debug log",
+        "plugin": "Plugin Debug Log",
+        "permission": "Permission system debug log",
+        "command": "Command Manager Debug Log"
+      }
+    },
+    "mohistYml": {
+      "mohist": {
+        "checkUpdate": "Whether to check for updates",
+        "lang": "Language",
+        "checkLibraries": "Whether to check dependent libraries",
+        "disableModsBlacklist": "Disable MOD Blacklist",
+        "disablePluginsBlacklist": "Disable Plugins Blacklist",
+        "checkUpdateAutoDownload": "Whether to check for updates and download them automatically",
+        "useCustomJava8": "Whether to allow custom downloads",
+        "showlogo": "Whether to display the Logo",
+        "optimizeExplosions": "Whether to optimize the algorithm when exploding",
+        "preventFromEnteringUnloadedChunks": "Whether to prevent entering unloaded chunks",
+        "ignoreEmptyTime": "ignore all empty times"
+      },
+      "librariesBlackList": "Dependent Libraries Blacklist"
+    },
+    "paperYml": {
+      "useDisplayNameInQuitMessage": "Sets whether the server should use the player name (dispalyname) in the exit message",
+      "verbose": "Sets whether the server should dump all configuration values to the server log on startup.",
+      "configVersion": "Configuration file version (do not change)",
+      "settings": {
+        "consoleHasAllPermissions": "Whether to allow the server console to get all permissions",
+        "useAlternativeLuckFormula": "Use Aikar's luck formula instead of vanilla luck formula. (Maybe helpful for fishing)",
+        "chunkTasksPerTick": "How many chunk tasks can be done per tick. This helps with rendering and chunk generation.",
+        "saveDmptyScoreboardTeams": "Whether to keep empty scoreboard team data",
+        "enablePlayerCollisions": "Whether to enable player collision",
+        "playerAutoSaveRate": "Sets how often players should be saved",
+        "maxPlayerAutoSavePerTick": "How many player data should be saved at most in each Tick",
+        "trackPluginScoreboards": "Should the server track plugin scoreboards with only dummy targets",
+        "regionFileCacheSize": "Set the maximum size of the region file cache",
+        "incomingPacketSpamThreshold": "Sets the threshold at which the server treats incoming packets as spam and ignores them.",
+        "suggestPlayerNamesWhenNullTabCompletions": "Instructs the server to return a list of players when tabCompleting if the plugin has no tab completions of its own.",
+        "bungeeOnlineMode": "Set it to be the same as server.properties",
+        "maxJoinsPerTick": "Maximum number of connections, sets the maximum number of players allowed to join the server at the same time. If this number is exceeded, they will be delayed from joining.",
+        "loadPermissionsYmlBeforePlugins": "Load bukkit's permission.yml file before plugins, allowing them to check permissions immediately when enabled.",
+        "useDisplayNameInQuitMessage": "Sets whether the server should use the player name (dispalyname) in the exit message",
+        "fixDntityPositionDesync": "Fixed item position desync between client and server",
+        "logNamedDntityDeaths": "Whether to log the death information of named entities",
+        "savePlayerData": "Sets whether the server should save player data such as inventory, experience and achievements",
+        "useVersionedWorld": "",
+        "unsupportedSettings": {
+          "allowPermanentBlockBreakDxploits": "Whether vanilla exploits can break non-breakable blocks",
+          "allowPistonDuplication": "Whether to allow to spawn blocks, such as duplicating TNT, spawning carpets and rails",
+          "allowHeadlessPistons": "Whether to allow headless pistons, usually used to break blocks such as bedrock",
+          "allowPermanentBlockBreakDxploitsReadme": "",
+          "allowPistonDuplicationReadme": "",
+          "allowHeadlessPistonsReadme": ""
+        },
+        "asyncChunks": {
+          "enable": "",
+          "threads": "Number of threads the server uses to save and load worlds"
+        },
+        "watchdog": {
+          "earlyWarningDvery": "The interval in milliseconds between printed thread dumps while the server is hanging",
+          "earlyWarningDelay": "The number of milliseconds before the watchdog thread starts printing thread dumps after the server starts hanging."
+        },
+        "bookSize": {
+          "pageMax": "The maximum number of bytes of a single page in a book can constitute the total number of bytes allowed by the book",
+          "totalMultiplier": "Each page has a multiple of the previous page's bytes"
+        },
+        "spamLimiter": {
+          "tabSpamIncrement": "The number that the internal tab spam counter increases by when a player presses tab in the chat window",
+          "tabSpamLimit": "The number that the internal tab spam counter can reach until the server kicks the player for spam",
+          "recipeSpamIncrement": "The number that the recipe spam counter increases by when a player presses a recipe",
+          "recipeSpamLimit": "The number that the recipe spam counter can reach until the server kicks the player for spam"
+        },
+        "velocitySupport": {
+          "enabled": "Set this to true if this server is behind a Velocity proxy. If this is true, do not enable the bungeecord setting in spigot.yml.",
+          "onlineMode": "",
+          "secret": "The secret shared by the Velocity agent and this server. This needs to match your agent's forwardingSecret setting."
+        },
+        "itemValidation": {
+          "displayName": "Limit on item display name length (overrides Spigot.yml)",
+          "locName": "LocName length limit (overrides Spigot.yml)",
+          "loreLine": "Item Lore length limit (overrides Spigot.yml)",
+          "book": {
+            "title": "Book title length limit (override Spigot.yml)",
+            "author": "Author name length limit (overrides Spigot.yml)",
+            "page": "Single page length limit (overrides Spigot.yml)"
+          },
+          "console": {
+            "enableBrigadierHighlighting": " Enables Mojang’s Brigadier highlighting in the server console",
+            "enableBrigadierCompletions": "Enables Mojang’s Brigadier command completions in the server console"
+          },
+          "loggers": {
+            "deobfuscateStacktraces": ""
+          }
+        }
+      },
+      "timings": {
+        "enabled": "Whether to enable Timings",
+        "verbose": "Instructs Timings to provide more specific information in its reports. For example, specific entity types causing lag rather than just “entities”",
+        "serverNamePrivacy": "Instructs Timings to hide server name information in reports.",
+        "url": "Specify the URL of the Timings Viewer server to which the Timings report should be uploaded",
+        "hiddenConfigDntries": "Config entries to hide from the Timings report",
+        "historyInterval": "Interval in seconds between points in the Timings report",
+        "historyLength": "Maximum amount of data to keep for a single report",
+        "serverName": "Set the time of input for the server name"
+      },
+      "messages": {
+        "noPermission": "The message that the client prompts when there is no permission",
+        "kick": {
+          "connectionThrottle": "Message when a player's connection is throttled",
+          "flyingPlayer": "The message that the player is kicked when flying in the server",
+          "flyingVehicle": "The message that the player is kicked when flying a vehicle in the server",
+          "authenticationServersDown": "The message that gets kicked when a player disconnects because the Mojang authentication servers are down"
+        }
+      },
+      "worldSettings": {
+        "default": {
+          "armorStandsTick": "Disable to prevent armor stands from ticking. Can improve performance with many armor stands",
+          "disableTeleportationSuffocationCheck": "Disables the server checking if the destination is safe before teleporting the player",
+          "removeCorruptTileDntities": "Whether the server should automatically remove corrupted Tile entities that cannot be repaired",
+          "experienceMergeMaxValue": "Sets the maximum value of server experience orbs to prevent them all from being merged into 1",
+          "fallingBlockHeightNerf": "The height at which falling blocks will be removed from the server",
+          "tntDntityHeightNerf": "The height at which Primed TNT entities will be removed from the server",
+          "phantomsDoNotSpawnOnCreativePlayers": "Players are prohibited from spawning phantoms in creative mode",
+          "phantomsOnlyAttackInsomniacs": "Prevents phantoms from attacking sleeping players",
+          "maxAutoSaveChunksPerTick": "The maximum number of chunks automatically saved by the system per Tick",
+          "perPlayerMobSpawns": "Whether the mob limit (in bukkit.yml) counts per player or the entire server",
+          "delayChunkUnloadsBy": "Delays chunk unloads by the specified time",
+          "disableThunder": "Disable Thunderstorm",
+          "keepSpawnLoadedRange": "Range of chunks to keep loaded around spawn chunks",
+          "spawnerNerfedMobsShouldJump": "Determines if spawner nerfed mobs should attempt to float (jump) in water",
+          "entitiesTargetWithFollowRange": "Sets whether the server should use follow range when targeting entities",
+          "nonPlayerArrowDespawnRate": "The rate at which arrows fired from non-player entities (emitters) disappear, in Ticks",
+          "creativeArrowDespawnRate": "The rate at which arrows fired by the player in creative mode disappear, in Ticks",
+          "zombiesTargetTurtleDggs": "Sets whether zombies and zombified piglins target turtle eggs",
+          "zombieVillagerInfectionChance": "Sets the variance of villagers converting to zombie villagers, set according to the difficulty of the game. Default is -1.0, set to 0 to always make villagers die when killed by zombies; set to 100 to always convert villagers to zombie villagers",
+          "allChunksAreSlimeChunks": "Whether to allow the server to treat all chunks as slime chunks (may not increase the chance of spawning slimes)",
+          "mobSpawnerTickRate": "How often the spawner should calculate the available spawn area and spawn new entities into it",
+          "seedBasedFeatureSearch": "Whether the server should check if a chunk’s biome (determined by world seed) can support the desired feature before loading it during feature searches.",
+          "preventTntFromMovingInWater": "Whether to prevent lit TNT from moving in water",
+          "ironGolemsCanSpawnInAir": "Sets whether iron golems can spawn in the air",
+          "skeletonHorseThunderSpawnChance": "Sets the chance that 4 skeleton horsemen will spawn in a thunderstorm",
+          "disableIceAndSnow": "Disable ice and snow formation",
+          "waterOverLavaFlowSpeed": "Sets the speed at which water flows over lava",
+          "useFasterDigencraftRedstone": "Increase redstone performance",
+          "netherCeilingVoidDamageHeight": "Sets the level above which players in the nether will take void damage",
+          "allowNonPlayerDntitiesOnScoreboards": "Whether to allow non-player entities on the scoreboard",
+          "parrotsAreUnaffectedByPlayerMovement": "Prevents parrots from falling off the player's shoulders while the player is moving",
+          "portalSearchRadius": "The maximum range to search for existing nether portals. If one is not found within that range, a new one will be generated",
+          "portalCreateRadius": "The maximum range the server will try to create a portal around when generating a new portal",
+          "disableDxplosionKnockback": "Prevent being blown up",
+          "containerUpdateTickRate": "The rate, in ticks, at which the server updates containers and inventories",
+          "keepSpawnLoaded": "Keep spawn chunks loaded",
+          "armorStandsDoCollisionDntityLookups": "Instructs armor stand entities to do entity collision checks",
+          "grassSpreadTickRate": "The growth rate of grass plants per Tick",
+          "shouldRemoveDragon": "Sets whether or not to remove the dragon if it exists without a portal.",
+          "useVanillaWorldScoreboardNameColoring": "Use vanilla world scoreboard name coloring",
+          "fixedChunkInhabitedTime": "If 0 or greater, set the chunk inhabited time to a fixed number",
+          "preventMovingIntoUnloadedChunks": "Whether the server prevents players from moving into unloaded chunks",
+          "babyZombieMovementModifier": "Modifies the speed at which baby zombies move",
+          "countAllMobsForSpawning": "Whether mob spawners and other mobs count towards the global mob limit",
+          "optimizeDxplosions": "Optimize TNT/creeper etc. explosions",
+          "duplicateUuidResolver": "Specify the server's method for resolving entities with duplicate UUIDs (saferegen: regenerate a UUID for the entity; delete: delete the entity; silent: do nothing, do not print logs; warn: do nothing, print logs)",
+          "duplicateUuidSaferegenDeleteRange": "If multiple entities with duplicate UUIDs are within this many blocks, saferegen will delete all but 1 of them",
+          "disableCreeperLingeringDffect": "Randomly disables creepers, leaving a lingering area effect cloud",
+          "maxDntityCollisions": "Maximum entity collisions after which the server stops processing collisions",
+          "filterNbtDataFromSpawnDggsAndRelated": "Removes certain NBT data from spawned eggs, dropped blocks, and other commonly abused items in creative mode",
+          "lightQueueSize": "Sets how large the queue of light updates off the main thread for each world should be",
+          "autoSaveInterval": "Auto Save Interval",
+          "enableTreasureMaps": "Whether to allow villagers to trade treasure maps",
+          "treasureMapsReturnAlreadyDiscovered": "Instructs the server to target the first treasure location found, rather than the first undiscovered one",
+          "showSignClickCommandFailureMsgsToPlayer": "Whether commands executed by sign click should show failure messages to players",
+          "fixItemsMergingThroughWalls": "Whether to prevent items from merging through walls (enable may cause performance degradation)",
+          "fixClimbingBypassingCrammingRule": "Sets whether climbing should bypass Cramming restrictions",
+          "onlyPlayersCollide": "Only calculate collisions if a player is one of the two entities colliding",
+          "allowVehicleCollisions": "Allow Vehicle Collisions",
+          "portalSearchVanillaDimensionScaling": "Whether to apply vanilla dimension scaling to portalSearchRadius",
+          "seedBasedFeatureSearchLoadsChunks": "Seed-based feature search loads chunks (disabled to improve performance, but affects /locate directive)",
+          "maxLeashDistance": "Configures the maximum distance of the leash, if it exceeds this distance, it will break",
+          "fixWitherTargetingBug": "Fix WitherTargetingBug (MC-29274)",
+          "allowPlayerCrammingDamage": "Allow the player to receive damage from maxEntityCramming when more entities collide in the game rules settings",
+          "updatePathfindingOnBlockUpdate": "Controls whether to update pathfinding balabala for mobs when blocks are updated in the world (disabling this option can significantly improve server performance)",
+          "mapItemFrameCursorLimit": "The cursor limit of each map in the display frame (that is the green arrow),",
+          "enderDragonsDeathAlwaysPlacesDragonDgg": "Whether the ender dragon will drop dragon eggs when it dies",
+          "allowUsingSignsInsideSpawnProtection": "Allow players to use signs inside the spawn protection area",
+          "bedSearchRadius": "",
+          "allowLeashingUndeadHorse": "",
+          "babyZombieMovementSpeed": "Modifies the speed at which baby zombies move (0.5 means 50% faster than base speed, -0.4 makes it 40% slower)",
+          "doorBreakingDifficulty": {
+            "zombie": "List of difficulties that zombies can break through",
+            "vindicator": "Lists the difficulty list that vindicator can break"
+          },
+          "mobsCanAlwaysPickUpLoot": {
+            "zombies": "Sets whether zombies can pick up items. If set to false, the probability of zombies picking up items depends on the difficulty of the world",
+            "skeletons": "Sets whether skeletons can pick up items. If set to false, the probability of zombies picking up items depends on the difficulty of the world"
+          },
+          "spawnLimits": {
+            "monsters": "The number of monsters that can be spawned per world (if -1, use the settings in bukkit.yml, the same below)",
+            "animals": "Number of animals that can spawn per world",
+            "waterAnimals": "Number of aquatic animals that can spawn per world",
+            "waterAmbient": "The amount of waterAmbient that can be generated per world",
+            "ambient": "The number of ambients that can be spawned per world"
+          },
+          "entityPerChunkSaveLimit": {
+            "experience_orb": "Limit the number of experience orbs saved/loaded per chunk (-1 disables this limit, same below)",
+            "snowball": "Limit the number of snowballs saved/loaded per chunk",
+            "ender_pearl": "Limit the number of ender pearls saved/loaded per chunk",
+            "fireball": "Limit number of fireballs saved/loaded per chunk",
+            "small_fireball": "Limits the number of fireballs a blaze spews per chunk save/load",
+            "arrow": "Limit the number of arrows saved/loaded per chunk"
+          },
+          "mobDffects": {
+            "undeadImmuneToCertainDffects": "",
+            "spidersImmuneToPoisonDffect": "",
+            "immuneToWitherDffect": {
+              "wither": "",
+              "witherSkeleton": ""
+            }
+          },
+          "tickRates": {
+            "sensor": {
+              "villager": {
+                "secondarypoisensor": "Sets the tick rate of the secondarypoisensor sensor of Villager entities",
+                "validatenearbypoi": ""
+              }
+            }
+          },
+          "fishingTimeRange": {
+            "MinimumTicks": "Minimum RNG Ticks required to catch a fish",
+            "MaximumTicks": "Maximum RNG Ticks before catching a fish"
+          },
+          "despawnRanges": {
+            "soft": "The number of blocks away from the player, once exceeded, the entity will be cleared randomly",
+            "hard": "The number of blocks away from the player, once exceeded, the entity will be forcibly cleared"
+          },
+          "frosted ice": {
+            "enabled": "Whether frost is enabled",
+            "delay": {
+              "min": "Minimum RNG value to apply frostedIce effects at",
+              "max": "Maximum RNG value to apply frostedIce effects at"
+            }
+          },
+          "gameMechanics": {
+            "disablePillagerPatrols": "Disables pillager patrols and related AI",
+            "disableRelativeProjectileVelocity": "",
+            "disableUnloadedChunkDnderpearlDxploit": "Prevents enderpearls from storing droppers in unloaded chunks",
+            "disableChestCatDetection": "Whether the chest can be opened when there is a cat on it",
+            "nerfPigmenFromNetherPortals": "Whether to remove AI from pigmen that go through nether portals to overworld",
+            "disablePlayerCrits": "Whether to disable player crits",
+            "shieldBlockingDelay": "Instructs the server to ignore shooter velocity when calculating the velocity of a fired arrow",
+            "disableDndCredits": "Instructs the server to never send the end game credits when leaving the end",
+            "scanForLegacyDnderDragon": "Whether the server searches for the ender dragon when loading old worlds",
+            "disableSprintInterruptionOnAttack": "Whether to interrupt sprinting players if they are attacked",
+            "fixCuringZombieVillagerDiscountDxploit": "Fix bug that gave huge discounts for infecting and curing zombie villagers",
+            "disableMobSpawnerSpawnDggTransformation": "Whether to prevent players from using spawn eggs to change the type of spawner",
+            "pillagerPatrols": {
+              "spawnChance": "Spawn Chance for Marauder Patrols",
+              "spawnDelay": {
+                "perPlayer": "Makes spawnDelay per player",
+                "ticks": "Delay in ticks between spawn chance"
+              },
+              "start": {
+                "perPlayer": "Makes days per player",
+                "day": "Days between raid spawns"
+              }
+            }
+          },
+          "viewdistances": {
+            "noTickViewDistance": "Sets the noTick view distance"
+          },
+          "antiXray": {
+            "enabled": "Whether anti-Xray is enabled",
+            "engineMode": "Set anti-Xray engine mode. Where 1 is to replace hidden blocks with stones, 2 is to replace all blocks with random block data",
+            "maxChunkSectionIndex": "",
+            "updateRadius": "Controls the distance in blocks from air or water that hiddenBlocks are hidden by the antiXray engine",
+            "lavaObscures": "Whether to obfuscate blocks touching lava",
+            "maxBlockHeight": "Set the maximum height that anti-Xray will try to hide ores (only multiples of 16 are allowed, if other values are entered, they will be rounded down to multiples of 16)",
+            "usePermission": "Whether to allow players with paper.antixray.bypass permission to bypass anti-Xray",
+            "chunkDdgeMode": "",
+            "replacementBlocks": "List of blocks that should be replaced by hidden blocks in engine mode 2",
+            "hiddenBlocks": "List of blocks to hide in engine mode 1"
+          },
+          "squidSpawnHeight": {
+            "maximum": "Maximum height for squid to spawn"
+          },
+          "generatorSettings": {
+            "flatBedrock": "Instructs the server to generate bedrock as a single flat layer"
+          },
+          "maxGrowthHeight": {
+            "cactus": "The maximum height a cactus can grow naturally",
+            "reeds": "The maximum height of sugarcane natural growth",
+            "bamboo": {
+              "max": "The maximum height of bamboo's natural growth",
+              "min": "The minimum height for bamboo to grow naturally"
+            }
+          },
+          "lootables": {
+            "autoReplenish": "Instructs the server to automatically replenish lootable containers",
+            "restrictPlayerReloot": "Prevents the same player from coming back and relooting the same container over and over",
+            "resetSeedOnFill": "Resets the loot seed each time the lootable is refilled. Effectively randomizing the new loot items on each refill",
+            "maxRefills": "Sets the maximum number of times a lootable may be refilled",
+            "refreshMin": "The minimum amount of time that must pass before a lootable will be eligible to be refilled",
+            "refreshMax": "The maximum amount of time that can pass before a lootable is refilled"
+          },
+          "hopper": {
+            "cooldownWhenFull": "Sets the server to apply a short cooldown when the hopper is full, instead of constantly trying to pull new items",
+            "disableMoveDvent": "Completely disables the hopper's InventoryMoveItemEvent, significantly improving hopper performance. But will break protection plugins and any other plugins that depend on this event",
+            "disableMoveDventQuickshopTips": ""
+          },
+          "altItemDespawnRate": {
+            "enabled": "Whether items have a different disappearance rate",
+            "items": {
+              "COBBLESTONE": "(Default) Rough Stone"
+            }
+          },
+          "lightningStrikeDistanceLimit": {
+            "sound": "The distance at which the player hears lightning",
+            "impactSound": "The distance at which players hear lightning impact",
+            "flash": "How far in the sky the player sees lightning"
+          },
+          "wanderingTrader": {
+            "spawnMinuteLength": "The length of minutes in which the wandering trader spawns (in Ticks)",
+            "spawnDayLength": "Time interval in Ticks between wandering trader spawns",
+            "spawnChanceFailureIncrement": "How much the spawn chance will be increased on every failed wandering trader spawn.",
+            "spawnChanceMin": "Minimum chance to spawn a wandering trader",
+            "spawnChanceMax": "Maximum chance to spawn a wandering trader"
+          },
+          "unsupportedSettings": {
+            "fixInvulnerableDndCrystalDxploit": "Fix invulnerable ender crystal exploit (MC-108513)"
+          }
+        }
+      }
+    },
+    "paperGlobalYml": {
+      "version": "",
+      "asyncChunks": {
+        "threads": "Number of threads the server should use for world saving and chunk loading. The default value (-1) means that Paper will use half the system's threads to load chunks, unless otherwise specified. The maximum default value for saving and loading chunks is 4 threads. This can be overridden by adding -Dpaper.maxChunkThreads=[number] to your startup parameters"
+      },
+      "chunkLoading": {
+        "autoconfigSendDistance": "Whether to use the client's render distance as the server's chunk send distance. This will specifically change the radius of chunks sent to the client and will not affect server side chunk loading or ticking.",
+        "enableFrustumPriority": "Whether to try to load chunks in front of the player before loading chunks to the side or back of the player. This is disabled by default and generally not recommended due to clients' poor reaction to receiving chunks out of order.",
+        "globalMaxChunkLoadRate": "Maximum chunks per second for the entire server to load. Takes precedence over playerMaxChunkLoadRate",
+        "globalMaxChunkSendRate": "The maximum number of chunks sent per second by the entire server. This may help with peak bandwidth usage on the server side.",
+        "globalMaxConcurrentLoads": "Maximum number of chunk loads to process for the entire server at once. Will override if playerMaxConcurrentLoads is exceeded",
+        "maxConcurrentSends": "Maximum number of blocks to send per queue. A lower value will help alleviate network bottlenecks on the server side, such as anti-mining. However, it is unlikely to help players with a bad network.",
+        "minLoadRadius": "There is no chunk radius around the player that limits loading chunks. The number of chunks affected is actually a config value plus one, which controls how many chunks the client can actually render.",
+        "playerMaxChunkLoadRate": "Maximum chunks to load per second per player.",
+        "playerMaxConcurrentLoads": "Maximum chunk loads per player to process at once.",
+        "targetPlayerChunkSendRate": "The maximum number of chunks to send to a single player in one second."
+      },
+      "collisions": {
+        "enablePlayerCollisions": "Sets whether the server allows player collisions. Plugins that interact with the scoreboard may break this option. If you have trouble using this option, try not installing plugins.",
+        "sendFullPosForHardCollidingDntities": "Attempts to mitigate this out-of-sync by sending the precise positions of entities involved in collisions. Enabling this will use more bandwidth; however, it is a worthwhile trade-off in most cases."
+      },
+      "commands": {
+        "fixTargetSelectorTagCompletion": "Fix a client bug preventing entity type tag suggestions from working in target selectors.",
+        "suggestPlayerNamesWhenNullTabCompletions": "Sets the server to return a list of players on tab completion if no other completions are available.",
+        "timeCommandAffectsAllWorlds": "Does the /time command affect all worlds? false to only affect the sender's current world."
+      },
+      "console": {
+        "enableBrigadierCompletions": "Enables Mojang's Brigadier (advanced) command completions in the server console.",
+        "enableBrigadierHighlighting": "Enables Mojang's BrigadierHighlighting in the server console.",
+        "hasAllPermissions": "Whether the console command has all permissions."
+      },
+      "itemValidation": {
+        "book": {
+          "author": "Maximum length (in characters) of a book author",
+          "page": "The maximum length of a book page in characters",
+          "title": "Maximum length of book title (in characters)"
+        },
+        "bookSize": {
+          "pageMax": "",
+          "totalMultiplier": ""
+        },
+        "displayName": "The maximum length of an item's display name. (in characters)",
+        "loreLine": "Maximum length of item lore. (in characters)",
+        "resolveSelectorsInBooks": "Whether to resolve selectors in books. When enabled, players who get creative mode will be able to crash the server in another way."
+      },
+      "logging": {
+        "deobfuscateStacktraces": "Whether to remap stack traces from Spigot maps to Mojang maps in logging. Has no effect on Mojang map servers.",
+        "logPlayerIpAddresses": "Whether the server should log player IP addresses. This does not affect the plugin's ability to log player IP addresses.",
+        "useRgbForNamedTextColors": "Whether named ANSI colors should be documented using RGB codes."
+      },
+      "messages": {
+        "kick": {
+          "authenticationServersDown": "Message to send to players when Mojang's authentication servers are unreachable.",
+          "connectionThrottle": "Message to send to players when they are unable to join due to connection throttling.",
+          "flyingPlayer": "Message to send to players detected flying.",
+          "flyingVehicle": "Message sent to players detected flying in a vehicle."
+        },
+        "noPermission": "Message sent to player when player does not have sufficient permission to perform an action",
+        "useDisplayNameInQuitMessage": "Whether the server should use the player's display name (set by plugin) or actual name in the quit message"
+      },
+      "misc": {
+        "chatThreads": {
+          "chatDxecutorCoreSize": "",
+          "chatDxecutorMaxSize": ""
+        },
+        "fixDntityPositionDesync": "Fix entity position synchronization.",
+        "lagCompensateBlockBreaking": "Whether the server uses time or TPS to determine the duration of block breaks. Clients assume the server is always running at 20 TPS, causing inconsistencies when blocks are broken during server lag. This setting prevents this desync.",
+        "loadPermissionsYmlBeforePlugins": "Whether to load bukkit's permissions.yml file before plugins are loaded, allowing them to immediately check settings there when enabled",
+        "maxJoinsPerTick": "Sets the maximum number of players that can join the server at one time. If more players join, they will be postponed until later ticks to join, but will not be kicked. This has nothing to do with the connection limit in bukkit.yml",
+        "regionFileCacheSize": "Maximum size of the region file cache.",
+        "strictAdvancementDimensionCheck": "",
+        "useAlternativeLuckFormula": "Whether to use the Alternative Luck Formula , allowing luck to be applied to items that don't have a defined quality. Significant changes to the fishing formula.",
+        "useDimensionTypeForCustomSpawners": "Whether phantoms, wandering traders, etc. should be able to spawn in custom worlds"
+      },
+      "packetLimiter": {
+        "allPackets": {
+          "action": "Action to take when the limit is violated. Possible values DROP will ignore packets exceeding the limit, and KICK will kick players who exceed the limit.",
+          "interval": "The time interval to apply. (in seconds)",
+          "maxPacketRate": "The number of packets allowed per player in the interval."
+        },
+        "kickMessage": "The message that the player was kicked for sending too many packets.",
+        "overrides": {
+          "ServerboundPlaceRecipePacket": {
+            "action": "",
+            "interval": "",
+            "maxPacketRate": ""
+          }
+        }
+      },
+      "playerAutoSave": {
+        "maxPerTick": "The maximum number of player data that can be saved in a tick.",
+        "rate": "How often player data should be saved."
+      },
+      "proxies": {
+        "bungeeCord": {
+          "onlineMode": "Set to be the same as your bungeeCord's onlineMode."
+        },
+        "proxyProtocol": "Whether the server should handle proxy protocol messages. This has absolutely nothing to do with Velocity or BungeeCord. Only enable this if you are using HAProxy or similar.",
+        "velocity": {
+          "enabled": "Whether the server should accept Velocity proxies.",
+          "onlineMode": "Set to be the same as your Velocity's onlineMode.",
+          "secret": "The secret string shared by the Velocity agent and this server. This needs to be the same as your Velocity's forwardingSecret setting."
+        }
+      },
+      "scoreboards": {
+        "saveDmptyScoreboardTeams": "Sets whether the server should automatically delete scoreboards for teams that are empty.",
+        "trackPluginScoreboards": "Whether the server should track scoreboards for plugins that only have dummy targets."
+      },
+      "spamLimiter": {
+        "incomingPacketThreshold": "Sets the threshold at which the server considers incoming packets as spam and ignores them.",
+        "recipeSpamIncrement": "Number to increment the recipe spam counter when the player presses the recipe.",
+        "recipeSpamLimit": "How much the recipe spam counter can reach before the server kicks the player out of spam.",
+        "tabSpamIncrement": "Amount to increment the internal tab spam counter when a player presses tab in the chat window.",
+        "tabSpamLimit": "The amount the internal tab spam counter can reach before the server kicks the player out of spam."
+      },
+      "timings": {
+        "enabled": "Whether to enable Timings",
+        "hiddenConfigDntries": "Config entries to hide from the Timings report.",
+        "historyInterval": "Interval between points in the Timings report. (in seconds)",
+        "historyLength": "The total amount of data to keep for a single report. This value is validated on the server side. Reports exceeding this number will be rejected.",
+        "serverName": "Set the contents of the Timings input server name.",
+        "serverNamePrivacy": "Sets whether Timings should hide server names in reports.",
+        "url": "Set the URL of the Timings Viewer server.",
+        "verbose": "Sets whether Timings should provide more specific information in its reports."
+      },
+      "unsupportedSettings": {
+        "allowHeadlessPistons": "Whether the server allows the creation of headless pistons.",
+        "allowPermanentBlockBreakDxploits": "Whether non-breakable blocks can be broken through normal exploits.",
+        "allowPistonDuplication": "Whether to allow duplication of TNT, carpet and rails. This does not control sand duplication.",
+        "performUsernameValidation": "Whether to allow players with special characters in their name to join."
+      },
+      "watchdog": {
+        "earlyWarningDelay": "Number of milliseconds before the watchdog thread starts printing thread dumps after the server starts hanging.",
+        "earlyWarningDvery": "Interval between printing thread dumps when the server hangs. (in milliseconds)"
+      }
+    },
+    "paperWorldDefaults": {
+      "_version": "",
+      "anticheat": {
+        "antiXray": {
+          "enabled": "Whether to enable anti-mine penetration. (Anti-Xray)",
+          "engineMode": "Set the Anti-Xray engine mode.",
+          "hiddenBlocks": "",
+          "lavaObscures": "Whether to obfuscate blocks exposed to lava.",
+          "maxBlockHeight": "Set the maximum height for Anti-Xray operations. Only integer multiples of 16 are accepted.",
+          "replacementBlocks": "",
+          "updateRadius": "The radius at which block updates containing real block data will be sent when the client interacts with the block. Only 0, 1, and 2 can be set. (0 is for testing purposes only, do not use in production)",
+          "usePermission": "Whether to allow players with paper.antixray.bypass permission to bypass Anti-Xray."
+        },
+        "obfuscation": {
+          "items": {
+            "hideDurability": "Whether to send durability information to other players' clients.",
+            "hideItemmeta": "Whether unnecessary item information (such as enchantments, items in shulker boxes, etc.) from cheat clients should be sent to other players' clients."
+          }
+        }
+      },
+      "chunks": {
+        "autoSaveInterval": "Configures the world autosave interval in Ticks.",
+        "delayChunkUnloadsBy": "Set the chunk unload delay time.",
+        "fixedChunkInhabitedTime": "",
+        "maxAutoSaveChunksPerTick": "The maximum number of chunks the autosave system will save per Tick.",
+        "preventMovingIntoUnloadedChunks": "Whether to prevent players from moving into unloaded chunks."
+      },
+      "collisions": {
+        "allowPlayerCrammingDamage": "",
+        "allowVehicleCollisions": "Whether vehicles can collide.",
+        "fixClimbingBypassingCrammingRule": "Whether climbing bypasses entity cramming restrictions.",
+        "maxDntityCollisions": "Sets the server to stop processing collisions after reaching this value.",
+        "onlyPlayersCollide": "Whether to only calculate collisions if the player is one of the two colliding entities."
+      },
+      "entities": {
+        "armorStands": {
+          "doCollisionDntityLookups": "Whether armor stand entities should be checked for entity collisions.",
+          "tick": "Disable to prevent armor stand Ticking. (Can improve performance of many armor stands)"
+        },
+        "behavior": {
+          "babyZombieMovementModifier": "Modifies baby zombie movement speed, 0.5 is 50% faster than base speed, -0.4 is 40% slower.",
+          "disableChestCatDetection": "Whether it is possible to open the chest when there is a cat sitting on it.",
+          "disableCreeperLingeringDffect": "Whether to disable random creepers and leave a lingering area effect cloud.",
+          "disablePlayerCrits": "Whether to disable crit.",
+          "doorBreakingDifficulty": {
+            "husk": "How hard husks can break doors.",
+            "vindicator": "How difficult a vindicator can break through.",
+            "zombie": "How difficult the door can be broken by zombies.",
+            "zombieVillager": "How difficult a zombie villager can break doors.",
+            "zombifiedPiglin": "How difficult a zombified piglin can break through."
+          },
+          "enderDragonsDeathAlwaysPlacesDragonDgg": "Whether the ender dragon always drops dragon eggs on death.",
+          "experienceMergeMaxValue": "Sets the server's maximum value for a single experience orb, preventing them all from being merged into 1 experience orb.",
+          "mobsCanAlwaysPickUpLoot": {
+            "skeletons": "Whether skeletons can always pick up loot. (If set to false, the probability of picking up items depends on the difficulty of the world)",
+            "zombies": "Whether zombies can always pick up loot. (If set to false, the probability of picking up items depends on the difficulty of the world)"
+          },
+          "nerfPigmenFromNetherPortals": "Remove AI from piglins that teleport through nether portals.",
+          "parrotsAreUnaffectedByPlayerMovement": "Whether to prevent parrots from falling off the player's shoulders while the player is moving.",
+          "phantomsDoNotSpawnOnCreativePlayers": "Whether to disable phantom spawning in creative mode.",
+          "phantomsOnlyAttackInsomniacs": "Whether to prevent phantoms from attacking sleeping players.",
+          "piglinsGuardChests": "Whether piglins should guard chests when enraged.",
+          "pillagerPatrols": {
+            "disable": "Whether to disable pillager patrols and associated AI.",
+            "spawnChance": "Modifies the spawn chance of pillagers",
+            "spawnDelay": {
+              "perPlayer": "",
+              "ticks": ""
+            },
+            "start": {
+              "day": "",
+              "perPlayer": ""
+            }
+          },
+          "shouldRemoveDragon": "Should remove the ender dragon if no portal exists.",
+          "spawnerNerfedMobsShouldJump": "",
+          "zombieVillagerInfectionChance": "Sets the chance for a villager to convert to a zombie villager. Set to -1.0 if it varies based on game difficulty. (Set to 0.0 to always let a villager die when killed by a zombie, set to 100.0 to always convert a villager to a zombie villager)",
+          "zombiesTargetTurtleDggs": "Sets whether zombies and zombified piglins will automatically seek out and destroy turtle eggs."
+        },
+        "entitiesTargetWithFollowRange": "Sets whether the server should use a follow range when locating entities.",
+        "mobDffects": {
+          "immuneToWitherDffect": {
+            "wither": "",
+            "witherSkeleton": "Whether wither skeletons are immune to wither effects"
+          },
+          "spidersImmuneToPoisonDffect": "Are spiders immune to poison effects",
+          "undeadImmuneToCertainDffects": "Whether undead mobs are immune to regeneration and poison effects"
+        },
+        "spawning": {
+          "allChunksAreSlimeChunks": "Whether to set all chunks to be slime chunks, allowing slimes to spawn in any chunk. (This may actually reduce your chances of encountering slimes, as they now have a larger potential spawn area.)",
+          "altItemDespawnRate": {
+            "enabled": "Sets whether items have different disappearance rates.",
+            "items": {
+              "cobblestone": "The probability that a cobblestone will disappear."
+            }
+          },
+          "countAllMobsForSpawning": "Whether mobs and other miscellaneous mobs spawned by spawn eggs count towards the global mob limit.",
+          "creativeArrowDespawnRate": "The rate at which arrows fired by the player in creative mode disappear, in Ticks.",
+          "despawnRanges": {
+            "ambient": {
+              "hard": "",
+              "soft": ""
+            },
+            "axolotls": {
+              "hard": "The number of blocks the axolotl is away from the player before it will be forced to disappear",
+              "soft": "The number of blocks the axolotl is away from the player before it will be randomly despawned"
+            },
+            "creature": {
+              "hard": "Animals are the number of blocks away from the player before they will be forced to disappear",
+              "soft": "The number of blocks the animal is away from the player before it will be randomly despawned"
+            },
+            "misc": {
+              "hard": "The number of blocks away from the player, beyond this distance will be forced to disappear",
+              "soft": "The number of blocks away from the player, beyond this distance will be randomly disappeared"
+            },
+            "monster": {
+              "hard": "The number of blocks the monster is away from the player, beyond which it will be forced to disappear",
+              "soft": "The number of blocks the monster is away from the player, beyond which it will disappear randomly"
+            },
+            "undergroundWaterCreature": {
+              "hard": "The number of blocks the underwater creature is away from the player, beyond which it will be forced to disappear",
+              "soft": "The number of blocks that underwater creatures are away from the player, beyond which they will disappear randomly"
+            },
+            "water ambient": {
+              "hard": "",
+              "soft": ""
+            },
+            "waterCreature": {
+              "hard": "Animals in the water are the number of blocks away from the player, beyond which they will be forced to disappear",
+              "soft": "Animals in the water are the number of blocks away from the player, beyond this distance they will disappear randomly"
+            }
+          },
+          "disableMobSpawnerSpawnDggTransformation": "Whether to prevent players from using spawn eggs to change the type of spawner.",
+          "duplicateUuid": {
+            "mode": "Specify the method the server uses to resolve entities with duplicate UUIDs. (SAFE_REGEN: Regenerate a UUID for entities, delete them if they are down. DELETE: Delete entities. SILENT: Do nothing, do not print logs. WARN: Do nothing, print logs.)",
+            "safeRegenDeleteRange": ""
+          },
+          "filterNbtDataFromSpawnDggsAndRelated": "Whether to remove certain NBT data from spawn eggs, dropped blocks, and other items that are often abused in creative mode.",
+          "ironGolemsCanSpawnInAir": "Whether iron golems can spawn in air.",
+          "monsterSpawnMaxLightLevel": "",
+          "nonPlayerArrowDespawnRate": "The rate (in Ticks) at which arrows fired by non-player entities will disappear",
+          "perPlayerMobSpawns": "Sets whether mob limits are calculated per player or the entire server (in bukkit.yml). Enabling this setting spawns roughly the same number of mobs, but with a more even distribution, preventing one player from using the entire mob cap and providing a more single player-like experience.",
+          "scanForLegacyDnderDragon": "",
+          "skeletonHorseThunderSpawnChance": "Sets the chance that a \"skeleton trap\" (4 skeleton horsemen) will spawn in a thunderstorm.",
+          "slimeSpawnHeight": {
+            "slimeChunk": {
+              "maximum": "Sets the maximum Y position of naturally spawned slimes in slime chunks."
+            },
+            "surfaceBiome": {
+              "maximum": "Sets the maximum Y position of naturally spawned slimes in swamp biomes.",
+              "minimum": "Sets the minimum Y position for naturally spawning slimes in swamp biomes."
+            }
+          },
+          "spawnLimits": {},
+          "wanderingTrader": {
+            "spawnChanceFailureIncrement": "",
+            "spawnChanceMax": "Maximum chance of spawning wandering traders.",
+            "spawnChanceMin": "Minimum chance to spawn a wandering trader.",
+            "spawnDayLength": "Time interval between spawning wandering traders.",
+            "spawnMinuteLength": ""
+          },
+          "wateranimalSpawnHeight": {
+            "maximum": "Maximum height for aquatic animals to spawn.",
+            "minimum": "Minimum height for aquatic animals to spawn."
+          }
+        }
+      },
+      "environment": {
+        "disableDxplosionKnockback": "Whether to prevent knockback from explosions.",
+        "disableIceAndSnow": "Whether to disable ice and snow generation.",
+        "disableTeleportationSuffocationCheck": "Whether to disable the stuck wall check performed by the server before teleporting the player.",
+        "disableThunder": "Whether to disable thunderstorms.",
+        "frosted ice": {
+          "delay": {
+            "max": "Maximum RNG value at which to apply the frosted ice effect.",
+            "min": "Minimum RNG value at which to apply the frosty ice effect."
+          },
+          "enabled": "Whether frosted ice is enabled."
+        },
+        "generateFlatBedrock": "Whether bedrock is generated as a single layer. (similar to superflat)",
+        "netherCeilingVoidDamageHeight": "The level at which the player will take void damage in hell.",
+        "optimizeDxplosions": "Whether the server caches entity lookups during an explosion, rather than recalculating them throughout.",
+        "portalCreateRadius": "The maximum radius the server will attempt to create a portal when spawning a new portal.",
+        "portalSearchRadius": "The maximum radius the server will use to find existing nether portals. If one is not found within that range, a new one will be generated.",
+        "portalSearchVanillaDimensionScaling": "",
+        "treasureMaps": {
+          "enabled": "",
+          "findAlreadyDiscovered": {
+            "lootTables": "",
+            "villageTrade": ""
+          }
+        },
+        "waterOverLavaFlowSpeed": "Sets the speed at which water flows through lava."
+      },
+      "featureSeeds": {
+        "generateRandomSeedsForAll": "Whether to enable random seed autofill for all available features that have not been seeded."
+      },
+      "fishingTimeRange": {
+        "maximum": "The maximum RNG Tick required to catch a fish.",
+        "minimum": "Minimum RNG Tick required to catch a fish."
+      },
+      "fixes": {
+        "disableUnloadedChunkDnderpearlDxploit": "",
+        "fallingBlockHeightNerf": "The number of blocks a block will be removed from when it falls from a height. (<1 disables this feature)",
+        "fixCuringZombieVillagerDiscountDxploit": "Whether to fix the exploit that gave huge discounts for infecting and curing zombie villagers.",
+        "fixItemsMergingThroughWalls": "Whether to prevent items from merging through walls.",
+        "preventTntFromMovingInWater": "Whether to prevent activated TNT entities from moving in moving water.",
+        "splitOverstackedLoot": "",
+        "tntDntityHeightNerf": ""
+      },
+      "hopper": {
+        "cooldownWhenFull": "Whether to have a short cooldown when the hopper is full, instead of constantly trying to suck new items.",
+        "disableMoveDvent": "",
+        "ignoreOccludingBlocks": "Whether the hopper should ignore containers inside occluding blocks, such as a hopper minecart inside sand. Enabling this will improve the performance of the hopper's ability to check the location of incoming items."
+      },
+      "lootables": {
+        "autoReplenish": "",
+        "maxRefills": "",
+        "refreshMax": "",
+        "refreshMin": "",
+        "resetSeedOnFill": "",
+        "restrictPlayerReloot": ""
+      },
+      "maps": {
+        "itemFrameCursorLimit": "Number of cursors (markers) allowed per map.",
+        "itemFrameCursorUpdateInterval": "The time interval for updating the cursor on the map in an item frame. (Setting this to a number less than 1 will completely disable updates)"
+      },
+      "maxGrowthHeight": {
+        "bamboo": {
+          "max": "The maximum height that bamboo will naturally grow to.",
+          "min": "The minimum height that bamboo will naturally grow to."
+        },
+        "cactus": "Maximum natural growth height for cactus blocks.",
+        "reeds": "Maximum height at which sugar cane will naturally grow."
+      },
+      "misc": {
+        "disableDndCredits": "Whether to never send game end credits when leaving game end.",
+        "disableRelativeProjectileVelocity": "Whether to ignore archer velocity when calculating archery velocity.",
+        "disableSprintInterruptionOnAttack": "Whether the player will be interrupted when being attacked while sprinting.",
+        "lightQueueSize": "Sets how big the main thread light update queue is per world.",
+        "maxLeashDistance": "Configures the maximum distance for the leash.",
+        "redstoneImplementation": "Specifies the redstone implementation used by the server. Alternative implementations can greatly reduce the delay caused by redstone dust by optimizing power calculations and reducing the number of block and shape updates issued. The following implementations can be used: VANILLA (vanilla), EIGENCRAFT, ALTERNATE-CURRENT",
+        "shieldBlockingDelay": "The Tick between when a player activates their shield and when it actually blocks damage.",
+        "showSignClickCommandFailureMsgsToPlayer": "Whether commands executed by clicking on signs should show the player a message that they failed to execute.",
+        "updatePathfindingOnBlockUpdate": "Controls whether to update the mob's pathfinding AI when a block is updated in the world. Disabling this option can significantly improve server performance with little noticeable effect on game mechanics. It is recommended to enable this option when there are many entities loaded and you have autofarming or redstone clocks."
+      },
+      "scoreboards": {
+        "allowNonPlayerDntitiesOnScoreboards": "Whether to treat non-player entities as if they were never on the scoreboard when calculating collisions.",
+        "useVanillaWorldScoreboardNameColoring": "Whether to use vanilla WorldScoreboardNameColoring for player nicknames."
+      },
+      "spawn": {
+        "allowUsingSignsInsideSpawnProtection": "Whether to allow players to use signs inside the spawn protection area.",
+        "keepSpawnLoaded": "Whether to keep the spawn point protection area as a constant loading block.",
+        "keepSpawnLoadedRange": "The spawn point guard area always loads a range of chunks."
+      },
+      "tickRates": {
+        "behavior": {
+          "village": {
+            "validatenearbypoi": ""
+          }
+        },
+        "containerUpdate": "The rate at which the server updates containers and inventory (in Ticks)",
+        "grassSpread": "Set the delay for the server to spread grass. (in Ticks)",
+        "mobSpawner": "How often the spawner should calculate the available spawn area and spawn new entities in the world. (A value of -1 will disable all spawners)",
+        "sensor": {
+          "village": {
+            "secondary poisensor": ""
+          }
+        }
+      },
+      "unsupportedSettings": {
+        "fixInvulnerableDndCrystalDxploit": "If set to false, will allow creation of invulnerable ender crystals."
+      }
+    },
+    "permissionYml": {
+      "default_level": "Default permission level for new players",
+      "owner": "owner",
+      "admin": "Administrator",
+      "helper": "Helper",
+      "user": "Normal Player",
+      "guest": "Visitor"
+    },
+    "serverProperties": {
+      "requireResourcePack": "Whether a resource pack is required",
+      "enableJmxMonitoring": "Whether to enable JMX monitoring",
+      "syncChunkWrites": "Whether to enable synchronous chunk writing",
+      "generatorSettings": "Used to customize the generation of superflat worlds, please leave blank if you do not want to generate superflat worlds",
+      "allowNether": "Whether to allow nether (including hell)",
+      "levelName": "Do not use Chinese for the world (map) name",
+      "enableQuery": "Whether to allow server listeners using the GameSpy4 protocol",
+      "allowFlight": "Whether the player is allowed to fly (in any game mode)",
+      "serverPort": "Server port (if the server has more advanced settings, this option may fail)",
+      "levelType": "The map generation type (default: default, superflat: flat, amplified world: amplified, large biomes: largeBiomes)",
+      "enableRcon": "Whether to allow remote access to the server console (RCON)",
+      "forceGamemode": "Default gamemode when forcing players to join",
+      "levelSeed": "Map seed is left blank by default",
+      "serverIp": "Server ip, please leave blank if not bound",
+      "maxBuildHeight": "Maximum height a player can place a block on the server",
+      "spawnNpcs": "Whether to spawn villagers",
+      "whiteList": "Whether to enable the whitelist",
+      "spawnAnimals": "Whether to spawn animals",
+      "snooperDnabled": "Enable data collection",
+      "hardcore": "Hardcore mode (auto-ban after death)",
+      "texturePack": "Texture Pack",
+      "onlineMode": "Online (genuine) verification",
+      "pvp": "Whether players are allowed to attack each other",
+      "enforceSecureProfile": "If enabled, players without a Mojang signed public key will not be able to connect to the server.",
+      "difficulty": "Game difficulty (peaceful, easy, normal, hard)",
+      "playerIdleTimeout": "The allowed idle time, in minutes, will be automatically kicked out of the server after exceeding the limit",
+      "gamemode": "Game mode (survival, creative, adventure, spectator)",
+      "maxPlayers": "Server maximum player limit",
+      "spawnMonsters": "Spawn hostile mobs (monsters)",
+      "viewDistance": "The amount of data sent by the server to the client determines the field of view that the player can set",
+      "generateStructures": "Dungeons and underground strongholds still generate when generating structures (such as villages) are disabled during world generation",
+      "motd": "Server information display If you use plugins such as ColorMotd, you can leave this option blank",
+      "opPermissionLevel": "OP permission level (1-4)",
+      "announcePlayerAchievements": "Whether to display in the server chat bar when a player gets an achievement (whether it is allowed to install X)",
+      "networkCompressionThreshold": "Network Compression Threshold",
+      "resourcePackSha1": "The SHA-1 value of the resource pack, must be lowercase hexadecimal, not a required option",
+      "enableCommandBlock": "Enable Command Block",
+      "resourcePack": "Uniform Resource Identifier (URI) pointing to a resource pack. Use is optional",
+      "maxWorldSize": "Maximum World Size",
+      "functionPermissionLevel": "Set the default permission level for functions",
+      "maxTickTime": "Set the maximum number of milliseconds each Tick takes",
+      "preventProxyConnections": "Whether to allow players to use web proxies to connect to the server",
+      "rconPort": "Set the port number for RCON remote access",
+      "rconPassword": "Set password for RCON remote access (see enableRcon)",
+      "queryPort": "Set the port number of the listening server (see enableRcon)",
+      "useNativeTransport": "Whether to use packet sending and receiving optimization for Linux platform [Linux only]",
+      "debug": "Debug Mode",
+      "broadcastRconToOps": "Broadcast RCON info to OP",
+      "broadcastConsoleToOps": "Broadcast server console info to OP",
+      "enforceWhitelist": "Enforce a whitelist on the server",
+      "spawnProtection": "Determines the spawn protection radius by multiplying this value by 2x+1, setting it to 0 will only protect the block below the spawn point.",
+      "maxChainedNeighborUpdates": "Limit the number of consecutive neighbor updates before skipping other updates. Negative values remove the limit.",
+      "enableStatus": "Makes the server appear online in the server list. If set to no, it will suppress replies from clients. This means it will appear offline, but will still accept connections.",
+      "resourcePackPrompt": "Optional, add a custom message that will be displayed on the resource pack prompt window when using requireResourcePack.",
+      "hideOnlinePlayers": "Whether to hide online players",
+      "entityBroadcastRangePercentage": "Control the distance of the furthest visible entity on the client side, which can be properly optimized to reduce the distance.",
+      "simulationDistance": "Sets the maximum distance between biological entities and the player for the server to update, in blocks in each direction of the player (radius). If entities are outside this radius, they will not be sent by the server and will not be seen by the player.",
+      "rateLimit": "When the total amount of data packets sent by the player client will be kicked out, 0 means off",
+      "previewsChat": "If set to yes, chat previews will be enabled. If enabled, the server prohibits users from using vpns or proxies; if disabled, the server does not prevent users from using vpns or proxies.",
+      "textFilteringConfig": "Text filtering rules configuration file (may not work properly)"
+    },
+    "spigotYml": {
+      "configVersion": "Configuration version number, generally no need to modify",
+      "settings": {
+        "debug": "Debug Mode",
+        "saveUserCacheOnStopOnly": "Whether to cache user data only when it is stopped",
+        "movedWronglyThreshold": "Controls the threshold for the \"moved Wrongly\" check",
+        "movedTooQuicklyMultiplier": "The multiplier threshold for judging that the moving speed is too fast",
+        "logVillagerDeaths": "Whether to log villager deaths",
+        "timeoutTime": "Connection timeout",
+        "restartOnCrash": "Whether to restart automatically when it crashes",
+        "restartScript": "Script name to be executed on restart (such as ./start.sh)",
+        "sampleCount": "Controls the number of (randomly selected) sample players displayed when hovering over the player count in the client server list.",
+        "userCacheSize": "User cache size",
+        "nettyThreads": "Number of Netty communication threads",
+        "playerShuffle": "Every number of ticks (20ticks/1s) to refresh the order of players in the data traversal, which can effectively adjust the order of players in memory. It is helpful on PvP servers. Less than 100 will cause performance problems",
+        "bungeecord": "Whether to enable cluster mode (more auxiliary software and configuration are needed to be used together)",
+        "attribute": {
+          "maxHealth": {
+            "max": "The server's maximum health limit",
+            "min": "The server's minimum health limit"
+          },
+          "movementSpeed": {
+            "max": "The server's maximum speed limit",
+            "min": "The server's minimum health limit"
+          },
+          "attackDamage": {
+            "max": "The server's maximum damage limit",
+            "min": "The server's minimum health limit"
+          }
+        }
+      },
+      "stats": {
+        "disableSaving": "If enabled, the server will not save player stats or achievements",
+        "forcedStats": "Cannot be modified, currently not supported"
+      },
+      "players": {
+        "disableSaving": ""
+      },
+      "messages": {
+        "whitelist": "Text displayed when player is blocked by whitelist",
+        "unknownCommand": "The text displayed when the player executes an unknown command",
+        "serverFull": "Prompt text when the server is full",
+        "outdatedClient": "When the client version is too low, the text content of the prompt, where {0} is the server version variable",
+        "outdatedServer": "When the server version is too low, the text content of the prompt, where {0} is the client version variable",
+        "restart": "Text prompt for player to enter server when server restarts"
+      },
+      "commands": {
+        "silentCommandblockConsole": "Mute command block console output",
+        "log": "Whether to enable log output",
+        "tabComplete": "Controls whether to allow the player to press the TAB key to autocomplete commands. -1 is off, 0 is immediate, 1 is the first letter, etc",
+        "sendNamespaced": "Whether to send command namespace",
+        "replaceCommands": "Disable Bukkit's implementation of the listed commands and enable their original behavior, multiple comma-separated are supported",
+        "spamDxclusions": "Spam exclusions, support multiple items separated by commas"
+      },
+      "worldSettings": {
+        "default": {
+          "randomLightUpdates": "Random Light Updates",
+          "saveStructureInfo": "Save structure updates",
+          "seedFeature": "Seed Feature",
+          "verbose": "Whether to display per-world verbose reports and configuration in the console/log at server startup. Can be disabled/enabled globally or per world",
+          "itemDespawnRate": "Controls the Tick(s) required before an item entity on the ground is dropped (20 Ticks = 1s)",
+          "enableZombiePigmenPortalSpawns": "Whether to enable Zombie Pigmen Portal Spawns",
+          "viewDistance": "Control the farthest viewing distance of all players, the lowest is 1, the highest is 15, adjusting to about 8 can significantly improve server performance",
+          "hangingTickFrequency": "Update frequency per Tick",
+          "mobSpawnRange": "Mob Spawn Range",
+          "hopperAmount": "Controls the maximum amount of items the hopper will receive/emit in the hopper Tick period. Best used in conjunction with higher Ticks for each hopper transfer and check to combine actions into one",
+          "maxTntPerTick": "Maximum number of updated TNTs per Tick refresh",
+          "witherSpawnSoundRadius": "Spawn radius of the wither",
+          "arrowDespawnRate": "Arrow disappear distance",
+          "tridentDespawnRate": "Trident Despawn Rate",
+          "seedVillage": "Generate the seed code of the village",
+          "seedDesert": "Generate the desert seed code",
+          "seedIgloo": "Generation hut seed code",
+          "seedJungle": "Generate a jungle seed",
+          "seedSwamp": "Swamp seed code",
+          "seedMonument": "Seed to generate the Monument",
+          "seedShipwreck": "Generation shipwreck seed code",
+          "seedOcean": "Generate the ocean's seed code",
+          "seedOutpost": "Generate the seed code for Guardian Outpost",
+          "seedDndcity": "Generate the seed code of the end city",
+          "seedSlime": "Seed to generate slime blocks",
+          "seedBastion": "Generate the seed for the fletching bench",
+          "seedFortress": "Seed fortress generation",
+          "seedMansion": "Generate the seed code of the mansion",
+          "seedFossil": "Seed code for generating fossils",
+          "seedPortal": "Generate the seed code of the portal",
+          "nerfSpawnerMobs": "When enabled, new mobs spawned by mobs will not have any AI",
+          "dragonDeathSoundRadius": "End Dragon Death Sound Radius",
+          "zombieAggressiveTowardsVillager": "Whether to allow spawning zombie villagers",
+          "endPortalSoundRadius": "Nether Portal Sound Radius",
+          "entityTrackingRange": {
+            "players": "The maximum range for entity AI to track players, reducing this value can slightly save server computing resources",
+            "animals": "The maximum range for entity AI to track animals, reducing this value can slightly save server computing resources",
+            "monsters": "The maximum range for entity AI to track monsters, reducing this value can slightly save server computing resources",
+            "misc": "Maximum range for entity AI to track items, reducing this value can slightly save server computing resources",
+            "other": "Maximum range for entity AI to track others, reducing this value can slightly save server computing resources"
+          },
+          "mergeRadius": {
+            "item": "When the items are far away, they will merge and attract each other",
+            "exp": "When the experience balls are far away, they will merge and attract each other"
+          },
+          "ticksPer": {
+            "hopperTransfer": "Time between hopper pushing/pulling/receiving an item and hopper pushing/pulling more items, update 8 behaviors every Tick on server",
+            "hopperCheck": "The hopper attempts to push/pull items since the last attempt. For example, a value of 8 means that an empty hopper looks for material entities above, inventory above, etc. every 8 ticks. Values 0 or 1 reflect vanilla behavior. This option is disabled when HOPPER-ALT-TICKING is set to \"Yes\""
+          },
+          "growth": {
+            "cactusModifier": "Cactus Growth Rate",
+            "caneModifier": "Cane Speed",
+            "melonModifier": "Watermelon Speed",
+            "mushroomModifier": "Mushroom Speed",
+            "pumpkinModifier": "Pumpkin Speed",
+            "saplingModifier": "Sapling Growth Rate",
+            "beetrootModifier": "Beetroot Growth Rate",
+            "carrotModifier": "Carrot growth rate",
+            "potatoModifier": "Potato Growth Rate",
+            "wheatModifier": "Wheat Growth Rate",
+            "netherwartModifier": "Netherwart Growth Rate",
+            "vineModifier": "Vine growth rate",
+            "cocoaModifier": "Cocoa bean growth rate",
+            "bambooModifier": "Pillar growth rate",
+            "sweetberryModifier": "Sweetberry Growth Rate",
+            "kelpModifier": "Kelp Growth Rate"
+          },
+          "hunger": {
+            "jumpWalkDxhaustion": "Hunger consumed when jumping and running",
+            "jumpSprintDxhaustion": "Hunger consumed when jumping and sprinting",
+            "combatDxhaustion": "Hunger spent in combat",
+            "regenDxhaustion": "Hunger consumed when regenerating",
+            "swimMultiplier": "Hunger multiplier consumed while swimming",
+            "sprintMultiplier": "Hunger multiplier consumed only when sprinting",
+            "otherMultiplier": "Hunger multiplier consumed by other actions"
+          },
+          "entityActivationRange": {
+            "animals": "Maximum animal activation range",
+            "monsters": "Monster Max Activation Range",
+            "raiders": "Raid Max Activation Range",
+            "misc": "Item Max Activation Range",
+            "tickInactiveVillagers": "Whether to update inactive villagers"
+          },
+          "squidSpawnRange": {
+            "min": "Squid minimum spawn range"
+          },
+          "maxTickTime": {
+            "tile": "Maximum Tick time allocated to Tile",
+            "entity": "Maximum Tick time allocated to an entity"
+          }
+        }
+      }
+    },
+    "velocityToml": {
+      "configVersion": "Configuration file version, do not change this option",
+      "bind": "Listening address",
+      "motd": "MOTD",
+      "showMaxPlayers": "The maximum number of players displayed (actual Velocity does not limit the number of players)",
+      "onlineMode": "Whether to enable genuine verification",
+      "forceKeyAuthentication": "Whether to enable forced key authentication",
+      "preventClientProxyConnections": "Whether to prevent client proxy connections",
+      "playerInfoForwardingMode": "Player Information Forwarding Mode",
+      "forwardingSecretFile": "Forwarding Secret File",
+      "announceForge": "Whether the broadcast server supports Forge",
+      "kickDxistingPlayers": "Whether to kick existing players",
+      "pingPassthrough": "PING request passthrough mode",
+      "enablePlayerAddressLogging": "If not enabled, the player's IP address will be replaced by <ip address withheld> in the logs",
+      "servers": {
+        "try": "Try to connect to the server order (format: lobby,minigame1,minigame2)"
+      },
+      "advanced": {
+        "compressionThreshold": "Network packet compression threshold, set to 0 to compress all packets, set to -1 to completely disable all packet compression",
+        "compressionLevel": "Compression level (0 - 9, set -1 to use default 6)",
+        "loginRatelimit": "Client login cooldown",
+        "connectionTimeout": "Connection Timeout",
+        "readTimeout": "Read Timeout",
+        "haproxyProtocol": "Whether to enable support for the HAProxy protocol",
+        "tcpFastOpen": "Whether to enable support for tcp fast open, need to run on Linux",
+        "bungeePluginMessageChannel": "Whether to enable BungeeCord custom message channel support",
+        "showPingRequests": "Whether to show PING requests from clients on the agent",
+        "failoverOnUnexpectedServerDisconnect": "Whether to prevent Velocity from rolling back player actions (except Read Timeout) instead of disconnecting the player when the user connection is unexpectedly lost but the server connection is not explicitly disconnected",
+        "announceProxyCommands": "Whether to announce proxy commands to 1.13+ clients (this will allow clients to receive proxy command completions etc.)",
+        "logCommandDxecutions": "Whether to log the command usage of the agent",
+        "logPlayerConnections": "Whether to log player connections on the agent side"
+      },
+      "query": {
+        "enabled": "Whether to enable response to GameSpy 4 queries",
+        "port": "Query protocol listening port",
+        "map": "The name of the map fed back to the query service",
+        "showPlugins": "Whether to show plugins in query response results"
+      }
+    }
   },
   "processConfigFile": {
     "title": "Configuration File",

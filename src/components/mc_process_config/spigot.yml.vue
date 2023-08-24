@@ -1,6 +1,5 @@
 <!--
   Copyright (C) 2022 MCSManager <mcsmanager-dev@outlook.com>
-  This page is for Chinese users only
 -->
 
 <template>
@@ -18,7 +17,7 @@
     <!-- 当前文件的说明，请根据需要自定义修改文字，勿修改排版 -->
     <LineOption :custom="true">
       <template #default>
-        <div class="sub-title">
+        <div class="sub-title" v-iszh>
           <div class="sub-title">关于配置兼容与翻译</div>
           <div class="sub-title-info">
             此界面由开源社区开发者开发与翻译，若翻译发现错误可前往开源社区进行反馈。Spigot
@@ -26,10 +25,9 @@
           </div>
         </div>
         <div class="sub-title">
-          <div class="sub-title">关于配置文件</div>
+          <div class="sub-title">{{this.$t("processConfig.introduction.common.aboutConfig")}}</div>
           <div class="sub-title-info">
-            此文件为 Spigot 服务端专用的配置文件，可以进一步的设置服务端的一些高级参数，比如实体 AI
-            范围，玩家限制，视距限制和区块限制等
+            {{this.$t("processConfig.introduction.spigotYml.infoLong")}}
           </div>
         </div>
       </template>
@@ -73,159 +71,150 @@ export default {
     return {
       config: null,
       description: {
-        "config-version": "配置版本号，一般情况无需修改",
-        settings: {
-          debug: "调试模式",
-          "save-user-cache-on-stop-only": "是否只要停止时才准缓存用户数据",
-          "moved-wrongly-threshold": "控制“错误移动”检查的阈值",
-          "moved-too-quickly-multiplier": "判断移动速度太快的倍数阈值",
-          "log-villager-deaths": "是否记载村民死亡",
-          "timeout-time": "连接超时时间",
-          "restart-on-crash": "崩溃时是否自动重启",
-          "restart-script": "重启时执行的脚本名（如 ./start.sh）",
-          "sample-count":
-            "控制将鼠标悬停在客户端服务器列表中的玩家计数上时显示的(随机选择的)样本玩家数量。",
-          "user-cache-size": "用户缓存大小",
-          "netty-threads": "Netty 通信线程数",
-          "player-shuffle":
-            "每隔多少 ticks（20ticks/1s）刷新玩家在数据遍历中的顺序，可以有效调整玩家在内存中顺序，在 PvP 服务器上有些帮助，低于100会导致性能问题",
-          bungeecord: "是否开启集群模式（还需要更多辅助软件与配置结合使用）",
-          attribute: {
-            maxHealth: {
-              max: "服务器最大的生命值上限",
-              min: "服务器最小的生命值上限"
+        "config-version": this.$t("processConfig.spigotYml.configVersion"),
+        "settings": {
+          "debug": this.$t("processConfig.spigotYml.settings.debug"),
+          "save-user-cache-on-stop-only": this.$t("processConfig.spigotYml.settings.saveUserCacheOnStopOnly"),
+          "moved-wrongly-threshold": this.$t("processConfig.spigotYml.settings.movedWronglyThreshold"),
+          "moved-too-quickly-multiplier": this.$t("processConfig.spigotYml.settings.movedTooQuicklyMultiplier"),
+          "log-villager-deaths": this.$t("processConfig.spigotYml.settings.logVillagerDeaths"),
+          "timeout-time": this.$t("processConfig.spigotYml.settings.timeoutTime"),
+          "restart-on-crash": this.$t("processConfig.spigotYml.settings.restartOnCrash"),
+          "restart-script": this.$t("processConfig.spigotYml.settings.restartScript"),
+          "sample-count": this.$t("processConfig.spigotYml.settings.sampleCount"),
+          "user-cache-size": this.$t("processConfig.spigotYml.settings.userCacheSize"),
+          "netty-threads": this.$t("processConfig.spigotYml.settings.nettyThreads"),
+          "player-shuffle": this.$t("processConfig.spigotYml.settings.playerShuffle"),
+          "bungeecord": this.$t("processConfig.spigotYml.settings.bungeecord"),
+          "attribute": {
+            "maxHealth": {
+              "max": this.$t("processConfig.spigotYml.settings.attribute.maxHealth.max"),
+              "min": this.$t("processConfig.spigotYml.settings.attribute.maxHealth.min")
             },
-            movementSpeed: {
-              max: "服务器最大的速度上限",
-              min: "服务器最小的生命值上限"
+            "movementSpeed": {
+              "max": this.$t("processConfig.spigotYml.settings.attribute.movementSpeed.max"),
+              "min": this.$t("processConfig.spigotYml.settings.attribute.movementSpeed.min")
             },
-            attackDamage: {
-              max: "服务器最大的伤害上限",
-              min: "服务器最小的生命值上限"
+            "attackDamage": {
+              "max": this.$t("processConfig.spigotYml.settings.attribute.attackDamage.max"),
+              "min": this.$t("processConfig.spigotYml.settings.attribute.attackDamage.min")
             }
           }
         },
-        stats: {
-          "disable-saving": "如果启用，则服务器将不保存玩家统计数据或成就",
-          "forced-stats": "无法修改，暂不支持"
+        "stats": {
+          "disable-saving": this.$t("processConfig.spigotYml.stats.disableSaving"),
+          "forced-stats": this.$t("processConfig.spigotYml.stats.forcedStats")
         },
-        players: {
-          "disable-saving": ""
+        "players": {
+          "disable-saving": this.$t("processConfig.spigotYml.players.disableSaving")
         },
-        messages: {
-          whitelist: "当玩家被白名单阻止时显示的文本内容",
-          "unknown-command": "当玩家执行未知命令时所提示的文本内容",
-          "server-full": "当服务器满人时的提示文本",
-          "outdated-client": "当客户端版本过低时，提示的文本内容，其中 {0} 为服务器版本变量",
-          "outdated-server": "当服务器版本过低时，提示的文本内容，其中 {0} 为客户端版本变量",
-          restart: "当服务器重启时玩家进入服务器的文本提示"
+        "messages": {
+          "whitelist": this.$t("processConfig.spigotYml.messages.whitelist"),
+          "unknown-command": this.$t("processConfig.spigotYml.messages.unknownCommand"),
+          "server-full": this.$t("processConfig.spigotYml.messages.serverFull"),
+          "outdated-client": this.$t("processConfig.spigotYml.messages.outdatedClient"),
+          "outdated-server": this.$t("processConfig.spigotYml.messages.outdatedServer"),
+          "restart": this.$t("processConfig.spigotYml.messages.restart")
         },
-        commands: {
-          "silent-commandblock-console": "屏蔽命令方块的控制台输出",
-          log: "是否开启日志输出",
-          "tab-complete":
-            "控制是否允许玩家按下 TAB 键来自动完成命令。-1 为关闭，0 为立即，1 为第一个字母，以此类推",
-          "send-namespaced": "是否发送命令命令空间",
-          "replace-commands":
-            "禁用 Bukkit 对所列命令的实现，并启用它们的原始行为，支持多项且使用英文逗号分隔",
-          "spam-exclusions": "垃圾排除,支持多项且使用英文逗号分隔"
+        "commands": {
+          "silent-commandblock-console": this.$t("processConfig.spigotYml.commands.silentCommandblockConsole"),
+          "log": this.$t("processConfig.spigotYml.commands.log"),
+          "tab-complete": this.$t("processConfig.spigotYml.commands.tabComplete"),
+          "send-namespaced": this.$t("processConfig.spigotYml.commands.sendNamespaced"),
+          "replace-commands": this.$t("processConfig.spigotYml.commands.replaceCommands"),
+          "spam-exclusions": this.$t("processConfig.spigotYml.commands.spamExclusions")
         },
         "world-settings": {
-          default: {
-            "random-light-updates": "随机亮度更新",
-            "save-structure-info": "保存结构更新",
-            "seed-feature": "种子特征",
-            verbose:
-              "是否在服务器启动时在控制台/日志中显示每个世界的详细报告和配置。可以全局禁用/启用，也可以按世界禁用/启用",
-            "item-despawn-rate": "控制在地面上的项目实体删除之前所需的 Tick(s)（20 Ticks = 1s）",
-            "enable-zombie-pigmen-portal-spawns": "是否启用僵尸猪人入口生成",
-            "view-distance":
-              "控制所有玩家最远视距，最低为 1，最高为 15，调整到 8 左右可以显著提升服务器性能",
-            "hanging-tick-frequency": "每 Tick 的更新频率",
-            "mob-spawn-range": "怪物生成范围",
-            "hopper-amount":
-              "控制漏斗在漏斗 Tick 周期中接收/发出的最大物品数量。最好与每个漏斗转移和检查的更高 Tick 结合使用以将动作合二为一",
-            "max-tnt-per-tick": "每 Tick 刷新时最大更新的 TNT 数量",
-            "wither-spawn-sound-radius": "生成凋灵的声音范围",
-            "arrow-despawn-rate": "箭消失距离",
-            "trident-despawn-rate": "三叉戟消失距离",
-            "seed-village": "生成村庄的种子码",
-            "seed-desert": "生成沙漠的种子码",
-            "seed-igloo": "生成小屋的种子码",
-            "seed-jungle": "生成丛林的种子码",
-            "seed-swamp": "生成沼泽的种子码",
-            "seed-monument": "生成遗迹的种子码",
-            "seed-shipwreck": "生成船骸的种子码",
-            "seed-ocean": "生成海洋的种子码",
-            "seed-outpost": "生成守护者前哨的种子码",
-            "seed-endcity": "生成末地城的种子码",
-            "seed-slime": "生成黏液区块的种子码",
-            "seed-bastion": "生成造箭台的种子码",
-            "seed-fortress": "生成要塞的种子码",
-            "seed-mansion": "生成宅邸的种子码",
-            "seed-fossil": "生成化石的种子码",
-            "seed-portal": "生成传送门的种子码",
-            "nerf-spawner-mobs": "启用后，由怪物生成的新怪物将不会有任何 AI",
-            "dragon-death-sound-radius": "末地龙死亡声音范围",
-            "zombie-aggressive-towards-villager": "是否准许生成僵尸村民",
-            "end-portal-sound-radius": "下界传送门声音范围",
+          "default": {
+            "random-light-updates": this.$t("processConfig.spigotYml.worldSettings.default.randomLightUpdates"),
+            "save-structure-info": this.$t("processConfig.spigotYml.worldSettings.default.saveStructureInfo"),
+            "seed-feature": this.$t("processConfig.spigotYml.worldSettings.default.seedFeature"),
+            "verbose": this.$t("processConfig.spigotYml.worldSettings.default.verbose"),
+            "item-despawn-rate": this.$t("processConfig.spigotYml.worldSettings.default.itemDespawnRate"),
+            "enable-zombie-pigmen-portal-spawns": this.$t("processConfig.spigotYml.worldSettings.default.enableZombiePigmenPortalSpawns"),
+            "view-distance": this.$t("processConfig.spigotYml.worldSettings.default.viewDistance"),
+            "hanging-tick-frequency": this.$t("processConfig.spigotYml.worldSettings.default.hangingTickFrequency"),
+            "mob-spawn-range": this.$t("processConfig.spigotYml.worldSettings.default.mobSpawnRange"),
+            "hopper-amount": this.$t("processConfig.spigotYml.worldSettings.default.hopperAmount"),
+            "max-tnt-per-tick": this.$t("processConfig.spigotYml.worldSettings.default.maxTntPerTick"),
+            "wither-spawn-sound-radius": this.$t("processConfig.spigotYml.worldSettings.default.witherSpawnSoundRadius"),
+            "arrow-despawn-rate": this.$t("processConfig.spigotYml.worldSettings.default.arrowDespawnRate"),
+            "trident-despawn-rate": this.$t("processConfig.spigotYml.worldSettings.default.tridentDespawnRate"),
+            "seed-village": this.$t("processConfig.spigotYml.worldSettings.default.seedVillage"),
+            "seed-desert": this.$t("processConfig.spigotYml.worldSettings.default.seedDesert"),
+            "seed-igloo": this.$t("processConfig.spigotYml.worldSettings.default.seedIgloo"),
+            "seed-jungle": this.$t("processConfig.spigotYml.worldSettings.default.seedJungle"),
+            "seed-swamp": this.$t("processConfig.spigotYml.worldSettings.default.seedSwamp"),
+            "seed-monument": this.$t("processConfig.spigotYml.worldSettings.default.seedMonument"),
+            "seed-shipwreck": this.$t("processConfig.spigotYml.worldSettings.default.seedShipwreck"),
+            "seed-ocean": this.$t("processConfig.spigotYml.worldSettings.default.seedOcean"),
+            "seed-outpost": this.$t("processConfig.spigotYml.worldSettings.default.seedOutpost"),
+            "seed-endcity": this.$t("processConfig.spigotYml.worldSettings.default.seedEndcity"),
+            "seed-slime": this.$t("processConfig.spigotYml.worldSettings.default.seedSlime"),
+            "seed-bastion": this.$t("processConfig.spigotYml.worldSettings.default.seedBastion"),
+            "seed-fortress": this.$t("processConfig.spigotYml.worldSettings.default.seedFortress"),
+            "seed-mansion": this.$t("processConfig.spigotYml.worldSettings.default.seedMansion"),
+            "seed-fossil": this.$t("processConfig.spigotYml.worldSettings.default.seedFossil"),
+            "seed-portal": this.$t("processConfig.spigotYml.worldSettings.default.seedPortal"),
+            "nerf-spawner-mobs": this.$t("processConfig.spigotYml.worldSettings.default.nerfSpawnerMobs"),
+            "dragon-death-sound-radius": this.$t("processConfig.spigotYml.worldSettings.default.dragonDeathSoundRadius"),
+            "zombie-aggressive-towards-villager": this.$t("processConfig.spigotYml.worldSettings.default.zombieAggressiveTowardsVillager"),
+            "end-portal-sound-radius": this.$t("processConfig.spigotYml.worldSettings.default.endPortalSoundRadius"),
             "entity-tracking-range": {
-              players: "实体AI追踪玩家的最大范围，调小此值可轻微节约服务器计算资源",
-              animals: "实体AI追踪动物的最大范围，调小此值可轻微节约服务器计算资源",
-              monsters: "实体AI追踪怪物的最大范围，调小此值可轻微节约服务器计算资源",
-              misc: "实体AI追踪物品的最大范围，调小此值可轻微节约服务器计算资源",
-              other: "实体AI追踪其他的最大范围，调小此值可轻微节约服务器计算资源"
+              "players": this.$t("processConfig.spigotYml.worldSettings.default.entityTrackingRange.players"),
+              "animals": this.$t("processConfig.spigotYml.worldSettings.default.entityTrackingRange.animals"),
+              "monsters": this.$t("processConfig.spigotYml.worldSettings.default.entityTrackingRange.monsters"),
+              "misc": this.$t("processConfig.spigotYml.worldSettings.default.entityTrackingRange.misc"),
+              "other": this.$t("processConfig.spigotYml.worldSettings.default.entityTrackingRange.other")
             },
             "merge-radius": {
-              item: "物品距离多少时会互相合并吸引",
-              exp: "经验球距离多少时会互相合并吸引"
+              "item": this.$t("processConfig.spigotYml.worldSettings.default.mergeRadius.item"),
+              "exp": this.$t("processConfig.spigotYml.worldSettings.default.mergeRadius.exp")
             },
             "ticks-per": {
-              "hopper-transfer":
-                "漏斗推/拉/接收物品与漏斗推/拉更多物品之间的时间，在服务器每个 Tick 中更新 8 个行为",
-              "hopper-check":
-                '自上次尝试后，漏斗尝试推/拉物品。例如，值8表示空料斗每隔 8 个刻度查找上方的物料实体、上方的库存等。值 0 或 1 反映原版行为。当 HOPPER-ALT-TICKING 设置为"是"时，此选项被禁用'
+              "hopper-transfer": this.$t("processConfig.spigotYml.worldSettings.default.ticksPer.hopperTransfer"),
+              "hopper-check": this.$t("processConfig.spigotYml.worldSettings.default.ticksPer.hopperCheck")
             },
-            growth: {
-              "cactus-modifier": "仙人掌生长速度",
-              "cane-modifier": "甘蔗速度",
-              "melon-modifier": "西瓜速度",
-              "mushroom-modifier": "蘑菇速度",
-              "pumpkin-modifier": "南瓜速度",
-              "sapling-modifier": "树苗生长速度",
-              "beetroot-modifier": "甜菜根生长速度",
-              "carrot-modifier": "胡萝卜生长速度",
-              "potato-modifier": "马铃薯生长速度",
-              "wheat-modifier": "小麦生长速度",
-              "netherwart-modifier": "地狱疣生长速度",
-              "vine-modifier": "藤曼生长速度",
-              "cocoa-modifier": "可可豆生长速度",
-              "bamboo-modifier": "柱子生长速度",
-              "sweetberry-modifier": "甜莓生长速度",
-              "kelp-modifier": "海藻生长速度"
+            "growth": {
+              "cactus-modifier": this.$t("processConfig.spigotYml.worldSettings.default.growth.cactusModifier"),
+              "cane-modifier": this.$t("processConfig.spigotYml.worldSettings.default.growth.caneModifier"),
+              "melon-modifier": this.$t("processConfig.spigotYml.worldSettings.default.growth.melonModifier"),
+              "mushroom-modifier": this.$t("processConfig.spigotYml.worldSettings.default.growth.mushroomModifier"),
+              "pumpkin-modifier": this.$t("processConfig.spigotYml.worldSettings.default.growth.pumpkinModifier"),
+              "sapling-modifier": this.$t("processConfig.spigotYml.worldSettings.default.growth.saplingModifier"),
+              "beetroot-modifier": this.$t("processConfig.spigotYml.worldSettings.default.growth.beetrootModifier"),
+              "carrot-modifier": this.$t("processConfig.spigotYml.worldSettings.default.growth.carrotModifier"),
+              "potato-modifier": this.$t("processConfig.spigotYml.worldSettings.default.growth.potatoModifier"),
+              "wheat-modifier": this.$t("processConfig.spigotYml.worldSettings.default.growth.wheatModifier"),
+              "netherwart-modifier": this.$t("processConfig.spigotYml.worldSettings.default.growth.netherwartModifier"),
+              "vine-modifier": this.$t("processConfig.spigotYml.worldSettings.default.growth.vineModifier"),
+              "cocoa-modifier": this.$t("processConfig.spigotYml.worldSettings.default.growth.cocoaModifier"),
+              "bamboo-modifier": this.$t("processConfig.spigotYml.worldSettings.default.growth.bambooModifier"),
+              "sweetberry-modifier": this.$t("processConfig.spigotYml.worldSettings.default.growth.sweetberryModifier"),
+              "kelp-modifier": this.$t("processConfig.spigotYml.worldSettings.default.growth.kelpModifier")
             },
-            hunger: {
-              "jump-walk-exhaustion": "跳跃跑步动作时消耗的饥饿度",
-              "jump-sprint-exhaustion": "跳跃冲刺动作时消耗的饥饿度",
-              "combat-exhaustion": "战斗时消耗的饥饿度",
-              "regen-exhaustion": "回复时消耗的饥饿度",
-              "swim-multiplier": "游泳时消耗的饥饿度倍率",
-              "sprint-multiplier": "仅冲刺时消耗的饥饿度倍率",
-              "other-multiplier": "其他动作消耗的饥饿度倍率"
+            "hunger": {
+              "jump-walk-exhaustion": this.$t("processConfig.spigotYml.worldSettings.default.hunger.jumpWalkExhaustion"),
+              "jump-sprint-exhaustion": this.$t("processConfig.spigotYml.worldSettings.default.hunger.jumpSprintExhaustion"),
+              "combat-exhaustion": this.$t("processConfig.spigotYml.worldSettings.default.hunger.combatExhaustion"),
+              "regen-exhaustion": this.$t("processConfig.spigotYml.worldSettings.default.hunger.regenExhaustion"),
+              "swim-multiplier": this.$t("processConfig.spigotYml.worldSettings.default.hunger.swimMultiplier"),
+              "sprint-multiplier": this.$t("processConfig.spigotYml.worldSettings.default.hunger.sprintMultiplier"),
+              "other-multiplier": this.$t("processConfig.spigotYml.worldSettings.default.hunger.otherMultiplier")
             },
             "entity-activation-range": {
-              animals: "动物最大激活范围",
-              monsters: "怪物最大激活范围",
-              raiders: "突袭最大激活范围",
-              misc: "物品最大激活范围",
-              "tick-inactive-villagers": "是否更新不活跃的村民"
+              "animals": this.$t("processConfig.spigotYml.worldSettings.default.entityActivationRange.animals"),
+              "monsters": this.$t("processConfig.spigotYml.worldSettings.default.entityActivationRange.monsters"),
+              "raiders": this.$t("processConfig.spigotYml.worldSettings.default.entityActivationRange.raiders"),
+              "misc": this.$t("processConfig.spigotYml.worldSettings.default.entityActivationRange.misc"),
+              "tick-inactive-villagers": this.$t("processConfig.spigotYml.worldSettings.default.entityActivationRange.tickInactiveVillagers")
             },
             "squid-spawn-range": {
-              min: "鱿鱼最小生成范围"
+              "min": this.$t("processConfig.spigotYml.worldSettings.default.squidSpawnRange.min")
             },
             "max-tick-time": {
-              tile: "分配给 Tile 的最大 Tick 时间",
-              entity: "分配给实体的最大 Tick 时间"
+              "tile": this.$t("processConfig.spigotYml.worldSettings.default.maxTickTime.tile"),
+              "entity": this.$t("processConfig.spigotYml.worldSettings.default.maxTickTime.entity")
             }
           }
         }

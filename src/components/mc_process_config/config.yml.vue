@@ -1,23 +1,21 @@
 <!--
   Copyright (C) 2022 MCSManager <mcsmanager-dev@outlook.com>
-  This page is for Chinese users only
 -->
 
 <template>
   <!-- 当前文件的说明，请根据需要自定义修改文字 -->
   <LineOption :custom="true">
     <template #default>
-      <div class="sub-title">
+      <div class="sub-title" v-iszh>
         <div class="sub-title">关于配置兼容与翻译</div>
         <div class="sub-title-info">
           此界面由开源社区开发者开发与翻译，若翻译发现错误可前往开源社区进行反馈。配置文件部分设置因版本和服务端类型不同会有些许变化，某些配置文件子元素过于复杂，可能会导致配置项值无法正常显示，如遇到不正常的配置项值切勿进行修改。若对配置文件要进行更为详细的配置，建议前往文件在线管理功能进行文件编辑。
         </div>
       </div>
       <div class="sub-title">
-        <div class="sub-title">关于配置文件</div>
+        <div class="sub-title">{{this.$t("processConfig.introduction.common.aboutConfig")}}</div>
         <div class="sub-title-info">
-          此配置适用于 BungeeCord
-          群组服务端软件，但由于此配置文件略微有些复杂，大部分配置只能进行简单修改，建议您使用文件在线管理功能编辑此文件。
+          {{this.$t("processConfig.introduction.configYml.infoLong")}}
         </div>
       </div>
     </template>
@@ -62,46 +60,45 @@ export default {
     return {
       config: null,
       description: {
-        prevent_proxy_connections: "是否向 Mojang 发送玩家 IP 数据以阻止使用了代理的玩家进入服务器",
-        listeners: [
-          {
-            query_port: "UDP查询端口",
-            motd: "当仅有一个默认服务器时，服务器将会显示给玩家的 Motd。当 ping_passthrough 被开启时，此项无效",
-            tab_list: "连接到服务器的玩家的 TAB 列表所显示的内容格式",
-            query_enabled: "是否开启 UDP 查询",
-            proxy_protocol: "是否开启对 HAProxy 的支持",
-            forced_hosts: "端口转发设置",
-            ping_passthrough: "是否开启 ping 穿透",
-            priorities: "优先级设置",
-            bind_local_address: "是否显示 BungeeCord 正在监听的 IP 地址",
-            host: "监听的 IP 地址和端口",
-            max_players:
-              "玩家客户端将会显示的最大玩家数，默认值为 1。此项只作为装饰，并未真实的最大玩家数设置",
-            tab_size: "显示在 TAB 列表上的最大玩家数量",
-            force_default_server: "每次玩家进入服务器时，是否强制将玩家传送到默认服务器中"
+        "prevent_proxy_connections": this.$t("processConfig.configYml.preventProxyConnections"),
+        "listeners": {
+          "0": {
+            "query_port": this.$t("processConfig.configYml.listeners.0.queryPort"),
+            "motd": this.$t("processConfig.configYml.listeners.0.motd"),
+            "tab_list": this.$t("processConfig.configYml.listeners.0.tabList"),
+            "query_enabled": this.$t("processConfig.configYml.listeners.0.queryEnabled"),
+            "proxy_protocol": this.$t("processConfig.configYml.listeners.0.proxyProtocol"),
+            "forced_hosts": this.$t("processConfig.configYml.listeners.0.forcedHosts"),
+            "ping_passthrough": this.$t("processConfig.configYml.listeners.0.pingPassthrough"),
+            "priorities": this.$t("processConfig.configYml.listeners.0.priorities"),
+            "bind_local_address": this.$t("processConfig.configYml.listeners.0.bindLocalAddress"),
+            "host": this.$t("processConfig.configYml.listeners.0.host"),
+            "max_players": this.$t("processConfig.configYml.listeners.0.maxPlayers"),
+            "tab_size": this.$t("processConfig.configYml.listeners.0.tabSize"),
+            "force_default_server": this.$t("processConfig.configYml.listeners.0.forceDefaultServer")
           }
-        ],
-        remote_ping_cache: "",
-        network_compression_threshold: "",
-        permissions: {
-          default: "默认用户组权限",
-          admin: "管理员用户组权限"
         },
-        log_pings: "是否在控制台记录玩家客户端向 BungeeCord 发起 ping 请求的记录",
-        connection_throttle: "断开时间",
-        connection_throttle_limit: "断开次数",
-        server_connect_timeout: "",
-        timeout: "超时时间",
-        player_limit: "整个 BungeeCord 实例能够接受的最大玩家数量，默认值为-1，即不限数量",
-        ip_forward: "是否启用 IP 追踪",
-        groups: "权限组设置",
-        remote_ping_timeout: "",
-        log_commands: "是否在控制台记录玩家输入的指令（仅记录 BungeeCord 指令）",
-        stats: "",
-        online_mode: "正版验证",
-        forge_support: "是否启用对 Forge 的支持",
-        disabled_commands: "禁用的指令",
-        servers: "下游服务端设置，只有在此处设置过的下游服务器才可被连接"
+        "remote_ping_cache": this.$t("processConfig.configYml.remotePingCache"),
+        "network_compression_threshold": this.$t("processConfig.configYml.networkCompressionThreshold"),
+        "permissions": {
+          "default": this.$t("processConfig.configYml.permissions.default"),
+          "admin": this.$t("processConfig.configYml.permissions.admin")
+        },
+        "log_pings": this.$t("processConfig.configYml.logPings"),
+        "connection_throttle": this.$t("processConfig.configYml.connectionThrottle"),
+        "connection_throttle_limit": this.$t("processConfig.configYml.connectionThrottleLimit"),
+        "server_connect_timeout": this.$t("processConfig.configYml.serverConnectTimeout"),
+        "timeout": this.$t("processConfig.configYml.timeout"),
+        "player_limit": this.$t("processConfig.configYml.playerLimit"),
+        "ip_forward": this.$t("processConfig.configYml.ipForward"),
+        "groups": this.$t("processConfig.configYml.groups"),
+        "remote_ping_timeout": this.$t("processConfig.configYml.remotePingTimeout"),
+        "log_commands": this.$t("processConfig.configYml.logCommands"),
+        "stats": this.$t("processConfig.configYml.stats"),
+        "online_mode": this.$t("processConfig.configYml.onlineMode"),
+        "forge_support": this.$t("processConfig.configYml.forgeSupport"),
+        "disabled_commands": this.$t("processConfig.configYml.disabledCommands"),
+        "servers": this.$t("processConfig.configYml.servers")
       }
     };
   }

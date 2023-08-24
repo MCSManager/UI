@@ -1,25 +1,21 @@
 <!--
   Copyright (C) 2022 MCSManager <mcsmanager-dev@outlook.com>
-  This page is for Chinese users only
 -->
 
 <template>
   <!-- 当前文件的说明，请根据需要自定义修改文字 -->
   <LineOption :custom="true">
     <template #default>
-      <div class="sub-title">
+      <div class="sub-title" v-iszh>
         <div class="sub-title">关于配置兼容与翻译</div>
         <div class="sub-title-info">
           此界面由开源社区开发者开发与翻译，若翻译发现错误可前往开源社区进行反馈。配置文件部分设置因版本和服务端类型不同会有些许变化，某些配置文件子元素过于复杂，可能会导致配置项值无法正常显示，如遇到不正常的配置项值切勿进行修改。若对配置文件要进行更为详细的配置，建议前往文件在线管理功能进行文件编辑。
         </div>
       </div>
       <div class="sub-title">
-        <div class="sub-title">关于配置文件</div>
+        <div class="sub-title">{{this.$t("processConfig.introduction.common.aboutConfig")}}</div>
         <div class="sub-title-info">
-          此配置适用于 MCDReforged 服务端控制工具，建议搭配其<a
-            href="https://mcdreforged.readthedocs.io/zh_CN/latest/configure.html"
-            >官方文档</a
-          >进行修改。
+          {{this.$t("processConfig.introduction.mcdrConfigYml.infoLong")}}
         </div>
       </div>
     </template>
@@ -43,6 +39,7 @@
 import { getDescriptionByTitle, jsonToMap } from "../../app/service/common";
 import LineOption from "../LineOption";
 import LineOptionList from "../LineOptionList";
+
 export default {
   // eslint-disable-next-line vue/no-unused-components
   components: { LineOption, LineOptionList },
@@ -63,33 +60,33 @@ export default {
     return {
       config: null,
       description: {
-        language: "MCDR 用于输出信息的语言",
-        working_directory: "服务端的工作目录",
-        start_command: "启动服务端的控制台命令",
-        handler: "服务端处理器",
-        encoding: "输入内容的编码格式，留空以自动选择",
-        decoding: "输出内容的解码格式，留空以自动选择",
-        plugin_directories: "插件目录列表",
-        rcon: {
-          enable: "rcon 开关",
-          address: "rcon 地址",
-          port: "rcon 端口",
-          password: "rcon 密码"
+        "language": this.$t("processConfig.mcdrConfigYml.language"),
+        "working_directory": this.$t("processConfig.mcdrConfigYml.workingDirectory"),
+        "start_command": this.$t("processConfig.mcdrConfigYml.startCommand"),
+        "handler": this.$t("processConfig.mcdrConfigYml.handler"),
+        "encoding": this.$t("processConfig.mcdrConfigYml.encoding"),
+        "decoding": this.$t("processConfig.mcdrConfigYml.decoding"),
+        "plugin_directories": this.$t("processConfig.mcdrConfigYml.pluginDirectories"),
+        "rcon": {
+          "enable": this.$t("processConfig.mcdrConfigYml.rcon.enable"),
+          "address": this.$t("processConfig.mcdrConfigYml.rcon.address"),
+          "port": this.$t("processConfig.mcdrConfigYml.rcon.port"),
+          "password": this.$t("processConfig.mcdrConfigYml.rcon.password")
         },
-        check_update: "更新检测",
-        advanced_console: "高级控制台",
-        disable_console_thread: "禁用控制台线程",
-        disable_console_color: "禁用控制台颜色",
-        custom_handlers: "自定义服务端处理器列表",
-        custom_info_reactors: "自定义 info 响应器列表",
-        debug: {
-          all: "开启全部调试日志",
-          mcdr: "MCDR 调试日志",
-          handler: "服务端处理器调试日志",
-          reactor: "info 相应器调试日志",
-          plugin: "插件调试日志",
-          permission: "权限系统调试日志",
-          command: "指令管理器调试日志"
+        "check_update": this.$t("processConfig.mcdrConfigYml.checkUpdate"),
+        "advanced_console": this.$t("processConfig.mcdrConfigYml.advancedConsole"),
+        "disable_console_thread": this.$t("processConfig.mcdrConfigYml.disableConsoleThread"),
+        "disable_console_color": this.$t("processConfig.mcdrConfigYml.disableConsoleColor"),
+        "custom_handlers": this.$t("processConfig.mcdrConfigYml.customHandlers"),
+        "custom_info_reactors": this.$t("processConfig.mcdrConfigYml.customInfoReactors"),
+        "debug": {
+          "all": this.$t("processConfig.mcdrConfigYml.debug.all"),
+          "mcdr": this.$t("processConfig.mcdrConfigYml.debug.mcdr"),
+          "handler": this.$t("processConfig.mcdrConfigYml.debug.handler"),
+          "reactor": this.$t("processConfig.mcdrConfigYml.debug.reactor"),
+          "plugin": this.$t("processConfig.mcdrConfigYml.debug.plugin"),
+          "permission": this.$t("processConfig.mcdrConfigYml.debug.permission"),
+          "command": this.$t("processConfig.mcdrConfigYml.debug.command")
         }
       }
     };

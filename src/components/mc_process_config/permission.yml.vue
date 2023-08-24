@@ -1,25 +1,21 @@
 <!--
   Copyright (C) 2022 MCSManager <mcsmanager-dev@outlook.com>
-  This page is for Chinese users only
 -->
 
 <template>
   <!-- 当前文件的说明，请根据需要自定义修改文字 -->
   <LineOption :custom="true">
     <template #default>
-      <div class="sub-title">
+      <div class="sub-title" v-iszh>
         <div class="sub-title">关于配置兼容与翻译</div>
         <div class="sub-title-info">
           此界面由开源社区开发者开发与翻译，若翻译发现错误可前往开源社区进行反馈。配置文件部分设置因版本和服务端类型不同会有些许变化，某些配置文件子元素过于复杂，可能会导致配置项值无法正常显示，如遇到不正常的配置项值切勿进行修改。若对配置文件要进行更为详细的配置，建议前往文件在线管理功能进行文件编辑。
         </div>
       </div>
       <div class="sub-title">
-        <div class="sub-title">关于配置文件</div>
+        <div class="sub-title">{{this.$t("processConfig.introduction.common.aboutConfig")}}</div>
         <div class="sub-title-info">
-          此配置适用于 MCDReforged 服务端控制工具，建议搭配其<a
-            href="https://mcdreforged.readthedocs.io/zh_CN/latest/permission.html"
-            >官方文档</a
-          >进行修改。
+          {{this.$t("processConfig.introduction.permissionYml.infoLong")}}
         </div>
       </div>
     </template>
@@ -43,6 +39,7 @@
 import { getDescriptionByTitle, jsonToMap } from "../../app/service/common";
 import LineOption from "../LineOption";
 import LineOptionList from "../LineOptionList";
+
 export default {
   // eslint-disable-next-line vue/no-unused-components
   components: { LineOption, LineOptionList },
@@ -63,12 +60,12 @@ export default {
     return {
       config: null,
       description: {
-        default_level: "新玩家默认的权限等级",
-        owner: "所有者",
-        admin: "管理员",
-        helper: "助手",
-        user: "普通玩家",
-        guest: "访客"
+        "default_level": this.$t("processConfig.permissionYml.defaultLevel"),
+        "owner": this.$t("processConfig.permissionYml.owner"),
+        "admin": this.$t("processConfig.permissionYml.admin"),
+        "helper": this.$t("processConfig.permissionYml.helper"),
+        "user": this.$t("processConfig.permissionYml.user"),
+        "guest": this.$t("processConfig.permissionYml.guest")
       }
     };
   }
