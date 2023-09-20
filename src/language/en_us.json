@@ -501,7 +501,7 @@
     "sameFile": "Duplicate file exist",
     "author": "Module Author",
     "unknownCompatible": "The panel is unable to confirm the compatibility of this config file, please use at your own risk.",
-    "browse": "Browse"
+    "browse": "Browse",
     "introduction": {
       "common": {
         "aboutConfig": "About config"
