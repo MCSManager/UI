@@ -197,6 +197,9 @@ export default {
     },
     isCN() {
       return this.$i18n.locale === "zh_cn";
+    },
+    isRU() {
+      return this.$i18n.locale === "ru_ru";
     }
   },
   methods: {
