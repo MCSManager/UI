@@ -18,4 +18,12 @@ export default function (app) {
       if (language != "en_us") el.style.display = "none";
     }
   });
+
+  app.directive("isru", {
+    // eslint-disable-next-line no-unused-vars
+    mounted(el, binding, vnode) {
+      const language = i18n.global.locale;
+      if (language != "ru_ru") el.style.display = "none";
+    }
+  });
 }
