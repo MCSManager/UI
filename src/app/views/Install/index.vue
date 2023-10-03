@@ -116,6 +116,10 @@ export default {
         {
           label: "简体中文",
           value: "zh_cn"
+        },
+        {
+          label: "Русский",
+          value: "ru_ru"
         }
       ],
       rules: {
@@ -136,6 +140,8 @@ export default {
     const language = window.navigator.language;
     if (language.includes("zh")) {
       this.selectLanguage("zh_cn");
+    } else if (language.includes("ru")) {
+      this.selectLanguage("ru_ru");
     } else {
       this.selectLanguage("en_us");
     }
