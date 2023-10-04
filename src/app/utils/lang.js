@@ -5,6 +5,9 @@ export function isEN() {
 }
 
 export function isCN() {
-  console.log("L:", i18n);
   return i18n.global.locale === "zh_cn";
+}
+
+export function isRU() {
+  return i18n.global.locale === "ru_ru";
 }

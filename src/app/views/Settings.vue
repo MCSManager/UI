@@ -38,6 +38,7 @@
               <el-select v-model="settings.language" :placeholder="$t('general.pleaseSelect')">
                 <el-option label="English" value="en_us"></el-option>
                 <el-option value="zh_cn" :label="$t('CommonText.011')"></el-option>
+                <el-option label="Russian" value="ru_ru"></el-option>
                 <!-- <el-option label="Japanese" value="jp" disabled></el-option> -->
               </el-select>
             </div>
