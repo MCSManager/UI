@@ -13,7 +13,7 @@
   },
   "dependencies": {
     "@element-plus/icons": "0.0.11",
-    "axios": "^0.21.2",
+    "axios": "^1.6.0",
     "core-js": "^3.6.5",
     "echarts": "^5.2.2",
     "element-plus": "^1.1.0-beta.15",
