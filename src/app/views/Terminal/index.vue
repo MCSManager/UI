@@ -1373,7 +1373,7 @@ export default {
 }
 
 #terminal-container {
-  height: 580px;
+  height: 620px;
   width: 100%;
   overflow-x: scroll !important;
   overflow-y: hidden;
