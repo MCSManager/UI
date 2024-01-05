@@ -105,6 +105,7 @@
     "passWord": "密码",
     "forgotPassword": "忘记密码",
     "forgotPasswordInfo": "如果您是普通用户，请询问您的服务商帮助您重置密码。如果您是管理员，请备份并删除 mcsmanager/web/data/Users 文件夹来重新安装 MCSManager。",
+    "toRegister": "前往注册",
     "login": "登录",
     "logging": "登录中",
     "isNull": "账号或密码不能为空值",
@@ -115,6 +116,20 @@
       "title": "网页无法正确运作",
       "message": "无法获取身份数据，可能是您已被封禁，或者网络问题，请尝试刷新页面"
     }
+  },
+  "register": {
+    "title": "注册账号",
+    "titleInfo": "注册服务器的 MCSManager 账号",
+    "account": "账号",
+    "passWord": "密码",
+    "rePassWord": "确认密码",
+    "register": "注册",
+    "registering": "注册中",
+    "isNull": "表单不能为空值",
+    "errorCause": "未知错误，请联系管理员",
+    "reRegister": "重新注册",
+    "registerSuccess": "注册成功",
+    "toLogin": "返回登录"
   },
   "overview": {
     "systemInfoTable": "系统信息总览",
@@ -2310,6 +2325,7 @@
     "userResources": "用户资源",
     "schedule": "计划任务",
     "newInstance": "新增实例",
+    "register": "注册",
     "login": "登录",
     "quickStart": "快速开始",
     "update": "版本控制",
