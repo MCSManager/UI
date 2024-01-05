@@ -59,19 +59,32 @@
                     </template>
                   </el-input>
                 </div>
-                <div class="login-btn-wrapper row-mt">
+                <div class="login-info-wrapper row-mt">
                   <transition name="fade">
                     <div v-if="cause" id="login-cause">{{ cause }}</div>
-                    <div v-else class="login-info-wrapper fgp" @click="forgotPassword">
+                    <div v-else class="login-info-wrapper" @click="forgotPassword">
                       <a href="javascript:void(0)" rel="noopener noreferrer">
                         {{ $t("login.forgotPassword") }}
                       </a>
                     </div>
                   </transition>
+                </div>
+                <div class="login-btn-wrapper row-mt">
+                  <router-link v-if="canRegister" to="/register" style="margin-right: 10px;">
+                    <el-button
+                      type="success"
+                      size="small"
+                      style="width: 100px"
+                      :disabled="close"
+                      :loading="loading"
+                    >
+                      {{ $t("login.toRegister") }}
+                    </el-button>
+                  </router-link>
                   <el-button
                     type="primary"
                     size="small"
-                    style="width: 110px"
+                    style="width: 100px"
                     @click="login"
                     :disabled="close"
                     :loading="loading"
@@ -166,7 +179,7 @@
 import Panel from "../../components/Panel";
 // eslint-disable-next-line no-unused-vars
 // import router from "../router";
-import { API_USER_LOGIN, API_USER_LOGIN_INFO, sleep } from "../service/common";
+import {API_USER_LOGIN, API_USER_LOGIN_INFO, API_USER_REGISTER_SETTING, sleep} from "../service/common";
 import { request, setupUserInfo } from "../service/protocol";
 
 export default {
@@ -182,7 +195,8 @@ export default {
       loginText: this.$t("login.login"),
       loading: false,
       cause: "",
-      loginInfo: ""
+      loginInfo: "",
+      canRegister: false
     };
   },
   methods: {
@@ -192,7 +206,7 @@ export default {
 
     async login() {
       try {
-        if (!this.form.username || !this.form.username) {
+        if (!this.form.username || !this.form.password) {
           this.cause = this.$t("login.isNull");
           return;
         }
@@ -249,6 +263,13 @@ export default {
       });
       this.loginInfo = res?.loginInfo ?? "";
     },
+    async getCanRegister() {
+      const res = await request({
+        method: "GET",
+        url: API_USER_REGISTER_SETTING
+      });
+      this.canRegister = res.canRegister;
+    },
     forgotPassword() {
       this.$confirm(this.$t("login.forgotPasswordInfo"), this.$t("login.forgotPassword"), {
         confirmButtonText: this.$t("general.confirm"),
@@ -260,6 +281,7 @@ export default {
     console.log("Welcome use MCSManager.");
     console.log("Copyright 2022 MCSManager All rights reserved.");
     // Request login copyleft text
+    this.getCanRegister();
     this.requestLoginInfo();
   }
 };
@@ -377,7 +399,7 @@ export default {
   backdrop-filter: blur(8px) brightness(0.5);
   display: flex;
   align-items: center;
-  
+
   transition-property: all;
   transition-duration: 1.5s;
   transition-timing-function: cubic-bezier(1, 0.05, 0.84, 0.74);
@@ -421,20 +443,9 @@ export default {
 #login-cause {
   color: rgb(170, 8, 8);
   font-size: 12px;
-  margin-right: 18px;
-}
-
-.fgp {
-  font-size: 12px;
-  margin-right: 18px;
 }
 
 @media (max-width: 900px) {
-  .fgp {
-    font-size: 12px;
-    margin-right: 0px;
-    margin-top: 8px;
-  }
   #login-panel {
     text-align: center;
     margin: 0;
@@ -452,9 +463,8 @@ export default {
   }
   .login-btn-wrapper {
     display: flex;
-    justify-content: flex-start;
+    justify-content: center;
     align-items: center;
-    flex-direction: column-reverse;
     text-align: center;
   }
   #login-cause {
