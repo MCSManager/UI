@@ -105,6 +105,7 @@
     "passWord": "Password",
     "forgotPassword": "Forgot password",
     "forgotPasswordInfo": "If you are an ordinary user, please contact your system administrator. If you are the administrator, please backup and delete mcsmanager/web/data/Users folder to reinstall panel.",
+    "toRegister": "Go to Registration",
     "login": "Login",
     "logging": "Logging in",
     "isNull": "Username or Password cannot be empty.",
@@ -115,6 +116,20 @@
       "title": "This page doesn't work correctly.",
       "message": "Unable to get user identity, possibly due to a banned account or network problem. Please try again."
     }
+  },
+  "register": {
+    "title": "Sign up for an account",
+    "titleInfo": "Register an MCSManager account for the server.",
+    "account": "Username",
+    "passWord": "Password",
+    "rePassWord": "Confirm your password",
+    "register": "Register",
+    "registering": "Registering",
+    "isNull": "The form can't be a null value",
+    "errorCause": "Unknown error, contact your administrator",
+    "reRegister": "ReRegister",
+    "registerSuccess": "Registration is successful",
+    "toLogin": "Go back to Login"
   },
   "overview": {
     "systemInfoTable": "Overview",
@@ -2311,6 +2326,7 @@
     "schedule": "Scheduled",
     "newInstance": "New Instance",
     "login": "Login",
+    "register": "Register",
     "quickStart": "Quick Start",
     "update": "Version Control",
     "install": "Install",
