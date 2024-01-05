@@ -25,6 +25,7 @@ export const API_USER = `${API_URL}/api/auth/`;
 export const API_SEARCH = `${API_URL}/api/auth/search`;
 export const API_USER_LIST = `${API_URL}/api/auth/overview`;
 export const API_USER_REGISTER = `${API_URL}/api/auth/register`;
+export const API_USER_REGISTER_SETTING = `${API_URL}/api/auth/register_setting`;
 export const API_USER_LOGIN = `${API_URL}/api/auth/login`;
 export const API_USER_LOGIN_INFO = `${API_URL}/api/auth/login_info`;
 export const API_USER_TOKEN = `${API_URL}/api/auth/token`;
