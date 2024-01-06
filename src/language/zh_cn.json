@@ -2181,6 +2181,8 @@
     "referenceLink": "注意事项",
     "referenceLinksInfo": "面板的大部分设置十分重要，在一般情况下，绝大部分参数都无需更改，如果某个参数您并不知晓代表什么，那么建议您不要对其进行修改。",
     "limitAndSecurity": "限制与安全",
+    "canRegister": "允许注册账号",
+    "canRegisterInfo": "开放账号注册，允许用户自己注册账号。",
     "canFileManager": "准许普通用户使用文件管理功能",
     "canFileManagerInfo": "文件管理是一个较为消耗资源且不易控制的功能，如果您的普通用户没有文件管理的任何需求，可以禁止用户使用文件管理。",
     "crossAPI": "跨域请求 API 接口",
