@@ -105,9 +105,9 @@
           <el-col :md="12">
             <div class="config-item" style="margin-top: 0px">
               <div class="sub-title">
-                <p class="sub-title-title">允许注册账号</p>
+                <p class="sub-title-title">{{ $t("settings.canRegister") }}</p>
                 <p class="sub-title-info">
-                  开放账号注册，允许用户自己注册账号。{{ $t("users.psInfo") }}
+                  {{ $t("settings.canRegisterInfo") }}{{ $t("users.psInfo") }}
                   <br/>
                   <a
                     class="color-blue"
