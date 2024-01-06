@@ -2181,6 +2181,8 @@
     "referenceLink": "Attention",
     "referenceLinksInfo": "In general, most of the configurations should be in their default values. Do not change any settings unless you absolutely know what you are doing.",
     "limitAndSecurity": "Restrictions and Security",
+    "canRegister": "Account registration is allowed",
+    "canRegisterInfo": "Open account registration, allowing users to register accounts by themselves.",
     "canFileManager": "Allow normal users to use file management",
     "canFileManagerInfo": "File management is a complicate and resource-consuming (like file compression) function. You can disable this function for normal users if they don't have to modify any files.",
     "crossAPI": "CRSF API",
