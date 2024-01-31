@@ -1731,41 +1731,41 @@
       }
     },
     "velocityToml": {
-      "configVersion": "配置文件版本, 不要更改这个选项",
+      "configVersion": "配置文件版本（请勿更改）",
       "bind": "监听地址",
-      "motd": "MOTD",
-      "showMaxPlayers": "展示的最大玩家数量（实际Velocity不限制玩家数）",
+      "motd": "当玩家将您的服务器添加到他们的服务器列表时会显示这个（必须使用MiniMessage格式 https://adventure-docs.minecraft.kim/minimessage.html）",
+      "showMaxPlayers": "展示的最大玩家数量（实际 Velocity 不限制玩家数）",
       "onlineMode": "是否启用正版验证",
-      "forceKeyAuthentication": "是否开启强制秘钥验证",
+      "forceKeyAuthentication": "是否应该强制执行新的公钥安全标准",
       "preventClientProxyConnections": "是否禁止客户端代理连接",
       "playerInfoForwardingMode": "玩家信息转发模式",
-      "forwardingSecretFile": "转发秘钥文件",
-      "announceForge": "是否广播服务器支持Forge",
-      "kickDxistingPlayers": "是否踢出已存在的玩家",
-      "pingPassthrough": "PING请求透传模式",
-      "enablePlayerAddressLogging": "如果不启用，玩家的IP地址将在日志中被<ip address withheld>取代",
+      "forwardingSecretFile": "转发秘钥文件（该文件应该是 UTF-8 编码且不为空）",
+      "announceForge": "是否声明您的服务器支持Forge（如果您运行的是一个mod服务器，建议选择 “是”）",
+      "kickDxistingPlayers": "是否踢出尝试重复连接的已存在的玩家",
+      "pingPassthrough": "Ping 请求传递模式",
+      "enablePlayerAddressLogging": "如果没有启用，玩家的IP地址将在日志中被 <ip address withheld> 取代",
       "servers": {
-        "try": "尝试连接服务器顺序（格式如：lobby,minigame1,minigame2）"
+        "try": "当玩家登录或从服务器被踢出时，尝试连接服务器的顺序（格式如：lobby,minigame1,minigame2）"
       },
       "advanced": {
         "compressionThreshold": "网络数据包压缩阈值，设置为 0 将压缩所有数据包，设置为 -1 将会完全禁用所有数据包压缩",
-        "compressionLevel": "压缩等级（0 - 9，设为 -1 使用默认值 6）",
-        "loginRatelimit": "客户端登录冷却时间",
-        "connectionTimeout": "连接超时时间",
-        "readTimeout": "读取超时时间",
-        "haproxyProtocol": "是否启用对 HAProxy 协议的支持",
-        "tcpFastOpen": "是否启用对 tcp fast open 的支持，需要运行在 Linux 上",
-        "bungeePluginMessageChannel": "是否启用对 BungeeCord 自定义消息信道支持",
-        "showPingRequests": "是否在代理端上显示来自于客户端的 PING 请求",
-        "failoverOnUnexpectedServerDisconnect": "是否禁止当用户连接意外丢失但服务器的连接而没有显式断开的情况下 Velocity 将玩家行为回退（Read Timeout 除外），而不是断开与玩家的连接的处理方式",
+        "compressionLevel": "压缩等级（0 - 9，设为 -1 将使用默认值 6）",
+        "loginRatelimit": "客户端登录冷却时间（以毫秒计）。默认为 3 秒。通过将此设置为 0 来禁用客户端登录冷却时间",
+        "connectionTimeout": "连接超时的自定义超时时间（以毫秒计）。默认为 5 秒",
+        "readTimeout": "连接的读取超时时间（以毫秒计）。默认为 30 秒",
+        "haproxyProtocol": "是否启用与 HAProxy 的 PROXY 协议的兼容性支持",
+        "tcpFastOpen": "是否启用 TCP 快速打开支持。需要代理运行在Linux上",
+        "bungeePluginMessageChannel": "是否启用对 BungeeCord 插件消息信道支持",
+        "showPingRequests": "是否在代理端上显示来自于客户端的 Ping 请求",
+        "failoverOnUnexpectedServerDisconnect": "是否在用户意外失去与服务器的连接且没有明确的断开连接消息时，启用 Velocity 将用户行为回退的方式（读取超时的情况除外），而不是像 BungeeCord 那样断开用户连接的处理方式。",
         "announceProxyCommands": "是否向 1.13+ 客户端声明代理端指令（这将允许客户端接收到代理端的指令补全等信息）",
         "logCommandDxecutions": "是否记录代理端的指令使用情况",
-        "logPlayerConnections": "是否录代理端的玩家连接情况"
+        "logPlayerConnections": "是否记录玩家连接日志，包括连接到代理、切换服务器和从代理断开连接。"
       },
       "query": {
-        "enabled": "是否开启对 GameSpy 4 查询的响应",
+        "enabled": "是否开启对 GameSpy 4 查询的响应支持",
         "port": "查询协议监听端口",
-        "map": "反馈给查询服务的 map 名",
+        "map": "反馈给查询服务的地图名称",
         "showPlugins": "是否将插件展示在查询响应结果中"
       }
     }
