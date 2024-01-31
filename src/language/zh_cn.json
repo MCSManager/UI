@@ -1760,7 +1760,7 @@
         "failoverOnUnexpectedServerDisconnect": "是否在用户意外失去与服务器的连接且没有明确的断开连接消息时，启用 Velocity 将用户行为回退的方式（读取超时的情况除外），而不是像 BungeeCord 那样断开用户连接的处理方式。",
         "announceProxyCommands": "是否向 1.13+ 客户端声明代理端指令（这将允许客户端接收到代理端的指令补全等信息）",
         "logCommandDxecutions": "是否记录代理端的指令使用情况",
-        "logPlayerConnections": "是否记录玩家连接日志，包括连接到代理、切换服务器和从代理断开连接。"
+        "logPlayerConnections": "是否记录玩家连接日志（包括连接到代理、切换服务器和从代理断开连接）"
       },
       "query": {
         "enabled": "是否开启对 GameSpy 4 查询的响应支持",
